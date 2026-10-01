@@ -12,11 +12,12 @@ window.AZAKEI = {
   ],
 
   /* ---- お問い合わせ設定 ----
-     formEndpoint: Formspree などの送信先URL（例: https://formspree.io/f/xxxxxx）
+     formEndpoint: FormSubmit の送信先（https://formsubmit.co/ajax/〈メールアドレス or 有効化後の英数字〉）
+                   ここに送ると AZAKEI の Gmail にメールが届きます。
      email:        formEndpoint が空のとき、メールソフトを開いて送る宛先
      どちらも空なら、下の instagram アカウントの DM へ案内します。 */
   contact: {
-    formEndpoint: '',
+    formEndpoint: 'https://formsubmit.co/ajax/azakeiten@gmail.com',
     email: '',
     instagram: { handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/' }
   },

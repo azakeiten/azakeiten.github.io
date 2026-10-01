@@ -115,21 +115,38 @@
     ev.preventDefault();
     const data = Object.fromEntries(new FormData(form));
     if (form.type) data.type = form.type.options[form.type.selectedIndex].text;
-    if (data._gotcha) return; // スパム対策
+    if (data._honey) return; // スパム対策（人には見えない入力欄）
 
     if (cfg.formEndpoint) {
       status.textContent = '送信中…';
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
       try {
+        // FormSubmit（https://formsubmit.co）へ送信 → AZAKEI の Gmail に届く
         const res = await fetch(cfg.formEndpoint, {
           method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: '[AZAKEI] ' + data.type + '（' + data.name + ' 様）',
+            _template: 'table',
+            'お名前': data.name,
+            'ご所属': data.org || '—',
+            email: data.email,
+            '種類': data.type,
+            'お問い合わせ内容': data.message
+          })
         });
-        if (!res.ok) throw new Error(res.status);
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || String(json.success) !== 'true') throw new Error(json.message || res.status);
         form.reset();
+        form.type.dispatchEvent(new Event('change'));
+        form.message.dispatchEvent(new Event('input'));
         status.textContent = '送信しました。ありがとうございます！内容を確認のうえ、ご連絡いたします。';
       } catch (e) {
+        console.error(e);
         status.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、Instagram の DM からご連絡ください。';
+      } finally {
+        btn.disabled = false;
       }
       return;
     }
