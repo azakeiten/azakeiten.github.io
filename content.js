@@ -27,7 +27,14 @@ window.AZAKEI = {
      firebase が null の間は、仮の保存先（Abacus）を使います。
      年度を変えるときは pollId を 'festival-2028' のように変えると 0 票から始まります。
      ※ 選択肢の key を変えたら firestore.rules の options() も同じに直すこと。 */
-  firebase: null,
+  firebase: {
+    apiKey: 'AIzaSyBHw0uo7i1aTQ45UI_nNWsN8Ljb_C7C6J4',
+    authDomain: 'azakei.firebaseapp.com',
+    projectId: 'azakei',
+    storageBucket: 'azakei.firebasestorage.app',
+    messagingSenderId: '616148078496',
+    appId: '1:616148078496:web:216b60254a70665696dec5'
+  },
   vote: {
     pollId: 'festival-2027',
     namespace: 'azakei-festival-vote-2027',
