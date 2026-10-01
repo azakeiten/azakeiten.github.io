@@ -1,0 +1,96 @@
+/* ================================================================
+   DESIGN v9 — ロゴの光・見出しの星・カードのアイコン・ボタン・英語版
+   ================================================================ */
+
+/* ---- トップ：写真の上の光 ---- */
+.hero-sparkles { position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: screen; }
+
+/* ---- 下層ページの見出し：ゆっくり回るロゴの星 ---- */
+.ph-star {
+  position: absolute; z-index: 0; pointer-events: none;
+  right: clamp(-40px, 2vw, 40px); top: 50%; transform: translateY(-46%);
+  width: clamp(200px, 30vw, 380px); height: clamp(200px, 30vw, 380px);
+  animation: rise 1.2s var(--ease-out) 0.3s both;
+}
+.ph-star polygon { fill: none; stroke: rgba(200, 169, 110, 0.38); stroke-width: 0.8; stroke-linejoin: round; }
+.ph-star .ph-hex { stroke: rgba(60, 138, 55, 0.35); }
+.ph-star-spin { transform-origin: 100px 100px; animation: spin 90s linear infinite; }
+.ph-star-sparks path { fill: #fff2c8; transform-box: fill-box; transform-origin: center; filter: drop-shadow(0 0 3px rgba(255, 210, 110, 0.9)); animation: twinkle 4.2s ease-in-out infinite; animation-delay: calc(var(--i) * -0.7s); }
+:root[data-theme="dark"] .ph-star polygon { stroke: rgba(109, 255, 124, 0.28); }
+:root[data-theme="dark"] .ph-star .ph-hex { stroke: rgba(200, 169, 110, 0.35); }
+:root[data-theme="dark"] .ph-star-sparks path { fill: #e9ffe9; filter: drop-shadow(0 0 3px rgba(110, 255, 130, 0.9)); }
+.page-hero[data-bg]::after { z-index: 0; }
+@media (max-width: 640px) { .ph-star { width: 180px; height: 180px; right: -50px; opacity: 0.7; } }
+
+/* ---- カードのアイコン ---- */
+.card-ico { width: 1.25em; height: 1.25em; vertical-align: -0.28em; margin-right: 10px; color: var(--color-accent-deep); transition: transform 0.5s var(--ease-out); }
+a.link-card:hover .card-ico { transform: rotate(-8deg) scale(1.12); }
+.link-card .num { display: flex; align-items: center; }
+.contest-num { display: flex; flex-direction: column; gap: 12px; }
+.contest-num .card-ico { width: 34px; height: 34px; margin: 0; padding: 7px; border-radius: 50%; border: 1px solid rgba(200, 169, 110, 0.5); }
+
+/* ---- ボタン：光がすっと通り、矢印が動く ---- */
+.btn-primary { position: relative; overflow: hidden; isolation: isolate; }
+.btn-primary::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.55) 48%, transparent 66%);
+  transform: translateX(-120%); transition: transform 0.8s var(--ease-out);
+}
+.btn-primary:hover::after { transform: translateX(120%); }
+.btn-ghost svg { transition: transform 0.35s var(--ease-out); }
+.btn-ghost:hover svg { transform: translateX(6px); }
+
+/* ---- 英語版 ---- */
+.page-en .section-title { font-family: 'Cormorant Garamond', var(--font-display); }
+.page-en .section-title em { font-style: italic; }
+.nav-en .nav-links { display: flex; }
+@media (max-width: 1100px) {
+  .nav-en { flex-wrap: wrap; row-gap: 10px; }
+  .nav-en .nav-links {
+    order: 3; width: 100%; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent);
+  }
+  .nav-en .nav-links::-webkit-scrollbar { display: none; }
+  .nav-en .nav-links a { display: inline-block; padding: 6px 12px; border: 1px solid var(--nav-line); border-radius: 999px; white-space: nowrap; }
+  .nav-en .nav-links a::after { display: none; }
+  .nav-en .hamburger { display: none; }
+}
+.en-corners { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: clamp(32px, 5vw, 56px); background: var(--color-border); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; }
+.en-corners .service-card { display: flex; flex-direction: column; }
+.en-corners .service-desc a { color: var(--color-accent-deep); text-decoration: underline; }
+@media (max-width: 900px) { .en-corners { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .en-corners { grid-template-columns: 1fr; } }
+.en-visit {
+  margin-top: clamp(28px, 4vw, 44px); display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  padding: clamp(22px, 3.5vw, 36px); border-radius: var(--radius); background: var(--color-surface); border: 1px solid var(--color-border);
+}
+.en-visit h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); margin: 4px 0 12px; }
+.en-visit dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 22px; margin: 0; }
+.en-visit dt { font-size: 13px; font-weight: 700; color: var(--color-accent-deep); }
+.en-visit dd { margin: 0; line-height: 1.7; }
+@media (max-width: 700px) { .en-visit { grid-template-columns: 1fr; } .en-visit .btn-primary { justify-self: start; } }
+.en-contests { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 2vw, 20px); }
+.en-contests article { padding: clamp(22px, 3vw, 32px); border-radius: var(--radius); background: var(--color-bg); border: 1px solid var(--color-border); transition: transform 0.5s var(--ease-out), border-color 0.3s; }
+.en-contests article:hover { transform: translateY(-3px); border-color: rgba(200, 169, 110, 0.5); }
+.en-c-num { font-family: 'Cormorant Garamond', serif; font-size: 34px; color: var(--color-accent-deep); line-height: 1; }
+.en-contests h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(22px, 2.4vw, 28px); margin: 10px 0 8px; }
+.en-contests p { color: var(--color-muted); line-height: 1.8; }
+@media (max-width: 700px) { .en-contests { grid-template-columns: 1fr; } }
+.page-en .value .value-en { letter-spacing: 0.08em; text-transform: none; font-size: 13px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ph-star-spin, .ph-star-sparks path { animation: none; }
+  .btn-primary::after { display: none; }
+}
+
+/* トップ：投票バッジを見出しの上の流れに置き、大きな AZAKEI と重ならないように */
+.hero-content > .hero-vote { position: relative; top: auto; left: auto; display: inline-flex; margin-bottom: clamp(16px, 2.6vh, 28px); }
+@media (max-width: 640px) { .hero-content > .hero-vote { top: auto; } }
+
+/* トップ：画面の高さに合わせて見出しを調整し、上がナビに隠れないように */
+.hero { padding-top: calc(var(--nav-h, 100px) + 16px); padding-bottom: clamp(36px, 7vh, 110px); }
+.hero-wordmark { font-size: clamp(56px, min(14vw, 21vh), 180px); }
+.hero-tagline { font-size: clamp(24px, min(4.4vw, 6vh), 52px) !important; }
+.hero h1 { margin-bottom: clamp(16px, 3vh, 32px); }
+.hero-sub { margin-bottom: clamp(20px, 4vh, 52px); }
+.hero-label { margin-bottom: clamp(14px, 2.6vh, 28px); }

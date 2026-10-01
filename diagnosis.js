@@ -53,6 +53,55 @@
     }
   };
 
+  // ---- 英語版（<html lang="en"> のページでは英語で表示） ----
+  const EN = document.documentElement.lang === 'en';
+  const S = EN ? {
+    kicker: 'Choose YES or NO and find your investor type',
+    title: 'What kind of <em>investor</em> are you?',
+    intro: 'Our hand-drawn flowchart poster was a hit at the school festival. Now you can try it online: answer YES or NO and follow the arrows.',
+    start: 'Start the test', back: '← Back one step',
+    resultKicker: 'Your investor type is', strength: 'Strengths', care: 'Watch out for',
+    shine: 'Where you would shine at AZAKEI', match: 'Best match', trail: 'The path you took',
+    share: 'Share your result', copy: 'Copy link', copied: 'Copied!', copyFail: 'Could not copy',
+    retry: 'Take the test again', festival: 'About the festival exhibition →', festivalHref: 'en.html#festival',
+    shareText: name => `I'm "${name}"! What kind of investor are you? #AZAKEI`,
+    url: 'https://ryoishiyama1-svg.github.io/azakei/en-diagnosis.html', sep: ', '
+  } : {
+    kicker: 'YES か NO の道を選んで、自分の投資家タイプを知ろう',
+    title: 'あなたは、どの<em>投資家タイプ</em>？',
+    intro: '文化祭で大人気だった手描きポスターの診断を、そのまま Web にしました。質問に YES か NO で答えて、矢印の先へ進んでください。',
+    start: '診断をはじめる', back: '← ひとつ前に戻る',
+    resultKicker: 'あなたの投資家タイプは', strength: '強み', care: '気をつけたいこと',
+    shine: 'AZAKEI で輝ける場所', match: '相性のいいタイプ', trail: 'あなたが通った道',
+    share: '結果をシェア', copy: 'リンクをコピー', copied: 'コピーしました！', copyFail: 'コピーできませんでした',
+    retry: 'もう一度診断する', festival: '文化祭の展示を見る →', festivalHref: 'festival.html',
+    shareText: name => `私は「${name}」の投資家でした！あなたは？ #AZAKEI経済診断`,
+    url: 'https://ryoishiyama1-svg.github.io/azakei/diagnosis.html', sep: '・'
+  };
+  if (EN) {
+    const q = {
+      r1: 'In investing, I go for the big win.',
+      r2: 'I check the news every day.',
+      r3: 'My hobbies matter more than work (or school).',
+      r4: 'I am easily influenced by other people.',
+      m1: 'I would buy the stocks an investor recommends.',
+      m2: 'I would take risks to get a bigger return.',
+      m3: 'I am careful with money.',
+      m4: 'I have done volunteer work.',
+      l1: 'I want to actively buy growth stocks.',
+      l2: 'I often use technical analysis.',
+      l3: 'I do not have an "oshi" (a favorite idol, star, or character I support).',
+      l4: 'I spend money on what I want right now.'
+    };
+    Object.keys(q).forEach(k => { N[k].q = q[k]; });
+    N.l1.note = 'Growth stocks: shares of companies expected to grow quickly.';
+    N.l2.note = 'Technical analysis: predicting prices from the shape of price charts.';
+    Object.assign(T.lion, { name: 'Lion', lead: 'A bold investor who jumps at opportunities. You invest boldly in companies that could grow big, aiming for large returns.', good: 'Quick decisions and courage. You move while others are still hesitating.', care: 'Do not bet everything at once. Spreading your money out (diversification) is your friend.', azakei: ['Entrepreneur auditions', 'Business contests'] });
+    Object.assign(T.fox, { name: 'Fox', lead: 'A clever investor who reads data and charts. You use price patterns and the news to time your moves wisely.', good: 'Gathering information and analyzing it calmly.', care: 'Do not get swept up by every small price move. Looking at the long term matters too.', azakei: ['Nikkei Stock League', 'Research papers'] });
+    Object.assign(T.turtle, { name: 'Turtle', lead: 'A steady, long-term builder who avoids waste. You let time work for you and grow your money slowly. You make the most of compound interest, where interest earns more interest.', good: 'Persistence and reliability. People trust you.', care: 'Being too careful can mean missing good chances.', azakei: ['Research papers', 'Running the exhibition'] });
+    Object.assign(T.rabbit, { name: 'Rabbit', lead: 'You live in the moment and value experiences. You spend on things you love and make every day richer. In fact, spending is the engine that keeps the economy moving.', good: 'Energy and the ability to enjoy life. You brighten the people around you.', care: 'Save a little for the future, even a small amount at a time.', azakei: ['Planning the festival', 'Social media'] });
+  }
+
   // ---- 動物の絵（シンプルな SVG） ----
   const ART = {
     lion: `<svg viewBox="0 0 120 120" aria-hidden="true"><g fill="#a5622a">${[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return `<circle cx="${60 + 40 * Math.cos(a)}" cy="${62 + 40 * Math.sin(a)}" r="15"/>`; }).join('')}</g><circle cx="60" cy="62" r="36" fill="#a5622a"/><circle cx="60" cy="64" r="28" fill="#f6d34a"/><circle cx="49" cy="58" r="3.4" fill="#2a1f12"/><circle cx="71" cy="58" r="3.4" fill="#2a1f12"/><path d="M54 68h12l-6 6z" fill="#7a4317"/><path d="M60 74q-6 7-12 3M60 74q6 7 12 3" stroke="#7a4317" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="45" cy="76" rx="9" ry="5" fill="#fff" opacity=".9"/><ellipse cx="75" cy="76" rx="9" ry="5" fill="#fff" opacity=".9"/></svg>`,
@@ -63,7 +112,7 @@
 
   const root = document.getElementById('diag');
   if (!root) return;
-  const URL_BASE = 'https://ryoishiyama1-svg.github.io/azakei/diagnosis.html';
+  const URL_BASE = S.url;
   const esc = s => encodeURIComponent(s);
   let path = [];   // [{ id, ans }]
 
@@ -71,11 +120,11 @@
     path = [];
     root.innerHTML = `
       <div class="dg-card dg-intro">
-        <p class="dg-kicker">YES か NO の道を選んで、自分の投資家タイプを知ろう</p>
-        <h2>あなたは、どの<em>投資家タイプ</em>？</h2>
-        <p>文化祭で大人気だった手描きポスターの診断を、そのまま Web にしました。質問に YES か NO で答えて、矢印の先へ進んでください。</p>
+        <p class="dg-kicker">${S.kicker}</p>
+        <h2>${S.title}</h2>
+        <p>${S.intro}</p>
         <div class="dg-animals">${Object.entries(T).map(([k, t]) => `<figure style="--c:${t.color}">${ART[k]}<figcaption>${t.name}</figcaption></figure>`).join('')}</div>
-        <button type="button" class="btn-primary dg-start">診断をはじめる</button>
+        <button type="button" class="btn-primary dg-start">${S.start}</button>
       </div>`;
     root.querySelector('.dg-start').addEventListener('click', () => ask(START));
   }
@@ -91,7 +140,7 @@
           <button type="button" class="dg-yes"><span aria-hidden="true">←</span>YES</button>
           <button type="button" class="dg-no"><span aria-hidden="true">↓</span>NO</button>
         </div>
-        ${path.length ? '<button type="button" class="dg-back">← ひとつ前に戻る</button>' : ''}
+        ${path.length ? `<button type="button" class="dg-back">${S.back}</button>` : ''}
       </div>`;
     const go = ans => {
       path.push({ id, ans });
@@ -108,40 +157,40 @@
 
   function show(key, played) {
     const t = T[key], m = T[t.match];
-    const shareText = `私は「${t.name}」の投資家でした！あなたは？ #AZAKEI経済診断`;
+    const shareText = S.shareText(t.name);
     const url = URL_BASE + '#' + key;
     const trail = played && path.length ? `
-        <div class="dg-trail"><p class="dg-trail-head">あなたが通った道</p><ol>${path.map(p => `<li><span>${N[p.id].q}</span><b class="${p.ans ? 'y' : 'n'}">${p.ans ? 'YES' : 'NO'}</b></li>`).join('')}</ol></div>` : '';
+        <div class="dg-trail"><p class="dg-trail-head">${S.trail}</p><ol>${path.map(p => `<li><span>${N[p.id].q}</span><b class="${p.ans ? 'y' : 'n'}">${p.ans ? 'YES' : 'NO'}</b></li>`).join('')}</ol></div>` : '';
     root.innerHTML = `
       <div class="dg-card dg-result" style="--c:${t.color}">
-        <p class="dg-kicker">あなたの投資家タイプは</p>
+        <p class="dg-kicker">${S.resultKicker}</p>
         <div class="dg-art">${ART[key]}</div>
         <h2>${t.name}</h2>
         <p class="dg-en">${t.en}</p>
         <p class="dg-lead">${t.lead}</p>
         <dl class="dg-detail">
-          <dt>強み</dt><dd>${t.good}</dd>
-          <dt>気をつけたいこと</dt><dd>${t.care}</dd>
-          <dt>AZAKEI で輝ける場所</dt><dd>${t.azakei.join('・')}</dd>
-          <dt>相性のいいタイプ</dt><dd><a href="#${t.match}" class="dg-match">${m.name}</a></dd>
+          <dt>${S.strength}</dt><dd>${t.good}</dd>
+          <dt>${S.care}</dt><dd>${t.care}</dd>
+          <dt>${S.shine}</dt><dd>${t.azakei.join(S.sep)}</dd>
+          <dt>${S.match}</dt><dd><a href="#${t.match}" class="dg-match">${m.name}</a></dd>
         </dl>
         ${trail}
         <div class="share">
-          <span class="share-label">結果をシェア</span>
+          <span class="share-label">${S.share}</span>
           <a href="https://twitter.com/intent/tweet?text=${esc(shareText)}&url=${esc(url)}" target="_blank" rel="noopener">X</a>
           <a href="https://social-plugins.line.me/lineit/share?url=${esc(url)}" target="_blank" rel="noopener">LINE</a>
-          <button type="button" class="dg-copy">リンクをコピー</button>
+          <button type="button" class="dg-copy">${S.copy}</button>
         </div>
         <div class="dg-actions">
-          <button type="button" class="btn-primary dg-retry">もう一度診断する</button>
-          <a href="festival.html" class="btn-ghost">文化祭の展示を見る →</a>
+          <button type="button" class="btn-primary dg-retry">${S.retry}</button>
+          <a href="${S.festivalHref}" class="btn-ghost">${S.festival}</a>
         </div>
       </div>`;
     root.querySelector('.dg-retry').addEventListener('click', () => { history.replaceState(null, '', location.pathname); intro(); root.scrollIntoView({ behavior: 'smooth' }); });
     root.querySelector('.dg-copy').addEventListener('click', async function() {
-      try { await navigator.clipboard.writeText(url); this.textContent = 'コピーしました！'; }
-      catch (e) { this.textContent = 'コピーできませんでした'; }
-      setTimeout(() => { this.textContent = 'リンクをコピー'; }, 2000);
+      try { await navigator.clipboard.writeText(url); this.textContent = S.copied; }
+      catch (e) { this.textContent = S.copyFail; }
+      setTimeout(() => { this.textContent = S.copy; }, 2000);
     });
     root.querySelector('.dg-match').addEventListener('click', e => { e.preventDefault(); path = []; history.replaceState(null, '', '#' + t.match); show(t.match, false); });
   }

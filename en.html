@@ -23,17 +23,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="base.css?v=20261002k" />
-  <link rel="stylesheet" href="nav.css?v=20261002k" />
-  <link rel="stylesheet" href="sections.css?v=20261002k" />
-  <link rel="stylesheet" href="pages.css?v=20261002k" />
-  <link rel="stylesheet" href="design.css?v=20261002k" />
-  <link rel="stylesheet" href="design-v4.css?v=20261002k" />
-  <link rel="stylesheet" href="design-v5.css?v=20261002k" />
-  <link rel="stylesheet" href="design-v6.css?v=20261002k" />
-  <link rel="stylesheet" href="design-v7.css?v=20261002k" />
-  <link rel="stylesheet" href="design-v8.css?v=20261002k" />
-  <link rel="stylesheet" href="readable.css?v=20261002k" />
+  <link rel="stylesheet" href="base.css?v=20261002o" />
+  <link rel="stylesheet" href="nav.css?v=20261002o" />
+  <link rel="stylesheet" href="sections.css?v=20261002o" />
+  <link rel="stylesheet" href="pages.css?v=20261002o" />
+  <link rel="stylesheet" href="design.css?v=20261002o" />
+  <link rel="stylesheet" href="design-v4.css?v=20261002o" />
+  <link rel="stylesheet" href="design-v5.css?v=20261002o" />
+  <link rel="stylesheet" href="design-v6.css?v=20261002o" />
+  <link rel="stylesheet" href="design-v7.css?v=20261002o" />
+  <link rel="stylesheet" href="design-v8.css?v=20261002o" />
+  <link rel="stylesheet" href="design-v9.css?v=20261002o" />
+  <link rel="stylesheet" href="readable.css?v=20261002o" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -43,19 +44,7 @@
     gtag('config', 'G-S1YQ2P951D');
   </script>
 </head>
-<body class="page-en">
-
-  <nav id="navbar">
-    <a href="en.html" class="nav-logo wordmark" aria-label="AZAKEI home"><span class="nav-mark" data-logomark aria-hidden="true"></span>AZA<span>KEI</span></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#what">What we do</a></li>
-      <li><a href="#festival">Festival</a></li>
-      <li><a href="#partner">Partner</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-right"><a href="index.html" class="lang-switch" hreflang="ja" lang="ja">日本語</a></div>
-  </nav>
+<body class="page-en" data-ja="index.html">
 
   <header class="page-hero en-hero" data-bg="AZAKEI">
     <div class="container">
@@ -63,8 +52,8 @@
       <h1 class="section-title">Economics, <em>in our hands.</em></h1>
       <p class="page-hero-lead">AZAKEI is the student-run economics club of Azabu Junior and Senior High School in Tokyo. We turn economics into something you can play with: a hands-on exhibition at our school festival, business contests, and real-world research.</p>
       <div class="cta-actions" style="justify-content:flex-start; margin-top:28px;">
-        <a href="#contact" class="btn-primary">Get in touch</a>
-        <a href="index.html" class="btn-ghost" hreflang="ja" lang="ja">日本語サイトへ →</a>
+        <a href="en-diagnosis.html" class="btn-primary">Take the Economist Type Test</a>
+        <a href="#contact" class="btn-ghost">Get in touch <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
       </div>
     </div>
     <div class="en-emblem" data-emblem aria-hidden="true"></div>
@@ -96,29 +85,31 @@
     </div>
   </section>
 
-  <section class="services tight" id="what">
+  <section class="services tight" id="values">
     <div class="container">
-      <div class="section-head reveal">
-        <p class="section-label">What we do</p>
-        <h2 class="section-title">Three ways we <em>do economics.</em></h2>
+      <div class="section-head reveal" style="text-align:center;">
+        <p class="section-label" style="justify-content:center;">Our values</p>
+        <h2 class="section-title">What we <em>care about.</em></h2>
       </div>
-      <div class="card-grid reveal">
-        <div class="link-card">
-          <p class="num">Compete</p>
-          <h3>Contests</h3>
-          <p>Business plan contests, the Nikkei Stock League (an investment and research competition for students run by Nikkei Inc.), entrepreneur pitch auditions, and research papers.</p>
-        </div>
-        <a class="link-card" href="#festival">
-          <p class="num">Share</p>
-          <h3>The festival exhibition</h3>
-          <p>A hands-on exhibition where economics becomes entertainment: quizzes, an original strategy card game, crosswords, and our Economist Type Test.</p>
-          <span class="more">See the numbers →</span>
-        </a>
-        <div class="link-card">
-          <p class="num">Explore</p>
-          <h3>Everyday activities</h3>
-          <p>Weekly meetings, research, and plenty of after-school conversation about how the world's systems work.</p>
-        </div>
+      <div class="values reveal">
+        <article class="value" data-kanji="楽">
+          <p class="value-num">No. 01</p>
+          <h3>Be curious</h3>
+          <p class="value-en">面白がる</p>
+          <p>We treat economics as something fun, not just something to study. Every quiz and game starts with what excites us.</p>
+        </article>
+        <article class="value" data-kanji="創">
+          <p class="value-num">No. 02</p>
+          <h3>Build it ourselves</h3>
+          <p class="value-en">自分でつくる</p>
+          <p>Understanding how the world works is only the start. We design the exhibition and our contest ideas with our own hands.</p>
+        </article>
+        <article class="value" data-kanji="開">
+          <p class="value-num">No. 03</p>
+          <h3>Open to everyone</h3>
+          <p class="value-en">みんなに開く</p>
+          <p>We turn difficult ideas into something anyone can understand, and share them at the festival and on social media.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -128,6 +119,7 @@
       <div class="section-head reveal">
         <p class="section-label">Azabu Economic Exhibition 2026</p>
         <h2 class="section-title">Three days, <em>2,364 visitors.</em></h2>
+        <p class="lead">Visitors collect chips by playing, then decide how to use them. Growing and losing chips is a small model of economic activity.</p>
       </div>
       <div class="numbers reveal">
         <div class="number"><div class="number-val"><span data-count>2,364</span><small>visitors</small></div><p class="number-label">over three days of the 2026 school festival</p></div>
@@ -135,17 +127,54 @@
         <div class="number"><div class="number-val"><span data-count>6</span><small>corners</small></div><p class="number-label">of hands-on activities</p></div>
         <div class="number"><div class="number-val"><span data-count>15</span><small>min</small></div><p class="number-label">to experience the exhibition</p></div>
       </div>
-      <p class="en-next reveal">Next exhibition: <b>May 1–3, 2027</b> (planned) at Azabu Junior and Senior High School, 2-3-29 Motoazabu, Minato-ku, Tokyo.</p>
+
+      <div class="en-corners reveal">
+        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg><h3 class="service-name">Quiz</h3><p class="service-desc">From economic basics to fun trivia. Answer correctly to earn chips.</p></div>
+        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="10" height="14" rx="1.5" transform="rotate(-8 9 13)"/><rect x="10" y="4" width="10" height="14" rx="1.5" transform="rotate(8 15 11)"/></svg><h3 class="service-name">Card game</h3><p class="service-desc">An original strategy game where reading your opponent matters.</p></div>
+        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 9.3h16M4 14.6h16M9.3 4v16M14.6 4v16"/></svg><h3 class="service-name">Crossword</h3><p class="service-desc">Solve economics through the connections between words.</p></div>
+        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><h3 class="service-name">Economist Type Test</h3><p class="service-desc">Find out what kind of investor you are. <a href="en-diagnosis.html">Try it online →</a></p></div>
+        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10v7H8l-4 3z"/><path d="M14 10h6v7l-3-2.4h-5V13"/></svg><span class="service-tag">Special</span><h3 class="service-name">Debate</h3><p class="service-desc">A space to dig deep into one theme together.</p></div>
+        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg><span class="service-tag">Special</span><h3 class="service-name">Dialogue</h3><p class="service-desc">Conversations that bring the real world of society and economics to life.</p></div>
+      </div>
+
+      <div class="en-visit reveal">
+        <div>
+          <p class="section-label">Visit us</p>
+          <h3>Azabu Economic Exhibition 2027</h3>
+          <dl>
+            <dt>Dates</dt><dd>May 1–3, 2027 (planned)</dd>
+            <dt>Hours</dt><dd>9:00–16:00 (special programs around 13:00)</dd>
+            <dt>Place</dt><dd>Azabu Junior and Senior High School<br>2-3-29 Motoazabu, Minato-ku, Tokyo</dd>
+          </dl>
+        </div>
+        <a href="https://maps.app.goo.gl/95uSshVfN6Gis78n8" target="_blank" rel="noopener" class="btn-primary">Open in Google Maps</a>
+      </div>
     </div>
   </section>
 
-  <section class="services tight" id="partner">
+  <section class="services tight" id="contests">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label">Contests</p>
+        <h2 class="section-title">Testing ourselves <em>beyond school.</em></h2>
+      </div>
+      <div class="en-contests reveal">
+        <article><span class="en-c-num">01</span><h3>Business contests</h3><p>Find a social problem, design a business that solves it, and turn it into a business plan and pitch.</p></article>
+        <article><span class="en-c-num">02</span><h3>Nikkei Stock League</h3><p>An investment and research competition run by Nikkei Inc. We choose a theme, analyze companies, build a virtual portfolio, and write a report.</p></article>
+        <article><span class="en-c-num">03</span><h3>Entrepreneur auditions</h3><p>Pitch our ideas directly to entrepreneurs and judges, and learn whether they could really work.</p></article>
+        <article><span class="en-c-num">04</span><h3>Research papers</h3><p>Ask a question about the economy, dig into data and sources, and write it up as a paper.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about tight" id="partner">
     <div class="container">
       <div class="split" style="align-items:start;">
         <div class="reveal">
           <p class="section-label">Partner with us</p>
           <h2 class="section-title">Help us make economics <em>fun.</em></h2>
-          <p style="margin-top:24px;">We welcome companies and organizations that share our goal of making economics accessible and exciting for students and our community.</p>
+          <p style="margin-top:24px;">We welcome companies and organizations that share our goal of making economics accessible and exciting for students and our community. Partners are introduced at the exhibition and on our website.</p>
+          <p><a href="sponsor-kit.html" hreflang="ja" style="color:var(--color-accent-deep);text-decoration:underline;">Sponsorship information (Japanese, A4 PDF)</a></p>
         </div>
         <ul class="join-list reveal">
           <li>Sponsorship of the exhibition and contest participation</li>
@@ -170,32 +199,14 @@
     </div>
   </section>
 
-  <footer class="site-footer en-footer">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand"><div class="footer-emblem" data-emblem></div><span class="wordmark footer-wordmark">AZA<span>KEI</span></span></div>
-        <p class="footer-note">Azabu Economics · Est. 2025<br>Azabu Junior and Senior High School, Tokyo</p>
-      </div>
-      <div>
-        <p class="footer-head">Social</p>
-        <ul class="footer-list">
-          <li><a href="https://www.instagram.com/azakeichannel/" target="_blank" rel="noopener">Instagram <span>@azakeichannel</span></a></li>
-          <li><a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener">Instagram Vlog <span>@azakei_vlog</span></a></li>
-          <li><a href="https://x.com/azakeiten" target="_blank" rel="noopener">X <span>@azakeiten</span></a></li>
-        </ul>
-      </div>
-      <div>
-        <p class="footer-head">Language</p>
-        <ul class="footer-list"><li><a href="index.html" hreflang="ja" lang="ja">日本語</a></li><li><a href="en.html">English</a></li></ul>
-      </div>
-    </div>
-    <div class="footer-bottom">© 2026 AZAKEI. All rights reserved.</div>
-  </footer>
+  <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261002k"></script>
-  <script src="brand.js?v=20261002k"></script>
-  <script src="reveal.js?v=20261002k"></script>
-  <script src="fx.js?v=20261002k"></script>
+  <script src="content.js?v=20261002o"></script>
+  <script src="layout-en.js?v=20261002o"></script>
+  <script src="brand.js?v=20261002o"></script>
+  <script src="reveal.js?v=20261002o"></script>
+  <script src="fx.js?v=20261002o"></script>
+  <script src="v9.js?v=20261002o"></script>
   <script>
     (function () {
       var c = (window.AZAKEI || {}).liveEconomy, box = document.querySelector('[data-live-en]');
