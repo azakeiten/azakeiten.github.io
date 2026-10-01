@@ -81,6 +81,14 @@
       </div>
     </div>`);
 
+  /* ---- 本文へスキップ（キーボード操作用） ---- */
+  const main = document.querySelector('.page-hero, .hero-sticky-wrap, main, .notfound');
+  if (main) {
+    if (!main.id) main.id = 'main';
+    main.setAttribute('tabindex', '-1');
+    document.body.insertAdjacentHTML('afterbegin', `<a class="skip-link" href="#${main.id}">本文へスキップ</a>`);
+  }
+
   /* ---- 目次の開閉に合わせた処理（開閉そのものは nav.js） ---- */
   const menu = document.getElementById('mobileMenu');
   const burger = document.getElementById('hamburger');

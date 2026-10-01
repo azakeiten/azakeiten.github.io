@@ -190,6 +190,64 @@
     if (document.fonts) document.fonts.ready.then(drawHub);
   }
 
+  /* ---- 写真の拡大表示（ギャラリーの写真を押すと大きく） ---- */
+  const shots = [...document.querySelectorAll('.gallery-item:not(.is-empty)')];
+  if (shots.length) {
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', '写真の拡大表示');
+    const arrow = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="${d}"/></svg>`;
+    lb.innerHTML = `
+      <figure><img alt=""><figcaption></figcaption></figure>
+      <button type="button" class="lb-close" aria-label="閉じる">${arrow('M6 6l12 12M18 6L6 18')}</button>
+      <button type="button" class="lb-prev" aria-label="前の写真">${arrow('M15 5l-7 7 7 7')}</button>
+      <button type="button" class="lb-next" aria-label="次の写真">${arrow('M9 5l7 7-7 7')}</button>`;
+    document.body.appendChild(lb);
+    const img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
+    const multi = shots.length > 1;
+    lb.querySelector('.lb-prev').hidden = lb.querySelector('.lb-next').hidden = !multi;
+    let idx = 0, opener = null;
+
+    function show(i) {
+      idx = (i + shots.length) % shots.length;
+      const s = shots[idx], src = s.querySelector('img');
+      img.src = src.currentSrc || src.src;
+      img.alt = src.alt;
+      const c = s.querySelector('figcaption');
+      cap.innerHTML = (c ? c.innerHTML : '') + (multi ? `<span>${idx + 1} / ${shots.length}</span>` : '');
+    }
+    function open(i) { opener = document.activeElement; show(i); lb.classList.add('open'); document.documentElement.style.overflow = 'hidden'; lb.querySelector('.lb-close').focus(); }
+    function close() { lb.classList.remove('open'); document.documentElement.style.overflow = ''; if (opener) opener.focus(); }
+
+    shots.forEach((s, i) => {
+      s.tabIndex = 0;
+      s.setAttribute('role', 'button');
+      s.setAttribute('aria-label', '写真を拡大：' + (s.querySelector('img').alt || ''));
+      s.addEventListener('click', () => open(i));
+      s.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
+    });
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-prev').addEventListener('click', () => show(idx - 1));
+    lb.querySelector('.lb-next').addEventListener('click', () => show(idx + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft' && multi) show(idx - 1);
+      if (e.key === 'ArrowRight' && multi) show(idx + 1);
+    });
+    // スマホ：左右にスワイプで切り替え
+    let sx = null;
+    lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      if (sx === null || !multi) return;
+      const dx = e.changedTouches[0].clientX - sx; sx = null;
+      if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    });
+  }
+
   /* ---- カーソル追従の光 ---- */
   document.addEventListener('pointermove', e => {
     const el = e.target.closest && e.target.closest('.link-card, .vote-option, .sns-card, .dm-card');

@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="pages.css" />
   <link rel="stylesheet" href="design.css" />
   <link rel="stylesheet" href="design-v4.css" />
+  <link rel="stylesheet" href="design-v5.css" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZS22BPLKW"></script>
   <script>
@@ -62,6 +63,15 @@
         </div>
 
         <form class="contact-form reveal" id="contactForm" novalidate>
+          <div>
+            <span class="purpose-label">ご用件を選んでください</span>
+            <div class="purpose" role="group" aria-label="ご用件">
+              <button type="button" data-type="general" aria-pressed="true"><b>展示・活動について</b><small>文化祭や活動への質問</small></button>
+              <button type="button" data-type="sponsor" aria-pressed="false"><b>協賛・ご協力</b><small>ご支援・登壇・メンタリング</small></button>
+              <button type="button" data-type="media" aria-pressed="false"><b>取材</b><small>メディア・学校新聞など</small></button>
+              <button type="button" data-type="collab" aria-pressed="false"><b>コラボレーション</b><small>共同イベント・企画</small></button>
+            </div>
+          </div>
           <div class="field-row">
             <div class="field">
               <label for="name">お名前<span class="req">必須</span></label>
@@ -88,7 +98,8 @@
           </div>
           <div class="field">
             <label for="message">お問い合わせ内容<span class="req">必須</span></label>
-            <textarea id="message" name="message" required></textarea>
+            <textarea id="message" name="message" required maxlength="2000"></textarea>
+            <span class="count" aria-live="off"><span id="msgCount">0</span> / 2000</span>
           </div>
           <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button type="submit" class="btn-primary">送信する</button>
@@ -112,6 +123,21 @@
       var form = document.getElementById('contactForm');
       var t = new URLSearchParams(location.search).get('type');
       if (t && form.type.querySelector('option[value="' + t + '"]')) form.type.value = t;
+
+      // ご用件ボタン ⇔ 種類のセレクトを同期
+      var btns = form.querySelectorAll('.purpose button');
+      function sync() {
+        btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.type === form.type.value ? 'true' : 'false'); });
+      }
+      btns.forEach(function (b) {
+        b.addEventListener('click', function () { form.type.value = b.dataset.type; sync(); form.name.focus(); });
+      });
+      form.type.addEventListener('change', sync);
+      sync();
+
+      // 文字数カウンター
+      var msg = form.message, count = document.getElementById('msgCount');
+      msg.addEventListener('input', function () { count.textContent = msg.value.length; });
       form.addEventListener('submit', function (e) {
         if (!form.checkValidity()) {
           e.stopImmediatePropagation();

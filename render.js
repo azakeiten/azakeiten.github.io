@@ -29,8 +29,18 @@
       ? fmt(e.date) + (e.end && e.end !== e.date ? ' – ' + fmt(e.end).slice(5) : '')
       : (e.when || '日程未定');
     const tag = e.link ? 'a' : 'div';
+    // 日付のある予定には「あと○日」／「開催中」
+    let badge = '';
+    if (e.date && !e.past) {
+      const t = todayStr();
+      const days = Math.round((new Date(e.date) - new Date(t)) / 86400000);
+      badge = days <= 0 ? '<span class="event-countdown is-now">開催中</span>'
+                        : `<span class="event-countdown">あと <b>${days}</b> 日</span>`;
+    } else if (!e.date && e.when === '受付中') {
+      badge = '<span class="event-countdown is-now">受付中</span>';
+    }
     return `<${tag} class="event-row${e.past ? ' is-past' : ''}"${e.link ? ` href="${e.link}"` : ''}>
-      <div class="event-when">${when}</div>
+      <div class="event-when">${when}${badge}</div>
       <div class="event-main">
         <span class="chip">${e.tag || 'Event'}</span>
         <h3>${e.title}</h3>
