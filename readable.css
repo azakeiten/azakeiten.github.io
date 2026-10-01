@@ -1,0 +1,77 @@
+/* ================================================================
+   readable.css — 文字の読みやすさ（コントラスト・文字サイズ）
+   基準：本文 4.5:1 以上、大きい文字 3:1 以上（WCAG AA）
+   ・明るい背景の上の「文字の金色」は濃い金 --color-accent-deep を使う
+     （線・飾り・背景の金はそのまま明るい金）
+   ・小さすぎるラベル（10〜11px）は最低 12px に
+   ================================================================ */
+:root:not([data-theme="dark"]) {
+  --color-accent-deep: #7d6131;          /* アイボリー上で約 5:1 */
+  --color-muted: rgba(33, 28, 21, 0.72); /* 補足テキストを少し濃く */
+}
+
+/* ---- 金色の文字 → 濃い金（ダーク時は明るい金になる変数） ---- */
+.nav-logo span, .wordmark span,
+.link-card .num, .link-card .more, .heritage-arrow, .timeline .when,
+.achievements li span, .contest-num, .contest dt, .list-head, .event-when,
+.diary-item time, .sns-handle, .steps li::before, .field label .req,
+.footer-head, .vote-idx, .stat-num, .service-num, .toc-num, .toc-count b,
+.marquee-item em, .number-val, .value-num, .page-festival .highlight,
+.chip, .toc-mobile-scroller a span, .event-countdown b, #formStatus,
+.dm-label, .vote-status, .vote-count em, .breadcrumb a:hover, .footer-list a:hover {
+  color: var(--color-accent-deep);
+}
+/* 暗い背景の上はそのまま明るい金 */
+.hero .hero-wordmark .ch.gold, .cta-band .section-title em, html.index-open #navbar .nav-logo span,
+#loader-brand-logo .loader-word span { color: var(--color-accent); }
+
+/* ---- 金のボタン：白文字 → 濃い文字（読みやすく、金の印象はそのまま） ---- */
+.btn-primary, .toc-list a.is-active .toc-num, .toc-mobile-scroller a.is-active,
+.vote-option[data-rank="1"] .vote-rank, .to-top:hover, .skip-link {
+  color: #1d1812;
+}
+.btn-primary { background: #d2b47a; font-weight: 600; }
+.btn-primary:hover { background: #c8a96e; }
+.toc-mobile-scroller a.is-active span { color: rgba(29, 24, 18, 0.7); }
+.vote-mine { background: #7d6131; }
+:root[data-theme="dark"] .vote-mine { background: #a8844a; color: #14110d; }
+.skip-link { background: #d2b47a; }
+
+/* 赤いバッジは少し濃い赤に */
+.event-countdown.is-now, .si-badge { background: #c0392b; border-color: #c0392b; }
+
+/* ---- 写真の上の文字は白 ---- */
+.about-image-caption { color: rgba(255, 255, 255, 0.92); }
+.gallery-item figcaption { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
+.gallery-item.is-empty figcaption { color: #5f4b2c; text-shadow: none; }
+.gallery-ph { color: rgba(95, 75, 44, 0.85); border-color: rgba(125, 97, 49, 0.45); }
+:root[data-theme="dark"] .gallery-item.is-empty figcaption, :root[data-theme="dark"] .gallery-ph { color: rgba(236, 230, 218, 0.75); }
+
+/* ---- 文化祭の締めの文字 ---- */
+.dynamic-subtitle { color: #6b5636; }
+.dynamic-title { color: #6b5636; }
+:root[data-theme="dark"] .dynamic-subtitle { color: rgba(236, 230, 218, 0.75); }
+
+/* ---- 小さすぎる文字を最低 12px に ---- */
+.section-label, .footer-head, .list-head, .timeline .when, .toc-head, .stat-label,
+.vote-total-label, .dm-label, .value-en, .contest .en, .toc-text small, .page-hero .breadcrumb,
+.footer-bottom, .chip, .event-countdown, .hero-counter-label, .vote-note, .purpose button small {
+  font-size: max(12px, 1em);
+}
+.section-label, .footer-head, .list-head, .timeline .when, .toc-head, .value-en, .contest .en { font-size: 12px; letter-spacing: 0.18em; }
+.chip { font-size: 12px; }
+.footer-bottom { font-size: 11.5px; }
+.stat-label, .vote-total-label, .dm-label { font-size: 12px; }
+.toc-text small { font-size: 11px; }
+.nav-links a { font-size: 12.5px; }
+
+/* ---- 本文は少し大きく・行間ゆったり ---- */
+.link-card p, .service-desc, .diary-item p, .event-main p, .steps p, .value p:last-child { font-size: 15px; line-height: 1.9; }
+
+/* 暗い帯（CTA）の中のラベルは明るい金 */
+.cta-band .section-label { color: var(--color-accent); }
+.cta-band .section-label::before { background: var(--color-accent); }
+
+/* 残りの微調整 */
+:root:not([data-theme="dark"]) { --ink-soft: rgba(33, 28, 21, 0.72); }
+:root:not([data-theme="dark"]) .marquee-item { color: #6b5636; }
