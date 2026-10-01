@@ -84,16 +84,79 @@
   // 合計値などの計算スクリプトが走ってから監視する
   window.addEventListener('load', () => nums.forEach(n => countIO.observe(n)));
 
-  /* ---- 目次：今読んでいる項目を光らせる ---- */
-  const tocLinks = [...document.querySelectorAll('.toc a[href^="#"]')];
-  if (tocLinks.length) {
-    const spy = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if (!en.isIntersecting) return;
-        tocLinks.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + en.target.id));
+  /* ---- ナビの高さ（スマホ目次バーの貼り付き位置に使う） ---- */
+  function setNavH() { if (nav) document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px'); }
+  setNavH();
+  if (nav && window.ResizeObserver) new ResizeObserver(setNavH).observe(nav, { box: 'border-box' });
+
+  /* ---- 目次：見出しから自動生成し、読み進めた分だけバーを伸ばす ----
+     <nav class="toc" data-toc=".contest"> … PC 用（左に固定）
+     <nav class="toc-mobile" data-toc-mobile> … スマホ用（上に貼り付く横バー） */
+  const toc = document.querySelector('.toc[data-toc]');
+  if (toc) {
+    const secs = [...document.querySelectorAll(toc.dataset.toc)].filter(s => s.id);
+    const pad  = n => String(n).padStart(2, '0');
+    const items = secs.map((s, i) => ({
+      id: s.id, num: pad(i + 1),
+      ja: (s.querySelector('h2') || s).textContent.trim(),
+      en: ((s.querySelector('.en') || {}).textContent || '').trim()
+    }));
+
+    toc.innerHTML = `
+      <div class="toc-head"><span>Index</span><span class="toc-count"><b>01</b> / ${pad(items.length)}</span></div>
+      <ol class="toc-list">${items.map(it => `
+        <li><a href="#${it.id}">
+          <span class="toc-track"><span class="toc-fill"></span></span>
+          <span class="toc-num">${it.num}</span>
+          <span class="toc-text"><b>${it.ja}</b><small>${it.en}</small></span>
+          <svg class="toc-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a></li>`).join('')}
+      </ol>`;
+
+    const mob = document.querySelector('[data-toc-mobile]');
+    if (mob) mob.innerHTML = `
+      <div class="toc-mobile-scroller">${items.map(it =>
+        `<a href="#${it.id}"><span>${it.num}</span>${it.ja}</a>`).join('')}</div>
+      <div class="toc-mobile-progress"><span></span></div>`;
+
+    const links   = [...toc.querySelectorAll('a')];
+    const fills   = [...toc.querySelectorAll('.toc-fill')];
+    const chips   = mob ? [...mob.querySelectorAll('a')] : [];
+    const scroller = mob && mob.querySelector('.toc-mobile-scroller');
+    const bar      = mob && mob.querySelector('.toc-mobile-progress span');
+    const countEl  = toc.querySelector('.toc-count b');
+    let current = -1, ticking = false;
+
+    function updateToc() {
+      ticking = false;
+      const line = window.innerHeight * 0.4;
+      let active = 0;
+      secs.forEach((s, i) => {
+        const r = s.getBoundingClientRect();
+        const p = Math.max(0, Math.min(1, (line - r.top) / r.height));
+        fills[i].style.transform = `scaleY(${p})`;
+        if (r.top <= line) active = i;
+        links[i].classList.toggle('is-done', p >= 1);
       });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    tocLinks.forEach(l => { const t = document.querySelector(l.getAttribute('href')); if (t) spy.observe(t); });
+      const first = secs[0].getBoundingClientRect(), last = secs[secs.length - 1].getBoundingClientRect();
+      const total = Math.max(0, Math.min(1, (line - first.top) / (last.bottom - first.top)));
+      if (bar) bar.style.transform = `scaleX(${total})`;
+      if (active !== current) {
+        current = active;
+        links.forEach((l, i) => l.classList.toggle('is-active', i === active));
+        chips.forEach((c, i) => c.classList.toggle('is-active', i === active));
+        if (countEl) countEl.textContent = items[active].num;
+        const chip = chips[active];
+        if (scroller && chip) {
+          const left = scroller.scrollLeft + chip.getBoundingClientRect().left - scroller.getBoundingClientRect().left
+                     - (scroller.clientWidth - chip.offsetWidth) / 2;
+          scroller.scrollTo({ left, behavior: reduce ? 'auto' : 'smooth' });
+        }
+      }
+    }
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(updateToc); } }, { passive: true });
+    window.addEventListener('resize', updateToc);
+    updateToc();
   }
 
   /* ---- ハブ：中心から各カードへ線を引く（黒板のマインドマップ風・PCのみ） ---- */
