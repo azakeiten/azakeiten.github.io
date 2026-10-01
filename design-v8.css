@@ -153,3 +153,20 @@
 .dg-trail b { font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.08em; }
 .dg-trail b.y { color: #c62f2f; } .dg-trail b.n { color: #2547a8; }
 :root[data-theme="dark"] .dg-trail b.y { color: #ff7b6e; } :root[data-theme="dark"] .dg-trail b.n { color: #8fb0ff; }
+
+/* ---- 言語切替・英語ページ ---- */
+.lang-switch {
+  display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 12px; border-radius: 999px;
+  border: 1px solid var(--nav-line); color: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  transition: border-color 0.3s, color 0.3s;
+}
+.lang-switch:hover { border-color: var(--color-accent); color: var(--color-accent-deep); }
+html.index-open .lang-switch { color: #ece6da; border-color: rgba(236,230,218,.2); }
+.page-en .en-hero { position: relative; }
+.page-en .en-hero .section-title { font-family: 'Cormorant Garamond', var(--font-display); font-size: clamp(44px, 7vw, 88px); }
+.en-emblem { position: absolute; z-index: 1; right: var(--gutter); top: 50%; transform: translateY(-40%); width: clamp(140px, 18vw, 240px); height: clamp(140px, 18vw, 240px); color: var(--color-accent-deep); }
+@media (max-width: 900px) { .en-emblem { display: none; } }
+.en-next { margin-top: 22px; color: var(--color-muted); }
+.en-next b { color: var(--color-text); }
+.page-en .nav-links { display: flex; }
+@media (max-width: 900px) { .page-en .nav-links { display: none; } }
