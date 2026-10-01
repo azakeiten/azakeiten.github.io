@@ -68,7 +68,7 @@
       const limit = +el.dataset.limit || Infinity;
       el.innerHTML = (D.gallery || []).slice(0, limit).map(g => g.src
         ? `<figure class="gallery-item"><img src="${g.src}" alt="${g.caption}" loading="lazy"><figcaption>${g.caption}${g.date ? `<span>${g.date}</span>` : ''}</figcaption></figure>`
-        : `<figure class="gallery-item is-empty"><div class="gallery-ph">Photo<br>coming soon</div><figcaption>${g.caption}</figcaption></figure>`
+        : `<figure class="gallery-item is-empty"><div class="gallery-ph" aria-hidden="true"><span class="ph-mark" data-logomark></span><span class="ph-text">Photo coming soon</span></div><figcaption>${g.caption}</figcaption></figure>`
       ).join('');
     },
 
@@ -104,6 +104,7 @@
     const fn = renderers[el.dataset.render];
     if (fn) fn(el);
   });
+  if (window.AZAKEI_RENDER_MARKS) window.AZAKEI_RENDER_MARKS();
 
   /* ---- お問い合わせフォーム ---- */
   const form = document.getElementById('contactForm');

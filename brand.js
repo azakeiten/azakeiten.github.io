@@ -81,6 +81,11 @@
   }
 
   window.AZAKEI_EMBLEM = emblem;
+  // 後から追加された要素の中のロゴを描く
+  window.AZAKEI_RENDER_MARKS = (scope = document) => {
+    scope.querySelectorAll('[data-emblem]:empty').forEach(el => { el.innerHTML = emblem(); });
+    scope.querySelectorAll('[data-logomark]:empty').forEach(el => { el.innerHTML = markOnly(); });
+  };
   document.querySelectorAll('[data-emblem]').forEach(el => { el.innerHTML = emblem(); });
   document.querySelectorAll('[data-logomark]').forEach(el => { el.innerHTML = markOnly(); });
 })();

@@ -28,6 +28,7 @@
       { ico: 'M4 6h16v14H4zM4 10h16M8 3v5M16 3v5', href: 'events.html',     ja: '日程・イベント',    en: 'Schedule', desc: 'これからの予定と、これまでの歩み。',           img: 'tokyo-s.jpg' }
     ]},
     { group: '参加する', en: 'Join', pages: [
+      { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.6M12 16.8v.2', href: 'diagnosis.html',  ja: 'エコノミスト診断',  en: 'Type Test', desc: 'YES か NO で、あなたの投資家タイプがわかる。', img: 'hero.jpg', badge: 'NEW' },
       { ico: 'M5 11h14v9H5zM9 15l2 2 4-4M8 11V6h8v5', href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '来年どんな展示が見たい？ 1 票で決めよう。',   img: 'hero.jpg', badge: '受付中' },
       { ico: 'M3 12l4-4 3 2 4-3 7 6M7 13l3 3 2-1 2 2 3-3', href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'tokyo-s.jpg' },
       { ico: 'M4 6h16v12H4zM4 7l8 6 8-6', href: 'contact.html',    ja: 'お問い合わせ',      en: 'Contact',  desc: 'フォーム、または Instagram の DM から。',      img: 'members.jpg' }
