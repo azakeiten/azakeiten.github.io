@@ -1,0 +1,157 @@
+/* ================================================================
+   DESIGN v6 — ブランド：親しみやすさと気品
+   あたたかいアイボリー × 金 × 明朝、少し丸みのある形、紋章（麻の葉）
+   ================================================================ */
+
+/* ---- あたたかい色（ライト） ---- */
+:root {
+  --color-bg:      #f6f2ea;
+  --color-surface: #fffdf9;
+  --color-border:  rgba(74, 56, 28, 0.11);
+  --color-text:    #211c15;
+  --color-muted:   rgba(33, 28, 21, 0.62);
+  --nav-bg:        #fffdf9;
+  --nav-line:      rgba(74, 56, 28, 0.10);
+  --ink:           #211c15;
+  --ink-soft:      rgba(33, 28, 21, 0.6);
+  --footer-bg:     #fbf8f2;
+  --radius:        14px;
+  --radius-sm:     10px;
+}
+:root[data-theme="dark"] { --radius: 14px; --radius-sm: 10px; }
+.services { background: var(--color-surface); }
+:root:not([data-theme="dark"]) .cta-band { background: #221c14; }
+
+/* ---- 丸み（親しみやすさ） ---- */
+.btn-primary { border-radius: 999px; padding: 15px 34px; box-shadow: 0 10px 24px -14px rgba(154,122,69,0.9); }
+.nav-cta { border-radius: 999px; }
+.card-grid, .sns-grid, .diary, .services-grid { border-radius: var(--radius); overflow: hidden; }
+@media (max-width: 1024px) { .hub-branches { border-radius: var(--radius); overflow: hidden; } }
+@media (min-width: 1025px) { .hub .hub-branches { border-radius: 0; overflow: visible; } .hub .link-card { border-radius: var(--radius-sm); } }
+.vote-option, .contact-form, .dm-card, .heritage, .map-box, .purpose button { border-radius: var(--radius); }
+.split-img, .about-image, .gallery-item { border-radius: var(--radius); }
+.split-img img, .about-image img { border-radius: inherit; }
+.numbers { border-radius: var(--radius); border: 1px solid var(--color-border); overflow: hidden; background: var(--color-surface); }
+.field input, .field select, .field textarea { border-radius: var(--radius-sm); }
+.page-festival .about-stats { border-radius: var(--radius); overflow: hidden; }
+.page-festival .schedule-table { border-radius: var(--radius); }
+.event-row { border-radius: var(--radius-sm); }
+
+/* ---- 紋章 ---- */
+.emblem { width: 100%; height: 100%; overflow: visible; display: block; }
+.emblem .em-ring { fill: none; stroke: currentColor; stroke-width: 1; opacity: 0.85; }
+.emblem .em-thin { stroke-width: 0.6; opacity: 0.5; }
+.emblem .em-text { font-family: 'Cormorant Garamond', serif; font-size: 13.5px; font-weight: 500; letter-spacing: 0.2em; fill: currentColor; }
+.emblem .em-spin { transform-origin: 100px 100px; animation: spin 48s linear infinite; }
+.emblem .em-dot { fill: var(--color-accent); }
+.emblem-draw .em-ring { animation: em-fade 1s ease both; }
+@keyframes em-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes em-fade { from { opacity: 0; } }
+
+/* ローディング画面 */
+#loader-brand-logo.has-emblem { flex-direction: column; gap: 18px; padding: 0; letter-spacing: 0.24em; }
+#loader-brand-logo .loader-emblem { width: clamp(92px, 12vw, 130px); height: clamp(92px, 12vw, 130px); color: var(--color-accent-deep); }
+#loader-brand-logo .loader-word { font-size: clamp(30px, 5vw, 56px); padding-left: 0.24em; }
+
+/* トップ：右上でゆっくり回る */
+.hero-emblem {
+  position: absolute; z-index: 3; right: var(--gutter); top: calc(var(--nav-h, 100px) + 28px);
+  width: clamp(92px, 11vw, 150px); height: clamp(92px, 11vw, 150px); color: rgba(255, 248, 235, 0.88);
+  filter: drop-shadow(0 6px 20px rgba(0,0,0,0.35));
+  animation: rise 1s var(--ease-out) 1.5s both;
+}
+@media (max-width: 640px) { .hero-emblem { display: none; } }
+
+/* フッター */
+.footer-brand { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
+.footer-emblem { width: 72px; height: 72px; flex: none; color: var(--color-accent-deep); }
+.footer-brand .footer-wordmark { margin-bottom: 0; }
+
+/* 麻経とは：由来の紋章 */
+.heritage-emblem { width: 120px; height: 120px; color: var(--color-accent-deep); }
+
+/* ---- 大切にしていること ---- */
+.values { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 24px); }
+.value {
+  position: relative; padding: clamp(28px, 3.4vw, 44px); border-radius: var(--radius);
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), border-color 0.4s;
+  overflow: hidden;
+}
+.value:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -30px rgba(120, 90, 40, 0.55); border-color: rgba(200,169,110,0.5); }
+.value::after {
+  content: attr(data-kanji); position: absolute; right: -0.08em; bottom: -0.28em;
+  font-family: 'Shippori Mincho', serif; font-size: 150px; line-height: 1; color: rgba(200,169,110,0.10);
+  pointer-events: none; transition: color 0.5s, transform 0.8s var(--ease-out);
+}
+.value:hover::after { color: rgba(200,169,110,0.18); transform: translateY(-6px); }
+.value-num { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--color-accent-deep); font-size: 15px; letter-spacing: 0.1em; }
+.value h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(24px, 2.4vw, 30px); margin: 14px 0 4px; }
+.value .value-en { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 18px; }
+.value p:last-child { color: var(--color-muted); line-height: 1.95; font-size: 15px; position: relative; }
+@media (max-width: 900px) { .values { grid-template-columns: 1fr; } }
+
+/* ---- 仲間になろう ---- */
+.join {
+  position: relative; overflow: hidden; border-radius: calc(var(--radius) + 8px);
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center;
+  padding: clamp(32px, 5vw, 72px);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.22), transparent 55%),
+    linear-gradient(135deg, var(--color-surface), color-mix(in srgb, var(--color-surface) 80%, #e9dcc3));
+  border: 1px solid rgba(200,169,110,0.35);
+}
+:root[data-theme="dark"] .join { background: radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.18), transparent 55%), #1a1712; }
+.join h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4vw, 52px); line-height: 1.3; margin: 8px 0 18px; }
+.join h2 em { font-style: normal; color: var(--color-accent-deep); }
+.join > div > p { color: var(--color-muted); line-height: 1.95; margin-bottom: 28px; }
+.join-list { list-style: none; display: grid; gap: 12px; }
+.join-list li {
+  display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-surface) 70%, transparent); border: 1px solid var(--color-border);
+  font-size: 15px; line-height: 1.7;
+}
+.join-list li::before {
+  content: ''; flex: none; width: 20px; height: 20px; margin-top: 3px; border-radius: 50%;
+  background: var(--color-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;
+}
+.join-emblem { position: absolute; right: -60px; bottom: -60px; width: 260px; height: 260px; color: rgba(200,169,110,0.25); pointer-events: none; }
+@media (max-width: 900px) { .join { grid-template-columns: 1fr; } .join-emblem { width: 180px; height: 180px; right: -40px; bottom: -40px; } }
+
+/* ---- 麻の葉の区切り飾り ---- */
+.ornament { display: flex; align-items: center; justify-content: center; gap: 16px; color: var(--color-accent); margin: 0 auto; max-width: 320px; }
+.ornament::before, .ornament::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,169,110,0.6)); }
+.ornament::after { background: linear-gradient(90deg, rgba(200,169,110,0.6), transparent); }
+.ornament svg { width: 22px; height: 22px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .emblem .em-spin { animation: none; }
+}
+#loader-brand-logo .loader-word { color: var(--color-text); }
+#loader-brand-logo .loader-word span { color: var(--color-accent); }
+.emblem-draw .em-mark { animation: em-fade 0.9s ease both; }
+@media (prefers-reduced-motion: reduce) { .emblem-draw .em-mark { animation: none; } }
+
+/* ---- ナビの混雑を解消 ---- */
+.nav-links { gap: clamp(16px, 1.8vw, 34px); }
+.nav-links a { white-space: nowrap; font-size: 12px; }
+@media (max-width: 1360px) { .nav-cta { display: none; } }
+@media (max-width: 1180px) { .nav-links, .nav-cta { display: none; } }
+
+/* ---- 全体像の中心にロゴマーク ---- */
+.hub-mark { display: block; width: clamp(64px, 6vw, 88px); height: clamp(64px, 6vw, 88px); margin-bottom: 14px; filter: drop-shadow(0 8px 16px rgba(120, 90, 30, 0.25)); transition: transform 1s var(--ease-out); }
+.hub-core:hover .hub-mark { transform: rotate(60deg) scale(1.04); }
+
+/* ヒーローのワードマーク：AZA は白、KEI は金 */
+.hero-wordmark .ch { color: #fff; }
+.hero-wordmark .ch.gold { color: var(--color-accent); }
+
+/* 仲間になろう：紋章は控えめな透かしに */
+.join > *:not(.join-emblem) { position: relative; z-index: 1; }
+.join-emblem { z-index: 0; opacity: 0.14; filter: grayscale(0.3); width: 300px; height: 300px; right: -70px; bottom: -90px; }
+
+/* ---- ロゴマーク（ナビ） ---- */
+.logomark { width: 100%; height: 100%; display: block; overflow: visible; }
+.nav-mark { display: inline-block; width: 34px; height: 34px; margin-right: 12px; flex: none; transition: transform 0.6s var(--ease-out); }
+.nav-logo:hover .nav-mark { transform: rotate(60deg); }
+.nav-logo { align-items: center; }
