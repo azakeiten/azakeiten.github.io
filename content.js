@@ -22,9 +22,14 @@ window.AZAKEI = {
   },
 
   /* ---- 文化祭投票 ----
-     票数は Abacus（無料のカウンターAPI）に保存されます。
-     年度を変えるときは namespace を変えると 0 票から始まります。 */
+     firebase に設定（Firebase コンソールの firebaseConfig）を入れると、
+     票は Firestore に保存されます（1人1票をサーバー側のルールで保証）。
+     firebase が null の間は、仮の保存先（Abacus）を使います。
+     年度を変えるときは pollId を 'festival-2028' のように変えると 0 票から始まります。
+     ※ 選択肢の key を変えたら firestore.rules の options() も同じに直すこと。 */
+  firebase: null,
   vote: {
+    pollId: 'festival-2027',
     namespace: 'azakei-festival-vote-2027',
     question: '来年の麻布経済展、どんな展示が見たい？',
     options: [

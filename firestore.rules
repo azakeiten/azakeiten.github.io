@@ -1,0 +1,76 @@
+rules_version = '2';
+
+// ================================================================
+//  AZAKEI 文化祭投票 — Firestore セキュリティルール
+//  Firebase コンソール →「Firestore Database」→「ルール」に貼り付けて「公開」。
+//
+//  データの形:
+//    polls/{pollId}              … 集計（same: 3, econ: 5, ...）誰でも読める
+//    polls/{pollId}/votes/{uid}  … 1人1件の投票記録（本人だけ読める）
+//
+//  守っていること:
+//    ・1つの匿名アカウントにつき1票だけ（投票記録が既にあれば集計を増やせない）
+//    ・集計は「投票記録の作成と同時に、選んだ項目を +1」する時しか変えられない
+//    ・投票の書き換え・削除はできない
+//  ※ 選択肢を変えたら、下の options() も content.js と同じに直すこと。
+// ================================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function options() {
+      return ['same', 'econ', 'fun', 'insta', 'food', 'life', 'society'];
+    }
+    function pollPath(pollId) {
+      return /databases/$(database)/documents/polls/$(pollId);
+    }
+    function votePath(pollId) {
+      return /databases/$(database)/documents/polls/$(pollId)/votes/$(request.auth.uid);
+    }
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    match /polls/{pollId} {
+      allow read: if pollId.matches('festival-[0-9]{4}');
+
+      // 最初の1回だけ：全項目 0 の状態で作成できる
+      allow create: if signedIn()
+        && pollId.matches('festival-[0-9]{4}')
+        && request.resource.data.keys().hasOnly(options())
+        && request.resource.data.keys().hasAll(options())
+        && request.resource.data.same == 0
+        && request.resource.data.econ == 0
+        && request.resource.data.fun == 0
+        && request.resource.data.insta == 0
+        && request.resource.data.food == 0
+        && request.resource.data.life == 0
+        && request.resource.data.society == 0;
+
+      // 投票：自分の投票記録を同時に作るときだけ、選んだ項目を +1
+      allow update: if signedIn()
+        && !exists(votePath(pollId))
+        && existsAfter(votePath(pollId))
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly([getAfter(votePath(pollId)).data.choice])
+        && request.resource.data[getAfter(votePath(pollId)).data.choice]
+             == resource.data[getAfter(votePath(pollId)).data.choice] + 1;
+
+      allow delete: if false;
+
+      match /votes/{uid} {
+        allow get: if signedIn() && request.auth.uid == uid;
+        allow list: if false;
+
+        allow create: if signedIn()
+          && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['choice', 'at'])
+          && request.resource.data.choice in options()
+          && request.resource.data.at == request.time
+          && getAfter(pollPath(pollId)).data[request.resource.data.choice]
+               == get(pollPath(pollId)).data[request.resource.data.choice] + 1;
+
+        allow update, delete: if false;
+      }
+    }
+  }
+}
