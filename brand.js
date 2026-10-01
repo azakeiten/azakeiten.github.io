@@ -1,49 +1,65 @@
 /* ================================================================
    brand.js — AZAKEI のロゴマークと紋章（エンブレム）
-   ロゴマーク：金の円 × 緑の六芒星 × 白い「経」
-   紋章：ロゴマークの周りを AZAKEI · AZABU ECONOMICS · EST. 2025 が回る
+   ロゴ：緑の六芒星（先端は2面に分かれる）× 白い六角形 × 緑の「経」
+         角には小さな光（キラキラ）。
+   2 種類：
+     昼（.lm-day）  … 緑の面・濃い輪郭・白い六角形（明るい背景用）
+     夜（.lm-night）… 光る緑の線だけ（ダークモード・写真の上用）
    使い方:
-     <div data-emblem></div>  … 紋章（文字が回る丸いバッジ）
-     <span data-logomark></span> … ロゴマークだけ
+     <div data-emblem></div>      … 紋章（文字が回る丸いバッジ）
+     <span data-logomark></span>  … ロゴマークだけ
    ================================================================ */
 (function() {
   let uid = 0;
-  const f = n => n.toFixed(2);
   const pt = (deg, r) => { const a = deg * Math.PI / 180; return [r * Math.cos(a), r * Math.sin(a)]; };
-  const P = p => `${f(p[0])},${f(p[1])}`;
+  const P = p => `${p[0].toFixed(2)},${p[1].toFixed(2)}`;
+  const R = 46, RIN = R / Math.sqrt(3), MID = R / 2;   // 先端・内側の六角形・底辺の中点
 
-  // 中心 (0,0)・半径 50 のロゴマーク
+  // 星の輪郭（12 点）
+  const outline = [];
+  for (let k = 0; k < 6; k++) outline.push(pt(-90 + 60 * k, R), pt(-60 + 60 * k, RIN));
+  const outlineD = `M${outline.map(P).join('L')}Z`;
+  const hexD = `M${[0,1,2,3,4,5].map(k => P(pt(-60 + 60 * k, RIN))).join('L')}Z`;
+
+  // 小さな光（4 方向に伸びる星）
+  const spark = (x, y, s, i) =>
+    `<path class="lm-spark" style="--i:${i}" d="M${x},${y - s}Q${x},${y} ${x + s},${y}Q${x},${y} ${x},${y + s}Q${x},${y} ${x - s},${y}Q${x},${y} ${x},${y - s}Z"/>`;
+
   function logomark() {
     const id = 'azk' + (++uid);
-    const R = 40, rin = R / Math.sqrt(3), mid = R / 2;
-    let facets = '';
-    // 星の6つの先端：左右で明暗を変えて立体感を出す
+    let facets = '', splits = '', sparks = '';
     for (let k = 0; k < 6; k++) {
       const a = -90 + 60 * k;
-      const tip = pt(a, R), bl = pt(a - 30, rin), br = pt(a + 30, rin), m = pt(a, mid);
-      facets += `<path d="M${P(tip)}L${P(bl)}L${P(m)}Z" fill="#45a852"/>`;
-      facets += `<path d="M${P(tip)}L${P(m)}L${P(br)}Z" fill="#1f7a31"/>`;
+      const tip = pt(a, R), bl = pt(a - 30, RIN), br = pt(a + 30, RIN), m = pt(a, MID);
+      facets += `<path d="M${P(tip)}L${P(bl)}L${P(m)}Z" fill="url(#${id}l)"/><path d="M${P(tip)}L${P(m)}L${P(br)}Z" fill="url(#${id}d)"/>`;
+      splits += `M${P(tip)}L${P(m)}`;
     }
-    // 中央の六角形：6つの三角形を交互の色で
-    for (let k = 0; k < 6; k++) {
-      const a = pt(-60 + 60 * k, rin), b = pt(60 * k, rin);
-      facets += `<path d="M0,0L${P(a)}L${P(b)}Z" fill="${k % 2 ? '#2b8e3c' : '#33994a'}"/>`;
-    }
-    // 星の輪郭
-    const outline = [];
-    for (let k = 0; k < 6; k++) { outline.push(pt(-90 + 60 * k, R), pt(-60 + 60 * k, rin)); }
+    outline.forEach((p, i) => { sparks += spark(p[0], p[1], i % 2 ? 3.2 : 4.2, i); });
+
+    const kei = (cls) => `<text class="${cls}" y="9.6" text-anchor="middle" font-family="'Shippori Mincho', 'Yu Mincho', serif" font-weight="800" font-size="27">経</text>`;
+
     return `
       <defs>
-        <radialGradient id="${id}g" cx="40%" cy="35%" r="70%">
-          <stop offset="0" stop-color="#fff2b0"/><stop offset="0.45" stop-color="#f3c63a"/><stop offset="1" stop-color="#c8920f"/>
-        </radialGradient>
+        <linearGradient id="${id}l" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#57a64f"/><stop offset="1" stop-color="#3b8a37"/></linearGradient>
+        <linearGradient id="${id}d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3f8f3a"/><stop offset="1" stop-color="#2c702b"/></linearGradient>
+        <filter id="${id}g" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="2.2" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
       </defs>
-      <circle r="48" fill="url(#${id}g)" stroke="#9c6f0c" stroke-width="1.4"/>
-      <circle r="44.5" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="0.8"/>
-      <g stroke="#164d21" stroke-width="0.6" stroke-linejoin="round">${facets}</g>
-      <path d="M${outline.map(P).join('L')}Z" fill="none" stroke="#164d21" stroke-width="1.6" stroke-linejoin="round"/>
-      <text y="9.5" text-anchor="middle" font-family="'Shippori Mincho', 'Yu Mincho', serif" font-weight="800" font-size="27"
-            fill="#fff" stroke="#164d21" stroke-width="1.6" paint-order="stroke" stroke-linejoin="round">経</text>`;
+      <g class="lm-day">
+        ${facets}
+        <path d="${splits}" stroke="#241a10" stroke-width="1.1" fill="none"/>
+        <path d="${hexD}" fill="#fbf8ee" stroke="#241a10" stroke-width="1.2"/>
+        <path d="${outlineD}" fill="none" stroke="#241a10" stroke-width="2.2" stroke-linejoin="miter"/>
+        ${kei('lm-kei-day')}
+      </g>
+      <g class="lm-night" filter="url(#${id}g)">
+        <path d="${outlineD}" fill="none" stroke="#6dff7c" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="${hexD}" fill="none" stroke="#6dff7c" stroke-width="0.9" opacity="0.8"/>
+        ${kei('lm-kei-night')}
+      </g>
+      <g class="lm-sparks">${sparks}</g>`;
   }
 
   function emblem() {
@@ -56,12 +72,12 @@
         <g class="em-spin">
           <text class="em-text" textLength="492" lengthAdjust="spacing"><textPath href="#${id}">AZAKEI · AZABU ECONOMICS · EST. 2025 ·</textPath></text>
         </g>
-        <g class="em-mark" transform="translate(100 100) scale(1.13)">${logomark()}</g>
+        <g class="em-mark" transform="translate(100 102) scale(1.2)">${logomark()}</g>
       </svg>`;
   }
 
   function markOnly() {
-    return `<svg class="logomark" viewBox="-50 -50 100 100" role="img" aria-label="AZAKEI ロゴマーク">${logomark()}</svg>`;
+    return `<svg class="logomark" viewBox="-52 -52 104 104" role="img" aria-label="AZAKEI ロゴマーク">${logomark()}</svg>`;
   }
 
   window.AZAKEI_EMBLEM = emblem;

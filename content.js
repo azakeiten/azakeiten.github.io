@@ -22,6 +22,15 @@ window.AZAKEI = {
     instagram: { handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/' }
   },
 
+  /* ---- 生きている経済の数字（トップ） ----
+     年間の名目GDPを1年の秒数で割り、今年1月1日から今までの分を数え上げて表示します。
+     新しい年の数字が発表されたら、annualYen・year・source を書き換えるだけ。 */
+  liveEconomy: {
+    year: '2025年度',
+    annualYen: 672.7e12,
+    source: '内閣府 経済社会総合研究所「国民経済計算」2025年度 名目GDP 672.7兆円（2026年9月公表）'
+  },
+
   /* ---- 文化祭投票 ----
      firebase に設定（Firebase コンソールの firebaseConfig）を入れると、
      票は Firestore に保存されます（1人1票をサーバー側のルールで保証）。

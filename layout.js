@@ -18,19 +18,19 @@
   /* ---- サイト全体の目次（☰ で開く）---- */
   const INDEX = [
     { group: '知る', en: 'Know', pages: [
-      { href: 'index.html',      ja: 'ホーム',           en: 'Home',     desc: 'AZAKEI の全体像と最新情報。',                 img: 'hero.jpg' },
-      { href: 'about.html',      ja: '麻経とは',         en: 'About',    desc: '成り立ち・活動の全体説明・今後の展望。',       img: 'members.jpg' },
-      { href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'hero.jpg' },
-      { href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'members.jpg' }
+      { ico: 'M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10', href: 'index.html',      ja: 'ホーム',           en: 'Home',     desc: 'AZAKEI の全体像と最新情報。',                 img: 'hero.jpg' },
+      { ico: 'M12 3l2.6 4.5H20l-2.7 4.5L20 16.5h-5.4L12 21l-2.6-4.5H4l2.7-4.5L4 7.5h5.4z', href: 'about.html',      ja: '麻経とは',         en: 'About',    desc: '成り立ち・活動の全体説明・今後の展望。',       img: 'members.jpg' },
+      { ico: 'M4 8h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM10 8v10', href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'hero.jpg' },
+      { ico: 'M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'members.jpg' }
     ]},
     { group: '挑む', en: 'Challenge', pages: [
-      { href: 'contests.html',   ja: '各種コンテスト',    en: 'Contests', desc: 'ビジネスコンテスト・日経ストックリーグ ほか。', img: 'tokyo-s.jpg' },
-      { href: 'events.html',     ja: '日程・イベント',    en: 'Schedule', desc: 'これからの予定と、これまでの歩み。',           img: 'tokyo-s.jpg' }
+      { ico: 'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M10 17h4', href: 'contests.html',   ja: '各種コンテスト',    en: 'Contests', desc: 'ビジネスコンテスト・日経ストックリーグ ほか。', img: 'tokyo-s.jpg' },
+      { ico: 'M4 6h16v14H4zM4 10h16M8 3v5M16 3v5', href: 'events.html',     ja: '日程・イベント',    en: 'Schedule', desc: 'これからの予定と、これまでの歩み。',           img: 'tokyo-s.jpg' }
     ]},
     { group: '参加する', en: 'Join', pages: [
-      { href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '来年どんな展示が見たい？ 1 票で決めよう。',   img: 'hero.jpg', badge: '受付中' },
-      { href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'tokyo-s.jpg' },
-      { href: 'contact.html',    ja: 'お問い合わせ',      en: 'Contact',  desc: 'フォーム、または Instagram の DM から。',      img: 'members.jpg' }
+      { ico: 'M5 11h14v9H5zM9 15l2 2 4-4M8 11V6h8v5', href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '来年どんな展示が見たい？ 1 票で決めよう。',   img: 'hero.jpg', badge: '受付中' },
+      { ico: 'M3 12l4-4 3 2 4-3 7 6M7 13l3 3 2-1 2 2 3-3', href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'tokyo-s.jpg' },
+      { ico: 'M4 6h16v12H4zM4 7l8 6 8-6', href: 'contact.html',    ja: 'お問い合わせ',      en: 'Contact',  desc: 'フォーム、または Instagram の DM から。',      img: 'members.jpg' }
     ]}
   ];
   let n = 0;
@@ -41,7 +41,7 @@
         <li><a href="${p.href}" class="mobile-link si-link${cur ? ' is-current' : ''}"${cur ? ' aria-current="page"' : ''}
                data-en="${p.en}" data-desc="${p.desc}" data-img="${p.img}" style="--d:${n}">
           <span class="si-num">${String(n).padStart(2, '0')}</span>
-          <span class="si-name">${p.ja}${p.badge ? `<em class="si-badge">${p.badge}</em>` : ''}${cur ? '<em class="si-here">現在のページ</em>' : ''}</span>
+          <span class="si-name"><svg class="si-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p.ico || ''}"/></svg>${p.ja}${p.badge ? `<em class="si-badge">${p.badge}</em>` : ''}${cur ? '<em class="si-here">現在のページ</em>' : ''}</span>
           <span class="si-en">${p.en}</span>
         </a></li>`; }).join('')}
       </ul>
