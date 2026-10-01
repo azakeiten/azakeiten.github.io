@@ -1,0 +1,184 @@
+/* ================================================================
+   BASE — CSS variables, reset, body, shared utilities
+   ================================================================ */
+:root {
+  --color-bg:      #f8f9fa;
+  --color-surface: #ffffff;
+  --color-border:  rgba(0,0,0,0.08);
+  --color-accent:  #c8a96e;
+  --color-accent2: #e8d5b0;
+  --color-text:    #1a1a1a;
+  --color-muted:   rgba(26,26,26,0.6);
+  --font-display:  'Cormorant Garamond', Georgia, serif;
+  --font-body:     'DM Sans', sans-serif;
+  --section-pad:   clamp(80px, 12vw, 160px);
+  --max-w:         1360px;
+  --gutter:        clamp(24px, 5vw, 80px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='rotate(15 30 30)' opacity='0.08'%3E%3Cpath d='M30 15 L40 22.5 L40 37.5 L30 45 L20 37.5 L20 22.5 Z' fill='none' stroke='%23c8a96e' stroke-width='0.5'/%3E%3Cpath d='M30 25 L35 28.5 L35 31.5 L30 35 L25 31.5 L25 28.5 Z' fill='none' stroke='%238b7355' stroke-width='0.3'/%3E%3Ccircle cx='30' cy='30' r='3' fill='none' stroke='%23c8a96e' stroke-width='0.3'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='256' height='256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+  background-size: 60px 60px, 256px 256px;
+  background-color: var(--color-bg);
+}
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---- SHARED SECTION ELEMENTS ---- */
+section { padding: var(--section-pad) 0; }
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: var(--color-accent);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.section-title em { font-style: italic; color: var(--color-accent2); }
+
+/* ---- SHARED BUTTONS ---- */
+.btn-primary {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  font-weight: 500;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  transition: color 0.3s;
+}
+.btn-ghost:hover { color: var(--color-text); }
+.btn-ghost svg { transition: transform 0.3s; }
+.btn-ghost:hover svg { transform: translateX(4px); }
+
+/* ---- REVEAL ON SCROLL ---- */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.visible { opacity: 1; transform: none; }
+code
+CSS
+/* ================================================================
+   ADDITIONAL FIXES — 改行保護・マップ・スケジュール
+   ================================================================ */
+
+/* フレーズの途中で変に改行させない */
+.keep-phrase {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* セクションタイトルの調整 */
+.section-title {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-height: 1.3;
+}
+
+/* マップボックスのスタイル（Googleマップ用） */
+.map-box {
+  width: 100%;
+  height: 400px;
+  background: #e8dfd0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.map-box iframe {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(0.2) sepia(0.15) contrast(0.9); /* サイトになじむ色調 */
+  transition: filter 0.5s ease;
+}
+
+.map-box:hover iframe {
+  filter: grayscale(0) sepia(0) contrast(1); /* ホバーで元の色に戻る */
+}
+
+/* スケジュール表のレスポンシブ対応 */
+.schedule-container {
+  margin-top: 32px;
+  width: 100%;
+  overflow-x: auto; /* スマホで表がはみ出さないように横スクロールを許可 */
+  -webkit-overflow-scrolling: touch;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 100%; /* ある程度の幅を確保 */
+  table-layout: fixed; /* セルの幅を均等にする */
+}
+
+.schedule-table th, .schedule-table td {
+  border: 1px solid var(--color-border);
+  padding: 12px 8px;
+  text-align: center;
+  word-break: break-all; /* 長いテキストもセル内で折り返す */
+}
+
+.schedule-table th:nth-child(1),
+.schedule-table td:nth-child(1) {
+  background: rgba(0,0,0,0.02);
+  font-weight: 500;
+  color: var(--color-text);
+  width: 30%;
+  font-size: 12px;
+}
+
+.special-row {
+  background: rgba(200, 169, 110, 0.1); /* ゴールド系の背景 */
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* モバイル表示時の調整 */
+@media (max-width: 768px) {
+  .map-box {
+    height: 300px;
+    margin-top: 40px;
+  }
+  .schedule-table{
+    font-size: 11px;
+  }
+  .schedule-table th, .schedule-table td {
+    padding: 8px 4px;
+  }
+}

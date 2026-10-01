@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>活動風景・日常 | AZAKEI</title>
+  <meta name="description" content="AZAKEI の活動風景と、何気ない日常の記録。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="sections.css" />
+  <link rel="stylesheet" href="pages.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZS22BPLKW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5ZS22BPLKW');
+  </script>
+</head>
+<body>
+
+  <header class="page-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / 活動風景</p>
+      <p class="section-label">Activity</p>
+      <h1 class="section-title"><span class="keep-phrase">活動</span><span class="keep-phrase"><em>風景</em></span></h1>
+      <p class="page-hero-lead">展示づくり、コンテストの準備、放課後のミーティング。AZAKEI のふだんの姿をのぞいてみてください。</p>
+    </div>
+  </header>
+
+  <section class="about tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label">Gallery</p>
+        <h2 class="section-title"><span class="keep-phrase">写真で見る</span><span class="keep-phrase"><em>AZAKEI</em></span></h2>
+      </div>
+      <div class="gallery reveal" data-render="gallery"></div>
+    </div>
+  </section>
+
+  <section class="services tight" id="daily">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label">Daily</p>
+        <h2 class="section-title"><span class="keep-phrase">何気ない</span><span class="keep-phrase"><em>日常</em></span></h2>
+        <p class="lead">大きな出来事じゃなくても、残しておきたい毎日のこと。もっと見たい方は Vlog もどうぞ。</p>
+      </div>
+      <div class="diary reveal" data-render="diary"></div>
+      <div class="reveal" style="margin-top: 32px;">
+        <a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener" class="btn-ghost">Instagram Vlog @azakei_vlog <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="content.js"></script>
+  <script src="layout.js"></script>
+  <script src="render.js"></script>
+  <script src="nav.js"></script>
+  <script src="reveal.js"></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+/* ================================================================
+   HERO — ヒーローセクション（スティッキー、スロット、背景）
+   ================================================================ */
+.hero-sticky-wrap { 
+  position: relative; 
+  height: 250vh; /* スクロール量の調整 */
+}
+
+/* ---- HERO TEXT REVEAL ANIMATIONS ---- */
+.hero h1 .line-wrap { 
+  display: block; 
+  overflow: hidden; 
+  margin-bottom: 8px;
+}
+
+.hero h1 .line-inner {
+  display: block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+}
+
+.hero h1 .line-inner.in { 
+  transform: translateY(0); 
+  opacity: 1; 
+}
+
+.hero-label, .hero-sub, .hero-actions {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero-label.in, .hero-sub.in, .hero-actions.in { 
+  opacity: 1; 
+  transform: none; 
+}
+
+/* ---- TYPOGRAPHY ---- */
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 8.5vw, 110px); /* 2行で最も美しく見えるサイズ */
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+  word-break: keep-all; /* 改行のキモさを防止 */
+}
+
+.hero h1 em { 
+  font-style: italic; 
+  color: var(--color-accent2); 
+}
+
+.hero-sub {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: #f5e6d3;
+  max-width: 520px;
+  margin-bottom: 52px;
+  line-height: 1.8;
+}
+
+/* ---- COUNTDOWN COUNTER (Slot Machine) ---- */
+.hero-counter {
+  position: absolute;
+  right: var(--gutter);
+  bottom: clamp(40px, 8vw, 80px);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.hero-counter-num-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  overflow-y: hidden;
+  height: auto;
+}
+
+.hero-counter-num-wrap.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.digit-slot {
+  overflow: hidden;
+  height: clamp(64px, 9vw, 120px);
+  display: flex;
+  align-items: flex-start;
+}
+
+.digit-reel {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.digit-reel span {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7.2vw, 100px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-accent);
+  display: block;
+  height: clamp(64px, 9vw, 120px);
+  text-align: center;
+  min-width: clamp(32px, 4.2vw, 62px);
+  padding: 0 2px;
+}
+
+.hero-counter-unit {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 300;
+  color: var(--color-accent);
+  margin-left: 4px;
+  margin-bottom: clamp(6px, 0.8vw, 10px);
+  opacity: 0.75;
+}
+
+.hero-counter-label {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  opacity: 0;
+  transition: opacity 0.6s ease 0.3s;
+}
+
+.hero-counter-label.show { opacity: 1; }
+
+/* ---- PROGRESS BAR (Side) ---- */
+.hero-progress-bar {
+  position: absolute;
+  right: calc(var(--gutter) - 20px);
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+  z-index: 3;
+}
+
+.hero-progress-fill {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  background: var(--color-accent);
+  height: 0%;
+  transition: height 0.1s linear;
+}
+
+/* ---- HERO LAYOUT & BG ---- */
+.hero {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--gutter) clamp(60px, 10vw, 120px);
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('IMG_6150.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+  z-index: 0;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.4) 60%, rgba(10,10,10,0.85) 100%);
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 960px; }
+
+.hero-label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-label::before {
+  content: '';
+  display: block;
+  width: 40px; height: 1px;
+  background: var(--color-accent);
+}
+
+.hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+
+/* ================================================================
+   MARQUEE — 洗練されたインフォメーション・ライン
+   ================================================================ */
+.marquee-strip {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+  padding: 26px 0;
+  background: var(--color-surface);
+  position: relative;
+  z-index: 5;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  animation: marquee 45s linear infinite; /* 優雅な速度 */
+  white-space: nowrap;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.35em; /* 知的な余白 */
+  text-transform: uppercase;
+  color: #8b7355;
+  padding: 0 50px;
+}
+
+.marquee-item em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 11px;
+  margin-right: 18px;
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+
+.marquee-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--color-accent);
+  opacity: 0.25;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-strip:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-sub { margin-bottom: 32px; }
+  .marquee-item { font-size: 11px; letter-spacing: 0.25em; padding: 0 35px; }
+}

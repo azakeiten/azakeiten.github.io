@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お問い合わせ | AZAKEI</title>
+  <meta name="description" content="AZAKEI へのお問い合わせ。取材・協賛・コラボレーションのご相談など。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="sections.css" />
+  <link rel="stylesheet" href="pages.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZS22BPLKW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5ZS22BPLKW');
+  </script>
+</head>
+<body>
+
+  <header class="page-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / お問い合わせ</p>
+      <p class="section-label">Contact</p>
+      <h1 class="section-title"><span class="keep-phrase">お問い合わせ</span><span class="keep-phrase"><em>フォーム</em></span></h1>
+      <p class="page-hero-lead">取材・協賛・コラボレーションのご相談、展示へのご質問など、お気軽にご連絡ください。</p>
+    </div>
+  </header>
+
+  <section class="about tight">
+    <div class="container">
+      <div class="form-wrap">
+        <div class="form-aside reveal">
+          <p class="section-label">Before you write</p>
+          <p>いただいた内容は、AZAKEI のメンバーが確認します。学校生活の合間に対応しているため、お返事まで数日いただく場合があります。</p>
+          <p>協賛・ご協力については <a href="sponsor.html" style="color: var(--color-accent); text-decoration: underline;">協賛のご案内</a> もあわせてご覧ください。</p>
+          <p>SNS の DM でも受け付けています。</p>
+          <div class="sns-grid" data-render="sns" style="grid-template-columns: 1fr; margin-top: 12px;"></div>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="name">お名前<span class="req">必須</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="org">ご所属</label>
+              <input id="org" name="org" type="text" autocomplete="organization" placeholder="会社名・学校名など" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">メールアドレス<span class="req">必須</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="type">お問い合わせの種類</label>
+            <select id="type" name="type">
+              <option value="general">展示・活動について</option>
+              <option value="sponsor">協賛・ご協力</option>
+              <option value="media">取材</option>
+              <option value="collab">コラボレーション</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">お問い合わせ内容<span class="req">必須</span></label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn-primary">送信する</button>
+          <p id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="content.js"></script>
+  <script src="layout.js"></script>
+  <script src="render.js"></script>
+  <script src="nav.js"></script>
+  <script src="reveal.js"></script>
+  <script>
+    // ?type=sponsor などで種類を初期選択 & 必須チェック
+    (function () {
+      var form = document.getElementById('contactForm');
+      var t = new URLSearchParams(location.search).get('type');
+      if (t && form.type.querySelector('option[value="' + t + '"]')) form.type.value = t;
+      form.addEventListener('submit', function (e) {
+        if (!form.checkValidity()) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          form.reportValidity();
+        }
+      }, true);
+    })();
+  </script>
+</body>
+</html>

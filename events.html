@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>日程・イベント | AZAKEI</title>
+  <meta name="description" content="AZAKEI の今後の日程とイベント、これまでの活動。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="sections.css" />
+  <link rel="stylesheet" href="pages.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZS22BPLKW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5ZS22BPLKW');
+  </script>
+</head>
+<body>
+
+  <header class="page-hero">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / 日程・イベント</p>
+      <p class="section-label">Schedule</p>
+      <h1 class="section-title"><span class="keep-phrase">日程と</span><span class="keep-phrase"><em>イベント</em></span></h1>
+      <p class="page-hero-lead">文化祭やコンテストなど、AZAKEI のこれからの予定とこれまでの歩みです。最新情報は SNS でもお知らせします。</p>
+    </div>
+  </header>
+
+  <section class="about tight">
+    <div class="container">
+      <div class="reveal" data-render="events"></div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="content.js"></script>
+  <script src="layout.js"></script>
+  <script src="render.js"></script>
+  <script src="nav.js"></script>
+  <script src="reveal.js"></script>
+</body>
+</html>
