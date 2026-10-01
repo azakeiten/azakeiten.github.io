@@ -5,6 +5,20 @@
 (function() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- 幕：前のページから幕で移動してきたら、幕を上げて見せる ---- */
+  const curtain = document.createElement('div');
+  curtain.className = 'curtain';
+  curtain.setAttribute('aria-hidden', 'true');
+  curtain.textContent = 'AZAKEI';
+  document.body.appendChild(curtain);
+  let arrived = false;
+  try { arrived = !!sessionStorage.getItem('azakei-curtain'); sessionStorage.removeItem('azakei-curtain'); } catch (e) {}
+  if (arrived && !document.getElementById('loader') && !reduce) {
+    document.body.classList.add('has-curtain');
+    curtain.classList.add('is-out');
+  }
+  document.documentElement.classList.remove('curtain-pending');
+
   /* ---- ヒーローのワードマークを1文字ずつに分割 ---- */
   const wm = document.querySelector('.hero-wordmark');
   if (wm) {
@@ -70,7 +84,18 @@
   // 合計値などの計算スクリプトが走ってから監視する
   window.addEventListener('load', () => nums.forEach(n => countIO.observe(n)));
 
-  /* ---- ページ遷移フェード ---- */
+  /* ---- 目次：今読んでいる項目を光らせる ---- */
+  const tocLinks = [...document.querySelectorAll('.toc a[href^="#"]')];
+  if (tocLinks.length) {
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        tocLinks.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + en.target.id));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    tocLinks.forEach(l => { const t = document.querySelector(l.getAttribute('href')); if (t) spy.observe(t); });
+  }
+
   /* ---- ハブ：中心から各カードへ線を引く（黒板のマインドマップ風・PCのみ） ---- */
   const hub = document.querySelector('.hub');
   if (hub) {
@@ -125,14 +150,22 @@
       btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
     });
   }
+
+  /* ---- ページ移動：金の線とロゴの入った幕が下から閉じる ---- */
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href]');
-    if (!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin || url.pathname === location.pathname) return;
     e.preventDefault();
-    document.body.classList.add('page-leave');
-    setTimeout(() => { location.href = a.href; }, 260);
+    curtain.classList.remove('is-out');
+    void curtain.offsetWidth;
+    curtain.classList.add('is-in');
+    try { sessionStorage.setItem('azakei-curtain', '1'); } catch (err) {}
+    setTimeout(() => { location.href = a.href; }, 480);
   });
-  window.addEventListener('pageshow', () => document.body.classList.remove('page-leave'));
+  // 「戻る」で戻ってきたとき（ページが保存されていた場合）は幕を開ける
+  window.addEventListener('pageshow', ev => {
+    if (ev.persisted) { curtain.classList.remove('is-in'); curtain.classList.add('is-out'); }
+  });
 })();

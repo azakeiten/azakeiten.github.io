@@ -63,9 +63,9 @@ window.AZAKEI = {
   /* ---- 活動風景（写真） ----
      src を空にすると「写真準備中」の枠になります。 */
   gallery: [
-    { src: 'S__36020261.jpg', caption: 'メンバー集合', date: '2026' },
-    { src: 'IMG_6150.jpg', caption: '文化祭の展示', date: '2026.05' },
-    { src: 'tokyo.jpg', caption: '世の中の仕組みを見渡す', date: '' },
+    { src: 'members.jpg', caption: 'メンバー集合', date: '2026' },
+    { src: 'hero.jpg', caption: '文化祭の展示', date: '2026.05' },
+    { src: 'tokyo-s.jpg', caption: '世の中の仕組みを見渡す', date: '' },
     { src: '', caption: 'ミーティング風景', date: '' },
     { src: '', caption: 'コンテスト準備', date: '' },
     { src: '', caption: '文化祭の準備', date: '' }

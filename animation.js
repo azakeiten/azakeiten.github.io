@@ -166,7 +166,7 @@
   }
 
   function animate() {
-    ctx.fillStyle = 'rgba(248, 244, 230, 0.15)';
+    ctx.fillStyle = document.documentElement.dataset.theme === 'dark' ? 'rgba(18, 16, 13, 0.15)' : 'rgba(248, 244, 230, 0.15)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     backgroundPattern.draw();
