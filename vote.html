@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文化祭投票 | AZAKEI</title>
+  <meta name="description" content="来年の麻布経済展、どんな展示が見たい？ AZAKEI の文化祭投票に参加しよう。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="sections.css" />
+  <link rel="stylesheet" href="pages.css" />
+  <link rel="stylesheet" href="design.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZS22BPLKW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5ZS22BPLKW');
+  </script>
+</head>
+<body>
+
+  <header class="page-hero" data-bg="VOTE">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / 文化祭投票</p>
+      <p class="section-label">Festival Vote 2027</p>
+      <h1 class="section-title"><span class="keep-phrase">来年、どんな展示が</span><span class="keep-phrase"><em>見たい？</em></span></h1>
+      <p class="page-hero-lead">次の麻布経済展の方向性を、みなさんの声で決めたい。いちばん見たいものを 1 つ選んで押してください。票はその場でカウントされます。</p>
+    </div>
+  </header>
+
+  <section class="about tight">
+    <div class="container">
+      <div class="vote-head reveal">
+        <div>
+          <p class="section-label">Choose one</p>
+          <h2 class="vote-q">来年の麻布経済展、どんな展示が見たい？</h2>
+        </div>
+        <div class="vote-total"><span id="voteTotal">0</span><small>票</small><span class="vote-total-label">現在の投票数</span></div>
+      </div>
+      <div class="vote-list reveal" id="voteList" role="group" aria-label="投票の選択肢"></div>
+      <p id="voteStatus" class="vote-status" role="status" aria-live="polite"></p>
+      <p class="vote-note">※ 投票は 1 端末につき 1 回です。結果は 20 秒ごとに自動で更新されます。</p>
+    </div>
+  </section>
+
+  <section class="cta-band tight">
+    <div class="container reveal">
+      <h2 class="section-title"><span class="keep-phrase">もっと具体的な</span><span class="keep-phrase"><em>アイデア</em>も歓迎。</span></h2>
+      <p>「こんな展示が見たい！」という声は、Instagram の DM やお問い合わせフォームからも送れます。</p>
+      <div class="cta-actions">
+        <a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener" class="btn-primary">DM で送る @azakei_vlog</a>
+        <a href="festival.html" class="btn-ghost">去年の展示を見る <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="content.js"></script>
+  <script src="layout.js"></script>
+  <script src="vote.js"></script>
+  <script src="nav.js"></script>
+  <script src="reveal.js"></script>
+  <script src="fx.js"></script>
+</body>
+</html>

@@ -45,7 +45,8 @@
 
   // 初期ロード時
   window.addEventListener('DOMContentLoaded', () => { 
-    trigger(heroLabel); 
+    trigger(heroLabel);
+    setTimeout(() => triggerLine(0), 1300); // ローダー明けにワードマークを表示
     onHeroScroll();
   });
   

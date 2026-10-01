@@ -7,11 +7,12 @@
   <meta name="description" content="AZAKEI へのお問い合わせ。取材・協賛・コラボレーションのご相談など。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="sections.css" />
   <link rel="stylesheet" href="pages.css" />
+  <link rel="stylesheet" href="design.css" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZS22BPLKW"></script>
   <script>
@@ -23,7 +24,7 @@
 </head>
 <body>
 
-  <header class="page-hero">
+  <header class="page-hero" data-bg="CONTACT">
     <div class="container">
       <p class="breadcrumb"><a href="index.html">AZAKEI</a> / お問い合わせ</p>
       <p class="section-label">Contact</p>
@@ -39,8 +40,13 @@
           <p class="section-label">Before you write</p>
           <p>いただいた内容は、AZAKEI のメンバーが確認します。学校生活の合間に対応しているため、お返事まで数日いただく場合があります。</p>
           <p>協賛・ご協力については <a href="sponsor.html" style="color: var(--color-accent); text-decoration: underline;">協賛のご案内</a> もあわせてご覧ください。</p>
-          <p>SNS の DM でも受け付けています。</p>
-          <div class="sns-grid" data-render="sns" style="grid-template-columns: 1fr; margin-top: 12px;"></div>
+          <p>Instagram の DM でも受け付けています。</p>
+          <a class="dm-card" href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener">
+            <span class="dm-label">Instagram DM</span>
+            <span class="dm-handle">@azakei_vlog</span>
+            <span class="dm-desc">お問い合わせはこちらのアカウントへ</span>
+            <svg width="18" height="14" aria-hidden="true"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+          </a>
         </div>
 
         <form class="contact-form reveal" id="contactForm" novalidate>
@@ -87,6 +93,7 @@
   <script src="render.js"></script>
   <script src="nav.js"></script>
   <script src="reveal.js"></script>
+  <script src="fx.js"></script>
   <script>
     // ?type=sponsor などで種類を初期選択 & 必須チェック
     (function () {

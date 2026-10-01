@@ -131,6 +131,6 @@
       return;
     }
 
-    status.innerHTML = 'フォームは現在準備中です。お手数ですが <a href="' + ((D.sns || [])[0] || {}).url + '" target="_blank" rel="noopener">Instagram の DM</a> からご連絡ください。';
+    status.innerHTML = 'フォームは現在準備中です。お手数ですが <a href="' + cfg.instagram.url + '" target="_blank" rel="noopener">Instagram（' + cfg.instagram.handle + '）の DM</a> からご連絡ください。';
   });
 })();

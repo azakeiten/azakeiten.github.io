@@ -7,22 +7,41 @@ window.AZAKEI = {
   /* ---- SNS ---- */
   sns: [
     { name: 'Instagram', handle: '@azakeichannel', url: 'https://www.instagram.com/azakeichannel/', desc: '活動報告・お知らせ' },
-    { name: 'Instagram Vlog', handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/', desc: '何気ない日常をVlogで' },
+    { name: 'Instagram Vlog', handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/', desc: 'Vlog・お問い合わせ（DM）' },
     { name: 'X', handle: '@azakeiten', url: 'https://x.com/azakeiten', desc: '最新情報をいち早く' }
   ],
 
   /* ---- お問い合わせ設定 ----
      formEndpoint: Formspree などの送信先URL（例: https://formspree.io/f/xxxxxx）
      email:        formEndpoint が空のとき、メールソフトを開いて送る宛先
-     どちらも空なら、Instagram の DM へ案内します。 */
+     どちらも空なら、下の instagram アカウントの DM へ案内します。 */
   contact: {
     formEndpoint: '',
-    email: ''
+    email: '',
+    instagram: { handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/' }
+  },
+
+  /* ---- 文化祭投票 ----
+     票数は Abacus（無料のカウンターAPI）に保存されます。
+     年度を変えるときは namespace を変えると 0 票から始まります。 */
+  vote: {
+    namespace: 'azakei-festival-vote-2027',
+    question: '来年の麻布経済展、どんな展示が見たい？',
+    options: [
+      { key: 'same',    label: '去年と同じ',       en: 'Same as 2026', desc: 'チップを増やす体験型展示を、もう一度。' },
+      { key: 'econ',    label: 'ガチ経済系',       en: 'Hardcore Economics', desc: '株・金融・マクロ経済を本気で深掘り。' },
+      { key: 'fun',     label: '面白系',           en: 'Just for Fun', desc: 'とにかく笑えて、楽しい展示。' },
+      { key: 'insta',   label: 'Instagram映え系',  en: 'Photogenic', desc: '思わず写真を撮りたくなる空間。' },
+      { key: 'food',    label: '飲食系',           en: 'Food & Drink', desc: '食べて、飲んで、経済を体感。' },
+      { key: 'life',    label: '人生系',           en: 'Life & Money', desc: 'お金・キャリア・生き方を考える。' },
+      { key: 'society', label: '社会系',           en: 'Society', desc: '社会の課題を、経済で読み解く。' }
+    ]
   },
 
   /* ---- 日程・イベント ----
      date は 'YYYY-MM-DD'。日付未定なら date を空にして when に文字で書く。 */
   events: [
+    { date: '', when: '受付中', title: '文化祭投票「来年どんな展示が見たい？」', tag: '投票', place: 'このサイト', desc: '次の麻布経済展のテーマを、みなさんの投票で決めます。', link: 'vote.html' },
     { date: '2027-05-01', end: '2027-05-03', title: '文化祭「麻布経済展」2027', tag: '文化祭', place: '麻布中学校・高等学校', desc: '経済とエンタメが交差する、体験型展示。今年も開催予定です。', link: 'festival.html' },
     { date: '', when: '日程調整中', title: '日経ストックリーグ 参加', tag: 'コンテスト', place: 'オンライン', desc: 'チームでポートフォリオを組み、レポートを作成します。', link: 'contests.html#stockleague' },
     { date: '', when: '日程調整中', title: 'ビジネスコンテスト 挑戦', tag: 'コンテスト', place: '—', desc: '高校生向けビジネスコンテストへの出場を準備中。', link: 'contests.html#business' },

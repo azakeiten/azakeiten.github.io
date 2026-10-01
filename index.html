@@ -7,13 +7,14 @@
   <meta name="description" content="AZAKEI（麻経）は、麻布中学校・高等学校の経済系同好会。ビジネスコンテストや日経ストックリーグへの挑戦、文化祭の体験型展示「麻布経済展」を行っています。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="loader.css" />
   <link rel="stylesheet" href="nav.css" />
   <link rel="stylesheet" href="hero.css" />
   <link rel="stylesheet" href="sections.css" />
   <link rel="stylesheet" href="pages.css" />
+  <link rel="stylesheet" href="design.css" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZS22BPLKW"></script>
@@ -41,6 +42,7 @@
     <div class="hero-progress-bar"><div class="hero-progress-fill" id="heroProgressFill"></div></div>
     <section class="hero">
       <div class="hero-bg" id="heroBg"></div>
+      <a href="vote.html" class="hero-vote"><span class="dot"></span><span><b>文化祭投票</b> 受付中<span class="hv-sub"> — 来年どんな展示が見たい？</span></span><span class="arrow">→</span></a>
       <div class="hero-counter">
         <div class="hero-counter-num-wrap" id="counterWrap"><span class="hero-counter-unit">日</span></div>
         <div class="hero-counter-label">次の文化祭まで</div>
@@ -165,6 +167,29 @@
     </div>
   </section>
 
+  <!-- 文化祭投票 -->
+  <section class="about tight">
+    <div class="container">
+      <div class="vote-promo">
+        <div class="reveal">
+          <p class="section-label">Festival Vote 2027</p>
+          <h2 class="section-title"><span class="keep-phrase">来年の展示を、</span><span class="keep-phrase"><em>一緒に</em>決めよう。</span></h2>
+          <p>次の麻布経済展、どんな展示が見たいですか？ 1 つ選んで押すだけ。票はその場でカウントされ、結果もすぐに見られます。</p>
+          <a href="vote.html" class="btn-primary">投票する</a>
+        </div>
+        <div class="vote-promo-chips reveal">
+          <a href="vote.html">去年と同じ</a>
+          <a href="vote.html">ガチ経済系</a>
+          <a href="vote.html">面白系</a>
+          <a href="vote.html">Instagram映え系</a>
+          <a href="vote.html">飲食系</a>
+          <a href="vote.html">人生系</a>
+          <a href="vote.html">社会系</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 日程・イベント -->
   <section class="about tight">
     <div class="container">
@@ -242,5 +267,6 @@
   <script src="hero.js"></script>
   <script src="countdown.js"></script>
   <script src="reveal.js"></script>
+  <script src="fx.js"></script>
 </body>
 </html>
