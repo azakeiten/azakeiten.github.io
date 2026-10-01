@@ -15,10 +15,40 @@
   const sns  = (window.AZAKEI && window.AZAKEI.sns) || [];
   const ig   = (window.AZAKEI && window.AZAKEI.contact && window.AZAKEI.contact.instagram) || { url: '#' };
 
+  /* ---- サイト全体の目次（☰ で開く）---- */
+  const INDEX = [
+    { group: '知る', en: 'Know', pages: [
+      { href: 'index.html',      ja: 'ホーム',           en: 'Home',     desc: 'AZAKEI の全体像と最新情報。',                 img: 'hero.jpg' },
+      { href: 'about.html',      ja: '麻経とは',         en: 'About',    desc: '成り立ち・活動の全体説明・今後の展望。',       img: 'members.jpg' },
+      { href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'hero.jpg' },
+      { href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'members.jpg' }
+    ]},
+    { group: '挑む', en: 'Challenge', pages: [
+      { href: 'contests.html',   ja: '各種コンテスト',    en: 'Contests', desc: 'ビジネスコンテスト・日経ストックリーグ ほか。', img: 'tokyo-s.jpg' },
+      { href: 'events.html',     ja: '日程・イベント',    en: 'Schedule', desc: 'これからの予定と、これまでの歩み。',           img: 'tokyo-s.jpg' }
+    ]},
+    { group: '参加する', en: 'Join', pages: [
+      { href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '来年どんな展示が見たい？ 1 票で決めよう。',   img: 'hero.jpg', badge: '受付中' },
+      { href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'tokyo-s.jpg' },
+      { href: 'contact.html',    ja: 'お問い合わせ',      en: 'Contact',  desc: 'フォーム、または Instagram の DM から。',      img: 'members.jpg' }
+    ]}
+  ];
+  let n = 0;
+  const indexGroups = INDEX.map(g => `
+    <div class="si-group">
+      <p class="si-group-head"><span>${g.en}</span>${g.group}</p>
+      <ul>${g.pages.map(p => { n++; const cur = p.href === here; return `
+        <li><a href="${p.href}" class="mobile-link si-link${cur ? ' is-current' : ''}"${cur ? ' aria-current="page"' : ''}
+               data-en="${p.en}" data-desc="${p.desc}" data-img="${p.img}" style="--d:${n}">
+          <span class="si-num">${String(n).padStart(2, '0')}</span>
+          <span class="si-name">${p.ja}${p.badge ? `<em class="si-badge">${p.badge}</em>` : ''}${cur ? '<em class="si-here">現在のページ</em>' : ''}</span>
+          <span class="si-en">${p.en}</span>
+        </a></li>`; }).join('')}
+      </ul>
+    </div>`).join('');
+
   const navLinks = LINKS.map(l =>
     `<li><a href="${l.href}" class="${l.cls || ''}${l.href === here ? ' active' : ''}">${l.label}</a></li>`).join('');
-  const mobileLinks = LINKS.map(l =>
-    `<a href="${l.href}" class="mobile-link">${l.label}<small>${l.ja}</small></a>`).join('');
 
   document.body.insertAdjacentHTML('afterbegin', `
     <nav id="navbar">
@@ -30,13 +60,60 @@
           <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
           <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         </button>
-        <div class="hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></div>
+        <button type="button" class="hamburger" id="hamburger" aria-label="サイトの目次を開く" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
       </div>
     </nav>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="index.html" class="mobile-link">Home<small>ホーム</small></a>
-      ${mobileLinks}
+    <div class="site-index" id="mobileMenu" role="dialog" aria-modal="true" aria-label="サイトの目次" aria-hidden="true">
+      <div class="si-inner">
+        <div class="si-list">
+          <p class="si-title">Index <span>サイトの目次</span></p>
+          ${indexGroups}
+        </div>
+        <aside class="si-preview" aria-hidden="true">
+          <div class="si-preview-img"></div>
+          <p class="si-preview-en"></p>
+          <p class="si-preview-desc"></p>
+        </aside>
+      </div>
+      <div class="si-foot">
+        ${sns.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${s.name}<span>${s.handle}</span></a>`).join('')}
+        <span class="si-copy">© AZAKEI</span>
+      </div>
     </div>`);
+
+  /* ---- 目次の開閉に合わせた処理（開閉そのものは nav.js） ---- */
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('hamburger');
+  const pv = {
+    img:  menu.querySelector('.si-preview-img'),
+    en:   menu.querySelector('.si-preview-en'),
+    desc: menu.querySelector('.si-preview-desc')
+  };
+  function preview(a) {
+    if (!a) return;
+    pv.img.style.backgroundImage = `url("${a.dataset.img}")`;
+    pv.en.textContent = a.dataset.en;
+    pv.desc.textContent = a.dataset.desc;
+    menu.querySelectorAll('.si-link').forEach(l => l.classList.toggle('is-hover', l === a));
+  }
+  menu.querySelectorAll('.si-link').forEach(a => {
+    a.addEventListener('mouseenter', () => preview(a));
+    a.addEventListener('focus', () => preview(a));
+  });
+  new MutationObserver(() => {
+    const open = menu.classList.contains('open');
+    document.documentElement.classList.toggle('index-open', open);
+    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'サイトの目次を閉じる' : 'サイトの目次を開く');
+    menu.setAttribute('aria-hidden', !open);
+    if (open) {
+      preview(menu.querySelector('.si-link.is-current') || menu.querySelector('.si-link'));
+      setTimeout(() => (menu.querySelector('.si-link.is-current') || menu.querySelector('.si-link')).focus({ preventScroll: true }), 350);
+    }
+  }).observe(menu, { attributes: true, attributeFilter: ['class'] });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) { burger.click(); burger.focus(); }
+  });
 
   /* ---- ライト／ダーク切り替え ---- */
   document.getElementById('themeToggle').addEventListener('click', () => {
