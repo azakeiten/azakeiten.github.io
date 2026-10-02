@@ -265,3 +265,19 @@
       </a>`);
   }
 })();
+
+/* ---- v14：縦書きの合言葉を、一文字ずつ ---- */
+(function() {
+  const box = document.querySelector('[data-motto]');
+  if (!box) return;
+  const sec = box.closest('.motto');
+  const text = box.querySelector('.motto-text');
+  text.setAttribute('aria-label', text.textContent);
+  let i = 0;
+  text.querySelectorAll(':scope > span').forEach(line => {
+    line.setAttribute('aria-hidden', 'true');
+    line.innerHTML = [...line.textContent].map(c => `<span class="mc" style="--i:${i++}">${c}</span>`).join('');
+  });
+  if (!('IntersectionObserver' in window)) { sec.classList.add('is-in'); return; }
+  new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { sec.classList.add('is-in'); io.disconnect(); } }), { threshold: 0.35 }).observe(sec);
+})();

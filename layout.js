@@ -157,6 +157,8 @@
           <li><a href="activities.html">活動風景・日常</a></li>
           <li><a href="events.html">日程・イベント</a></li>
           <li><a href="sponsor.html">協賛のご案内</a></li>
+          <li><a href="quiz.html">億万長者クイズ</a></li>
+          <li><a href="diagnosis.html">エコノミスト診断</a></li>
           <li><a href="vote.html">文化祭投票</a></li>
           <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
@@ -172,6 +174,6 @@
         <p class="footer-note">世の中の仕組みを理解し、自分たちで仕組みを創り出す。コンテストへの挑戦と文化祭の展示を通じて、経済を社会に開いていく麻布中学校・高等学校の同好会です。</p>
       </div>
     </div>
-    <div class="footer-giant" aria-hidden="true">AZAKEI</div>
+    <div class="footer-giant" aria-hidden="true">AZAKEI<span class="footer-giant-seal">麻経</span></div>
     <div class="footer-bottom">© ${new Date().getFullYear()} AZAKEI. All rights reserved.</div>`;
 })();

@@ -330,3 +330,50 @@
 .next-page:hover b svg { transform: translateX(10px); }
 .next-page + .wave-band.is-footer { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) { .cd-unit b.tick { animation: none; } .next-page img { transition: none; } }
+
+/* ================================================================
+   v14 — 縦書きの合言葉・フッターの印・金のスクロールバー
+   ================================================================ */
+/* トップ：合言葉を縦書きで（和紙の上に、一文字ずつ現れる） */
+.motto { position: relative; overflow: hidden; isolation: isolate; padding: clamp(64px, 9vw, 120px) 24px; background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+.motto::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0.22; background: var(--wave) repeat 0 0 / 64px 32px;
+  -webkit-mask: radial-gradient(60% 70% at 50% 50%, transparent 40%, #000 100%); mask: radial-gradient(60% 70% at 50% 50%, transparent 40%, #000 100%); }
+.motto-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: clamp(20px, 5vw, 64px); }
+.motto-label { justify-self: end; align-self: start; writing-mode: vertical-rl; margin: 0; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--color-accent-deep); }
+.motto-text { margin: 0; writing-mode: vertical-rl; text-orientation: mixed; display: flex; flex-direction: column; gap: 0.5em;
+  font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(26px, 3.6vw, 40px); line-height: 1.45; letter-spacing: 0.12em; color: var(--color-text); }
+.motto-text > span { display: block; }
+.motto-text > span:last-child { margin-top: 1.6em; }
+.motto-text .mc { display: inline-block; opacity: 0; transform: translateY(-0.35em); filter: blur(3px); transition: opacity 0.6s var(--ease-out), transform 0.8s var(--ease-out), filter 0.8s; transition-delay: calc(var(--i) * 70ms); }
+.motto.is-in .motto-text .mc { opacity: 1; transform: none; filter: none; }
+.motto-en { justify-self: start; align-self: end; max-width: 16em; margin: 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(15px, 1.6vw, 19px); line-height: 1.6; color: var(--color-muted); }
+.motto-seal { position: absolute; right: clamp(16px, 8vw, 120px); bottom: clamp(20px, 5vw, 56px); writing-mode: vertical-rl; text-orientation: upright;
+  font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(14px, 1.6vw, 18px); line-height: 1; letter-spacing: 0.08em;
+  padding: 0.38em 0.3em; border-radius: 0.28em; color: #fff6e2; background: linear-gradient(160deg, #c8a96e, #7d6131);
+  opacity: 0; transform: scale(1.7) rotate(-10deg); }
+.motto.is-in .motto-seal { animation: seal-press 0.6s cubic-bezier(.2, 1.4, .4, 1) 2.2s forwards; }
+@media (max-width: 700px) {
+  .motto-inner { grid-template-columns: 1fr; justify-items: center; gap: 22px; }
+  .motto-label { writing-mode: horizontal-tb; justify-self: center; }
+  .motto-text { font-size: clamp(24px, 8vw, 34px); }
+  .motto-en { justify-self: center; text-align: center; }
+  .motto-seal { right: 18px; bottom: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motto-text .mc { opacity: 1; transform: none; filter: none; transition: none; }
+  .motto-seal { opacity: 1; transform: rotate(-3deg); animation: none !important; }
+}
+
+/* フッター：大きな AZAKEI に「麻経」の印 */
+.footer-giant { font-size: clamp(56px, 15vw, 230px); }
+.footer-giant-seal { display: inline-block; vertical-align: 0.42em; margin-left: 0.18em; writing-mode: vertical-rl; text-orientation: upright;
+  font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 0.16em; line-height: 1; letter-spacing: 0.06em;
+  padding: 0.38em 0.3em; border-radius: 0.28em; color: #fff6e2; -webkit-text-stroke: 0; background: linear-gradient(160deg, #c8a96e, #7d6131); transform: rotate(-4deg); }
+@media (max-width: 400px) { .footer-giant { font-size: 15vw; } }
+
+/* 金のスクロールバー（対応ブラウザのみ） */
+html { scrollbar-color: color-mix(in srgb, var(--color-accent) 70%, transparent) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--color-accent) 60%, transparent); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); background-clip: padding-box; }
