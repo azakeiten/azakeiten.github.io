@@ -385,7 +385,7 @@
     if (isBest) { best = chips; try { localStorage.setItem(BEST_KEY, chips); } catch (e) {} }
     const title = chips >= 120 ? '伝説の億万長者' : chips >= 40 ? '億万長者' : chips > START_CHIPS ? 'やり手の投資家' : chips > 0 ? '堅実な投資家' : '一文なし……';
     const okCount = log.filter(l => l.ok).length;
-    const url = 'https://ryoishiyama1-svg.github.io/azakei/quiz.html';
+    const url = 'https://azakeiten.github.io/quiz.html';
     const text = `AZAKEI の億万長者クイズで、チップ ${START_CHIPS} 枚 → ${chips} 枚（${times} 倍）！ 称号「${title}」 #AZAKEI`;
     show(`
       <div class="dg-card qz-final">

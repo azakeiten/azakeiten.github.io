@@ -65,7 +65,7 @@
     share: 'Share your result', copy: 'Copy link', copied: 'Copied!', copyFail: 'Could not copy',
     retry: 'Take the test again', festival: 'About the festival exhibition →', festivalHref: 'en.html#festival',
     shareText: name => `I'm "${name}"! What kind of investor are you? #AZAKEI`,
-    url: 'https://ryoishiyama1-svg.github.io/azakei/en-diagnosis.html', sep: ', '
+    url: 'https://azakeiten.github.io/en-diagnosis.html', sep: ', '
   } : {
     kicker: 'YES か NO の道を選んで、自分の投資家タイプを知ろう',
     title: 'あなたは、どの<em>投資家タイプ</em>？',
@@ -76,7 +76,7 @@
     share: '結果をシェア', copy: 'リンクをコピー', copied: 'コピーしました！', copyFail: 'コピーできませんでした',
     retry: 'もう一度診断する', festival: '文化祭の展示を見る →', festivalHref: 'festival.html',
     shareText: name => `私は「${name}」の投資家でした！あなたは？ #AZAKEI経済診断`,
-    url: 'https://ryoishiyama1-svg.github.io/azakei/diagnosis.html', sep: '・'
+    url: 'https://azakeiten.github.io/diagnosis.html', sep: '・'
   };
   if (EN) {
     const q = {

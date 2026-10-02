@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/</loc><lastmod>2026-10-02</lastmod><priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://ryoishiyama1-svg.github.io/azakei/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ryoishiyama1-svg.github.io/azakei/en.html" /></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/en.html</loc><lastmod>2026-10-02</lastmod><priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://ryoishiyama1-svg.github.io/azakei/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://ryoishiyama1-svg.github.io/azakei/en.html" /></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/about.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/festival.html</loc><lastmod>2026-10-02</lastmod><priority>0.9</priority></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/diagnosis.html</loc><lastmod>2026-10-02</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/en-diagnosis.html</loc><lastmod>2026-10-02</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/quiz.html</loc><lastmod>2026-10-02</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/contests.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/activities.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/events.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/vote.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/sponsor.html</loc><lastmod>2026-10-02</lastmod></url>
-  <url><loc>https://ryoishiyama1-svg.github.io/azakei/contact.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://azakeiten.github.io/</loc><lastmod>2026-10-02</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://azakeiten.github.io/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://azakeiten.github.io/en.html" /></url>
+  <url><loc>https://azakeiten.github.io/en.html</loc><lastmod>2026-10-02</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://azakeiten.github.io/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://azakeiten.github.io/en.html" /></url>
+  <url><loc>https://azakeiten.github.io/about.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://azakeiten.github.io/festival.html</loc><lastmod>2026-10-02</lastmod><priority>0.9</priority></url>
+  <url><loc>https://azakeiten.github.io/diagnosis.html</loc><lastmod>2026-10-02</lastmod><priority>0.8</priority></url>
+  <url><loc>https://azakeiten.github.io/en-diagnosis.html</loc><lastmod>2026-10-02</lastmod><priority>0.7</priority></url>
+  <url><loc>https://azakeiten.github.io/quiz.html</loc><lastmod>2026-10-02</lastmod><priority>0.8</priority></url>
+  <url><loc>https://azakeiten.github.io/contests.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://azakeiten.github.io/activities.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://azakeiten.github.io/events.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://azakeiten.github.io/vote.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://azakeiten.github.io/sponsor.html</loc><lastmod>2026-10-02</lastmod></url>
+  <url><loc>https://azakeiten.github.io/contact.html</loc><lastmod>2026-10-02</lastmod></url>
 </urlset>
