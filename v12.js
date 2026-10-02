@@ -281,3 +281,8 @@
   if (!('IntersectionObserver' in window)) { sec.classList.add('is-in'); return; }
   new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { sec.classList.add('is-in'); io.disconnect(); } }), { threshold: 0.35 }).observe(sec);
 })();
+
+/* ---- オフライン対応（ホーム画面に追加したとき用） ---- */
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}

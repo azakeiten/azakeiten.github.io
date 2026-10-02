@@ -1,0 +1,21 @@
+{
+  "name": "麻経 AZAKEI — Azabu Economics",
+  "short_name": "麻経",
+  "description": "麻布中学校・高等学校の経済系同好会 AZAKEI（麻経）。億万長者クイズ・エコノミスト診断・文化祭「麻布経済展」。",
+  "lang": "ja",
+  "start_url": "./?source=app",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f3ef",
+  "theme_color": "#121519",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "億万長者クイズ", "url": "quiz.html", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "エコノミスト診断", "url": "diagnosis.html", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "文化祭投票", "url": "vote.html", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] }
+  ]
+}
