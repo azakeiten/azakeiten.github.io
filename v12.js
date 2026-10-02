@@ -186,15 +186,19 @@
   const cd = document.querySelector('[data-countdown]');
   if (cd) {
     const target = new Date(cd.dataset.countdown).getTime();
+    const en = document.documentElement.lang === 'en';
+    const L = en
+      ? { u: ['days', 'hours', 'min', 'sec'], foot: 'Until opening day, May 1, 2027 (dates are provisional)', more: 'About the exhibition →' }
+      : { u: ['日', '時間', '分', '秒'], foot: '2027 年 5 月 1 日の開幕日まで（日程は予定です）', more: '展示の内容を見る →' };
     cd.innerHTML = `
       <div class="cd-head"><p>Next Festival</p><h2>${cd.dataset.title}</h2></div>
       <div class="cd-digits" role="timer" aria-live="off">
-        <div class="cd-unit"><b data-u="d">0</b><small>日</small></div>
-        <div class="cd-unit"><b data-u="h">00</b><small>時間</small></div>
-        <div class="cd-unit"><b data-u="m">00</b><small>分</small></div>
-        <div class="cd-unit"><b data-u="s">00</b><small>秒</small></div>
+        <div class="cd-unit"><b data-u="d">0</b><small>${L.u[0]}</small></div>
+        <div class="cd-unit"><b data-u="h">00</b><small>${L.u[1]}</small></div>
+        <div class="cd-unit"><b data-u="m">00</b><small>${L.u[2]}</small></div>
+        <div class="cd-unit"><b data-u="s">00</b><small>${L.u[3]}</small></div>
       </div>
-      <div class="cd-foot"><span>2027 年 5 月 1 日の開幕日まで（日程は予定です）</span><a href="${cd.dataset.href}">展示の内容を見る →</a></div>`;
+      <div class="cd-foot"><span>${L.foot}</span><a href="${cd.dataset.href}">${L.more}</a></div>`;
     const els = Object.fromEntries([...cd.querySelectorAll('[data-u]')].map(b => [b.dataset.u, b]));
     const pad = n => String(n).padStart(2, '0');
     let timer;
@@ -214,7 +218,7 @@
     document.querySelectorAll('.event-row:not(.is-past)').forEach(row => {
       if (row.querySelector('.event-when') && row.querySelector('.event-when').textContent.includes(day)) row.querySelectorAll('.event-countdown:not(.is-now)').forEach(b => b.remove());
     });
-    cd.setAttribute('aria-label', `${cd.dataset.title}まで、あと ${els.d.textContent} 日`);
+    cd.setAttribute('aria-label', en ? `${els.d.textContent} days until ${cd.dataset.title}` : `${cd.dataset.title}まで、あと ${els.d.textContent} 日`);
   }
 
   /* ---- 年表：スクロールに合わせて金の線が伸びる ---- */

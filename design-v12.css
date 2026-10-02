@@ -408,3 +408,78 @@ html { scrollbar-color: color-mix(in srgb, var(--color-accent) 70%, transparent)
 .daily-q.is-correct { animation: dq-pop 0.6s var(--ease-out); }
 @keyframes dq-pop { 40% { box-shadow: 0 0 0 6px rgba(60, 138, 55, 0.18); } }
 @media (max-width: 560px) { .dq-choices { grid-template-columns: 1fr; } }
+
+/* ================================================================
+   v15 — ダークモード「夜の展示室」
+   黒は少し緑がかった深い墨に。星くず・ネオンの縁・金の灯りで、夜の教室の展示のように。
+   ================================================================ */
+:root[data-theme="dark"] {
+  --color-bg:      #0b0e0d;
+  --color-surface: #121715;
+  --color-border:  rgba(160, 230, 170, 0.10);
+  --color-text:    #ece8dd;
+  --color-muted:   rgba(236, 232, 221, 0.68);
+  --color-accent:  #d6b97f;
+  --color-accent-deep: #e6cc95;
+  --nav-bg:        rgba(11, 14, 13, 0.82);
+  --nav-line:      rgba(160, 230, 170, 0.10);
+  --sumi:          #060807;
+  --neon:          #6dff7c;
+}
+:root[data-theme="dark"] body { background: var(--color-bg); }
+/* 星くず（とても控えめに、画面に固定） */
+:root[data-theme="dark"] body::after {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.55;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(1px 1px at 68% 9%, rgba(255, 245, 210, 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 84% 42%, rgba(160, 255, 170, 0.45), transparent 60%),
+    radial-gradient(1px 1px at 33% 64%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(1px 1px at 51% 88%, rgba(255, 245, 210, 0.45), transparent 60%),
+    radial-gradient(1.5px 1.5px at 7% 79%, rgba(255, 255, 255, 0.35), transparent 60%),
+    radial-gradient(1px 1px at 93% 73%, rgba(255, 255, 255, 0.4), transparent 60%);
+  background-size: 520px 520px;
+}
+/* 夜の灯り：ページの上と下に、ほんのりした光 */
+:root[data-theme="dark"] main, :root[data-theme="dark"] body > section { position: relative; z-index: 1; }
+:root[data-theme="dark"] .about, :root[data-theme="dark"] .services { background-color: transparent; }
+:root[data-theme="dark"] .services { background-image: linear-gradient(rgba(160, 230, 170, 0.025), rgba(160, 230, 170, 0.025)); }
+
+/* 見出しの金の言葉が、ろうそくのように灯る */
+:root[data-theme="dark"] .section-title em { filter: drop-shadow(0 0 14px rgba(230, 204, 149, 0.35)); }
+/* 見出しラベルの星が、ネオンの緑に */
+:root[data-theme="dark"] .section-label { color: var(--color-accent-deep); }
+
+/* カード：夜はネオンの細い縁が浮かぶ */
+:root[data-theme="dark"] .link-card, :root[data-theme="dark"] .service-card, :root[data-theme="dark"] .dg-card,
+:root[data-theme="dark"] .fx-rule, :root[data-theme="dark"] .diary-item, :root[data-theme="dark"] .daily-q,
+:root[data-theme="dark"] .visitors, :root[data-theme="dark"] .qz-rank { background-color: rgba(18, 23, 21, 0.86); border-color: var(--color-border); transition: border-color 0.4s, box-shadow 0.4s; }
+:root[data-theme="dark"] .link-card:hover, :root[data-theme="dark"] .service-card:hover, :root[data-theme="dark"] .fx-rule:hover,
+:root[data-theme="dark"] .diary-item:hover { border-color: rgba(109, 255, 124, 0.35); box-shadow: 0 0 0 1px rgba(109, 255, 124, 0.12), 0 0 28px -6px rgba(109, 255, 124, 0.25); }
+
+/* ボタン：金がほんのり光る */
+:root[data-theme="dark"] .btn-primary { box-shadow: 0 0 24px -4px rgba(214, 185, 127, 0.45); }
+
+/* 濃い帯（GDP・お問い合わせ・カウントダウン）は、上に金の細い線で区切る */
+:root[data-theme="dark"] .live-econ, :root[data-theme="dark"] .cta-band { background: var(--sumi); border-top: 1px solid rgba(214, 185, 127, 0.22); border-bottom: 1px solid rgba(214, 185, 127, 0.12); }
+:root[data-theme="dark"] .countdown { background: #070a09; box-shadow: inset 0 0 0 1px rgba(214, 185, 127, 0.25), 0 0 40px -10px rgba(109, 255, 124, 0.2); }
+
+/* 黒板：夜はチョークがうっすら光る */
+:root[data-theme="dark"] .mm-board { background: radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.05), transparent 60%), #16291f; }
+:root[data-theme="dark"] .mm-lines path { filter: url(#mm-chalk) drop-shadow(0 0 3px rgba(190, 255, 200, 0.45)); }
+
+/* 合言葉：夜は和紙ではなく、墨の夜空に金の文字 */
+:root[data-theme="dark"] .motto { background: transparent; }
+:root[data-theme="dark"] .motto-text { color: #f3e3bd; text-shadow: 0 0 18px rgba(230, 204, 149, 0.28); }
+:root[data-theme="dark"] .motto::before { opacity: 0.12; }
+:root[data-theme="dark"] .motto-seal, :root[data-theme="dark"] .hero-seal { box-shadow: 0 0 22px -2px rgba(214, 185, 127, 0.6); }
+
+/* 写真：夜は少し暗く落ち着かせ、触れると明るく */
+:root[data-theme="dark"] .gallery-item img, :root[data-theme="dark"] .fx-photos img { filter: brightness(0.86) saturate(0.95); transition: filter 0.6s; }
+:root[data-theme="dark"] .gallery-item:hover img, :root[data-theme="dark"] .fx-photos figure:hover img { filter: none; }
+
+/* スクロールバーも夜色に */
+:root[data-theme="dark"] { scrollbar-color: rgba(214, 185, 127, 0.5) transparent; }
+@media (prefers-reduced-motion: reduce) { :root[data-theme="dark"] body::after { display: none; } }
+@media print { :root[data-theme="dark"] body::after { display: none; } }
+:root[data-theme="dark"] .site-footer, :root[data-theme="dark"] .page-hero, :root[data-theme="dark"] .next-page { position: relative; z-index: 1; }

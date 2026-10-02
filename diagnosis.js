@@ -62,6 +62,7 @@
     start: 'Start the test', back: '← Back one step',
     resultKicker: 'Your investor type is', strength: 'Strengths', care: 'Watch out for',
     shine: 'Where you would shine at AZAKEI', match: 'Best match', trail: 'The path you took',
+    saveImg: 'Save as image', imgCta: 'What type are you?', imgDone: 'Saved!', imgFail: 'Could not create the image',
     share: 'Share your result', copy: 'Copy link', copied: 'Copied!', copyFail: 'Could not copy',
     retry: 'Take the test again', festival: 'About the festival exhibition →', festivalHref: 'en.html#festival',
     shareText: name => `I'm "${name}"! What kind of investor are you? #AZAKEI`,
@@ -73,6 +74,7 @@
     start: '診断をはじめる', back: '← ひとつ前に戻る',
     resultKicker: 'あなたの投資家タイプは', strength: '強み', care: '気をつけたいこと',
     shine: 'AZAKEI で輝ける場所', match: '相性のいいタイプ', trail: 'あなたが通った道',
+    saveImg: '画像で保存', imgCta: 'あなたは何タイプ？', imgDone: '保存しました！', imgFail: '画像を作れませんでした',
     share: '結果をシェア', copy: 'リンクをコピー', copied: 'コピーしました！', copyFail: 'コピーできませんでした',
     retry: 'もう一度診断する', festival: '文化祭の展示を見る →', festivalHref: 'festival.html',
     shareText: name => `私は「${name}」の投資家でした！あなたは？ #AZAKEI経済診断`,
@@ -180,6 +182,7 @@
           <a href="https://twitter.com/intent/tweet?text=${esc(shareText)}&url=${esc(url)}" target="_blank" rel="noopener">X</a>
           <a href="https://social-plugins.line.me/lineit/share?url=${esc(url)}" target="_blank" rel="noopener">LINE</a>
           <button type="button" class="dg-copy">${S.copy}</button>
+          ${window.AZAKEI_SHARE_IMG ? `<button type="button" class="dg-img">${S.saveImg}</button>` : ''}
         </div>
         <div class="dg-actions">
           <button type="button" class="btn-primary dg-retry">${S.retry}</button>
@@ -191,6 +194,15 @@
       try { await navigator.clipboard.writeText(url); this.textContent = S.copied; }
       catch (e) { this.textContent = S.copyFail; }
       setTimeout(() => { this.textContent = S.copy; }, 2000);
+    });
+    const imgBtn = root.querySelector('.dg-img');
+    if (imgBtn) imgBtn.addEventListener('click', async () => {
+      imgBtn.disabled = true; const label = imgBtn.textContent; imgBtn.textContent = '…';
+      try {
+        const r = await window.AZAKEI_SHARE_IMG({ kicker: S.resultKicker, art: ART[key], title: t.name, subtitle: t.en, lines: [t.lead], cta: S.imgCta, url: S.url.replace('https://', ''), filename: 'azakei-' + key, text: shareText });
+        imgBtn.textContent = r === 'cancel' ? label : S.imgDone;
+      } catch (e) { imgBtn.textContent = S.imgFail; }
+      setTimeout(() => { imgBtn.textContent = label; imgBtn.disabled = false; }, 2200);
     });
     root.querySelector('.dg-match').addEventListener('click', e => { e.preventDefault(); path = []; history.replaceState(null, '', '#' + t.match); show(t.match, false); });
   }

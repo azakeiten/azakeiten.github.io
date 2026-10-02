@@ -355,6 +355,7 @@
           <span class="share-label">結果をシェア</span>
           <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener">X</a>
           <a href="https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}" target="_blank" rel="noopener">LINE</a>
+          ${window.AZAKEI_SHARE_IMG ? '<button type="button" class="qz-img">画像で保存</button>' : ''}
         </div>
         <div class="dg-actions">
           <button type="button" class="btn-primary qz-retry">もう一度挑戦する</button>
@@ -363,6 +364,20 @@
       </div>`);
     countUp(root.querySelector('.qz-count'), 0, chips);
     bindRankForm(chips);
+    const imgBtn = root.querySelector('.qz-img');
+    if (imgBtn) imgBtn.addEventListener('click', async () => {
+      imgBtn.disabled = true; imgBtn.textContent = '…';
+      try {
+        const r = await window.AZAKEI_SHARE_IMG({
+          kicker: '億万長者クイズの結果', big: chips.toLocaleString('ja-JP'), bigUnit: '枚',
+          title: `称号「${title}」`, subtitle: `5 chips → ${chips.toLocaleString('en-US')} chips (×${times})`,
+          lines: [`チップ ${START_CHIPS} 枚から ${times} 倍に。文化祭の最高記録は 120 枚。`],
+          cta: 'あなたは何枚まで増やせる？', url: 'azakeiten.github.io/quiz.html', filename: 'azakei-quiz-' + chips, text
+        });
+        imgBtn.textContent = r === 'cancel' ? '画像で保存' : '保存しました！';
+      } catch (e) { imgBtn.textContent = '画像を作れませんでした'; }
+      setTimeout(() => { imgBtn.textContent = '画像で保存'; imgBtn.disabled = false; }, 2200);
+    });
     if (chips >= 40) setTimeout(confetti, 300);
     root.querySelector('.qz-retry').addEventListener('click', intro);
   }
