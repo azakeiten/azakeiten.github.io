@@ -17,7 +17,7 @@ window.AZAKEI = {
      どちらも空なら、下の instagram アカウントの DM へ案内します。 */
   contact: {
     formEndpoint: 'https://formsubmit.co/ajax/azakeiten@gmail.com',
-    email: '',
+    email: 'azakeiten@gmail.com',   // フォームが送れないときの予備（メールで送る）
     instagram: { handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/' }
   },
 

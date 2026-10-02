@@ -145,7 +145,14 @@
         status.textContent = '送信しました。ありがとうございます！内容を確認のうえ、ご連絡いたします。';
       } catch (e) {
         console.error(e);
-        status.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、Instagram の DM からご連絡ください。';
+        // 送れなかったときは、書いた内容をそのままメールで送れるようにする（内容は消さない）
+        if (cfg.email) {
+          const body = `お名前: ${data.name}\nご所属: ${data.org || '-'}\nメール: ${data.email}\n種類: ${data.type}\n\n${data.message}`;
+          const href = `mailto:${cfg.email}?subject=${encodeURIComponent('[AZAKEI] ' + data.type + '（' + data.name + ' 様）')}&body=${encodeURIComponent(body)}`;
+          status.innerHTML = '送信に失敗しました。お手数ですが、<a href="' + href + '">こちらからメールで送る</a>（入力した内容が入った状態で開きます）か、<a href="' + cfg.instagram.url + '" target="_blank" rel="noopener">Instagram の DM</a> からご連絡ください。';
+        } else {
+          status.textContent = '送信に失敗しました。時間をおいて再度お試しいただくか、Instagram の DM からご連絡ください。';
+        }
       } finally {
         btn.disabled = false;
       }
