@@ -22,7 +22,7 @@
   document.body.insertAdjacentHTML('afterbegin', `
     <a class="skip-link" href="#main">Skip to content</a>
     <nav id="navbar" class="nav-en" aria-label="Main">
-      <a href="en.html" class="nav-logo wordmark" aria-label="AZAKEI home"><span class="nav-mark" data-logomark aria-hidden="true"></span>AZA<span>KEI</span></a>
+      <a href="en.html" class="nav-logo wordmark" aria-label="AZAKEI home"><span class="nav-mark" data-logomark aria-hidden="true"></span>AZA<span>KEI</span><small class="nav-kanji" aria-hidden="true">麻経</small></a>
       <ul class="nav-links">${LINKS.map(link).join('')}</ul>
       <div class="nav-right">
         <a href="${ja}" class="lang-switch" hreflang="ja" lang="ja" aria-label="日本語版">日本語</a>
@@ -53,7 +53,7 @@
     </a>
     <div class="footer-grid">
       <div>
-        <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="en.html" class="wordmark footer-wordmark">AZA<span>KEI</span></a></div>
+        <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="en.html" class="wordmark footer-wordmark">AZA<span>KEI</span><small class="footer-kanji" lang="ja">麻経</small></a></div>
         <p class="footer-note">Azabu Economics · Est. 2025<br>Azabu Junior and Senior High School, Tokyo</p>
       </div>
       <div>

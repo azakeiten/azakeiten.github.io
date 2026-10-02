@@ -56,7 +56,7 @@
 
   document.body.insertAdjacentHTML('afterbegin', `
     <nav id="navbar">
-      <a href="index.html" class="nav-logo wordmark" aria-label="AZAKEI ホーム"><span class="nav-mark" data-logomark aria-hidden="true"></span>AZA<span>KEI</span></a>
+      <a href="index.html" class="nav-logo wordmark" aria-label="麻経 AZAKEI ホーム"><span class="nav-mark" data-logomark aria-hidden="true"></span>AZA<span>KEI</span><small class="nav-kanji" aria-hidden="true">麻経</small></a>
       <ul class="nav-links">${navLinks}</ul>
       <div class="nav-right">
         <a href="${ig.url}" target="_blank" rel="noopener" class="nav-cta">Instagram</a>
@@ -145,7 +145,7 @@
     </a>
     <div class="footer-grid">
       <div>
-        <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="index.html" class="wordmark footer-wordmark">AZA<span>KEI</span></a></div>
+        <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="index.html" class="wordmark footer-wordmark">AZA<span>KEI</span><small class="footer-kanji">麻経</small></a></div>
         <p class="footer-note">麻経 · Azabu Economics<br>Est. 2025 · 麻布中学校・高等学校</p>
       </div>
       <div>
