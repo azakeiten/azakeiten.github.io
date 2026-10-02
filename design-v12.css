@@ -483,3 +483,61 @@ html { scrollbar-color: color-mix(in srgb, var(--color-accent) 70%, transparent)
 @media (prefers-reduced-motion: reduce) { :root[data-theme="dark"] body::after { display: none; } }
 @media print { :root[data-theme="dark"] body::after { display: none; } }
 :root[data-theme="dark"] .site-footer, :root[data-theme="dark"] .page-hero, :root[data-theme="dark"] .next-page { position: relative; z-index: 1; }
+
+/* ================================================================
+   v16 — 文化祭「3 日間の物語」・AZAKEI の歩み
+   ================================================================ */
+/* 3 日間の物語：左の写真は留まり、右の文章が流れる */
+.story { padding: clamp(64px, 9vw, 120px) 0; background: var(--color-surface); }
+.story-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 72px); margin-top: clamp(28px, 4vw, 48px); }
+.story-media { position: sticky; top: calc(var(--nav-h, 80px) + 24px); height: min(72vh, 640px); border-radius: calc(var(--radius) + 4px); overflow: hidden; background: var(--sumi, #121519); box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.5); }
+.story-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.08); transition: opacity 0.9s ease, transform 6s ease-out; }
+.story-media img.is-on { opacity: 1; transform: scale(1); }
+.story-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 60%, rgba(10, 12, 16, 0.55)); pointer-events: none; }
+.story-count { position: absolute; left: 20px; bottom: 16px; z-index: 1; color: rgba(255, 255, 255, 0.85); font-family: 'Cormorant Garamond', serif; font-size: 18px; letter-spacing: 0.1em; }
+.story-count b { font-family: 'Shippori Mincho', serif; font-size: 30px; font-weight: 500; color: #f3e3bd; }
+.story-steps { list-style: none; margin: 0; padding: 0; }
+.story-steps li { min-height: 68vh; display: grid; align-content: center; gap: 12px; padding: 24px 0; opacity: 0.28; transform: translateY(12px); transition: opacity 0.6s ease, transform 0.6s var(--ease-out); }
+.story-steps li.is-on { opacity: 1; transform: none; }
+.story-steps li:first-child { min-height: 52vh; align-content: start; padding-top: 8vh; }
+.story-steps li:last-child { min-height: 60vh; }
+.story-tag { margin: 0; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-accent-deep); }
+.story-steps h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: clamp(24px, 3vw, 36px); line-height: 1.4; }
+.story-steps p:not(.story-tag) { margin: 0; color: var(--color-muted); line-height: 2; font-size: 15.5px; max-width: 30em; }
+@media (max-width: 860px) {
+  .story-grid { grid-template-columns: 1fr; gap: 0; }
+  .story-media { top: calc(var(--nav-h, 72px) + 10px); height: 46vh; z-index: 2; }
+  .story-steps li, .story-steps li:first-child, .story-steps li:last-child { min-height: 58vh; align-content: center; padding: 24px 4px; }
+  .story-steps li { background: linear-gradient(var(--color-surface) 70%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-media img { transition: opacity 0.2s; transform: none; }
+  .story-steps li { opacity: 1; transform: none; }
+}
+
+/* AZAKEI の歩み（年表） */
+.ayumi { list-style: none; margin: clamp(24px, 4vw, 40px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+.ayumi::before { content: ''; position: absolute; left: 0; right: 0; top: 54px; height: 1px; background: linear-gradient(90deg, var(--color-accent), var(--color-accent) 75%, transparent); }
+.ayumi li { position: relative; padding: 0 clamp(10px, 2vw, 24px) 0 0; display: grid; gap: 22px; align-content: start; }
+.ay-year { font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(24px, 2.6vw, 32px); color: var(--color-accent-deep); line-height: 1; padding-bottom: 6px; }
+.ayumi li::after { content: ''; position: absolute; left: 0; top: 48px; width: 13px; height: 13px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 0 5px rgba(200, 169, 110, 0.18); }
+.ayumi li.is-next::after { background: var(--color-surface); border: 1.5px dashed var(--color-accent); box-shadow: none; }
+.ayumi h3 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.5; }
+.ayumi p { margin: 0; color: var(--color-muted); font-size: 14px; line-height: 1.8; }
+.ayumi a { display: inline-block; margin-top: 8px; font-size: 13.5px; color: var(--color-accent-deep); }
+@media (max-width: 760px) {
+  .ayumi { grid-template-columns: 1fr; gap: 26px; padding-left: 28px; }
+  .ayumi::before { left: 6px; right: auto; top: 6px; bottom: 6px; width: 1px; height: auto; background: linear-gradient(var(--color-accent), var(--color-accent) 80%, transparent); }
+  .ayumi li { gap: 6px; padding: 0; }
+  .ayumi li::after { left: -28px; top: 6px; }
+  .ay-year { font-size: 22px; }
+}
+/* 物語の写真は、表示中の 1 枚だけ（読みこみ時のフェードより優先） */
+.story .story-media img:not(.is-on) { opacity: 0; }
+.story .story-media img.is-on { opacity: 1; }
+@media (max-width: 860px) {
+  .story-media { height: 40vh; }
+  .story-steps li, .story-steps li:first-child, .story-steps li:last-child { min-height: 64vh; align-content: end; padding: 0 4px 6vh; background: none; }
+  .story-steps li:first-child { margin-top: 2vh; }
+}
+@media (max-width: 860px) { .story-media { box-shadow: 0 -80px 0 0 var(--color-surface), 0 24px 40px -28px rgba(0, 0, 0, 0.45); } }

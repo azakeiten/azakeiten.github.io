@@ -290,3 +290,27 @@
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
+
+/* ---- v16：文化祭「3 日間の物語」 ---- */
+(function() {
+  const grid = document.querySelector('[data-story]');
+  if (!grid) return;
+  const imgs = [...grid.querySelectorAll('.story-media img')];
+  const steps = [...grid.querySelectorAll('.story-steps li')];
+  const count = grid.querySelector('.story-count b');
+  // 次の写真を先に読みこんでおく
+  imgs.forEach(i => { i.loading = 'eager'; });
+  let cur = 0;
+  const set = n => {
+    if (n === cur || n < 0) return;
+    cur = n;
+    imgs.forEach((im, i) => im.classList.toggle('is-on', i === n));
+    steps.forEach((s, i) => s.classList.toggle('is-on', i === n));
+    if (count) count.textContent = String(n + 1).padStart(2, '0');
+  };
+  if (!('IntersectionObserver' in window)) { steps.forEach(s => s.classList.add('is-on')); return; }
+  // スマホは写真が上に留まるので、画面の下のほうに来た場面を「いま」にする
+  const narrow = matchMedia('(max-width: 860px)').matches;
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(steps.indexOf(e.target)); }), { rootMargin: narrow ? '-72% 0px -22% 0px' : '-45% 0px -45% 0px' });
+  steps.forEach(s => io.observe(s));
+})();
