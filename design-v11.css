@@ -130,3 +130,45 @@
 
 /* 活動日誌：狭い画面でカードが枠からはみ出さないように */
 .diary { grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
+
+/* ================================================================
+   v11 後半：ページの切りかえ・写真のフェード・押した手ごたえ・ごあいさつの手紙
+   ================================================================ */
+/* ページを移動するとき、ふわっと切りかえる（対応ブラウザのみ） */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out 0.28s ease both; }
+::view-transition-new(root) { animation: vt-in 0.42s var(--ease-out, ease) both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+
+/* 写真：読みこみ中は淡く、読めたらふわっと */
+img.img-wait { opacity: 0; transform: scale(1.015); transition: opacity 0.8s ease, transform 1.2s var(--ease-out, ease); }
+img.img-wait.img-in { opacity: 1; transform: none; }
+
+/* ボタンを押したときの手ごたえ */
+.btn-primary:active, .btn-ghost:active, .qz-choice:active:not(:disabled), .qz-level:active, .dg-opt:active { transform: scale(0.97); transition-duration: 0.08s; }
+
+/* 協賛ページ：メンバーからのごあいさつ（便せん風） */
+.sp-letter-wrap { padding-top: clamp(40px, 6vw, 72px); padding-bottom: 0; }
+.sp-letter {
+  position: relative; max-width: 720px; margin: 0 auto; padding: clamp(28px, 5vw, 56px) clamp(22px, 5vw, 60px);
+  background:
+    repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.1em - 1px), rgba(200, 169, 110, 0.22) calc(2.1em - 1px), rgba(200, 169, 110, 0.22) 2.1em),
+    var(--color-surface);
+  background-position: 0 clamp(28px, 5vw, 56px);
+  border: 1px solid var(--color-border); border-radius: var(--radius);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 24px 48px -32px rgba(80, 60, 20, 0.35);
+  line-height: 2.1; font-size: 16px;
+}
+.sp-letter::before { content: ''; position: absolute; inset: 10px; border: 1px solid rgba(200, 169, 110, 0.35); border-radius: max(0px, calc(var(--radius) - 6px)); pointer-events: none; }
+.sp-letter p { margin: 0; word-break: normal; line-break: strict; text-wrap: wrap; }
+.sp-letter p + p { margin-top: 0; text-indent: 1em; }
+.sp-letter .sp-letter-to { font-family: var(--font-display); font-size: 18px; color: var(--color-accent-deep); text-indent: 0; font-size: 16px; }
+.sp-letter .sp-letter-from { text-indent: 0; margin-top: 2.1em; display: flex; justify-content: flex-end; align-items: center; gap: 10px; font-family: var(--font-display); }
+.sp-letter-from [data-logomark] { display: inline-block; width: 30px; height: 30px; }
+.sp-letter-from [data-logomark] svg { width: 100%; height: 100%; }
+:root[data-theme="dark"] .sp-letter { box-shadow: 0 24px 48px -32px rgba(0, 0, 0, 0.8); }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}

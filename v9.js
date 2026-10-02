@@ -97,3 +97,15 @@
     if (CONTEST[c.id] && num && !num.querySelector('.card-ico')) num.insertAdjacentHTML('beforeend', svg(CONTEST[c.id]));
   });
 })();
+
+/* 写真：読みこめたら、ふわっと表示する */
+(function() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if (img.complete && img.naturalWidth) return;
+    img.classList.add('img-wait');
+    const done = () => img.classList.add('img-in');
+    img.addEventListener('load', done, { once: true });
+    img.addEventListener('error', done, { once: true });
+  });
+})();
