@@ -1,0 +1,132 @@
+/* ================================================================
+   DESIGN v11 — 数字の形・スマホで途切れない文字・クイズの進化
+   ================================================================ */
+
+/* ---- 数字をふつうの形に ----
+   Cormorant Garamond は数字がクラシックな形（1 が I、0 が o に見える）なので、
+   サイト全体で「ふつうの高さの数字（lining figures）」を使う。 */
+*, *::before, *::after { font-feature-settings: 'palt' 1, 'lnum' 1; }
+
+/* ---- 小さいスマホ（〜400px）で文字が途切れないように ---- */
+@media (max-width: 400px) {
+  .keep-phrase { white-space: normal; }
+  .section-title { font-size: clamp(27px, 8.6vw, 36px); }
+  .page-en .en-hero .section-title { font-size: clamp(34px, 11vw, 44px); }
+  .contest h2 { font-size: clamp(22px, 7.4vw, 28px); }
+  .contest .en { letter-spacing: 0.12em; }
+  .live-value { font-size: clamp(20px, 7.6vw, 28px); overflow-wrap: anywhere; }
+  .live-label, .live-note, .live-side { overflow-wrap: anywhere; }
+  .live-value small { display: block; margin: 6px 0 0; white-space: nowrap; }
+  .dynamic-title { font-size: clamp(26px, 8.4vw, 34px); }
+  .numbers { grid-template-columns: 1fr; }
+  .number { border-right: 0; border-bottom: 1px solid var(--color-border); }
+  .number:last-child { border-bottom: 0; }
+  .gallery-item figcaption { flex-wrap: wrap; gap: 2px 8px; }
+  .value::after { font-size: 110px; }
+  .hero-wordmark { letter-spacing: 0.1em; }
+  .fx-hook-q { font-size: 24px; }
+  .join h2 { font-size: 27px; }
+  .dg-box h2 { font-size: 21px; }
+  .qz-amount output { font-size: 36px; min-width: 52px; }
+  .footer-giant { font-size: 19vw; }
+  /* ナビ：右端のメニューボタンが画面からはみ出さないように */
+  nav { padding-left: 16px !important; padding-right: 12px !important; }
+  .nav-logo.wordmark { letter-spacing: 0.16em; }
+  .nav-right { gap: 6px; }
+}
+
+/* ================================================================
+   億万長者クイズ v2：進み具合・おたすけ・演出・ふり返り
+   ================================================================ */
+.qz-status { flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.qz-dots { display: inline-flex; gap: 5px; margin-left: 8px; vertical-align: middle; }
+.qz-dots i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--color-accent); }
+.qz-dots i.done { background: var(--color-accent); }
+.qz-dots i.now { background: var(--color-accent); box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.25); }
+
+/* 賭ける枚数のプレビュー */
+.qz-preview { font-size: 14px; color: var(--color-muted); min-height: 1.6em; margin-top: -6px; }
+.qz-max { display: block; margin-top: 4px; font-size: 13px; font-weight: 700; color: var(--color-accent-deep); font-variant-numeric: tabular-nums; }
+
+/* おたすけ */
+.qz-life { display: flex; flex-wrap: wrap; gap: 10px; }
+.qz-life button {
+  font: inherit; cursor: pointer; display: inline-flex; align-items: baseline; gap: 8px;
+  padding: 9px 16px; border-radius: 999px; border: 1px dashed var(--color-accent); background: transparent; color: var(--color-text);
+  transition: background 0.25s, transform 0.3s var(--ease-out);
+}
+.qz-life button b { font-size: 14px; }
+.qz-life button small { font-size: 12px; color: var(--color-muted); }
+.qz-life button:hover:not(:disabled) { background: rgba(200, 169, 110, 0.12); transform: translateY(-2px); }
+.qz-life button:disabled { cursor: default; opacity: 0.45; border-style: solid; }
+.qz-choice.is-gone { opacity: 0.22; text-decoration: line-through; }
+.qz-life-intro { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.qz-life-intro li { padding: 12px 14px; border-radius: var(--radius); border: 1px dashed var(--color-accent); font-size: 14px; color: var(--color-muted); line-height: 1.6; }
+.qz-life-intro b { display: block; color: var(--color-text); font-size: 15px; }
+@media (max-width: 480px) { .qz-life-intro { grid-template-columns: 1fr; } }
+.qz-small { font-size: 13px; color: var(--color-muted); line-height: 1.8; }
+.qz-sofar { margin-left: 12px; padding: 2px 10px; border-radius: 999px; background: rgba(200, 169, 110, 0.15); font-size: 12px; letter-spacing: 0.04em; }
+
+/* 演出：まちがえたらカードが揺れる・増えたチップがはずむ */
+.qz-shake { animation: qz-shake 0.45s ease both; }
+@keyframes qz-shake { 20% { transform: translateX(-7px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(2px); } }
+.qz-chips i.is-new { animation: qz-drop 0.55s var(--ease-out) both; }
+@keyframes qz-drop { from { opacity: 0; transform: translateY(-14px) scale(0.6); } to { opacity: 1; transform: none; } }
+.qz-choice.is-right { animation: qz-glow 0.9s ease both; }
+@keyframes qz-glow { 0% { box-shadow: 0 0 0 0 rgba(60, 138, 55, 0.45); } 100% { box-shadow: 0 0 0 12px rgba(60, 138, 55, 0); } }
+.qz-confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; }
+
+/* 最終結果：チップの推移とふり返り */
+.qz-chart { margin: 4px 0 0; width: 100%; max-width: 440px; }
+.qz-chart svg { width: 100%; height: auto; overflow: visible; }
+.qz-chart-base { stroke: var(--color-border); stroke-dasharray: 4 4; }
+.qz-chart-line { fill: none; stroke: var(--color-accent); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 900; stroke-dashoffset: 900; animation: qz-draw 1.6s var(--ease-out) 0.3s forwards; }
+@keyframes qz-draw { to { stroke-dashoffset: 0; } }
+.qz-chart circle { fill: var(--color-bg); stroke: var(--color-accent-deep); stroke-width: 2; }
+.qz-chart text { font-family: 'Cormorant Garamond', serif; font-size: 14px; fill: var(--color-text); text-anchor: middle; }
+.qz-chart figcaption { font-size: 12px; color: var(--color-muted); margin-top: 4px; }
+.qz-review { width: 100%; max-width: 560px; text-align: left; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); }
+.qz-review summary { cursor: pointer; padding: 14px 18px; font-weight: 700; font-size: 14px; }
+.qz-review ol { list-style: none; margin: 0; padding: 0 18px 14px; display: grid; gap: 12px; }
+.qz-review li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; font-size: 14px; line-height: 1.7; }
+.qz-review li > span { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; background: #3c8a37; }
+.qz-review li.ng > span { background: #c0392b; }
+.qz-review small { display: block; color: var(--color-muted); font-size: 12px; }
+.qz-status b.qz-count, .qz-big .qz-count { font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  .qz-shake, .qz-chips i.is-new, .qz-choice.is-right { animation: none; }
+  .qz-chart-line { animation: none; stroke-dashoffset: 0; }
+}
+.qz-q .qz-feedback p.qz-answer:not(.ng) { color: var(--color-text); font-size: 16px; margin-top: -6px; }
+.qz-feedback .qz-answer b { color: #2f7a32; }
+:root[data-theme="dark"] .qz-feedback .qz-answer b { color: #7fd889; }
+
+/* ================================================================
+   ブランドの細部：見出しラベルの星・紙の質感・写真の額縁
+   ================================================================ */
+/* 見出しラベルの線の先に、ロゴの星（4 本の光）をひとつ */
+.section-label::before {
+  width: 34px; height: 9px; flex: none;
+  -webkit-mask: linear-gradient(#000, #000) left center / 24px 1px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 0C5.4 3.6 6.4 4.6 10 5 6.4 5.4 5.4 6.4 5 10 4.6 6.4 3.6 5.4 0 5 3.6 4.6 4.6 3.6 5 0Z'/%3E%3C/svg%3E") right center / 9px 9px no-repeat;
+          mask: linear-gradient(#000, #000) left center / 24px 1px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 0C5.4 3.6 6.4 4.6 10 5 6.4 5.4 5.4 6.4 5 10 4.6 6.4 3.6 5.4 0 5 3.6 4.6 4.6 3.6 5 0Z'/%3E%3C/svg%3E") right center / 9px 9px no-repeat;
+  background: currentColor;
+}
+
+/* 紙のようなかすかな質感（ライトモードだけ） */
+:root:not([data-theme="dark"]) body::after {
+  content: ''; position: fixed; inset: 0; z-index: 9000; pointer-events: none; opacity: 0.05; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media print { body::after { display: none; } }
+
+/* 写真：金の細い内枠で、額に入れたように */
+.fx-photos figure, .fx-record-photo, .gallery-item { position: relative; }
+.fx-photos figure::after, .fx-record-photo::after, .gallery-item::after {
+  content: ''; position: absolute; inset: 8px; pointer-events: none; border-radius: max(0px, calc(var(--radius) - 6px));
+  border: 1px solid rgba(255, 240, 205, 0.55); opacity: 0; transition: opacity 0.5s var(--ease-out), inset 0.5s var(--ease-out);
+}
+.fx-photos figure:hover::after, .fx-record-photo:hover::after, .gallery-item:hover::after { opacity: 1; inset: 12px; }
+
+/* 活動日誌：狭い画面でカードが枠からはみ出さないように */
+.diary { grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
