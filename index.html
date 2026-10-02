@@ -22,23 +22,24 @@
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="base.css?v=20261002x" />
-  <link rel="stylesheet" href="loader.css?v=20261002x" />
-  <link rel="stylesheet" href="nav.css?v=20261002x" />
-  <link rel="stylesheet" href="hero.css?v=20261002x" />
-  <link rel="stylesheet" href="sections.css?v=20261002x" />
-  <link rel="stylesheet" href="pages.css?v=20261002x" />
-  <link rel="stylesheet" href="design.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v4.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v5.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v6.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v7.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v8.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v9.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v10.css?v=20261002x" />
-  <link rel="stylesheet" href="design-v11.css?v=20261002x" />
-  <link rel="stylesheet" href="readable.css?v=20261002x" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="base.css?v=20261003e" />
+  <link rel="stylesheet" href="loader.css?v=20261003e" />
+  <link rel="stylesheet" href="nav.css?v=20261003e" />
+  <link rel="stylesheet" href="hero.css?v=20261003e" />
+  <link rel="stylesheet" href="sections.css?v=20261003e" />
+  <link rel="stylesheet" href="pages.css?v=20261003e" />
+  <link rel="stylesheet" href="design.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v4.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v5.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v6.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v7.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v8.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v9.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v10.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v11.css?v=20261003e" />
+  <link rel="stylesheet" href="readable.css?v=20261003e" />
+  <link rel="stylesheet" href="design-v12.css?v=20261003e" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
@@ -81,7 +82,7 @@
   <!-- LOADER -->
   <div id="loader">
     <div id="loader-brand">
-      <div id="loader-brand-logo" class="wordmark has-emblem"><div class="loader-emblem emblem-draw" data-emblem></div><span class="loader-word">AZA<span>KEI</span></span></div>
+      <div id="loader-brand-logo" class="wordmark has-emblem"><div class="loader-emblem emblem-draw" data-emblem></div><span class="loader-word">AZA<span>KEI</span></span><span class="loader-seal" aria-hidden="true">麻経</span></div>
       <div id="loader-brand-line"></div>
       <div id="loader-brand-sub">Est. 2025 · Azabu</div>
     </div>
@@ -240,52 +241,51 @@
       <div class="section-head reveal">
         <p class="section-label">Overview</p>
         <h2 class="section-title"><span class="keep-phrase">AZAKEI の</span><span class="keep-phrase"><em>全体像</em></span></h2>
-        <p class="lead">ひとつの同好会から、いくつもの活動が枝分かれしています。気になるところから覗いてみてください。</p>
+        <p class="lead">黒板に描いた、私たちの地図。ひとつの同好会から、いくつもの活動が枝分かれしています。気になるところから覗いてみてください。</p>
       </div>
-      <div class="hub reveal">
-        <div class="hub-core">
-          <span class="hub-mark" data-logomark aria-hidden="true"></span>
-          <span class="wordmark">AZA<span>KEI</span></span>
-          <small>麻経 · Azabu Economics</small>
+      <div class="mm-board" data-mindmap>
+        <svg class="mm-lines" aria-hidden="true"></svg>
+        <div class="mm-core" data-mm="core">
+          <span class="mm-core-mark" data-logomark aria-hidden="true"></span>
+          <span class="mm-core-name">AZAKEI</span>
+          <span class="mm-core-ja">麻経</span>
         </div>
-        <div class="hub-branches">
-          <a class="link-card" href="contests.html">
-            <p class="num">01</p>
-            <h3>各種コンテスト</h3>
-            <p>学校の外で、自分たちの力を試す。</p>
-            <div class="sub"><span class="chip">ビジネスコンテスト</span><span class="chip">日経ストックリーグ</span><span class="chip">起業家オーディション</span><span class="chip">論文作成</span></div>
-          </a>
-          <a class="link-card" href="festival.html">
-            <p class="num">02</p>
-            <h3>文化祭「麻布経済展」</h3>
-            <p>経済とエンタメが交差する、体験型展示。</p>
-            <span class="more">展示を見る →</span>
-          </a>
-          <a class="link-card" href="activities.html">
-            <p class="num">03</p>
-            <h3>活動風景・何気ない日常</h3>
-            <p>ミーティングから放課後の雑談まで。</p>
-            <span class="more">写真を見る →</span>
-          </a>
-          <a class="link-card" href="events.html">
-            <p class="num">04</p>
-            <h3>日程・イベント</h3>
-            <p>これからの予定と、これまでの歩み。</p>
-            <span class="more">日程を見る →</span>
-          </a>
-          <a class="link-card" href="sponsor.html">
-            <p class="num">05</p>
-            <h3>協賛・ご協力の募集</h3>
-            <p>企業・団体の皆さまと一緒に、経済の面白さを届けたい。</p>
-            <span class="more">募集項目を見る →</span>
-          </a>
-          <a class="link-card" href="about.html#vision">
-            <p class="num">06</p>
-            <h3>今後の展望</h3>
-            <p>AZAKEI がこれから目指していくこと。</p>
-            <span class="more">展望を読む →</span>
-          </a>
+        <div class="mm-branch mm-b1">
+          <a class="mm-node" href="contests.html" data-mm="b1"><small>Challenge</small>挑む</a>
+          <ul class="mm-leaves">
+            <li><a href="contests.html#business" data-mm-parent="b1">ビジネスコンテスト</a></li>
+            <li><a href="contests.html#stockleague" data-mm-parent="b1">日経ストックリーグ</a></li>
+            <li><a href="contests.html#audition" data-mm-parent="b1">起業家オーディション</a></li>
+            <li><a href="contests.html#paper" data-mm-parent="b1">論文作成</a></li>
+          </ul>
         </div>
+        <div class="mm-branch mm-b2">
+          <a class="mm-node" href="festival.html" data-mm="b2"><small>Festival</small>魅せる</a>
+          <ul class="mm-leaves">
+            <li><a href="festival.html" data-mm-parent="b2">文化祭「麻布経済展」</a></li>
+            <li><a href="quiz.html" data-mm-parent="b2">億万長者クイズ</a></li>
+            <li><a href="diagnosis.html" data-mm-parent="b2">エコノミスト診断</a></li>
+            <li><a href="vote.html" data-mm-parent="b2">文化祭投票</a></li>
+          </ul>
+        </div>
+        <div class="mm-branch mm-b3">
+          <a class="mm-node" href="about.html" data-mm="b3"><small>Know</small>知る</a>
+          <ul class="mm-leaves">
+            <li><a href="about.html" data-mm-parent="b3">麻経とは</a></li>
+            <li><a href="activities.html" data-mm-parent="b3">活動風景・日常</a></li>
+            <li><a href="events.html" data-mm-parent="b3">日程・イベント</a></li>
+            <li><a href="about.html#vision" data-mm-parent="b3">今後の展望</a></li>
+          </ul>
+        </div>
+        <div class="mm-branch mm-b4">
+          <a class="mm-node" href="sponsor.html" data-mm="b4"><small>Connect</small>つながる</a>
+          <ul class="mm-leaves">
+            <li><a href="sponsor.html" data-mm-parent="b4">協賛・ご協力</a></li>
+            <li><a href="contact.html" data-mm-parent="b4">お問い合わせ</a></li>
+            <li><a href="en.html" data-mm-parent="b4">English</a></li>
+          </ul>
+        </div>
+        <p class="mm-chalk-note" aria-hidden="true">世の中の仕組みを理解し、自らで仕組みを創り出す。</p>
       </div>
     </div>
   </section>
@@ -429,17 +429,18 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261002x"></script>
-  <script src="layout.js?v=20261002x"></script>
-  <script src="brand.js?v=20261002x"></script>
-  <script src="live.js?v=20261002x"></script>
-  <script src="render.js?v=20261002x"></script>
-  <script src="loader.js?v=20261002x"></script>
-  <script src="nav.js?v=20261002x"></script>
-  <script src="hero.js?v=20261002x"></script>
-  <script src="countdown.js?v=20261002x"></script>
-  <script src="reveal.js?v=20261002x"></script>
-  <script src="fx.js?v=20261002x"></script>
-  <script src="v9.js?v=20261002x"></script>
+  <script src="content.js?v=20261003e"></script>
+  <script src="layout.js?v=20261003e"></script>
+  <script src="brand.js?v=20261003e"></script>
+  <script src="live.js?v=20261003e"></script>
+  <script src="render.js?v=20261003e"></script>
+  <script src="loader.js?v=20261003e"></script>
+  <script src="nav.js?v=20261003e"></script>
+  <script src="hero.js?v=20261003e"></script>
+  <script src="countdown.js?v=20261003e"></script>
+  <script src="reveal.js?v=20261003e"></script>
+  <script src="fx.js?v=20261003e"></script>
+  <script src="v9.js?v=20261003e"></script>
+  <script src="v12.js?v=20261003e"></script>
 </body>
 </html>

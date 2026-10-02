@@ -1,0 +1,228 @@
+/* ================================================================
+   DESIGN v12 — 和紙と墨の配色・黒板の地図・大波の柄・写真の見出し
+   （readable.css のあとに読みこむ）
+   ================================================================ */
+
+/* ---- 配色：黄みの強いベージュ 2 色 → 和紙のような白と、墨の黒 ----
+   半透明の茶色だった文字を、はっきりした墨色に。金は少し深く落ち着かせる。 */
+:root:not([data-theme="dark"]) {
+  --color-bg:      #f4f3ef;
+  --color-surface: #fbfbf9;
+  --color-border:  rgba(20, 22, 28, 0.09);
+  --color-text:    #17191e;
+  --color-muted:   #575b63;
+  --color-accent:  #b8955a;
+  --color-accent2: #e4d7bd;
+  --color-accent-deep: #7a5a26;
+  --nav-bg:        #fbfbf9;
+  --nav-line:      rgba(20, 22, 28, 0.08);
+  --ink:           #17191e;
+  --ink-soft:      #575b63;
+  --sumi:          #121519;
+}
+:root[data-theme="dark"] { --sumi: #0b0d10; }
+/* 前の版で足した紙のざらつきは、かえって画面がくすむのでやめる */
+:root:not([data-theme="dark"]) body::after { content: none; }
+
+/* 濃い帯は茶色ではなく墨色に（ページにメリハリをつける） */
+:root:not([data-theme="dark"]) .cta-band { background: var(--sumi); }
+
+/* GDP の帯：墨色の「相場の電光掲示板」に */
+:root:not([data-theme="dark"]) .live-econ { background: var(--sumi); border-color: transparent; color: #eceae4; }
+:root:not([data-theme="dark"]) .live-econ .live-label,
+:root:not([data-theme="dark"]) .live-econ .live-note,
+:root:not([data-theme="dark"]) .live-econ .live-side,
+:root:not([data-theme="dark"]) .live-econ .live-value small { color: rgba(236, 234, 228, 0.68); }
+:root:not([data-theme="dark"]) .live-econ .live-value { color: #f3e3bd; }
+:root:not([data-theme="dark"]) .live-econ .live-side b { color: #d9bb7e; }
+:root:not([data-theme="dark"]) .live-econ .live-tag { color: #ff8a7a; border-color: rgba(255, 138, 122, 0.4); }
+.live-value small { display: block; margin: 6px 0 0; white-space: nowrap; }
+
+/* ================================================================
+   ① 黒板のマインドマップ（トップの「全体像」）
+   ================================================================ */
+.mm-board {
+  --chalk: rgba(246, 244, 236, 0.92);
+  --chalk-soft: rgba(246, 244, 236, 0.62);
+  --chalk-gold: #f1d48f;
+  position: relative; margin-top: clamp(28px, 4vw, 48px);
+  display: grid; grid-template-columns: 1fr minmax(180px, 0.8fr) 1fr; grid-template-areas: "b1 . b2" "b1 core b2" "b3 core b4" "b3 . b4";
+  gap: clamp(20px, 3vw, 40px) clamp(24px, 4vw, 64px);
+  padding: clamp(36px, 5vw, 72px) clamp(22px, 4vw, 64px) clamp(56px, 6vw, 80px);
+  border-radius: calc(var(--radius) + 4px);
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.07), transparent 60%),
+    radial-gradient(80% 60% at 80% 90%, rgba(0, 0, 0, 0.25), transparent 70%),
+    #1f3a2e;
+  box-shadow: inset 0 0 0 10px #5b4127, inset 0 0 0 11px rgba(0, 0, 0, 0.35), inset 0 0 60px rgba(0, 0, 0, 0.45), 0 30px 60px -30px rgba(0, 0, 0, 0.45);
+  color: var(--chalk); overflow: hidden; isolation: isolate;
+}
+/* 黒板の消し跡 */
+.mm-board::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+  background:
+    radial-gradient(40% 18% at 22% 70%, rgba(255, 255, 255, 0.05), transparent 70%),
+    radial-gradient(35% 14% at 70% 30%, rgba(255, 255, 255, 0.045), transparent 70%),
+    radial-gradient(30% 12% at 55% 85%, rgba(255, 255, 255, 0.04), transparent 70%);
+}
+.mm-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+.mm-lines path { fill: none; stroke: var(--chalk-soft); stroke-width: 2.2; stroke-linecap: round; filter: url(#mm-chalk); }
+.mm-lines path.mm-main { stroke: var(--chalk); stroke-width: 3; }
+.mm-board.is-drawn .mm-lines path { animation: mm-draw 1.1s cubic-bezier(.6, .1, .3, 1) both; animation-delay: var(--d, 0s); }
+@keyframes mm-draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+.mm-board:not(.is-drawn) .mm-lines path { stroke-dashoffset: var(--len); }
+
+.mm-core { grid-area: core; align-self: center; justify-self: center; position: relative; z-index: 1; display: grid; justify-items: center; gap: 6px; padding: 26px 30px; text-align: center; }
+.mm-core::before { content: ''; position: absolute; inset: 0; border: 2.5px solid var(--chalk); border-radius: 48% 52% 50% 50% / 55% 48% 52% 45%; filter: url(#mm-chalk); }
+.mm-core-mark { width: 44px; height: 44px; }
+.mm-core-mark svg { width: 100%; height: 100%; }
+.mm-core-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 36px); letter-spacing: 0.22em; padding-left: 0.22em; color: #fff; line-height: 1; }
+.mm-core-ja { font-family: 'Klee One', 'Shippori Mincho', serif; font-size: 15px; letter-spacing: 0.3em; color: var(--chalk-gold); }
+
+.mm-branch { position: relative; z-index: 1; display: grid; gap: 14px; align-content: center; }
+.mm-b1 { grid-area: b1; } .mm-b2 { grid-area: b2; } .mm-b3 { grid-area: b3; } .mm-b4 { grid-area: b4; }
+.mm-b2, .mm-b4 { justify-items: end; text-align: right; }
+.mm-node {
+  justify-self: start; display: inline-grid; gap: 2px; padding: 8px 18px 10px; position: relative;
+  font-family: 'Klee One', 'Shippori Mincho', serif; font-weight: 600; font-size: clamp(22px, 2.4vw, 28px); color: #fff; text-decoration: none; line-height: 1.2;
+  transition: transform 0.35s var(--ease-out), color 0.25s;
+}
+.mm-b2 .mm-node, .mm-b4 .mm-node { justify-self: end; }
+.mm-node small { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--chalk-gold); }
+.mm-node::after { content: ''; position: absolute; left: 10px; right: 10px; bottom: 2px; height: 2px; background: var(--chalk-gold); opacity: 0.8; border-radius: 2px; filter: url(#mm-chalk); transform: scaleX(0.35); transform-origin: left; transition: transform 0.4s var(--ease-out); }
+.mm-b2 .mm-node::after, .mm-b4 .mm-node::after { transform-origin: right; }
+.mm-node:hover { transform: rotate(-2deg) scale(1.05); color: var(--chalk-gold); }
+.mm-node:hover::after { transform: scaleX(1); }
+.mm-leaves { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.mm-b2 .mm-leaves, .mm-b4 .mm-leaves { justify-content: flex-end; }
+.mm-leaves a {
+  position: relative; z-index: 1; background: #1f3a2e;
+  display: inline-block; padding: 5px 12px; font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: var(--chalk); text-decoration: none;
+  border: 1.5px dashed rgba(246, 244, 236, 0.35); border-radius: 999px; transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+.mm-leaves a:hover, .mm-leaves a:focus-visible { border-style: solid; border-color: var(--chalk-gold); color: #fff; background: rgba(241, 212, 143, 0.12); }
+.mm-chalk-note { position: absolute; left: 0; right: 0; bottom: 18px; z-index: 1; text-align: center; font-family: 'Klee One', serif; font-size: 13px; color: var(--chalk-soft); letter-spacing: 0.1em; }
+/* 黒板の粉受け */
+.mm-board .mm-tray { position: absolute; left: 10px; right: 10px; bottom: 10px; height: 8px; background: linear-gradient(#6b4c2e, #4a3320); }
+
+@media (max-width: 860px) {
+  .mm-board { grid-template-columns: 1fr; grid-template-areas: "core" "b1" "b2" "b3" "b4"; gap: 34px; padding-bottom: 76px; }
+  .mm-b2, .mm-b4 { justify-items: start; text-align: left; }
+  .mm-b2 .mm-node, .mm-b4 .mm-node { justify-self: start; }
+  .mm-b2 .mm-leaves, .mm-b4 .mm-leaves { justify-content: flex-start; }
+  .mm-branch { padding-left: 28px; }
+  .mm-leaves a { font-size: 14px; }
+  .mm-chalk-note { padding: 0 24px; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-board .mm-lines path { animation: none !important; stroke-dashoffset: 0 !important; }
+}
+
+/* ================================================================
+   ② 「麻経の大波」の柄
+   ================================================================ */
+:root {
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24'%3E%3Cg fill='none' stroke='%23b8955a' stroke-width='0.9'%3E%3Cpath d='M0 24a24 24 0 0 1 48 0M6 24a18 18 0 0 1 36 0M12 24a12 12 0 0 1 24 0M18 24a6 6 0 0 1 12 0'/%3E%3Cpath d='M-24 12a24 24 0 0 1 48 0M-18 12a18 18 0 0 1 36 0M-12 12a12 12 0 0 1 24 0M-6 12a6 6 0 0 1 12 0M24 12a24 24 0 0 1 48 0M30 12a18 18 0 0 1 36 0M36 12a12 12 0 0 1 24 0M42 12a6 6 0 0 1 12 0'/%3E%3C/g%3E%3C/svg%3E");
+}
+.wave-band {
+  height: 48px; pointer-events: none;
+  background: var(--wave) repeat-x bottom left / 48px 24px;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent), linear-gradient(to top, #000, transparent);
+  -webkit-mask-composite: source-in; mask: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent) intersect, linear-gradient(to top, #000 30%, transparent);
+  opacity: 0.55;
+}
+.page-hero > .wave-band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; opacity: 0.45; }
+.wave-band.is-footer { margin-top: clamp(40px, 6vw, 80px); }
+/* 濃い帯の中にも、うっすら大波 */
+.cta-band { position: relative; isolation: isolate; }
+.cta-band::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.16;
+  background: var(--wave) repeat 0 0 / 64px 32px;
+  -webkit-mask: radial-gradient(70% 90% at 50% 100%, #000, transparent 75%); mask: radial-gradient(70% 90% at 50% 100%, #000, transparent 75%);
+}
+/* カードの角に、小さな大波 */
+.link-card, .service-card, .fx-rule, .diary-item { position: relative; }
+.link-card::after, .fx-rule::after, .diary-item::after {
+  content: ''; position: absolute; right: 0; bottom: 0; width: 72px; height: 36px; pointer-events: none; opacity: 0; transition: opacity 0.5s var(--ease-out);
+  background: var(--wave) repeat 0 0 / 24px 12px;
+  -webkit-mask: radial-gradient(100% 100% at 100% 100%, #000, transparent 70%); mask: radial-gradient(100% 100% at 100% 100%, #000, transparent 70%);
+}
+.link-card:hover::after, .fx-rule:hover::after, .diary-item:hover::after { opacity: 0.7; }
+
+/* ================================================================
+   ③ 幕とローディングに「麻経」の印を押す
+   ================================================================ */
+.curtain { background: var(--sumi, #121519); }
+.curtain-inner { display: inline-flex; align-items: center; gap: 0.5em; }
+.curtain-seal, .loader-seal {
+  display: inline-block; writing-mode: vertical-rl; text-orientation: upright;
+  font-family: 'Shippori Mincho', serif; font-weight: 800; line-height: 1; letter-spacing: 0.08em;
+  padding: 0.38em 0.3em; border-radius: 0.28em; color: #fff6e2;
+  background: linear-gradient(160deg, #c8a96e, #7d6131); box-shadow: 0 0 0 1px rgba(255, 240, 205, 0.5) inset;
+  opacity: 0; transform: scale(1.7) rotate(-10deg);
+}
+.curtain-seal { font-size: 0.42em; }
+.curtain.is-in .curtain-seal, .curtain.is-out .curtain-seal { animation: seal-press 0.5s cubic-bezier(.2, 1.4, .4, 1) 0.28s forwards; }
+.curtain.is-out .curtain-seal { animation-delay: 0s; animation-duration: 0.01s; }
+.loader-seal { font-size: 0.34em; margin-left: 0.5em; vertical-align: middle; }
+#loader-brand.show .loader-seal { animation: seal-press 0.6s cubic-bezier(.2, 1.4, .4, 1) 0.9s forwards; }
+
+/* ================================================================
+   ④ 下層ページの見出しに、本物の写真
+   ================================================================ */
+.page-hero > .container { position: relative; z-index: 1; }
+.ph-photo { position: absolute; top: 0; right: 0; bottom: 0; width: 56%; z-index: 0; pointer-events: none; overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent 0, #000 42%); mask: linear-gradient(90deg, transparent 0, #000 42%); }
+.ph-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.55) sepia(0.22) contrast(1.02) brightness(1.04); opacity: 0.5; transform: scale(1.06); animation: ph-drift 14s ease-out forwards; }
+@keyframes ph-drift { to { transform: scale(1); } }
+:root[data-theme="dark"] .ph-photo img { filter: grayscale(0.4) brightness(0.7); opacity: 0.42; }
+.page-hero.has-photo .ph-star { opacity: 0.5; }
+@media (max-width: 760px) {
+  .ph-photo { width: 100%; -webkit-mask: linear-gradient(to top, transparent 0, #000 70%); mask: linear-gradient(to top, transparent 0, #000 70%); }
+  .ph-photo img { opacity: 0.2; }
+}
+@media (prefers-reduced-motion: reduce) { .ph-photo img { animation: none; transform: none; } }
+
+/* ================================================================
+   ⑥ 来場者のグラフ（文化祭ページ）
+   ================================================================ */
+.visitors { margin-top: clamp(28px, 4vw, 44px); padding: clamp(22px, 3vw, 32px); border-radius: var(--radius); background: var(--color-surface); border: 1px solid var(--color-border); }
+.visitors h3 { font-family: var(--font-display); font-weight: 500; font-size: clamp(20px, 2.2vw, 24px); margin: 4px 0 18px; }
+.vz-total { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 64px); line-height: 1; color: var(--color-accent-deep); font-variant-numeric: tabular-nums; }
+.vz-total small { font-family: var(--font-body); font-size: 0.3em; color: var(--color-muted); margin-left: 6px; }
+.vz-bars { display: grid; gap: 12px; margin-top: 20px; }
+.vz-row { display: grid; grid-template-columns: 7.5em 1fr 5.5em; gap: 12px; align-items: center; font-size: 14px; }
+.vz-row span:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+.vz-track { height: 14px; border-radius: 999px; background: color-mix(in srgb, var(--color-accent) 14%, transparent); overflow: hidden; }
+.vz-fill { height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--color-accent), var(--color-accent-deep)); transition: width 1.4s cubic-bezier(.2, .8, .2, 1); }
+.vz-row.is-peak .vz-fill { background: linear-gradient(90deg, #4f9a49, #2f6b2b); }
+.visitors.is-in .vz-fill { width: var(--w); }
+.vz-note { margin-top: 14px; font-size: 12.5px; color: var(--color-muted); line-height: 1.7; }
+@media (max-width: 480px) { .vz-row { grid-template-columns: 6em 1fr 4.8em; gap: 8px; font-size: 13px; } }
+
+/* ================================================================
+   ⑦ マウスで触ったときの手ざわり（パソコンだけ）
+   ================================================================ */
+.spot { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 0.4s;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(200, 169, 110, 0.16), transparent 65%); }
+.spot::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+  background: radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(200, 169, 110, 0.9), transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.has-spot:hover > .spot { opacity: 1; }
+.tilt { transition: transform 0.5s var(--ease-out); transform-style: preserve-3d; will-change: transform; }
+
+@media print { .wave-band, .ph-photo, .spot { display: none !important; } }
+
+/* 修正：グラフの棒・合計の数字・見出しの文と写真の重なり */
+.vz-fill { display: block; }
+.visitors p.vz-total { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 64px); line-height: 1; color: var(--color-accent-deep); margin: 0; }
+.visitors p.vz-note { font-size: 12.5px; margin: 14px 0 0; }
+.visitors h3 { color: var(--color-text); }
+@media (min-width: 761px) { .page-hero.has-photo .page-hero-lead { max-width: min(560px, 46%); } }
+/* フッター：狭いスマホでロゴと「麻経」がはみ出さないように */
+.footer-grid > * { min-width: 0; }
+@media (max-width: 400px) {
+  .footer-brand { flex-wrap: wrap; }
+  .footer-wordmark { font-size: 26px; gap: 8px; }
+  .footer-kanji { padding-left: 8px; }
+}
