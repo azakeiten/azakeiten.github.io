@@ -174,3 +174,94 @@
   // 点を押したら、幕を出さずにその場所へ
   nav.addEventListener('click', e => { e.stopPropagation(); }, true);
 })();
+
+/* ================================================================
+   v13 — カウントダウン・伸びる年表・雑誌のような写真・次のページへ
+   ================================================================ */
+(function() {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const page = location.pathname.split('/').pop() || 'index.html';
+
+  /* ---- 文化祭までのカウントダウン ---- */
+  const cd = document.querySelector('[data-countdown]');
+  if (cd) {
+    const target = new Date(cd.dataset.countdown).getTime();
+    cd.innerHTML = `
+      <div class="cd-head"><p>Next Festival</p><h2>${cd.dataset.title}</h2></div>
+      <div class="cd-digits" role="timer" aria-live="off">
+        <div class="cd-unit"><b data-u="d">0</b><small>日</small></div>
+        <div class="cd-unit"><b data-u="h">00</b><small>時間</small></div>
+        <div class="cd-unit"><b data-u="m">00</b><small>分</small></div>
+        <div class="cd-unit"><b data-u="s">00</b><small>秒</small></div>
+      </div>
+      <div class="cd-foot"><span>2027 年 5 月 1 日の開幕日まで（日程は予定です）</span><a href="${cd.dataset.href}">展示の内容を見る →</a></div>`;
+    const els = Object.fromEntries([...cd.querySelectorAll('[data-u]')].map(b => [b.dataset.u, b]));
+    const pad = n => String(n).padStart(2, '0');
+    let timer;
+    const tick = () => {
+      const s = Math.max(0, Math.floor((target - Date.now()) / 1000));
+      const v = { d: String(Math.floor(s / 86400)), h: pad(Math.floor(s % 86400 / 3600)), m: pad(Math.floor(s % 3600 / 60)), s: pad(s % 60) };
+      for (const k in v) if (els[k].textContent !== v[k]) {
+        els[k].textContent = v[k];
+        if (!reduce) { els[k].classList.remove('tick'); void els[k].offsetWidth; els[k].classList.add('tick'); }
+      }
+      if (s === 0) { cd.querySelector('.cd-head p').textContent = 'Now'; clearInterval(timer); }
+    };
+    tick();
+    timer = setInterval(tick, 1000);
+    // 同じ予定の「あと○日」は、カウントダウンと重なるので消す
+    const day = cd.dataset.countdown.slice(0, 10).replace(/-/g, '.');
+    document.querySelectorAll('.event-row:not(.is-past)').forEach(row => {
+      if (row.querySelector('.event-when') && row.querySelector('.event-when').textContent.includes(day)) row.querySelectorAll('.event-countdown:not(.is-now)').forEach(b => b.remove());
+    });
+    cd.setAttribute('aria-label', `${cd.dataset.title}まで、あと ${els.d.textContent} 日`);
+  }
+
+  /* ---- 年表：スクロールに合わせて金の線が伸びる ---- */
+  const tl = document.querySelector('.timeline-wrap');
+  if (tl) {
+    const fill = document.createElement('span');
+    fill.className = 'tl-fill'; fill.setAttribute('aria-hidden', 'true');
+    tl.appendChild(fill);
+    const update = () => {
+      const r = tl.getBoundingClientRect();
+      const line = reduce ? r.height : Math.max(0, Math.min(r.height, innerHeight * 0.6 - r.top));
+      fill.style.setProperty('--tl', line + 'px');
+      tl.querySelectorAll('.event-row').forEach(row => row.classList.toggle('is-lit', row.getBoundingClientRect().top - r.top + 40 <= line));
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+
+  /* ---- 活動風景：雑誌のような並び ---- */
+  if (page === 'activities.html') document.querySelectorAll('.gallery').forEach(g => g.classList.add('is-mag'));
+
+  /* ---- 各ページの最後：写真つきで次のページへ ---- */
+  const ORDER = [
+    ['about.html', '麻経とは', 'AZAKEI の成り立ちと、これから。', 'members.jpg'],
+    ['festival.html', '文化祭「麻布経済展」', '経済とエンタメが交差する、体験型展示。', 'photos/hallway-wave.jpg'],
+    ['contests.html', '各種コンテスト', '学校の外で、自分たちの力を試す。', 'photos/star-bills.jpg'],
+    ['activities.html', '活動風景・日常', 'ミーティングから放課後まで。', 'photos/setup.jpg'],
+    ['events.html', '日程・イベント', 'これからの予定と、これまでの歩み。', 'photos/balloons.jpg'],
+    ['quiz.html', '億万長者クイズ', 'チップを賭けて、億万長者を目指せ。', 'photos/board-millionaire.jpg'],
+    ['diagnosis.html', 'エコノミスト診断', 'YES / NO で、あなたの投資家タイプがわかる。', 'photos/room-diagnosis.jpg'],
+    ['vote.html', '文化祭投票', '来年どんな展示が見たい？', 'photos/hallway-game.jpg'],
+    ['sponsor.html', '協賛のご案内', '企業・団体の皆さまへ。', 'photos/room-paper.jpg'],
+    ['contact.html', 'お問い合わせ', 'フォーム、または Instagram の DM から。', 'photos/star-door.jpg']
+  ];
+  const i = ORDER.findIndex(o => o[0] === page);
+  const foot = document.querySelector('.wave-band.is-footer') || document.getElementById('site-footer');
+  if (i >= 0 && foot) {
+    const [href, ja, desc, img] = ORDER[(i + 1) % ORDER.length];
+    foot.insertAdjacentHTML('beforebegin', `
+      <a class="next-page" href="${href}">
+        <img src="${img}" alt="" loading="lazy" decoding="async">
+        <div class="container">
+          <small>Next page</small>
+          <b>${ja}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7"/></svg></b>
+          <span class="np-desc">${desc}</span>
+        </div>
+      </a>`);
+  }
+})();
