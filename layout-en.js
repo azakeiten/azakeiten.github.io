@@ -69,8 +69,7 @@
       <div>
         <p class="footer-head">Social</p>
         <ul class="footer-list">
-          <li><a href="https://www.instagram.com/azakeichannel/" target="_blank" rel="noopener">Instagram <span>@azakeichannel</span></a></li>
-          <li><a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener">Instagram Vlog <span>@azakei_vlog</span></a></li>
+          <li><a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener">Instagram <span>@azakei_vlog</span></a></li>
           <li><a href="https://x.com/azakeiten" target="_blank" rel="noopener">X <span>@azakeiten</span></a></li>
         </ul>
       </div>

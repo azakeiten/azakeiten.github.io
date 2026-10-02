@@ -133,6 +133,79 @@
     requestAnimationFrame(tick);
   }
 
+  /* ---- ランキング（ranking.js があるときだけ） ---- */
+  const RANK = window.AZAKEI_RANK && window.AZAKEI_RANK.available ? window.AZAKEI_RANK : null;
+  const NAME_KEY = 'azakei_quiz_name';
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  function rankTable(list, myId) {
+    if (!list.length) return '<p class="qz-small">まだ誰も載っていません。最初の億万長者になろう。</p>';
+    return `<ol class="qz-rank-list">${list.map((r, i) => `
+      <li class="${r.id === myId ? 'is-me' : ''}${i < 3 ? ' top' + (i + 1) : ''}">
+        <span class="qz-rank-no">${i + 1}</span>
+        <span class="qz-rank-name">${esc(r.name)}${r.id === myId ? '<em>あなた</em>' : ''}</span>
+        <span class="qz-rank-score">${Number(r.score).toLocaleString('ja-JP')}<small>枚</small></span>
+      </li>`).join('')}</ol>`;
+  }
+  async function loadRank(box, n, myId) {
+    if (!box) return;
+    try {
+      const [list, me] = await Promise.all([RANK.top(n), myId === undefined ? RANK.uid().catch(() => null) : myId]);
+      box.querySelector('.qz-small, .qz-rank-list') && box.querySelectorAll('.qz-small, .qz-rank-list').forEach(e => e.remove());
+      box.insertAdjacentHTML('beforeend', rankTable(list, me));
+    } catch (e) {
+      // 読めないとき（通信やルールの準備中）は、枠ごと隠す
+      if (box.matches('.qz-intro [data-rank-box]')) { box.remove(); return; }
+      box.querySelectorAll('.qz-small, .qz-rank-list').forEach(e => e.remove());
+      box.insertAdjacentHTML('beforeend', '<p class="qz-small">ランキングを読み込めませんでした。時間をおいて、もう一度開いてください。</p>');
+    }
+  }
+  function rankForm(score) {
+    if (!RANK || score < 1) return '';
+    let saved = '';
+    try { saved = localStorage.getItem(NAME_KEY) || ''; } catch (e) {}
+    return `
+      <form class="qz-rank qz-rank-form" data-rank-box novalidate>
+        <p class="qz-rank-head">ランキングに名前を載せる</p>
+        <p class="qz-small">ニックネームで OK（12 文字まで）。本名や、人が嫌な気持ちになる名前はやめてね。</p>
+        <div class="qz-rank-input">
+          <label class="sr-only" for="qzName">名前</label>
+          <input id="qzName" name="name" type="text" maxlength="12" autocomplete="nickname" placeholder="例：麻布の投資家" value="${esc(saved)}" required>
+          <button type="submit" class="btn-primary">${score.toLocaleString('ja-JP')} 枚で登録</button>
+        </div>
+        <p class="qz-rank-msg" aria-live="polite"></p>
+      </form>`;
+  }
+  function bindRankForm(score) {
+    const form = root.querySelector('.qz-rank-form');
+    if (!form) return;
+    const msg = form.querySelector('.qz-rank-msg');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = form.querySelector('button');
+      const c = RANK.cleanName(form.name.value);
+      if (c.error) { msg.textContent = c.error; form.name.focus(); return; }
+      btn.disabled = true; msg.textContent = '登録しています…';
+      try {
+        const res = await RANK.submit(c.name, score);
+        try { localStorage.setItem(NAME_KEY, c.name); } catch (err) {}
+        const myId = await RANK.uid();
+        const shown = res.kept ? res.best : score;
+        const place = await RANK.rankOf(shown).catch(() => null);
+        form.outerHTML = `
+          <div class="qz-rank" data-rank-box>
+            <p class="qz-rank-head">Web 版ランキング <small>上位 10 人</small></p>
+            <p class="qz-rank-done">${res.kept
+              ? `自己ベストの <b>${shown.toLocaleString('ja-JP')} 枚</b> のほうが高いので、ランキングはそのままです。`
+              : `<b>${esc(c.name)}</b> さん、登録しました！`}${place ? ` いま <b>${place} 位</b> です。` : ''}</p>
+          </div>`;
+        loadRank(root.querySelector('[data-rank-box]'), 10, myId);
+      } catch (err) {
+        btn.disabled = false;
+        msg.textContent = /この点数|名前|使えません/.test(err.message) ? err.message : '登録できませんでした。通信状況を確かめて、もう一度押してください。';
+      }
+    });
+  }
+
   // チップの推移グラフ
   function chart() {
     const w = 320, h = 130, pad = 18, max = Math.max(...history, 10);
@@ -166,7 +239,9 @@
         <p class="qz-small">おたすけは Web 版だけのルール。どちらも 1 ゲームに 1 回だけ使えます。問題は全 ${Q.easy.length + Q.normal.length + Q.hard.length} 問から毎回ランダムに出題。</p>
         <p class="qz-record">文化祭の最高記録は <b>120 枚（24 倍）</b>。${best ? `あなたの最高記録は <b>${best} 枚</b>。` : ''}</p>
         <button type="button" class="btn-primary qz-start">ゲームをはじめる</button>
+        ${RANK ? '<div class="qz-rank" data-rank-box><p class="qz-rank-head">Web 版ランキング <small>上位 5 人</small></p><p class="qz-small">読み込み中…</p></div>' : ''}
       </div>`);
+    if (RANK) loadRank(root.querySelector('[data-rank-box]'), 5);
     root.querySelector('.qz-start').addEventListener('click', () => {
       chips = START_CHIPS; round = 0; used = { easy: new Set(), normal: new Set(), hard: new Set() };
       life = { half: true, swap: true }; history = [START_CHIPS]; log = [];
@@ -320,6 +395,7 @@
         <h2>称号：<em>${title}</em></h2>
         <p>${chips >= 40 ? '文化祭なら、シャーペンをプレゼントしていた成績です！' : '文化祭では、40 枚以上でシャーペンをプレゼントしていました。'}${isBest ? '<br><b>自己ベスト更新！</b>' : ''}</p>
         <p class="qz-record">文化祭の最高記録は 120 枚（24 倍）。${chips > 120 ? '<b>記録を超えました！</b>' : `あと ${121 - chips} 枚で記録更新。`}</p>
+        ${rankForm(chips)}
         ${chart()}
         <details class="qz-review">
           <summary>出題された問題をふり返る（${log.length} 問中 ${okCount} 問正解）</summary>
@@ -336,6 +412,7 @@
         </div>
       </div>`);
     countUp(root.querySelector('.qz-count'), 0, chips);
+    bindRankForm(chips);
     if (chips >= 40) setTimeout(confetti, 300);
     root.querySelector('.qz-retry').addEventListener('click', intro);
   }

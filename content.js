@@ -6,8 +6,7 @@ window.AZAKEI = {
 
   /* ---- SNS ---- */
   sns: [
-    { name: 'Instagram', handle: '@azakeichannel', url: 'https://www.instagram.com/azakeichannel/', desc: '活動報告・お知らせ' },
-    { name: 'Instagram Vlog', handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/', desc: 'Vlog・お問い合わせ（DM）' },
+    { name: 'Instagram', handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/', desc: '活動報告・Vlog・お問い合わせ（DM）' },
     { name: 'X', handle: '@azakeiten', url: 'https://x.com/azakeiten', desc: '最新情報をいち早く' }
   ],
 

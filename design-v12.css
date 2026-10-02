@@ -226,3 +226,55 @@
   .footer-wordmark { font-size: 26px; gap: 8px; }
   .footer-kanji { padding-left: 8px; }
 }
+
+/* ================================================================
+   v12.1 — クイズのランキング・SNS の並び・見出しの金の光・目次の点
+   ================================================================ */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.sns-grid { grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }
+
+/* ランキング */
+.qz-rank { width: 100%; max-width: 560px; margin: 4px auto 0; padding: clamp(18px, 3vw, 26px); border-radius: var(--radius); background: var(--color-bg); border: 1px solid var(--color-border); text-align: left; display: grid; gap: 10px; }
+.qz-intro .qz-rank { margin-top: 10px; }
+.qz-rank-head { font-family: var(--font-display); font-weight: 700; font-size: 18px; display: flex; align-items: baseline; gap: 10px; }
+.qz-rank-head small { font-family: var(--font-body); font-weight: 400; font-size: 12px; color: var(--color-muted); }
+.qz-rank-input { display: flex; gap: 10px; flex-wrap: wrap; }
+.qz-rank-input input { flex: 1 1 180px; min-width: 0; font: inherit; font-size: 16px; padding: 12px 16px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); }
+.qz-rank-input input:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+.qz-rank-input .btn-primary { border: 0; cursor: pointer; font-family: inherit; }
+.qz-rank-input .btn-primary:disabled { opacity: 0.6; cursor: wait; }
+.qz-rank-msg { font-size: 13px; color: #c0392b; min-height: 1.2em; }
+:root[data-theme="dark"] .qz-rank-msg { color: #ff7b6e; }
+.qz-rank-done { font-size: 14px; line-height: 1.8; }
+.qz-rank-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.qz-rank-list li { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 8px 12px; border-radius: 12px; background: var(--color-surface); border: 1px solid var(--color-border); }
+.qz-rank-no { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--color-muted); border: 1px solid var(--color-border); }
+.qz-rank-list li.top1 .qz-rank-no { color: #5a4210; border: 0; background: radial-gradient(circle at 35% 30%, #fff1c1, #d9b25a 55%, #a57c25); box-shadow: 0 2px 8px rgba(165, 124, 37, 0.45); }
+.qz-rank-list li.top2 .qz-rank-no { color: #3d434b; border: 0; background: radial-gradient(circle at 35% 30%, #ffffff, #c4cad2 55%, #8c939c); }
+.qz-rank-list li.top3 .qz-rank-no { color: #4a2a12; border: 0; background: radial-gradient(circle at 35% 30%, #ffd9b8, #c58650 55%, #8a5427); }
+.qz-rank-list li.top1 { border-color: rgba(200, 169, 110, 0.6); }
+.qz-rank-name { min-width: 0; overflow-wrap: anywhere; font-weight: 500; }
+.qz-rank-name em { font-style: normal; font-size: 11px; font-weight: 700; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: var(--color-accent); color: #1a1a1a; vertical-align: 1px; }
+.qz-rank-score { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-accent-deep); white-space: nowrap; }
+.qz-rank-score small { font-family: var(--font-body); font-size: 11px; margin-left: 3px; color: var(--color-muted); font-weight: 400; }
+.qz-rank-list li.is-me { border-color: var(--color-accent); box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.25); }
+.qz-leader { margin-top: 10px; font-size: 13px; color: var(--color-muted); display: flex; align-items: center; gap: 6px; }
+.qz-leader b { color: var(--color-text); }
+.qz-leader-crown { color: #c8a96e; font-size: 16px; line-height: 1; }
+
+/* 見出しの金の言葉に、一度だけ光がすっと通る */
+.section-title em { background-image: linear-gradient(105deg, currentColor 40%, #f6e3b4 50%, currentColor 60%); background-size: 260% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; }
+.reveal.visible .section-title em, .page-hero .section-title em { -webkit-text-fill-color: transparent; animation: em-shine 1.6s ease 0.6s both; }
+@keyframes em-shine { from { background-position: 100% 0; } to { background-position: 0 0; } }
+
+/* トップ：右はしの「いまどこ？」の点（広い画面だけ） */
+.chapters { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 50; display: none; list-style: none; margin: 0; padding: 0; }
+@media (min-width: 1180px) { .chapters { display: grid; gap: 12px; } }
+.chapters a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; text-decoration: none; color: var(--color-muted); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+.chapters a span { opacity: 0; transform: translateX(6px); transition: opacity 0.3s, transform 0.3s; white-space: nowrap; background: var(--color-surface); padding: 3px 8px; border-radius: 999px; border: 1px solid var(--color-border); }
+.chapters a i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--color-accent); transition: transform 0.3s, background 0.3s; }
+.chapters a:hover span, .chapters a:focus-visible span, .chapters a.is-on span { opacity: 1; transform: none; }
+.chapters a.is-on i { background: var(--color-accent); transform: scale(1.4); }
+.chapters.is-hidden { opacity: 0; pointer-events: none; }
+.chapters { transition: opacity 0.4s; }
+@media (prefers-reduced-motion: reduce) { .reveal.visible .section-title em, .page-hero .section-title em { animation: none; background-position: 0 0; } }

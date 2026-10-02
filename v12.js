@@ -143,3 +143,34 @@
     el.addEventListener('pointerleave', () => { el.style.transform = ''; });
   });
 })();
+
+/* ---- トップ：右はしの「いまどこ？」の点 ---- */
+(function() {
+  if (!document.querySelector('.hero')) return;
+  const secs = [...document.querySelectorAll('main section, body > section, .hero-sticky-wrap ~ section')]
+    .filter((s, i, a) => a.indexOf(s) === i && s.querySelector(':scope .section-label') && !s.closest('.hero'));
+  if (secs.length < 3) return;
+  const nav = document.createElement('ul');
+  nav.className = 'chapters is-hidden'; nav.setAttribute('aria-label', 'このページの目次');
+  secs.forEach((s, i) => {
+    if (!s.id) s.id = 'sec-' + (i + 1);
+    const label = s.querySelector('.section-label').textContent.trim();
+    nav.insertAdjacentHTML('beforeend', `<li><a href="#${s.id}"><span>${label}</span><i></i></a></li>`);
+  });
+  document.body.appendChild(nav);
+  const links = [...nav.querySelectorAll('a')];
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const i = secs.indexOf(e.target);
+    links.forEach((a, j) => a.classList.toggle('is-on', i === j));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(s => io.observe(s));
+  // ヒーローの間とフッター付近では隠す
+  const onScroll = () => {
+    const first = secs[0].getBoundingClientRect().top, last = secs[secs.length - 1].getBoundingClientRect().bottom;
+    nav.classList.toggle('is-hidden', first > innerHeight * 0.6 || last < innerHeight * 0.3);
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  // 点を押したら、幕を出さずにその場所へ
+  nav.addEventListener('click', e => { e.stopPropagation(); }, true);
+})();
