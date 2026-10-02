@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>エコノミスト診断 | AZAKEI</title>
-  <meta name="description" content="YES か NO の道を選んで、あなたの投資家タイプがわかる。ライオン・キツネ・カメ・ウサギ。文化祭で人気だった AZAKEI のエコノミスト診断の Web 版。" />
+  <title>億万長者クイズ | AZAKEI</title>
+  <meta name="description" content="チップを賭けて、難しさを選んで2問に挑戦。文化祭で人気だった AZAKEI の経済クイズを Web で。目指せ億万長者。" />
   <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
   <link rel="icon" href="icon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="icon-180.png" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AZAKEI" />
-  <meta property="og:title" content="エコノミスト診断 | AZAKEI" />
-  <meta property="og:description" content="YES か NO の道を選んで、あなたの投資家タイプがわかる。ライオン・キツネ・カメ・ウサギ。文化祭で人気だった AZAKEI のエコノミスト診断の Web 版。" />
-  <meta property="og:url" content="https://ryoishiyama1-svg.github.io/azakei/diagnosis.html" />
-  <link rel="canonical" href="https://ryoishiyama1-svg.github.io/azakei/diagnosis.html" />
-  <link rel="alternate" hreflang="ja" href="https://ryoishiyama1-svg.github.io/azakei/diagnosis.html" />
-  <link rel="alternate" hreflang="en" href="https://ryoishiyama1-svg.github.io/azakei/en-diagnosis.html" />
+  <meta property="og:title" content="億万長者クイズ | AZAKEI" />
+  <meta property="og:description" content="チップを賭けて、難しさを選んで2問に挑戦。文化祭で人気だった AZAKEI の経済クイズを Web で。目指せ億万長者。" />
+  <meta property="og:url" content="https://ryoishiyama1-svg.github.io/azakei/quiz.html" />
+  <link rel="canonical" href="https://ryoishiyama1-svg.github.io/azakei/quiz.html" />
   <meta property="og:image" content="https://ryoishiyama1-svg.github.io/azakei/og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
@@ -47,19 +45,19 @@
 </head>
 <body>
 
-  <header class="page-hero" data-bg="TYPE">
+  <header class="page-hero" data-bg="QUIZ">
     <div class="container">
-      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / エコノミスト診断</p>
-      <p class="section-label">Economist Type Test</p>
-      <h1 class="section-title"><span class="keep-phrase">エコノミスト</span><span class="keep-phrase"><em>診断</em></span></h1>
-      <p class="page-hero-lead">文化祭で人気だった手描きポスターの「エコノミスト診断」を、Web で遊べるようにしました。YES か NO で道を選ぶと、あなたの投資家タイプがわかります。</p>
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / 億万長者クイズ</p>
+      <p class="section-label">Millionaire Quiz</p>
+      <h1 class="section-title"><span class="keep-phrase">億万長者</span><span class="keep-phrase"><em>クイズ</em></span></h1>
+      <p class="page-hero-lead">文化祭で人気だったチップのクイズを、Web で遊べるようにしました。賭ける枚数と難しさを選んで 2 問に挑戦。正解数で、賭けたチップが最大 6 倍に。</p>
     </div>
   </header>
 
   <section class="about tight">
     <div class="container">
-      <div id="diag" class="diag"></div>
-      <p class="dg-note">※ 遊びとしての診断です。投資をすすめるものではありません。</p>
+      <div id="quiz" class="diag"></div>
+      <p class="dg-note">※ 遊びのゲームです。チップに実際の価値はありません。</p>
     </div>
   </section>
 
@@ -70,7 +68,7 @@
   <script src="brand.js?v=20261002p"></script>
   <script src="nav.js?v=20261002p"></script>
   <script src="reveal.js?v=20261002p"></script>
-  <script src="diagnosis.js?v=20261002p"></script>
+  <script src="quiz.js?v=20261002p"></script>
   <script src="fx.js?v=20261002p"></script>
   <script src="v9.js?v=20261002p"></script>
 </body>

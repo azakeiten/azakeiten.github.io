@@ -73,12 +73,18 @@ window.AZAKEI = {
   /* ---- 活動風景（写真） ----
      src を空にすると「写真準備中」の枠になります。 */
   gallery: [
+    { src: 'photos/room-diagnosis.jpg', caption: '展示会場（エコノミスト診断のポスター）', date: '2026.05' },
+    { src: 'photos/hallway-wave.jpg', caption: '廊下の飾りつけ「麻経」の大波', date: '2026.05' },
+    { src: 'photos/setup.jpg', caption: '準備中。パネルを組み立てる', date: '2026' },
+    { src: 'photos/board-millionaire.jpg', caption: '黒板の「本日の億万長者」', date: '2026.05' },
+    { src: 'photos/hallway-game.jpg', caption: '廊下の入口。「GAME」の看板', date: '2026.05' },
+    { src: 'photos/member-pizza.jpg', caption: 'おつかれさまのピザ', date: '2026.05' },
+    { src: 'photos/room-paper.jpg', caption: '「紙展」のパネルとカードゲームの卓', date: '2026.05' },
+    { src: 'photos/star-bills.jpg', caption: '入口の六芒星と、オリジナル紙幣', date: '2026.05' },
+    { src: 'photos/balloons.jpg', caption: '文化祭のフィナーレ', date: '2026.05' },
     { src: 'members.jpg', caption: 'メンバー集合', date: '2026' },
-    { src: 'hero.jpg', caption: '文化祭の展示', date: '2026.05' },
-    { src: 'tokyo-s.jpg', caption: '世の中の仕組みを見渡す', date: '' },
-    { src: '', caption: 'ミーティング風景', date: '' },
-    { src: '', caption: 'コンテスト準備', date: '' },
-    { src: '', caption: '文化祭の準備', date: '' }
+    { src: 'photos/star-door.jpg', caption: '中3-5 教室の入口', date: '2026.05' },
+    { src: 'photos/board-special.jpg', caption: '特別時間の黒板と倍率表', date: '2026.05' }
   ],
 
   /* ---- 何気ない日常 ---- */

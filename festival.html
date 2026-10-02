@@ -21,20 +21,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="base.css?v=20261002o" />
-  <link rel="stylesheet" href="nav.css?v=20261002o" />
-  <link rel="stylesheet" href="hero.css?v=20261002o" />
-  <link rel="stylesheet" href="sections.css?v=20261002o" />
-  <link rel="stylesheet" href="animation.css?v=20261002o" />
-  <link rel="stylesheet" href="pages.css?v=20261002o" />
-  <link rel="stylesheet" href="design.css?v=20261002o" />
-  <link rel="stylesheet" href="design-v4.css?v=20261002o" />
-  <link rel="stylesheet" href="design-v5.css?v=20261002o" />
-  <link rel="stylesheet" href="design-v6.css?v=20261002o" />
-  <link rel="stylesheet" href="design-v7.css?v=20261002o" />
-  <link rel="stylesheet" href="design-v8.css?v=20261002o" />
-  <link rel="stylesheet" href="design-v9.css?v=20261002o" />
-  <link rel="stylesheet" href="readable.css?v=20261002o" />
+  <link rel="stylesheet" href="base.css?v=20261002p" />
+  <link rel="stylesheet" href="nav.css?v=20261002p" />
+  <link rel="stylesheet" href="hero.css?v=20261002p" />
+  <link rel="stylesheet" href="sections.css?v=20261002p" />
+  <link rel="stylesheet" href="animation.css?v=20261002p" />
+  <link rel="stylesheet" href="pages.css?v=20261002p" />
+  <link rel="stylesheet" href="design.css?v=20261002p" />
+  <link rel="stylesheet" href="design-v4.css?v=20261002p" />
+  <link rel="stylesheet" href="design-v5.css?v=20261002p" />
+  <link rel="stylesheet" href="design-v6.css?v=20261002p" />
+  <link rel="stylesheet" href="design-v7.css?v=20261002p" />
+  <link rel="stylesheet" href="design-v8.css?v=20261002p" />
+  <link rel="stylesheet" href="design-v9.css?v=20261002p" />
+  <link rel="stylesheet" href="design-v10.css?v=20261002p" />
+  <link rel="stylesheet" href="readable.css?v=20261002p" />
   <style>
     .keep-phrase { display: inline-block; white-space: nowrap; }
     .schedule-container { margin-top: 32px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -158,6 +159,75 @@
       <div class="about-body reveal" style="max-width: 840px;">
         <p>チップを増減させていく過程こそが、経済活動の模写。獲得したチップをどう運用するかは、あなた次第。</p>
       </div>
+
+      <div class="fx-hook reveal">
+        <p class="fx-hook-q">あなたは<em>稼げる人？</em><br>それとも<span>失敗する人？</span></p>
+        <p>経済って難しそう……。でも、このゲームを体験すれば全部わかる。チップを賭けて増やすだけ。ただし、選び方を間違えると一瞬で失う！？</p>
+      </div>
+
+      <ol class="fx-steps reveal">
+        <li><b>チップを受け取る</b><span>受付で、全員同じ枚数のチップからスタート。</span></li>
+        <li><b>好きなゲームに賭ける</b><span>クイズ・カードゲーム・クロスワード。どこで勝負するかは自由。</span></li>
+        <li><b>増やして、億万長者へ</b><span>ポイントは「どこに賭けるか」を見極めること。</span></li>
+      </ol>
+
+      <div class="fx-rules">
+        <div class="fx-rule reveal">
+          <p class="fx-rule-tag">Quiz</p>
+          <h3>クイズの倍率</h3>
+          <p>難しさを選んで 2 問に挑戦。安全策をとるか、リスクをとるか。正解数と難しさで、賭けたチップの倍率が決まります。</p>
+          <div class="fx-table-wrap">
+            <table class="fx-table">
+              <thead><tr><th>正解数</th><th>かんたん</th><th>普通</th><th>激ムズ</th></tr></thead>
+              <tbody>
+                <tr><th>2 問正解</th><td>×2</td><td>×3</td><td class="hot">×6</td></tr>
+                <tr><th>1 問正解</th><td>×1</td><td>×2</td><td>×3</td></tr>
+                <tr><th>0 問正解</th><td>×0</td><td>×0</td><td>×0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="quiz.html" class="btn-primary">Web 版で挑戦する</a>
+        </div>
+        <div class="fx-rule reveal">
+          <p class="fx-rule-tag">Card game</p>
+          <h3>カードゲームの流れ</h3>
+          <ol class="fx-flow">
+            <li>テーブルには「役職カード」8 種類 × 2 枚の山札。3〜4 人で遊び、最初に 4 枚引く。</li>
+            <li>ランダムに「状況」が決まる。手札から状況に合いそうなカードを選んで出し、得点を得る。</li>
+            <li>一度出したカードと状況は使えない。これを 4 ターンくり返す。</li>
+            <li>4 ターン終了時の順位で、賭けたチップが増減。1 位は 2 倍、2 位は 1.5 倍、3 位はそのまま、4 位は返ってこない（端数は切り上げ）。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="fx-record reveal">
+        <div class="fx-record-photo"><img src="photos/board-millionaire.jpg" alt="黒板に書かれた「本日の億万長者」ランキング" loading="lazy" /></div>
+        <div>
+          <p class="section-label">Record</p>
+          <h3>本日の億万長者</h3>
+          <ol class="fx-rank">
+            <li><span>1 位</span><b>120 枚</b><small>24 倍</small></li>
+            <li><span>2 位</span><b>60 枚</b><small>12 倍</small></li>
+            <li><span>3 位</span><b>44 枚</b><small>8.8 倍</small></li>
+          </ol>
+          <p>会場の黒板に書かれた、ある日のランキングです。最後のチップが 40 枚以上になった人には、シャーペンをプレゼントしました。</p>
+        </div>
+      </div>
+
+      <div class="fx-special reveal">
+        <p class="fx-rule-tag">Special</p>
+        <h3>特別企画</h3>
+        <ul>
+          <li><b>麻布 OB へのインタビュー動画</b>を、特別時間（12 時〜）に放映しました。</li>
+          <li><b>麻布生によるリアル経済ディスカッション</b>。この時間だけの「何か」がある企画です。</li>
+        </ul>
+      </div>
+
+      <div class="fx-photos reveal">
+        <figure><img src="photos/room-diagnosis.jpg" alt="展示会場。エコノミスト診断の大きなポスター" loading="lazy" /><figcaption>エコノミスト診断の大ポスター</figcaption></figure>
+        <figure><img src="photos/hallway-wave.jpg" alt="廊下に貼られた「麻経」の大波の飾り" loading="lazy" /><figcaption>廊下の「麻経」の大波</figcaption></figure>
+        <figure><img src="photos/room-paper.jpg" alt="「紙展」のパネルとカードゲームの卓" loading="lazy" /><figcaption>「紙展」とカードゲームの卓</figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -171,7 +241,7 @@
         </div>
       </div>
       <div class="services-grid reveal">
-        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg><p class="service-num">01</p><h3 class="service-name">クイズ</h3><p class="service-desc">経済の常識から雑学まで。正解してチップを獲得。</p></div>
+        <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg><p class="service-num">01</p><h3 class="service-name">クイズ</h3><p class="service-desc">経済の常識から雑学まで。正解してチップを獲得。<br><a href="quiz.html" style="color:var(--color-accent-deep);text-decoration:underline;">Web 版で挑戦する →</a></p></div>
         <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="10" height="14" rx="1.5" transform="rotate(-8 9 13)"/><rect x="10" y="4" width="10" height="14" rx="1.5" transform="rotate(8 15 11)"/></svg><p class="service-num">02</p><h3 class="service-name">カードゲーム</h3><p class="service-desc">駆け引きが重要となるオリジナル戦略ゲーム。</p></div>
         <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 9.3h16M4 14.6h16M9.3 4v16M14.6 4v16"/><rect x="9.3" y="9.3" width="5.3" height="5.3" fill="currentColor" opacity=".35" stroke="none"/></svg><p class="service-num">03</p><h3 class="service-name">クロスワード</h3><p class="service-desc">思考を巡らせ、言葉の繋がりから経済を解く。</p></div>
         <div class="service-card"><svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><p class="service-num">04</p><h3 class="service-name">エコノミスト診断</h3><p class="service-desc">あなたの経済的性質を浮き彫りにします。<br><a href="diagnosis.html" style="color:var(--color-accent-deep);text-decoration:underline;">Web 版で診断してみる →</a></p></div>
@@ -221,14 +291,14 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261002o"></script>
-  <script src="layout.js?v=20261002o"></script>
-  <script src="brand.js?v=20261002o"></script>
-  <script src="nav.js?v=20261002o"></script>
-  <script src="reveal.js?v=20261002o"></script>
-  <script src="fx.js?v=20261002o"></script>
-  <script src="v9.js?v=20261002o"></script>
-  <script src="animation.js?v=20261002o"></script>
+  <script src="content.js?v=20261002p"></script>
+  <script src="layout.js?v=20261002p"></script>
+  <script src="brand.js?v=20261002p"></script>
+  <script src="nav.js?v=20261002p"></script>
+  <script src="reveal.js?v=20261002p"></script>
+  <script src="fx.js?v=20261002p"></script>
+  <script src="v9.js?v=20261002p"></script>
+  <script src="animation.js?v=20261002p"></script>
   <script>
     (function () {
       var dayIds = ["day1Visitors", "day2Visitors", "day3Visitors"];
