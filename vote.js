@@ -149,6 +149,8 @@
     });
     list.classList.toggle('has-voted', !!mine);
     if (totalEl) animateNum(totalEl, total);
+    // 「いまの結果」カードなどに知らせる
+    document.dispatchEvent(new CustomEvent('azakei:votes', { detail: { total, mine, items: V.options.map(o => ({ key: o.key, label: o.label, n: counts[o.key] || 0 })) } }));
   }
 
   // 投票した瞬間の金色の粒

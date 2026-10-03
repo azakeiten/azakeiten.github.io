@@ -516,7 +516,7 @@ html { scrollbar-color: color-mix(in srgb, var(--color-accent) 70%, transparent)
 }
 
 /* AZAKEI の歩み（年表） */
-.ayumi { list-style: none; margin: clamp(24px, 4vw, 40px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+.ayumi { list-style: none; margin: clamp(24px, 4vw, 40px) 0 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0; position: relative; }
 .ayumi::before { content: ''; position: absolute; left: 0; right: 0; top: 54px; height: 1px; background: linear-gradient(90deg, var(--color-accent), var(--color-accent) 75%, transparent); }
 .ayumi li { position: relative; padding: 0 clamp(10px, 2vw, 24px) 0 0; display: grid; gap: 22px; align-content: start; }
 .ay-year { font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(24px, 2.6vw, 32px); color: var(--color-accent-deep); line-height: 1; padding-bottom: 6px; }
@@ -526,7 +526,7 @@ html { scrollbar-color: color-mix(in srgb, var(--color-accent) 70%, transparent)
 .ayumi p { margin: 0; color: var(--color-muted); font-size: 14px; line-height: 1.8; }
 .ayumi a { display: inline-block; margin-top: 8px; font-size: 13.5px; color: var(--color-accent-deep); }
 @media (max-width: 760px) {
-  .ayumi { grid-template-columns: 1fr; gap: 26px; padding-left: 28px; }
+  .ayumi { grid-auto-flow: row; grid-template-columns: 1fr; gap: 26px; padding-left: 28px; }
   .ayumi::before { left: 6px; right: auto; top: 6px; bottom: 6px; width: 1px; height: auto; background: linear-gradient(var(--color-accent), var(--color-accent) 80%, transparent); }
   .ayumi li { gap: 6px; padding: 0; }
   .ayumi li::after { left: -28px; top: 6px; }
@@ -541,3 +541,41 @@ html { scrollbar-color: color-mix(in srgb, var(--color-accent) 70%, transparent)
   .story-steps li:first-child { margin-top: 2vh; }
 }
 @media (max-width: 860px) { .story-media { box-shadow: 0 -80px 0 0 var(--color-surface), 0 24px 40px -28px rgba(0, 0, 0, 0.45); } }
+
+/* ================================================================
+   v17 — 投票「いまの結果」・トップへ戻るの金の輪・404 のチップ
+   ================================================================ */
+/* 投票：いまの結果カード */
+.vote-summary { display: grid; grid-template-columns: auto 1fr; gap: clamp(18px, 3vw, 36px); align-items: center; margin: 0 0 18px; padding: clamp(18px, 3vw, 28px); border-radius: calc(var(--radius) + 4px); background: var(--color-surface); border: 1px solid var(--color-border); }
+.vote-summary[hidden] { display: none; }
+.vs-ring { width: clamp(110px, 16vw, 150px); height: auto; }
+.vs-ring circle { transition: stroke-dasharray 0.8s var(--ease-out), stroke-dashoffset 0.8s var(--ease-out); }
+.vs-ring-n { font-family: 'Shippori Mincho', serif; font-size: 26px; font-weight: 500; fill: var(--color-text); }
+.vs-ring-u { font-size: 11px; fill: var(--color-muted); }
+.vs-kicker { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.2em; color: var(--color-accent-deep); }
+.vs-live { width: 8px; height: 8px; border-radius: 50%; background: #e0533f; box-shadow: 0 0 0 0 rgba(224, 83, 63, 0.5); animation: vs-pulse 1.8s ease-out infinite; }
+@keyframes vs-pulse { 70% { box-shadow: 0 0 0 8px rgba(224, 83, 63, 0); } 100% { box-shadow: 0 0 0 0 rgba(224, 83, 63, 0); } }
+.vs-top { margin: 4px 0 12px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; font-family: var(--font-display); font-weight: 600; font-size: clamp(22px, 3vw, 30px); }
+.vs-top small { font-size: 0.55em; font-weight: 400; color: var(--color-muted); margin-left: 4px; }
+.vs-top b { font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: 1.2em; color: var(--color-accent-deep); }
+.vs-top b small { font-size: 0.5em; color: var(--color-accent-deep); }
+.vs-legend { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px 16px; font-size: 13px; color: var(--color-muted); }
+.vs-legend li { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.vs-legend i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.vs-legend span { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--color-text); }
+.vs-legend li.is-mine { color: var(--color-text); font-weight: 700; }
+@media (max-width: 520px) { .vote-summary { grid-template-columns: 1fr; justify-items: center; text-align: center; } .vs-kicker, .vs-top { justify-content: center; } .vs-legend { width: 100%; text-align: left; } }
+@media (prefers-reduced-motion: reduce) { .vs-live { animation: none; } }
+
+/* トップへ戻る：読んだ量だけ金の輪が満ちる */
+.to-top { position: fixed; }
+.to-top .tt-ring { position: absolute; inset: -3px; width: calc(100% + 6px); height: calc(100% + 6px); pointer-events: none; transform: rotate(-90deg); }
+.to-top .tt-ring circle { fill: none; stroke: var(--color-accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 0.15s linear; }
+
+/* 404：0 がチップになって転がる */
+.notfound-num { display: inline-flex; align-items: center; justify-content: center; gap: 0.06em; }
+.nf-chip { display: inline-grid; place-items: center; width: 0.5em; height: 0.5em; margin: 0 0.1em; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff9a88, #c0392b 62%, #8f2416); box-shadow: inset 0 0 0 0.07em rgba(255, 255, 255, 0.6), inset 0 0 0 0.12em #c0392b, inset 0 0 0 0.14em rgba(255, 255, 255, 0.35), 0 0.06em 0.12em rgba(0, 0, 0, 0.3); animation: nf-roll 3.6s cubic-bezier(.45, .05, .35, 1) infinite; }
+.nf-chip i { width: 0.34em; height: 0.34em; border-radius: 50%; border: 0.03em dashed rgba(255, 255, 255, 0.8); }
+@keyframes nf-roll { 0%, 100% { transform: translateX(0) rotate(0); } 45% { transform: translateX(0.18em) rotate(160deg); } 55% { transform: translateX(0.18em) rotate(160deg); } }
+.nf-joke { color: var(--color-accent-deep); font-weight: 700; margin: 6px 0 0; }
+@media (prefers-reduced-motion: reduce) { .nf-chip { animation: none; } }

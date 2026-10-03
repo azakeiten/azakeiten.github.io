@@ -314,3 +314,48 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(steps.indexOf(e.target)); }), { rootMargin: narrow ? '-72% 0px -22% 0px' : '-45% 0px -45% 0px' });
   steps.forEach(s => io.observe(s));
 })();
+
+/* ---- v17：投票「いまの結果」カード（円グラフと 1 位） ---- */
+(function() {
+  const box = document.querySelector('[data-vote-summary]');
+  if (!box) return;
+  const COLORS = ['#c8a96e', '#3c8a37', '#7d6131', '#6fae5f', '#e3c98f', '#2c5a37', '#a8875a'];
+  document.addEventListener('azakei:votes', e => {
+    const { total, mine, items } = e.detail;
+    if (!total) { box.hidden = true; return; }
+    const sorted = items.slice().sort((a, b) => b.n - a.n);
+    const top = sorted[0];
+    const ties = sorted.filter(x => x.n === top.n);
+    const R = 52, C = 2 * Math.PI * R;
+    let off = 0;
+    const arcs = items.map((it, i) => {
+      if (!it.n) return '';
+      const len = it.n / total * C;
+      const s = `<circle r="${R}" cx="60" cy="60" fill="none" stroke="${COLORS[i % COLORS.length]}" stroke-width="16" stroke-dasharray="${len.toFixed(2)} ${(C - len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 60 60)"><title>${it.label} ${it.n} 票</title></circle>`;
+      off += len;
+      return s;
+    }).join('');
+    const pct = n => Math.round(n / total * 100);
+    box.innerHTML = `
+      <svg class="vs-ring" viewBox="0 0 120 120" role="img" aria-label="投票の割合">${arcs}<text x="60" y="58" text-anchor="middle" class="vs-ring-n">${total}</text><text x="60" y="76" text-anchor="middle" class="vs-ring-u">票</text></svg>
+      <div class="vs-main">
+        <p class="vs-kicker"><span class="vs-live"></span>いまの 1 位</p>
+        <p class="vs-top">${ties.length > 1 ? ties.map(t => t.label).join(' と ') + '<small>が同票</small>' : top.label}<b>${pct(top.n)}<small>%</small></b></p>
+        <ul class="vs-legend">${items.map((it, i) => `<li${it.key === mine ? ' class="is-mine"' : ''}><i style="background:${COLORS[i % COLORS.length]}"></i>${it.label}<span>${pct(it.n)}%</span></li>`).join('')}</ul>
+      </div>`;
+    box.hidden = false;
+  });
+})();
+
+/* ---- v17：トップへ戻るボタンに、読んだ量の金の輪 ---- */
+(function() {
+  const btn = document.querySelector('.to-top');
+  if (!btn || btn.querySelector('.tt-ring')) return;
+  btn.insertAdjacentHTML('afterbegin', '<svg class="tt-ring" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" pathLength="100"/></svg>');
+  const ring = btn.querySelector('.tt-ring circle');
+  const upd = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    ring.style.strokeDashoffset = String(100 - (h > 0 ? Math.min(100, scrollY / h * 100) : 0));
+  };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+})();
