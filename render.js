@@ -50,17 +50,21 @@
     </${tag}>`;
   }
 
+  // Firebase から日程・日誌を読みこむあいだは「読みこみ中…」と出す
+  let loading = !!D.firebase;
+  const emptyMsg = text => `<p class="empty${loading ? ' is-loading' : ''}">${loading ? '読みこみ中…' : text}</p>`;
+
   const renderers = {
     events(el) {
       const { upcoming, past } = sortedEvents();
       const limit = +el.dataset.limit || Infinity;
       if (el.dataset.scope === 'upcoming') {
-        el.innerHTML = upcoming.slice(0, limit).map(eventCard).join('') || '<p class="empty">予定は準備中です。</p>';
+        el.innerHTML = upcoming.slice(0, limit).map(eventCard).join('') || emptyMsg('予定は準備中です。');
         return;
       }
       el.innerHTML =
         `<h3 class="list-head">これから</h3>` +
-        (upcoming.map(eventCard).join('') || '<p class="empty">予定は準備中です。</p>') +
+        (upcoming.map(eventCard).join('') || emptyMsg('予定は準備中です。')) +
         (past.length ? `<h3 class="list-head">これまで</h3>` + past.map(eventCard).join('') : '');
     },
 
@@ -80,7 +84,7 @@
           <time>${fmt(d.date)}</time>
           <h3>${d.title}</h3>
           <p>${d.body}</p>
-        </article>`).join('');
+        </article>`).join('') || emptyMsg('活動日誌は準備中です。');
     },
 
     achievements(el) {
@@ -108,13 +112,14 @@
 
   /* ---- 部員が管理ページ（admin.html）から書いた「日誌」「日程」を Firebase から足す ---- */
   const live = [...document.querySelectorAll('[data-render="diary"], [data-render="events"]')];
-  if (live.length && D.firebase) (async () => {
+  if (!live.length) loading = false;
+  else if (D.firebase) (async () => {
     try {
       const SDK = 'https://www.gstatic.com/firebasejs/12.19.0/';
       const [appMod, fs] = await Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-firestore.js')]);
       const app = appMod.getApps().length ? appMod.getApp() : appMod.initializeApp(D.firebase);
       const snap = await fs.getDocs(fs.query(fs.collection(fs.getFirestore(app), 'posts'), fs.limit(300)));
-      if (snap.empty) return;
+      if (snap.empty) throw 0;
       // 部員が書いた文字は、そのまま文字として表示（HTML として動かない）
       const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
       const safeLink = s => (/^(https:\/\/|[a-z0-9-]+\.html(#[\w-]+)?$)/i.test(s || '') ? s : '');
@@ -134,9 +139,10 @@
           D.events.push({ date: day(p.date), end: day(p.end), when, title: esc(p.title), tag: esc(p.tag) || 'Event', place: esc(p.place), desc: esc(p.body), link: safeLink(p.link), img: safeImg(p.img) });
         }
       });
-      live.forEach(el => { const fn = renderers[el.dataset.render]; if (fn) fn(el); });
-      document.dispatchEvent(new Event('azakei:rerender'));
-    } catch (e) { /* 読めないときは、もとの内容のまま */ }
+    } catch (e) { /* 読めないとき・まだ何もないときは「準備中」 */ }
+    loading = false;
+    live.forEach(el => { const fn = renderers[el.dataset.render]; if (fn) fn(el); });
+    document.dispatchEvent(new Event('azakei:rerender'));
   })();
 
   /* ---- お問い合わせフォーム ---- */

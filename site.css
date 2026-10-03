@@ -3795,3 +3795,8 @@ html[data-fs="xl"] { zoom: 1.25; }
 .adm-import[hidden] { display: none; }
 .adm-import p { margin: 0; font-size: 14px; line-height: 1.8; }
 .adm-import .btn-primary { border: 0; cursor: pointer; font-family: inherit; justify-self: start; }
+
+/* ######## ▼ 日程・日誌：読みこみ中 ######## */
+.empty.is-loading { opacity: .6; animation: azk-pulse 1.4s ease-in-out infinite; }
+@keyframes azk-pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .empty.is-loading { animation: none; } }
