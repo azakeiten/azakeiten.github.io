@@ -494,7 +494,7 @@ try {
     'about.html': 'members.jpg', 'activities.html': 'photos/setup.jpg', 'contests.html': 'photos/star-bills.jpg',
     'events.html': 'photos/balloons.jpg', 'festival.html': 'photos/hallway-wave.jpg', 'vote.html': 'photos/hallway-game.jpg',
     'sponsor.html': 'photos/room-paper.jpg', 'contact.html': 'photos/star-door.jpg', 'diagnosis.html': 'photos/room-diagnosis.jpg',
-    'en-diagnosis.html': 'photos/room-diagnosis.jpg', 'quiz.html': 'photos/board-millionaire.jpg', '404.html': 'photos/entrance.jpg'
+    'en-diagnosis.html': 'photos/room-diagnosis.jpg', 'quiz.html': 'photos/board-millionaire.jpg', 'sim.html': 'photos/board-special.jpg', 'glossary.html': 'photos/rules-posters.jpg', '404.html': 'photos/entrance.jpg'
   };
   const hero = document.querySelector('.page-hero');
   if (hero && PHOTO[page] && !hero.classList.contains('en-hero')) {
@@ -670,7 +670,9 @@ try {
     ['activities.html', '活動風景・日常', 'ミーティングから放課後まで。', 'photos/setup.jpg'],
     ['events.html', '日程・イベント', 'これからの予定と、これまでの歩み。', 'photos/balloons.jpg'],
     ['quiz.html', '億万長者クイズ', 'チップを賭けて、億万長者を目指せ。', 'photos/board-millionaire.jpg'],
+    ['sim.html', 'チップ配分シミュレーター', '株・債券・預金に分けて、10 年後へ早送り。', 'photos/board-special.jpg'],
     ['diagnosis.html', 'エコノミスト診断', 'YES / NO で、あなたの投資家タイプがわかる。', 'photos/room-diagnosis.jpg'],
+    ['glossary.html', '経済用語ミニ辞典', '経済の言葉を、やさしく。', 'photos/rules-posters.jpg'],
     ['vote.html', '文化祭投票', '来年どんな展示が見たい？', 'photos/hallway-game.jpg'],
     ['sponsor.html', '協賛のご案内', '企業・団体の皆さまへ。', 'photos/room-paper.jpg'],
     ['contact.html', 'お問い合わせ', 'フォーム、または Instagram の DM から。', 'photos/star-door.jpg']

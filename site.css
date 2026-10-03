@@ -3643,3 +3643,92 @@ p.fx-rule-tag { text-transform: uppercase; color: var(--color-accent-deep); marg
 @media (max-width: 560px) { :root { --btn-h: 48px; } }
 .contest :is(.ct-flow, .ct-skills) li { font-size: var(--fs-tag); }
 p.fx-rule-tag { font-family: var(--font-body); font-style: normal; }
+
+
+/* ################################################################
+   ▼ 経済用語ミニ辞典
+   ################################################################ */
+.gl-tools { position: sticky; top: calc(var(--nav-h, 72px) + 8px); z-index: 5; display: grid; gap: 10px; padding: 14px; margin-bottom: clamp(24px, 4vw, 40px); border-radius: var(--radius); background: color-mix(in srgb, var(--color-surface) 90%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid var(--color-border); }
+.gl-search { display: flex; align-items: center; gap: 10px; padding: 0 16px; border-radius: var(--radius-pill); border: 1px solid var(--color-border); background: var(--color-bg); }
+.gl-search svg { width: 18px; height: 18px; color: var(--color-muted); flex: none; }
+.gl-search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--color-text); font: inherit; font-size: 16px; padding: 12px 0; outline: none; }
+.gl-search:focus-within { border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(200, 169, 110, 0.2); }
+.gl-cats { display: flex; flex-wrap: wrap; gap: 6px; }
+.gl-cats a { font-size: var(--fs-tag); padding: 5px 12px; border-radius: var(--radius-pill); border: 1px solid var(--color-border); color: var(--color-text); text-decoration: none; }
+.gl-cats a:hover { border-color: var(--color-accent); }
+.gl-count { margin: 0; font-size: 12px; color: var(--color-muted); }
+.gl-group { scroll-margin-top: calc(var(--nav-h, 72px) + 180px); margin-bottom: clamp(32px, 5vw, 56px); }
+.gl-group[hidden] { display: none; }
+.gl-head { display: flex; align-items: baseline; gap: 12px; font-family: var(--font-display); font-weight: 600; font-size: clamp(22px, 2.6vw, 28px); margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
+.gl-head span { font-family: 'Shippori Mincho', serif; font-size: 0.7em; color: var(--color-accent-deep); }
+.gl-list { margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 12px; }
+.gl-item { padding: var(--pad-card); border-radius: var(--radius); background: var(--color-surface); border: 1px solid var(--color-border); scroll-margin-top: calc(var(--nav-h, 72px) + 180px); }
+.gl-item[hidden] { display: none; }
+.gl-item dt { font-family: var(--font-display); font-weight: 700; font-size: 17px; margin-bottom: 6px; color: var(--color-text); }
+.gl-item dd { margin: 0; font-size: 14.5px; line-height: 1.9; color: var(--color-muted); }
+.gl-item dd a { display: inline-block; margin-left: 4px; color: var(--color-accent-deep); }
+.gl-item.is-hl { animation: gl-hl 2.4s ease; }
+@keyframes gl-hl { 0%, 30% { border-color: var(--color-accent); box-shadow: 0 0 0 4px rgba(200, 169, 110, 0.25); } }
+.gl-empty { padding: 20px; text-align: center; color: var(--color-muted); }
+.gl-empty a { color: var(--color-accent-deep); }
+
+/* ################################################################
+   ▼ チップ配分シミュレーター
+   ################################################################ */
+.sim-card { display: grid; gap: 18px; }
+.sim-presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.sim-presets button { font: inherit; font-size: var(--fs-tag); cursor: pointer; padding: 7px 16px; border-radius: var(--radius-pill); border: 1px dashed var(--color-accent); background: transparent; color: var(--color-text); }
+.sim-presets button:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+.sim-rows { display: grid; gap: 12px; }
+.sim-row { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "name ctrl" "bar bar"; gap: 8px 16px; padding: 14px 16px; border-radius: var(--radius); background: var(--color-bg); border: 1px solid var(--color-border); border-left: 4px solid var(--c); }
+.sim-name { grid-area: name; display: grid; gap: 2px; }
+.sim-name b { font-size: 18px; }
+.sim-name small { font-size: 12.5px; color: var(--color-muted); }
+.sim-ctrl { grid-area: ctrl; display: flex; align-items: center; gap: 8px; }
+.sim-ctrl button { font: inherit; font-size: 20px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text); cursor: pointer; }
+.sim-ctrl button:disabled { opacity: 0.35; cursor: default; }
+.sim-ctrl output { min-width: 3ch; text-align: center; font-family: 'Shippori Mincho', serif; font-size: 26px; font-variant-numeric: tabular-nums; }
+.sim-bar { grid-area: bar; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--c) 15%, transparent); overflow: hidden; }
+.sim-bar i { display: block; height: 100%; background: var(--c); border-radius: inherit; transition: width 0.35s var(--ease-out); }
+.sim-left { margin: 0; font-size: 14px; color: var(--color-muted); }
+.sim-left.is-warn { color: #c0392b; }
+:root[data-theme="dark"] .sim-left.is-warn { color: #ff7b6e; }
+.sim-actions { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; }
+.sim-actions .btn-primary { border: 0; cursor: pointer; font-family: inherit; }
+.sim-actions button:disabled { opacity: 0.45; cursor: default; }
+.sim-actions .btn-ghost { font: inherit; border: 0; background: none; cursor: pointer; color: var(--color-text); }
+.sim-out:empty { display: none; }
+.sim-result { display: grid; gap: 14px; padding-top: 6px; border-top: 1px solid var(--color-border); }
+.sim-now { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.sim-now small { width: 100%; font-size: 13px; color: var(--color-muted); }
+.sim-now b { font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(40px, 7vw, 60px); line-height: 1; font-variant-numeric: tabular-nums; }
+.sim-now b span { font-size: 0.35em; margin-left: 4px; color: var(--color-muted); }
+.sim-now em { font-style: normal; font-weight: 700; }
+.sim-now em.up { color: #2f7a32; }
+.sim-now em.down { color: #c0392b; }
+:root[data-theme="dark"] .sim-now em.up { color: #7fd889; }
+:root[data-theme="dark"] .sim-now em.down { color: #ff7b6e; }
+.sim-chart { width: 100%; height: auto; }
+.sim-grid { stroke: var(--color-border); stroke-width: 1; }
+.sim-grid.is-start { stroke: var(--color-accent); stroke-dasharray: 4 4; }
+.sim-ytick { font-size: 11px; fill: var(--color-muted); text-anchor: end; font-family: 'DM Sans', sans-serif; }
+.sim-xtick { font-size: 11px; fill: var(--color-muted); text-anchor: middle; font-family: 'DM Sans', sans-serif; }
+.sim-line { fill: none; stroke: var(--c); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; opacity: 0.7; stroke-dasharray: 5 5; }
+.sim-line.is-me { stroke: var(--color-text); stroke-width: 3.5; opacity: 1; stroke-dasharray: none; }
+.sim-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--color-muted); }
+.sim-legend li::before { content: ''; display: inline-block; width: 18px; height: 0; border-top: 2px dashed var(--c); margin-right: 6px; vertical-align: middle; }
+.sim-legend li.is-me::before { border-top: 3px solid var(--color-text); }
+.sim-note { margin: 0; font-size: 14px; line-height: 1.9; color: var(--color-muted); }
+.sim-note a, .sim-note .sim-link { color: var(--color-accent-deep); font: inherit; background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.sim-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.sim-stats > div { padding: 14px; border-radius: var(--radius); background: var(--color-bg); border: 1px solid var(--color-border); display: grid; gap: 6px; }
+.sim-stats small { font-size: 12px; color: var(--color-muted); }
+.sim-stats b { font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(22px, 3vw, 30px); font-variant-numeric: tabular-nums; }
+.sim-stats b span { font-size: 0.5em; margin-left: 3px; color: var(--color-muted); }
+.sim-hist { height: 110px; display: flex; align-items: flex-end; gap: 3px; padding: 0 2px; }
+.sim-hist i { flex: 1; min-height: 2px; border-radius: 3px 3px 0 0; background: var(--color-accent); }
+.sim-hist i.is-loss { background: #d0796c; }
+.sim-hist-axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--color-muted); margin-top: -6px; }
+@media (max-width: 560px) { .sim-stats { grid-template-columns: 1fr; } .sim-ctrl button { width: 40px; height: 40px; } }
+.qz-feedback p.qz-gl { margin: -4px 0 0; font-size: 13px; }
+.qz-feedback p.qz-gl a { color: var(--color-accent-deep); }

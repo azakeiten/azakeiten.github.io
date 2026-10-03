@@ -276,7 +276,7 @@
       btns.forEach(x => { x.disabled = true; if (x.dataset.ok === '1') x.classList.add('is-right'); });
       root.querySelectorAll('.qz-life button').forEach(x => { x.disabled = true; });
       if (!ok) { b.classList.add('is-wrong'); card.classList.add('qz-shake'); }
-      fb.innerHTML = `<p class="${ok ? 'ok' : 'ng'}">${ok ? "正解！" : "残念……"}</p>${ok ? "" : `<p class="qz-answer">正解は「<b>${q.a[0]}</b>」</p>`}<p>${q.note}</p><button type="button" class="btn-primary qz-next">${cur.idx === 0 ? '次の問題へ' : '結果を見る'}</button>`;
+      fb.innerHTML = `<p class="${ok ? 'ok' : 'ng'}">${ok ? "正解！" : "残念……"}</p>${ok ? "" : `<p class="qz-answer">正解は「<b>${q.a[0]}</b>」</p>`}<p>${q.note}</p><p class="qz-gl"><a href="glossary.html" target="_blank" rel="noopener">わからない言葉は「経済用語ミニ辞典」で（別のタブで開きます）→</a></p><button type="button" class="btn-primary qz-next">${cur.idx === 0 ? '次の問題へ' : '結果を見る'}</button>`;
       const next = fb.querySelector('.qz-next');
       next.addEventListener('click', () => { cur.idx++; if (cur.idx < 2) ask(); else settle(); });
       next.focus({ preventScroll: true });

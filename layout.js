@@ -22,6 +22,7 @@
       { ico: 'M12 3l2.6 4.5H20l-2.7 4.5L20 16.5h-5.4L12 21l-2.6-4.5H4l2.7-4.5L4 7.5h5.4z', href: 'about.html',      ja: '麻経とは',         en: 'About',    desc: '成り立ち・活動の全体説明・今後の展望。',       img: 'members.jpg' },
       { ico: 'M4 8h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM10 8v10', href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'photos/room-diagnosis.jpg' },
       { ico: 'M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'photos/setup.jpg' }
+      { ico: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6', href: 'glossary.html',   ja: '経済用語ミニ辞典', en: 'Glossary', desc: 'GDP・円高・配当……経済の言葉をやさしく。', img: 'photos/rules-posters.jpg', badge: 'NEW' },
     ]},
     { group: '挑む', en: 'Challenge', pages: [
       { ico: 'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M10 17h4', href: 'contests.html',   ja: '各種コンテスト',    en: 'Contests', desc: 'ビジネスコンテスト・日経ストックリーグ ほか。', img: 'tokyo-s.jpg' },
@@ -30,6 +31,7 @@
     { group: '参加する', en: 'Join', pages: [
       { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.6M12 16.8v.2', href: 'diagnosis.html',  ja: 'エコノミスト診断',  en: 'Type Test', desc: 'YES か NO で、あなたの投資家タイプがわかる。', img: 'photos/room-diagnosis.jpg', badge: 'NEW' },
       { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9 9h6M9 12h6M12 6v12', href: 'quiz.html',       ja: '億万長者クイズ',    en: 'Quiz',      desc: 'チップを賭けて 2 問に挑戦。目指せ 6 倍。', img: 'photos/board-special.jpg', badge: 'NEW' },
+      { ico: 'M4 19h16M7 16v-5M12 16V7M17 16v-8', href: 'sim.html',        ja: 'チップ配分シミュレーター', en: 'Simulator', desc: 'チップを株・債券・預金に分けて、10 年後へ早送り。', img: 'photos/board-special.jpg', badge: 'NEW' },
       { ico: 'M5 11h14v9H5zM9 15l2 2 4-4M8 11V6h8v5', href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '来年どんな展示が見たい？ 1 票で決めよう。',   img: 'photos/hallway-game.jpg', badge: '受付中' },
       { ico: 'M3 12l4-4 3 2 4-3 7 6M7 13l3 3 2-1 2 2 3-3', href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'photos/star-bills.jpg' },
       { ico: 'M4 6h16v12H4zM4 7l8 6 8-6', href: 'contact.html',    ja: 'お問い合わせ',      en: 'Contact',  desc: 'フォーム、または Instagram の DM から。',      img: 'photos/star-door.jpg' }
@@ -159,6 +161,8 @@
           <li><a href="sponsor.html">協賛のご案内</a></li>
           <li><a href="quiz.html">億万長者クイズ</a></li>
           <li><a href="diagnosis.html">エコノミスト診断</a></li>
+          <li><a href="sim.html">チップ配分シミュレーター</a></li>
+          <li><a href="glossary.html">経済用語ミニ辞典</a></li>
           <li><a href="vote.html">文化祭投票</a></li>
           <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
