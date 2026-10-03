@@ -64,11 +64,11 @@ window.AZAKEI = {
   // 文化祭の来場者（2026 年）。1〜3 日目
   visitors: { total: 2364, days: [492, 1152, 720] },
   events: [
-    { date: '', when: '受付中', title: '文化祭投票「来年どんな展示が見たい？」', tag: '投票', place: 'このサイト', desc: '次の麻布経済展のテーマを、みなさんの投票で決めます。', link: 'vote.html' },
-    { date: '2027-05-01', end: '2027-05-03', title: '文化祭「麻布経済展」2027', tag: '文化祭', place: '麻布中学校・高等学校', desc: '経済とエンタメが交差する、体験型展示。今年も開催予定です。', link: 'festival.html' },
+    { date: '', when: '受付中', title: '文化祭投票「来年どんな展示が見たい？」', tag: '投票', place: 'このサイト', desc: '次の麻布経済展のテーマを、みなさんの投票で決めます。', link: 'vote.html', img: 'photos/hallway-game.jpg' },
+    { date: '2027-05-01', end: '2027-05-03', title: '文化祭「麻布経済展」2027', tag: '文化祭', place: '麻布中学校・高等学校', desc: '経済とエンタメが交差する、体験型展示。今年も開催予定です。', link: 'festival.html', img: 'photos/hallway-wave.jpg' },
     { date: '', when: '日程調整中', title: '日経ストックリーグ 参加', tag: 'コンテスト', place: 'オンライン', desc: 'チームでポートフォリオを組み、レポートを作成します。', link: 'contests.html#stockleague' },
     { date: '', when: '日程調整中', title: 'ビジネスコンテスト 挑戦', tag: 'コンテスト', place: '—', desc: '高校生向けビジネスコンテストへの出場を準備中。', link: 'contests.html#business' },
-    { date: '2026-05-01', end: '2026-05-03', title: '文化祭「麻布経済展」2026', tag: '文化祭', place: '麻布中学校・高等学校 中3-5教室', desc: '3日間で合計2,364人にご来場いただきました。', link: 'festival.html' }
+    { date: '2026-05-01', end: '2026-05-03', title: '文化祭「麻布経済展」2026', tag: '文化祭', place: '麻布中学校・高等学校 中3-5教室', desc: '3日間で合計2,364人にご来場いただきました。', link: 'festival.html', img: 'photos/balloons.jpg' }
   ],
 
   /* ---- 活動風景（写真） ----

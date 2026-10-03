@@ -380,3 +380,33 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     });
   });
 })();
+
+/* ---- v19：スマホ用クイックドック（画面の下。下へスクロール中は隠れ、上へ戻すと出る） ---- */
+(function() {
+  if (document.documentElement.lang === 'en' || !document.getElementById('site-footer')) return;
+  const here = location.pathname.split('/').pop() || 'index.html';
+  const I = window.AZAKEI_ICONS || {};
+  const items = [
+    ['index.html', 'ホーム', I['index.html']],
+    ['quiz.html', 'クイズ', I['quiz.html']],
+    ['diagnosis.html', '診断', I['diagnosis.html']],
+    ['vote.html', '投票', I['vote.html']]
+  ];
+  const ico = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d || ''}"/></svg>`;
+  const dock = document.createElement('div');   // nav 要素だとサイト全体の nav の見た目が付いてしまうので div に
+  dock.className = 'dock'; dock.setAttribute('role', 'navigation'); dock.setAttribute('aria-label', 'よく使うページ');
+  dock.innerHTML = items.map(([href, label, d]) => `<a href="${href}"${href === here ? ' aria-current="page" class="is-here"' : ''}>${ico(d)}<span>${label}</span></a>`).join('') +
+    `<button type="button" class="dock-menu" aria-label="サイトの目次を開く">${ico('M4 7h16M4 12h16M4 17h10')}<span>目次</span></button>`;
+  document.body.appendChild(dock);
+  document.body.classList.add('has-dock');
+  dock.querySelector('.dock-menu').addEventListener('click', () => { const h = document.getElementById('hamburger') || document.querySelector('.hamburger'); if (h) h.click(); });
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY, down = y > lastY + 6, up = y < lastY - 6;
+    if (down && y > 160) dock.classList.add('is-hidden');
+    else if (up || y < 40) dock.classList.remove('is-hidden');
+    if (Math.abs(y - lastY) > 6) lastY = y;
+    // ページの最後まで来たら出す（フッターのリンクと重ならないよう、少し透明に）
+    if (innerHeight + y >= document.documentElement.scrollHeight - 4) dock.classList.remove('is-hidden');
+  }, { passive: true });
+})();

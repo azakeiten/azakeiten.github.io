@@ -40,13 +40,13 @@
       badge = '<span class="event-countdown is-now">受付中</span>';
     }
     return `<${tag} class="event-row${e.past ? ' is-past' : ''}"${e.link ? ` href="${e.link}"` : ''}>
-      <div class="event-when">${when}${badge}</div>
+      <div class="event-when">${!e.date && e.when === '受付中' ? '' : when}${badge}</div>
       <div class="event-main">
         <span class="chip">${e.tag || 'Event'}</span>
         <h3>${e.title}</h3>
         <p>${e.desc || ''}</p>
       </div>
-      <div class="event-place">${e.place || ''}</div>
+      <div class="event-place">${e.img ? `<img class="event-thumb" src="${e.img}" alt="" loading="lazy" decoding="async">` : ''}${e.place || ''}</div>
     </${tag}>`;
   }
 
