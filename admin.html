@@ -3,22 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>チップ配分シミュレーター | 麻経 AZAKEI</title>
-  <meta name="description" content="チップ 100 枚を株・債券・預金に分けて、10 年後へ早送り。リスクとリターン、分散投資を遊びながら体験できるシミュレーター。" />
+  <title>部員用 更新ページ | 麻経 AZAKEI</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="AZAKEI 部員用の更新ページ" />
   <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
   <link rel="icon" href="icon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="icon-180.png" />
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="apple-mobile-web-app-title" content="麻経" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="AZAKEI" />
-  <meta property="og:title" content="チップ配分シミュレーター | 麻経 AZAKEI" />
-  <meta property="og:description" content="チップ 100 枚を株・債券・預金に分けて、10 年後へ早送り。リスクとリターンを遊びながら体験。" />
-  <meta property="og:url" content="https://azakeiten.github.io/sim.html" />
-  <link rel="canonical" href="https://azakeiten.github.io/sim.html" />
-  <meta property="og:image" content="https://azakeiten.github.io/og.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,19 +28,18 @@
 </head>
 <body>
 
-  <header class="page-hero" data-bg="SIMULATE">
+  <header class="page-hero" data-bg="EDIT">
     <div class="container">
-      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / チップ配分シミュレーター</p>
-      <p class="section-label">Portfolio Simulator</p>
-      <h1 class="section-title"><span class="keep-phrase">チップ配分</span><span class="keep-phrase"><em>シミュレーター</em></span></h1>
-      <p class="page-hero-lead">チップ 100 枚を「株・債券・預金」に分けて、10 年後へ早送り。増え方とブレ方を見くらべて、リスクとリターン、分散投資を体で覚えよう。</p>
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / 部員用 更新ページ</p>
+      <p class="section-label">Members only</p>
+      <h1 class="section-title"><span class="keep-phrase">部員用</span><span class="keep-phrase"><em>更新ページ</em></span></h1>
+      <p class="page-hero-lead">活動日誌（お知らせ）と日程を、ここから追加・修正できます。書いた内容は、トップ・活動風景・日程のページにすぐ表示されます。</p>
     </div>
   </header>
 
   <section class="about tight">
     <div class="container">
-      <div id="sim" class="sim"></div>
-      <p class="dg-note">※ 学ぶための模擬です。値動きは「株は大きく増えやすいがブレも大きい」などの性質をまねた仮の数字で、実際の市場のデータや将来の予想ではありません。投資をすすめるものでもありません。</p>
+      <div id="admin" class="adm" aria-live="polite"><p class="adm-msg">読みこみ中…</p></div>
     </div>
   </section>
 
@@ -58,7 +50,7 @@
   <script src="brand.js?v=20261004o"></script>
   <script src="nav.js?v=20261004o"></script>
   <script src="reveal.js?v=20261004o"></script>
-  <script src="sim.js?v=20261004o"></script>
+  <script src="admin.js?v=20261004o"></script>
   <script src="site.js?v=20261004o"></script>
 </body>
 </html>

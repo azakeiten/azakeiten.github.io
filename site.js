@@ -636,9 +636,11 @@ try {
     timer = setInterval(tick, 1000);
     // 同じ予定の「あと○日」は、カウントダウンと重なるので消す
     const day = cd.dataset.countdown.slice(0, 10).replace(/-/g, '.');
-    document.querySelectorAll('.event-row:not(.is-past)').forEach(row => {
+    const dedupe = () => document.querySelectorAll('.event-row:not(.is-past)').forEach(row => {
       if (row.querySelector('.event-when') && row.querySelector('.event-when').textContent.includes(day)) row.querySelectorAll('.event-countdown:not(.is-now)').forEach(b => b.remove());
     });
+    dedupe();
+    document.addEventListener('azakei:rerender', dedupe);   // 部員の投稿で日程を描き直したときも
     cd.setAttribute('aria-label', en ? `${els.d.textContent} days until ${cd.dataset.title}` : `${cd.dataset.title}まで、あと ${els.d.textContent} 日`);
   }
 
@@ -649,14 +651,15 @@ try {
     fill.className = 'tl-fill'; fill.setAttribute('aria-hidden', 'true');
     tl.appendChild(fill);
     const update = () => {
+      if (!fill.isConnected) tl.appendChild(fill);   // 日程を描き直すと消えるので、付けなおす
       const r = tl.getBoundingClientRect();
       const line = reduce ? r.height : Math.max(0, Math.min(r.height, innerHeight * 0.6 - r.top));
       fill.style.setProperty('--tl', line + 'px');
       tl.querySelectorAll('.event-row').forEach(row => row.classList.toggle('is-lit', row.getBoundingClientRect().top - r.top + 40 <= line));
     };
     addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', update);
     update();
+    document.addEventListener('azakei:rerender', update);
   }
 
   /* ---- 活動風景：雑誌のような並び ---- */

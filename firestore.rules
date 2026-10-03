@@ -1,7 +1,7 @@
 rules_version = '2';
 
 // ================================================================
-//  AZAKEI 文化祭投票・クイズランキング — Firestore セキュリティルール
+//  AZAKEI 文化祭投票・クイズランキング・部員の投稿 — Firestore セキュリティルール
 //  Firebase コンソール →「Firestore Database」→「ルール」に貼り付けて「公開」。
 //
 //  データの形:
@@ -98,6 +98,39 @@ service cloud.firestore {
       allow update: if signedIn() && request.auth.uid == uid && validRankEntry()
         && request.resource.data.score > resource.data.score;
       allow delete: if false;
+    }
+
+    // ================================================================
+    //  部員用 更新ページ（admin.html）の投稿
+    //    posts/{id} … { kind: diary|event, title, body, date, end, place, tag, link, author, updatedAt }
+    //    ・誰でも読める（サイトに表示するため）
+    //    ・書く・直す・消すのは、下の一覧にある Google アカウントだけ
+    //    ・部員を増やすときは、ここと admin.js の EDITORS の両方にメールアドレスを足す
+    // ================================================================
+    function isEditor() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ['azakeiten@gmail.com'];
+    }
+    function validPost() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['kind', 'title', 'body', 'date', 'end', 'place', 'tag', 'link', 'author', 'updatedAt'])
+        && d.kind in ['diary', 'event']
+        && d.title is string && d.title.size() >= 1 && d.title.size() <= 40
+        && d.body is string && d.body.size() <= 300
+        && d.date is string && (d.date == '' || d.date.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}'))
+        && d.end is string && (d.end == '' || d.end.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}'))
+        && d.place is string && d.place.size() <= 40
+        && d.tag is string && d.tag.size() <= 12
+        && d.link is string && d.link.size() <= 200
+        && d.author == request.auth.token.email
+        && d.updatedAt == request.time;
+    }
+
+    match /posts/{id} {
+      allow read: if true;
+      allow create, update: if isEditor() && validPost();
+      allow delete: if isEditor();
     }
   }
 }

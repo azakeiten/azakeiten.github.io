@@ -106,6 +106,30 @@
   });
   if (window.AZAKEI_RENDER_MARKS) window.AZAKEI_RENDER_MARKS();
 
+  /* ---- 部員が管理ページ（admin.html）から書いた「日誌」「日程」を Firebase から足す ---- */
+  const live = [...document.querySelectorAll('[data-render="diary"], [data-render="events"]')];
+  if (live.length && D.firebase) (async () => {
+    try {
+      const SDK = 'https://www.gstatic.com/firebasejs/12.19.0/';
+      const [appMod, fs] = await Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-firestore.js')]);
+      const app = appMod.getApps().length ? appMod.getApp() : appMod.initializeApp(D.firebase);
+      const snap = await fs.getDocs(fs.query(fs.collection(fs.getFirestore(app), 'posts'), fs.limit(300)));
+      if (snap.empty) return;
+      // 部員が書いた文字は、そのまま文字として表示（HTML として動かない）
+      const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const safeLink = s => (/^(https:\/\/|[a-z0-9-]+\.html(#[\w-]+)?$)/i.test(s || '') ? s : '');
+      const day = s => (/^\d{4}-\d{2}-\d{2}$/.test(s || '') ? s : '');
+      D.diary = (D.diary || []).slice(); D.events = (D.events || []).slice();
+      snap.forEach(doc => {
+        const p = doc.data();
+        if (p.kind === 'diary' && day(p.date)) D.diary.push({ date: p.date, title: esc(p.title), body: esc(p.body).replace(/\n/g, '<br>') });
+        if (p.kind === 'event') D.events.push({ date: day(p.date), end: day(p.end), when: day(p.date) ? '' : '日程調整中', title: esc(p.title), tag: esc(p.tag) || 'Event', place: esc(p.place), desc: esc(p.body), link: safeLink(p.link) });
+      });
+      live.forEach(el => { const fn = renderers[el.dataset.render]; if (fn) fn(el); });
+      document.dispatchEvent(new Event('azakei:rerender'));
+    } catch (e) { /* 読めないときは、もとの内容のまま */ }
+  })();
+
   /* ---- お問い合わせフォーム ---- */
   const form = document.getElementById('contactForm');
   if (!form) return;
