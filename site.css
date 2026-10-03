@@ -3599,3 +3599,47 @@ html { scrollbar-color: color-mix(in srgb, var(--color-accent) 70%, transparent)
 .event-thumb { display: block; width: 100%; max-width: 200px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; margin-bottom: 8px; transition: transform 0.6s var(--ease-out); }
 a.event-row:hover .event-thumb { transform: scale(1.03); }
 @media (max-width: 760px) { .event-thumb { max-width: 160px; } }
+
+
+/* ################################################################
+   ▼ デザインのルール（部品ごとの大きさ・丸み・文字をそろえる）
+   ここで決めた値を使えば、新しい部品も同じ見た目になります。
+   ################################################################ */
+:root {
+  /* 角の丸み：カード 16px／大きな面 22px／タグ・ボタン 999px（まんまる） */
+  --radius:       16px;
+  --radius-panel: 22px;
+  --radius-pill:  999px;
+  /* カードの内側の余白 */
+  --pad-card:  clamp(20px, 3vw, 32px);
+  --pad-panel: clamp(24px, 4.4vw, 48px);
+  /* 小さな文字：見出しラベル／タグ／バッジ */
+  --fs-label: 12px;  --ls-label: 0.22em;
+  --fs-tag:   13px;
+  --fs-badge: 12px;
+  /* ボタンの高さ */
+  --btn-h: 50px;
+}
+
+/* カード（ひとつずつ独立した四角） */
+:is(.fx-rule, .value, .visitors, .qz-rank, .vote-option, .dm-card, .event-row, .sp-letter, .vote-summary, .daily-q, .en-visit, .en-contests article, .qz-review, .dq-choice, .qz-choice, .qz-level) { border-radius: var(--radius); }
+:is(.fx-rule, .value, .visitors, .qz-rank, .vote-summary, .daily-q, .dm-card) { padding: var(--pad-card); }
+/* 大きな面（黒板・カウントダウン・診断/クイズのカード・案内） */
+:is(.countdown, .mm-board, .dg-card, .dg-promo, .story-media) { border-radius: var(--radius-panel); }
+:is(.countdown, .dg-card) { padding: var(--pad-panel); }
+
+/* 見出しラベル（英語の小さな見出し）：どこでも同じ大きさ・字間・太さ */
+p:is(.section-label, .dq-kicker, .dg-kicker, .story-tag, .vs-kicker, .fx-rule-tag),
+.cd-head p { font-size: var(--fs-label); letter-spacing: var(--ls-label); font-weight: 500; line-height: 1.6; }
+p.fx-rule-tag { text-transform: uppercase; color: var(--color-accent-deep); margin-bottom: 6px; }
+
+/* タグ（選べる・並ぶもの） */
+:is(.ct-flow li, .ct-skills li, .qz-life button, .dq-week) { font-size: var(--fs-tag); }
+/* バッジ（小さな印） */
+:is(.chip, .dq-level, .vote-option .vote-rank:not(:empty), .qz-rank-name em) { font-size: var(--fs-badge); padding: 3px 10px; border-radius: var(--radius-pill); font-weight: 600; letter-spacing: 0.04em; }
+
+/* ボタン：高さと形をそろえる */
+.btn-primary { min-height: var(--btn-h); display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-pill); box-sizing: border-box; }
+@media (max-width: 560px) { :root { --btn-h: 48px; } }
+.contest :is(.ct-flow, .ct-skills) li { font-size: var(--fs-tag); }
+p.fx-rule-tag { font-family: var(--font-body); font-style: normal; }
