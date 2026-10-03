@@ -835,3 +835,20 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 })();
 
 } catch (e) { console.error('[site.js / v12]', e); }
+
+/* ######## ▼ 文字の大きさの切りかえ（フッター） ######## */
+try {
+(function() {
+  const html = document.documentElement;
+  const sync = () => document.querySelectorAll(".fs-switch button").forEach(b => b.setAttribute("aria-pressed", String((html.dataset.fs || "") === b.dataset.fs)));
+  document.addEventListener("click", e => {
+    const b = e.target.closest && e.target.closest(".fs-switch button");
+    if (!b) return;
+    if (b.dataset.fs) html.dataset.fs = b.dataset.fs; else delete html.dataset.fs;
+    try { if (b.dataset.fs) localStorage.setItem("azakei-fs", b.dataset.fs); else localStorage.removeItem("azakei-fs"); } catch (err) {}
+    sync();
+    dispatchEvent(new Event("resize"));
+  });
+  sync();
+})();
+} catch (e) { console.error("[site.js / fs]", e); }

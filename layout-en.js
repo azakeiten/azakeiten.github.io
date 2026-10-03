@@ -55,6 +55,7 @@
       <div>
         <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="en.html" class="wordmark footer-wordmark">AZA<span>KEI</span><small class="footer-kanji" lang="ja">麻経</small></a></div>
         <p class="footer-note">Azabu Economics · Est. 2025<br>Azabu Junior and Senior High School, Tokyo</p>
+        <div class="fs-switch" role="group" aria-label="Text size"><span>Text size</span><button type="button" data-fs="">A</button><button type="button" data-fs="l">A+</button><button type="button" data-fs="xl">A++</button></div>
       </div>
       <div>
         <p class="footer-head">Explore</p>
