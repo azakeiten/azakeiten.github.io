@@ -359,3 +359,24 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
 })();
+
+/* ---- v18：コンテスト「取り組み」を流れ図に、「身につく力」をタグに ---- */
+(function() {
+  document.querySelectorAll('.contest').forEach(c => { const n = c.querySelector('.contest-num'); if (n) c.dataset.num = n.textContent.trim().slice(0, 2); });
+  document.querySelectorAll('.contest dl').forEach(dl => {
+    [...dl.querySelectorAll('dt')].forEach(dt => {
+      const dd = dt.nextElementSibling;
+      if (!dd || dd.tagName !== 'DD' || dd.dataset.done) return;
+      const label = dt.textContent.trim();
+      const text = dd.textContent.trim();
+      if (label === '取り組み' && text.includes('→')) {
+        const steps = text.split('→').map(s => s.trim()).filter(Boolean);
+        dd.setAttribute('aria-label', text);
+        dd.innerHTML = `<ol class="ct-flow">${steps.map((s, i) => `<li style="--i:${i}"><span>${String(i + 1).padStart(2, '0')}</span>${s}</li>`).join('')}</ol>`;
+      } else if (label === '身につく力' && text.includes('、')) {
+        dd.innerHTML = `<ul class="ct-skills">${text.split('、').map(s => `<li>${s.trim()}</li>`).join('')}</ul>`;
+      }
+      dd.dataset.done = '1';
+    });
+  });
+})();
