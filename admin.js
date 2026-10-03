@@ -13,6 +13,8 @@
   if (!cfg) { root.innerHTML = '<p class="adm-msg">Firebase の設定がありません。</p>'; return; }
 
   const EDITORS = ['azakeiten@gmail.com'];
+  // 日程に付けられる写真（サイトにある写真だけ）
+  const PHOTOS = ((window.AZAKEI && window.AZAKEI.gallery) || []).filter(g => /^photos\/[a-z0-9-]+\.jpg$/.test(g.src || ''));
   const SDK = 'https://www.gstatic.com/firebasejs/12.19.0/';
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const today = () => { const j = new Date(Date.now() + 9 * 3600e3); return j.toISOString().slice(0, 10); };
@@ -70,12 +72,14 @@
           <label class="adm-f"><span>ラベル <em>例：文化祭、コンテスト</em></span><input name="tag" maxlength="12"></label>
         </div>
         <label class="adm-f adm-ev"><span>リンク <em>例：festival.html や https://…</em></span><input name="link" maxlength="200"></label>
+        <label class="adm-f adm-ev"><span>写真 <em>サイトの写真から選ぶ（日程のページに小さく出ます）</em></span><select name="img"><option value="">なし</option>${PHOTOS.map(p => `<option value="${esc(p.src)}">${esc(p.caption)}</option>`).join('')}</select></label>
         <p class="adm-err" role="alert"></p>
         <div class="adm-actions">
           <button type="submit" class="btn-primary">保存する</button>
           <button type="button" class="btn-ghost adm-cancel" hidden>書くのをやめる</button>
         </div>
       </form>
+      <div class="adm-import" hidden></div>
       <div class="adm-list-head"><h2>これまでの投稿</h2><small>ここに出るのは、このページから書いたものだけです</small></div>
       <ol class="adm-list"><li class="adm-msg">読みこみ中…</li></ol>`;
     root.querySelector('.adm-logout').addEventListener('click', () => fb.authMod.signOut(fb.auth));
@@ -119,14 +123,50 @@
         </li>`).join('') : '<li class="adm-msg">まだ投稿はありません。</li>';
       list.querySelectorAll('[data-edit]').forEach(b => b.addEventListener('click', () => edit(b.dataset.edit)));
       list.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => del(b.dataset.del)));
+      importBox();
     } catch (e) { list.innerHTML = `<li class="adm-err">読みこめませんでした（${esc(e.code || e.message)}）</li>`; }
+  }
+
+  /* ---- サイトに直接書いてある日誌・日程（content.js）を、管理ページの投稿として取りこむ ---- */
+  function legacyItems() {
+    const D = window.AZAKEI || {};
+    const photo = s => (/^photos\/[a-z0-9-]+\.jpg$/.test(s || '') ? s : '');
+    const diary = (D.diary || []).map(d => ({ kind: 'diary', title: d.title, body: d.body || '', date: d.date || '', end: '', place: '', tag: '', link: '', img: '' }));
+    const events = (D.events || []).map(e => ({ kind: 'event', title: e.title, body: e.desc || '', date: e.date || '', end: e.end || '', place: e.place || '', tag: e.tag || '', link: e.link || '', img: photo(e.img) }));
+    const key = p => p.kind + '|' + p.date + '|' + p.title;
+    const have = new Set(posts.map(key));
+    return [...diary, ...events].filter(p => !have.has(key(p)));
+  }
+  function importBox() {
+    const box = root.querySelector('.adm-import');
+    if (!box) return;
+    const items = legacyItems();
+    if (!items.length) { box.hidden = true; return; }
+    box.hidden = false;
+    box.innerHTML = `
+      <p><b>サイトに直接書いてある日誌・日程が ${items.length} 件あります。</b><br>取りこむと、ここから直したり消したりできるようになります（サイトの見た目は変わりません）。</p>
+      <button type="button" class="btn-primary">${items.length} 件を取りこむ</button>
+      <p class="adm-err" role="alert"></p>`;
+    const btn = box.querySelector('button'), msg = box.querySelector('.adm-err');
+    btn.addEventListener('click', async () => {
+      btn.disabled = true; msg.textContent = '取りこんでいます…';
+      try {
+        for (const it of items) await fb.fs.addDoc(fb.fs.collection(fb.db, 'posts'), { ...it, author: user.email, updatedAt: fb.fs.serverTimestamp() });
+        msg.classList.add('is-ok'); msg.textContent = `${items.length} 件を取りこみました。`;
+        load();
+      } catch (e) {
+        btn.disabled = false;
+        msg.textContent = '途中で止まりました（' + (e.code || e.message) + '）。もう一度押すと、残りだけ取りこみます。';
+        load();
+      }
+    });
   }
 
   function edit(id) {
     const p = posts.find(x => x.id === id); if (!p) return;
     editing = id;
     const f = root.querySelector('.adm-form');
-    f.kind.value = p.kind; ['title', 'date', 'end', 'body', 'place', 'tag', 'link'].forEach(k => { f[k].value = p[k] || ''; });
+    f.kind.value = p.kind; ['title', 'date', 'end', 'body', 'place', 'tag', 'link', 'img'].forEach(k => { f[k].value = p[k] || ''; });
     root.querySelector('#admMode').textContent = '直している投稿';
     f.querySelector('.adm-cancel').hidden = false;
     f.dispatchEvent(new Event('change'));
@@ -144,7 +184,7 @@
     const err = f.querySelector('.adm-err');
     const kind = f.kind.value;
     const v = k => f[k].value.trim();
-    const data = { kind, title: v('title'), body: v('body'), date: v('date'), end: kind === 'event' ? v('end') : '', place: kind === 'event' ? v('place') : '', tag: kind === 'event' ? v('tag') : '', link: kind === 'event' ? v('link') : '' };
+    const data = { kind, title: v('title'), body: v('body'), date: v('date'), end: kind === 'event' ? v('end') : '', place: kind === 'event' ? v('place') : '', tag: kind === 'event' ? v('tag') : '', link: kind === 'event' ? v('link') : '', img: kind === 'event' ? f.img.value : '' };
     if (!data.title) { err.textContent = 'タイトルを入れてください。'; f.title.focus(); return; }
     if (kind === 'diary' && !data.date) { err.textContent = '日誌には日付が必要です。'; f.date.focus(); return; }
     if (data.end && data.date && data.end < data.date) { err.textContent = '終わりの日が、はじまりの日より前になっています。'; return; }

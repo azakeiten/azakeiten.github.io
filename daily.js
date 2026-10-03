@@ -54,7 +54,7 @@
     if (fresh && ok && !matchMedia('(prefers-reduced-motion: reduce)').matches) box.classList.add('is-correct');
   }
 
-  if (save.week === weekNo && Number.isInteger(save.pick)) reveal(save.pick, false);
+  if (save.week === weekNo && Number.isInteger(save.pick)) { reveal(save.pick, false); stats(null); }
 
   btns.forEach((b, i) => b.addEventListener('click', () => {
     const ok = b.dataset.ok === '1';
@@ -63,7 +63,45 @@
     save = { week: weekNo, pick: i, streak, lastOk: ok ? weekNo : save.lastOk };
     try { localStorage.setItem(KEY, JSON.stringify(save)); } catch (e) {}
     reveal(i, true);
+    stats(ok);
   }));
+
+  /* ---- みんなの正解率（Firestore: weekly/{週の番号}、1 人 1 回だけ数える） ---- */
+  async function stats(myAnswer) {
+    const cfg = window.AZAKEI && window.AZAKEI.firebase;
+    if (!cfg) return;
+    const line = document.createElement('p');
+    line.className = 'dq-rate';
+    result.appendChild(line);
+    try {
+      const SDK = 'https://www.gstatic.com/firebasejs/12.19.0/';
+      const [appMod, authMod, fs] = await Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-auth.js'), import(SDK + 'firebase-firestore.js')]);
+      const app = appMod.getApps().length ? appMod.getApp() : appMod.initializeApp(cfg);
+      const auth = authMod.getAuth(app);
+      await auth.authStateReady();
+      if (!auth.currentUser) await authMod.signInAnonymously(auth);
+      const db = fs.getFirestore(app);
+      const ref = fs.doc(db, 'weekly', String(weekNo));
+      // 今回はじめて答えたなら、集計に 1 票ぶん足す（すでに数えられていたら足さない）
+      if (myAnswer !== null) {
+        const mine = fs.doc(ref, 'answers', auth.currentUser.uid);
+        const already = await fs.getDoc(mine).then(s => s.exists()).catch(() => true);
+        if (!already) {
+          const cur = await fs.getDoc(ref);
+          if (!cur.exists()) { try { await fs.setDoc(ref, { n: 0, ok: 0 }); } catch (e) { /* ほかの人が先に作った */ } }
+          const batch = fs.writeBatch(db);
+          batch.set(mine, { ok: !!myAnswer, at: fs.serverTimestamp() });
+          batch.update(ref, { n: fs.increment(1), ok: fs.increment(myAnswer ? 1 : 0) });
+          await batch.commit();
+        }
+      }
+      const s = await fs.getDoc(ref);
+      if (!s.exists() || !s.data().n) { line.remove(); return; }
+      const { n, ok } = s.data();
+      const pct = Math.round(ok / n * 100);
+      line.innerHTML = `<span class="dq-rate-bar"><i style="width:${pct}%"></i></span><span>みんなの正解率 <b>${pct}%</b>（${n.toLocaleString('ja-JP')} 人中）</span>`;
+    } catch (e) { line.remove(); }
+  }
 
   function gcd(a, b) { return b ? gcd(b, a % b) : a; }
 })();

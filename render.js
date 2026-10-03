@@ -119,11 +119,20 @@
       const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
       const safeLink = s => (/^(https:\/\/|[a-z0-9-]+\.html(#[\w-]+)?$)/i.test(s || '') ? s : '');
       const day = s => (/^\d{4}-\d{2}-\d{2}$/.test(s || '') ? s : '');
-      D.diary = (D.diary || []).slice(); D.events = (D.events || []).slice();
-      snap.forEach(doc => {
-        const p = doc.data();
+      const safeImg = s => (/^photos\/[a-z0-9-]+\.jpg$/.test(s || '') ? s : '');
+      const posts = snap.docs.map(d => d.data());
+      // 管理ページに取りこんだものと同じ（種類・日付・タイトルが同じ）元の書きこみは、二重に出さない
+      const key = (k, d, t) => k + '|' + (d || '') + '|' + t;
+      const has = new Set(posts.map(p => key(p.kind, p.date, p.title)));
+      D.diary = (D.diary || []).filter(x => !has.has(key('diary', x.date, x.title)));
+      D.events = (D.events || []).filter(x => !has.has(key('event', x.date, x.title)));
+      posts.forEach(p => {
         if (p.kind === 'diary' && day(p.date)) D.diary.push({ date: p.date, title: esc(p.title), body: esc(p.body).replace(/\n/g, '<br>') });
-        if (p.kind === 'event') D.events.push({ date: day(p.date), end: day(p.end), when: day(p.date) ? '' : '日程調整中', title: esc(p.title), tag: esc(p.tag) || 'Event', place: esc(p.place), desc: esc(p.body), link: safeLink(p.link) });
+        if (p.kind === 'event') {
+          // 日付なしでラベルが「投票」なら「受付中」、それ以外は「日程調整中」
+          const when = day(p.date) ? '' : (p.tag === '投票' ? '受付中' : '日程調整中');
+          D.events.push({ date: day(p.date), end: day(p.end), when, title: esc(p.title), tag: esc(p.tag) || 'Event', place: esc(p.place), desc: esc(p.body), link: safeLink(p.link), img: safeImg(p.img) });
+        }
       });
       live.forEach(el => { const fn = renderers[el.dataset.render]; if (fn) fn(el); });
       document.dispatchEvent(new Event('azakei:rerender'));

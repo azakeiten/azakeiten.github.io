@@ -3784,3 +3784,14 @@ html[data-fs="xl"] { zoom: 1.25; }
 .adm-del { color: #c0392b !important; }
 @media (max-width: 560px) { .adm-row { grid-template-columns: 1fr; } .adm-list li { grid-template-columns: auto 1fr; } .adm-list li .btn-ghost { grid-column: span 1; } }
 .footer-members { display: inline-block; margin-top: 10px; font-size: 12px; color: var(--color-muted); text-decoration: underline; }
+
+/* ######## ▼ 今週の 1 問：みんなの正解率／管理ページ：写真・取りこみ ######## */
+.dq-rate { margin: 4px 0 0; display: grid; gap: 6px; font-size: 13.5px; color: var(--color-muted); }
+.dq-rate b { color: var(--color-text); font-size: 15px; }
+.dq-rate-bar { display: block; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--color-accent) 18%, transparent); overflow: hidden; }
+.dq-rate-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--color-accent), #3c8a37); transition: width 1s var(--ease-out); }
+.adm-f select { font: inherit; font-size: 16px; padding: 11px 14px; border-radius: 12px; border: 1px solid var(--color-border); background: var(--color-bg); color: var(--color-text); }
+.adm-import { display: grid; gap: 10px; padding: var(--pad-card); border-radius: var(--radius); border: 1px dashed var(--color-accent); background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+.adm-import[hidden] { display: none; }
+.adm-import p { margin: 0; font-size: 14px; line-height: 1.8; }
+.adm-import .btn-primary { border: 0; cursor: pointer; font-family: inherit; justify-self: start; }
