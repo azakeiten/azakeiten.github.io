@@ -24,7 +24,12 @@
     return { upcoming, past };
   }
 
-  function eventCard(e) {
+  // 今日から何日前か（日付文字列どうしで計算）
+  function daysAgo(d) {
+    return Math.round((new Date(todayStr()) - new Date(d)) / 86400000);
+  }
+
+  function eventCard(e, next) {
     const when = e.date
       ? fmt(e.date) + (e.end && e.end !== e.date ? ' – ' + fmt(e.end).slice(5) : '')
       : (e.when || '日程未定');
@@ -39,8 +44,8 @@
     } else if (!e.date && e.when === '受付中') {
       badge = '<span class="event-countdown is-now">受付中</span>';
     }
-    return `<${tag} class="event-row${e.past ? ' is-past' : ''}"${e.link ? ` href="${e.link}"` : ''}>
-      <div class="event-when">${!e.date && e.when === '受付中' ? '' : when}${badge}</div>
+    return `<${tag} class="event-row${e.past ? ' is-past' : ''}${next ? ' is-next' : ''}"${e.link ? ` href="${e.link}"` : ''}>
+      <div class="event-when">${next ? '<span class="event-next">Next Event</span>' : ''}${!e.date && e.when === '受付中' ? '' : when}${badge}</div>
       <div class="event-main">
         <span class="chip">${e.tag || 'Event'}</span>
         <h3>${e.title}</h3>
@@ -58,14 +63,17 @@
     events(el) {
       const { upcoming, past } = sortedEvents();
       const limit = +el.dataset.limit || Infinity;
+      // 日付が決まっている、いちばん近い予定を「Next Event」として大きく見せる
+      const nextIdx = upcoming.findIndex(e => e.date);
+      const card = (e, i) => eventCard(e, i === nextIdx);
       if (el.dataset.scope === 'upcoming') {
-        el.innerHTML = upcoming.slice(0, limit).map(eventCard).join('') || emptyMsg('予定は準備中です。');
+        el.innerHTML = upcoming.slice(0, limit).map(card).join('') || emptyMsg('予定は準備中です。');
         return;
       }
       el.innerHTML =
         `<h3 class="list-head">これから</h3>` +
-        (upcoming.map(eventCard).join('') || emptyMsg('予定は準備中です。')) +
-        (past.length ? `<h3 class="list-head">これまで</h3>` + past.map(eventCard).join('') : '');
+        (upcoming.map(card).join('') || emptyMsg('予定は準備中です。')) +
+        (past.length ? `<h3 class="list-head">これまで</h3>` + past.map(e => eventCard(e)).join('') : '');
     },
 
     gallery(el) {
@@ -80,8 +88,9 @@
       const limit = +el.dataset.limit || Infinity;
       const items = (D.diary || []).slice().sort((a, b) => a.date < b.date ? 1 : -1).slice(0, limit);
       el.innerHTML = items.map(d => `
-        <article class="diary-item">
-          <time>${fmt(d.date)}</time>
+        <article class="diary-item${d.img ? ' has-img' : ''}">
+          ${d.img ? `<img class="diary-img" src="${d.img}" alt="" loading="lazy" decoding="async">` : ''}
+          <time>${fmt(d.date)}${daysAgo(d.date) <= 14 ? '<span class="diary-new">New</span>' : ''}</time>
           <h3>${d.title}</h3>
           <p>${d.body}</p>
         </article>`).join('') || emptyMsg('活動日誌は準備中です。');
@@ -132,7 +141,7 @@
       D.diary = (D.diary || []).filter(x => !has.has(key('diary', x.date, x.title)));
       D.events = (D.events || []).filter(x => !has.has(key('event', x.date, x.title)));
       posts.forEach(p => {
-        if (p.kind === 'diary' && day(p.date)) D.diary.push({ date: p.date, title: esc(p.title), body: esc(p.body).replace(/\n/g, '<br>') });
+        if (p.kind === 'diary' && day(p.date)) D.diary.push({ date: p.date, title: esc(p.title), body: esc(p.body).replace(/\n/g, '<br>'), img: safeImg(p.img) });
         if (p.kind === 'event') {
           // 日付なしでラベルが「投票」なら「受付中」、それ以外は「日程調整中」
           const when = day(p.date) ? '' : (p.tag === '投票' ? '受付中' : '日程調整中');

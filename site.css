@@ -3800,3 +3800,25 @@ html[data-fs="xl"] { zoom: 1.25; }
 .empty.is-loading { opacity: .6; animation: azk-pulse 1.4s ease-in-out infinite; }
 @keyframes azk-pulse { 50% { opacity: .3; } }
 @media (prefers-reduced-motion: reduce) { .empty.is-loading { animation: none; } }
+
+/* ######## ▼ v23：次の予定を大きく／日誌に写真と NEW ######## */
+/* いちばん近い予定（Next Event） */
+.event-row.is-next { position: relative; margin: 6px 0 12px; padding-top: clamp(24px, 3vw, 34px); padding-bottom: clamp(24px, 3vw, 34px); padding-right: clamp(16px, 2.4vw, 28px); border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent); background: linear-gradient(120deg, color-mix(in srgb, var(--color-accent) 13%, var(--color-surface)), var(--color-surface) 70%); box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--color-accent) 70%, transparent); }
+[data-scope] .event-row.is-next { padding-left: clamp(16px, 2.4vw, 28px); }
+a.event-row.is-next:hover { padding-right: clamp(16px, 2.4vw, 28px); }
+[data-scope] a.event-row.is-next:hover { padding-left: clamp(16px, 2.4vw, 28px); }
+.event-next { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-family: var(--font-body, inherit); font-size: var(--fs-label, 12px); letter-spacing: var(--ls-label, .22em); text-transform: uppercase; color: var(--color-accent-deep, var(--color-accent)); font-weight: 600; }
+.event-next::before { content: ''; width: 18px; height: 1px; background: currentColor; }
+.event-row.is-next .event-main h3 { font-size: clamp(22px, 2.5vw, 30px); }
+.event-row.is-next .event-countdown b { font-size: 24px; }
+.event-row.is-next .event-thumb { max-width: 240px; box-shadow: 0 12px 26px -16px rgba(0, 0, 0, .55); }
+
+/* 日誌：写真つきカード・新しい日誌に NEW */
+.diary { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+.diary-item.has-img { --dp: clamp(24px, 3vw, 36px); padding: 0 0 var(--dp); overflow: hidden; }
+.diary-item.has-img > :not(.diary-img) { margin-left: var(--dp); margin-right: var(--dp); }
+.diary-img { display: block; width: 100%; height: auto; margin: 0 0 20px; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .8s var(--ease-out, ease); }
+.diary-item.has-img:hover .diary-img { transform: scale(1.04); }
+.diary-item time { display: flex; align-items: center; gap: 10px; }
+.diary-new { display: inline-block; padding: 3px 9px 2px; border-radius: var(--radius-pill, 999px); background: var(--color-accent); color: #fff; font-family: var(--font-body, inherit); font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; }
+:root[data-theme="dark"] .diary-new { color: #111; }

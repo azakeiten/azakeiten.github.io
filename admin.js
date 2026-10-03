@@ -72,7 +72,7 @@
           <label class="adm-f"><span>ラベル <em>例：文化祭、コンテスト</em></span><input name="tag" maxlength="12"></label>
         </div>
         <label class="adm-f adm-ev"><span>リンク <em>例：festival.html や https://…</em></span><input name="link" maxlength="200"></label>
-        <label class="adm-f adm-ev"><span>写真 <em>サイトの写真から選ぶ（日程のページに小さく出ます）</em></span><select name="img"><option value="">なし</option>${PHOTOS.map(p => `<option value="${esc(p.src)}">${esc(p.caption)}</option>`).join('')}</select></label>
+        <label class="adm-f"><span>写真 <em>サイトの写真から選ぶ（日程は小さく、日誌はカードの上に大きく出ます）</em></span><select name="img"><option value="">なし</option>${PHOTOS.map(p => `<option value="${esc(p.src)}">${esc(p.caption)}</option>`).join('')}</select></label>
         <p class="adm-err" role="alert"></p>
         <div class="adm-actions">
           <button type="submit" class="btn-primary">保存する</button>
@@ -184,7 +184,7 @@
     const err = f.querySelector('.adm-err');
     const kind = f.kind.value;
     const v = k => f[k].value.trim();
-    const data = { kind, title: v('title'), body: v('body'), date: v('date'), end: kind === 'event' ? v('end') : '', place: kind === 'event' ? v('place') : '', tag: kind === 'event' ? v('tag') : '', link: kind === 'event' ? v('link') : '', img: kind === 'event' ? f.img.value : '' };
+    const data = { kind, title: v('title'), body: v('body'), date: v('date'), end: kind === 'event' ? v('end') : '', place: kind === 'event' ? v('place') : '', tag: kind === 'event' ? v('tag') : '', link: kind === 'event' ? v('link') : '', img: f.img.value };
     if (!data.title) { err.textContent = 'タイトルを入れてください。'; f.title.focus(); return; }
     if (kind === 'diary' && !data.date) { err.textContent = '日誌には日付が必要です。'; f.date.focus(); return; }
     if (data.end && data.date && data.end < data.date) { err.textContent = '終わりの日が、はじまりの日より前になっています。'; return; }
