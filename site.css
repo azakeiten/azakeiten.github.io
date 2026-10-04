@@ -3840,3 +3840,40 @@ a.event-row.is-next:hover { padding-right: clamp(16px, 2.4vw, 28px); }
 @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 18px; } .footer-col:last-child { grid-column: 1 / -1; } .footer-list a { padding: 8px 0; } }
 @media (prefers-reduced-motion: reduce) { .footer-list a, .footer-list a::after { transition: none; } }
 .footer-list a { max-width: 100%; overflow-wrap: anywhere; word-break: normal; }
+
+/* ######## ▼ v25：歩みと実績を「金の線でつながる年表」に ######## */
+.achievements { position: relative; border-top: 0; display: grid; gap: 14px; padding-left: 4px; }
+.achievements::before { content: ''; position: absolute; left: 31px; top: 14px; bottom: 14px; width: 1px; background: linear-gradient(var(--color-accent), color-mix(in srgb, var(--color-accent) 15%, transparent)); }
+.achievements li.ach { display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start; padding: 0; border: 0; font-size: inherit; font-style: normal; color: inherit; }
+.achievements .ach-year { position: relative; z-index: 1; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--color-surface); border: 1px solid var(--color-accent); font-family: var(--font-display); font-size: 15px; letter-spacing: .04em; color: var(--color-accent-deep, var(--color-accent)); min-width: 0; box-shadow: 0 0 0 5px var(--color-bg); }
+.achievements .ach-card { position: relative; display: block; padding: 16px 48px 16px 20px; border-radius: var(--radius); border: 1px solid var(--color-border); background: var(--color-surface); color: inherit; text-decoration: none; transition: border-color .3s, transform .35s var(--ease-out, ease), box-shadow .35s; }
+.achievements a.ach-card:hover { border-color: var(--color-accent); transform: translateX(4px); box-shadow: 0 14px 30px -22px color-mix(in srgb, var(--color-accent) 80%, transparent); }
+.ach-title { margin: 0; font-size: 15px; line-height: 1.7; }
+.ach-stat { margin: 6px 0 0; display: flex; align-items: baseline; gap: 4px; line-height: 1; }
+.ach-stat b { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(40px, 5vw, 56px); color: var(--color-accent-deep, var(--color-accent)); font-variant-numeric: tabular-nums; letter-spacing: .01em; }
+.ach-stat small { font-size: 15px; color: var(--color-text); }
+.ach-label { margin: 6px 0 0; font-size: 13px; color: var(--color-muted); letter-spacing: .04em; }
+.ach-more { position: absolute; right: 18px; top: 50%; translate: 0 -50%; color: var(--color-accent); transition: transform .3s var(--ease-out, ease); }
+.achievements a.ach-card:hover .ach-more { transform: translateX(4px); }
+.achievements li.has-stat .ach-card { background: linear-gradient(120deg, color-mix(in srgb, var(--color-accent) 12%, var(--color-surface)), var(--color-surface) 65%); border-color: color-mix(in srgb, var(--color-accent) 40%, transparent); }
+.achievements li.is-next .ach-year { border-style: dashed; background: var(--color-bg); font-size: 12px; letter-spacing: .1em; font-style: italic; }
+.achievements li.is-next .ach-card { border-style: dashed; border-color: color-mix(in srgb, var(--color-accent) 55%, transparent); background: transparent; }
+.achievements li.is-next .ach-title { color: var(--color-muted); font-style: italic; }
+:root[data-theme="dark"] .achievements .ach-year { box-shadow: 0 0 0 5px var(--color-bg); }
+@media (prefers-reduced-motion: reduce) { .achievements .ach-card, .ach-more { transition: none; } }
+.ach-more { top: 16px; translate: none; }
+@media (max-width: 560px) {
+  .achievements li.ach { grid-template-columns: 46px 1fr; gap: 12px; }
+  .achievements .ach-year { width: 46px; height: 46px; font-size: 13px; }
+  .achievements::before { left: 26px; }
+  .achievements .ach-card { padding: 14px 36px 14px 16px; }
+  .ach-more { right: 14px; }
+}
+.achievements .ach-more { min-width: 0; letter-spacing: 0; font-family: inherit; }
+/* 夜（ダーク）：Next Event・実績カードも暗い面に */
+:root[data-theme="dark"] .event-row.is-next,
+:root[data-theme="dark"] .achievements li.has-stat .ach-card { background: linear-gradient(120deg, rgba(200, 169, 110, 0.14), rgba(18, 23, 21, 0.86) 65%); border-color: rgba(200, 169, 110, 0.35); }
+:root[data-theme="dark"] .achievements .ach-card { background-color: rgba(18, 23, 21, 0.86); }
+:root[data-theme="dark"] .achievements li.is-next .ach-card { background: transparent; }
+:root[data-theme="dark"] .achievements .ach-year { background: #12110e; }
+:root[data-theme="dark"] .ach-stat b { color: #e3c68e; }

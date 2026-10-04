@@ -98,8 +98,18 @@
 
     achievements(el) {
       const items = D.achievements || [];
-      el.innerHTML = items.map(a => `<li><span>${a.year}</span>${a.title}</li>`).join('') +
-        '<li class="is-next"><span>Next</span>ここに、これからの実績が積み重なっていきます。</li>';
+      // 年の印を金の線でつなぐ「年表」。数字（stat）があれば大きく、カウントアップで見せる
+      el.innerHTML = items.map(a => {
+        const tag = a.link ? 'a' : 'div';
+        return `<li class="ach${a.stat ? ' has-stat' : ''}"><span class="ach-year">${a.year}</span>
+          <${tag} class="ach-card"${a.link ? ` href="${a.link}"` : ''}>
+            <p class="ach-title">${a.title}</p>
+            ${a.stat ? `<p class="ach-stat"><b data-count>${a.stat}</b><small>${a.unit || ''}</small></p>${a.label ? `<p class="ach-label">${a.label}</p>` : ''}` : ''}
+            ${a.link ? '<span class="ach-more" aria-hidden="true">→</span>' : ''}
+          </${tag}></li>`;
+      }).join('') +
+        `<li class="ach is-next"><span class="ach-year">Next</span>
+          <a class="ach-card" href="${/contests.html$/.test(location.pathname) ? 'events.html' : 'contests.html'}"><p class="ach-title">ここに、これからの実績が積み重なっていきます。</p><p class="ach-label">ビジネスコンテスト・日経ストックリーグに挑戦中</p><span class="ach-more" aria-hidden="true">→</span></a></li>`;
     },
 
     sns(el) {

@@ -90,6 +90,7 @@ window.AZAKEI = {
   /* ---- 実績（いつか） ----
      ここに追加すると、トップと「麻経とは」に表示されます。 */
   achievements: [
-    { year: '2026', title: '文化祭「麻布経済展」 来場者 2,364人' }
+    // stat（大きく出す数字）・unit・label・link は書かなくても OK
+    { year: '2026', title: '文化祭「麻布経済展」を開催', stat: '2,364', unit: '人', label: '3 日間の来場者', link: 'festival.html' }
   ]
 };
