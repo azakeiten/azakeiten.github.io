@@ -177,6 +177,7 @@
     if (data._honey) return; // スパム対策（人には見えない入力欄）
 
     if (cfg.formEndpoint) {
+      status.className = '';
       status.textContent = '送信中…';
       const btn = form.querySelector('button[type="submit"]');
       btn.disabled = true;
@@ -200,9 +201,11 @@
         form.reset();
         form.type.dispatchEvent(new Event('change'));
         form.message.dispatchEvent(new Event('input'));
-        status.textContent = '送信しました。ありがとうございます！内容を確認のうえ、ご連絡いたします。';
+        status.className = 'is-sent';
+        status.innerHTML = '<b>送信しました。ありがとうございます！</b>内容を確認のうえ、ご連絡いたします。数日かかることがあります。';
       } catch (e) {
         console.error(e);
+        status.className = 'is-error';
         // 送れなかったときは、書いた内容をそのままメールで送れるようにする（内容は消さない）
         if (cfg.email) {
           const body = `お名前: ${data.name}\nご所属: ${data.org || '-'}\nメール: ${data.email}\n種類: ${data.type}\n\n${data.message}`;

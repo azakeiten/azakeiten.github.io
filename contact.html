@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261004t" />
+  <link rel="stylesheet" href="site.css?v=20261004u" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -64,10 +64,11 @@
           <div>
             <span class="purpose-label">ご用件を選んでください</span>
             <div class="purpose" role="group" aria-label="ご用件">
-              <button type="button" data-type="general" aria-pressed="true"><b>展示・活動について</b><small>文化祭や活動への質問</small></button>
-              <button type="button" data-type="sponsor" aria-pressed="false"><b>協賛・ご協力</b><small>ご支援・登壇・メンタリング</small></button>
-              <button type="button" data-type="media" aria-pressed="false"><b>取材</b><small>メディア・学校新聞など</small></button>
-              <button type="button" data-type="collab" aria-pressed="false"><b>コラボレーション</b><small>共同イベント・企画</small></button>
+              <button type="button" data-type="general" aria-pressed="true"><svg class="pp-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M9 10h6"/></svg><b>展示・活動について</b><small>文化祭や活動への質問</small></button>
+              <button type="button" data-type="sponsor" aria-pressed="false"><svg class="pp-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><b>協賛・ご協力</b><small>ご支援・登壇・メンタリング</small></button>
+              <button type="button" data-type="media" aria-pressed="false"><svg class="pp-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg><b>取材</b><small>メディア・学校新聞など</small></button>
+              <button type="button" data-type="collab" aria-pressed="false"><svg class="pp-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/></svg><b>コラボレーション</b><small>共同イベント・企画</small></button>
+              <button type="button" data-type="other" aria-pressed="false" class="pp-wide"><svg class="pp-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></svg><b>その他</b><small>上にあてはまらないこと</small></button>
             </div>
           </div>
           <div class="field-row">
@@ -84,7 +85,7 @@
             <label for="email">メールアドレス<span class="req">必須</span></label>
             <input id="email" name="email" type="email" autocomplete="email" required />
           </div>
-          <div class="field">
+          <div class="field field-type" hidden>
             <label for="type">お問い合わせの種類</label>
             <select id="type" name="type">
               <option value="general">展示・活動について</option>
@@ -100,6 +101,7 @@
             <span class="count" aria-live="off"><span id="msgCount">0</span> / 2000</span>
           </div>
           <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="form-progress" aria-hidden="true"><span class="fp-bar"><i></i></span><span class="fp-text">必須 <b>0</b> / 3</span></div>
           <button type="submit" class="btn-primary">送信する</button>
           <p id="formStatus" role="status" aria-live="polite"></p>
         </form>
@@ -109,13 +111,13 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261004t"></script>
-  <script src="layout.js?v=20261004t"></script>
-  <script src="brand.js?v=20261004t"></script>
-  <script src="render.js?v=20261004t"></script>
-  <script src="nav.js?v=20261004t"></script>
-  <script src="reveal.js?v=20261004t"></script>
-  <script src="site.js?v=20261004t"></script>
+  <script src="content.js?v=20261004u"></script>
+  <script src="layout.js?v=20261004u"></script>
+  <script src="brand.js?v=20261004u"></script>
+  <script src="render.js?v=20261004u"></script>
+  <script src="nav.js?v=20261004u"></script>
+  <script src="reveal.js?v=20261004u"></script>
+  <script src="site.js?v=20261004u"></script>
   <script>
     // ?type=sponsor などで種類を初期選択 & 必須チェック
     (function () {
@@ -125,8 +127,17 @@
 
       // ご用件ボタン ⇔ 種類のセレクトを同期
       var btns = form.querySelectorAll('.purpose button');
+      // ご用件ごとに、本文の書き方のヒントを変える
+      var HINT = {
+        general: '例）文化祭の展示について質問があります。〜',
+        sponsor: 'ご支援の内容（協賛金・物品・登壇・メンタリングなど）や、ご希望の時期をお書きください。',
+        media: '媒体名・取材の内容・ご希望の日程をお書きください。',
+        collab: '企画の内容・ご希望の時期・規模などをお書きください。',
+        other: 'ご自由にお書きください。'
+      };
       function sync() {
         btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.type === form.type.value ? 'true' : 'false'); });
+        form.message.placeholder = HINT[form.type.value] || '';
       }
       btns.forEach(function (b) {
         b.addEventListener('click', function () { form.type.value = b.dataset.type; sync(); form.name.focus(); });
@@ -137,6 +148,19 @@
       // 文字数カウンター
       var msg = form.message, count = document.getElementById('msgCount');
       msg.addEventListener('input', function () { count.textContent = msg.value.length; });
+
+      // 必須項目の進みぐあい（お名前・メール・内容）
+      var req = [form.name, form.email, form.message];
+      var fp = form.querySelector('.form-progress');
+      function progress() {
+        var n = req.filter(function (el) { return el.value.trim() && el.checkValidity(); }).length;
+        fp.querySelector('b').textContent = n;
+        fp.querySelector('i').style.width = (n / req.length * 100) + '%';
+        fp.classList.toggle('is-done', n === req.length);
+      }
+      req.forEach(function (el) { el.addEventListener('input', progress); });
+      form.addEventListener('reset', function () { setTimeout(progress, 0); });
+      progress();
       form.addEventListener('submit', function (e) {
         if (!form.checkValidity()) {
           e.stopImmediatePropagation();
