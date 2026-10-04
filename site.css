@@ -3907,3 +3907,17 @@ a.event-row.is-next:hover { padding-right: clamp(16px, 2.4vw, 28px); }
 @media (prefers-reduced-motion: reduce) { #formStatus.is-sent, #formStatus.is-error { animation: none; } .fp-bar i { transition: none; } }
 .field.field-type[hidden] { display: none; }
 .purpose button { justify-self: stretch; width: 100%; }
+
+/* ######## ▼ v27：協賛の募集項目 — アイコンと「この内容で相談する」 ######## */
+.sp-item { position: relative; display: flex; flex-direction: column; color: inherit; text-decoration: none; }
+.sp-item .sp-ico { width: 44px; height: 44px; padding: 10px; margin-bottom: 14px; border-radius: 14px; background: color-mix(in srgb, var(--color-accent) 12%, transparent); fill: none; stroke: var(--color-accent-deep, var(--color-accent)); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: background .35s, stroke .35s, transform .45s var(--ease-out, ease); }
+.sp-item .num { position: absolute; top: clamp(20px, 2.4vw, 30px); right: clamp(20px, 2.4vw, 30px); margin: 0; }
+.sp-go { margin-top: auto; padding-top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: .06em; color: var(--color-accent-deep, var(--color-accent)); font-weight: 500; }
+.sp-go::after { content: '→'; transition: transform .3s var(--ease-out, ease); }
+.sp-item:hover .sp-ico { background: var(--color-accent); stroke: #fff; transform: rotate(-6deg) scale(1.05); }
+.sp-item:hover .sp-go::after { transform: translateX(5px); }
+.sp-item:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -4px; }
+:root[data-theme="dark"] .sp-item .sp-ico { stroke: #e3c68e; }
+:root[data-theme="dark"] .sp-item:hover .sp-ico { stroke: #111; }
+:root[data-theme="dark"] .sp-go { color: #e3c68e; }
+@media (prefers-reduced-motion: reduce) { .sp-item .sp-ico, .sp-go::after { transition: none; } .sp-item:hover .sp-ico { transform: none; } }
