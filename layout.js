@@ -141,6 +141,12 @@
   if (!footer) return;
   footer.className = 'site-footer';
   const tick = '<span>仕組みを、<em>つくろう。</em></span><span>Let\'s build <em>the system</em> —</span>';
+  // フッターのリンクは「知る」「遊ぶ・学ぶ」「つながる」の 3 つに分ける
+  const FOOT_GROUPS = [
+    { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
+    { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '億万長者クイズ'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', 'チップ配分<wbr>シミュレーター'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
+    { en: 'Connect', ja: 'つながる', links: [['contact.html', 'お問い合わせ'], ['sponsor.html', '協賛のご案内'], ...sns.map(s => [s.url, s.name, s.handle])] }
+  ];
   footer.innerHTML = `
     <a class="footer-ticker" href="contact.html" aria-label="お問い合わせへ">
       <span class="footer-ticker-track">${tick.repeat(4)}</span>
@@ -149,36 +155,20 @@
       <div>
         <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="index.html" class="wordmark footer-wordmark">AZA<span>KEI</span><small class="footer-kanji">麻経</small></a></div>
         <p class="footer-note">麻経 · Azabu Economics<br>Est. 2025 · 麻布中学校・高等学校</p>
+        <p class="footer-mission">世の中の仕組みを理解し、<br>自分たちで仕組みを創り出す。</p>
         <div class="fs-switch" role="group" aria-label="文字の大きさ"><span>文字の大きさ</span><button type="button" data-fs="">標準</button><button type="button" data-fs="l">大</button><button type="button" data-fs="xl">特大</button></div>
         <a class="footer-members" href="admin.html">部員用 更新ページ</a>
       </div>
-      <div>
-        <p class="footer-head">Pages</p>
+      ${FOOT_GROUPS.map(g => `<div class="footer-col">
+        <p class="footer-head">${g.en}<span>${g.ja}</span></p>
         <ul class="footer-list">
-          <li><a href="about.html">麻経とは</a></li>
-          <li><a href="contests.html">各種コンテスト</a></li>
-          <li><a href="festival.html">文化祭</a></li>
-          <li><a href="activities.html">活動風景・日常</a></li>
-          <li><a href="events.html">日程・イベント</a></li>
-          <li><a href="sponsor.html">協賛のご案内</a></li>
-          <li><a href="quiz.html">億万長者クイズ</a></li>
-          <li><a href="diagnosis.html">エコノミスト診断</a></li>
-          <li><a href="sim.html">チップ配分シミュレーター</a></li>
-          <li><a href="glossary.html">経済用語ミニ辞典</a></li>
-          <li><a href="vote.html">文化祭投票</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
+          ${g.links.map(([href, label, sub]) => {
+            const ext = /^https:/.test(href);
+            const cur = !ext && href === here ? ' aria-current="page"' : '';
+            return `<li><a href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''}${cur}>${label}${sub ? ` <span>${sub}</span>` : ''}</a></li>`;
+          }).join('')}
         </ul>
-      </div>
-      <div>
-        <p class="footer-head">Social</p>
-        <ul class="footer-list">
-          ${sns.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener">${s.name} <span>${s.handle}</span></a></li>`).join('')}
-        </ul>
-      </div>
-      <div>
-        <p class="footer-head">Mission</p>
-        <p class="footer-note">世の中の仕組みを理解し、自分たちで仕組みを創り出す。コンテストへの挑戦と文化祭の展示を通じて、経済を社会に開いていく麻布中学校・高等学校の同好会です。</p>
-      </div>
+      </div>`).join('')}
     </div>
     <div class="footer-giant" aria-hidden="true">AZAKEI<span class="footer-giant-seal">麻経</span></div>
     <div class="footer-bottom">© ${new Date().getFullYear()} AZAKEI. All rights reserved.</div>`;

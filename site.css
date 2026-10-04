@@ -3822,3 +3822,21 @@ a.event-row.is-next:hover { padding-right: clamp(16px, 2.4vw, 28px); }
 .diary-item time { display: flex; align-items: center; gap: 10px; }
 .diary-new { display: inline-block; padding: 3px 9px 2px; border-radius: var(--radius-pill, 999px); background: var(--color-accent); color: #fff; font-family: var(--font-body, inherit); font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; }
 :root[data-theme="dark"] .diary-new { color: #111; }
+
+/* ######## ▼ v24：フッターを「知る・遊ぶ・つながる」に整理 ######## */
+.footer-grid { grid-template-columns: 1.35fr 1fr 1fr 1fr; gap: clamp(28px, 4vw, 56px); }
+.footer-head { display: flex; align-items: baseline; gap: 10px; }
+.footer-head span { font-family: var(--font-display); font-size: 13px; letter-spacing: .12em; text-transform: none; color: var(--color-muted); }
+.footer-list { gap: 4px; font-size: 14px; }
+.footer-list a { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 6px 0; transition: color .3s, transform .3s var(--ease-out, ease); }
+.footer-list a::after { content: '→'; font-size: 12px; opacity: 0; transform: translateX(-6px); transition: opacity .25s, transform .3s var(--ease-out, ease); color: var(--color-accent); }
+.footer-list a:hover { transform: translateX(3px); }
+.footer-list a:hover::after { opacity: 1; transform: none; }
+.footer-list a[target="_blank"]::after { content: '↗'; }
+.footer-list a[aria-current="page"] { color: var(--color-text); font-weight: 500; }
+.footer-list a[aria-current="page"]::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 22%, transparent); }
+.footer-mission { margin: 14px 0 4px; padding-left: 12px; border-left: 2px solid var(--color-accent); font-family: var(--font-display); font-size: 15px; line-height: 1.8; color: var(--color-text); }
+@media (max-width: 1000px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-grid > :first-child { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 18px; } .footer-col:last-child { grid-column: 1 / -1; } .footer-list a { padding: 8px 0; } }
+@media (prefers-reduced-motion: reduce) { .footer-list a, .footer-list a::after { transition: none; } }
+.footer-list a { max-width: 100%; overflow-wrap: anywhere; word-break: normal; }
