@@ -34,12 +34,12 @@
       ? fmt(e.date) + (e.end && e.end !== e.date ? ' – ' + fmt(e.end).slice(5) : '')
       : (e.when || '日程未定');
     const tag = e.link ? 'a' : 'div';
-    // 日付のある予定には「あと○日」／「開催中」
+    // 日付のある予定には「あと○日」／「開催中」（コンテストは「参加中」）
     let badge = '';
     if (e.date && !e.past) {
       const t = todayStr();
       const days = Math.round((new Date(e.date) - new Date(t)) / 86400000);
-      badge = days <= 0 ? '<span class="event-countdown is-now">開催中</span>'
+      badge = days <= 0 ? `<span class="event-countdown is-now">${e.tag === 'コンテスト' ? '参加中' : '開催中'}</span>`
                         : `<span class="event-countdown">あと <b>${days}</b> 日</span>`;
     } else if (!e.date && e.when === '受付中') {
       badge = '<span class="event-countdown is-now">受付中</span>';
@@ -109,7 +109,7 @@
           </${tag}></li>`;
       }).join('') +
         `<li class="ach is-next"><span class="ach-year">Next</span>
-          <a class="ach-card" href="${/contests.html$/.test(location.pathname) ? 'events.html' : 'contests.html'}"><p class="ach-title">ここに、これからの実績が積み重なっていきます。</p><p class="ach-label">ビジネスコンテスト・日経ストックリーグに挑戦中</p><span class="ach-more" aria-hidden="true">→</span></a></li>`;
+          <a class="ach-card" href="${/contests.html$/.test(location.pathname) ? 'events.html' : 'contests.html'}"><p class="ach-title">ここに、これからの実績が積み重なっていきます。</p><p class="ach-label">いまは日経ストックリーグに参加中</p><span class="ach-more" aria-hidden="true">→</span></a></li>`;
     },
 
     sns(el) {

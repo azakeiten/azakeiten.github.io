@@ -91,6 +91,7 @@ window.AZAKEI = {
      ここに追加すると、トップと「麻経とは」に表示されます。 */
   achievements: [
     // stat（大きく出す数字）・unit・label・link は書かなくても OK
-    { year: '2026', title: '文化祭「麻布経済展」を開催', stat: '2,364', unit: '人', label: '3 日間の来場者', link: 'festival.html' }
+    { year: '2026', title: '文化祭「麻布経済展」を開催', stat: '2,364', unit: '人', label: '3 日間の来場者', link: 'festival.html' },
+    { year: '2026', title: '高校生ビジネスコンテストに出場', label: 'チームで事業計画をつくり、挑戦しました', link: 'contests.html#business' }
   ]
 };
