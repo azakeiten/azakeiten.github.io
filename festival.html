@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261004v" />
+  <link rel="stylesheet" href="site.css?v=20261004w" />
   <style>
     .keep-phrase { display: inline-block; white-space: nowrap; }
     .schedule-container { margin-top: 32px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -279,15 +279,15 @@
           <p class="section-label">Information</p>
           <h2 class="section-title"><span class="keep-phrase">開催日程と</span><span class="keep-phrase"><em>アクセス</em></span></h2>
           <p style="margin-top: 20px;">場所：東京都港区元麻布2-3-29 麻布中高内<br>教室：中3-5</p>
-          <div class="schedule-container">
-            <table class="schedule-table">
-              <thead><tr><th>Time</th><th>5/1</th><th>5/2</th><th>5/3</th></tr></thead>
-              <tbody>
-                <tr><td>09:00 - 13:00</td><td>通常展示</td><td>通常展示</td><td>通常展示</td></tr>
-                <tr class="special-row"><td>13:00 - 14:00</td><td>特別企画</td><td>通常展示</td><td>特別企画</td></tr>
-                <tr><td>14:00 - 16:00</td><td>通常展示</td><td>通常展示</td><td>通常展示</td></tr>
-              </tbody>
-            </table>
+          <div class="sched" aria-label="3 日間のタイムテーブル（2026 年）">
+            <p class="sched-cap">Timetable <span>2026.05.01 – 05.03</span></p>
+            <div class="sched-axis" aria-hidden="true"><span style="--h:0">9:00</span><span style="--h:4">13:00</span><span style="--h:5">14:00</span><span style="--h:7">16:00</span></div>
+            <ul class="sched-days">
+              <li class="sched-day"><p class="sched-date"><b>5/1</b><small>金</small></p><div class="sched-bar"><span style="--s:0;--e:4">通常展示<small>9:00–13:00</small></span><span class="is-special" style="--s:4;--e:5">特別企画<small>13–14時</small></span><span style="--s:5;--e:7">通常展示<small>14:00–16:00</small></span></div></li>
+              <li class="sched-day"><p class="sched-date"><b>5/2</b><small>土</small></p><div class="sched-bar"><span style="--s:0;--e:7">通常展示<small>9:00–16:00</small></span></div></li>
+              <li class="sched-day"><p class="sched-date"><b>5/3</b><small>日・祝</small></p><div class="sched-bar"><span style="--s:0;--e:4">通常展示<small>9:00–13:00</small></span><span class="is-special" style="--s:4;--e:5">特別企画<small>13–14時</small></span><span style="--s:5;--e:7">通常展示<small>14:00–16:00</small></span></div></li>
+            </ul>
+            <p class="sched-note"><i class="sched-key" aria-hidden="true"></i>特別企画 … 討論・対談（13:00–14:00）</p>
           </div>
           <div style="margin-top: 24px;"><a href="https://maps.app.goo.gl/95uSshVfN6Gis78n8" target="_blank" rel="noopener" class="btn-ghost">Google Maps <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a></div>
         </div>
@@ -311,13 +311,13 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261004v"></script>
-  <script src="layout.js?v=20261004v"></script>
-  <script src="brand.js?v=20261004v"></script>
-  <script src="nav.js?v=20261004v"></script>
-  <script src="reveal.js?v=20261004v"></script>
-  <script src="site.js?v=20261004v"></script>
-  <script src="animation.js?v=20261004v"></script>
+  <script src="content.js?v=20261004w"></script>
+  <script src="layout.js?v=20261004w"></script>
+  <script src="brand.js?v=20261004w"></script>
+  <script src="nav.js?v=20261004w"></script>
+  <script src="reveal.js?v=20261004w"></script>
+  <script src="site.js?v=20261004w"></script>
+  <script src="animation.js?v=20261004w"></script>
   <script>
     (function () {
       var dayIds = ["day1Visitors", "day2Visitors", "day3Visitors"];
