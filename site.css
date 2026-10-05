@@ -3967,3 +3967,13 @@ a.event-row.is-next:hover { padding-right: clamp(16px, 2.4vw, 28px); }
 :root[data-theme="dark"] .contest-status.is-done { color: #e3c68e; }
 :root[data-theme="dark"] .contest-status.is-live { color: #ff8a7a; }
 @media (prefers-reduced-motion: reduce) { .contest-status.is-live::before { animation: none; } }
+
+/* ######## ▼ v29：歩みに「現在地」 ######## */
+.ayumi .ay-year { position: relative; }
+.ay-now { position: absolute; left: 0; top: -22px; display: inline-flex; align-items: center; gap: 6px; font-style: normal; font-family: var(--font-body, inherit); font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #c0392b; }
+.ay-now::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 1.6s ease-in-out infinite; }
+.ayumi li.is-now::after { background: #c0392b; box-shadow: 0 0 0 5px rgba(192, 57, 43, .18); animation: ay-ring 2.2s ease-out infinite; }
+@keyframes ay-ring { 0% { box-shadow: 0 0 0 0 rgba(192, 57, 43, .45); } 70% { box-shadow: 0 0 0 12px rgba(192, 57, 43, 0); } 100% { box-shadow: 0 0 0 0 rgba(192, 57, 43, 0); } }
+:root[data-theme="dark"] .ay-now { color: #ff8a7a; }
+@media (max-width: 760px) { .ay-now { position: static; margin-left: 10px; vertical-align: middle; } }
+@media (prefers-reduced-motion: reduce) { .ay-now::before, .ayumi li.is-now::after { animation: none; } }
