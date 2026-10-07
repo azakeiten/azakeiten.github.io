@@ -6,7 +6,7 @@
      ・フォントなど外部   … 同上
      ・Firebase や送信（POST）は触らない
    ================================================================ */
-const CACHE = 'azakei-v23';
+const CACHE = 'azakei-v24';
 const CORE = ['./', 'index.html', 'quiz.html', 'diagnosis.html', 'offline.html', 'icon-192.png', 'manifest.webmanifest'];
 
 self.addEventListener('install', e => {

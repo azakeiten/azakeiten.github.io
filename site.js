@@ -280,9 +280,11 @@ try {
     });
   }
 
-  /* ---- ページ移動：金の線とロゴの入った幕が下から閉じる ---- */
+  /* ---- ページ移動：金の線とロゴの入った幕が下から閉じる（いまは使っていない） ---- */
+  const CURTAIN_NAV = false;
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href]');
+    if (!CURTAIN_NAV) return; // v30：ページ移動の幕はやめて、すぐ移動する（ブラウザのふわっと切りかえだけ）
     if (!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin || url.pathname === location.pathname) return;

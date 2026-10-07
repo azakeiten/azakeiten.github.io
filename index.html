@@ -25,8 +25,8 @@
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261004y" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css?v=20261007a" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
@@ -98,7 +98,7 @@
             <span class="keep-phrase">経済を、</span><span class="keep-phrase"><em>自分たちの手に。</em></span>
           </span></span>
         </h1>
-        <p class="hero-sub" id="heroSub">世の中の仕組みを理解し、自らで仕組みを創り出す。<br>コンテストへの挑戦から文化祭の展示まで。<br>麻布から、経済をもっと面白く。</p>
+        <p class="hero-sub" id="heroSub">世の中の仕組みを理解し、<br>自らで仕組みを創り出す。</p>
         <div class="hero-actions" id="heroActions">
           <a href="about.html" class="btn-primary">麻経とは</a>
           <a href="#overview" class="btn-ghost">活動を見る <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
@@ -107,184 +107,74 @@
     </section>
   </div>
 
-  <!-- MARQUEE -->
-  <div class="marquee-strip">
-    <div class="marquee-track">
-      <span class="marquee-item"><em>01</em> BUSINESS CONTEST</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item"><em>02</em> NIKKEI STOCK LEAGUE</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item"><em>03</em> ENTREPRENEUR AUDITION</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item"><em>04</em> RESEARCH PAPER</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item">AZABU ECONOMIC EXHIBITION</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item">ECONOMY × ENTERTAINMENT</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item"><em>01</em> BUSINESS CONTEST</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item"><em>02</em> NIKKEI STOCK LEAGUE</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item"><em>03</em> ENTREPRENEUR AUDITION</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item"><em>04</em> RESEARCH PAPER</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item">AZABU ECONOMIC EXHIBITION</span>
-      <span class="marquee-sep"></span>
-      <span class="marquee-item">ECONOMY × ENTERTAINMENT</span>
-      <span class="marquee-sep"></span>
-    </div>
-  </div>
-
-  <!-- 生きている経済の数字 -->
-  <section class="live-econ" data-live-econ aria-label="今年、日本で生まれた付加価値（概算）" style="padding-left:0;padding-right:0;">
-    <div class="container">
-      <span class="live-tag">LIVE</span>
-      <div>
-        <p class="live-label"><span data-live-year>2026</span>年1月1日から今までに、日本で生まれた付加価値（名目GDP・概算）</p>
-        <p class="live-value" data-live-value>¥0<small>いまも増えています</small></p>
-        <p class="live-note" data-live-note></p>
-      </div>
-      <p class="live-side">1秒あたり<b data-live-persec>—</b>経済は、いまこの瞬間も動いている。</p>
-    </div>
-  </section>
-
-  <!-- 麻経とは -->
-  <section class="about">
-    <div class="container">
-      <div class="split">
-        <div class="split-img reveal"><img src="members.jpg" alt="AZAKEI のメンバー" /></div>
-        <div class="reveal">
-          <p class="section-label">What is AZAKEI</p>
-          <h2 class="section-title"><span class="keep-phrase">麻経</span><span class="keep-phrase">とは<em>。</em></span></h2>
-          <p style="margin-top: 28px;">AZAKEI（麻経）は、麻布中学校・高等学校の経済系同好会です。文化祭の体験型展示「麻布経済展」から始まり、いまはビジネスコンテストや日経ストックリーグなど、学校の外にも挑戦の場を広げています。</p>
-          <p>経済を「勉強するもの」から「自分たちで動かすもの」へ。それが私たちの合言葉です。</p>
-          <a href="about.html" class="btn-ghost">もっと詳しく <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
-        </div>
+  <!-- ひとことで（Apple のような、大きな一文） -->
+  <section class="ap-intro">
+    <div class="container reveal">
+      <p class="ap-eyebrow">麻布中学校・高等学校　経済系同好会</p>
+      <h2 class="ap-title">経済を、<br class="sp-only">勉強から体験へ。</h2>
+      <p class="ap-lead">文化祭の体験型展示と、学校の外のコンテスト。<br>遊びながら、世の中の仕組みを動かしています。</p>
+      <div class="ap-links">
+        <a href="about.html" class="ap-link">麻経とは</a>
+        <a href="activities.html" class="ap-link">活動風景を見る</a>
       </div>
     </div>
   </section>
 
-  <!-- 合言葉（縦書き） -->
-  <section class="motto" aria-label="AZAKEI の合言葉">
-    <div class="motto-inner" data-motto>
-      <p class="motto-label">Our Motto</p>
-      <p class="motto-text" lang="ja"><span>世の中の仕組みを理解し、</span><span>自らで仕組みを創り出す。</span></p>
-      <p class="motto-en">Understand how the world works — then build the systems yourself.</p>
-      <span class="motto-seal" aria-hidden="true">麻経</span>
-    </div>
-  </section>
-
-  <!-- 大切にしていること -->
-  <section class="services tight">
+  <!-- 数字で見る -->
+  <section class="ap-numbers-wrap">
     <div class="container">
-      <div class="section-head reveal" style="text-align:center;">
-        <p class="ornament" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7zM12 2v20M3.34 7l17.32 10M20.66 7L3.34 17"/></svg></p>
-        <p class="section-label" style="justify-content:center; margin-top:18px;">Our Values</p>
-        <h2 class="section-title"><span class="keep-phrase">AZAKEI が</span><span class="keep-phrase"><em>大切にしていること</em></span></h2>
-      </div>
-      <div class="values reveal">
-        <article class="value" data-kanji="楽">
-          <p class="value-num">No. 01</p>
-          <h3>面白がる</h3>
-          <p class="value-en">Be Curious</p>
-          <p>経済を「勉強するもの」ではなく、「面白いもの」として楽しむ。クイズもゲームも、まずは自分たちがワクワクするところから。</p>
-        </article>
-        <article class="value" data-kanji="創">
-          <p class="value-num">No. 02</p>
-          <h3>自分でつくる</h3>
-          <p class="value-en">Build It Ourselves</p>
-          <p>世の中の仕組みを知るだけで終わらせない。展示もコンテストの案も、自分たちの手で形にしてみる。</p>
-        </article>
-        <article class="value" data-kanji="開">
-          <p class="value-num">No. 03</p>
-          <h3>みんなに開く</h3>
-          <p class="value-en">Open to Everyone</p>
-          <p>難しい話を、誰にでも伝わる形に。文化祭や SNS を通じて、経済の面白さをたくさんの人に届ける。</p>
-        </article>
+      <div class="ap-numbers reveal">
+        <div><b><span data-count>2,364</span></b><small>人</small><p>2026 年の文化祭、3 日間の来場者</p></div>
+        <div><b><span data-count>6</span></b><small>コーナー</small><p>チップを賭けて遊ぶ体験型展示</p></div>
+        <div><b>2</b><small>大会</small><p>2026 年に挑戦しているコンテスト</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 数字で見る AZAKEI -->
-  <section class="about tight" style="padding-top: 0;">
+  <!-- タイル（見る・遊ぶ・挑む） -->
+  <section class="ap-tiles-wrap" id="overview">
     <div class="container">
-      <p class="section-label reveal">In Numbers</p>
-      <div class="numbers reveal">
-        <div class="number">
-          <div class="number-val"><span data-count>2,364</span><small>人</small></div>
-          <p class="number-label">2026年の文化祭<br>3日間の来場者数</p>
-        </div>
-        <div class="number">
-          <div class="number-val"><span data-count>4</span><small>種類</small></div>
-          <p class="number-label">挑戦している<br>コンテスト</p>
-        </div>
-        <div class="number">
-          <div class="number-val"><span data-count>6</span><small>コーナー</small></div>
-          <p class="number-label">文化祭の<br>体験型展示</p>
-        </div>
-        <div class="number">
-          <div class="number-val">2025</div>
-          <p class="number-label">麻布中学校・高等学校で<br>活動スタート</p>
-        </div>
+      <div class="ap-head reveal">
+        <h2 class="ap-title sm">見る。遊ぶ。挑む。</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- 全体説明（ハブ） -->
-  <section class="services" id="overview">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="section-label">Overview</p>
-        <h2 class="section-title"><span class="keep-phrase">AZAKEI の</span><span class="keep-phrase"><em>全体像</em></span></h2>
-        <p class="lead">黒板に描いた、私たちの地図。ひとつの同好会から、いくつもの活動が枝分かれしています。気になるところから覗いてみてください。</p>
-      </div>
-      <div class="mm-board" data-mindmap>
-        <svg class="mm-lines" aria-hidden="true"></svg>
-        <div class="mm-core" data-mm="core">
-          <span class="mm-core-mark" data-logomark aria-hidden="true"></span>
-          <span class="mm-core-name">AZAKEI</span>
-          <span class="mm-core-ja">麻経</span>
-        </div>
-        <div class="mm-branch mm-b1">
-          <a class="mm-node" href="contests.html" data-mm="b1"><small>Challenge</small>挑む</a>
-          <ul class="mm-leaves">
-            <li><a href="contests.html#business" data-mm-parent="b1">ビジネスコンテスト</a></li>
-            <li><a href="contests.html#stockleague" data-mm-parent="b1">日経ストックリーグ</a></li>
-            <li><a href="contests.html#audition" data-mm-parent="b1">起業家オーディション</a></li>
-            <li><a href="contests.html#paper" data-mm-parent="b1">論文作成</a></li>
+      <div class="ap-tiles">
+        <a class="ap-tile is-wide is-photo reveal" href="festival.html" style="--img:url('photos/balloons.jpg')">
+          <p class="ap-tile-eyebrow">文化祭「麻布経済展」</p>
+          <h3>2027 年 5 月、また開催。</h3>
+          <p>チップを賭けて、経済で遊ぶ 3 日間。</p>
+          <span class="ap-link">くわしく見る</span>
+        </a>
+        <a class="ap-tile is-dark reveal" href="contests.html">
+          <p class="ap-tile-eyebrow">コンテスト</p>
+          <h3>学校の外へ、挑戦中。</h3>
+          <ul class="ap-status">
+            <li><i class="is-done"></i>高校生ビジネスコンテスト 出場</li>
+            <li><i class="is-live"></i>日経ストックリーグ 参加中</li>
           </ul>
+          <span class="ap-link">コンテストを見る</span>
+        </a>
+        <a class="ap-tile reveal" href="quiz.html">
+          <span class="ap-tile-art qz-promo-chips" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          <p class="ap-tile-eyebrow">億万長者クイズ</p>
+          <h3>チップ 5 枚から、<br>億万長者へ。</h3>
+          <p class="qz-leader" data-rank-leader hidden></p>
+          <span class="ap-link">挑戦する</span>
+        </a>
+        <a class="ap-tile reveal" href="diagnosis.html">
+          <p class="ap-tile-eyebrow">エコノミスト診断</p>
+          <h3>あなたは、どの<br>投資家タイプ？</h3>
+          <span class="ap-link">診断する</span>
+        </a>
+        <a class="ap-tile is-gold reveal" href="vote.html">
+          <p class="ap-tile-eyebrow"><span class="ap-live"></span>受付中</p>
+          <h3>来年の展示を、<br>一緒に決めよう。</h3>
+          <p>文化祭投票。1 つ選んで押すだけ。</p>
+          <span class="ap-link">投票する</span>
+        </a>
+        <div class="ap-tile is-pair reveal">
+          <a href="glossary.html"><p class="ap-tile-eyebrow">経済用語ミニ辞典</p><h3>42 語を、やさしく。</h3><span class="ap-link">ひらく</span></a>
+          <a href="sim.html"><p class="ap-tile-eyebrow">チップ配分シミュレーター</p><h3>10 年後、いくら？</h3><span class="ap-link">ためす</span></a>
         </div>
-        <div class="mm-branch mm-b2">
-          <a class="mm-node" href="festival.html" data-mm="b2"><small>Festival</small>魅せる</a>
-          <ul class="mm-leaves">
-            <li><a href="festival.html" data-mm-parent="b2">文化祭「麻布経済展」</a></li>
-            <li><a href="quiz.html" data-mm-parent="b2">億万長者クイズ</a></li>
-            <li><a href="diagnosis.html" data-mm-parent="b2">エコノミスト診断</a></li>
-            <li><a href="vote.html" data-mm-parent="b2">文化祭投票</a></li>
-            <li><a href="sim.html" data-mm-parent="b2">シミュレーター</a></li>
-          </ul>
-        </div>
-        <div class="mm-branch mm-b3">
-          <a class="mm-node" href="about.html" data-mm="b3"><small>Know</small>知る</a>
-          <ul class="mm-leaves">
-            <li><a href="about.html" data-mm-parent="b3">麻経とは</a></li>
-            <li><a href="activities.html" data-mm-parent="b3">活動風景・日常</a></li>
-            <li><a href="events.html" data-mm-parent="b3">日程・イベント</a></li>
-            <li><a href="about.html#vision" data-mm-parent="b3">今後の展望</a></li>
-            <li><a href="glossary.html" data-mm-parent="b3">経済用語ミニ辞典</a></li>
-          </ul>
-        </div>
-        <div class="mm-branch mm-b4">
-          <a class="mm-node" href="sponsor.html" data-mm="b4"><small>Connect</small>つながる</a>
-          <ul class="mm-leaves">
-            <li><a href="sponsor.html" data-mm-parent="b4">協賛・ご協力</a></li>
-            <li><a href="contact.html" data-mm-parent="b4">お問い合わせ</a></li>
-            <li><a href="en.html" data-mm-parent="b4">English</a></li>
-          </ul>
-        </div>
-        <p class="mm-chalk-note" aria-hidden="true">世の中の仕組みを理解し、自らで仕組みを創り出す。</p>
       </div>
     </div>
   </section>
@@ -298,79 +188,24 @@
     </div>
   </section>
 
-  <!-- エコノミスト診断 -->
-  <section class="about tight" style="padding-bottom: 0;">
-    <div class="container">
-      <a class="dg-promo reveal" href="diagnosis.html">
-        <span class="dg-promo-mark" data-logomark aria-hidden="true"></span>
-        <div>
-          <p class="section-label" style="margin-bottom:8px;">Economist Type Test · NEW</p>
-          <h2>あなたは、ライオン？ キツネ？ カメ？ ウサギ？</h2>
-          <p>文化祭で人気だった「エコノミスト診断」を Web で。YES か NO で道を選ぶと、あなたの投資家タイプがわかります。</p>
-        </div>
-        <span class="btn-primary">診断する</span>
-      </a>
-      <a class="dg-promo qz-promo reveal" href="quiz.html">
-        <span class="qz-promo-chips" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        <div>
-          <p class="section-label" style="margin-bottom:8px;">Millionaire Quiz · NEW</p>
-          <h2>チップ 5 枚から、億万長者へ。</h2>
-          <p>文化祭のクイズを Web で。全 42 問から毎回ランダム出題、おたすけ「50:50」「問題チェンジ」つき。文化祭の最高記録 120 枚を超えられるか。</p>
-          <p class="qz-leader" data-rank-leader hidden></p>
-        </div>
-        <span class="btn-primary">挑戦する</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- 文化祭投票 -->
-  <section class="about tight">
-    <div class="container">
-      <div class="vote-promo">
-        <div class="reveal">
-          <p class="section-label">Festival Vote 2027</p>
-          <h2 class="section-title"><span class="keep-phrase">来年の展示を、</span><span class="keep-phrase"><em>一緒に</em>決めよう。</span></h2>
-          <p>次の麻布経済展、どんな展示が見たいですか？ 1 つ選んで押すだけ。票はその場でカウントされ、結果もすぐに見られます。</p>
-          <a href="vote.html" class="btn-primary">投票する</a>
-        </div>
-        <div class="vote-promo-chips reveal">
-          <a href="vote.html">去年と同じ</a>
-          <a href="vote.html">ガチ経済系</a>
-          <a href="vote.html">面白系</a>
-          <a href="vote.html">Instagram映え系</a>
-          <a href="vote.html">飲食系</a>
-          <a href="vote.html">人生系</a>
-          <a href="vote.html">社会系</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 日程・イベント -->
   <section class="about tight">
     <div class="container">
-      <div class="services-header reveal">
-        <div>
-          <p class="section-label">Upcoming</p>
-          <h2 class="section-title"><span class="keep-phrase">これからの</span><span class="keep-phrase"><em>予定</em></span></h2>
-        </div>
-        <a href="events.html" class="btn-ghost">すべての日程 <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <div class="ap-head row reveal">
+        <h2 class="ap-title sm">これからの予定</h2>
+        <a href="events.html" class="ap-link">すべての日程</a>
       </div>
       <div class="reveal" data-render="events" data-scope="upcoming" data-limit="3"></div>
     </div>
   </section>
 
-  <!-- 何気ない日常 -->
-  <section class="services tight">
+  <!-- 活動日誌 -->
+  <section class="about tight">
     <div class="container">
-      <div class="services-header reveal">
-        <div>
-          <p class="section-label">Daily</p>
-          <h2 class="section-title"><span class="keep-phrase">何気ない</span><span class="keep-phrase"><em>日常</em></span></h2>
-        </div>
-        <a href="activities.html" class="btn-ghost">活動風景へ <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <div class="ap-head row reveal">
+        <h2 class="ap-title sm">活動日誌</h2>
+        <a href="activities.html" class="ap-link">活動風景へ</a>
       </div>
-      <div class="gallery reveal" data-render="gallery" data-limit="3" style="margin-bottom: 20px;"></div>
       <div class="diary reveal" data-render="diary" data-limit="3"></div>
     </div>
   </section>
@@ -380,77 +215,42 @@
     <div class="container">
       <div class="split" style="align-items: start;">
         <div class="reveal">
-          <p class="section-label">Track Record</p>
-          <h2 class="section-title"><span class="keep-phrase">歩みと</span><span class="keep-phrase"><em>実績</em></span></h2>
-          <p style="margin-top: 24px;">まだ始まったばかり。ここに少しずつ、挑戦の記録を積み重ねていきます。</p>
+          <h2 class="ap-title sm">歩みと実績</h2>
+          <p class="ap-lead left">まだ始まったばかり。<br>挑戦の記録を、ここに積み重ねていきます。</p>
         </div>
         <ul class="achievements reveal" data-render="achievements"></ul>
       </div>
     </div>
   </section>
 
-  <!-- 仲間になろう -->
-  <section class="about tight">
-    <div class="container">
-      <div class="join reveal">
-        <div class="join-emblem" data-emblem aria-hidden="true"></div>
-        <div>
-          <p class="section-label">Join AZAKEI</p>
-          <h2><span class="keep-phrase">経済に</span><span class="keep-phrase">詳しくなくても、</span><br><em>大歓迎。</em></h2>
-          <p>AZAKEI は、麻布中学校・高等学校の生徒が集まる同好会です。「ちょっと気になる」くらいの気持ちで大丈夫。まずは気軽に声をかけてください。</p>
-          <div class="cta-actions" style="justify-content:flex-start;">
-            <a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener" class="btn-primary">Instagram で話を聞く</a>
-            <a href="activities.html" class="btn-ghost">ふだんの様子を見る <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
-          </div>
-        </div>
-        <ul class="join-list">
-          <li>文化祭の展示づくり、コンテスト、SNS。関わり方は自分で選べます。</li>
-          <li>知識より「面白そう」が大事。わからないことは、みんなで調べます。</li>
-          <li>見学や質問だけでも OK。Instagram の DM でお気軽にどうぞ。</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- SNS -->
-  <section class="services tight">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="section-label">Follow us</p>
-        <h2 class="section-title"><span class="keep-phrase">各種</span><span class="keep-phrase"><em>SNS</em></span></h2>
-      </div>
-      <div class="sns-grid reveal" data-render="sns"></div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-band tight">
+  <!-- しめくくり：仲間・協賛・お問い合わせ -->
+  <section class="ap-end">
     <div class="container reveal">
-      <p class="section-label" style="justify-content: center;">Contact</p>
-      <h2 class="section-title"><span class="keep-phrase">一緒に、</span><span class="keep-phrase"><em>仕組み</em>を</span><span class="keep-phrase">つくりませんか。</span></h2>
-      <p>取材・協賛・コラボレーションのご相談、メンバーへの質問など、お気軽にどうぞ。</p>
-      <div class="cta-actions">
+      <h2 class="ap-title">一緒に、<br class="sp-only">仕組みをつくろう。</h2>
+      <p class="ap-lead">経済に詳しくなくても大歓迎。協賛・取材・コラボのご相談もお待ちしています。</p>
+      <div class="ap-end-actions">
         <a href="contact.html" class="btn-primary">お問い合わせ</a>
-        <a href="sponsor.html" class="btn-ghost">協賛のご案内 <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+        <a href="sponsor.html" class="ap-link">協賛のご案内</a>
+        <a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener" class="ap-link">Instagram</a>
       </div>
     </div>
   </section>
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261004y"></script>
-  <script src="layout.js?v=20261004y"></script>
-  <script src="brand.js?v=20261004y"></script>
-  <script src="live.js?v=20261004y"></script>
-  <script src="render.js?v=20261004y"></script>
-  <script src="loader.js?v=20261004y"></script>
-  <script src="nav.js?v=20261004y"></script>
-  <script src="hero.js?v=20261004y"></script>
-  <script src="countdown.js?v=20261004y"></script>
-  <script src="reveal.js?v=20261004y"></script>
-  <script src="site.js?v=20261004y"></script>
-  <script src="ranking.js?v=20261004y"></script>
-  <script src="quiz-data.js?v=20261004y"></script>
-  <script src="daily.js?v=20261004y"></script>
+  <script src="content.js?v=20261007a"></script>
+  <script src="layout.js?v=20261007a"></script>
+  <script src="brand.js?v=20261007a"></script>
+  <script src="live.js?v=20261007a"></script>
+  <script src="render.js?v=20261007a"></script>
+  <script src="loader.js?v=20261007a"></script>
+  <script src="nav.js?v=20261007a"></script>
+  <script src="hero.js?v=20261007a"></script>
+  <script src="countdown.js?v=20261007a"></script>
+  <script src="reveal.js?v=20261007a"></script>
+  <script src="site.js?v=20261007a"></script>
+  <script src="ranking.js?v=20261007a"></script>
+  <script src="quiz-data.js?v=20261007a"></script>
+  <script src="daily.js?v=20261007a"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@
     const total    = wrapH - viewH;
     
     // 進捗率 0.0 ～ 1.0
-    const progress = Math.max(0, Math.min(1, scrolled / total));
+    const progress = total > 0 ? Math.max(0, Math.min(1, scrolled / total)) : Math.max(0, Math.min(1, scrolled / viewH));
 
     // 進捗バー更新
     if (progressFill) progressFill.style.height = (progress * 100) + '%';
@@ -35,18 +35,14 @@
       heroBg.style.transform = `scale(1.04) translateY(${progress * viewH * 0.18}px)`;
     }
 
-    // スクロール進捗に合わせたテキスト表示タイミング（2行版）
-    if (progress >= 0.00) trigger(heroLabel);
-    if (progress >= 0.15) triggerLine(0); // 1行目：経済とエンタメが
-    if (progress >= 0.35) triggerLine(1); // 2行目：交差する。
-    if (progress >= 0.60) trigger(heroSub);
-    if (progress >= 0.80) trigger(heroActions);
   }
 
-  // 初期ロード時
-  window.addEventListener('DOMContentLoaded', () => { 
-    trigger(heroLabel);
-    setTimeout(() => triggerLine(0), 1300); // ローダー明けにワードマークを表示
+  // v30：スクロールを待たずに、開いてすぐ順番に表示（ローダーが出るときはその後）
+  window.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('loader');
+    const wait = loader && loader.style.display !== 'none' ? 700 : 80;
+    [() => trigger(heroLabel), () => triggerLine(0), () => triggerLine(1), () => trigger(heroSub), () => trigger(heroActions)]
+      .forEach((fn, i) => setTimeout(fn, wait + i * 110));
     onHeroScroll();
   });
   
