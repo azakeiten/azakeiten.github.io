@@ -172,5 +172,5 @@
       </div>`).join('')}
     </div>
     <div class="footer-giant" aria-hidden="true">AZAKEI<span class="footer-giant-seal">麻経</span></div>
-    <div class="footer-bottom">© ${new Date().getFullYear()} AZAKEI. All rights reserved.</div>`;
+    <div class="footer-bottom"><span>© ${new Date().getFullYear()} AZAKEI. All rights reserved.</span><span class="footer-legal"><a href="about.html#profile">団体概要</a><a href="about.html#faq">よくある質問</a><a href="privacy.html">プライバシーポリシー</a></span></div>`;
 })();

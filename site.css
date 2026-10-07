@@ -4157,3 +4157,75 @@ a.ap-tile:hover, .ap-tile.is-pair a:hover { transform: translateY(-3px); box-sha
   .ap-tile, .ap-tile.is-pair a, .ap-tile.is-photo::before { transition: none; }
   .ap-live, .ap-status i.is-live { animation: none; }
 }
+
+/* ################################################################
+   ▼ v32 — 親しみやすく・本格的に
+   ################################################################ */
+/* 下層ページ（昼）：ほんのり温かい紙の色に。カード・ボタンは丸く、やわらかく */
+html:not(.is-apple):not([data-theme="dark"]) { --color-bg: #faf7f1; --color-surface: #fffdf9; }
+:root { --radius: 18px; }
+.btn-primary, .btn-ghost { border-radius: 999px; }
+:is(.link-card, .service-card, .dm-card, .fx-rule) { transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s; }
+:is(a.link-card, .service-card, .dm-card):hover { transform: translateY(-3px); box-shadow: 0 16px 34px -22px rgba(120, 90, 40, 0.45); }
+
+/* お知らせ（トップ） */
+.news-list { list-style: none; margin: 0; padding: 0; border-radius: var(--radius-panel, 24px); background: var(--color-surface); overflow: hidden; }
+.news-list li + li { border-top: 1px solid var(--color-border); }
+.news-list a { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 16px; padding: 18px clamp(18px, 3vw, 28px); color: var(--color-text); text-decoration: none; transition: background 0.25s; }
+.news-list a::after { content: '›'; font-size: 20px; color: var(--color-muted); transition: transform 0.25s var(--ease-out); }
+.news-list a:hover { background: color-mix(in srgb, var(--color-accent) 7%, transparent); }
+.news-list a:hover::after { transform: translateX(3px); }
+.news-list time { font-variant-numeric: tabular-nums; font-size: 14px; color: var(--color-muted); font-weight: 600; }
+.news-kind { padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: color-mix(in srgb, var(--color-accent) 14%, transparent); color: var(--color-accent-deep); }
+.news-kind.is-diary { background: rgba(60, 138, 55, 0.12); color: #2f7a2b; }
+.news-kind.is-vote { background: rgba(192, 57, 43, 0.1); color: #b2382b; }
+.news-title { font-size: 15.5px; font-weight: 500; line-height: 1.6; min-width: 0; }
+[data-theme="dark"] .news-kind.is-diary { color: #8fd98a; }
+[data-theme="dark"] .news-kind.is-vote { color: #ff8a7a; }
+@media (max-width: 560px) {
+  .news-list a { grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; gap: 6px 10px; padding: 16px 18px; }
+  .news-list time { grid-column: 1; grid-row: 1; font-size: 13px; }
+  .news-kind { grid-column: 2; grid-row: 1; justify-self: start; }
+  .news-title { grid-column: 1 / 3; grid-row: 2; }
+  .news-list a::after { grid-column: 3; grid-row: 1 / 3; }
+}
+
+/* 団体概要 */
+.org-table { margin: 0; border-radius: var(--radius-panel, 24px); background: var(--color-surface); border: 1px solid var(--color-border); overflow: hidden; }
+.org-table > div { display: grid; grid-template-columns: 9em 1fr; gap: 16px; padding: 18px clamp(18px, 3vw, 28px); }
+.org-table > div + div { border-top: 1px solid var(--color-border); }
+.org-table dt { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--color-accent-deep); padding-top: 2px; }
+.org-table dd { margin: 0; font-size: 15px; line-height: 1.85; }
+.org-table a { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 560px) { .org-table > div { grid-template-columns: 1fr; gap: 4px; } }
+
+/* よくある質問 */
+.faq { display: grid; gap: 12px; max-width: 860px; }
+.faq details { border-radius: var(--radius); background: var(--color-surface); border: 1px solid var(--color-border); transition: border-color 0.25s, box-shadow 0.25s; }
+.faq details[open] { border-color: color-mix(in srgb, var(--color-accent) 45%, transparent); box-shadow: 0 12px 28px -22px rgba(120, 90, 40, 0.5); }
+.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px; padding: 18px clamp(18px, 3vw, 24px); font-size: 16px; font-weight: 600; line-height: 1.6; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: 'Q'; flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--color-accent); color: #fff; font-size: 14px; font-weight: 700; }
+.faq summary::after { content: '+'; margin-left: auto; font-size: 22px; font-weight: 400; color: var(--color-accent-deep); transition: transform 0.25s var(--ease-out); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0; padding: 0 clamp(18px, 3vw, 24px) 20px calc(clamp(18px, 3vw, 24px) + 44px); color: var(--color-muted); line-height: 1.9; }
+.faq details a { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+[data-theme="dark"] .faq summary::before { color: #111; }
+
+/* プライバシーポリシー本文 */
+.legal { max-width: 780px; }
+.legal h2 { margin: 40px 0 12px; font-size: clamp(19px, 2vw, 22px); line-height: 1.5; }
+.legal h2:first-child { margin-top: 0; }
+.legal p, .legal li { line-height: 1.95; font-size: 15.5px; }
+.legal ul { margin: 10px 0 0; padding-left: 1.3em; display: grid; gap: 6px; }
+.legal a { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+.legal-date { margin-top: 40px; color: var(--color-muted); font-size: 14px; }
+
+/* フッターの下の行・フォームの一言 */
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
+.footer-legal { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.footer-legal a { color: inherit; text-decoration: none; }
+.footer-legal a:hover { color: var(--color-accent-deep); text-decoration: underline; }
+.form-privacy { margin: 0; font-size: 13px; color: var(--color-muted); line-height: 1.8; }
+.form-privacy a { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .news-list a, .faq details, .faq summary::after { transition: none; } }

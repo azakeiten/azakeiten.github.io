@@ -84,6 +84,19 @@
       ).join('');
     },
 
+    // お知らせ：管理ページで書いた日誌・日程を、更新した日の新しい順に
+    news(el) {
+      const limit = +el.dataset.limit || Infinity;
+      const items = (D.news || []).slice(0, limit);
+      const ymd = d => { const j = new Date(d.getTime() + 9 * 3600e3); return `${j.getUTCFullYear()}.${String(j.getUTCMonth() + 1).padStart(2, '0')}.${String(j.getUTCDate()).padStart(2, '0')}`; };
+      el.innerHTML = items.length ? `<ul class="news-list">${items.map(n => `
+        <li><a href="${n.link}">
+          <time>${ymd(n.at)}</time>
+          <span class="news-kind is-${n.cls}">${n.label}</span>
+          <span class="news-title">${n.title}</span>
+        </a></li>`).join('')}</ul>` : emptyMsg('お知らせは準備中です。');
+    },
+
     diary(el) {
       const limit = +el.dataset.limit || Infinity;
       const items = (D.diary || []).slice().sort((a, b) => a.date < b.date ? 1 : -1).slice(0, limit);
@@ -130,7 +143,7 @@
   if (window.AZAKEI_RENDER_MARKS) window.AZAKEI_RENDER_MARKS();
 
   /* ---- 部員が管理ページ（admin.html）から書いた「日誌」「日程」を Firebase から足す ---- */
-  const live = [...document.querySelectorAll('[data-render="diary"], [data-render="events"]')];
+  const live = [...document.querySelectorAll('[data-render="diary"], [data-render="events"], [data-render="news"]')];
   if (!live.length) loading = false;
   else if (D.firebase) (async () => {
     try {
@@ -145,6 +158,16 @@
       const day = s => (/^\d{4}-\d{2}-\d{2}$/.test(s || '') ? s : '');
       const safeImg = s => (/^photos\/[a-z0-9-]+\.jpg$/.test(s || '') ? s : '');
       const posts = snap.docs.map(d => d.data());
+      // お知らせ用（更新日つきのものだけ）
+      D.news = posts.filter(p => p.title && p.updatedAt && p.updatedAt.toDate).map(p => {
+        const vote = p.kind === 'event' && p.tag === '投票';
+        return {
+          at: p.updatedAt.toDate(), title: esc(p.title),
+          label: p.kind === 'diary' ? '活動日誌' : vote ? '投票' : '日程',
+          cls: p.kind === 'diary' ? 'diary' : vote ? 'vote' : 'event',
+          link: p.kind === 'diary' ? 'activities.html' : (safeLink(p.link) || 'events.html')
+        };
+      }).sort((a, b) => b.at - a.at);
       // 管理ページに取りこんだものと同じ（種類・日付・タイトルが同じ）元の書きこみは、二重に出さない
       const key = (k, d, t) => k + '|' + (d || '') + '|' + t;
       const has = new Set(posts.map(p => key(p.kind, p.date, p.title)));
