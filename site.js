@@ -280,11 +280,11 @@ try {
     });
   }
 
-  /* ---- ページ移動：金の線とロゴの入った幕が下から閉じる（いまは使っていない） ---- */
-  const CURTAIN_NAV = false;
+  /* ---- ページ移動：金の線とロゴの入った幕が下から閉じる（v31：短く） ---- */
+  const CURTAIN_NAV = true;
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href]');
-    if (!CURTAIN_NAV) return; // v30：ページ移動の幕はやめて、すぐ移動する（ブラウザのふわっと切りかえだけ）
+    if (!CURTAIN_NAV) return;
     if (!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin || url.pathname === location.pathname) return;
@@ -293,7 +293,7 @@ try {
     void curtain.offsetWidth;
     curtain.classList.add('is-in');
     try { sessionStorage.setItem('azakei-curtain', '1'); } catch (err) {}
-    setTimeout(() => { location.href = a.href; }, 480);
+    setTimeout(() => { location.href = a.href; }, 220); // v31：幕は短く
   });
   // 「戻る」で戻ってきたとき（ページが保存されていた場合）は幕を開ける
   window.addEventListener('pageshow', ev => {
@@ -493,7 +493,7 @@ try {
 
   /* ---- ④ 下層ページの見出しに写真 ---- */
   const PHOTO = {
-    'about.html': 'members.jpg', 'activities.html': 'photos/setup.jpg', 'contests.html': 'photos/star-bills.jpg',
+    'about.html': 'members.jpg', 'azakei.html': 'photos/board-special.jpg', 'activities.html': 'photos/setup.jpg', 'contests.html': 'photos/star-bills.jpg',
     'events.html': 'photos/balloons.jpg', 'festival.html': 'photos/hallway-wave.jpg', 'vote.html': 'photos/hallway-game.jpg',
     'sponsor.html': 'photos/room-paper.jpg', 'contact.html': 'photos/star-door.jpg', 'diagnosis.html': 'photos/room-diagnosis.jpg',
     'en-diagnosis.html': 'photos/room-diagnosis.jpg', 'quiz.html': 'photos/board-millionaire.jpg', 'sim.html': 'photos/board-special.jpg', 'glossary.html': 'photos/rules-posters.jpg', '404.html': 'photos/entrance.jpg'
@@ -670,6 +670,7 @@ try {
   /* ---- 各ページの最後：写真つきで次のページへ ---- */
   const ORDER = [
     ['about.html', '麻経とは', 'AZAKEI の成り立ちと、これから。', 'members.jpg'],
+    ['azakei.html', 'AZAKEI として', '合言葉と、大切にしていること。', 'photos/board-special.jpg'],
     ['festival.html', '文化祭「麻布経済展」', '経済とエンタメが交差する、体験型展示。', 'photos/hallway-wave.jpg'],
     ['contests.html', '各種コンテスト', '学校の外で、自分たちの力を試す。', 'photos/star-bills.jpg'],
     ['activities.html', '活動風景・日常', 'ミーティングから放課後まで。', 'photos/setup.jpg'],

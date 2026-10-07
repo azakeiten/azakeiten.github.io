@@ -20,6 +20,7 @@
     { group: '知る', en: 'Know', pages: [
       { ico: 'M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10', href: 'index.html',      ja: 'ホーム',           en: 'Home',     desc: 'AZAKEI の全体像と最新情報。',                 img: 'hero.jpg' },
       { ico: 'M12 3l2.6 4.5H20l-2.7 4.5L20 16.5h-5.4L12 21l-2.6-4.5H4l2.7-4.5L4 7.5h5.4z', href: 'about.html',      ja: '麻経とは',         en: 'About',    desc: '成り立ち・活動の全体説明・今後の展望。',       img: 'members.jpg' },
+      { ico: 'M5 21V4M5 4h12l-2.5 4 2.5 4H5', href: 'azakei.html',     ja: 'AZAKEI として',    en: 'Identity', desc: '合言葉・大切にしていること・活動の地図・数字。', img: 'photos/board-special.jpg' },
       { ico: 'M4 8h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM10 8v10', href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'photos/room-diagnosis.jpg' },
       { ico: 'M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'photos/setup.jpg' },
       { ico: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6', href: 'glossary.html',   ja: '経済用語ミニ辞典', en: 'Glossary', desc: 'GDP・円高・配当……経済の言葉をやさしく。', img: 'photos/rules-posters.jpg', badge: 'NEW' },
@@ -143,7 +144,7 @@
   const tick = '<span>仕組みを、<em>つくろう。</em></span><span>Let\'s build <em>the system</em> —</span>';
   // フッターのリンクは「知る」「遊ぶ・学ぶ」「つながる」の 3 つに分ける
   const FOOT_GROUPS = [
-    { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
+    { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['azakei.html', 'AZAKEI として'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
     { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '億万長者クイズ'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', 'チップ配分<wbr>シミュレーター'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
     { en: 'Connect', ja: 'つながる', links: [['contact.html', 'お問い合わせ'], ['sponsor.html', '協賛のご案内'], ...sns.map(s => [s.url, s.name, s.handle])] }
   ];
