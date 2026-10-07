@@ -679,7 +679,7 @@ try {
     ['sim.html', 'チップ配分シミュレーター', '株・債券・預金に分けて、10 年後へ早送り。', 'photos/board-special.jpg'],
     ['diagnosis.html', 'エコノミスト診断', 'YES / NO で、あなたの投資家タイプがわかる。', 'photos/room-diagnosis.jpg'],
     ['glossary.html', '経済用語ミニ辞典', '経済の言葉を、やさしく。', 'photos/rules-posters.jpg'],
-    ['vote.html', '文化祭投票', '来年どんな展示が見たい？', 'photos/hallway-game.jpg'],
+    ['vote.html', '文化祭投票', '次はどんな展示が見たい？', 'photos/hallway-game.jpg'],
     ['sponsor.html', '協賛のご案内', '企業・団体の皆さまへ。', 'photos/room-paper.jpg'],
     ['contact.html', 'お問い合わせ', 'フォーム、または Instagram の DM から。', 'photos/star-door.jpg']
   ];

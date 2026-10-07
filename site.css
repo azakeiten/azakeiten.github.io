@@ -4229,3 +4229,101 @@ html:not(.is-apple):not([data-theme="dark"]) { --color-bg: #faf7f1; --color-surf
 .form-privacy { margin: 0; font-size: 13px; color: var(--color-muted); line-height: 1.8; }
 .form-privacy a { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .news-list a, .faq details, .faq summary::after { transition: none; } }
+
+/* ################################################################
+   ▼ v33 — 「次の麻布経済展へ」・あそびかた・写真の帯・来場者グラフ
+   ################################################################ */
+/* ヒーロー右下：日数カウンターの代わりに「次の麻布経済展へ」 */
+.hero-next { position: absolute; right: var(--gutter); bottom: clamp(40px, 8vw, 80px); z-index: 3; display: grid; justify-items: end; gap: 6px; color: #fff; text-decoration: none; opacity: 0; transform: translateY(10px); animation: hn-in 0.6s var(--ease-out) 0.9s forwards; }
+.hero-next-label { font-size: 12px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #f3dca8; }
+.hero-next-text { display: inline-flex; align-items: center; gap: 12px; font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(22px, 2.6vw, 34px); letter-spacing: 0.06em; text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45); }
+.hero-next-text i { font-style: normal; font-size: 0.8em; color: #f3dca8; transition: transform 0.3s var(--ease-out); }
+.hero-next:hover .hero-next-text i { transform: translateX(6px); }
+@keyframes hn-in { to { opacity: 1; transform: none; } }
+@media (max-width: 760px) { .hero-next { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-next { animation: none; opacity: 1; transform: none; } }
+
+/* 日程ページ・英語ページ：開幕カウントダウンの代わり */
+.next-fest { position: relative; overflow: hidden; isolation: isolate; display: grid; gap: 10px; margin-bottom: clamp(36px, 5vw, 56px); padding: clamp(28px, 4.4vw, 48px); border-radius: calc(var(--radius) + 6px); background: var(--sumi, #121519); color: #eceae4; text-decoration: none; }
+.next-fest::after { content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0.18; background: var(--wave) repeat 0 0 / 56px 28px; -webkit-mask: radial-gradient(80% 100% at 100% 100%, #000, transparent 70%); mask: radial-gradient(80% 100% at 100% 100%, #000, transparent 70%); }
+.nf-label { margin: 0; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #d9bb7e; }
+.nf-title { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 500; font-size: clamp(28px, 4.4vw, 48px); color: #fff; letter-spacing: 0.04em; }
+.nf-text { margin: 0; max-width: 560px; font-size: 15px; line-height: 1.9; color: rgba(236, 234, 228, 0.78); }
+.nf-more { margin-top: 6px; font-size: 14px; color: #f3e3bd; }
+.next-fest:hover .nf-more { text-decoration: underline; text-underline-offset: 4px; }
+
+/* 来場者：日別のミニグラフ */
+.ap-num-main { display: grid; align-content: start; padding-bottom: 40px !important; }
+.ap-bars { display: grid; grid-template-columns: repeat(3, 1fr); align-items: end; gap: 10px; height: 92px; margin: 28px auto 0; width: min(100%, 240px); }
+.ap-bars span { position: relative; height: var(--h); min-height: 20px; border-radius: 8px 8px 4px 4px; background: color-mix(in srgb, var(--color-accent) 30%, transparent); transform-origin: bottom; transform: scaleY(0.05); transition: transform 0.7s var(--ease-out); }
+.ap-bars span.is-top { background: linear-gradient(180deg, #d6b97f, #a8823f); }
+.reveal.visible .ap-bars span { transform: none; }
+.reveal.visible .ap-bars span:nth-child(2) { transition-delay: 0.08s; }
+.reveal.visible .ap-bars span:nth-child(3) { transition-delay: 0.16s; }
+.ap-bars i { position: absolute; left: 50%; top: -20px; translate: -50% 0; font-style: normal; font-size: 12px; font-weight: 700; color: var(--color-text); white-space: nowrap; }
+.ap-bars em { position: absolute; left: 50%; bottom: -20px; translate: -50% 0; font-style: normal; font-size: 11px; color: var(--color-muted); white-space: nowrap; }
+@media (max-width: 760px) {
+  .ap-num-main .ap-bars { grid-column: 1 / -1; margin: 30px 0 0; width: 100%; height: 72px; }
+}
+
+/* 麻布経済展のあそびかた */
+.ap-how { padding: clamp(64px, 9vw, 120px) 0; }
+.ap-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ap-steps li { display: grid; align-content: start; gap: 6px; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius-panel, 28px); background: var(--color-surface); text-align: center; }
+.ap-step-art { display: grid; place-items: center; height: 120px; margin-bottom: 8px; }
+.ap-step-no { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--color-accent-deep); }
+.ap-steps h3 { margin: 0; font-size: clamp(20px, 2vw, 24px); }
+.ap-steps li > p:last-child { margin: 4px 0 0; color: var(--color-muted); font-size: 15px; line-height: 1.75; }
+.ap-chipstack { position: relative; width: 84px; height: 90px; }
+.ap-chipstack i { position: absolute; left: 0; width: 84px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #e8574a, #b8352a 70%); box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.55), inset 0 0 0 7px #b8352a, 0 3px 0 #8d2a21; bottom: calc(var(--n, 0) * 13px); }
+.ap-chipstack i:nth-child(1) { --n: 0; }
+.ap-chipstack i:nth-child(2) { --n: 1; }
+.ap-chipstack i:nth-child(3) { --n: 2; }
+.ap-chipstack i:nth-child(4) { --n: 3; }
+.ap-chipstack i:nth-child(5) { --n: 4; }
+.reveal .ap-chipstack i { opacity: 0; transform: translateY(-14px); transition: opacity 0.3s, transform 0.4s var(--ease-out); transition-delay: calc(var(--n) * 0.07s + 0.15s); }
+.reveal.visible .ap-chipstack i { opacity: 1; transform: none; }
+.ap-odds { display: flex; align-items: center; gap: 8px; }
+.ap-odds b { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; font-family: var(--font-head, inherit); font-size: 18px; font-weight: 700; background: color-mix(in srgb, var(--color-accent) 16%, var(--color-surface)); color: var(--color-accent-deep); }
+.ap-odds b.is-hot { width: 70px; height: 70px; font-size: 22px; background: linear-gradient(160deg, #d6b97f, #a8823f); color: #fff; box-shadow: 0 10px 24px -12px rgba(168, 130, 63, 0.9); }
+.ap-record { display: flex; align-items: baseline; gap: 4px; }
+.ap-record b { font-family: var(--font-head, inherit); font-size: 72px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; background: linear-gradient(100deg, #d6b97f, #8a6a2f); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.ap-record small { font-size: 18px; font-weight: 700; color: var(--color-accent-deep); }
+.ap-center { margin-top: 28px; text-align: center; }
+@media (max-width: 760px) {
+  .ap-steps { grid-template-columns: 1fr; gap: 12px; }
+  .ap-steps li { grid-template-columns: 96px 1fr; column-gap: 16px; align-items: center; text-align: left; padding: 22px 20px; }
+  .ap-step-art { grid-row: 1 / 4; height: auto; margin: 0; transform: scale(0.75); }
+  .ap-steps li > :not(.ap-step-art) { grid-column: 2; }
+  .ap-record b { font-size: 56px; }
+}
+
+/* 写真の帯 */
+.ap-strip-wrap { padding: clamp(56px, 8vw, 100px) 0; overflow: hidden; }
+.ap-strip { position: relative; }
+.strip-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); padding: 0 var(--gutter) 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.strip-track::-webkit-scrollbar { display: none; }
+.strip-item { flex: none; width: clamp(240px, 34vw, 420px); margin: 0; scroll-snap-align: start; }
+.strip-item img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 22px; background: var(--color-surface); }
+.strip-item figcaption { margin-top: 10px; font-size: 14px; color: var(--color-muted); line-height: 1.6; }
+.strip-nav { display: flex; justify-content: flex-end; gap: 10px; padding: 18px var(--gutter) 0; }
+.strip-btn { width: 42px; height: 42px; border-radius: 50%; border: 0; background: var(--color-surface); color: var(--color-text); font-size: 24px; line-height: 1; cursor: pointer; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); transition: background 0.2s; }
+.strip-btn:hover { background: color-mix(in srgb, var(--color-accent) 18%, var(--color-surface)); }
+@media (max-width: 760px) { .strip-nav { display: none; } .strip-item { width: 78vw; } }
+
+/* 写真タイル（クイズ・診断）は、文字を下に */
+.ap-tile.is-photo.is-low { justify-content: flex-end; }
+.ap-tile.is-photo.is-low::after { background: linear-gradient(0deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.15) 60%, rgba(0, 0, 0, 0.05)); }
+.ap-tile.is-photo.is-low h3 { font-size: clamp(26px, 3.2vw, 40px); }
+@media (max-width: 760px) { .ap-tile.is-photo.is-low { min-height: 360px; } }
+@media (prefers-reduced-motion: reduce) { .ap-bars span, .reveal .ap-chipstack i { transition: none; transform: none; opacity: 1; } }
+
+/* 夜モードでも、ヒーローの白い札（文化祭投票）の文字は濃い色に */
+.is-apple .hero-vote, .is-apple .hero-vote b, .is-apple .hero-vote span:not(.dot) { color: #1d1d1f; }
+.is-apple .hero-vote .hv-sub { color: #6e6e73; }
+.is-apple .hero-vote .arrow { color: #8a6a2f; }
+@media (min-width: 761px) {
+  .ap-numbers > .ap-num-main { display: block; }
+  .ap-numbers > div:not(.ap-num-main) { display: grid; align-content: center; justify-items: center; }
+  .ap-numbers > div:not(.ap-num-main) > p { max-width: 16em; }
+}

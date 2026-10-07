@@ -47,7 +47,7 @@ window.AZAKEI = {
   vote: {
     pollId: 'festival-2027',
     namespace: 'azakei-festival-vote-2027',
-    question: '来年の麻布経済展、どんな展示が見たい？',
+    question: '次の麻布経済展、どんな展示が見たい？',
     options: [
       { key: 'same',    label: '去年と同じ',       en: 'Same as 2026', desc: 'チップを増やす体験型展示を、もう一度。' },
       { key: 'econ',    label: 'ガチ経済系',       en: 'Hardcore Economics', desc: '株・金融・マクロ経済を本気で深掘り。' },

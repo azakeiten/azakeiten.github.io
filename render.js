@@ -84,6 +84,19 @@
       ).join('');
     },
 
+    // 写真を横に流して見る帯（トップ）。PC は左右の矢印でも動かせる
+    strip(el) {
+      const limit = +el.dataset.limit || Infinity;
+      const items = (D.gallery || []).filter(g => g.src).slice(0, limit);
+      el.innerHTML = `<div class="strip-track" tabindex="0" aria-label="活動の写真（横にスクロールできます）">${items.map(g => `
+        <figure class="strip-item"><img src="${g.src}" alt="${g.caption}" loading="lazy" decoding="async"><figcaption>${g.caption}</figcaption></figure>`).join('')}</div>
+        <div class="strip-nav"><button type="button" class="strip-btn" data-dir="-1" aria-label="前の写真">‹</button><button type="button" class="strip-btn" data-dir="1" aria-label="次の写真">›</button></div>`;
+      const track = el.querySelector('.strip-track');
+      el.querySelectorAll('.strip-btn').forEach(b => b.addEventListener('click', () => {
+        track.scrollBy({ left: +b.dataset.dir * track.clientWidth * 0.8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }));
+    },
+
     // お知らせ：管理ページで書いた日誌・日程を、更新した日の新しい順に
     news(el) {
       const limit = +el.dataset.limit || Infinity;
