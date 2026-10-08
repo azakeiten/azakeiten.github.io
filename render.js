@@ -103,7 +103,7 @@
       const items = (D.news || []).slice(0, limit);
       const ymd = d => { const j = new Date(d.getTime() + 9 * 3600e3); return `${j.getUTCFullYear()}.${String(j.getUTCMonth() + 1).padStart(2, '0')}.${String(j.getUTCDate()).padStart(2, '0')}`; };
       el.innerHTML = items.length ? `<ul class="news-list">${items.map(n => `
-        <li><a href="${n.link}">
+        <li data-at="${n.at.getTime()}"><a href="${n.link}">
           <time>${ymd(n.at)}</time>
           <span class="news-kind is-${n.cls}">${n.label}</span>
           <span class="news-title">${n.title}</span>

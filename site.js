@@ -858,3 +858,73 @@ try {
   sync();
 })();
 } catch (e) { console.error("[site.js / fs]", e); }
+
+/* ######## ▼ v34：サイト探検スタンプ・おかえりなさい・お知らせの NEW・最終更新日 ########
+   ・見たページは、その人のブラウザの中（localStorage）にだけ記録。AZAKEI には送られない */
+try {
+(function() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  const get = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
+  const set = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+
+  /* ---- ① サイト探検スタンプ（フッター） ---- */
+  const STAMPS = [
+    ['index.html', 'ホーム'], ['about.html', '麻経とは'], ['azakei.html', 'AZAKEI として'], ['festival.html', '文化祭'],
+    ['contests.html', 'コンテスト'], ['activities.html', '活動風景'], ['events.html', '日程'], ['quiz.html', 'クイズ'],
+    ['diagnosis.html', '診断'], ['sim.html', 'シミュレーター'], ['glossary.html', '用語辞典'], ['vote.html', '投票'],
+    ['sponsor.html', '協賛'], ['contact.html', 'お問い合わせ']
+  ];
+  const visited = new Set(get('azakei-visited', []));
+  const firstTime = STAMPS.some(s => s[0] === page) && !visited.has(page);
+  if (STAMPS.some(s => s[0] === page)) { visited.add(page); set('azakei-visited', [...visited]); }
+  const box = document.querySelector('[data-explore]');
+  if (box) {
+    const n = STAMPS.filter(s => visited.has(s[0])).length, all = STAMPS.length, done = n === all;
+    const next = STAMPS.find(s => !visited.has(s[0]));
+    box.innerHTML = `
+      <div class="ex-head">
+        <p class="ex-title">サイト探検スタンプ <b>${n}</b> / ${all}</p>
+        <p class="ex-msg">${done ? '全ページ制覇！ 隅々まで見てくれて、ありがとうございます。' : `まだ見ていないページ：<a href="${next[0]}">${next[1]}</a>`}</p>
+      </div>
+      <div class="ex-bar" aria-hidden="true"><i style="width:${n / all * 100}%"></i></div>
+      <ul class="ex-stamps">${STAMPS.map(([href, ja]) => `<li class="${visited.has(href) ? 'is-got' : ''}${href === page && firstTime ? ' is-new' : ''}"><a href="${href}" title="${ja}${visited.has(href) ? '（見た）' : '（まだ）'}"><span aria-hidden="true">${visited.has(href) ? '経' : ''}</span><small>${ja}</small></a></li>`).join('')}</ul>`;
+    if (done) box.classList.add('is-done');
+  }
+
+  /* ---- ② トップ：おかえりなさい ＋ 前回から増えたお知らせに NEW ---- */
+  const prev = get('azakei-last-visit', 0);
+  const welcome = document.querySelector('[data-welcome]');
+  if (page === 'index.html') set('azakei-last-visit', Date.now());
+  const weekly = get('azakei_weekly', {});
+  const jst = new Date(Date.now() + 9 * 3600e3);
+  const weekNo = Math.floor((Math.floor(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate()) / 864e5) - 4) / 7);
+  const fmt = t => { const d = new Date(t + 9 * 3600e3); return `${d.getUTCMonth() + 1}/${d.getUTCDate()}`; };
+
+  function update() {
+    // お知らせ：前回の訪問より新しいものに NEW
+    let fresh = 0, latest = 0;
+    document.querySelectorAll('.news-list li[data-at]').forEach(li => {
+      const at = +li.dataset.at;
+      latest = Math.max(latest, at);
+      if (prev && at > prev) { fresh++; li.classList.add('is-fresh'); }
+    });
+    // 最終更新日
+    if (latest) document.querySelectorAll('[data-last-updated]').forEach(el => {
+      const d = new Date(latest + 9 * 3600e3);
+      el.textContent = `最終更新 ${d.getUTCFullYear()}.${String(d.getUTCMonth() + 1).padStart(2, '0')}.${String(d.getUTCDate()).padStart(2, '0')}`;
+      el.hidden = false;
+    });
+    if (!welcome || !prev) return;
+    const items = [];
+    if (fresh) items.push(`<a href="#news">お知らせが <b>${fresh}</b> 件増えています</a>`);
+    if (weekly.week === undefined) items.push(`<a href="#weekly">今週の 1 問に、挑戦してみませんか</a>`);
+    else if (weekly.week !== weekNo) items.push(`<a href="#weekly">今週の 1 問が、新しくなっています</a>`);
+    else if (weekly.lastOk === weekNo && weekly.streak > 1) items.push(`<a href="#weekly">今週の 1 問、<b>${weekly.streak}</b> 週連続正解中！</a>`);
+    if (visited.size < STAMPS.length) items.push(`<a href="#site-footer">探検スタンプ ${STAMPS.filter(s => visited.has(s[0])).length} / ${STAMPS.length}</a>`);
+    welcome.innerHTML = `<div class="container"><p class="wb-hello"><span aria-hidden="true">👋</span> おかえりなさい。<small>前回は ${fmt(prev)} に来てくれました。</small></p>${items.length ? `<ul class="wb-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</div>`;
+    welcome.hidden = false;
+  }
+  update();
+  document.addEventListener('azakei:rerender', update);
+})();
+} catch (e) { console.error('[site.js / v34]', e); }
