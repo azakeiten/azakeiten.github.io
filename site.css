@@ -4385,3 +4385,21 @@ html:not(.is-apple):not([data-theme="dark"]) { --color-bg: #faf7f1; --color-surf
 @keyframes ex-pop { 0% { transform: scale(2.2) rotate(-30deg); opacity: 0; } 70% { transform: scale(0.92) rotate(-6deg); opacity: 1; } 100% { transform: rotate(-8deg); } }
 @media (max-width: 560px) { .ex-stamps { grid-template-columns: repeat(5, 1fr); } .ex-stamps span { width: 36px; height: 36px; font-size: 15px; } .ex-stamps small { font-size: 10px; } }
 @media (prefers-reduced-motion: reduce) { .ex-stamps li.is-new span { animation: none; } .ap-first-card, .wb-list a { transition: none; } }
+
+/* ######## ▼ v35：バッジ（探検スタンプの下） ######## */
+.ex-badges { display: grid; gap: 10px; padding-top: 14px; border-top: 1px dashed color-mix(in srgb, var(--color-accent) 35%, transparent); }
+.ex-title.sm { font-size: 14px; }
+.ex-title.sm b { font-size: 18px; }
+.ex-badges ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.ex-badges a { display: grid; grid-template-columns: 30px 1fr; grid-template-rows: auto auto; column-gap: 8px; align-items: center; padding: 8px 10px; border-radius: 14px; background: var(--color-surface); color: var(--color-muted); text-decoration: none; border: 1px solid var(--color-border); transition: transform 0.2s var(--ease-out); }
+.ex-badges a:hover { transform: translateY(-2px); }
+.ex-badges span { grid-row: 1 / 3; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: color-mix(in srgb, var(--color-text) 6%, transparent); font-size: 15px; filter: grayscale(1); opacity: 0.6; }
+.ex-badges b { font-size: 12.5px; color: var(--color-text); opacity: 0.55; }
+.ex-badges small { font-size: 10.5px; line-height: 1.4; }
+.ex-badges li.is-got a { border-color: color-mix(in srgb, var(--color-accent) 50%, transparent); background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); }
+.ex-badges li.is-got span { filter: none; opacity: 1; background: linear-gradient(160deg, #f3dca8, #d6b97f); }
+.ex-badges li.is-got b { opacity: 1; }
+.ex-badges li.is-got small { color: var(--color-accent-deep); font-weight: 700; }
+.ex-share { margin-left: 8px; padding: 3px 12px; border-radius: 999px; background: #111; color: #fff !important; text-decoration: none !important; font-size: 12px; }
+@media (max-width: 560px) { .ex-badges ul { grid-template-columns: 1fr 1fr; } }
+@media (prefers-reduced-motion: reduce) { .ex-badges a { transition: none; } }

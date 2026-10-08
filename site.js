@@ -889,6 +889,33 @@ try {
       <div class="ex-bar" aria-hidden="true"><i style="width:${n / all * 100}%"></i></div>
       <ul class="ex-stamps">${STAMPS.map(([href, ja]) => `<li class="${visited.has(href) ? 'is-got' : ''}${href === page && firstTime ? ' is-new' : ''}"><a href="${href}" title="${ja}${visited.has(href) ? '（見た）' : '（まだ）'}"><span aria-hidden="true">${visited.has(href) ? '経' : ''}</span><small>${ja}</small></a></li>`).join('')}</ul>`;
     if (done) box.classList.add('is-done');
+
+    // バッジ：サイトのあちこちで遊ぶと集まる（記録はこのブラウザの中だけ）
+    const best = +(get('azakei_quiz_best', 0)) || 0;
+    const wk = get('azakei_weekly', {});
+    let voted = false, dg = false;
+    try { voted = Object.keys(localStorage).some(k => k.startsWith('azakei_vote_')); dg = !!localStorage.getItem('azakei_dg_type'); } catch (e) {}
+    const BADGES = [
+      ['🧭', '探検家', n >= 7, 'ページを 7 つ見る', next ? next[0] : 'index.html'],
+      ['🏆', '探検マスター', done, '14 ページすべてを見る', next ? next[0] : 'index.html'],
+      ['🪙', '投資家デビュー', best > 0, 'クイズをチップを残してクリア', 'quiz.html'],
+      ['💰', '億万長者', best >= 40, 'クイズでチップ 40 枚以上', 'quiz.html'],
+      ['👑', '伝説の億万長者', best >= 120, 'クイズでチップ 120 枚以上', 'quiz.html'],
+      ['🦊', '自分を知る', dg, 'エコノミスト診断を最後まで', 'diagnosis.html'],
+      ['🗳️', '一票を投じる', voted, '文化祭投票に参加する', 'vote.html'],
+      ['✅', '今週の正解者', wk.lastOk !== undefined, '今週の 1 問に正解する', 'index.html#weekly'],
+      ['🔥', '3 週連続', (wk.streak || 0) >= 3, '今週の 1 問に 3 週連続で正解', 'index.html#weekly']
+    ];
+    const got = BADGES.filter(b => b[2]).length;
+    box.insertAdjacentHTML('beforeend', `
+      <div class="ex-badges">
+        <p class="ex-title sm">バッジ <b>${got}</b> / ${BADGES.length}</p>
+        <ul>${BADGES.map(([ico, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}" title="${ok ? name + '（獲得済み）' : 'とり方：' + how}"><span aria-hidden="true">${ok ? ico : '🔒'}</span><b>${name}</b><small>${ok ? '獲得！' : how}</small></a></li>`).join('')}</ul>
+      </div>`);
+    if (done) {
+      const share = `AZAKEI のホームページを全ページ制覇！ バッジ ${got} / ${BADGES.length} #AZAKEI`;
+      box.querySelector('.ex-msg').insertAdjacentHTML('beforeend', ` <a class="ex-share" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(share)}&url=${encodeURIComponent('https://azakeiten.github.io/')}" target="_blank" rel="noopener">X でシェア</a>`);
+    }
   }
 
   /* ---- ② トップ：おかえりなさい ＋ 前回から増えたお知らせに NEW ---- */

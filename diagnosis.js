@@ -159,6 +159,8 @@
 
   function show(key, played) {
     const t = T[key], m = T[t.match];
+    // バッジ用：自分で最後まで診断したタイプだけ、ブラウザの中に覚えておく
+    if (played) { try { localStorage.setItem('azakei_dg_type', key); } catch (e) {} }
     const shareText = S.shareText(t.name);
     const url = URL_BASE + '#' + key;
     const trail = played && path.length ? `
