@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261008b" />
+  <link rel="stylesheet" href="site.css?v=20261008d" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
@@ -82,10 +82,10 @@
     <section class="hero">
       <div class="hero-bg" id="heroBg"></div>
       <div class="hero-emblem" data-emblem aria-hidden="true"></div>
-      <a class="hero-next" href="festival.html">
-        <span class="hero-next-label">Next</span>
-        <span class="hero-next-text">次の麻布経済展へ<i aria-hidden="true">→</i></span>
-      </a>
+      <div class="hero-counter">
+        <div class="hero-counter-num-wrap" id="counterWrap"><span class="hero-counter-unit">日</span></div>
+        <div class="hero-counter-label">次の文化祭まで<small>（予定）</small></div>
+      </div>
       <div class="scroll-cue" id="scrollCue">Scroll</div>
       <div class="hero-content">
         <a href="vote.html" class="hero-vote"><span class="dot"></span><span><b>文化祭投票</b> 受付中<span class="hv-sub"> — 次はどんな展示が見たい？</span></span><span class="arrow">→</span></a>
@@ -128,8 +128,8 @@
   <section class="ap-first">
     <div class="container">
       <div class="ap-head reveal">
-        <p class="ap-eyebrow">はじめての方へ</p>
-        <h2 class="ap-title sm">3 つだけ、知ってください。</h2>
+        <p class="ap-eyebrow">ようこそ、麻経へ</p>
+        <h2 class="ap-title sm">はじめて来てくれた人へ。</h2>
       </div>
       <div class="ap-first-grid reveal">
         <a class="ap-first-card" href="about.html">
@@ -159,7 +159,7 @@
     <div class="container">
       <div class="ap-numbers reveal">
         <div class="ap-num-main"><b><span data-count>2,364</span></b><small>人</small><p>2026 年の文化祭、3 日間の来場者</p>
-          <div class="ap-bars" role="img" aria-label="1 日目 492 人、2 日目 1,152 人、3 日目 720 人"><span style="--h:43%"><i>492</i><em>1 日目</em></span><span style="--h:100%" class="is-top"><i>1,152</i><em>2 日目</em></span><span style="--h:63%"><i>720</i><em>3 日目</em></span></div>
+          <div class="ap-bars" role="img" aria-label="1 日目 492 人、2 日目 1,152 人、3 日目 720 人"><span style="--h:43%"><i>492</i><em>1 日目</em></span><span style="--h:100%" class="is-top"><i>1,152</i><em>2 日目</em><b class="hand-note bar-note" aria-hidden="true">いちばん混んだ日！</b></span><span style="--h:63%"><i>720</i><em>3 日目</em></span></div>
         </div>
         <div><b><span data-count>6</span></b><small>コーナー</small><p>チップを賭けて遊ぶ体験型展示</p></div>
         <div><b>2</b><small>大会</small><p>2026 年に挑戦しているコンテスト</p></div>
@@ -203,6 +203,7 @@
           <p class="ap-step-no">Step 3</p>
           <h3>増やして、億万長者へ</h3>
           <p>ある日の 1 位は、120 枚。最初の 24 倍です。</p>
+          <p class="hand-note">40 枚をこえた人には、シャーペンをプレゼントしました</p>
         </li>
       </ol>
       <p class="ap-center reveal"><a href="festival.html#exhibition" class="ap-link">くわしいルールを見る</a></p>
@@ -213,7 +214,7 @@
   <section class="ap-tiles-wrap" id="overview">
     <div class="container">
       <div class="ap-head reveal">
-        <h2 class="ap-title sm">見る。遊ぶ。挑む。</h2>
+        <h2 class="ap-title sm">ここで、できること。</h2>
       </div>
       <div class="ap-tiles">
         <a class="ap-tile is-wide is-photo reveal" href="festival.html" style="--img:url('photos/balloons.jpg')">
@@ -327,18 +328,19 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261008b"></script>
-  <script src="layout.js?v=20261008b"></script>
-  <script src="brand.js?v=20261008b"></script>
-  <script src="live.js?v=20261008b"></script>
-  <script src="render.js?v=20261008b"></script>
-  <script src="loader.js?v=20261008b"></script>
-  <script src="nav.js?v=20261008b"></script>
-  <script src="hero.js?v=20261008b"></script>
-  <script src="reveal.js?v=20261008b"></script>
-  <script src="site.js?v=20261008b"></script>
-  <script src="ranking.js?v=20261008b"></script>
-  <script src="quiz-data.js?v=20261008b"></script>
-  <script src="daily.js?v=20261008b"></script>
+  <script src="content.js?v=20261008d"></script>
+  <script src="layout.js?v=20261008d"></script>
+  <script src="brand.js?v=20261008d"></script>
+  <script src="live.js?v=20261008d"></script>
+  <script src="render.js?v=20261008d"></script>
+  <script src="loader.js?v=20261008d"></script>
+  <script src="nav.js?v=20261008d"></script>
+  <script src="hero.js?v=20261008d"></script>
+  <script src="countdown.js?v=20261008d"></script>
+  <script src="reveal.js?v=20261008d"></script>
+  <script src="site.js?v=20261008d"></script>
+  <script src="ranking.js?v=20261008d"></script>
+  <script src="quiz-data.js?v=20261008d"></script>
+  <script src="daily.js?v=20261008d"></script>
 </body>
 </html>

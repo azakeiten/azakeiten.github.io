@@ -896,21 +896,21 @@ try {
     let voted = false, dg = false;
     try { voted = Object.keys(localStorage).some(k => k.startsWith('azakei_vote_')); dg = !!localStorage.getItem('azakei_dg_type'); } catch (e) {}
     const BADGES = [
-      ['🧭', '探検家', n >= 7, 'ページを 7 つ見る', next ? next[0] : 'index.html'],
-      ['🏆', '探検マスター', done, '14 ページすべてを見る', next ? next[0] : 'index.html'],
-      ['🪙', '投資家デビュー', best > 0, 'クイズをチップを残してクリア', 'quiz.html'],
-      ['💰', '億万長者', best >= 40, 'クイズでチップ 40 枚以上', 'quiz.html'],
-      ['👑', '伝説の億万長者', best >= 120, 'クイズでチップ 120 枚以上', 'quiz.html'],
-      ['🦊', '自分を知る', dg, 'エコノミスト診断を最後まで', 'diagnosis.html'],
-      ['🗳️', '一票を投じる', voted, '文化祭投票に参加する', 'vote.html'],
-      ['✅', '今週の正解者', wk.lastOk !== undefined, '今週の 1 問に正解する', 'index.html#weekly'],
-      ['🔥', '3 週連続', (wk.streak || 0) >= 3, '今週の 1 問に 3 週連続で正解', 'index.html#weekly']
+      ['探', '探検家', n >= 7, 'ページを 7 つ見る', next ? next[0] : 'index.html'],
+      ['覇', '探検マスター', done, '14 ページすべてを見る', next ? next[0] : 'index.html'],
+      ['初', '投資家デビュー', best > 0, 'クイズをチップを残してクリア', 'quiz.html'],
+      ['億', '億万長者', best >= 40, 'クイズでチップ 40 枚以上', 'quiz.html'],
+      ['伝', '伝説の億万長者', best >= 120, 'クイズでチップ 120 枚以上', 'quiz.html'],
+      ['診', '自分を知る', dg, 'エコノミスト診断を最後まで', 'diagnosis.html'],
+      ['票', '一票を投じる', voted, '文化祭投票に参加する', 'vote.html'],
+      ['正', '今週の正解者', wk.lastOk !== undefined, '今週の 1 問に正解する', 'index.html#weekly'],
+      ['連', '3 週連続', (wk.streak || 0) >= 3, '今週の 1 問に 3 週連続で正解', 'index.html#weekly']
     ];
     const got = BADGES.filter(b => b[2]).length;
     box.insertAdjacentHTML('beforeend', `
       <div class="ex-badges">
         <p class="ex-title sm">バッジ <b>${got}</b> / ${BADGES.length}</p>
-        <ul>${BADGES.map(([ico, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}" title="${ok ? name + '（獲得済み）' : 'とり方：' + how}"><span aria-hidden="true">${ok ? ico : '🔒'}</span><b>${name}</b><small>${ok ? '獲得！' : how}</small></a></li>`).join('')}</ul>
+        <ul>${BADGES.map(([ico, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}" title="${ok ? name + '（獲得済み）' : 'とり方：' + how}"><span aria-hidden="true">${ico}</span><b>${name}</b><small>${ok ? '獲得！' : how}</small></a></li>`).join('')}</ul>
       </div>`);
     if (done) {
       const share = `AZAKEI のホームページを全ページ制覇！ バッジ ${got} / ${BADGES.length} #AZAKEI`;
@@ -948,7 +948,7 @@ try {
     else if (weekly.week !== weekNo) items.push(`<a href="#weekly">今週の 1 問が、新しくなっています</a>`);
     else if (weekly.lastOk === weekNo && weekly.streak > 1) items.push(`<a href="#weekly">今週の 1 問、<b>${weekly.streak}</b> 週連続正解中！</a>`);
     if (visited.size < STAMPS.length) items.push(`<a href="#site-footer">探検スタンプ ${STAMPS.filter(s => visited.has(s[0])).length} / ${STAMPS.length}</a>`);
-    welcome.innerHTML = `<div class="container"><p class="wb-hello"><span aria-hidden="true">👋</span> おかえりなさい。<small>前回は ${fmt(prev)} に来てくれました。</small></p>${items.length ? `<ul class="wb-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</div>`;
+    welcome.innerHTML = `<div class="container"><p class="wb-hello"><span class="wb-seal" aria-hidden="true">経</span>おかえりなさい。<small>前回は ${fmt(prev)} に来てくれました。</small></p>${items.length ? `<ul class="wb-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</div>`;
     welcome.hidden = false;
   }
   update();

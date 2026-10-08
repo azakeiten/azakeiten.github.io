@@ -144,5 +144,5 @@
 
   setTimeout(() => {
     animateToDigits(startDigits, targetDigits);
-  }, 2600);
+  }, 900); // v36：待ち時間を短く
 })();

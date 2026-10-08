@@ -4403,3 +4403,97 @@ html:not(.is-apple):not([data-theme="dark"]) { --color-bg: #faf7f1; --color-surf
 .ex-share { margin-left: 8px; padding: 3px 12px; border-radius: 999px; background: #111; color: #fff !important; text-decoration: none !important; font-size: 12px; }
 @media (max-width: 560px) { .ex-badges ul { grid-template-columns: 1fr 1fr; } }
 @media (prefers-reduced-motion: reduce) { .ex-badges a { transition: none; } }
+
+/* ################################################################
+   ▼ v36 — 「紙と黒板」の色と形（トップ）／AI っぽさを消す
+   ・色は麻経のものから：展示室の紙、金、校章の緑、黒板の深緑、朱肉の朱
+   ・昼は紙の質感、夜は黒板。形は「大きな面 28px・カード 20px・小物はまる」の 3 段
+   ################################################################ */
+html.is-apple {
+  --color-bg: #f3eee4;
+  --color-surface: #fffcf5;
+  --color-text: #1e1a15;
+  --color-muted: #6d6458;
+  --color-border: rgba(70, 52, 22, 0.13);
+  --color-accent: #b08a4a;
+  --color-accent-deep: #7a5a24;
+  --green: #2f6b3a;
+  --green-soft: rgba(47, 107, 58, 0.1);
+  --shu: #b5432f;
+  --nav-bg: rgba(243, 238, 228, 0.82);
+  --nav-line: rgba(70, 52, 22, 0.1);
+  --footer-bg: #ebe4d6;
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 12px 30px -20px rgba(70, 45, 10, 0.45);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .26 0 0 0 0 .12 0 0 0 .075 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html.is-apple[data-theme="dark"] {
+  --color-bg: #101713;
+  --color-surface: #18211c;
+  --color-text: #eee7d8;
+  --color-muted: #a8a090;
+  --color-border: rgba(238, 231, 216, 0.1);
+  --color-accent: #d9bb7e;
+  --color-accent-deep: #e6cb92;
+  --green: #86c98f;
+  --green-soft: rgba(134, 201, 143, 0.12);
+  --shu: #e0705b;
+  --nav-bg: rgba(16, 23, 19, 0.82);
+  --nav-line: rgba(238, 231, 216, 0.08);
+  --footer-bg: #0c120f;
+  --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 14px 30px -20px rgba(0, 0, 0, 0.7);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 .95 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* 紙（夜は黒板）の質感：ごく薄く */
+.is-apple body { background-color: var(--color-bg); background-image: var(--grain); background-size: 180px 180px; }
+
+/* 見出し：ゴシックの太字＋金の筆の下線（手で引いたような、少し傾いた線） */
+.is-apple .ap-title.sm { position: relative; display: inline-block; padding-bottom: 10px; }
+.is-apple .ap-title.sm::after { content: ''; position: absolute; left: -2px; bottom: 0; width: min(100%, 220px); height: 10px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 10' preserveAspectRatio='none'%3E%3Cpath d='M2 7 C 50 2, 120 9, 218 3' fill='none' stroke='%23c9a35c' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 0 / 100% 100%; opacity: 0.85; }
+.is-apple .ap-head:not(.row) .ap-title.sm::after { left: 50%; translate: -50% 0; }
+.is-apple .ap-eyebrow { color: var(--green); }
+.is-apple .ap-step-no { color: var(--green); }
+
+/* 形の 3 段：大きな面 28px・カード 20px・小物はまる */
+.is-apple { --radius: 20px; --radius-panel: 28px; }
+.is-apple :is(.ap-steps li, .ap-first-card, .ap-numbers > div, .news-list, .ap-tile.is-pair a, .diary-item, .daily-q, .event-row.is-next) {
+  border-radius: var(--radius); border: 1px solid var(--color-border); box-shadow: var(--card-shadow); background-color: var(--color-surface);
+}
+.is-apple .ap-tile { border-radius: var(--radius-panel); }
+.is-apple .ap-tile:not(.is-photo):not(.is-dark):not(.is-gold):not(.is-pair) { border: 1px solid var(--color-border); box-shadow: var(--card-shadow); }
+.is-apple .ap-tile.is-dark { background: #1c2a22; }
+.is-apple[data-theme="dark"] .ap-tile.is-dark { background: #22302a; }
+.is-apple .ap-tile.is-dark::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: var(--grain); opacity: 0.9; }
+.is-apple .ap-end { background: var(--footer-bg); background-image: var(--grain); }
+.is-apple .welcome-back { background: color-mix(in srgb, var(--green) 9%, var(--color-surface)); }
+
+/* 手書きメモ（Klee One）：部員が書きこんだような一言 */
+.hand-note { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-weight: 600; color: var(--green, #2f6b3a); font-size: 15px; line-height: 1.5; transform: rotate(-2deg); }
+.ap-steps .hand-note { margin: 10px 0 0; padding-top: 8px; border-top: 1px dashed var(--color-border); }
+.ap-steps li > p:not(.ap-step-no):not(.hand-note) { margin: 4px 0 0; color: var(--color-muted); font-size: 15px; line-height: 1.75; }
+.bar-note { position: absolute; left: 50%; top: -48px; translate: -50% 0; white-space: nowrap; font-size: 13px; }
+.bar-note::after { content: ''; position: absolute; left: 50%; bottom: -10px; width: 1px; height: 8px; background: currentColor; transform: rotate(14deg); }
+.ap-num-main { padding-top: clamp(30px, 3.4vw, 40px) !important; }
+.ap-num-main .ap-bars { margin-top: 52px; }
+
+/* 写真の帯：紙のフチのついた写真に、手書きのキャプション */
+.is-apple .strip-item { padding: 8px 8px 12px; border-radius: 18px; background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--card-shadow); transform: rotate(var(--tilt, 0deg)); transition: transform 0.35s var(--ease-out); }
+.is-apple .strip-item:nth-child(odd) { --tilt: -0.8deg; }
+.is-apple .strip-item:nth-child(even) { --tilt: 0.7deg; }
+.is-apple .strip-item:hover { --tilt: 0deg; }
+.is-apple .strip-item img { border-radius: 12px; }
+.is-apple .strip-item figcaption { margin: 10px 6px 0; font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; font-weight: 600; color: var(--color-text); font-size: 14.5px; }
+.is-apple .strip-track { padding-top: 6px; padding-bottom: 14px; }
+
+/* ヒーロー：「（予定）」は小さく */
+.hero-counter-label small { margin-left: 2px; font-size: 0.82em; opacity: 0.8; }
+
+/* 朱印：おかえりなさい・バッジ・探検スタンプ（判子らしく、少し傾けて） */
+.wb-seal { display: inline-grid; place-items: center; width: 26px; height: 26px; margin-right: 10px; border-radius: 6px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 14px; transform: rotate(-6deg); vertical-align: -6px; }
+.ex-badges span { border-radius: 8px; filter: none; opacity: 1; background: transparent; border: 1.5px dashed color-mix(in srgb, var(--color-muted) 55%, transparent); color: color-mix(in srgb, var(--color-muted) 60%, transparent); font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 15px; }
+.ex-badges li.is-got span { border: 0; background: var(--shu, #b5432f); color: #fff; transform: rotate(-6deg); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25); }
+.ex-stamps li.is-got span { background: radial-gradient(circle at 40% 35%, #c9573f, var(--shu, #b5432f) 70%); box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.3), inset 0 0 0 5px var(--shu, #b5432f); }
+:root { --shu: #b5432f; }
+:root[data-theme="dark"] { --shu: #c9573f; }
+@media (prefers-reduced-motion: reduce) { .is-apple .strip-item { transition: none; } }
+.ap-numbers .ap-bars b.bar-note { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-size: 13px; font-weight: 600; letter-spacing: 0; line-height: 1.4; background: none; -webkit-text-fill-color: currentColor; color: var(--green, #2f6b3a); }
+.ap-steps li > p.hand-note:last-child { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-weight: 600; font-size: 15px; color: var(--green, #2f6b3a); line-height: 1.6; }
