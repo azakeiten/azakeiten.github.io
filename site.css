@@ -4578,3 +4578,40 @@ html.is-apple[data-theme="dark"] {
   .craft .hand-note { font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { .to-lv, .to-choice, .craft img { transition: none; } .to-result, .to-chips i { animation: none; } }
+
+/* ################################################################
+   ▼ v38 — 大波でつなぐ：区切りの形・帯の背景・ヒーローの色・全ページの紙の質感
+   ################################################################ */
+/* 大波の線（区切りに使う形）。黒で描いて mask に使う */
+:root {
+  --wave-edge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='16' viewBox='0 0 120 16'%3E%3Cpath d='M0 16V9C10 9 14 2 30 2S50 9 60 9 70 2 90 2 110 9 120 9V16Z'/%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .26 0 0 0 0 .12 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --band: #ebe3d3;
+}
+:root[data-theme="dark"] {
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 .95 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --band: #0b110e;
+}
+html.is-apple { --band: #e9e1cf; }
+html.is-apple[data-theme="dark"] { --band: #0a100d; }
+
+/* 帯：少し濃いクラフト紙（夜は一段深い黒板）＋上下を大波で切る */
+.band { position: relative; background-color: var(--band); background-image: var(--grain); background-size: 180px 180px; margin: 16px 0; }
+.band::before, .band::after { content: ''; position: absolute; left: 0; right: 0; height: 16px; background: var(--band); -webkit-mask: var(--wave-edge) repeat-x 0 0 / 120px 16px; mask: var(--wave-edge) repeat-x 0 0 / 120px 16px; pointer-events: none; }
+.band::before { top: -15px; }
+.band::after { bottom: -15px; transform: scaleY(-1); }
+
+/* ヒーロー：暗くするときは黒ではなく「黒板の深緑」。下の端は大波で紙へつなぐ */
+.is-apple .hero::after { background: linear-gradient(90deg, rgba(10, 26, 18, 0.66), rgba(10, 26, 18, 0.18) 70%), linear-gradient(0deg, rgba(10, 26, 18, 0.45), transparent 42%); }
+.is-apple .hero-sticky-wrap::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 16px; z-index: 5; background: var(--color-bg); -webkit-mask: var(--wave-edge) repeat-x 0 0 / 120px 16px; mask: var(--wave-edge) repeat-x 0 0 / 120px 16px; pointer-events: none; }
+.is-apple .welcome-back:not([hidden]) { margin-top: 0; }
+
+/* 下層ページにも、同じ紙（夜は黒板）の質感 */
+html:not(.is-apple) body { background-image: var(--grain); background-size: 180px 180px; }
+
+/* 色の小さなそろえ：トップのカードの線を、紙の上の鉛筆線くらいに */
+.is-apple { --color-border: rgba(70, 52, 22, 0.11); }
+.is-apple[data-theme="dark"] { --color-border: rgba(238, 231, 216, 0.09); }
+.is-apple .band :is(.ap-steps li, .strip-item) { background-color: var(--color-surface); }
+.is-apple .hero-sticky-wrap:has(~ .welcome-back:not([hidden]))::after { background: color-mix(in srgb, var(--green) 9%, var(--color-surface)); }
+html.is-apple[data-theme="dark"] { --band: #17221c; }
