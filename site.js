@@ -877,6 +877,8 @@ try {
   const visited = new Set(get('azakei-visited', []));
   const firstTime = STAMPS.some(s => s[0] === page) && !visited.has(page);
   if (STAMPS.some(s => s[0] === page)) { visited.add(page); set('azakei-visited', [...visited]); }
+  // 目次（☰）で、見たページに朱印の「済」
+  document.querySelectorAll('.si-link').forEach(a => { if (visited.has(a.getAttribute('href'))) a.classList.add('is-visited'); });
   const box = document.querySelector('[data-explore]');
   if (box) {
     const n = STAMPS.filter(s => visited.has(s[0])).length, all = STAMPS.length, done = n === all;

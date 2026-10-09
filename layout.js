@@ -42,7 +42,7 @@
   window.AZAKEI_ICONS = Object.fromEntries(INDEX.flatMap(g => g.pages).map(p => [p.href, p.ico]));
   let n = 0;
   const indexGroups = INDEX.map(g => `
-    <div class="si-group">
+    <div class="si-group si-g-${g.en.toLowerCase()}">
       <p class="si-group-head"><span>${g.en}</span>${g.group}</p>
       <ul>${g.pages.map(p => { n++; const cur = p.href === here; return `
         <li><a href="${p.href}" class="mobile-link si-link${cur ? ' is-current' : ''}"${cur ? ' aria-current="page"' : ''}

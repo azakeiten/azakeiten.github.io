@@ -4701,3 +4701,28 @@ html:not(.is-apple) section.services:not(.cta-band):has(+ section.services:not(.
 html:not(.is-apple) section.services:not(.cta-band):has(+ section.services:not(.cta-band))::after { display: none; }
 html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-band) { margin-top: 0; }
 html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-band)::before { display: none; }
+
+/* ################################################################
+   ▼ v41 — 目次（☰）も黒板に：朱印の「済」・3 色のグループ・写真は紙のフチ・開くのを速く
+   ################################################################ */
+.site-index {
+  background: radial-gradient(ellipse at 90% 8%, rgba(217, 187, 126, 0.14), transparent 50%), var(--grain), #1c2b23;
+  background-size: auto, 180px 180px, auto;
+  transition: clip-path 0.5s cubic-bezier(0.76, 0, 0.24, 1), visibility 0s linear 0.5s;
+}
+:root[data-theme="dark"] .site-index { background: radial-gradient(ellipse at 90% 8%, rgba(217, 187, 126, 0.1), transparent 50%), var(--grain), #0b120e; background-size: auto, 180px 180px, auto; }
+.site-index.open { transition: clip-path 0.5s cubic-bezier(0.76, 0, 0.24, 1), visibility 0s; }
+.site-index.open .si-link { transition-delay: calc(var(--d) * 22ms + 120ms), calc(var(--d) * 22ms + 120ms), 0s; }
+.si-preview { transition-delay: 0.2s, 0.2s; }
+/* グループの見出しに 3 色の印（知る＝金・挑む＝朱・参加する＝緑） */
+.si-group-head { display: flex; align-items: center; gap: 8px; }
+.si-group-head::before { content: ''; width: 9px; height: 9px; border-radius: 50%; flex: none; order: -1; }
+.si-g-know .si-group-head::before { background: #d9bb7e; }
+.si-g-challenge .si-group-head::before { background: #e0705b; }
+.si-g-join .si-group-head::before { background: #86c98f; }
+/* 見たページに朱印の「済」 */
+.si-link.is-visited .si-name::after { content: '済'; display: inline-grid; place-items: center; width: 22px; height: 22px; margin-left: 10px; border-radius: 5px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 12px; font-weight: 800; transform: rotate(-8deg); vertical-align: 4px; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.25); }
+/* 写真のプレビューは、黒板に貼った紙のフチの写真 */
+.si-preview-img { border-radius: 10px; border: 10px solid #f6f1e7; border-bottom-width: 14px; transform: rotate(-1.4deg); box-shadow: 0 26px 50px -26px rgba(0, 0, 0, 0.85); }
+.si-preview-en { color: #e3c68e; }
+@media (max-width: 560px) { .si-link.is-visited .si-name::after { width: 18px; height: 18px; margin-left: 6px; font-size: 10px; } }
