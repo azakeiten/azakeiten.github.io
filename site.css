@@ -4497,3 +4497,84 @@ html.is-apple[data-theme="dark"] {
 @media (prefers-reduced-motion: reduce) { .is-apple .strip-item { transition: none; } }
 .ap-numbers .ap-bars b.bar-note { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-size: 13px; font-weight: 600; letter-spacing: 0; line-height: 1.4; background: none; -webkit-text-fill-color: currentColor; color: var(--green, #2f6b3a); }
 .ap-steps li > p.hand-note:last-child { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-weight: 600; font-size: 15px; color: var(--green, #2f6b3a); line-height: 1.6; }
+
+/* ################################################################
+   ▼ v37 — 1 回だけ賭けてみる（おためし版）・麻経のこだわり
+   ################################################################ */
+/* おためし版：緑のフェルトのテーブルのような面 */
+.tryout { margin-top: 20px; padding: clamp(26px, 4vw, 44px); border-radius: var(--radius-panel, 28px); background: radial-gradient(120% 90% at 50% 0%, #2f6b47, #1d4a31 70%); color: #f3efe4; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 20px 44px -26px rgba(10, 40, 20, 0.7); position: relative; overflow: hidden; isolation: isolate; text-align: center; }
+.tryout::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: var(--grain); opacity: 0.8; }
+.tryout::after { content: ''; position: absolute; inset: 10px; z-index: -1; border: 1px dashed rgba(243, 220, 168, 0.28); border-radius: calc(var(--radius-panel, 28px) - 8px); pointer-events: none; }
+.to-head { display: grid; gap: 6px; margin-bottom: 20px; }
+.to-kicker { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #f3dca8; }
+.tryout h3 { margin: 0; font-size: clamp(24px, 3vw, 34px); color: #fff; }
+.to-q { font-size: clamp(18px, 2.2vw, 23px) !important; line-height: 1.6; max-width: 720px; margin: 0 auto !important; }
+.to-lead { margin: 0; color: rgba(243, 239, 228, 0.82); font-size: 15.5px; }
+.to-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 640px; margin: 0 auto; }
+.to-lv { display: grid; justify-items: center; gap: 2px; padding: 18px 10px 16px; border: 0; border-radius: 20px; cursor: pointer; font-family: inherit; color: #1e1a15; background: #fbf6ea; box-shadow: 0 4px 0 #c7b58c, 0 10px 20px -12px rgba(0, 0, 0, 0.6); transition: transform 0.15s var(--ease-out), box-shadow 0.15s; }
+.to-lv:hover { transform: translateY(-3px); box-shadow: 0 7px 0 #c7b58c, 0 16px 26px -14px rgba(0, 0, 0, 0.6); }
+.to-lv:active { transform: translateY(3px); box-shadow: 0 1px 0 #c7b58c; }
+.to-lv b { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; color: #7a5a24; }
+.to-lv span { font-size: 15px; font-weight: 700; }
+.to-lv small { font-size: 12px; color: #6d6458; }
+.to-lv.to-hard { background: linear-gradient(160deg, #f3dca8, #d6b97f); box-shadow: 0 4px 0 #a8823f, 0 10px 20px -12px rgba(0, 0, 0, 0.6); }
+.to-lv.to-hard:hover { box-shadow: 0 7px 0 #a8823f, 0 16px 26px -14px rgba(0, 0, 0, 0.6); }
+.to-lv.to-hard b { color: #b5432f; }
+.to-rule { margin: 18px 0 0; color: #f3dca8 !important; font-size: 14px; }
+.to-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 720px; margin: 0 auto; }
+.to-choice { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 16px; background: rgba(255, 255, 255, 0.08); color: #fff; font: inherit; font-size: 15.5px; text-align: left; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+.to-choice span { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: rgba(243, 220, 168, 0.2); color: #f3dca8; font-weight: 700; font-size: 13px; }
+.to-choice:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); transform: translateY(-1px); }
+.to-choice.is-right { background: #f3dca8; color: #1e1a15; border-color: transparent; }
+.to-choice.is-right span { background: #2f6b3a; color: #fff; }
+.to-choice.is-wrong { background: rgba(181, 67, 47, 0.85); border-color: transparent; }
+.to-choice:disabled { cursor: default; }
+.to-result { margin: 22px auto 0; max-width: 720px; padding-top: 20px; border-top: 1px dashed rgba(243, 220, 168, 0.3); display: grid; gap: 10px; justify-items: center; animation: to-in 0.4s var(--ease-out); }
+.to-score { margin: 0; display: flex; align-items: baseline; gap: 14px; font-weight: 700; }
+.to-score span { font-size: 18px; color: rgba(243, 239, 228, 0.7); }
+.to-score i { font-style: normal; color: #f3dca8; }
+.to-score b { font-size: clamp(40px, 6vw, 60px); letter-spacing: -0.03em; color: #f3dca8; }
+.to-result.is-lose .to-score b { color: #ff9a86; }
+.to-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; max-width: 320px; }
+.to-chips i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #e8574a, #b8352a 70%); box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.55), inset 0 0 0 5px #b8352a; animation: to-chip 0.35s var(--ease-out) both; }
+.to-chips i:nth-child(n) { animation-delay: calc(var(--d, 0) * 1s); }
+.to-chips i:nth-child(2) { --d: 0.04; } .to-chips i:nth-child(3) { --d: 0.08; } .to-chips i:nth-child(4) { --d: 0.12; } .to-chips i:nth-child(5) { --d: 0.16; } .to-chips i:nth-child(6) { --d: 0.2; } .to-chips i:nth-child(n+7) { --d: 0.24; }
+.to-verdict { margin: 0; font-size: 17px; font-weight: 700; color: #fff; }
+.to-note { margin: 0; font-size: 14px; line-height: 1.8; color: rgba(243, 239, 228, 0.75); max-width: 600px; }
+.to-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 16px; margin-top: 6px; }
+.to-actions .btn-primary { background: #f3dca8 !important; color: #1e1a15 !important; }
+.to-again { padding: 12px 22px; border-radius: 999px; border: 1px solid rgba(243, 220, 168, 0.5); background: transparent; color: #f3dca8; font: inherit; font-weight: 600; cursor: pointer; }
+.to-again:hover { background: rgba(243, 220, 168, 0.12); }
+@keyframes to-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes to-chip { from { opacity: 0; transform: translateY(-16px) scale(0.6); } }
+@media (max-width: 560px) {
+  .to-pick { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .to-lv { padding: 14px 4px 12px; border-radius: 16px; }
+  .to-lv b { font-size: 24px; }
+  .to-lv small { font-size: 10.5px; }
+  .to-choices { grid-template-columns: 1fr; }
+}
+
+/* 麻経のこだわり：大きい 1 枚＋小さい 3 枚。写真に手書きの説明 */
+.ap-craft { padding: clamp(56px, 8vw, 100px) 0; }
+.craft-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap: 16px; }
+.craft { margin: 0; display: grid; grid-template-rows: 1fr auto; overflow: hidden; border-radius: var(--radius, 20px); background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--card-shadow); }
+.craft.is-big { grid-row: 1 / 3; }
+.craft img { display: block; width: 100%; height: 100%; min-height: 0; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.6s var(--ease-out); }
+.craft.is-big img { aspect-ratio: auto; min-height: 320px; }
+.craft:hover img { transform: scale(1.03); }
+.craft figcaption { display: grid; gap: 4px; padding: 14px 16px 16px; }
+.craft figcaption b { font-size: 16px; }
+.craft .hand-note { transform: none; font-size: 14.5px; }
+.craft:nth-child(3) { grid-column: 2 / 4; grid-row: 2; }
+.craft:nth-child(3) img { aspect-ratio: 16 / 7; }
+@media (max-width: 760px) {
+  .craft-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .craft.is-big { grid-column: 1 / -1; grid-row: auto; }
+  .craft.is-big img { min-height: 0; aspect-ratio: 4 / 3; }
+  .craft:nth-child(3) { grid-column: 1 / -1; grid-row: auto; }
+  .craft figcaption { padding: 10px 12px 12px; }
+  .craft figcaption b { font-size: 14.5px; }
+  .craft .hand-note { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) { .to-lv, .to-choice, .craft img { transition: none; } .to-result, .to-chips i { animation: none; } }
