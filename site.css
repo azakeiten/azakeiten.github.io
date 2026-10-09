@@ -4661,3 +4661,43 @@ html { --page-bg: var(--color-bg); }
 .ph-cat.is-join { background: #2f6b3a; }
 .page-hero .section-label::before { display: none; }
 html.is-apple { --page-bg: var(--footer-bg); }
+
+/* ################################################################
+   ▼ v40 — 下層ページにも「紙とクラフト紙の帯・大波の区切り・カードの形」
+   ################################################################ */
+html:not(.is-apple) { --band: #f0e8d9; --card-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 12px 28px -20px rgba(70, 45, 10, 0.4); }
+html:not(.is-apple)[data-theme="dark"] { --band: #17150f; --card-shadow: 0 14px 30px -20px rgba(0, 0, 0, 0.7); }
+
+/* 交互の帯（services）：白い面 → クラフト紙＋上下に大波 */
+html:not(.is-apple) section.services:not(.cta-band) {
+  position: relative; background-color: var(--band) !important; background-image: var(--grain); background-size: 180px 180px; margin: 16px 0;
+}
+html:not(.is-apple) section.services:not(.cta-band)::before,
+html:not(.is-apple) section.services:not(.cta-band)::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 16px; background: var(--band); pointer-events: none; z-index: 1;
+  -webkit-mask: var(--wave-edge) repeat-x 0 0 / 120px 16px; mask: var(--wave-edge) repeat-x 0 0 / 120px 16px;
+}
+html:not(.is-apple) section.services:not(.cta-band)::before { top: -15px; }
+html:not(.is-apple) section.services:not(.cta-band)::after { bottom: -15px; transform: scaleY(-1); }
+
+/* カードの形：1px の線で区切った表 → すき間のある、角の丸い紙のカード */
+html:not(.is-apple) :is(.card-grid, .services-grid) { gap: 16px; background: transparent; border: 0; overflow: visible; border-radius: 0; }
+html:not(.is-apple) :is(.card-grid, .services-grid) > :is(.link-card, .service-card) {
+  border-radius: 20px; border: 1px solid var(--color-border); background-color: var(--color-surface); box-shadow: var(--card-shadow);
+}
+html:not(.is-apple)[data-theme="dark"] :is(.card-grid, .services-grid) > :is(.link-card, .service-card) { background-color: rgba(255, 255, 255, 0.035); }
+html:not(.is-apple) .service-card::after { left: 20px; right: auto; bottom: 0; border-radius: 2px; }
+
+/* 下層ページの見出し：右奥に、うすい「印の輪」 */
+.page-hero > .container { position: relative; }
+.page-hero > .container::after {
+  content: ''; position: absolute; right: -40px; top: 50%; width: min(46vw, 460px); aspect-ratio: 1; translate: 0 -50%; pointer-events: none; z-index: -1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23b08a4a'%3E%3Ccircle cx='100' cy='100' r='96' stroke-width='1.2' stroke-dasharray='3 5' opacity='.55'/%3E%3Ccircle cx='100' cy='100' r='84' stroke-width='.6' opacity='.45'/%3E%3Ccircle cx='100' cy='100' r='60' stroke-width='.6' opacity='.25'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
+  opacity: 0.55;
+}
+@media (max-width: 760px) { .page-hero > .container::after { right: -120px; width: 320px; opacity: 0.35; } }
+/* 帯が続くときは、つなぎ目の大波とすき間をなくす */
+html:not(.is-apple) section.services:not(.cta-band):has(+ section.services:not(.cta-band)) { margin-bottom: 0; }
+html:not(.is-apple) section.services:not(.cta-band):has(+ section.services:not(.cta-band))::after { display: none; }
+html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-band) { margin-top: 0; }
+html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-band)::before { display: none; }
