@@ -955,3 +955,20 @@ try {
   document.addEventListener('azakei:rerender', update);
 })();
 } catch (e) { console.error('[site.js / v34]', e); }
+
+/* ######## ▼ v39：下層ページの見出しに「知る・挑む・参加する」のタグ ######## */
+try {
+(function() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  const CAT = {
+    know: ['about.html', 'azakei.html', 'festival.html', 'activities.html', 'glossary.html'],
+    challenge: ['contests.html', 'events.html'],
+    join: ['diagnosis.html', 'quiz.html', 'sim.html', 'vote.html', 'sponsor.html', 'contact.html']
+  };
+  const JA = { know: '知る', challenge: '挑む', join: '参加する' };
+  const key = Object.keys(CAT).find(k => CAT[k].includes(page));
+  const label = document.querySelector('.page-hero .section-label');
+  if (!key || !label) return;
+  label.insertAdjacentHTML('afterbegin', `<span class="ph-cat is-${key}">${JA[key]}</span>`);
+})();
+} catch (e) { console.error('[site.js / v39]', e); }

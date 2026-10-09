@@ -4615,3 +4615,49 @@ html:not(.is-apple) body { background-image: var(--grain); background-size: 180p
 .is-apple .band :is(.ap-steps li, .strip-item) { background-color: var(--color-surface); }
 .is-apple .hero-sticky-wrap:has(~ .welcome-back:not([hidden]))::after { background: color-mix(in srgb, var(--green) 9%, var(--color-surface)); }
 html.is-apple[data-theme="dark"] { --band: #17221c; }
+
+/* ################################################################
+   ▼ v39 — 黒板のフッター（全ページ）・見出しのカテゴリタグ
+   ################################################################ */
+html { --page-bg: var(--color-bg); }
+.site-footer {
+  --color-text: #eee7d8; --color-muted: rgba(238, 231, 216, 0.66); --color-border: rgba(238, 231, 216, 0.12);
+  --color-accent: #d9bb7e; --color-accent-deep: #e6cb92; --color-surface: rgba(255, 255, 255, 0.05);
+  --green: #9ad4a2; --ink: #eee7d8; --ink-soft: rgba(238, 231, 216, 0.66);
+  background-color: #1c2b23; background-image: var(--grain); background-size: 180px 180px;
+  color: var(--color-text); border-top: 0; margin-top: 16px;
+}
+:root[data-theme="dark"] .site-footer { background-color: #0b120e; }
+/* 紙から黒板へ、大波でつなぐ */
+.site-footer::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 16px; z-index: 2; background: var(--page-bg); -webkit-mask: var(--wave-edge) repeat-x 0 0 / 120px 16px; mask: var(--wave-edge) repeat-x 0 0 / 120px 16px; transform: scaleY(-1); pointer-events: none; }
+.site-footer :is(.footer-list a, .footer-note, .footer-bottom, .footer-legal a) { color: var(--color-muted); }
+.site-footer .footer-list a:hover, .site-footer .footer-legal a:hover { color: #fff; }
+.site-footer .footer-list a[aria-current="page"] { color: #fff; }
+.site-footer .footer-head { color: var(--color-accent); }
+.site-footer .footer-mission { color: #fff; border-left-color: var(--color-accent); font-family: 'Klee One', 'Shippori Mincho', serif; font-weight: 600; }
+.site-footer .wordmark, .site-footer .footer-wordmark { color: #fff; }
+.site-footer .footer-members { color: var(--color-muted); }
+.site-footer .fs-switch span { color: var(--color-muted); }
+.site-footer .fs-switch button { color: #fff; border-color: rgba(238, 231, 216, 0.25); }
+.site-footer .fs-switch button[aria-pressed="true"] { background: var(--color-accent); color: #1c2b23; }
+.site-footer .footer-giant { color: transparent; -webkit-text-stroke: 1px rgba(238, 231, 216, 0.16); opacity: 1; }
+.site-footer .footer-bottom { border-top-color: rgba(238, 231, 216, 0.12); }
+/* 探検スタンプとバッジは、黒板に貼ったスタンプカード */
+.site-footer .explore { background: rgba(255, 255, 255, 0.04); border-color: rgba(243, 220, 168, 0.35); }
+.site-footer .ex-stamps span { border-color: rgba(243, 220, 168, 0.4); }
+.site-footer .ex-stamps a { color: var(--color-muted); }
+.site-footer .ex-stamps li.is-got small, .site-footer .ex-title { color: #fff; }
+.site-footer .ex-badges a { background: rgba(255, 255, 255, 0.04); border-color: rgba(238, 231, 216, 0.12); }
+.site-footer .ex-badges li.is-got a { background: rgba(217, 187, 126, 0.12); border-color: rgba(217, 187, 126, 0.45); }
+.site-footer .ex-badges b { color: #fff; }
+.site-footer .ex-badges span { border-color: rgba(238, 231, 216, 0.3); color: rgba(238, 231, 216, 0.4); }
+.site-footer .ex-msg a { color: var(--color-accent-deep); }
+.site-footer .ex-bar { background: rgba(255, 255, 255, 0.1); }
+
+/* 下層ページの見出し：カテゴリのタグ（知る＝金・挑む＝朱・参加する＝緑） */
+.ph-cat { display: inline-flex; align-items: center; margin-right: 12px; padding: 3px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #fff; vertical-align: 1px; }
+.ph-cat.is-know { background: #a8823f; }
+.ph-cat.is-challenge { background: var(--shu, #b5432f); }
+.ph-cat.is-join { background: #2f6b3a; }
+.page-hero .section-label::before { display: none; }
+html.is-apple { --page-bg: var(--footer-bg); }
