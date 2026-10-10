@@ -4726,3 +4726,35 @@ html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-
 .si-preview-img { border-radius: 10px; border: 10px solid #f6f1e7; border-bottom-width: 14px; transform: rotate(-1.4deg); box-shadow: 0 26px 50px -26px rgba(0, 0, 0, 0.85); }
 .si-preview-en { color: #e3c68e; }
 @media (max-width: 560px) { .si-link.is-visited .si-name::after { width: 18px; height: 18px; margin-left: 6px; font-size: 10px; } }
+
+/* ################################################################
+   ▼ v42 — 億万長者クイズを「緑のフェルトのゲーム台」に
+   ################################################################ */
+#quiz .dg-card {
+  --color-text: #f3efe4; --color-muted: rgba(243, 239, 228, 0.72); --color-border: rgba(243, 220, 168, 0.22);
+  --color-surface: rgba(255, 255, 255, 0.06); --color-bg: rgba(0, 0, 0, 0.12);
+  --color-accent: #f3dca8; --color-accent-deep: #f3dca8; --ink: #f3efe4; --ink-soft: rgba(243, 239, 228, 0.72);
+  position: relative; isolation: isolate; overflow: hidden;
+  background: radial-gradient(120% 80% at 50% 0%, #2f6b47, #1d4a31 72%) !important;
+  color: var(--color-text); border: 0 !important; border-radius: 28px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 50px -28px rgba(10, 40, 20, 0.75) !important;
+}
+#quiz .dg-card::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: var(--grain); opacity: 0.8; pointer-events: none; }
+#quiz .dg-card::after { content: ''; position: absolute; inset: 12px; z-index: -1; border: 1px dashed rgba(243, 220, 168, 0.28); border-radius: 20px; pointer-events: none; }
+#quiz .dg-card :is(h2, h3, b, strong) { color: #fff; }
+#quiz .dg-card h2 em, #quiz .dg-card .dg-kicker { color: #f3dca8 !important; -webkit-text-fill-color: currentColor; background: none; }
+#quiz .dg-card :is(p, li, td, th, small, span) { color: inherit; }
+#quiz .dg-card table, #quiz .dg-card .fx-table { background: rgba(0, 0, 0, 0.18); border-color: rgba(243, 220, 168, 0.2) !important; border-radius: 14px; overflow: hidden; }
+#quiz .dg-card :is(th, td) { border-color: rgba(243, 220, 168, 0.14) !important; background: transparent !important; color: #f3efe4 !important; }
+#quiz .dg-card thead th, #quiz .dg-card tr:first-child th { background: rgba(0, 0, 0, 0.3) !important; color: #f3dca8 !important; }
+#quiz .dg-card :is(td, th).hot, #quiz .dg-card .hot { background: rgba(181, 67, 47, 0.35) !important; color: #fff !important; }
+#quiz .dg-card .btn-primary { background: linear-gradient(160deg, #f3dca8, #d6b97f) !important; color: #1e1a15 !important; border: 0; box-shadow: 0 4px 0 #a8823f, 0 12px 22px -12px rgba(0, 0, 0, 0.6); }
+#quiz .dg-card .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #a8823f, 0 16px 26px -14px rgba(0, 0, 0, 0.6); }
+#quiz .dg-card :is(.qz-level, .qz-choice, .qz-gl > *, .qz-life > *) { background: rgba(255, 255, 255, 0.07); border-color: rgba(243, 220, 168, 0.22); color: #f3efe4; }
+#quiz .dg-card :is(.qz-level, .qz-choice):hover { background: rgba(255, 255, 255, 0.13); }
+#quiz .dg-card a:not(.btn-primary) { color: #f3dca8; }
+#quiz .dg-card input { background: rgba(255, 255, 255, 0.92); color: #1e1a15; }
+#quiz .dg-card .qz-choice.is-right { background: #f3dca8 !important; color: #1e1a15 !important; border-color: transparent !important; }
+#quiz .dg-card .qz-choice.is-right * { color: #1e1a15 !important; }
+#quiz .dg-card .qz-choice.is-wrong { background: rgba(181, 67, 47, 0.85) !important; color: #fff !important; border-color: transparent !important; }
+#quiz .dg-card .qz-choice:disabled:not(.is-right):not(.is-wrong) { opacity: 0.55; }
