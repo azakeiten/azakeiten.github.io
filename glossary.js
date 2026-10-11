@@ -39,4 +39,19 @@
   // 「#gdp」のように言葉の場所へ飛んできたら、そこを光らせる
   const hl = () => { const t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t && t.classList.contains('gl-item')) { t.classList.remove('is-hl'); void t.offsetWidth; t.classList.add('is-hl'); } };
   addEventListener('hashchange', hl); hl();
+  // 今日のことば：日付で 1 語えらぶ（同じ日はだれが見ても同じ言葉）
+  const today = document.getElementById('glToday');
+  if (today && items.length) {
+    const d = new Date(), wd = '日月火水木金土'[d.getDay()];
+    const dayNo = Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5));
+    let pick = dayNo % items.length;
+    const draw = () => {
+      const it = items[pick];
+      today.innerHTML = `<div class="gt-cal" aria-hidden="true"><span class="gt-m">${d.getMonth() + 1}月</span><b class="gt-d">${d.getDate()}</b><span class="gt-w">${wd}曜日</span></div>
+        <div class="gt-body"><p class="gt-label">${pick === dayNo % items.length ? '今日のことば' : 'もう 1 枚めくると'}</p><h2 class="gt-term">${it.querySelector('dt').innerHTML}</h2><p class="gt-def">${it.querySelector('dd').innerHTML}</p>
+        <div class="gt-actions"><a href="#${it.id}">辞典で見る</a><button type="button" class="gt-next">ほかのことばをめくる</button></div></div>`;
+      today.querySelector('.gt-next').addEventListener('click', () => { pick = (pick + 1 + Math.floor(Math.random() * (items.length - 1))) % items.length; draw(); today.querySelector('.gt-next').focus(); });
+    };
+    draw(); today.hidden = false;
+  }
 })();
