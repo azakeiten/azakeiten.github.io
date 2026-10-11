@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261012i" />
+  <link rel="stylesheet" href="site.css?v=20261012j" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -58,6 +58,12 @@
             <span class="dm-desc">お問い合わせはこちらのアカウントへ</span>
             <svg width="18" height="14" aria-hidden="true"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
           </a>
+          <ol class="cf-flow" aria-label="送ったあとの流れ">
+            <li><b>送信</b><small>このページから</small></li>
+            <li><b>メンバーが確認</b><small>学校生活の合間に</small></li>
+            <li><b>お返事</b><small>数日いただくことも</small></li>
+          </ol>
+          <p class="cf-draft">書きかけの内容は、このタブを閉じるまで残ります。</p>
         </div>
 
         <form class="contact-form reveal" id="contactForm" novalidate>
@@ -112,17 +118,26 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261012i"></script>
-  <script src="layout.js?v=20261012i"></script>
-  <script src="brand.js?v=20261012i"></script>
-  <script src="render.js?v=20261012i"></script>
-  <script src="nav.js?v=20261012i"></script>
-  <script src="reveal.js?v=20261012i"></script>
-  <script src="site.js?v=20261012i"></script>
+  <script src="content.js?v=20261012j"></script>
+  <script src="layout.js?v=20261012j"></script>
+  <script src="brand.js?v=20261012j"></script>
+  <script src="render.js?v=20261012j"></script>
+  <script src="nav.js?v=20261012j"></script>
+  <script src="reveal.js?v=20261012j"></script>
+  <script src="site.js?v=20261012j"></script>
   <script>
     // ?type=sponsor などで種類を初期選択 & 必須チェック
     (function () {
       var form = document.getElementById('contactForm');
+      // 書きかけを、このタブの中にだけ残す（閉じると消える・送信すると消える）
+      var DK = 'azakei-contact-draft', FIELDS = ['type', 'name', 'org', 'email', 'message'];
+      try {
+        var dr = JSON.parse(sessionStorage.getItem(DK) || 'null');
+        if (dr) FIELDS.forEach(function (k) { if (form[k] && dr[k] && !form[k].value.trim()) form[k].value = dr[k]; });
+        document.getElementById('msgCount').textContent = form.message.value.length;
+      } catch (e) {}
+      form.addEventListener('input', function () { try { var o = {}; FIELDS.forEach(function (k) { if (form[k]) o[k] = form[k].value; }); sessionStorage.setItem(DK, JSON.stringify(o)); } catch (e) {} });
+      form.addEventListener('reset', function () { try { sessionStorage.removeItem(DK); } catch (e) {} });
       var t = new URLSearchParams(location.search).get('type');
       if (t && form.type.querySelector('option[value="' + t + '"]')) form.type.value = t;
       // 協賛ページの「この内容で相談する」から来たら、本文の 1 行目に項目名を入れておく

@@ -5273,3 +5273,17 @@ html[data-theme="dark"] .gt-d { color: #f3eee4; }
 .pv-reset button:hover { background: var(--shu, #b5432f); color: #fff; }
 .pv-reset span { flex: 1 1 220px; font-size: 13px; line-height: 1.7; color: var(--color-muted); }
 @media (max-width: 760px) { .pv-sum { grid-template-columns: 1fr; gap: 12px; } .pv-card { grid-template-columns: 40px 1fr; column-gap: 14px; } .pv-seal { grid-row: span 2; margin: 0; } }
+
+/* ################################################################
+   ▼ v67 — お問い合わせ：送ったあとの流れ・書きかけの保存
+   ################################################################ */
+.cf-flow { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 0; counter-reset: cf; }
+.cf-flow li { position: relative; display: grid; gap: 1px; padding: 0 0 16px 38px; counter-increment: cf; }
+.cf-flow li::before { content: counter(cf); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #1c2b23; color: #e3c68e; font-size: 12px; font-weight: 700; }
+.cf-flow li::after { content: ''; position: absolute; left: 11px; top: 26px; bottom: 2px; border-left: 2px dotted var(--color-border); }
+.cf-flow li:last-child { padding-bottom: 0; }
+.cf-flow li:last-child::after { display: none; }
+.cf-flow li:last-child::before { background: var(--shu, #b5432f); color: #fff; }
+.cf-flow b { font-size: 14.5px; font-weight: 700; line-height: 24px; }
+.cf-flow small { font-size: 12.5px; color: var(--color-muted); }
+.cf-draft { margin-top: 18px !important; font-size: 12.5px !important; color: var(--color-muted); padding-left: 14px; border-left: 2px solid var(--color-accent, #b08a4a); }
