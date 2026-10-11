@@ -5115,3 +5115,25 @@ html:not(.is-apple) .diary-item .diary-img { width: calc(100% + 26px); margin-le
 /* 大切にしていること：漢字を朱印に（左上） */
 html:not(.is-apple) .value { padding-top: 70px; }
 html:not(.is-apple) .value::before { content: attr(data-kanji); position: absolute; left: 24px; top: 20px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; transform: rotate(-6deg); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25); }
+
+/* ################################################################
+   ▼ v58 — 日程：見逃さないために（日めくり 3 枚）
+   ################################################################ */
+.mekuri { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.mk-page { position: relative; display: grid; align-content: start; gap: 8px; padding: 34px clamp(20px, 2.4vw, 28px) 24px; background: #fffdf8; border: 1px solid var(--color-border); border-radius: 6px 6px 20px 20px; box-shadow: var(--card-shadow, 0 14px 30px -22px rgba(0,0,0,0.4)); }
+.mk-page::before { content: ''; position: absolute; inset: 0 0 auto; height: 14px; border-radius: 6px 6px 0 0; background: var(--shu, #b5432f); }
+.mk-page:nth-child(2)::before { background: #2f6b3a; }
+.mk-page:nth-child(3)::before { background: #b08a4a; }
+.mk-ring { position: absolute; top: -6px; left: 50%; width: 46%; height: 12px; transform: translateX(-50%); background: radial-gradient(circle, #3a3a3a 3px, transparent 3.5px) 0 0 / 22px 12px repeat-x; }
+.mk-no { margin: 4px 0 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 46px; line-height: 1; color: var(--shu, #b5432f); }
+.mk-page:nth-child(2) .mk-no { color: #2f6b3a; }
+.mk-page:nth-child(3) .mk-no { color: #b08a4a; }
+.mk-page h3 { margin: 0; font-size: 17px; font-weight: 700; }
+.mk-page > p:not(.mk-no) { margin: 0; font-size: 14px; line-height: 1.8; color: var(--color-muted); }
+.mk-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.mk-links a { padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; color: inherit; border: 1px solid var(--color-border); background: var(--color-surface); transition: background 0.2s, transform 0.2s; }
+.mk-links a:hover { transform: translateY(-1px); background: rgba(176, 138, 74, 0.12); }
+.mk-links a::after { content: ' →'; opacity: 0.6; }
+@media (max-width: 860px) { .mekuri { grid-template-columns: 1fr; gap: 24px; } }
+html[data-theme="dark"] .mk-page { background: var(--color-surface); }
+@media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .mk-page { background: var(--color-surface); } }
