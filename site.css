@@ -4952,3 +4952,30 @@ html:not(.is-apple) .diary-item time .diary-new { background: var(--shu, #b5432f
 html:not(.is-apple) .diary-item h3 { margin: 14px 0 6px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; }
 html:not(.is-apple) .diary-item p { line-height: 28px; background-image: repeating-linear-gradient(transparent 0 27px, rgba(53, 85, 122, 0.14) 27px 28px); color: #4a443c; }
 html:not(.is-apple) .diary-item .diary-img { width: calc(100% + 26px); margin-left: -26px; border-radius: 4px 12px 0 0; }
+
+/* ################################################################
+   ▼ v50 — 各種コンテスト：挑戦マップ・「これから挑戦」・取り組みを線でつなぐ
+   ################################################################ */
+.cmap { margin-bottom: clamp(30px, 4vw, 48px); padding: 22px clamp(18px, 3vw, 28px); border-radius: 22px; background: #1c2b23; background-image: var(--grain); color: #eee7d8; box-shadow: 0 20px 44px -28px rgba(10, 30, 20, 0.7); }
+.cmap-title { margin: 0 0 16px; display: flex; align-items: baseline; gap: 10px; font-weight: 700; font-size: 16px; color: #fff; }
+.cmap-title small { font-size: 12px; font-weight: 600; color: #e3c68e; letter-spacing: 0.1em; }
+.cmap-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; position: relative; }
+.cmap-list a { display: grid; gap: 6px; height: 100%; padding: 14px 14px 16px; border-radius: 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(238, 231, 216, 0.12); color: #eee7d8; text-decoration: none; transition: background 0.2s, transform 0.2s var(--ease-out); }
+.cmap-list a:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+.cmap-no { font-family: var(--font-head, 'DM Sans', sans-serif); font-size: 12px; font-weight: 700; color: rgba(238, 231, 216, 0.55); }
+.cmap-list b { font-size: 15px; line-height: 1.4; color: #fff; }
+.cmap-list em { justify-self: start; font-style: normal; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+.cmap-list .is-done em { background: #e3c68e; color: #1c2b23; }
+.cmap-list .is-done em::before { content: '✓ '; }
+.cmap-list .is-live em { background: #e0705b; color: #fff; }
+.cmap-list .is-live em::before { content: '● '; animation: pulse 1.6s ease-in-out infinite; }
+.cmap-list .is-plan em { border: 1px dashed rgba(238, 231, 216, 0.45); color: rgba(238, 231, 216, 0.8); }
+.cmap-list .is-plan a { border-style: dashed; }
+@media (max-width: 760px) { .cmap-list { grid-template-columns: 1fr 1fr; } }
+/* 見出しの横の状況：「これから挑戦」は点線 */
+.contest-status.is-plan { color: var(--color-muted); background: transparent; border: 1px dashed color-mix(in srgb, var(--color-muted) 60%, transparent); }
+.contest-status.is-plan::before { content: '→'; width: auto; height: auto; background: none; font-size: 12px; }
+/* 取り組みのステップを、線でつながった駅のように */
+.ct-flow { position: relative; }
+.contest .ct-flow li span { box-shadow: 0 0 0 3px var(--color-bg); }
+@media (prefers-reduced-motion: reduce) { .cmap-list .is-live em::before { animation: none; } .cmap-list a { transition: none; } }
