@@ -54,15 +54,37 @@
       </ul>
     </div>`).join('');
 
-  const navLinks = LINKS.map(l =>
-    `<li><a href="${l.href}" class="${l.cls || ''}${l.href === here ? ' active' : ''}">${l.label}</a></li>`).join('');
+  // v44：大きな会社のサイトのように、日本語の 5 つの入口＋開くと説明つきのページ一覧（メガメニュー）
+  const P = Object.fromEntries(INDEX.flatMap(g => g.pages).map(p => [p.href, p]));
+  const MENU = [
+    { ja: 'AZAKEIについて', en: 'About', lead: '私たちが何者で、何を大切にしているか。', pages: ['about.html', 'azakei.html', 'activities.html', 'glossary.html'] },
+    { ja: '文化祭', en: 'Festival', lead: '体験型展示「麻布経済展」と、その日程。', pages: ['festival.html', 'events.html', 'vote.html'] },
+    { ja: 'コンテスト', en: 'Contests', href: 'contests.html' },
+    { ja: '体験する', en: 'Play', lead: '登録なし・スマホで、すぐに遊べます。', pages: ['quiz.html', 'diagnosis.html', 'sim.html'] },
+    { ja: '協賛・取材', en: 'Partners', href: 'sponsor.html' }
+  ];
+  const navLinks = MENU.map((m, i) => {
+    if (!m.pages) return `<li><a href="${m.href}" class="nav-top${m.href === here ? ' active' : ''}"${m.href === here ? ' aria-current="page"' : ''}>${m.ja}</a></li>`;
+    const on = m.pages.includes(here);
+    return `<li class="nav-dd${on ? ' is-active' : ''}">
+      <button type="button" class="nav-top nav-dd-btn" aria-expanded="false" aria-controls="navp${i}">${m.ja}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+      <div class="nav-panel" id="navp${i}">
+        <div class="nav-panel-head"><p><span>${m.en}</span>${m.ja}</p><small>${m.lead}</small></div>
+        <ul>${m.pages.map(h => { const p = P[h] || { ja: h, desc: '' }; const cur = h === here; return `
+          <li><a href="${h}"${cur ? ' aria-current="page" class="active"' : ''}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p.ico || ''}"/></svg>
+            <b>${p.ja}${h === 'vote.html' ? '<em>受付中</em>' : ''}</b><small>${p.desc}</small>
+          </a></li>`; }).join('')}</ul>
+      </div>
+    </li>`;
+  }).join('');
 
   document.body.insertAdjacentHTML('afterbegin', `
     <nav id="navbar">
       <a href="index.html" class="nav-logo wordmark" aria-label="麻経 AZAKEI ホーム"><span class="nav-mark" data-logomark aria-hidden="true"></span>AZA<span>KEI</span><small class="nav-kanji" aria-hidden="true">麻経</small></a>
       <ul class="nav-links">${navLinks}</ul>
       <div class="nav-right">
-        <a href="${ig.url}" target="_blank" rel="noopener" class="nav-cta">Instagram</a>
+        <a href="contact.html" class="nav-cta">お問い合わせ</a>
         <a href="${here === 'diagnosis.html' ? 'en-diagnosis.html' : 'en.html'}" class="lang-switch" hreflang="en" lang="en" aria-label="English version">EN</a>
         <button type="button" class="theme-toggle" id="themeToggle" aria-label="ライト／ダーク表示を切り替え">
           <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>

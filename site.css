@@ -4793,3 +4793,43 @@ html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-
 @keyframes v-stamp { 0% { opacity: 0; transform: rotate(-16deg) scale(1.9); } 60% { opacity: 1; } 100% { opacity: 0.92; transform: rotate(-10deg) scale(1); } }
 @media (max-width: 560px) { .vote-list .vote-mine { right: 84px; font-size: 10.5px; padding: 4px 7px; } }
 @media (prefers-reduced-motion: reduce) { .vote-list .vote-option.is-mine .vote-mine { animation: none; } }
+
+/* ################################################################
+   ▼ v44 — 上のメニュー：日本語の 5 つの入口＋説明つきのページ一覧（メガメニュー）
+   ################################################################ */
+.nav-links { gap: clamp(4px, 1.2vw, 14px); align-items: center; }
+.nav-links > li { position: relative; }
+.nav-links .nav-top { display: inline-flex; align-items: center; gap: 4px; padding: 10px 12px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: none; color: var(--color-text); cursor: pointer; transition: background 0.2s, color 0.2s; }
+.nav-links .nav-top::after { display: none; }
+.nav-links .nav-top svg { width: 12px; height: 12px; transition: transform 0.25s var(--ease-out); opacity: 0.7; }
+.nav-links .nav-top:hover, .nav-dd.is-open > .nav-top, .nav-dd:focus-within > .nav-top { background: color-mix(in srgb, var(--color-accent) 14%, transparent); }
+.nav-links .nav-top.active, .nav-dd.is-active > .nav-top { color: var(--color-accent-deep); box-shadow: inset 0 -2px 0 var(--color-accent); border-radius: 999px 999px 999px 999px; }
+.nav-dd.is-open > .nav-top svg, .nav-dd:hover > .nav-top svg { transform: rotate(180deg); }
+.nav-panel {
+  position: absolute; top: calc(100% + 10px); left: 50%; translate: -50% 0; width: min(560px, 80vw); z-index: 120;
+  display: grid; grid-template-columns: 180px 1fr; gap: 0; padding: 0; overflow: hidden;
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px;
+  box-shadow: 0 24px 50px -24px rgba(40, 28, 10, 0.4);
+  opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s, transform 0.22s var(--ease-out), visibility 0s linear 0.22s;
+}
+.nav-panel::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+.nav-dd:hover > .nav-panel, .nav-dd.is-open > .nav-panel, .nav-dd:focus-within > .nav-panel { opacity: 1; visibility: visible; transform: none; transition: opacity 0.18s, transform 0.22s var(--ease-out), visibility 0s; }
+.nav-panel-head { padding: 22px 20px; background: #1c2b23; background-image: var(--grain); color: #eee7d8; display: grid; align-content: start; gap: 8px; }
+.nav-panel-head p { margin: 0; font-size: 17px; font-weight: 700; display: grid; gap: 2px; color: #fff; }
+.nav-panel-head p span { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #e3c68e; font-weight: 600; }
+.nav-panel-head small { font-size: 12.5px; line-height: 1.7; color: rgba(238, 231, 216, 0.75); }
+.nav-panel ul { list-style: none; margin: 0; padding: 10px; display: grid; gap: 2px; }
+.nav-panel a { display: grid; grid-template-columns: 30px 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; color: var(--color-text); text-decoration: none; text-transform: none; letter-spacing: 0; font-size: 14px; transition: background 0.15s; }
+.nav-panel a::after { display: none; }
+.nav-panel a svg { grid-row: 1 / 3; width: 30px; height: 30px; padding: 6px; border-radius: 9px; background: color-mix(in srgb, var(--color-accent) 14%, transparent); color: var(--color-accent-deep); }
+.nav-panel a b { font-weight: 700; font-size: 14.5px; display: inline-flex; align-items: center; gap: 6px; }
+.nav-panel a b em { font-style: normal; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: #b5432f; color: #fff; }
+.nav-panel a small { font-size: 12px; color: var(--color-muted); line-height: 1.5; }
+.nav-panel a:hover, .nav-panel a:focus-visible { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.nav-panel a.active b { color: var(--color-accent-deep); }
+/* 右の目立つボタン：お問い合わせ */
+.nav-cta { display: inline-flex !important; align-items: center; padding: 10px 20px; border-radius: 999px; border: 0; background: var(--color-text); color: var(--color-bg) !important; font-size: 13.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: none; }
+.nav-cta:hover { background: var(--color-accent-deep); color: #fff !important; }
+@media (max-width: 1100px) { .nav-links .nav-top { padding: 8px 9px; font-size: 13px; } .nav-cta { padding: 9px 16px; } }
+@media (max-width: 1000px) { .nav-cta { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .nav-panel, .nav-links .nav-top svg { transition: none; } }

@@ -974,3 +974,24 @@ try {
   label.insertAdjacentHTML('afterbegin', `<span class="ph-cat is-${key}">${JA[key]}</span>`);
 })();
 } catch (e) { console.error('[site.js / v39]', e); }
+
+/* ######## ▼ v44：上のメニューの「開くページ一覧」（クリック・キーボードでも開ける） ######## */
+try {
+(function() {
+  const dds = [...document.querySelectorAll('.nav-dd')];
+  if (!dds.length) return;
+  const close = (except) => dds.forEach(d => { if (d !== except) { d.classList.remove('is-open'); d.querySelector('.nav-dd-btn').setAttribute('aria-expanded', 'false'); } });
+  dds.forEach(d => {
+    const btn = d.querySelector('.nav-dd-btn');
+    btn.addEventListener('click', () => {
+      const open = !d.classList.contains('is-open');
+      close(d);
+      d.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    d.addEventListener('mouseleave', () => { d.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); });
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.addEventListener('click', e => { if (!e.target.closest('.nav-dd')) close(); });
+})();
+} catch (e) { console.error('[site.js / v44]', e); }
