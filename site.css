@@ -5206,3 +5206,26 @@ html[data-theme="dark"] .gt-d { color: #f3eee4; }
 @keyframes ph-seal-press { from { opacity: 0; transform: scale(1.6) rotate(-14deg); } to { opacity: 1; transform: rotate(-5deg); } }
 @media (prefers-reduced-motion: reduce) { .ph-seal { animation: none; } }
 @media (max-width: 600px) { .page-hero .section-label { display: flex; align-items: center; gap: 10px; } .ph-seal { position: static; order: 9; margin-left: auto; width: 40px; height: 40px; font-size: 22px; border-radius: 8px; } }
+
+/* ################################################################
+   ▼ v64 — コンテスト：いまどこまで進んだか（すごろく式の進み具合）
+   ################################################################ */
+.cstep { list-style: none; margin: 14px 0 18px; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); counter-reset: cs; }
+.cstep li { position: relative; display: grid; align-content: start; gap: 2px; padding: 26px 8px 0 0; counter-increment: cs; font-size: 12.5px; line-height: 1.5; }
+.cstep li::before { content: counter(cs); position: absolute; left: 0; top: 0; z-index: 1; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 700; background: var(--color-surface, #fff); color: var(--color-muted); border: 1.5px solid var(--color-border); }
+.cstep li::after { content: ''; position: absolute; left: 20px; right: 0; top: 9px; height: 2px; background: var(--color-border); }
+.cstep li:last-child::after { display: none; }
+.cstep li.is-done::before { content: '済'; background: #2f6b3a; border-color: #2f6b3a; color: #fff; font-family: 'Shippori Mincho', serif; }
+.cstep li.is-done::after { background: #2f6b3a; }
+.cstep li.is-now::before { background: var(--shu, #b5432f); border-color: var(--shu, #b5432f); color: #fff; box-shadow: 0 0 0 4px color-mix(in srgb, var(--shu, #b5432f) 22%, transparent); animation: cs-pulse 1.8s ease-in-out infinite; }
+.cstep b { font-weight: 700; color: var(--color-text, inherit); }
+.cstep li:not(.is-done):not(.is-now) b { color: var(--color-muted); font-weight: 500; }
+.cstep small { font-size: 11.5px; color: var(--color-muted); }
+.cstep li.is-now small { color: var(--shu, #b5432f); font-weight: 700; }
+@keyframes cs-pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--shu, #b5432f) 8%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .cstep li.is-now::before { animation: none; } }
+@media (max-width: 600px) {
+  .cstep { grid-template-columns: 1fr; gap: 10px; }
+  .cstep li { padding: 0 0 0 30px; min-height: 20px; }
+  .cstep li::after { left: 9px; right: auto; top: 22px; bottom: -10px; width: 2px; height: auto; }
+}
