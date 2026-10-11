@@ -4833,3 +4833,33 @@ html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-
 @media (max-width: 1100px) { .nav-links .nav-top { padding: 8px 9px; font-size: 13px; } .nav-cta { padding: 9px 16px; } }
 @media (max-width: 1000px) { .nav-cta { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { .nav-panel, .nav-links .nav-top svg { transition: none; } }
+
+/* ################################################################
+   ▼ v45 — エコノミスト診断を「方眼紙の診断カード」に・4 つのタイプ・見やすいフォーカス
+   ################################################################ */
+#diag .dg-card {
+  background-color: #fffdf6 !important; color: #1e1a15;
+  --color-text: #1e1a15; --color-muted: #6d6458; --color-border: rgba(70, 52, 22, 0.14); --color-bg: #f6f1e6;
+  background-image: linear-gradient(rgba(47, 107, 58, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(47, 107, 58, 0.07) 1px, transparent 1px) !important;
+  background-size: 22px 22px !important;
+  border: 1px solid rgba(70, 52, 22, 0.14) !important; border-radius: 26px; box-shadow: 0 1px 0 #fff inset, 0 20px 44px -26px rgba(70, 45, 10, 0.45) !important;
+}
+#diag .dg-card .dg-kicker { color: #2f6b3a; }
+#diag .dg-card h2, #diag .dg-card h3 { color: #1e1a15; }
+
+/* 4 つのタイプ：色の帯つきカード。自分のタイプには朱印 */
+.dg-types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.dg-type { position: relative; display: grid; align-content: start; gap: 6px; padding: 24px 20px 22px; border-radius: 20px; background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--card-shadow, 0 12px 28px -20px rgba(70, 45, 10, 0.4)); overflow: hidden; }
+.dg-type::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--c); }
+.dg-type-en { margin: 6px 0 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--c); }
+.dg-type h3 { margin: 0; font-size: 20px; }
+.dg-type p:last-child { margin: 4px 0 0; font-size: 14px; line-height: 1.8; color: var(--color-muted); }
+.dg-type.is-mine { border-color: var(--c); box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 35%, transparent), var(--card-shadow, none); }
+.dg-type.is-mine::after { content: 'あなた'; position: absolute; top: 16px; right: 14px; padding: 4px 8px; border: 2px solid var(--shu, #b5432f); border-radius: 6px; color: var(--shu, #b5432f); font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 12px; transform: rotate(-8deg); }
+.dg-types-cta { margin-top: 26px; text-align: center; }
+@media (max-width: 900px) { .dg-types { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .dg-types { grid-template-columns: 1fr; } }
+
+/* フォーカス：キーボードで操作する人にも、今どこかがはっきりわかる */
+:focus-visible { outline: 3px solid #d9bb7e; outline-offset: 3px; border-radius: 6px; box-shadow: 0 0 0 6px rgba(30, 26, 21, 0.18); }
+.skip-link:focus { z-index: 1000; }
