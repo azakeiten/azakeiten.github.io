@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261011e" />
+  <link rel="stylesheet" href="site.css?v=20261011f" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -46,19 +46,45 @@
 
   <section class="about tight">
     <div class="container">
+      <div class="sim-ticker reveal" role="note" aria-label="このシミュレーターの想定">
+        <span class="st-label">想定（例）</span>
+        <span class="st-item"><b>預金</b><i class="st-up">年 +0.2%</i><small>ブレなし</small></span>
+        <span class="st-item"><b>債券</b><i class="st-up">年 +1.5%</i><small>ブレ ±4%</small></span>
+        <span class="st-item"><b>株</b><i class="st-up">年 +6.0%</i><small>ブレ ±18%</small></span>
+      </div>
       <div id="sim" class="sim"></div>
       <p class="dg-note">※ 学ぶための模擬です。値動きは「株は大きく増えやすいがブレも大きい」などの性質をまねた仮の数字で、実際の市場のデータや将来の予想ではありません。投資をすすめるものでもありません。</p>
     </div>
   </section>
 
+
+  <!-- このシミュレーターで出てくることば（用語辞典へ） -->
+  <section class="services tight" id="words">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label">Words</p>
+        <h2 class="section-title"><span class="keep-phrase">出てきた</span><span class="keep-phrase"><em>ことば</em>を、もう少し。</span></h2>
+        <p class="lead">シミュレーターで気になったことばは、経済用語ミニ辞典でやさしく説明しています。</p>
+      </div>
+      <ul class="sim-words reveal">
+        <li><a href="glossary.html#deposit"><b>預金</b><span>辞典で読む</span></a></li>
+        <li><a href="glossary.html#bond"><b>債券（国債・社債）</b><span>辞典で読む</span></a></li>
+        <li><a href="glossary.html#stock"><b>株式（株）</b><span>辞典で読む</span></a></li>
+        <li><a href="glossary.html#risk-return"><b>リスクとリターン</b><span>辞典で読む</span></a></li>
+        <li><a href="glossary.html#diversify"><b>分散投資</b><span>辞典で読む</span></a></li>
+        <li><a href="glossary.html#portfolio"><b>ポートフォリオ</b><span>辞典で読む</span></a></li>
+        <li><a href="glossary.html#interest"><b>金利・利息</b><span>辞典で読む</span></a></li>
+      </ul>
+    </div>
+  </section>
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261011e"></script>
-  <script src="layout.js?v=20261011e"></script>
-  <script src="brand.js?v=20261011e"></script>
-  <script src="nav.js?v=20261011e"></script>
-  <script src="reveal.js?v=20261011e"></script>
-  <script src="sim.js?v=20261011e"></script>
-  <script src="site.js?v=20261011e"></script>
+  <script src="content.js?v=20261011f"></script>
+  <script src="layout.js?v=20261011f"></script>
+  <script src="brand.js?v=20261011f"></script>
+  <script src="nav.js?v=20261011f"></script>
+  <script src="reveal.js?v=20261011f"></script>
+  <script src="sim.js?v=20261011f"></script>
+  <script src="site.js?v=20261011f"></script>
 </body>
 </html>
