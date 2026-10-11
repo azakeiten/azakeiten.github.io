@@ -22,8 +22,8 @@
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261011m" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css?v=20261011o" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -47,21 +47,30 @@
   <section class="about tight">
     <div class="container">
       <div id="quiz" class="diag"></div>
+      <div class="qz-venue reveal" aria-label="文化祭の会場の記録">
+        <p class="qz-venue-head">本日の億万長者 <small>2026 年 文化祭・会場の黒板より</small></p>
+        <ol>
+          <li><span>1 位</span><b>120 枚</b><em>24 倍</em></li>
+          <li><span>2 位</span><b>60 枚</b><em>12 倍</em></li>
+          <li><span>3 位</span><b>44 枚</b><em>8.8 倍</em></li>
+        </ol>
+        <p class="qz-venue-note">会場では、最後のチップが 40 枚以上の人にシャーペンをプレゼントしました。Web で、この記録をこえられるか。</p>
+      </div>
       <p class="dg-note">※ 遊びのゲームです。チップに実際の価値はありません。</p>
     </div>
   </section>
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261011m"></script>
-  <script src="layout.js?v=20261011m"></script>
-  <script src="brand.js?v=20261011m"></script>
-  <script src="nav.js?v=20261011m"></script>
-  <script src="reveal.js?v=20261011m"></script>
-  <script src="ranking.js?v=20261011m"></script>
-  <script src="quiz-data.js?v=20261011m"></script>
-  <script src="shareimg.js?v=20261011m"></script>
-  <script src="quiz.js?v=20261011m"></script>
-  <script src="site.js?v=20261011m"></script>
+  <script src="content.js?v=20261011o"></script>
+  <script src="layout.js?v=20261011o"></script>
+  <script src="brand.js?v=20261011o"></script>
+  <script src="nav.js?v=20261011o"></script>
+  <script src="reveal.js?v=20261011o"></script>
+  <script src="ranking.js?v=20261011o"></script>
+  <script src="quiz-data.js?v=20261011o"></script>
+  <script src="shareimg.js?v=20261011o"></script>
+  <script src="quiz.js?v=20261011o"></script>
+  <script src="site.js?v=20261011o"></script>
 </body>
 </html>
