@@ -4863,3 +4863,27 @@ html:not(.is-apple) section.services:not(.cta-band) + section.services:not(.cta-
 /* フォーカス：キーボードで操作する人にも、今どこかがはっきりわかる */
 :focus-visible { outline: 3px solid #d9bb7e; outline-offset: 3px; border-radius: 6px; box-shadow: 0 0 0 6px rgba(30, 26, 21, 0.18); }
 .skip-link:focus { z-index: 1000; }
+
+/* ################################################################
+   ▼ v46 — 経済用語ミニ辞典を「本物の辞書」に：分類ごとの爪見出しの色・罫線の紙・明朝の見出し語
+   ################################################################ */
+#g-basic { --gc: #b08a4a; } #g-money { --gc: #b5432f; } #g-company { --gc: #2f6b3a; } #g-society { --gc: #35557a; } #g-history { --gc: #7a5a24; }
+:root[data-theme="dark"] #g-basic { --gc: #d9bb7e; } :root[data-theme="dark"] #g-money { --gc: #e0705b; } :root[data-theme="dark"] #g-company { --gc: #86c98f; } :root[data-theme="dark"] #g-society { --gc: #8fb0d9; } :root[data-theme="dark"] #g-history { --gc: #d4b07a; }
+.gl-cats a { display: inline-flex; align-items: center; gap: 7px; }
+.gl-cats a::before { content: ''; width: 9px; height: 9px; border-radius: 3px; background: var(--gc, #b08a4a); }
+.gl-cats a[href="#g-basic"] { --gc: #b08a4a; } .gl-cats a[href="#g-money"] { --gc: #b5432f; } .gl-cats a[href="#g-company"] { --gc: #2f6b3a; } .gl-cats a[href="#g-society"] { --gc: #35557a; } .gl-cats a[href="#g-history"] { --gc: #7a5a24; }
+.gl-cats a:hover { border-color: var(--gc); background: color-mix(in srgb, var(--gc) 8%, transparent); }
+/* 分類の見出し：番号を色つきの爪（つめ）に */
+.gl-group .gl-head { border-bottom: 2px solid var(--gc); font-family: 'Shippori Mincho', serif; }
+.gl-group .gl-head span { display: inline-grid; place-items: center; min-width: 40px; height: 32px; padding: 0 8px; border-radius: 8px 8px 0 0; background: var(--gc); color: #fff; font-size: 0.6em; letter-spacing: 0.06em; align-self: flex-end; margin-bottom: -10px; }
+/* 見出し語のカード：左に分類の色、うすい罫線の紙 */
+.gl-group .gl-item {
+  position: relative; border-left: 4px solid var(--gc); border-radius: 6px 18px 18px 6px;
+  background-image: repeating-linear-gradient(transparent 0 27px, color-mix(in srgb, var(--gc) 12%, transparent) 27px 28px);
+  background-position: 0 calc(var(--pad-card, 24px) + 34px); box-shadow: var(--card-shadow, 0 10px 24px -20px rgba(70, 45, 10, 0.4));
+}
+.gl-group .gl-item dt { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 19px; letter-spacing: 0.02em; }
+.gl-group .gl-item dd { line-height: 28px; font-size: 14.5px; }
+.gl-group .gl-item.is-hl { outline: 3px solid var(--gc); outline-offset: 2px; }
+.gl-group .gl-item { background-image: none; }
+.gl-group .gl-item dd { background-image: repeating-linear-gradient(transparent 0 27px, color-mix(in srgb, var(--gc) 16%, transparent) 27px 28px); padding-bottom: 1px; }
