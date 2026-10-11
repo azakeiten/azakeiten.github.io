@@ -5153,3 +5153,24 @@ html[data-theme="dark"] .mk-page { background: var(--color-surface); }
 .film-more { margin: 18px 0 0; text-align: right; font-size: 14px; }
 .film-more a { color: inherit; font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--color-accent, #b08a4a); }
 @media (max-width: 860px) { .film { grid-auto-columns: 72%; } }
+
+/* ################################################################
+   ▼ v60 — 投票：1 票のゆくえ（点線でつながる 3 ステップ）
+   ################################################################ */
+.ballot { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
+.ballot::before { content: ''; position: absolute; top: 36px; left: 16%; right: 16%; border-top: 2px dashed color-mix(in srgb, var(--shu, #b5432f) 45%, transparent); z-index: 0; }
+.ballot li { position: relative; z-index: 1; display: grid; justify-items: center; text-align: center; gap: 8px; padding: 0 8px; }
+.bl-ico { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: #fffdf8; border: 2px solid var(--shu, #b5432f); }
+.ballot li:nth-child(2) .bl-ico { border-color: #2f6b3a; background: #1c2b23; }
+.ballot li:nth-child(3) .bl-ico { border-color: #b08a4a; }
+.bl-ico svg { width: 34px; height: 34px; fill: none; stroke: var(--shu, #b5432f); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ballot li:nth-child(2) svg { stroke: #e3c68e; }
+.ballot li:nth-child(3) svg { stroke: #b08a4a; fill: rgba(176, 138, 74, 0.15); }
+.ballot b { font-size: 16px; font-weight: 700; }
+.ballot p { margin: 0; max-width: 22em; font-size: 14px; line-height: 1.8; color: var(--color-muted); }
+@media (max-width: 760px) {
+  .ballot { grid-template-columns: 1fr; gap: 26px; }
+  .ballot::before { top: 36px; bottom: 36px; left: 36px; right: auto; border-top: 0; border-left: 2px dashed color-mix(in srgb, var(--shu, #b5432f) 45%, transparent); }
+  .ballot li { grid-template-columns: 72px 1fr; justify-items: start; text-align: left; column-gap: 16px; row-gap: 2px; padding: 0; }
+  .bl-ico { grid-row: span 2; }
+}
