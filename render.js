@@ -44,12 +44,29 @@
     } else if (!e.date && e.when === '受付中') {
       badge = '<span class="event-countdown is-now">受付中</span>';
     }
-    return `<${tag} class="event-row${e.past ? ' is-past' : ''}${next ? ' is-next' : ''}"${e.link ? ` href="${e.link}"` : ''}>
-      <div class="event-when">${next ? '<span class="event-next">Next Event</span>' : ''}${!e.date && e.when === '受付中' ? '' : when}${badge}</div>
+    // v48：日付は「日めくりカレンダー」の形に。これからの予定には「カレンダーに追加」（Google カレンダー）
+    let cal = '', addcal = '';
+    if (e.date) {
+      const [y, m, d] = e.date.split('-');
+      cal = `<span class="ev-cal" aria-hidden="true"><span>${y}.${m}</span><b>${+d}</b><small>${'日月火水木金土'[new Date(e.date).getUTCDay()]}</small></span>`;
+      if (!e.past) {
+        const txt = s => { const t = document.createElement('textarea'); t.innerHTML = s || ''; return t.value; };
+        const plus1 = s => { const t = new Date(s); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10).replace(/-/g, ''); };
+        const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+          + '&text=' + encodeURIComponent(txt(e.title))
+          + '&dates=' + e.date.replace(/-/g, '') + '/' + plus1(e.end || e.date)
+          + '&details=' + encodeURIComponent((txt(e.desc) ? txt(e.desc) + '\n' : '') + '日程は変わることがあります。最新は https://azakeiten.github.io/events.html')
+          + '&location=' + encodeURIComponent(txt(e.place));
+        addcal = `<span class="ev-addcal" role="link" tabindex="0" data-href="${url.replace(/"/g, '&quot;')}">カレンダーに追加</span>`;
+      }
+    }
+    return `<${tag} class="event-row${e.past ? ' is-past' : ''}${next ? ' is-next' : ''}${e.date ? ' has-cal' : ''}"${e.link ? ` href="${e.link}"` : ''}>
+      <div class="event-when">${next ? '<span class="event-next">Next Event</span>' : ''}${cal}<span class="ev-range">${!e.date && e.when === '受付中' ? '' : when}</span>${badge}</div>
       <div class="event-main">
         <span class="chip">${e.tag || 'Event'}</span>
         <h3>${e.title}</h3>
         <p>${e.desc || ''}</p>
+        ${addcal}
       </div>
       <div class="event-place">${e.img ? `<img class="event-thumb" src="${e.img}" alt="" loading="lazy" decoding="async">` : ''}${e.place || ''}</div>
     </${tag}>`;
@@ -199,6 +216,11 @@
     live.forEach(el => { const fn = renderers[el.dataset.render]; if (fn) fn(el); });
     document.dispatchEvent(new Event('azakei:rerender'));
   })();
+
+  /* ---- 「カレンダーに追加」：カード全体のリンクとは別に、Google カレンダーを新しいタブで開く ---- */
+  const openCal = (el, ev) => { ev.preventDefault(); ev.stopPropagation(); window.open(el.dataset.href, '_blank', 'noopener'); };
+  document.addEventListener('click', ev => { const el = ev.target.closest && ev.target.closest('.ev-addcal'); if (el) openCal(el, ev); }, true);
+  document.addEventListener('keydown', ev => { const el = ev.target.closest && ev.target.closest('.ev-addcal'); if (el && (ev.key === 'Enter' || ev.key === ' ')) openCal(el, ev); }, true);
 
   /* ---- お問い合わせフォーム ---- */
   const form = document.getElementById('contactForm');
