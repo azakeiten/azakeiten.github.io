@@ -98,6 +98,8 @@
       <div class="si-inner">
         <div class="si-list">
           <p class="si-title">Index <span>サイトの目次</span></p>
+          <label class="si-search"><span class="sr-only">サイトの中をさがす</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="siSearch" placeholder="さがす（例：来場ガイド、配当、FAQ）" autocomplete="off" enterkeyhint="search"></label>
+          <ul class="si-results" id="siResults" hidden></ul>
           ${indexGroups}
         </div>
         <aside class="si-preview" aria-hidden="true">
@@ -197,4 +199,47 @@
     </div>
     <div class="footer-giant" aria-hidden="true">AZAKEI<span class="footer-giant-seal">麻経</span></div>
     <div class="footer-bottom"><span>© ${new Date().getFullYear()} AZAKEI. All rights reserved.</span><span class="footer-legal"><a href="about.html#profile">団体概要</a><a href="about.html#faq">よくある質問</a><a href="privacy.html">プライバシーポリシー</a></span></div>`;
+})();
+
+/* ---- 目次の中の「さがす」：ページと、ページの中のコーナーを絞りこむ ---- */
+(function() {
+  const input = document.getElementById('siSearch'), list = document.getElementById('siResults');
+  if (!input || !list) return;
+  const norm = s => s.normalize('NFKC').toLowerCase().replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60)).replace(/\s+/g, '');
+  // ページの中のコーナー（見出し・よく探されそうな言葉）
+  const SPOTS = [
+    ['festival.html#guide', '来場ガイド', '文化祭', 'はじめて 行き方 あそびかた チップ 当日'],
+    ['festival.html#access', '開催日程とアクセス', '文化祭', '場所 日程 行き方 麻布'],
+    ['festival.html#story', '3 日間の物語', '文化祭', '来場者 2364 人数'],
+    ['festival.html#exhibition', '展示の仕組み', '文化祭', 'チップ 倍率 賭ける'],
+    ['about.html#faq', 'よくある質問（FAQ）', '麻経とは', 'faq 質問 入部 部員'],
+    ['about.html#profile', '団体概要', '麻経とは', '設立 学校 連絡先'],
+    ['about.html#vision', '今後の展望', '麻経とは', 'これから 目標 ロードマップ'],
+    ['contests.html#business', 'ビジネスコンテスト', 'コンテスト', '事業計画 高校生'],
+    ['contests.html#stockleague', '日経ストックリーグ', 'コンテスト', '株 ポートフォリオ 投資 レポート'],
+    ['events.html#follow', '予定を見逃さないために', '日程', 'カレンダー sns フォロー'],
+    ['activities.html#making', '展示ができるまで', '活動風景', '写真 準備 フィナーレ'],
+    ['azakei.html#unpack', '合言葉を、ほどくと。', 'AZAKEI として', '合言葉 理解 創造'],
+    ['vote.html#after-vote', 'あなたの 1 票の、ゆくえ', '投票', '投票 結果'],
+    ['glossary.html', '今日のことば', '用語辞典', '日めくり 用語'],
+    ['index.html#weekly', '今週の 1 問', 'ホーム', 'クイズ 毎週'],
+    ['diagnosis.html#types', '投資家タイプ一覧', '診断', 'タイプ 結果'],
+    ['sponsor.html', '協賛・取材のご相談', '協賛', 'スポンサー 企業 取材 メディア'],
+    ['privacy.html', 'プライバシーポリシー', 'その他', '個人情報 cookie']
+  ].map(([href, ja, group, kw]) => ({ href, ja, group, kw }));
+  const pages = (window.AZAKEI_PAGES || []).map(p => ({ href: p.href, ja: p.ja, group: p.group, kw: (p.en || '') + ' ' + (p.desc || '') }));
+  const all = pages.concat(SPOTS).map(it => ({ ...it, key: norm(it.ja + ' ' + it.kw + ' ' + it.group) }));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const run = () => {
+    const q = norm(input.value);
+    if (!q) { list.hidden = true; list.innerHTML = ''; return; }
+    const hits = all.filter(it => it.key.includes(q)).sort((a, b) => (norm(b.ja).includes(q)) - (norm(a.ja).includes(q))).slice(0, 8);
+    list.innerHTML = hits.map(it => `<li><a href="${it.href}"><b>${esc(it.ja)}</b><small>${esc(it.group)}</small></a></li>`).join('')
+      + `<li class="si-r-gl"><a href="glossary.html?q=${encodeURIComponent(input.value.trim())}"><b>「${esc(input.value.trim())}」を用語辞典でさがす</b><small>用語辞典</small></a></li>`;
+    list.hidden = false;
+  };
+  input.addEventListener('input', run);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') { const a = list.querySelector('a'); if (a) { e.preventDefault(); location.href = a.href; } } });
+  // 同じページの中へ飛ぶときは、目次を閉じる
+  list.addEventListener('click', e => { const m = document.getElementById('mobileMenu'), h = document.getElementById('hamburger'); if (e.target.closest('a') && m && h && m.classList.contains('open')) h.click(); });
 })();

@@ -34,6 +34,7 @@
     count.textContent = q ? `${n} 語みつかりました` : `全 ${total} 語`;
     empty.hidden = n > 0;
   };
+  const q0 = new URLSearchParams(location.search).get('q'); if (q0) input.value = q0;
   input.addEventListener('input', run);
   run();
   // 「#gdp」のように言葉の場所へ飛んできたら、そこを光らせる

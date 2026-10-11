@@ -5229,3 +5229,31 @@ html[data-theme="dark"] .gt-d { color: #f3eee4; }
   .cstep li { padding: 0 0 0 30px; min-height: 20px; }
   .cstep li::after { left: 9px; right: auto; top: 22px; bottom: -10px; width: 2px; height: auto; }
 }
+
+/* ################################################################
+   ▼ v65 — 目次の中の「さがす」
+   ################################################################ */
+.si-search { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; padding: 0 16px; height: 48px; border-radius: 999px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); box-shadow: 0 8px 20px -16px rgba(0, 0, 0, 0.5); transition: border-color 0.2s, box-shadow 0.2s; }
+.si-search:focus-within { border-color: var(--shu, #b5432f); box-shadow: 0 0 0 4px color-mix(in srgb, var(--shu, #b5432f) 14%, transparent); }
+.si-search svg { flex: none; width: 18px; height: 18px; color: var(--color-muted); }
+.si-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 16px; color: inherit; }
+.si-results { list-style: none; margin: -8px 0 22px; padding: 6px; display: grid; gap: 2px; border-radius: 18px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.si-results a { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: inherit; }
+.si-results a:hover, .si-results a:focus-visible { background: rgba(176, 138, 74, 0.12); }
+.si-results b { font-weight: 600; font-size: 15px; }
+.si-results small { flex: none; font-size: 11.5px; color: var(--color-muted); }
+.si-results .si-r-gl { border-top: 1px dashed var(--color-border); margin-top: 4px; padding-top: 4px; }
+.si-results .si-r-gl b { font-weight: 500; color: var(--color-muted); }
+/* 目次は黒板の深緑なので、さがす欄もチョークの色で */
+.site-index .si-search { background: rgba(255, 255, 255, 0.06); border-color: rgba(236, 230, 218, 0.18); box-shadow: none; }
+.site-index .si-search:focus-within { border-color: #d9bb7e; box-shadow: 0 0 0 4px rgba(217, 187, 126, 0.16); }
+.site-index .si-search svg { color: rgba(236, 230, 218, 0.6); }
+.site-index .si-search input { color: #f3eee4; }
+.site-index .si-search input::placeholder { color: rgba(236, 230, 218, 0.45); }
+.site-index .si-results { background: rgba(10, 20, 15, 0.55); border-color: rgba(236, 230, 218, 0.14); }
+.site-index .si-results a { color: #f3eee4; }
+.site-index .si-results a:hover, .site-index .si-results a:focus-visible { background: rgba(217, 187, 126, 0.14); }
+.site-index .si-results b { color: #f3eee4; }
+.site-index .si-results small { color: #d9bb7e; }
+.site-index .si-results .si-r-gl { border-top-color: rgba(236, 230, 218, 0.16); }
+.site-index .si-results .si-r-gl b { color: rgba(236, 230, 218, 0.7); }
