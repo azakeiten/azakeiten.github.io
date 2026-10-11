@@ -4979,3 +4979,26 @@ html:not(.is-apple) .diary-item .diary-img { width: calc(100% + 26px); margin-le
 .ct-flow { position: relative; }
 .contest .ct-flow li span { box-shadow: 0 0 0 3px var(--color-bg); }
 @media (prefers-reduced-motion: reduce) { .cmap-list .is-live em::before { animation: none; } .cmap-list a { transition: none; } }
+
+/* ################################################################
+   ▼ v51 — 今後の展望を「ロードマップ」に：Now（朱）→ Next（金）→ Future（点線）
+   ################################################################ */
+.timeline.roadmap { border-left: 0; margin-left: 0; position: relative; display: grid; gap: 14px; }
+.timeline.roadmap::before { content: ''; position: absolute; left: 15px; top: 20px; bottom: 20px; width: 3px; border-radius: 3px; background: linear-gradient(var(--shu, #b5432f) 0 18%, #c9a35c 18% 72%, transparent 72%); }
+.timeline.roadmap::after { content: ''; position: absolute; left: 15px; bottom: 20px; height: 28%; width: 3px; background: repeating-linear-gradient(#c9a35c 0 6px, transparent 6px 12px); }
+.timeline.roadmap li { padding: 18px 20px 18px 50px; border-radius: 18px; background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--card-shadow, 0 12px 28px -20px rgba(70, 45, 10, 0.4)); }
+.timeline.roadmap li::before { left: 8px; top: 22px; width: 17px; height: 17px; background: #fff; border: 3px solid #c9a35c; z-index: 1; }
+.timeline.roadmap li.now { border-color: color-mix(in srgb, var(--shu, #b5432f) 40%, transparent); }
+.timeline.roadmap li.now::before { background: var(--shu, #b5432f); border-color: #fff; box-shadow: 0 0 0 3px var(--shu, #b5432f); animation: ay-ring 2.2s ease-out infinite; }
+.timeline.roadmap li:last-child { border-style: dashed; background: transparent; box-shadow: none; }
+.timeline.roadmap li:last-child::before { border-style: dashed; background: var(--color-bg); }
+.timeline.roadmap .when { display: inline-block; padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: 11px; background: color-mix(in srgb, #c9a35c 18%, transparent); color: var(--color-accent-deep); }
+.timeline.roadmap li.now .when { background: var(--shu, #b5432f); color: #fff; }
+.timeline.roadmap h3 { font-size: clamp(19px, 2vw, 23px); margin: 8px 0 6px; }
+.timeline.roadmap p { font-size: 14.5px; }
+.rm-link { display: inline-flex; margin-top: 8px; font-size: 13px; font-weight: 700; color: var(--color-accent-deep); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 50%, transparent); }
+.rm-link::after { content: ' →'; }
+.rm-link:hover { border-bottom-color: currentColor; }
+.rm-cta { margin-top: 28px !important; display: grid; justify-items: start; gap: 12px; }
+.rm-cta .hand-note { font-size: 17px; transform: rotate(-2deg); }
+@media (prefers-reduced-motion: reduce) { .timeline.roadmap li.now::before { animation: none; } }
