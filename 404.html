@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261011k" />
+  <link rel="stylesheet" href="site.css?v=20261011l" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -35,6 +35,15 @@
       <h1>お探しのページが見つかりません。</h1>
       <p class="nf-joke">チップを 1 枚、どこかに落としてしまったようです。</p>
       <p>URL が間違っているか、ページが移動・削除された可能性があります。<br>サイトの目次から、目的のページを探してみてください。</p>
+      <!-- v53：もしかして・ページ検索・全ページ一覧 -->
+      <p class="nf-guess" data-nf-guess hidden></p>
+      <div class="nf-finder">
+        <label class="nf-search"><span class="sr-only">ページを探す</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" data-nf-q placeholder="ページを探す（例：クイズ、協賛、文化祭）" autocomplete="off">
+        </label>
+        <ul class="nf-pages" data-nf-pages></ul>
+      </div>
       <div class="cta-actions">
         <a href="index.html" class="btn-primary">トップへ戻る</a>
         <a href="quiz.html" class="btn-ghost">クイズでチップを取り戻す →</a>
@@ -45,11 +54,38 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261011k"></script>
-  <script src="layout.js?v=20261011k"></script>
-  <script src="brand.js?v=20261011k"></script>
-  <script src="nav.js?v=20261011k"></script>
-  <script src="reveal.js?v=20261011k"></script>
-  <script src="site.js?v=20261011k"></script>
+  <script src="content.js?v=20261011l"></script>
+  <script src="layout.js?v=20261011l"></script>
+  <script src="brand.js?v=20261011l"></script>
+  <script src="nav.js?v=20261011l"></script>
+  <script src="reveal.js?v=20261011l"></script>
+  <script src="site.js?v=20261011l"></script>
+  <script>
+    // 404：まちがえた URL から「もしかして」を出し、ページを名前や説明で探せるようにする
+    (function () {
+      var pages = window.AZAKEI_PAGES || [];
+      var list = document.querySelector('[data-nf-pages]'), q = document.querySelector('[data-nf-q]'), guess = document.querySelector('[data-nf-guess]');
+      if (!list || !pages.length) return;
+      function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+      function draw(word) {
+        var w = (word || '').trim().toLowerCase();
+        var hit = pages.filter(function (p) { return !w || (p.ja + ' ' + p.en + ' ' + p.desc + ' ' + p.href).toLowerCase().indexOf(w) >= 0; });
+        list.innerHTML = hit.length ? hit.map(function (p) {
+          return '<li><a href="' + p.href + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + esc(p.ico || '') + '"/></svg><b>' + esc(p.ja) + '</b><small>' + esc(p.desc) + '</small></a></li>';
+        }).join('') : '<li class="nf-none">見つかりませんでした。<a href="contact.html">お問い合わせ</a>からも聞けます。</li>';
+      }
+      draw('');
+      q.addEventListener('input', function () { draw(q.value); });
+      // まちがえた URL の言葉から、近いページを推測
+      var path = decodeURIComponent(location.pathname.split('/').pop() || '').toLowerCase().replace(/\.html?$/, '').replace(/[^a-z0-9]/g, '');
+      if (path.length >= 3) {
+        var best = pages.filter(function (p) {
+          var k = p.href.replace('.html', '').replace(/[^a-z]/g, ''), e = p.en.toLowerCase().replace(/[^a-z]/g, '');
+          return k.indexOf(path.slice(0, 4)) === 0 || path.indexOf(k.slice(0, 4)) === 0 || e.indexOf(path.slice(0, 4)) === 0;
+        })[0];
+        if (best) { guess.innerHTML = 'もしかして：<a href="' + best.href + '">' + esc(best.ja) + '</a> ？'; guess.hidden = false; }
+      }
+    })();
+  </script>
 </body>
 </html>

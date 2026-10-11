@@ -40,6 +40,7 @@
   ];
   // ページごとのアイコン（カードにも使う）
   window.AZAKEI_ICONS = Object.fromEntries(INDEX.flatMap(g => g.pages).map(p => [p.href, p.ico]));
+  window.AZAKEI_PAGES = INDEX.flatMap(g => g.pages.map(p => ({ href: p.href, ja: p.ja, en: p.en, desc: p.desc, ico: p.ico, group: g.group })));
   let n = 0;
   const indexGroups = INDEX.map(g => `
     <div class="si-group si-g-${g.en.toLowerCase()}">
