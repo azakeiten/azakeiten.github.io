@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261012h" />
+  <link rel="stylesheet" href="site.css?v=20261012i" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -46,6 +46,11 @@
 
   <section class="about tight">
     <div class="container">
+      <div class="pv-sum reveal" aria-label="ひと目でわかるまとめ">
+        <div class="pv-card"><span class="pv-seal" aria-hidden="true">名</span><b>名前の登録は、いりません</b><p>クイズ・投票・診断は、だれでもそのまま遊べます。</p></div>
+        <div class="pv-card"><span class="pv-seal" aria-hidden="true">守</span><b>勝手に、ほかへ渡しません</b><p>お問い合わせの内容は、お返事とご相談のためだけに使います。</p></div>
+        <div class="pv-card"><span class="pv-seal" aria-hidden="true">手</span><b>記録は、あなたの手元に</b><p>スタンプや自己ベストは、このブラウザの中だけに残ります。</p></div>
+      </div>
       <article class="legal reveal">
         <h2>1. お問い合わせフォームで受け取る情報</h2>
         <p>お問い合わせフォームでは、お名前・ご所属・メールアドレス・お問い合わせの種類・内容をお送りいただきます。</p>
@@ -67,6 +72,7 @@
 
         <h2>4. ブラウザに保存する設定</h2>
         <p>文字の大きさ・夜モード・クイズの自己ベスト・診断の結果・見たページ（サイト探検スタンプとバッジ）・前回トップページに来た日などは、お使いのブラウザの中（ローカルストレージ）にだけ保存します。AZAKEI に送られることはありません。ブラウザのデータを消すと、リセットされます。</p>
+        <div class="pv-reset"><button type="button" id="pvReset">このブラウザの記録を消す</button><span id="pvResetMsg" role="status" aria-live="polite">見たページ・バッジ・自己ベスト・診断の結果などを消します（文字の大きさ・夜モードの設定と、投票ずみの記録は残します）。</span></div>
 
         <h2>5. お問い合わせ・内容の変更</h2>
         <p>このポリシーについてのご質問は、<a href="contact.html">お問い合わせフォーム</a>からどうぞ。内容を変えるときは、このページでお知らせします。</p>
@@ -76,13 +82,26 @@
     </div>
   </section>
 
+  <script>
+    (function () {
+      var b = document.getElementById('pvReset'), m = document.getElementById('pvResetMsg');
+      if (!b) return;
+      b.addEventListener('click', function () {
+        if (!confirm('このブラウザに残っている AZAKEI の記録（スタンプ・バッジ・自己ベストなど）を消します。よろしいですか？')) return;
+        var keep = { 'azakei-theme': 1, 'azakei-fs': 1 }, n = 0;
+        try { Object.keys(localStorage).forEach(function (k) { if (/^azakei[-_]/.test(k) && !keep[k] && !/^azakei_vote_/.test(k)) { localStorage.removeItem(k); n++; } }); } catch (e) {}
+        m.textContent = n ? n + ' 件の記録を消しました。次にページを開いたときから、はじめての状態です。' : '消す記録はありませんでした。';
+      });
+    })();
+  </script>
+
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261012h"></script>
-  <script src="layout.js?v=20261012h"></script>
-  <script src="brand.js?v=20261012h"></script>
-  <script src="nav.js?v=20261012h"></script>
-  <script src="reveal.js?v=20261012h"></script>
-  <script src="site.js?v=20261012h"></script>
+  <script src="content.js?v=20261012i"></script>
+  <script src="layout.js?v=20261012i"></script>
+  <script src="brand.js?v=20261012i"></script>
+  <script src="nav.js?v=20261012i"></script>
+  <script src="reveal.js?v=20261012i"></script>
+  <script src="site.js?v=20261012i"></script>
 </body>
 </html>
