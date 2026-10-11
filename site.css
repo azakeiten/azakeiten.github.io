@@ -5137,3 +5137,19 @@ html:not(.is-apple) .value::before { content: attr(data-kanji); position: absolu
 @media (max-width: 860px) { .mekuri { grid-template-columns: 1fr; gap: 24px; } }
 html[data-theme="dark"] .mk-page { background: var(--color-surface); }
 @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .mk-page { background: var(--color-surface); } }
+
+/* ################################################################
+   ▼ v59 — 活動風景：展示ができるまで（フィルム 5 コマ）
+   ################################################################ */
+.film { --hole: radial-gradient(circle at center, #f3eee4 0 3.2px, transparent 3.8px); list-style: none; margin: 0; padding: 26px 18px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(160px, 1fr); gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; background-color: #1b1a17; background-image: var(--hole), var(--hole), var(--grain, none); background-size: 18px 12px, 18px 12px, auto; background-position: 0 6px, 0 calc(100% - 6px), 0 0; background-repeat: repeat-x, repeat-x, repeat; border-radius: 14px; box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.6); scrollbar-width: thin; }
+.film li { scroll-snap-align: start; counter-increment: frame; }
+.film { counter-reset: frame; }
+.film figure { margin: 0; display: grid; gap: 10px; }
+.film img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; filter: saturate(0.92) contrast(1.03); transition: filter 0.25s, transform 0.25s; }
+.film li:hover img { filter: none; transform: scale(1.02); }
+.film figcaption { display: grid; gap: 2px; font-size: 12.5px; color: rgba(243, 238, 228, 0.7); }
+.film figcaption b { font-family: 'Shippori Mincho', serif; font-size: 16px; color: #f3eee4; }
+.film figcaption b::before { content: counter(frame) ' '; font-family: var(--font-display, serif); font-size: 12px; letter-spacing: 0.1em; color: #e3c68e; margin-right: 4px; }
+.film-more { margin: 18px 0 0; text-align: right; font-size: 14px; }
+.film-more a { color: inherit; font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--color-accent, #b08a4a); }
+@media (max-width: 860px) { .film { grid-auto-columns: 72%; } }
