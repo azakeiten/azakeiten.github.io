@@ -5335,3 +5335,18 @@ a.footer-updated:hover { opacity: 1; }
 .gl-chips a { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; color: inherit; background: rgba(176, 138, 74, 0.12); border: 1px solid rgba(176, 138, 74, 0.4); transition: background 0.2s, transform 0.2s; }
 .gl-chips a::before { content: '辞'; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 3px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-size: 10px; }
 .gl-chips a:hover { background: rgba(176, 138, 74, 0.22); transform: translateY(-1px); }
+
+/* ################################################################
+   ▼ v72 — 協賛：ご協力までの流れを、朱印の番号つきカードに
+   ################################################################ */
+.steps { gap: 18px; counter-reset: step; }
+.steps li { position: relative; display: grid; align-content: start; gap: 6px; padding: 22px 20px 20px; border: 1px solid var(--color-border); border-radius: 20px; background: var(--color-surface, #fff); background-image: var(--grain, none); box-shadow: var(--card-shadow, 0 14px 30px -22px rgba(0,0,0,0.4)); }
+.steps li::before { content: counter(step, cjk-ideographic); display: grid; place-items: center; width: 40px; height: 40px; margin: 0 0 8px; border-radius: 8px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; transform: rotate(-5deg); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25); }
+.steps li:last-child::before { background: #2f6b3a; }
+.steps li::after { content: '→'; position: absolute; right: -15px; top: 30px; left: auto; width: auto; height: auto; transform: none !important; background: none; z-index: 2; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background-color: var(--color-bg, #faf7f1); border: 1px solid var(--color-border); color: #b08a4a; font-size: 12px; font-weight: 700; }
+.steps li:last-child::after { display: none; }
+.steps h3 { font-size: 16.5px; font-weight: 700; margin: 0; }
+.steps p { margin: 0; }
+.steps li > * { opacity: 1 !important; transform: none !important; }
+@media (max-width: 1024px) { .steps li:nth-child(2)::after { display: none; } }
+@media (max-width: 600px) { .steps li::after { display: grid; right: auto; left: 50%; top: auto; bottom: -15px; margin-left: -12px; content: '↓'; } .steps li:last-child::after { display: none; } .steps li:nth-child(2)::after { display: grid; } }
