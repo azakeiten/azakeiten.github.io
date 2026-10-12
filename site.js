@@ -945,6 +945,8 @@ try {
     });
     if (!welcome || !prev) return;
     const items = [];
+    const siteUp = window.AZAKEI && AZAKEI.siteUpdated ? Date.parse(AZAKEI.siteUpdated + 'T00:00:00+09:00') : 0;
+    if (siteUp > prev) items.push(`<a href="about.html#updates">ホームページに、新しいところがあります</a>`);
     if (fresh) items.push(`<a href="#news">お知らせが <b>${fresh}</b> 件増えています</a>`);
     if (weekly.week === undefined) items.push(`<a href="#weekly">今週の 1 問に、挑戦してみませんか</a>`);
     else if (weekly.week !== weekNo) items.push(`<a href="#weekly">今週の 1 問が、新しくなっています</a>`);
@@ -955,6 +957,8 @@ try {
   }
   update();
   document.addEventListener('azakei:rerender', update);
+  // 更新履歴：前にトップへ来た日より新しい日付に NEW
+  if (prev) document.querySelectorAll('.clog > li > time[datetime]').forEach(t => { if (Date.parse(t.getAttribute('datetime') + 'T00:00:00+09:00') > prev) t.parentElement.classList.add('is-new'); });
 })();
 } catch (e) { console.error('[site.js / v34]', e); }
 
