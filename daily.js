@@ -50,6 +50,7 @@
     result.innerHTML = `
       <p class="dq-verdict ${ok ? 'ok' : 'ng'}">${ok ? '正解！' : '残念……'}${ok && streak > 1 ? `<small>${streak} 週連続正解中</small>` : ''}</p>
       <p class="dq-note">${q.note}</p>
+      ${(() => { const g = window.AZAKEI_GL_FOR ? AZAKEI_GL_FOR(q) : []; return g.length ? `<p class="gl-chips"><span>関連する言葉</span>${g.map(([, id, label]) => `<a href="glossary.html#${id}">${label}</a>`).join("")}</p>` : ""; })()}
       <p class="dq-next">来週の月曜に、また新しい問題が出ます。<a href="quiz.html">待ちきれない人は、億万長者クイズで →</a></p>`;
     if (fresh && ok && !matchMedia('(prefers-reduced-motion: reduce)').matches) box.classList.add('is-correct');
   }
