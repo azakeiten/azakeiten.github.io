@@ -5299,3 +5299,8 @@ html[data-theme="dark"] .gt-d { color: #f3eee4; }
 .dg-next { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin: 18px 0 4px; }
 .dg-next span { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--color-muted); }
 .dg-next .dg-type-go { margin-top: 0; }
+
+/* ▼ v69 — フッターに最終更新日 */
+.footer-updated { display: inline-flex; align-items: center; gap: 6px; margin-left: 14px; padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; font-size: 11px; opacity: 0.75; white-space: nowrap; }
+.footer-updated::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4caf6a; }
+@media (max-width: 600px) { .footer-updated { margin: 6px 0 0; } }

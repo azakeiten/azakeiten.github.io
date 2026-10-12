@@ -4,6 +4,9 @@
    ================================================================ */
 window.AZAKEI = {
 
+  /* ---- サイトの最終更新日（フッターに出す。更新したら書きかえる） ---- */
+  siteUpdated: '2026-10-12',
+
   /* ---- SNS ---- */
   sns: [
     { name: 'Instagram', handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/', desc: '活動報告・Vlog・お問い合わせ（DM）' },

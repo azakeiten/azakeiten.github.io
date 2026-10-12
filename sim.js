@@ -18,6 +18,9 @@
   const YEARS = 10, TOTAL = 100, STEP = 10;
   const PRESETS = { 慎重: [70, 30, 0], バランス: [20, 40, 40], 攻め: [0, 0, 100] };
   let alloc = [30, 40, 30];
+  // ?p=safe / balance / bold で、おすすめの分け方から始める（診断の「次の一歩」などから）
+  const P0 = { safe: '慎重', balance: 'バランス', bold: '攻め' }[new URLSearchParams(location.search).get('p')];
+  if (P0) alloc = PRESETS[P0].slice();
 
   // ふつう分布の乱数（Box–Muller）
   const gauss = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
