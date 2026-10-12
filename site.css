@@ -5350,3 +5350,24 @@ a.footer-updated:hover { opacity: 1; }
 .steps li > * { opacity: 1 !important; transform: none !important; }
 @media (max-width: 1024px) { .steps li:nth-child(2)::after { display: none; } }
 @media (max-width: 600px) { .steps li::after { display: grid; right: auto; left: 50%; top: auto; bottom: -15px; margin-left: -12px; content: '↓'; } .steps li:last-child::after { display: none; } .steps li:nth-child(2)::after { display: grid; } }
+
+/* ################################################################
+   ▼ v73 — 文化祭：体験型コーナーを「会場の看板」に（Web 版ボタン・特別企画は黒板）
+   ################################################################ */
+.page-festival #activities .service-card { overflow: hidden; padding-top: 30px; }
+.page-festival #activities .service-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 6px; background: #b08a4a; }
+.page-festival #activities .service-card:nth-child(1)::before { background: var(--shu, #b5432f); }
+.page-festival #activities .service-card:nth-child(2)::before { background: #2f6b3a; }
+.page-festival #activities .service-card:nth-child(4)::before { background: #c98a1c; }
+.sc-web { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: #1c2b23; color: #f3eee4 !important; font-size: 13px; font-weight: 700; text-decoration: none; transition: transform 0.2s, background 0.2s; }
+.sc-web::before { content: 'WEB'; padding: 1px 6px; border-radius: 4px; background: #e3c68e; color: #1c2b23; font-size: 10px; letter-spacing: 0.08em; }
+.sc-web::after { content: '→'; }
+.sc-web:hover { transform: translateY(-1px); background: #2f6b3a; }
+.page-festival .service-desc { margin-bottom: 16px; }
+html:not(.is-apple) .page-festival #activities .service-card.is-special, .page-festival #activities .service-card.is-special { background-color: #1c2b23; background-image: var(--grain, none); color: #eee7d8; border-color: transparent; }
+.page-festival #activities .service-card.is-special::before { background: #e3c68e; }
+.page-festival #activities .is-special .service-name { color: #fff; }
+.page-festival #activities .is-special .service-desc { color: rgba(238, 231, 216, 0.75); }
+.page-festival #activities .is-special .service-num { color: #e3c68e; }
+.page-festival #activities .is-special .service-icon { color: #e3c68e; border-color: rgba(227, 198, 142, 0.4); }
+.page-festival #activities .is-special .service-tag { background: var(--shu, #b5432f); color: #fff; border-color: transparent; }
