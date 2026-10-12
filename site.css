@@ -5287,3 +5287,15 @@ html[data-theme="dark"] .gt-d { color: #f3eee4; }
 .cf-flow b { font-size: 14.5px; font-weight: 700; line-height: 24px; }
 .cf-flow small { font-size: 12.5px; color: var(--color-muted); }
 .cf-draft { margin-top: 18px !important; font-size: 12.5px !important; color: var(--color-muted); padding-left: 14px; border-left: 2px solid var(--color-accent, #b08a4a); }
+
+/* ################################################################
+   ▼ v68 — 診断：タイプごとの「次の一歩」
+   ################################################################ */
+.dg-type { display: flex; flex-direction: column; }
+.dg-type-go { margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; color: var(--c, #b08a4a); background: color-mix(in srgb, var(--c, #b08a4a) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c, #b08a4a) 35%, transparent); transition: background 0.2s, transform 0.2s; }
+.dg-type-go::after { content: '→'; }
+.dg-type-go:hover { background: color-mix(in srgb, var(--c, #b08a4a) 18%, transparent); transform: translateX(2px); }
+.dg-type > p:last-of-type { margin-bottom: 14px; }
+.dg-next { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin: 18px 0 4px; }
+.dg-next span { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--color-muted); }
+.dg-next .dg-type-go { margin-top: 0; }

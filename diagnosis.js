@@ -163,6 +163,9 @@
     if (played) { try { localStorage.setItem('azakei_dg_type', key); } catch (e) {} }
     const shareText = S.shareText(t.name);
     const url = URL_BASE + '#' + key;
+    // 中のページ（日本語版）の「次の一歩」を、結果の下にも出す
+    const go = document.querySelector(`.dg-type[data-type="${key}"] .dg-type-go`);
+    const next = go ? `<p class="dg-next"><span>次の一歩</span>${go.outerHTML}</p>` : '';
     const trail = played && path.length ? `
         <div class="dg-trail"><p class="dg-trail-head">${S.trail}</p><ol>${path.map(p => `<li><span>${N[p.id].q}</span><b class="${p.ans ? 'y' : 'n'}">${p.ans ? 'YES' : 'NO'}</b></li>`).join('')}</ol></div>` : '';
     root.innerHTML = `
@@ -179,6 +182,7 @@
           <dt>${S.match}</dt><dd><a href="#${t.match}" class="dg-match">${m.name}</a></dd>
         </dl>
         ${trail}
+        ${next}
         <div class="share">
           <span class="share-label">${S.share}</span>
           <a href="https://twitter.com/intent/tweet?text=${esc(shareText)}&url=${esc(url)}" target="_blank" rel="noopener">X</a>
