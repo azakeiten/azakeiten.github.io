@@ -39,7 +39,8 @@
     <h2 class="dq-q">${q.q}</h2>
     <div class="dq-choices">${choices.map((c, i) => `<button type="button" class="dq-choice" data-ok="${c.ok ? 1 : 0}"><span>${'ABCD'[i]}</span>${c.t}</button>`).join('')}</div>
     <div class="dq-result" aria-live="polite"></div>
-    <p class="dq-week">毎週月曜に新しい問題。次の問題まで、あと ${daysLeft} 日。</p>`;
+    <p class="dq-week">毎週月曜に新しい問題。次の問題まで、あと ${daysLeft} 日。</p>
+    ${(() => { const p = all[(((weekNo - 1) * step) % all.length + all.length) % all.length], pm = new Date(((weekNo - 1) * 7 + 4) * 864e5); return `<details class="dq-prev"><summary><span>先週の 1 問</span>${md(pm)}〜 の答えを見る</summary><p class="dq-prev-q">${p.q}</p><p class="dq-prev-a">答え：<b>${p.a[0]}</b></p><p class="dq-prev-note">${p.note}</p></details>`; })()}`;
   const result = box.querySelector('.dq-result');
   const btns = [...box.querySelectorAll('.dq-choice')];
 

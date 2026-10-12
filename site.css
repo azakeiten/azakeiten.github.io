@@ -5371,3 +5371,15 @@ html:not(.is-apple) .page-festival #activities .service-card.is-special, .page-f
 .page-festival #activities .is-special .service-num { color: #e3c68e; }
 .page-festival #activities .is-special .service-icon { color: #e3c68e; border-color: rgba(227, 198, 142, 0.4); }
 .page-festival #activities .is-special .service-tag { background: var(--shu, #b5432f); color: #fff; border-color: transparent; }
+
+/* ▼ v74 — 今週の 1 問：先週の 1 問と答え */
+.dq-prev { margin-top: 4px; border-top: 1px dashed var(--color-border); padding-top: 12px; }
+.dq-prev summary { display: flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; font-size: 13.5px; font-weight: 700; }
+.dq-prev summary::-webkit-details-marker { display: none; }
+.dq-prev summary::after { content: '＋'; margin-left: auto; color: #b08a4a; }
+.dq-prev[open] summary::after { content: '−'; }
+.dq-prev summary span { padding: 2px 10px; border-radius: 999px; background: #1c2b23; color: #e3c68e; font-size: 11px; letter-spacing: 0.06em; }
+.dq-prev-q { margin: 12px 0 6px; font-size: 14.5px; line-height: 1.8; }
+.dq-prev-a { margin: 0 0 6px; font-size: 14px; }
+.dq-prev-a b { color: var(--shu, #b5432f); }
+.dq-prev-note { margin: 0; font-size: 13px; line-height: 1.8; color: var(--color-muted); }
