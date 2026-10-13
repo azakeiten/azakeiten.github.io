@@ -5383,3 +5383,17 @@ html:not(.is-apple) .page-festival #activities .service-card.is-special, .page-f
 .dq-prev-a { margin: 0 0 6px; font-size: 14px; }
 .dq-prev-a b { color: var(--shu, #b5432f); }
 .dq-prev-note { margin: 0; font-size: 13px; line-height: 1.8; color: var(--color-muted); }
+
+/* ################################################################
+   ▼ v75 — トップ：見学は、いつでも OK（はじめての方へ の下）
+   ################################################################ */
+.ap-visit { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px 22px; margin-top: 22px; padding: 22px clamp(20px, 3vw, 30px); border-radius: 28px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.ap-visit-seal { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 10px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 28px; transform: rotate(-5deg); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.25); }
+.ap-visit-body p { margin: 0; font-size: 14.5px; line-height: 1.8; color: var(--color-muted); }
+.ap-visit-body .ap-visit-title { font-size: clamp(19px, 2.2vw, 24px); font-weight: 800; color: var(--color-text, inherit); letter-spacing: -0.01em; }
+.ap-visit-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.ap-visit-actions a { padding: 11px 18px; border-radius: 999px; font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform 0.2s, background 0.2s; }
+.ap-visit-dm { background: #1c2b23; color: #f3eee4; }
+.ap-visit-faq { color: inherit; border: 1px solid var(--color-border); }
+.ap-visit-actions a:hover { transform: translateY(-1px); }
+@media (max-width: 760px) { .ap-visit { grid-template-columns: auto 1fr; } .ap-visit-actions { grid-column: 1 / -1; } .ap-visit-actions a { flex: 1; text-align: center; } }
