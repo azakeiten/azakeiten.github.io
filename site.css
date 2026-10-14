@@ -5709,3 +5709,33 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .dbl-foot { margin: 14px 0 0; font-size: 12.5px; color: var(--color-muted); }
 .dbl-foot a { color: inherit; font-weight: 700; }
 @media (max-width: 760px) { .dbl { grid-template-columns: 1fr; } }
+
+/* ################################################################
+   ▼ v89 — シミュレーター：値段は、どう決まる？（需要と供給）
+   ################################################################ */
+.mk { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(18px, 3vw, 32px); align-items: center; padding: clamp(20px, 3vw, 32px); border-radius: 28px; background: #1c2b23; background-image: var(--grain, none); color: #eee7d8; }
+.mk-ctrl { display: grid; gap: 14px; }
+.mk-ctrl label { display: grid; gap: 6px; }
+.mk-ctrl label > span:first-child { font-size: 14px; font-weight: 700; }
+.mk-ctrl label small { font-weight: 500; color: rgba(238, 231, 216, 0.6); }
+.mk-ctrl input { width: 100%; accent-color: #e3c68e; }
+.mk-ends { display: flex; justify-content: space-between; font-size: 11px; color: rgba(238, 231, 216, 0.55); }
+.mk-ends i { font-style: normal; }
+.mk-result { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mk-result p { margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.06); display: grid; }
+.mk-result span { font-size: 12px; color: rgba(238, 231, 216, 0.65); }
+.mk-result b { font-family: 'Shippori Mincho', serif; font-size: 30px; line-height: 1.1; color: #e3c68e; }
+.mk-note { margin: 0; min-height: 3.4em; font-size: 13.5px; line-height: 1.75; color: rgba(238, 231, 216, 0.85); }
+.mk-reset { justify-self: start; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(238, 231, 216, 0.3); background: transparent; color: inherit; font: inherit; font-size: 12.5px; cursor: pointer; }
+.mk-chart { width: 100%; height: auto; background: #fffdf6; border-radius: 16px; }
+.mk-axis { stroke: #8a7c66; stroke-width: 1.5; }
+.mk-lab { font-size: 10px; fill: #8a7c66; }
+.mk-d { stroke: var(--shu, #b5432f); stroke-width: 3.5; fill: none; stroke-linecap: round; }
+.mk-s { stroke: #2f6b3a; stroke-width: 3.5; fill: none; stroke-linecap: round; }
+.mk-name { font-size: 12px; font-weight: 800; }
+.mk-dn { fill: var(--shu, #b5432f); } .mk-sn { fill: #2f6b3a; }
+.mk-guide { stroke: #b08a4a; stroke-width: 1.2; stroke-dasharray: 4 4; }
+.mk-dot { fill: #e3c68e; stroke: #1c2b23; stroke-width: 2; }
+.mk-dot-t { font-size: 9px; font-weight: 800; fill: #1c2b23; }
+@media (max-width: 760px) { .mk { grid-template-columns: 1fr; } .mk-chart { order: -1; } }
+.mk-result b i { font-style: normal; } .mk-result b small { font-size: 0.45em; color: rgba(238, 231, 216, 0.7); }
