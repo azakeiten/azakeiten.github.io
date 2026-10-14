@@ -55,4 +55,50 @@
     };
     draw(); today.hidden = false;
   }
+  // 単語カード：表に言葉、押すと 3D でめくれて説明。「覚えた」はこのブラウザにだけ残す
+  const deck = document.getElementById('glCards');
+  if (deck && items.length) {
+    const KEY = 'azakei_gl_known';
+    let known = new Set();
+    try { known = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) {}
+    const saveKnown = () => { try { localStorage.setItem(KEY, JSON.stringify([...known])); } catch (e) {} };
+    const mark = () => items.forEach(it => it.classList.toggle('is-known', known.has(it.id)));
+    const groupsOf = [{ id: '', name: 'すべて' }].concat(groups.map(g => ({ id: g.id, name: g.querySelector('.gl-head').textContent.replace(/^\d+/, '') })));
+    let pool = [], idx = 0, cat = '';
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const makePool = () => {
+      const src = items.filter(it => !cat || it.closest('.gl-group').id === cat);
+      const rest = src.filter(it => !known.has(it.id));
+      pool = shuffle(rest.length ? rest : src.slice()); idx = 0;
+    };
+    deck.innerHTML = `
+      <div class="gc-head">
+        <p class="gc-title"><span class="gc-seal" aria-hidden="true">覚</span>単語カードで覚える</p>
+        <p class="gc-progress"><b class="gc-n">0</b> / ${items.length} 語 覚えた<span class="gc-bar"><i></i></span></p>
+      </div>
+      <div class="gc-cats" role="group" aria-label="分類をえらぶ">${groupsOf.map(g => `<button type="button" data-cat="${g.id}" aria-pressed="${g.id === '' ? 'true' : 'false'}">${g.name}</button>`).join('')}</div>
+      <button type="button" class="gc-card" aria-live="polite"><span class="gc-inner"><span class="gc-face gc-front"><small class="gc-cat"></small><b class="gc-term"></b><em>押すと、うらへ</em></span><span class="gc-face gc-back"><b class="gc-term2"></b><span class="gc-def"></span></span></span></button>
+      <div class="gc-actions"><button type="button" class="gc-again">もう一回</button><button type="button" class="gc-ok">覚えた</button></div>
+      <p class="gc-done" hidden></p>`;
+    const card = deck.querySelector('.gc-card'), nEl = deck.querySelector('.gc-n'), bar = deck.querySelector('.gc-bar i'), done = deck.querySelector('.gc-done');
+    const progress = () => { nEl.textContent = known.size; bar.style.width = (known.size / items.length * 100) + '%'; mark(); };
+    const show = () => {
+      card.classList.remove('is-flipped');
+      if (idx >= pool.length) makePool();
+      const it = pool[idx];
+      const allKnown = items.filter(x => !cat || x.closest('.gl-group').id === cat).every(x => known.has(x.id));
+      done.hidden = !allKnown; done.textContent = allKnown ? 'この分類の言葉は、ぜんぶ覚えました！ もう一度、復習してみよう。' : '';
+      deck.querySelector('.gc-cat').textContent = it.closest('.gl-group').querySelector('.gl-head').textContent.replace(/^\d+/, '');
+      deck.querySelector('.gc-term').innerHTML = deck.querySelector('.gc-term2').innerHTML = it.querySelector('dt').innerHTML;
+      deck.querySelector('.gc-def').innerHTML = it.querySelector('dd').innerHTML;
+    };
+    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
+    deck.querySelector('.gc-ok').addEventListener('click', () => { known.add(pool[idx].id); saveKnown(); progress(); idx++; show(); });
+    deck.querySelector('.gc-again').addEventListener('click', () => { idx++; show(); });
+    deck.querySelectorAll('[data-cat]').forEach(b => b.addEventListener('click', () => {
+      cat = b.dataset.cat; deck.querySelectorAll('[data-cat]').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      makePool(); show();
+    }));
+    makePool(); progress(); show(); deck.hidden = false;
+  }
 })();

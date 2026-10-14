@@ -5596,3 +5596,38 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 #g-life { --gc: #c98a1c; } #g-biz { --gc: #5b4a8a; }
 :root[data-theme="dark"] #g-life { --gc: #e8b45a; } :root[data-theme="dark"] #g-biz { --gc: #a99ad8; }
 .gl-cats a[href="#g-life"] { --gc: #c98a1c; } .gl-cats a[href="#g-biz"] { --gc: #5b4a8a; }
+
+/* ################################################################
+   ▼ v83 — 用語辞典：単語カード（3D でめくる・覚えた数）
+   ################################################################ */
+.gl-cards { display: grid; gap: 14px; margin-bottom: 36px; padding: clamp(18px, 3vw, 28px); border-radius: 24px; background: #1c2b23; background-image: var(--grain, none); color: #eee7d8; }
+.gc-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.gc-title { margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(18px, 2.2vw, 22px); color: #fff; }
+.gc-seal { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 7px; background: var(--shu, #b5432f); color: #fff; font-size: 17px; transform: rotate(-5deg); }
+.gc-progress { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(238, 231, 216, 0.75); }
+.gc-progress b { font-size: 18px; color: #e3c68e; }
+.gc-bar { width: 110px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+.gc-bar i { display: block; height: 100%; width: 0; background: #e3c68e; transition: width 0.4s; }
+.gc-cats { display: flex; flex-wrap: wrap; gap: 6px; }
+.gc-cats button { padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(238, 231, 216, 0.22); background: transparent; color: inherit; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.gc-cats [aria-pressed="true"] { background: #e3c68e; color: #1c2b23; border-color: #e3c68e; }
+.gc-card { display: block; width: 100%; height: clamp(190px, 24vw, 230px); padding: 0; border: 0; background: none; cursor: pointer; perspective: 1100px; font: inherit; color: inherit; text-align: left; }
+.gc-card:focus-visible { outline: 2px solid #e3c68e; outline-offset: 4px; border-radius: 16px; }
+.gc-inner { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(.3, 1.2, .5, 1); }
+.gc-card.is-flipped .gc-inner { transform: rotateY(180deg); }
+.gc-face { position: absolute; inset: 0; display: grid; align-content: center; gap: 8px; padding: 22px 26px; border-radius: 16px; backface-visibility: hidden; box-shadow: 0 20px 36px -22px rgba(0, 0, 0, 0.7); }
+.gc-front { justify-items: center; text-align: center; color: #2a2015; background-color: #fffdf6; background-image: linear-gradient(transparent 31px, rgba(90, 130, 170, 0.18) 32px); background-size: 100% 32px; border-top: 8px solid var(--shu, #b5432f); }
+.gc-front small { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #b08a4a; }
+.gc-front b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(24px, 3.4vw, 34px); line-height: 1.35; }
+.gc-front em { font-style: normal; font-size: 12px; color: #8a7c66; }
+.gc-back { transform: rotateY(180deg); align-content: start; overflow: auto; color: #eee7d8; background: #2a4033; border: 1px solid rgba(227, 198, 142, 0.35); }
+.gc-back b { font-family: 'Shippori Mincho', serif; font-size: 17px; color: #e3c68e; }
+.gc-back span { font-size: 14.5px; line-height: 1.85; }
+.gc-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gc-actions button { padding: 12px; border-radius: 999px; font: inherit; font-size: 14.5px; font-weight: 800; cursor: pointer; transition: transform 0.15s; }
+.gc-actions button:active { transform: scale(0.97); }
+.gc-again { background: transparent; color: inherit; border: 1px solid rgba(238, 231, 216, 0.3); }
+.gc-ok { background: #e3c68e; color: #1c2b23; border: 0; }
+.gc-done { margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(227, 198, 142, 0.14); color: #e3c68e; font-size: 13.5px; font-weight: 700; }
+.gl-item.is-known dt::after { content: '済'; display: inline-grid; place-items: center; width: 20px; height: 20px; margin-left: 8px; border-radius: 4px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-size: 11px; vertical-align: middle; transform: rotate(-6deg); }
+@media (prefers-reduced-motion: reduce) { .gc-inner { transition: none; } }
