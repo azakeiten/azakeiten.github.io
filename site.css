@@ -5739,3 +5739,24 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .mk-dot-t { font-size: 9px; font-weight: 800; fill: #1c2b23; }
 @media (max-width: 760px) { .mk { grid-template-columns: 1fr; } .mk-chart { order: -1; } }
 .mk-result b i { font-style: normal; } .mk-result b small { font-size: 0.45em; color: rgba(238, 231, 216, 0.7); }
+
+/* ################################################################
+   ▼ v90 — トップの一番最初の画面：奥行きのあるチップと紙幣が浮かぶ
+   ################################################################ */
+.hf { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.hero-content, .hero-counter, .scroll-cue { position: relative; z-index: 2; }
+.hf-item { position: absolute; width: var(--s); aspect-ratio: 1; perspective: 600px; filter: drop-shadow(0 calc(var(--d) * 26px) calc(var(--d) * 22px) rgba(0, 0, 0, 0.45)) blur(calc((1 - var(--d)) * 1.6px)); opacity: calc(0.55 + var(--d) * 0.45); will-change: translate; }
+.hf-spin { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); animation: hf-float var(--dur, 8s) ease-in-out var(--dl, 0s) infinite; }
+.hf-chip i, .hf-chip b { position: absolute; inset: 0; border-radius: 50%; }
+.hf-chip i { background: repeating-conic-gradient(from 5deg, var(--sp) 0 10deg, color-mix(in srgb, var(--c) 72%, #000) 10deg 45deg); }
+.hf-chip b { display: grid; place-items: center; background: radial-gradient(circle, color-mix(in srgb, var(--sp) 92%, var(--c)) 0 41%, var(--c) 41.5% 47%, transparent 47.5%), repeating-conic-gradient(from 5deg, var(--sp) 0 10deg, var(--c) 10deg 45deg); box-shadow: inset 0 0 0 calc(var(--s) * 0.03) color-mix(in srgb, var(--c) 70%, #000), inset 0 0 calc(var(--s) * 0.18) rgba(0, 0, 0, 0.2); }
+.hf-chip em { font-style: normal; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: calc(var(--s) * 0.3); color: var(--c); }
+.hf-bill { aspect-ratio: 2.15; }
+.hf-bill b { position: absolute; inset: 0; border-radius: 4px; color: #6b4a22; background: radial-gradient(ellipse at 30% 50%, rgba(255, 250, 235, 0.9), transparent 60%), repeating-linear-gradient(115deg, rgba(140, 100, 50, 0.08) 0 2px, transparent 2px 8px), #e6d5b3; box-shadow: inset 0 0 0 4px #e6d5b3, inset 0 0 0 5px rgba(107, 74, 34, 0.6); }
+.hf-b-w { position: absolute; left: 7%; top: 14%; bottom: 14%; writing-mode: vertical-rl; transform: rotate(180deg); font-family: Georgia, serif; font-style: italic; font-size: 9px; text-align: center; }
+.hf-b-star { position: absolute; left: 16%; top: 50%; translate: 0 -50%; display: grid; place-items: center; width: 26%; aspect-ratio: 1; clip-path: polygon(50% 0, 63% 25%, 93% 25%, 76% 50%, 93% 75%, 63% 75%, 50% 100%, 37% 75%, 7% 75%, 24% 50%, 7% 25%, 37% 25%); background: #2f6b3a; color: #f6efdc; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 12px; }
+.hf-b-t { position: absolute; left: 46%; top: 16%; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 15px; letter-spacing: 0.1em; }
+.hf-b-m { position: absolute; right: 8%; top: 50%; translate: 0 -50%; width: 22%; aspect-ratio: 0.8; display: grid; place-content: center; border-radius: 50%; border: 1.5px solid rgba(107, 74, 34, 0.7); font-family: Georgia, serif; font-size: 8px; line-height: 1.1; text-align: center; }
+@keyframes hf-float { 0%, 100% { transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0) rotateZ(0deg); } 50% { transform: rotateX(calc(var(--rx) - 14deg)) rotateY(calc(var(--ry) + 24deg)) translateZ(calc(var(--s) * 0.15)) rotateZ(160deg); } }
+.hf.is-still .hf-spin { animation: none; }
+@media (max-width: 760px) { .hf-item { opacity: calc(0.4 + var(--d) * 0.4); } }
