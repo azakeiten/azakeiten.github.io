@@ -83,6 +83,7 @@
   }
 
   function runOnce() {
+    try { localStorage.setItem('azakei_sim_run', '1'); } catch (e) {}
     const me = simulate(alloc);
     const cash = simulate([100, 0, 0]), stock = simulate([0, 0, 100]);
     const out = root.querySelector('.sim-out');
@@ -107,6 +108,7 @@
   }
 
   function runMany() {
+    try { localStorage.setItem('azakei_sim_run', '1'); } catch (e) {}
     const N = 1000;
     const finals = Array.from({ length: N }, () => simulate(alloc)[YEARS]).sort((a, b) => a - b);
     const q = p => finals[Math.min(N - 1, Math.floor(p * N))];

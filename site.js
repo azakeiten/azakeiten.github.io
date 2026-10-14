@@ -897,7 +897,8 @@ try {
     // バッジ：サイトのあちこちで遊ぶと集まる（記録はこのブラウザの中だけ）
     const best = +(get('azakei_quiz_best', 0)) || 0;
     const wk = get('azakei_weekly', {});
-    let voted = false, dg = false;
+    let voted = false, dg = false, glKnown = 0, simRun = false, tour = false;
+    try { glKnown = JSON.parse(localStorage.getItem('azakei_gl_known') || '[]').length; simRun = !!localStorage.getItem('azakei_sim_run'); tour = !!localStorage.getItem('azakei_room_tour'); } catch (e) {}
     try { voted = Object.keys(localStorage).some(k => k.startsWith('azakei_vote_')); dg = !!localStorage.getItem('azakei_dg_type'); } catch (e) {}
     const BADGES = [
       ['探', '探検家', n >= 7, 'ページを 7 つ見る', next ? next[0] : 'index.html'],
@@ -908,7 +909,11 @@ try {
       ['診', '自分を知る', dg, 'エコノミスト診断を最後まで', 'diagnosis.html'],
       ['票', '一票を投じる', voted, '文化祭投票に参加する', 'vote.html'],
       ['正', '今週の正解者', wk.lastOk !== undefined, '今週の 1 問に正解する', 'index.html#weekly'],
-      ['連', '3 週連続', (wk.streak || 0) >= 3, '今週の 1 問に 3 週連続で正解', 'index.html#weekly']
+      ['連', '3 週連続', (wk.streak || 0) >= 3, '今週の 1 問に 3 週連続で正解', 'index.html#weekly'],
+      ['辞', '用語ハンター', glKnown >= 30, '単語カードで 30 語覚える', 'glossary.html#glCards'],
+      ['博', '経済博士', glKnown >= 130, '単語カードで 130 語覚える', 'glossary.html#glCards'],
+      ['試', '未来をのぞく', simRun, 'シミュレーターで 10 年後へ', 'sim.html'],
+      ['歩', '会場ツアー', tour, '3D の会場で、順路を最後まで', 'festival.html#room']
     ];
     const got = BADGES.filter(b => b[2]).length;
     box.insertAdjacentHTML('beforeend', `

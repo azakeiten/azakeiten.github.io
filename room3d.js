@@ -130,7 +130,7 @@
     if (timer) return stop();
     const L = LAYOUTS[mode]; let i = 0;
     playBtn.textContent = '止める';
-    const next = () => { show(L.steps[i].n); i++; timer = i < L.steps.length ? setTimeout(next, 1700) : 0; if (!timer) playBtn.textContent = 'もう一度再生'; };
+    const next = () => { show(L.steps[i].n); i++; timer = i < L.steps.length ? setTimeout(next, 1700) : 0; if (!timer) { playBtn.textContent = 'もう一度再生'; try { localStorage.setItem('azakei_room_tour', '1'); } catch (e) {} } };
     next();
   }
   playBtn.addEventListener('click', play);
