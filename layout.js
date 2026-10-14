@@ -226,6 +226,7 @@
     ['azakei.html#unpack', '合言葉を、ほどくと。', 'AZAKEI として', '合言葉 理解 創造'],
     ['vote.html#after-vote', 'あなたの 1 票の、ゆくえ', '投票', '投票 結果'],
     ['glossary.html', '今日のことば', '用語辞典', '日めくり 用語'],
+    ['glossary.html#nenpyo', '経済の歴史の年表', '用語辞典', '年表 歴史 バブル 恐慌 ショック'],
     ['index.html#weekly', '今週の 1 問', 'ホーム', 'クイズ 毎週'],
     ['diagnosis.html#types', '投資家タイプ一覧', '診断', 'タイプ 結果'],
     ['sponsor.html', '協賛・取材のご相談', '協賛', 'スポンサー 企業 取材 メディア'],

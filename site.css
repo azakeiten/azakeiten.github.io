@@ -5658,3 +5658,21 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .vote-vt .vt-col p small { min-height: 2.6em; }
 .vote-vt .vt-col.is-top p b { color: var(--shu, #b5432f); }
 @media (max-width: 600px) { .vote-vt { grid-template-columns: repeat(4, 1fr); } .vote-vt .vt-stage { height: 160px; } .vote-vt .vt-stack { width: 38px; height: 38px; margin-left: -19px; } }
+
+/* ################################################################
+   ▼ v86 — 用語辞典：年表で見る、経済の歴史（横にたどる）
+   ################################################################ */
+.nenpyo { overflow-x: auto; scroll-snap-type: x proximity; padding: 8px 2px 18px; scrollbar-width: thin; }
+.np-line { list-style: none; margin: 0; padding: 40px 0 0; display: flex; align-items: flex-start; gap: 0; width: max-content; position: relative; }
+.np-line::before { content: ''; position: absolute; left: 0; right: 0; top: 58px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #7a5a24, #b08a4a 40%, #2f6b3a 75%, var(--shu, #b5432f)); }
+.np-line > li { position: relative; scroll-snap-align: start; }
+.np-line > li a { display: grid; gap: 8px; width: 150px; padding: 0 14px; text-decoration: none; color: inherit; }
+.np-line > li a::before { content: ''; justify-self: start; width: 14px; height: 14px; margin-top: 12px; border-radius: 50%; background: var(--color-bg, #faf7f1); border: 3px solid #b08a4a; transition: transform 0.2s, background 0.2s; }
+.np-line > li a b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 26px; line-height: 1; color: var(--color-text, inherit); }
+.np-line > li a span { font-size: 13px; line-height: 1.6; color: var(--color-muted); }
+.np-line > li a:hover::before { transform: scale(1.35); background: #b08a4a; }
+.np-line > li a:hover span { color: var(--color-text, inherit); }
+.np-line > li.is-now a::before { border-color: var(--shu, #b5432f); background: var(--shu, #b5432f); box-shadow: 0 0 0 5px color-mix(in srgb, var(--shu, #b5432f) 20%, transparent); }
+.np-line > li.is-now a b { color: var(--shu, #b5432f); }
+.np-era { align-self: stretch; width: 34px; margin: -40px 6px 0; padding-top: 4px; writing-mode: vertical-rl; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 13px; letter-spacing: 0.2em; color: #fff; background: #1c2b23; border-radius: 8px; text-align: center; }
+.np-hint { margin: 4px 0 0; text-align: center; font-size: 12px; color: var(--color-muted); }
