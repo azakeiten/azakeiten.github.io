@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261014n" />
+  <link rel="stylesheet" href="site.css?v=20261014o" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -58,6 +58,33 @@
   </section>
 
 
+  <!-- お金が 2 倍になるまで（72 の法則） -->
+  <section class="about tight" id="double">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label">Rule of 72</p>
+        <h2 class="section-title"><span class="keep-phrase">お金が 2 倍になるまで、</span><span class="keep-phrase"><em>何年</em>？</span></h2>
+        <p class="lead">複利で増えるとき、「72 ÷ 年利（％）」で、2 倍になるまでのおよその年数がわかります。年利を動かして、ためしてみてください。</p>
+      </div>
+      <div class="dbl reveal" data-double>
+        <div class="dbl-left">
+          <label class="dbl-rate"><span>年利</span><b><output id="dblRate">6</output><small>％</small></b>
+            <input type="range" id="dblRange" min="1" max="12" step="1" value="6" aria-label="年利（％）"></label>
+          <div class="dbl-calc">
+            <p><span>72 の法則</span><b>72 ÷ <i data-r>6</i> ＝ 約 <em data-rule>12</em> 年</b></p>
+            <p><span>きちんと計算すると</span><b>約 <em data-exact>11.9</em> 年</b></p>
+          </div>
+          <p class="dbl-note" data-note>年 6％ なら、15 歳で始めたお金は、27 歳ごろに 2 倍。</p>
+        </div>
+        <div class="dbl-right" aria-hidden="true">
+          <div class="dbl-stage"><div class="dbl-stack" data-stack></div></div>
+          <p class="dbl-years"><b data-years>0</b> 年目 ・ チップ <b data-chips>5</b> 枚</p>
+        </div>
+      </div>
+      <p class="dbl-foot">※ 毎年、同じ年利で増え続けるとしたときの計算です。本物の投資では、増える年も減る年もあります（上のシミュレーターのように）。<a href="glossary.html#rule72">「72 の法則」を辞典で読む →</a></p>
+    </div>
+  </section>
+
   <!-- このシミュレーターで出てくることば（用語辞典へ） -->
   <section class="services tight" id="words">
     <div class="container">
@@ -79,12 +106,13 @@
   </section>
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261014n"></script>
-  <script src="layout.js?v=20261014n"></script>
-  <script src="brand.js?v=20261014n"></script>
-  <script src="nav.js?v=20261014n"></script>
-  <script src="reveal.js?v=20261014n"></script>
-  <script src="sim.js?v=20261014n"></script>
-  <script src="site.js?v=20261014n"></script>
+  <script src="content.js?v=20261014o"></script>
+  <script src="layout.js?v=20261014o"></script>
+  <script src="brand.js?v=20261014o"></script>
+  <script src="nav.js?v=20261014o"></script>
+  <script src="reveal.js?v=20261014o"></script>
+  <script src="sim.js?v=20261014o"></script>
+  <script src="double.js?v=20261014o"></script>
+  <script src="site.js?v=20261014o"></script>
 </body>
 </html>

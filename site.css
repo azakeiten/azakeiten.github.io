@@ -5683,3 +5683,29 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .gl-rel a { padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; text-decoration: none; color: inherit; border: 1px solid var(--color-border); background: color-mix(in srgb, var(--gc, #b08a4a) 7%, transparent); }
 .gl-rel a:hover { border-color: var(--gc, #b08a4a); }
 .contest .gl-chips { margin-top: 14px; }
+
+/* ################################################################
+   ▼ v88 — シミュレーター：お金が 2 倍になるまで（72 の法則・チップの山）
+   ################################################################ */
+.dbl { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(18px, 3vw, 32px); align-items: center; padding: clamp(20px, 3vw, 32px); border-radius: 28px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.dbl-left { display: grid; gap: 16px; }
+.dbl-rate { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 4px 12px; }
+.dbl-rate span { font-size: 13px; font-weight: 700; color: var(--color-muted); }
+.dbl-rate b { font-family: 'Shippori Mincho', serif; font-size: 44px; line-height: 1; color: var(--shu, #b5432f); }
+.dbl-rate b small { font-size: 0.45em; margin-left: 2px; }
+.dbl-rate input { grid-column: 1 / -1; width: 100%; accent-color: var(--shu, #b5432f); }
+.dbl-calc { display: grid; gap: 6px; }
+.dbl-calc p { margin: 0; display: flex; justify-content: space-between; gap: 10px; padding: 10px 14px; border-radius: 12px; background: color-mix(in srgb, #b08a4a 8%, transparent); }
+.dbl-calc span { font-size: 13px; color: var(--color-muted); }
+.dbl-calc b { font-size: 15px; }
+.dbl-calc em { font-style: normal; font-size: 20px; color: #2f6b3a; }
+.dbl-note { margin: 0; font-family: "Klee One", cursive, sans-serif; font-size: 15px; color: var(--color-muted); }
+.dbl-right { display: grid; justify-items: center; }
+.dbl-stage { position: relative; width: 100%; height: 220px; perspective: 700px; perspective-origin: 50% 0%; }
+.dbl-stack { position: absolute; left: 50%; bottom: 24px; width: 70px; height: 70px; margin-left: -35px; transform-style: preserve-3d; transform: rotateX(62deg) rotateZ(-20deg); }
+.dbl .vt-chip { opacity: 1; animation: none; }
+.dbl-years { margin: 0; font-size: 13px; color: var(--color-muted); }
+.dbl-years b { font-family: var(--font-display, serif); font-size: 22px; color: var(--color-text, inherit); }
+.dbl-foot { margin: 14px 0 0; font-size: 12.5px; color: var(--color-muted); }
+.dbl-foot a { color: inherit; font-weight: 700; }
+@media (max-width: 760px) { .dbl { grid-template-columns: 1fr; } }
