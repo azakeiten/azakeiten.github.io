@@ -80,5 +80,5 @@
       </div>
     </div>
     <div class="footer-giant" aria-hidden="true">AZAKEI</div>
-    <div class="footer-bottom">© ${new Date().getFullYear()} AZAKEI. All rights reserved.</div>`;
+    <div class="footer-bottom">© ${new Date().getFullYear()} AZAKEI. All rights reserved.${(window.AZAKEI && AZAKEI.siteUpdated) ? `<span class="footer-updated">Updated <time datetime="${AZAKEI.siteUpdated}">${new Date(AZAKEI.siteUpdated + "T00:00:00+09:00").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Tokyo" })}</time></span>` : ""}</div>`;
 })();

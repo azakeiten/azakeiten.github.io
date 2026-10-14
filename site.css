@@ -5648,3 +5648,13 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .rg-ctrl button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(238, 231, 216, 0.3); background: transparent; color: inherit; font-size: 16px; cursor: pointer; }
 .rg-ctrl button:hover { background: rgba(255, 255, 255, 0.08); }
 .rg-cap { margin: 0; text-align: center; font-size: 13.5px; color: rgba(238, 231, 216, 0.85); }
+
+/* ▼ v85 — 文化祭投票：いまの票を「チップの塔」で */
+.vote-towers h3 { margin-bottom: 4px; }
+.vote-vt { grid-template-columns: repeat(7, 1fr); gap: 6px 4px; }
+@media (max-width: 860px) { .vote-vt { grid-template-columns: repeat(4, 1fr); } }
+.vote-vt .vt-stage { height: 190px; }
+.vote-vt .vt-stack { width: 46px; height: 46px; margin-left: -23px; }
+.vote-vt .vt-col p small { min-height: 2.6em; }
+.vote-vt .vt-col.is-top p b { color: var(--shu, #b5432f); }
+@media (max-width: 600px) { .vote-vt { grid-template-columns: repeat(4, 1fr); } .vote-vt .vt-stage { height: 160px; } .vote-vt .vt-stack { width: 38px; height: 38px; margin-left: -19px; } }
