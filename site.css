@@ -5535,3 +5535,40 @@ html:not(.is-apple) .page-festival #activities .service-card.is-special, .page-f
 @keyframes vt-drop { from { opacity: 0; transform: translateZ(calc(var(--z) + 60px)); } to { opacity: 1; transform: translateZ(var(--z)); } }
 @media (prefers-reduced-motion: reduce) { .vt-chip { opacity: 1; } .visitors.is-in .vt-chip { animation: none; } }
 @media (max-width: 600px) { .vt-stage { height: 190px; } .vt-stack { width: 48px; height: 48px; margin-left: -24px; } }
+
+/* ################################################################
+   ▼ v80 — 文化祭：麻布経済展が目指したこと ／ AZAKEI として：展示員の心得 拾参ヶ条（掛け軸）
+   ################################################################ */
+.aim { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; }
+.aim-goal, .aim-who { padding: clamp(22px, 3vw, 34px); border-radius: 28px; }
+.aim-goal { background: #1c2b23; background-image: var(--grain, none); color: #eee7d8; display: grid; align-content: center; gap: 12px; }
+.aim-who { background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.aim-kicker { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; color: #b08a4a; }
+.aim-goal .aim-kicker { color: #e3c68e; }
+.aim-quote { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(21px, 2.6vw, 30px); line-height: 1.6; color: #fff; }
+.aim-quote em { font-style: normal; color: #e3c68e; }
+.aim-sub { margin: 0; font-size: 13.5px; line-height: 1.8; color: rgba(238, 231, 216, 0.7); }
+.aim-who p:not(.aim-kicker) { margin: 0 0 10px; font-size: 14.5px; line-height: 1.9; }
+.aim-who b { background: linear-gradient(transparent 62%, rgba(176, 138, 74, 0.3) 62%); }
+.aim-pick { display: flex; gap: 14px; margin: 12px 0 16px; }
+.aim-pick span { position: relative; padding: 6px 4px; font-size: 16px; font-weight: 700; color: var(--color-muted); }
+.aim-pick .is-picked { color: var(--color-text, inherit); }
+.aim-pick .is-picked::after { content: ''; position: absolute; inset: -4px -12px; border: 2.5px solid var(--shu, #b5432f); border-radius: 50%; transform: rotate(-4deg); }
+@media (max-width: 860px) { .aim { grid-template-columns: 1fr; } }
+
+.kokoroe { position: relative; display: flex; flex-direction: row-reverse; gap: 22px; max-width: 980px; margin: 0 auto; padding: 46px clamp(20px, 3vw, 40px); background: #fbf6ea; background-image: var(--grain, none); border-radius: 6px; color: #2a2015; box-shadow: 0 30px 50px -34px rgba(60, 40, 10, 0.55); }
+.kokoroe::before, .kokoroe::after { content: ''; position: absolute; left: -14px; right: -14px; height: 18px; border-radius: 9px; background: linear-gradient(#7a5530, #4e341b); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25); }
+.kokoroe::before { top: -9px; } .kokoroe::after { bottom: -9px; }
+.kk-title { margin: 0; writing-mode: vertical-rl; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(24px, 2.8vw, 32px); letter-spacing: 0.2em; color: var(--shu, #b5432f); border-left: 2px solid rgba(181, 67, 47, 0.4); padding-left: 16px; }
+.kk-list { list-style: none; margin: 0; padding: 0; writing-mode: vertical-rl; height: 400px; display: flex; flex-wrap: wrap; gap: 0 4px; overflow-x: auto; font-family: 'Shippori Mincho', serif; font-size: 16px; line-height: 2; }
+.kk-list li { max-height: 100%; }
+.kk-list b { margin-bottom: 0.5em; display: inline-block; color: var(--shu, #b5432f); font-weight: 800; }
+@media (max-width: 760px) {
+  .kokoroe { flex-direction: column; gap: 14px; padding: 36px 22px; }
+  .kk-title { writing-mode: horizontal-tb; border-left: 0; padding-left: 0; border-bottom: 2px solid rgba(181, 67, 47, 0.4); padding-bottom: 8px; }
+  .kk-title br { display: none; }
+  .kk-list { writing-mode: horizontal-tb; height: auto; display: grid; gap: 6px; font-size: 15px; line-height: 1.8; }
+  .kk-list li { display: grid; grid-template-columns: 2.6em 1fr; }
+  .kk-list b { margin: 0; }
+}
+html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }

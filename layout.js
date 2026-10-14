@@ -211,6 +211,8 @@
     ['festival.html#guide', '来場ガイド', '文化祭', 'はじめて 行き方 あそびかた チップ 当日'],
     ['festival.html#access', '開催日程とアクセス', '文化祭', '場所 日程 行き方 麻布'],
     ['festival.html#room', '会場の 3D 模型', '文化祭', '教室 中3-5 レイアウト 順路 3d 模型'],
+    ['festival.html#aim', '麻布経済展が目指したこと', '文化祭', '目的 ねらい リスクマネジメント 中高生'],
+    ['azakei.html#kokoroe', '展示員の心得 拾参ヶ条', 'AZAKEI として', '心得 ルール 約束 マニュアル 裏側'],
     ['festival.html#story', '3 日間の物語', '文化祭', '来場者 2364 人数'],
     ['festival.html#exhibition', '展示の仕組み', '文化祭', 'チップ 倍率 賭ける'],
     ['about.html#faq', 'よくある質問（FAQ）', '麻経とは', 'faq 質問 入部 部員'],
