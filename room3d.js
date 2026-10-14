@@ -102,7 +102,7 @@
     k = Math.min(0.66, Math.max(0.3, view.clientWidth / 1150));
     host.style.setProperty('--k', k);
     floor.style.width = W * k + 'px'; floor.style.height = D * k + 'px';
-    const doors = `<span class="r3-door" style="left:${50 * k}px;width:${100 * k}px">入口</span><span class="r3-door is-exit" style="left:${750 * k}px;width:${100 * k}px">出口</span>`
+    const doors = `<span class="r3-door" style="left:${50 * k}px;width:${100 * k}px">入門</span><span class="r3-door is-exit" style="left:${750 * k}px;width:${100 * k}px">修了</span>`
       + `<span class="r3-side r3-side-n">廊下側</span><span class="r3-side r3-side-s">中庭側</span><span class="r3-side r3-side-w">黒板側</span>`;
     const walls = [{ x: -12, y: -12, w: 62, d: 12, h: 34 }, { x: 150, y: -12, w: 600, d: 12, h: 34 }, { x: 850, y: -12, w: 62, d: 12, h: 34 },
       { x: -12, y: D, w: W + 24, d: 12, h: 34 }, { x: -12, y: 0, w: 12, d: D, h: 34 }, { x: W, y: 0, w: 12, d: D, h: 34 }]
