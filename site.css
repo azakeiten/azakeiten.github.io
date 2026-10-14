@@ -5791,3 +5791,25 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .ud-btns button:not(:disabled):active, .ud-next:active { transform: scale(0.97); }
 .ud-next { background: #e3c68e; color: #1c2b23; }
 @media (max-width: 760px) { .ud { grid-template-columns: 1fr; } }
+
+/* ################################################################
+   ▼ v92 — 改行の微調整（1 文字だけ次の行に落ちる・数字と単位が離れる、を防ぐ）
+   ################################################################ */
+@media (max-width: 400px) {
+  .section-title { font-size: clamp(24px, 7.7vw, 34px); }
+  .page-hero .section-title { font-size: clamp(25px, 7.9vw, 34px); }
+}
+/* 数字と単位は、はなさない */
+.vz-total, .ach-stat, .sp-r b, .number-val, .ap-num-main b, .gc-progress, .dbl-years, .mk-result b, .ud-top b { white-space: nowrap; }
+/* おかえりなさい：スマホでは、前回の日付を次の行に */
+@media (max-width: 600px) { .wb-hello small { display: block; margin: 4px 0 0; } }
+/* トップの説明文：言葉のまとまりで折り返す（スマホでは折り返しを許す） */
+.ap-lead .keep-phrase { white-space: nowrap; }
+/* 麻経とは：歩みが 7 つに増えたので、パソコンでは 1 つの幅を 210px 以上にして、横にたどれるように */
+@media (min-width: 761px) {
+  .ayumi { grid-auto-columns: minmax(210px, 1fr); overflow-x: auto; padding-bottom: 14px; scroll-snap-type: x proximity; scrollbar-width: thin; }
+  .ayumi::before { display: none; }
+  .ayumi li { scroll-snap-align: start; }
+  .ayumi li::before { content: ''; position: absolute; left: 0; right: 0; top: 54px; height: 1px; background: var(--color-accent); }
+  .ayumi li.is-next::before { background: linear-gradient(90deg, var(--color-accent), transparent); }
+}
