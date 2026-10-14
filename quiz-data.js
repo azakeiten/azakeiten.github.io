@@ -68,7 +68,13 @@ window.AZAKEI_GL_LINKS = [
   [['自由貿易', '関税'], 'free-trade', '自由貿易'], [['ジニ係数'], 'gini', 'ジニ係数'], [['エンゲル'], 'engel', 'エンゲル係数'], [['失業'], 'unemployment', '失業率'],
   [['見えざる手', 'アダム・スミス'], 'invisible-hand', '見えざる手'], [['創造的破壊', 'シュンペーター'], 'creative-destruction', '創造的破壊'],
   [['世界恐慌'], 'great-depression', '世界恐慌'], [['ニクソン'], 'nixon-shock', 'ニクソン・ショック'], [['プラザ合意'], 'plaza-accord', 'プラザ合意'],
-  [['リーマン'], 'lehman', 'リーマン・ショック'], [['囚人のジレンマ'], 'prisoners-dilemma', '囚人のジレンマ'], [['合成の誤謬'], 'fallacy-composition', '合成の誤謬']
+  [['リーマン'], 'lehman', 'リーマン・ショック'], [['囚人のジレンマ'], 'prisoners-dilemma', '囚人のジレンマ'], [['合成の誤謬'], 'fallacy-composition', '合成の誤謬'],
+  [['堂島', '先物'], 'dojima', '堂島米会所'], [['渋沢'], 'shibusawa', '渋沢栄一'], [['バブル'], 'bubble', 'バブル景気'], [['オイルショック', '石油危機'], 'oil-shock', 'オイルショック'],
+  [['複利'], 'simple-compound', '単利と複利'], [['量的緩和'], 'qe', '量的緩和'], [['基軸通貨'], 'key-currency', '基軸通貨'], [['金本位'], 'gold-standard', '金本位制'], [['ビットコイン', '暗号資産', '仮想通貨'], 'crypto', '暗号資産'],
+  [['株式会社'], 'kabushiki-gaisha', '株式会社'], [['株主総会'], 'shareholders-meeting', '株主総会'], [['PER'], 'per', 'PER'], [['PBR'], 'pbr', 'PBR'], [['ROE'], 'roe', 'ROE'], [['IPO', '新規上場'], 'ipo', 'IPO'], [['M&A', '買収', '合併'], 'ma', 'M&A'], [['投資信託'], 'fund', '投資信託'], [['ETF'], 'etf', 'ETF'], [['ESG'], 'esg', 'ESG 投資'],
+  [['年金'], 'pension', '年金'], [['少子高齢化'], 'aging', '少子高齢化'], [['累進'], 'progressive-tax', '累進課税'], [['最低賃金'], 'min-wage', '最低賃金'], [['貿易黒字', '貿易赤字', '貿易収支'], 'trade-balance', '貿易収支'], [['経常収支'], 'current-account', '経常収支'], [['SDGs'], 'sdgs', 'SDGs'], [['フェアトレード'], 'fair-trade', 'フェアトレード'],
+  [['CPI', '消費者物価'], 'cpi', '消費者物価指数'], [['スタグフレーション'], 'stagflation', 'スタグフレーション'], [['独占', '寡占'], 'monopoly', '独占・寡占'], [['公共財'], 'public-goods', '公共財'], [['ケインズ', '有効需要'], 'keynes', 'ケインズ'], [['ブレトン'], 'bretton-woods', 'ブレトンウッズ体制'], [['行動経済学'], 'behavioral', '行動経済学'], [['サンクコスト', '埋没'], 'sunk-cost', 'サンクコスト'],
+  [['NISA'], 'nisa', 'NISA'], [['iDeCo'], 'ideco', 'iDeCo'], [['リボ'], 'revolving', 'リボ払い'], [['クーリング'], 'cooling-off', 'クーリング・オフ'], [['サブスク'], 'subscription', 'サブスク'], [['クラウドファンディング'], 'crowdfunding', 'クラウドファンディング'], [['ユニコーン'], 'unicorn', 'ユニコーン'], [['損益分岐'], 'break-even', '損益分岐点']
 ];
 // 問題 1 つ分の文章から、関連する言葉を最大 3 つ
 window.AZAKEI_GL_FOR = function(q) {

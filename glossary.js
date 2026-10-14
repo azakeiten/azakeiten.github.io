@@ -24,7 +24,7 @@
     'invisible-hand': 'みえざるて あだむすみす', 'creative-destruction': 'そうぞうてきはかい', 'great-depression': 'せかいきょうこう', 'nixon-shock': 'にくそんしょっく',
     'plaza-accord': 'ぷらざごうい', lehman: 'りーまんしょっく', 'prisoners-dilemma': 'しゅうじんのじれんま', 'fallacy-composition': 'ごうせいのごびゅう せつやくのぱらどっくす'
   };
-  const text = items.map(it => norm(it.textContent + ' ' + (YOMI[it.id] || '')));
+  const text = items.map(it => norm(it.textContent + ' ' + (YOMI[it.id] || '') + ' ' + (it.dataset.yomi || '')));
   const total = items.length;
   const run = () => {
     const q = norm(input.value);

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>経済用語ミニ辞典 | 麻経 AZAKEI</title>
-  <meta name="description" content="GDP、円高・円安、配当、比較優位……。中高生向けに、経済の言葉をやさしく説明するミニ辞典。麻布中学校・高等学校の経済系同好会 AZAKEI（麻経）がつくりました。" />
+  <meta name="description" content="GDP、円高・円安、配当、NISA、起業……。130 語以上の経済の言葉を、中高生向けにやさしく説明するミニ辞典。麻布中学校・高等学校の経済系同好会 AZAKEI（麻経）がつくりました。" />
   <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
   <link rel="icon" href="icon-32.png" type="image/png" sizes="32x32" />
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AZAKEI" />
   <meta property="og:title" content="経済用語ミニ辞典 | 麻経 AZAKEI" />
-  <meta property="og:description" content="GDP、円高・円安、配当、比較優位……。中高生向けに、経済の言葉をやさしく説明するミニ辞典。" />
+  <meta property="og:description" content="GDP、円高・円安、配当、NISA、起業……。130 語以上の経済の言葉を、中高生向けにやさしく説明するミニ辞典。" />
   <meta property="og:url" content="https://azakeiten.github.io/glossary.html" />
   <link rel="canonical" href="https://azakeiten.github.io/glossary.html" />
   <meta property="og:image" content="https://azakeiten.github.io/og.jpg" />
@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261014f" />
+  <link rel="stylesheet" href="site.css?v=20261014g" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -59,6 +59,8 @@
           <a href="#g-company">会社と株</a>
           <a href="#g-society">国と社会</a>
           <a href="#g-history">歴史と考え方</a>
+          <a href="#g-life">くらしとお金</a>
+          <a href="#g-biz">ビジネスと起業</a>
         </div>
         <p class="gl-count" id="glCount" aria-live="polite"></p>
       </div>
@@ -75,6 +77,18 @@
           <div class="gl-item" id="market"><dt>市場（しじょう）</dt><dd>売りたい人と買いたい人が出会い、取引をして値段が決まる場のこと。お店のような場所だけでなく、株や外国のお金の取引の場も「市場」です。</dd></div>
           <div class="gl-item" id="opportunity-cost"><dt>機会費用</dt><dd>何かを選んだときに、あきらめたほうの選択肢から得られたはずのもの。たとえば部活を休んで遊びに行くなら、その時間に練習していれば得られた上達が機会費用です。</dd></div>
           <div class="gl-item" id="scale"><dt>規模の経済</dt><dd>たくさん作るほど、1 個あたりのコストが下がること。工場や機械などの費用を、たくさんの製品で分けあえるからです。</dd></div>
+          <div class="gl-item" id="growth-rate" data-yomi="けいざいせいちょうりつ"><dt>経済成長率</dt><dd>国の経済の大きさ（GDP）が、前の年とくらべて何％増えたか。ふつうは物価の動きを取りのぞいた「実質」の GDP で計算します。</dd></div>
+          <div class="gl-item" id="nominal-real" data-yomi="めいもくとじっしつ めいもく じっしつ"><dt>名目と実質</dt><dd>そのときの値段のまま計算したのが「名目」、物価の上がり下がりを取りのぞいたのが「実質」。給料が 3％ 増えても物価が 3％ 上がれば、実質ではほとんど増えていません。</dd></div>
+          <div class="gl-item" id="cpi" data-yomi="しょうひしゃぶっかしすう しーぴーあい ぶっか"><dt>消費者物価指数（CPI）</dt><dd>ふだん買うモノやサービスの値段が、全体としてどれだけ変わったかを表す数字。総務省が毎月発表していて、インフレかどうかを見るときの基本になります。</dd></div>
+          <div class="gl-item" id="stagflation" data-yomi="すたぐふれーしょん"><dt>スタグフレーション</dt><dd>景気が悪い（停滞＝スタグネーション）のに、物価は上がる（インフレーション）状態。給料は増えにくいのに値段だけ上がるので、くらしがとても苦しくなります。</dd></div>
+          <div class="gl-item" id="business-cycle" data-yomi="けいきじゅんかん こうきょう ふきょう"><dt>好況と不況（景気の波）</dt><dd>景気は、よいとき（好況）と悪いとき（不況）を、波のようにくり返します。この波のことを「景気循環」といいます。</dd></div>
+          <div class="gl-item" id="productivity" data-yomi="せいさんせい"><dt>生産性</dt><dd>同じ時間や人数で、どれだけ多くのモノや価値を生み出せたか。生産性が上がると、ひとりあたりの給料も上がりやすくなります。</dd></div>
+          <div class="gl-item" id="incentive" data-yomi="いんせんてぃぶ"><dt>インセンティブ</dt><dd>人を行動させる「やる気のもと」。ごほうびや割引、罰金など。経済は、人がインセンティブにどう反応するかを考える学問ともいえます。</dd></div>
+          <div class="gl-item" id="scarcity" data-yomi="きしょうせい"><dt>希少性</dt><dd>欲しい人の数にくらべて、モノが足りないこと。お金も時間も資源も限られているから、人は「何を選ぶか」を考えなければなりません。</dd></div>
+          <div class="gl-item" id="tradeoff" data-yomi="とれーどおふ"><dt>トレードオフ</dt><dd>何かを得ると、別の何かをあきらめなければならない関係。「勉強の時間を増やすと、遊ぶ時間が減る」など。</dd></div>
+          <div class="gl-item" id="externality" data-yomi="がいぶせい がいぶけいざい"><dt>外部性</dt><dd>取引に関係ない人にまで、よい影響や悪い影響がおよぶこと。工場の煙が近所の人を困らせる（悪い外部性）、きれいな花壇が通る人を楽しませる（よい外部性）など。</dd></div>
+          <div class="gl-item" id="public-goods" data-yomi="こうきょうざい"><dt>公共財</dt><dd>道路・灯台・警察のように、みんなが同時に使えて、お金を払わない人を締め出しにくいもの。市場にまかせると足りなくなりやすいので、国や自治体が用意します。</dd></div>
+          <div class="gl-item" id="monopoly" data-yomi="どくせん かせん"><dt>独占・寡占</dt><dd>ある商品を 1 社だけが売っている状態が独占、少しの会社だけで売っている状態が寡占。競争が起きにくく、値段が高くなりやすいので、法律で見張られています。</dd></div>
         </dl>
       </div>
 
@@ -89,6 +103,17 @@
           <div class="gl-item" id="yen"><dt>円高・円安</dt><dd>1 ドル 150 円が 120 円になるように、少ない円で外国のお金が買えるようになるのが円高。反対が円安です。円安は外国に売る会社に、円高は外国から買う会社や海外旅行に有利になりやすくなります。</dd></div>
           <div class="gl-item" id="bond"><dt>債券（国債・社債）</dt><dd>国や会社がお金を借りるために発行する「借用証書」。持っている人は利子を受け取り、期限が来ると元本が返ってきます。国が出すものが国債、会社が出すものが社債です。</dd></div>
           <div class="gl-item" id="deposit"><dt>預金</dt><dd>銀行にお金を預けること。元本が減りにくい安全な置き場所ですが、金利が低いと、ほとんど増えません。</dd></div>
+          <div class="gl-item" id="simple-compound" data-yomi="たんりとふくり たんり ふくり"><dt>単利と複利</dt><dd>最初の元本にだけ利息がつくのが単利、ついた利息にもまた利息がつくのが複利。複利は時間がたつほど、雪だるまのように増え方が大きくなります。</dd></div>
+          <div class="gl-item" id="rule72" data-yomi="ななじゅうにのほうそく 72のほうそく"><dt>72 の法則</dt><dd>「72 ÷ 年利（％）」で、複利でお金がおよそ 2 倍になる年数がわかる計算。年 6％ なら 72 ÷ 6 ＝ 約 12 年。借金が 2 倍になる速さを考えるのにも使えます。</dd></div>
+          <div class="gl-item" id="credit-creation" data-yomi="しんようそうぞう"><dt>信用創造</dt><dd>銀行が預金の一部を貸し出し、そのお金がまた別の銀行に預けられて、さらに貸し出される……。このくり返しで、世の中のお金（預金）が何倍にも増えるしくみ。</dd></div>
+          <div class="gl-item" id="qe" data-yomi="りょうてきかんわ"><dt>量的緩和</dt><dd>中央銀行が国債などを大量に買って、世の中に出回るお金の量を増やす政策。金利をこれ以上下げられないときに使われます。日本銀行は 2013 年から大規模に行いました。</dd></div>
+          <div class="gl-item" id="key-currency" data-yomi="きじくつうか"><dt>基軸通貨</dt><dd>国と国との取引や、各国の外貨準備で、中心として使われる通貨。いまはアメリカのドルが基軸通貨です。</dd></div>
+          <div class="gl-item" id="gold-standard" data-yomi="きんほんいせい"><dt>金本位制</dt><dd>お札を、決まった量の金（きん）と交換できることを国が約束するしくみ。お金の量が金の量にしばられるため、今はほとんどの国でやめています。</dd></div>
+          <div class="gl-item" id="cashless" data-yomi="きゃっしゅれす でんしまねー"><dt>キャッシュレス決済</dt><dd>現金を使わずに払うこと。クレジットカード、電子マネー、QR コード決済など。便利な反面、使いすぎに気づきにくい点に注意。</dd></div>
+          <div class="gl-item" id="crypto" data-yomi="あんごうしさん かそうつうか びっとこいん"><dt>暗号資産（仮想通貨）</dt><dd>ビットコインのように、インターネット上でやりとりされるデジタルな資産。国や中央銀行が発行するお金ではなく、値段が大きく上下しやすいのが特徴です。</dd></div>
+          <div class="gl-item" id="credit-card" data-yomi="くれじっとかーど あとばらい"><dt>クレジットカード</dt><dd>買い物の代金を、あとでまとめて払う「後払い」のカード。手元にお金がなくても買えてしまうので、支払える分だけ使うことが大切です。</dd></div>
+          <div class="gl-item" id="revolving" data-yomi="りぼばらい りぼるびんぐ"><dt>リボ払い</dt><dd>いくら使っても、毎月の支払い額をほぼ一定にする払い方。残りの分には高い手数料（金利）がかかり続けるので、気づくと支払いがなかなか終わらなくなります。</dd></div>
+          <div class="gl-item" id="loan" data-yomi="ろーん かりいれ しゃっきん"><dt>ローン</dt><dd>お金を借りて、利息をつけて少しずつ返すこと。家を買う住宅ローン、車を買う自動車ローンなど。借りる前に、返す総額がいくらになるかを確かめましょう。</dd></div>
         </dl>
       </div>
 
@@ -105,6 +130,21 @@
           <div class="gl-item" id="risk-return"><dt>リスクとリターン</dt><dd>リターンは投資で得られる見込みの利益、リスクは結果がどれだけブレるか。大きなリターンを狙うほど、ふつうはリスク（損をする可能性）も大きくなります。</dd></div>
           <div class="gl-item" id="diversify"><dt>分散投資</dt><dd>お金を 1 か所に集めず、株・債券・預金など値動きのちがうものに分けておくこと。どれか 1 つが大きく下がっても、全体の損を小さくできます。「卵は 1 つのかごに盛るな」ともいいます。<a href="sim.html">シミュレーターで試す →</a></dd></div>
           <div class="gl-item" id="portfolio"><dt>ポートフォリオ</dt><dd>持っている投資先の組み合わせのこと。日経ストックリーグでは、テーマを決めて自分たちのポートフォリオを組みます。</dd></div>
+          <div class="gl-item" id="kabushiki-gaisha" data-yomi="かぶしきがいしゃ"><dt>株式会社</dt><dd>株を発行して、たくさんの人からお金（資本）を集めて事業をする会社。お金を出した人は株主になり、会社の持ち主の一人になります。</dd></div>
+          <div class="gl-item" id="limited-liability" data-yomi="ゆうげんせきにん"><dt>有限責任</dt><dd>会社がつぶれても、株主は出したお金以上の責任を負わなくてよいというルール。だから多くの人が安心して株を買え、大きな事業にお金が集まります。</dd></div>
+          <div class="gl-item" id="shareholders-meeting" data-yomi="かぶぬしそうかい"><dt>株主総会</dt><dd>株主が集まって、会社の大事なことを決める会議。取締役（経営者）を選んだり、配当の額を決めたりします。持っている株の数に応じて投票できます。</dd></div>
+          <div class="gl-item" id="kessan" data-yomi="けっさん けっさんしょ"><dt>決算</dt><dd>一定の期間（ふつうは 1 年）に、会社がいくらもうけたか、どれだけ財産があるかをまとめること。上場している会社は、その結果を公表します。</dd></div>
+          <div class="gl-item" id="pl" data-yomi="そんえきけいさんしょ ぴーえる"><dt>損益計算書（P/L）</dt><dd>1 年間の「売上 − 費用 ＝ 利益」をまとめた表。会社が本業でどれだけもうけたかがわかる、決算書のひとつです。</dd></div>
+          <div class="gl-item" id="bs" data-yomi="たいしゃくたいしょうひょう びーえす"><dt>貸借対照表（B/S）</dt><dd>ある日の時点で、会社が何を持っていて（資産）、どれだけ借りていて（負債）、自分のお金がいくらあるか（純資産）をまとめた表。「資産 ＝ 負債 ＋ 純資産」になります。</dd></div>
+          <div class="gl-item" id="per" data-yomi="ぴーいーあーる かぶかしゅうえきりつ"><dt>PER（株価収益率）</dt><dd>株価が、1 株あたりの利益の何倍かを表す数字。「その会社の利益の何年分の値段がついているか」の目安で、同じ業界の会社とくらべて割安・割高を考えます。</dd></div>
+          <div class="gl-item" id="pbr" data-yomi="ぴーびーあーる かぶかじゅんしさんばいりつ"><dt>PBR（株価純資産倍率）</dt><dd>株価が、1 株あたりの純資産の何倍かを表す数字。1 倍を下回ると、「会社を解散して財産を分けたほうが高くなる」くらい安く見られている、という意味になります。</dd></div>
+          <div class="gl-item" id="roe" data-yomi="あーるおーいー じこしほんりえきりつ"><dt>ROE（自己資本利益率）</dt><dd>株主が出したお金（自己資本）を使って、1 年でどれだけ利益を出せたかの割合。お金を効率よく使えているかを見る目安です。</dd></div>
+          <div class="gl-item" id="ipo" data-yomi="あいぴーおー しんきじょうじょう"><dt>IPO（新規上場）</dt><dd>会社が初めて証券取引所に株を上場し、だれでも株を売り買いできるようにすること。大きなお金を集められ、会社の知名度も上がります。</dd></div>
+          <div class="gl-item" id="ma" data-yomi="えむあんどえー がっぺい ばいしゅう"><dt>M&amp;A</dt><dd>会社どうしの合併（Merger）と買収（Acquisition）。ほかの会社を買って、新しい事業や技術、お客さんを一気に手に入れる方法です。</dd></div>
+          <div class="gl-item" id="fund" data-yomi="とうしんたく ふぁんど"><dt>投資信託</dt><dd>たくさんの人から集めたお金を、専門家がまとめて株や債券に投資する商品。少ないお金から、いろいろな会社に分散投資できます。</dd></div>
+          <div class="gl-item" id="index-fund" data-yomi="いんでっくすふぁんど"><dt>インデックスファンド</dt><dd>日経平均や TOPIX などの株価指数と同じ値動きを目指す投資信託。指数にまるごと投資するイメージで、手数料が安いものが多いのが特徴です。</dd></div>
+          <div class="gl-item" id="etf" data-yomi="いーてぃーえふ じょうじょうとうししんたく"><dt>ETF（上場投資信託）</dt><dd>証券取引所に上場していて、株と同じように、取引時間中いつでも売り買いできる投資信託。</dd></div>
+          <div class="gl-item" id="esg" data-yomi="いーえすじー"><dt>ESG 投資</dt><dd>もうけだけでなく、環境（Environment）・社会（Social）・会社の運営のしかた（Governance）への取り組みも見て投資先を選ぶ考え方。</dd></div>
         </dl>
       </div>
 
@@ -118,6 +158,19 @@
           <div class="gl-item" id="gini"><dt>ジニ係数</dt><dd>所得のかたより（格差）を 0〜1 の数字で表したもの。0 に近いほど平等で、1 に近いほど一部の人に集中しています。</dd></div>
           <div class="gl-item" id="engel"><dt>エンゲル係数</dt><dd>家計の支出のうち、食費がしめる割合。収入が増えるほど、この割合は下がる傾向があります（エンゲルの法則）。</dd></div>
           <div class="gl-item" id="unemployment"><dt>失業率</dt><dd>働きたいのに仕事が見つからない人の割合。景気が悪くなると上がりやすい数字です。</dd></div>
+          <div class="gl-item" id="social-security" data-yomi="しゃかいほしょう"><dt>社会保障</dt><dd>病気・けが・老後・失業など、困ったときに国がくらしを支えるしくみ。年金、医療保険、介護保険、生活保護などがあります。</dd></div>
+          <div class="gl-item" id="pension" data-yomi="ねんきん こくみんねんきん こうせいねんきん"><dt>年金</dt><dd>年をとったときなどに、毎月受け取れるお金。日本では 20 歳以上 60 歳未満の人は国民年金に入り、会社員はさらに厚生年金にも入ります。</dd></div>
+          <div class="gl-item" id="aging" data-yomi="しょうしこうれいか"><dt>少子高齢化</dt><dd>生まれる子どもが減り、お年寄りの割合が増えること。働く世代が減るので、年金や医療をどう支えるかが大きな課題になっています。</dd></div>
+          <div class="gl-item" id="deficit" data-yomi="ざいせいあかじ"><dt>財政赤字</dt><dd>国の支出が、税金などの収入より多い状態。足りない分は国債（国の借金）を発行してまかないます。</dd></div>
+          <div class="gl-item" id="progressive-tax" data-yomi="るいしんかぜい"><dt>累進課税</dt><dd>所得が多い人ほど、高い税率がかかるしくみ。日本の所得税はこの形で、余裕のある人に多めに負担してもらいます。</dd></div>
+          <div class="gl-item" id="redistribution" data-yomi="しょとくのさいぶんぱい さいぶんぱい"><dt>所得の再分配</dt><dd>税金や社会保障を通して、所得の多い人から少ない人へお金をまわし、格差を小さくすること。</dd></div>
+          <div class="gl-item" id="min-wage" data-yomi="さいていちんぎん"><dt>最低賃金</dt><dd>これより安い時給で人を働かせてはいけない、という法律の決まり。日本では都道府県ごとに金額が決められ、毎年見直されます。</dd></div>
+          <div class="gl-item" id="trade-balance" data-yomi="ぼうえきしゅうし ゆしゅつ ゆにゅう"><dt>貿易収支</dt><dd>輸出（外国へ売る）と輸入（外国から買う）の差。輸出のほうが多ければ貿易黒字、輸入のほうが多ければ貿易赤字です。</dd></div>
+          <div class="gl-item" id="current-account" data-yomi="けいじょうしゅうし"><dt>経常収支</dt><dd>貿易だけでなく、旅行などのサービスのやりとりや、外国への投資から入ってくる利子・配当もふくめた、外国とのお金の出入りの合計。</dd></div>
+          <div class="gl-item" id="globalization" data-yomi="ぐろーばるか"><dt>グローバル化</dt><dd>ヒト・モノ・お金・情報が、国境をこえて世界中を行き来するようになること。安く便利になる一方、遠くの国のできごとの影響も受けやすくなります。</dd></div>
+          <div class="gl-item" id="sdgs" data-yomi="えすでぃーじーず じぞくかのうなかいはつもくひょう"><dt>SDGs（持続可能な開発目標）</dt><dd>2015 年に国連で決まった、2030 年までに世界で達成をめざす 17 の目標。貧困や飢餓をなくすこと、気候変動への対策などがふくまれます。</dd></div>
+          <div class="gl-item" id="fair-trade" data-yomi="ふぇあとれーど"><dt>フェアトレード</dt><dd>発展途上国の生産者から、適正な値段で長く買い続けることで、生産者のくらしと自立を支える取引のしかた。</dd></div>
+          <div class="gl-item" id="basic-income" data-yomi="べーしっくいんかむ"><dt>ベーシックインカム</dt><dd>国が、すべての人に、生活に必要な最低限のお金を無条件で配るという考え方。くらしの安心につながる一方、財源をどうするかなど議論が続いています。</dd></div>
         </dl>
       </div>
 
@@ -132,6 +185,58 @@
           <div class="gl-item" id="lehman"><dt>リーマン・ショック</dt><dd>2008 年、アメリカの大手投資銀行リーマン・ブラザーズの経営破綻をきっかけに広がった世界的な金融危機。</dd></div>
           <div class="gl-item" id="prisoners-dilemma"><dt>囚人のジレンマ</dt><dd>おたがいに協力すれば両方とも得をするのに、相手を信じきれずに裏切りあって、両方とも損をしてしまう状況。ゲーム理論の有名な例です。</dd></div>
           <div class="gl-item" id="fallacy-composition"><dt>合成の誤謬（ごびゅう）</dt><dd>一人ひとりにとって正しいことでも、みんなが同じことをすると逆効果になること。みんなが節約すると、モノが売れずに社会全体の所得が減ってしまう「節約のパラドックス」が代表例です。</dd></div>
+          <div class="gl-item" id="dojima" data-yomi="どうじまこめかいしょ どうじま さきものとりひき"><dt>堂島米会所</dt><dd>江戸時代の大坂・堂島にあった、お米の取引所。1730 年に幕府に公認され、まだ収穫していないお米を前もって売り買いする「先物取引」が行われました。世界で最初期の、しくみの整った先物市場といわれます。</dd></div>
+          <div class="gl-item" id="shibusawa" data-yomi="しぶさわえいいち"><dt>渋沢栄一</dt><dd>明治から昭和のはじめにかけて、銀行や会社など、およそ 500 の企業の設立に関わった実業家。「日本資本主義の父」と呼ばれ、2024 年からの新しい一万円札の肖像になりました。</dd></div>
+          <div class="gl-item" id="tulip" data-yomi="ちゅーりっぷばぶる ちゅーりっぷきょうこう"><dt>チューリップ・バブル</dt><dd>17 世紀のオランダで、チューリップの球根の値段が異常に上がり、1637 年に一気に暴落したできごと。記録に残る、最初期のバブルといわれます。</dd></div>
+          <div class="gl-item" id="keynes" data-yomi="けいんず ゆうこうじゅよう"><dt>ケインズと有効需要</dt><dd>イギリスの経済学者ケインズは、不況のときは政府が公共事業などでお金を使い、実際にお金を払って買われる需要（有効需要）を生み出すべきだと考えました。</dd></div>
+          <div class="gl-item" id="bretton-woods" data-yomi="ぶれとんうっずたいせい"><dt>ブレトンウッズ体制</dt><dd>1944 年に決まった、戦後の世界のお金のしくみ。ドルを金と交換できることにし、ほかの国の通貨はドルとの交換比率を固定しました。1971 年のニクソン・ショックで終わりを迎えます。</dd></div>
+          <div class="gl-item" id="oil-shock" data-yomi="おいるしょっく せきゆききー"><dt>オイルショック</dt><dd>1973 年と 1979 年、中東での戦争や革命をきっかけに原油の値段が急に上がり、世界中で物価が上がって景気が悪くなったできごと。日本ではトイレットペーパーの買いだめ騒ぎも起きました。</dd></div>
+          <div class="gl-item" id="bubble" data-yomi="ばぶるけいき ばぶるほうかい"><dt>バブル景気</dt><dd>1980 年代後半から 1990 年代のはじめにかけて、日本で株や土地の値段が実力以上にふくらんだ好景気。1989 年の年末に日経平均は 3 万 8915 円の最高値をつけ、その後バブルははじけました。</dd></div>
+          <div class="gl-item" id="lost-decades" data-yomi="うしなわれた30ねん うしなわれたさんじゅうねん"><dt>失われた 30 年</dt><dd>バブルがはじけたあと、日本の経済が長く伸び悩んだ期間をさす言葉。物価も給料もあまり上がらない時代が続きました。</dd></div>
+          <div class="gl-item" id="marginal-utility" data-yomi="げんかいこうよう"><dt>限界効用</dt><dd>何かをもう 1 つ増やしたときに得られる、追加の満足。のどがかわいたときの 1 杯目の水はとてもおいしいけれど、10 杯目はそうでもない。これを「限界効用の逓減」といいます。</dd></div>
+          <div class="gl-item" id="sunk-cost" data-yomi="さんくこすと まいぼつひよう"><dt>サンクコスト（埋没費用）</dt><dd>すでに払ってしまって、もう取り戻せない費用。「ここまでお金をかけたから」と続けてしまいがちですが、これからの判断には入れないのが合理的です。</dd></div>
+          <div class="gl-item" id="game-theory" data-yomi="げーむりろん"><dt>ゲーム理論</dt><dd>自分の得が、相手の選び方によって変わる場面で、どう行動するのが一番よいかを考える理論。囚人のジレンマも、ゲーム理論の代表的な例です。</dd></div>
+          <div class="gl-item" id="behavioral" data-yomi="こうどうけいざいがく"><dt>行動経済学</dt><dd>人はいつも合理的に動くわけではない、という前提で経済を考える学問。「限定○個」に弱い、損をとても嫌がる、などの心のくせを研究します。2017 年にセイラーがノーベル経済学賞を受けました。</dd></div>
+        </dl>
+      </div>
+
+      <div class="gl-group" id="g-life">
+        <h2 class="gl-head"><span>06</span>くらしとお金</h2>
+        <dl class="gl-list">
+          <div class="gl-item" id="take-home" data-yomi="てどり がくめん きゅうりょう"><dt>手取り</dt><dd>給料の額（額面）から、税金や社会保険料を引いたあとに、実際に受け取れる金額。額面が 30 万円でも、手取りはおよそ 2 割ほど少なくなります。</dd></div>
+          <div class="gl-item" id="social-insurance" data-yomi="しゃかいほけんりょう"><dt>社会保険料</dt><dd>健康保険・年金・雇用保険・介護保険などのために払うお金。会社員の場合は、会社と働く人とで分け合って払います。</dd></div>
+          <div class="gl-item" id="withholding" data-yomi="げんせんちょうしゅう ねんまつちょうせい"><dt>源泉徴収</dt><dd>会社が給料を払うときに、所得税などを前もって差し引いて、本人の代わりに国へ納めるしくみ。年の終わりに「年末調整」で、払いすぎや足りない分を精算します。</dd></div>
+          <div class="gl-item" id="budget" data-yomi="よさん かけいぼ"><dt>予算と家計簿</dt><dd>使えるお金の計画が予算、実際に何にいくら使ったかの記録が家計簿。おこづかい帳も立派な家計簿です。記録すると、ムダづかいに気づけます。</dd></div>
+          <div class="gl-item" id="save-invest" data-yomi="ちょちくととうし ちょちく とうし"><dt>貯蓄と投資</dt><dd>お金を減らさずにためておくのが貯蓄、増えることを期待して、減るリスクも受け入れてお金を出すのが投資。目的や使う時期によって、使い分けるのが大切です。</dd></div>
+          <div class="gl-item" id="nisa" data-yomi="にーさ しょうがくとうしひかぜいせいど"><dt>NISA（少額投資非課税制度）</dt><dd>投資で得た利益に、ふつうはかかる税金（約 20％）がかからなくなる国の制度。2024 年から新しい NISA が始まり、税金がかからない期間に期限がなくなりました。18 歳以上が使えます。</dd></div>
+          <div class="gl-item" id="ideco" data-yomi="いでこ こじんがたかくていきょしゅつねんきん"><dt>iDeCo（個人型確定拠出年金）</dt><dd>自分で毎月お金を積み立てて運用し、原則 60 歳以降に受け取る「自分でつくる年金」。積み立てたお金は所得から差し引かれるので、税金が安くなります。</dd></div>
+          <div class="gl-item" id="insurance" data-yomi="ほけん"><dt>保険</dt><dd>病気・事故・火事など、めったに起きないけれど起きると大変なことに備えて、みんなで少しずつお金を出し合うしくみ。リスクマネジメントの代表的な方法です。</dd></div>
+          <div class="gl-item" id="risk-management" data-yomi="りすくまねじめんと"><dt>リスクマネジメント</dt><dd>起こりうる損やトラブルを前もって考え、避けたり、小さくしたり、備えたりすること。麻布経済展の「チップをどう賭けるか」も、まさにリスクマネジメントです。</dd></div>
+          <div class="gl-item" id="adult-age" data-yomi="せいねんねんれい 18さい じゅうはっさい けいやく"><dt>成年年齢（18 歳）</dt><dd>2022 年 4 月から、大人になる年齢が 18 歳になりました。18 歳からは親の同意がなくても、スマホやクレジットカード、ローンなどの契約ができます。その分、自分で責任を持つことになります。</dd></div>
+          <div class="gl-item" id="cooling-off" data-yomi="くーりんぐおふ"><dt>クーリング・オフ</dt><dd>訪問販売や電話での勧誘などで契約したとき、決められた期間内（多くは 8 日間）なら、理由がなくても契約をやめられる制度。ネット通販は対象外なので注意。</dd></div>
+          <div class="gl-item" id="fraud" data-yomi="とうしさぎ もうけばなし さぎ"><dt>投資詐欺</dt><dd>「絶対にもうかる」「元本保証で高い利回り」などとさそって、お金をだまし取ること。リターンが高いものはリスクも高い、が経済の基本。うますぎる話は疑いましょう。</dd></div>
+        </dl>
+      </div>
+
+      <div class="gl-group" id="g-biz">
+        <h2 class="gl-head"><span>07</span>ビジネスと起業</h2>
+        <dl class="gl-list">
+          <div class="gl-item" id="startup" data-yomi="きぎょう すたーとあっぷ"><dt>起業・スタートアップ</dt><dd>自分で新しく事業を始めることが起業。なかでも、新しいアイデアや技術で、短いあいだに大きく成長することを目指す会社をスタートアップと呼びます。</dd></div>
+          <div class="gl-item" id="business-model" data-yomi="びじねすもでる"><dt>ビジネスモデル</dt><dd>「だれに・何を・どうやって届けて、どこでお金をもらうか」という、もうけのしくみ。同じ商品でも、売り切りか定額制かで、ビジネスモデルは変わります。</dd></div>
+          <div class="gl-item" id="business-plan" data-yomi="じぎょうけいかくしょ"><dt>事業計画書</dt><dd>どんな課題を、どんな方法で解決し、どうやってもうけるのかをまとめた計画書。お金を出してくれる人や、ビジネスコンテストの審査員に、事業の中身を伝えるために使います。</dd></div>
+          <div class="gl-item" id="fixed-variable" data-yomi="こていひとへんどうひ こていひ へんどうひ"><dt>固定費と変動費</dt><dd>売れても売れなくてもかかる費用（家賃など）が固定費、売れた数に応じて増える費用（材料費など）が変動費。</dd></div>
+          <div class="gl-item" id="break-even" data-yomi="そんえきぶんきてん"><dt>損益分岐点</dt><dd>売上と費用がちょうど同じになり、もうけがゼロになる売上の額。これより多く売れれば黒字、少なければ赤字です。</dd></div>
+          <div class="gl-item" id="gross-profit" data-yomi="あらり うりあげそうりえき"><dt>粗利（売上総利益）</dt><dd>売上から、商品をつくったり仕入れたりした費用（原価）を引いた利益。ここから人件費や広告費などを払って、残ったものが営業利益になります。</dd></div>
+          <div class="gl-item" id="marketing" data-yomi="まーけてぃんぐ"><dt>マーケティング</dt><dd>お客さんが何を求めているかを調べ、商品が自然に売れるしくみをつくること。宣伝だけでなく、商品づくりや値段の決め方までふくみます。</dd></div>
+          <div class="gl-item" id="persona" data-yomi="たーげっと ぺるそな"><dt>ターゲットとペルソナ</dt><dd>商品を届けたい相手（ターゲット）を、年齢・好み・悩みまで 1 人の人物像のように具体的に描いたものがペルソナ。麻布経済展では「中高生」をいちばんのターゲットにしました。</dd></div>
+          <div class="gl-item" id="four-p" data-yomi="よんぴー ふぉーぴー"><dt>4P</dt><dd>マーケティングで考える 4 つの要素。何を売るか（Product）、いくらで売るか（Price）、どこで売るか（Place）、どうやって知らせるか（Promotion）。</dd></div>
+          <div class="gl-item" id="swot" data-yomi="すうぉっとぶんせき"><dt>SWOT 分析</dt><dd>自分たちの強み（Strength）・弱み（Weakness）と、まわりの機会（Opportunity）・脅威（Threat）を 4 つのマスに整理して、作戦を考える方法。</dd></div>
+          <div class="gl-item" id="brand" data-yomi="ぶらんど"><dt>ブランド</dt><dd>名前やマークを見ただけで、「あの品質」「あの雰囲気」と思い浮かぶ信頼やイメージ。ブランドがあると、ほかより高くても選ばれやすくなります。</dd></div>
+          <div class="gl-item" id="subscription" data-yomi="さぶすく さぶすくりぷしょん ていがくせい"><dt>サブスクリプション（サブスク）</dt><dd>毎月など決まった料金を払うと、一定の期間サービスを使い放題になるビジネスモデル。動画や音楽の配信が代表例です。</dd></div>
+          <div class="gl-item" id="crowdfunding" data-yomi="くらうどふぁんでぃんぐ"><dt>クラウドファンディング</dt><dd>インターネットで、アイデアや目標を発表して、共感した多くの人から少しずつお金を集める方法。お礼に、できあがった商品などを受け取れるものもあります。</dd></div>
+          <div class="gl-item" id="vc" data-yomi="べんちゃーきゃぴたる ぶいしー"><dt>ベンチャーキャピタル（VC）</dt><dd>これから大きく伸びそうなスタートアップにお金を出し、成長したときに株を売って大きなリターンを狙う投資会社。</dd></div>
+          <div class="gl-item" id="unicorn" data-yomi="ゆにこーん"><dt>ユニコーン</dt><dd>まだ上場していないのに、会社の価値が 10 億ドル以上と評価されているスタートアップ。めったにいないことから、伝説の生き物の名前で呼ばれます。</dd></div>
+          <div class="gl-item" id="pitch" data-yomi="ぴっち ぷれぜん"><dt>ピッチ</dt><dd>短い時間で、自分たちの事業のアイデアや魅力を伝えるプレゼンテーション。ビジネスコンテストや、投資家にお金を出してもらう場面で行われます。</dd></div>
         </dl>
       </div>
 
@@ -142,12 +247,12 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261014f"></script>
-  <script src="layout.js?v=20261014f"></script>
-  <script src="brand.js?v=20261014f"></script>
-  <script src="nav.js?v=20261014f"></script>
-  <script src="reveal.js?v=20261014f"></script>
-  <script src="glossary.js?v=20261014f"></script>
-  <script src="site.js?v=20261014f"></script>
+  <script src="content.js?v=20261014g"></script>
+  <script src="layout.js?v=20261014g"></script>
+  <script src="brand.js?v=20261014g"></script>
+  <script src="nav.js?v=20261014g"></script>
+  <script src="reveal.js?v=20261014g"></script>
+  <script src="glossary.js?v=20261014g"></script>
+  <script src="site.js?v=20261014g"></script>
 </body>
 </html>
