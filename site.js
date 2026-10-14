@@ -537,6 +537,8 @@ try {
       <p class="vz-total"><span data-count>${fmt(V.total)}</span><small>人</small></p>
       <div class="vz-bars">${rows.map(r => `<div class="vz-row${r.peak ? ' is-peak' : ''}"><span>${r.label}</span><span class="vz-track"><span class="vz-fill" style="--w:${r.w.toFixed(1)}%"></span></span><span>${fmt(r.n)} 人</span></div>`).join('')}</div>
       <p class="vz-note">${known ? 'いちばん多かった日を緑で示しています。' : `2 日目だけで、全体の約 ${Math.round(V.days[1] / V.total * 100)}％ の方が来てくださいました。`}</p>`;
+    // v79：チップの塔（1 枚 = 50 人）。画面に入ると、下から 1 枚ずつ積み上がる
+    if (known) {      const PER = 50, COL = [['#2f6b3a', '#fffaf0'], ['#b5432f', '#fffaf0'], ['#b08a4a', '#fffaf0']];      const tower = (n, i) => { const cnt = Math.round(n / PER); let h = ''; for (let c = 0; c < cnt; c++) h += `<span class="vt-chip" style="--z:${c * 7}px;--d:${(c * 0.045).toFixed(3)}s;--c:${COL[i][0]};--s:${COL[i][1]}"><i></i><i></i><i></i><b></b></span>`; return `<div class="vt-col"><div class="vt-stage"><div class="vt-stack">${h}</div></div><p><b>${fmt(n)}</b> 人<small>${i + 1} 日目・${cnt} 枚</small></p></div>`; };      vz.insertAdjacentHTML('beforeend', `<div class="vt-towers" aria-hidden="true">${V.days.map(tower).join('')}</div><p class="vz-note">チップ 1 枚 = 50 人で積むと、こうなります。</p>`);    }
     if (reduce || !('IntersectionObserver' in window)) vz.classList.add('is-in');
     else new IntersectionObserver((es, io) => es.forEach(e => { if (e.isIntersecting) { vz.classList.add('is-in'); io.disconnect(); } }), { threshold: 0.4 }).observe(vz);
   }

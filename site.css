@@ -5515,3 +5515,23 @@ html:not(.is-apple) .page-festival #activities .service-card.is-special, .page-f
 .r3-info b { display: block; color: #fff; font-size: 15px; }
 .r3-note { margin: 12px 0 0; font-size: 12.5px; color: var(--color-muted); }
 @media (prefers-reduced-motion: reduce) { .r3-route polyline, .r3-token i { animation: none; } .r3-world, .r3-token { transition: none; } }
+
+/* ################################################################
+   ▼ v79 — 文化祭：来場者を「チップの塔」で（1 枚 = 50 人・積み上がる）
+   ################################################################ */
+.vt-towers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+.vt-col { display: grid; justify-items: center; }
+.vt-col p { margin: 0; text-align: center; font-size: 13px; }
+.vt-col p b { font-family: var(--font-display, serif); font-size: 20px; }
+.vt-col p small { display: block; font-size: 11.5px; color: var(--color-muted); }
+.vt-stage { position: relative; width: 100%; height: 230px; perspective: 700px; perspective-origin: 50% 0%; }
+.vt-stack { position: absolute; left: 50%; bottom: 28px; width: 64px; height: 64px; margin-left: -32px; transform-style: preserve-3d; transform: rotateX(62deg) rotateZ(-20deg); }
+.vt-chip { position: absolute; inset: 0; transform-style: preserve-3d; transform: translateZ(var(--z)); opacity: 0; }
+.visitors.is-in .vt-chip { animation: vt-drop 0.38s cubic-bezier(.3, 1.4, .5, 1) var(--d) both; }
+.vt-chip i, .vt-chip b { position: absolute; inset: 0; border-radius: 50%; }
+.vt-chip i { background: repeating-conic-gradient(from 6deg, var(--s) 0 10deg, color-mix(in srgb, var(--c) 75%, #000) 10deg 45deg); }
+.vt-chip i:nth-child(1) { transform: translateZ(0); } .vt-chip i:nth-child(2) { transform: translateZ(2.2px); } .vt-chip i:nth-child(3) { transform: translateZ(4.4px); }
+.vt-chip b { transform: translateZ(6px); background: radial-gradient(circle, color-mix(in srgb, var(--s) 90%, var(--c)) 0 40%, var(--c) 41% 46%, transparent 47%), repeating-conic-gradient(from 6deg, var(--s) 0 10deg, var(--c) 10deg 45deg); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 70%, #000); }
+@keyframes vt-drop { from { opacity: 0; transform: translateZ(calc(var(--z) + 60px)); } to { opacity: 1; transform: translateZ(var(--z)); } }
+@media (prefers-reduced-motion: reduce) { .vt-chip { opacity: 1; } .visitors.is-in .vt-chip { animation: none; } }
+@media (max-width: 600px) { .vt-stage { height: 190px; } .vt-stack { width: 48px; height: 48px; margin-left: -24px; } }
