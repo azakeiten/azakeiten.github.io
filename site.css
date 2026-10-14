@@ -5760,3 +5760,34 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 @keyframes hf-float { 0%, 100% { transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0) rotateZ(0deg); } 50% { transform: rotateX(calc(var(--rx) - 14deg)) rotateY(calc(var(--ry) + 24deg)) translateZ(calc(var(--s) * 0.15)) rotateZ(160deg); } }
 .hf.is-still .hf-spin { animation: none; }
 @media (max-width: 760px) { .hf-item { opacity: calc(0.4 + var(--d) * 0.4); } }
+
+/* ################################################################
+   ▼ v91 — シミュレーター：上がる？下がる？ チャート予想（ゲーム）
+   ################################################################ */
+.ud { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(16px, 3vw, 28px); align-items: center; padding: clamp(18px, 3vw, 30px); border-radius: 28px; background: #12201a; background-image: var(--grain, none); color: #eee7d8; box-shadow: inset 0 0 0 1px rgba(227, 198, 142, 0.15); }
+.ud-top { display: flex; justify-content: space-between; font-size: 13px; color: rgba(238, 231, 216, 0.7); }
+.ud-top p { margin: 0; } .ud-top b { font-family: 'Shippori Mincho', serif; font-size: 20px; color: #e3c68e; }
+.ud-chart { width: 100%; height: auto; margin: 8px 0; border-radius: 12px; background: #0b1510; background-image: linear-gradient(rgba(227, 198, 142, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(227, 198, 142, 0.07) 1px, transparent 1px); background-size: 34px 25px; }
+.ud-future { fill: rgba(227, 198, 142, 0.06); }
+.ud-today { stroke: rgba(227, 198, 142, 0.5); stroke-dasharray: 3 4; }
+.ud-lab { font-size: 10px; fill: #e3c68e; }
+.ud-past { fill: none; stroke: #eee7d8; stroke-width: 2; stroke-linejoin: round; }
+.ud-next-line { fill: none; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.ud-next-line.is-up { stroke: #5fd27e; } .ud-next-line.is-down { stroke: #ff7a63; }
+.ud-dot { fill: #e3c68e; }
+.ud-info { margin: 0; min-height: 3.2em; font-size: 14px; line-height: 1.75; }
+.ud-info b { display: block; font-size: 16px; color: #fff; }
+.ud-info b.is-win { color: #5fd27e; } .ud-info b.is-lose { color: #ff7a63; }
+.ud-reveal { display: block; margin-top: 8px; padding: 10px 12px; border-radius: 10px; background: rgba(227, 198, 142, 0.1); font-size: 13.5px; }
+.ud-reveal strong { color: #e3c68e; }
+.ud-ctrl { display: grid; gap: 14px; }
+.ud-bet { display: grid; gap: 6px; font-size: 14px; }
+.ud-bet b { font-size: 20px; color: #e3c68e; }
+.ud-bet input { accent-color: #e3c68e; width: 100%; }
+.ud-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ud-btns button, .ud-next { padding: 14px 10px; border-radius: 14px; border: 0; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; transition: transform 0.15s, filter 0.2s; }
+.ud-up { background: #2f6b3a; color: #fff; } .ud-down { background: var(--shu, #b5432f); color: #fff; }
+.ud-btns button:disabled { filter: grayscale(0.8) brightness(0.6); cursor: default; }
+.ud-btns button:not(:disabled):active, .ud-next:active { transform: scale(0.97); }
+.ud-next { background: #e3c68e; color: #1c2b23; }
+@media (max-width: 760px) { .ud { grid-template-columns: 1fr; } }
