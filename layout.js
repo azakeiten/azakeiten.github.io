@@ -23,7 +23,7 @@
       { ico: 'M5 21V4M5 4h12l-2.5 4 2.5 4H5', href: 'azakei.html',     ja: 'AZAKEI として',    en: 'Identity', desc: '合言葉・大切にしていること・活動の地図・数字。', img: 'photos/board-special.jpg' },
       { ico: 'M4 8h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM10 8v10', href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'photos/room-diagnosis.jpg' },
       { ico: 'M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'photos/setup.jpg' },
-      { ico: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6', href: 'glossary.html',   ja: '経済用語ミニ辞典', en: 'Glossary', desc: '130 語以上。GDP から NISA、起業まで、やさしく。', img: 'photos/rules-posters.jpg', badge: 'NEW' },
+      { ico: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6', href: 'glossary.html',   ja: '経済用語ミニ辞典', en: 'Glossary', desc: '190 語以上。GDP から NISA、世界の経済まで、やさしく。', img: 'photos/rules-posters.jpg', badge: 'NEW' },
     ]},
     { group: '挑む', en: 'Challenge', pages: [
       { ico: 'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M10 17h4', href: 'contests.html',   ja: '各種コンテスト',    en: 'Contests', desc: 'ビジネスコンテスト・日経ストックリーグ ほか。', img: 'tokyo-s.jpg' },

@@ -5813,3 +5813,7 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
   .ayumi li::before { content: ''; position: absolute; left: 0; right: 0; top: 54px; height: 1px; background: var(--color-accent); }
   .ayumi li.is-next::before { background: linear-gradient(90deg, var(--color-accent), transparent); }
 }
+/* ▼ v93 — 用語辞典：世界の経済・テクノロジー */
+#g-world { --gc: #2b6f8f; } #g-tech { --gc: #4a4a4a; }
+:root[data-theme="dark"] #g-world { --gc: #7fbfdc; } :root[data-theme="dark"] #g-tech { --gc: #c9c9c9; }
+.gl-cats a[href="#g-world"] { --gc: #2b6f8f; } .gl-cats a[href="#g-tech"] { --gc: #4a4a4a; }

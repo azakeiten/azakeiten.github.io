@@ -911,7 +911,7 @@ try {
       ['正', '今週の正解者', wk.lastOk !== undefined, '今週の 1 問に正解する', 'index.html#weekly'],
       ['連', '3 週連続', (wk.streak || 0) >= 3, '今週の 1 問に 3 週連続で正解', 'index.html#weekly'],
       ['辞', '用語ハンター', glKnown >= 30, '単語カードで 30 語覚える', 'glossary.html#glCards'],
-      ['博', '経済博士', glKnown >= 130, '単語カードで 130 語覚える', 'glossary.html#glCards'],
+      ['博', '経済博士', glKnown >= 150, '単語カードで 150 語覚える', 'glossary.html#glCards'],
       ['試', '未来をのぞく', simRun, 'シミュレーターで 10 年後へ', 'sim.html'],
       ['歩', '会場ツアー', tour, '3D の会場で、順路を最後まで', 'festival.html#room']
     ];
