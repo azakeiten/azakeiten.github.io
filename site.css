@@ -5631,3 +5631,20 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .gc-done { margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(227, 198, 142, 0.14); color: #e3c68e; font-size: 13.5px; font-weight: 700; }
 .gl-item.is-known dt::after { content: '済'; display: inline-grid; place-items: center; width: 20px; height: 20px; margin-left: 8px; border-radius: 4px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-size: 11px; vertical-align: middle; transform: rotate(-6deg); }
 @media (prefers-reduced-motion: reduce) { .gc-inner { transition: none; } }
+
+/* ################################################################
+   ▼ v84 — 活動風景：写真の 3D 回転木馬
+   ################################################################ */
+.ring3d { --r: 420px; margin-bottom: 32px; padding: clamp(14px, 2.4vw, 22px) clamp(10px, 2vw, 20px) 16px; border-radius: 28px; background: #1c2b23; background-image: var(--grain, none); color: #eee7d8; overflow: hidden; }
+.rg-view { position: relative; height: clamp(260px, 34vw, 380px); perspective: 1100px; perspective-origin: 50% 40%; cursor: grab; touch-action: pan-y; user-select: none; }
+.rg-view:active { cursor: grabbing; }
+.rg-ring { position: absolute; left: 50%; top: 46%; width: 0; height: 0; transform-style: preserve-3d; }
+.rg-card { position: absolute; left: calc(var(--w) / -2); top: calc(var(--w) * -0.42); --w: clamp(150px, 22vw, 240px); width: var(--w); padding: 0; border: 0; border-radius: 10px; overflow: hidden; background: #000; cursor: pointer; transform: rotateY(calc(var(--i) * (360deg / var(--n, 11)))) translateZ(var(--r)); box-shadow: 0 18px 30px -16px rgba(0, 0, 0, 0.8); transition: filter 0.3s, outline-color 0.3s; filter: brightness(0.78) saturate(0.85); outline: 2px solid transparent; outline-offset: 3px; backface-visibility: hidden; }
+.rg-card.is-front { filter: none; outline-color: #e3c68e; }
+.rg-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; pointer-events: none; }
+.rg-card span { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 10px 6px; background: linear-gradient(transparent, rgba(0, 0, 0, 0.75)); color: #fff; font-size: 11.5px; text-align: left; }
+.rg-floor { position: absolute; left: 10%; right: 10%; bottom: 4%; height: 30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(227, 198, 142, 0.18), transparent); }
+.rg-ctrl { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; }
+.rg-ctrl button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(238, 231, 216, 0.3); background: transparent; color: inherit; font-size: 16px; cursor: pointer; }
+.rg-ctrl button:hover { background: rgba(255, 255, 255, 0.08); }
+.rg-cap { margin: 0; text-align: center; font-size: 13.5px; color: rgba(238, 231, 216, 0.85); }
