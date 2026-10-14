@@ -49,7 +49,7 @@
     const draw = () => {
       const it = items[pick];
       today.innerHTML = `<div class="gt-cal" aria-hidden="true"><span class="gt-m">${d.getMonth() + 1}月</span><b class="gt-d">${d.getDate()}</b><span class="gt-w">${wd}曜日</span></div>
-        <div class="gt-body"><p class="gt-label">${pick === dayNo % items.length ? '今日のことば' : 'もう 1 枚めくると'}</p><h2 class="gt-term">${it.querySelector('dt').innerHTML}</h2><p class="gt-def">${it.querySelector('dd').innerHTML}</p>
+        <div class="gt-body"><p class="gt-label">${pick === dayNo % items.length ? '今日のことば' : 'もう 1 枚めくると'}</p><h2 class="gt-term">${it.querySelector('dt').innerHTML}</h2><p class="gt-def">${it.querySelector('dd').innerHTML.replace(/<span class="gl-rel">.*$/s, '')}</p>
         <div class="gt-actions"><a href="#${it.id}">辞典で見る</a><button type="button" class="gt-next">ほかのことばをめくる</button></div></div>`;
       today.querySelector('.gt-next').addEventListener('click', () => { pick = (pick + 1 + Math.floor(Math.random() * (items.length - 1))) % items.length; draw(); today.querySelector('.gt-next').focus(); });
     };
@@ -90,7 +90,7 @@
       done.hidden = !allKnown; done.textContent = allKnown ? 'この分類の言葉は、ぜんぶ覚えました！ もう一度、復習してみよう。' : '';
       deck.querySelector('.gc-cat').textContent = it.closest('.gl-group').querySelector('.gl-head').textContent.replace(/^\d+/, '');
       deck.querySelector('.gc-term').innerHTML = deck.querySelector('.gc-term2').innerHTML = it.querySelector('dt').innerHTML;
-      deck.querySelector('.gc-def').innerHTML = it.querySelector('dd').innerHTML;
+      deck.querySelector('.gc-def').innerHTML = it.querySelector('dd').innerHTML.replace(/<span class="gl-rel">.*$/s, '');
     };
     card.addEventListener('click', () => card.classList.toggle('is-flipped'));
     deck.querySelector('.gc-ok').addEventListener('click', () => { known.add(pool[idx].id); saveKnown(); progress(); idx++; show(); });
@@ -101,4 +101,22 @@
     }));
     makePool(); progress(); show(); deck.hidden = false;
   }
+  // 関連する言葉：説明文の中に、ほかの見出し語が出てきたら、その言葉へのリンクを下に並べる（最大 4 つ）
+  (function() {
+    // 見出し語から、さがす言葉をつくる（「インフレーション（インフレ）」→ インフレーション・インフレ、「金利・利息」→ 金利・利息）
+    const names = items.map(it => {
+      const dt = it.querySelector('dt').textContent;
+      // 見出しそのもの（空白なし）と、かっこの中・「・」「と」で区切った部分。ただし、どこにでも出てくる言葉は使わない
+      const STOP = ['利益', '投資', '費用', '経済', '会社', 'お金'];
+      const main = dt.replace(/（.*?）/g, '').trim(), inner = (dt.match(/（(.*?)）/) || [])[1] || '';
+      const words = [main.replace(/\s/g, '')].concat(main.split(/[・と]/), inner.split(/[・、]/)).map(w => w.replace(/\s/g, '')).filter(w => w.length >= 2 && !STOP.includes(w));
+      return { id: it.id, label: dt.replace(/（.*?）/g, ''), words: [...new Set(words)] };
+    });
+    items.forEach(it => {
+      const text = it.querySelector('dd').textContent;
+      const rel = names.filter(n => n.id !== it.id && n.words.some(w => text.includes(w))).slice(0, 4);
+      if (!rel.length) return;
+      it.querySelector('dd').insertAdjacentHTML('beforeend', `<span class="gl-rel"><span>関連</span>${rel.map(n => `<a href="#${n.id}">${n.label}</a>`).join('')}</span>`);
+    });
+  })();
 })();
