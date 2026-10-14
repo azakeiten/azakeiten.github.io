@@ -19,8 +19,10 @@
   const md = d => `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
   const daysLeft = (weekNo * 7 + 11) - dayNo;   // 次の月曜まで
   // 毎週ちがう問題を、順番がわかりにくいように選ぶ（17 と問題数は互いに素になるよう調整）
-  let step = 17; while (gcd(step, all.length) !== 1) step++;
-  const q = all[((weekNo * step) % all.length + all.length) % all.length];
+  // 2026.10.14 に問題を増やしたので、10/19（月）の週の前までは、前からの問題だけで選ぶ（今週の問題が途中で変わらないように）
+  const W0 = Math.floor((Date.UTC(2026, 9, 19) / 864e5 - 4) / 7);
+  const pickFor = w => { const pool = w < W0 ? all.filter(x => !x.added) : all; let s = 17; while (gcd(s, pool.length) !== 1) s++; return pool[((w * s) % pool.length + pool.length) % pool.length]; };
+  const q = pickFor(weekNo);
   // 選択肢の並びも週で決める
   let seed = Math.abs(weekNo) + 1;
   const rand = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
@@ -40,7 +42,7 @@
     <div class="dq-choices">${choices.map((c, i) => `<button type="button" class="dq-choice" data-ok="${c.ok ? 1 : 0}"><span>${'ABCD'[i]}</span>${c.t}</button>`).join('')}</div>
     <div class="dq-result" aria-live="polite"></div>
     <p class="dq-week">毎週月曜に新しい問題。次の問題まで、あと ${daysLeft} 日。</p>
-    ${(() => { const p = all[(((weekNo - 1) * step) % all.length + all.length) % all.length], pm = new Date(((weekNo - 1) * 7 + 4) * 864e5); return `<details class="dq-prev"><summary><span>先週の 1 問</span>${md(pm)}〜 の答えを見る</summary><p class="dq-prev-q">${p.q}</p><p class="dq-prev-a">答え：<b>${p.a[0]}</b></p><p class="dq-prev-note">${p.note}</p></details>`; })()}`;
+    ${(() => { const p = pickFor(weekNo - 1), pm = new Date(((weekNo - 1) * 7 + 4) * 864e5); return `<details class="dq-prev"><summary><span>先週の 1 問</span>${md(pm)}〜 の答えを見る</summary><p class="dq-prev-q">${p.q}</p><p class="dq-prev-a">答え：<b>${p.a[0]}</b></p><p class="dq-prev-note">${p.note}</p></details>`; })()}`;
   const result = box.querySelector('.dq-result');
   const btns = [...box.querySelectorAll('.dq-choice')];
 
