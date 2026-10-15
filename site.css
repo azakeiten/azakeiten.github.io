@@ -5856,3 +5856,41 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .qz-tower em { position: absolute; right: calc(50% - 110px); bottom: 30px; font-style: normal; font-size: 13px; font-weight: 800; color: var(--color-accent-deep, #b08a4a); }
 @media (max-width: 520px) { .qz-modes { grid-template-columns: 1fr; } .qz-tower-stage { height: 200px; } }
 @media (prefers-reduced-motion: reduce) { .qz-news, .qz-tower .vt-chip.is-drop { animation: none; } }
+
+/* ################################################################
+   ▼ v96 — 案内役「お札マン」（ふきだしつき）
+   ################################################################ */
+.osatsu { display: flex; align-items: flex-end; gap: 6px; margin: 14px 0 18px; max-width: 640px; }
+.osatsu.is-right { flex-direction: row-reverse; margin-left: auto; }
+.os-man { flex: none; display: grid; justify-items: center; width: 84px; }
+.os-man small { margin-top: -2px; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--color-muted); }
+.os-svg { width: 84px; height: auto; overflow: visible; animation: os-bob 3.2s ease-in-out infinite; }
+.os-eyes { transform-origin: 63px 50px; animation: os-blink 4.6s infinite; }
+.os-arm-r { transform-origin: 98px 52px; animation: os-wave 2.4s ease-in-out infinite; }
+.os-bubble { position: relative; margin: 0 0 22px; padding: 12px 16px; border-radius: 18px 18px 18px 4px; background: #fffaf0; color: #3a2f1f; border: 2px solid #6b4a22; font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; font-size: 15px; line-height: 1.7; box-shadow: 3px 4px 0 rgba(107, 74, 34, 0.25); }
+.os-bubble::before { content: ''; position: absolute; left: -10px; bottom: 6px; width: 14px; height: 14px; background: #fffaf0; border-left: 2px solid #6b4a22; border-bottom: 2px solid #6b4a22; transform: skewY(-35deg); }
+.osatsu.is-right .os-bubble { border-radius: 18px 18px 4px 18px; }
+.osatsu.is-right .os-bubble::before { left: auto; right: -10px; border-left: 0; border-right: 2px solid #6b4a22; transform: skewY(35deg); }
+@keyframes os-bob { 50% { transform: translateY(-4px); } }
+@keyframes os-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes os-wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-22deg); } }
+@media (prefers-reduced-motion: reduce) { .os-svg, .os-eyes, .os-arm-r { animation: none; } }
+@media (max-width: 520px) { .os-man, .os-svg { width: 64px; } .os-bubble { font-size: 14px; } }
+.ap-head .osatsu { margin: 18px auto 0; justify-content: center; text-align: left; }
+.notfound .osatsu { margin: 18px auto; justify-content: center; text-align: left; }
+
+/* ▼ v97 — 長いページの「このページの中身」 */
+.ptoc { padding: 14px 0 6px; border-bottom: 1px solid var(--color-border); background: var(--color-bg); }
+.ptoc-head { margin: 0 0 8px; display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; }
+.ptoc-head span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 5px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-size: 12px; transform: rotate(-5deg); }
+.ptoc-head small { font-weight: 600; color: var(--color-muted); letter-spacing: 0; }
+.ptoc ol { list-style: none; margin: 0; padding: 0 0 10px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; }
+.ptoc li { flex: none; }
+.ptoc a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px 7px 8px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; text-decoration: none; font-size: 13px; font-weight: 600; white-space: nowrap; transition: background 0.2s, border-color 0.2s; }
+.ptoc a b { display: grid; place-items: center; min-width: 24px; height: 22px; padding: 0 4px; border-radius: 999px; background: color-mix(in srgb, #b08a4a 16%, transparent); font-size: 11px; color: var(--color-accent-deep, #8a6a2a); }
+.ptoc a:hover { border-color: #b08a4a; }
+.ptoc a.is-here { background: #1c2b23; color: #f3eee4; border-color: #1c2b23; }
+.ptoc a.is-here b { background: #e3c68e; color: #1c2b23; }
+.os-man, .os-svg { width: 100px; }
+@media (max-width: 520px) { .os-man, .os-svg { width: 72px; } }
+section[id] { scroll-margin-top: 84px; }

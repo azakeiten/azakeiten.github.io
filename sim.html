@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261015e" />
+  <link rel="stylesheet" href="site.css?v=20261015h" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -44,7 +44,7 @@
     </div>
   </header>
 
-  <section class="about tight">
+  <section class="about tight" id="sim-main" data-toc="チップ配分シミュレーター">
     <div class="container">
       <div class="sim-ticker reveal" role="note" aria-label="このシミュレーターの想定">
         <span class="st-label">想定（例）</span>
@@ -52,6 +52,7 @@
         <span class="st-item"><b>債券</b><i class="st-up">年 +1.5%</i><small>ブレ ±4%</small></span>
         <span class="st-item"><b>株</b><i class="st-up">年 +6.0%</i><small>ブレ ±18%</small></span>
       </div>
+      <div data-osatsu="チップの分け方ひとつで、10 年後がこんなに変わるんだ。いろいろ試してみてね。"></div>
       <div id="sim" class="sim"></div>
       <p class="dg-note">※ 学ぶための模擬です。値動きは「株は大きく増えやすいがブレも大きい」などの性質をまねた仮の数字で、実際の市場のデータや将来の予想ではありません。投資をすすめるものでもありません。</p>
     </div>
@@ -155,15 +156,17 @@
   </section>
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261015e"></script>
-  <script src="layout.js?v=20261015e"></script>
-  <script src="brand.js?v=20261015e"></script>
-  <script src="nav.js?v=20261015e"></script>
-  <script src="reveal.js?v=20261015e"></script>
-  <script src="sim.js?v=20261015e"></script>
-  <script src="double.js?v=20261015e"></script>
-  <script src="market.js?v=20261015e"></script>
-  <script src="updown.js?v=20261015e"></script>
-  <script src="site.js?v=20261015e"></script>
+  <script src="content.js?v=20261015h"></script>
+  <script src="layout.js?v=20261015h"></script>
+  <script src="brand.js?v=20261015h"></script>
+  <script src="nav.js?v=20261015h"></script>
+  <script src="reveal.js?v=20261015h"></script>
+  <script src="sim.js?v=20261015h"></script>
+  <script src="double.js?v=20261015h"></script>
+  <script src="market.js?v=20261015h"></script>
+  <script src="updown.js?v=20261015h"></script>
+  <script src="osatsu.js?v=20261015h"></script>
+  <script src="pagetoc.js?v=20261015h"></script>
+  <script src="site.js?v=20261015h"></script>
 </body>
 </html>
