@@ -32,7 +32,7 @@
     { group: '参加する', en: 'Join', pages: [
       { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.6M12 16.8v.2', href: 'diagnosis.html',  ja: 'エコノミスト診断',  en: 'Type Test', desc: 'YES か NO で、あなたの投資家タイプがわかる。', img: 'photos/room-diagnosis.jpg', badge: 'NEW' },
       { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9 9h6M9 12h6M12 6v12', href: 'quiz.html',       ja: '億万長者クイズ',    en: 'Quiz',      desc: 'チップを賭けて 2 問に挑戦。目指せ 6 倍。', img: 'photos/board-special.jpg', badge: 'NEW' },
-      { ico: 'M4 19h16M7 16v-5M12 16V7M17 16v-8', href: 'sim.html',        ja: 'チップ配分シミュレーター', en: 'Simulator', desc: 'チップを株・債券・預金に分けて、10 年後へ早送り。', img: 'photos/board-special.jpg', badge: 'NEW' },
+      { ico: 'M4 19h16M7 16v-5M12 16V7M17 16v-8', href: 'sim.html',        ja: '経済ラボ', en: 'Lab', desc: 'シミュレーターとゲームで、経済を手で動かす。', img: 'photos/board-special.jpg', badge: 'NEW' },
       { ico: 'M5 11h14v9H5zM9 15l2 2 4-4M8 11V6h8v5', href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '次はどんな展示が見たい？ あなたの 1 票を参考に。',   img: 'photos/hallway-game.jpg', badge: '受付中' },
       { ico: 'M3 12l4-4 3 2 4-3 7 6M7 13l3 3 2-1 2 2 3-3', href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'photos/star-bills.jpg' },
       { ico: 'M4 6h16v12H4zM4 7l8 6 8-6', href: 'contact.html',    ja: 'お問い合わせ',      en: 'Contact',  desc: 'フォーム、または Instagram の DM から。',      img: 'photos/star-door.jpg' }
@@ -170,7 +170,7 @@
   // フッターのリンクは「知る」「遊ぶ・学ぶ」「つながる」の 3 つに分ける
   const FOOT_GROUPS = [
     { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['azakei.html', 'AZAKEI として'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
-    { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '億万長者クイズ'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', 'チップ配分<wbr>シミュレーター'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
+    { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '億万長者クイズ'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', '経済ラボ'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
     { en: 'Connect', ja: 'つながる', links: [['contact.html', 'お問い合わせ'], ['sponsor.html', '協賛のご案内'], ...sns.map(s => [s.url, s.name, s.handle])] }
   ];
   footer.innerHTML = `
@@ -228,10 +228,10 @@
     ['glossary.html', '今日のことば', '用語辞典', '日めくり 用語'],
     ['glossary.html#nenpyo', '経済の歴史の年表', '用語辞典', '年表 歴史 バブル 恐慌 ショック'],
     ['glossary.html', 'お札マンの 3 コマ解説', '用語辞典', '解説 1 分 インフレ 円安 株 金利 複利 マンガ'],
-    ['sim.html#updown', 'チャート予想ゲーム', 'シミュレーター', 'ゲーム 株価 チャート 上がる 下がる 予想'],
-    ['sim.html#market', '値段はどう決まる？', 'シミュレーター', '需要 供給 値段 価格'],
-    ['sim.html#okozukai', 'おこづかい 12 か月チャレンジ', 'シミュレーター', 'おこづかい 貯金 家計簿 ゲーム 自転車'],
-    ['sim.html#double', 'お金が 2 倍になるまで', 'シミュレーター', '72 の法則 複利 2 倍'],
+    ['sim.html#updown', 'チャート予想ゲーム', '経済ラボ', 'ゲーム 株価 チャート 上がる 下がる 予想'],
+    ['sim.html#market', '値段はどう決まる？', '経済ラボ', '需要 供給 値段 価格'],
+    ['sim.html#okozukai', 'おこづかい 12 か月チャレンジ', '経済ラボ', 'おこづかい 貯金 家計簿 ゲーム 自転車'],
+    ['sim.html#double', 'お金が 2 倍になるまで', '経済ラボ', '72 の法則 複利 2 倍'],
     ['index.html#weekly', '今週の 1 問', 'ホーム', 'クイズ 毎週'],
     ['diagnosis.html#types', '投資家タイプ一覧', '診断', 'タイプ 結果'],
     ['sponsor.html', '協賛・取材のご相談', '協賛', 'スポンサー 企業 取材 メディア'],

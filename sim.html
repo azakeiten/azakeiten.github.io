@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>チップ配分シミュレーター | 麻経 AZAKEI</title>
-  <meta name="description" content="チップ 100 枚を株・債券・預金に分けて、10 年後へ早送り。リスクとリターン、分散投資を遊びながら体験できるシミュレーター。" />
+  <title>経済ラボ | 麻経 AZAKEI</title>
+  <meta name="description" content="経済を手で動かして学べる「経済ラボ」。チップ配分シミュレーター、72 の法則、株価のチャート予想ゲーム、おこづかい 12 か月チャレンジ、需要と供給。麻布中学校・高等学校の経済系同好会 AZAKEI。" />
   <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
   <link rel="icon" href="icon-32.png" type="image/png" sizes="32x32" />
@@ -13,8 +13,8 @@
   <meta name="apple-mobile-web-app-title" content="麻経" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AZAKEI" />
-  <meta property="og:title" content="チップ配分シミュレーター | 麻経 AZAKEI" />
-  <meta property="og:description" content="チップ 100 枚を株・債券・預金に分けて、10 年後へ早送り。リスクとリターンを遊びながら体験。" />
+  <meta property="og:title" content="経済ラボ | 麻経 AZAKEI" />
+  <meta property="og:description" content="シミュレーターとゲームで、経済を手で動かす「経済ラボ」。" />
   <meta property="og:url" content="https://azakeiten.github.io/sim.html" />
   <link rel="canonical" href="https://azakeiten.github.io/sim.html" />
   <meta property="og:image" content="https://azakeiten.github.io/og.jpg" />
@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261016c" />
+  <link rel="stylesheet" href="site.css?v=20261016d" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -35,14 +35,28 @@
 </head>
 <body>
 
-  <header class="page-hero" data-bg="SIMULATE">
+  <header class="page-hero" data-bg="LAB">
     <div class="container">
-      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / チップ配分シミュレーター</p>
-      <p class="section-label"><span class="ph-seal" aria-hidden="true">試</span>Portfolio Simulator</p>
-      <h1 class="section-title"><span class="keep-phrase">チップ配分</span><span class="keep-phrase"><em>シミュレーター</em></span></h1>
-      <p class="page-hero-lead">チップ 100 枚を「株・債券・預金」に分けて、10 年後へ早送り。増え方とブレ方を見くらべて、リスクとリターン、分散投資を体で覚えよう。</p>
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / 経済ラボ</p>
+      <p class="section-label"><span class="ph-seal" aria-hidden="true">試</span>Economics Lab</p>
+      <h1 class="section-title"><span class="keep-phrase">経済</span><span class="keep-phrase"><em>ラボ</em></span></h1>
+      <p class="page-hero-lead">シミュレーターとゲームで、経済を手で動かしてみる実験室。チップの分け方、複利、株価の予想、おこづかいのやりくり、値段の決まり方。気になるものから、どうぞ。</p>
     </div>
   </header>
+
+  <!-- 経済ラボのメニュー（6 つの実験） -->
+  <section class="about tight lab-board-wrap">
+    <div class="container">
+      <ol class="lab-board reveal" data-lab-board>
+        <li><a href="#sim-main"><span class="lb-seal">配</span><b>チップ配分</b><small>株・債券・預金に分けて、10 年後へ</small><i>シミュレーター</i></a></li>
+        <li><a href="#double"><span class="lb-seal is-g">倍</span><b>お金が 2 倍になるまで</b><small>年利を動かして、72 の法則</small><i>計算</i></a></li>
+        <li><a href="#updown"><span class="lb-seal is-y">予</span><b>チャート予想</b><small>上がる？ 下がる？ 7 回戦</small><i>ゲーム</i></a></li>
+        <li><a href="#okozukai"><span class="lb-seal is-y">遣</span><b>おこづかいチャレンジ</b><small>1 年後に自転車を買えるか</small><i>ゲーム</i></a></li>
+        <li><a href="#market"><span class="lb-seal is-g">値</span><b>値段の決まり方</b><small>需要と供給を、動かして</small><i>グラフ</i></a></li>
+        <li><a href="#words"><span class="lb-seal is-d">辞</span><b>出てきたことば</b><small>用語辞典で、もう少し</small><i>ことば</i></a></li>
+      </ol>
+    </div>
+  </section>
 
   <section class="about tight" id="sim-main" data-toc="チップ配分シミュレーター">
     <div class="container">
@@ -168,18 +182,18 @@
   </section>
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261016c"></script>
-  <script src="layout.js?v=20261016c"></script>
-  <script src="brand.js?v=20261016c"></script>
-  <script src="nav.js?v=20261016c"></script>
-  <script src="reveal.js?v=20261016c"></script>
-  <script src="sim.js?v=20261016c"></script>
-  <script src="double.js?v=20261016c"></script>
-  <script src="market.js?v=20261016c"></script>
-  <script src="updown.js?v=20261016c"></script>
-  <script src="osatsu.js?v=20261016c"></script>
-  <script src="okozukai.js?v=20261016c"></script>
-  <script src="pagetoc.js?v=20261016c"></script>
-  <script src="site.js?v=20261016c"></script>
+  <script src="content.js?v=20261016d"></script>
+  <script src="layout.js?v=20261016d"></script>
+  <script src="brand.js?v=20261016d"></script>
+  <script src="nav.js?v=20261016d"></script>
+  <script src="reveal.js?v=20261016d"></script>
+  <script src="sim.js?v=20261016d"></script>
+  <script src="double.js?v=20261016d"></script>
+  <script src="market.js?v=20261016d"></script>
+  <script src="updown.js?v=20261016d"></script>
+  <script src="osatsu.js?v=20261016d"></script>
+  <script src="okozukai.js?v=20261016d"></script>
+  <script src="pagetoc.js?v=20261016d"></script>
+  <script src="site.js?v=20261016d"></script>
 </body>
 </html>

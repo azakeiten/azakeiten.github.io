@@ -678,7 +678,7 @@ try {
     ['activities.html', '活動風景・日常', 'ミーティングから放課後まで。', 'photos/setup.jpg'],
     ['events.html', '日程・イベント', 'これからの予定と、これまでの歩み。', 'photos/balloons.jpg'],
     ['quiz.html', '億万長者クイズ', 'チップを賭けて、億万長者を目指せ。', 'photos/board-millionaire.jpg'],
-    ['sim.html', 'チップ配分シミュレーター', '株・債券・預金に分けて、10 年後へ早送り。', 'photos/board-special.jpg'],
+    ['sim.html', '経済ラボ', 'シミュレーターとゲームで、経済を手で動かす。', 'photos/board-special.jpg'],
     ['diagnosis.html', 'エコノミスト診断', 'YES / NO で、あなたの投資家タイプがわかる。', 'photos/room-diagnosis.jpg'],
     ['glossary.html', '経済用語ミニ辞典', '経済の言葉を、やさしく。', 'photos/rules-posters.jpg'],
     ['vote.html', '文化祭投票', '次はどんな展示が見たい？', 'photos/hallway-game.jpg'],
@@ -873,7 +873,7 @@ try {
   const STAMPS = [
     ['index.html', 'ホーム'], ['about.html', '麻経とは'], ['azakei.html', 'AZAKEI として'], ['festival.html', '文化祭'],
     ['contests.html', 'コンテスト'], ['activities.html', '活動風景'], ['events.html', '日程'], ['quiz.html', 'クイズ'],
-    ['diagnosis.html', '診断'], ['sim.html', 'シミュレーター'], ['glossary.html', '用語辞典'], ['vote.html', '投票'],
+    ['diagnosis.html', '診断'], ['sim.html', '経済ラボ'], ['glossary.html', '用語辞典'], ['vote.html', '投票'],
     ['sponsor.html', '協賛'], ['contact.html', 'お問い合わせ']
   ];
   const visited = new Set(get('azakei-visited', []));

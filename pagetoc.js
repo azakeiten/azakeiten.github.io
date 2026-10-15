@@ -5,7 +5,7 @@
    ================================================================ */
 (function() {
   const hero = document.querySelector('.page-hero');
-  if (!hero) return;
+  if (!hero || document.querySelector('[data-lab-board]')) return;
   const secs = [...document.querySelectorAll('section[id]')].filter(s => (s.dataset.toc || s.querySelector('h2')) && !s.closest('.page-hero'));
   if (secs.length < 4) return;
   const label = s => (s.dataset.toc || s.querySelector('h2').textContent).replace(/\s+/g, ' ').replace(/[。、]$/, '').trim();

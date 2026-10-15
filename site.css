@@ -5970,3 +5970,16 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .oz-log li.n { color: #8a7c66; }
 .oz-link { font-size: 13.5px; font-weight: 800; color: #6b4a22; }
 @media (max-width: 520px) { .oz-status { grid-template-columns: 1fr 1fr; } .oz-status p:last-child { grid-column: 1 / -1; } }
+
+/* ▼ v101 — 経済ラボ：6 つの実験のメニュー */
+.lab-board-wrap { padding-bottom: 0; }
+.lab-board { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.lab-board a { position: relative; display: grid; grid-template-columns: 44px 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; padding: 14px 16px; border-radius: 18px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); color: inherit; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+.lab-board a:hover { transform: translateY(-2px); border-color: #b08a4a; box-shadow: 0 14px 28px -20px rgba(60, 40, 10, 0.5); }
+.lb-seal { grid-row: span 2; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; transform: rotate(-5deg); }
+.lb-seal.is-g { background: #2f6b3a; } .lb-seal.is-y { background: #c98a1c; } .lb-seal.is-d { background: #1c2b23; color: #e3c68e; }
+.lab-board b { font-size: 15px; }
+.lab-board small { font-size: 12.5px; color: var(--color-muted); }
+.lab-board i { position: absolute; right: 12px; top: 10px; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: var(--color-muted); }
+@media (max-width: 860px) { .lab-board { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .lab-board { grid-template-columns: 1fr; gap: 8px; } .lab-board a { padding: 12px 14px; } }
