@@ -5901,3 +5901,28 @@ section[id] { scroll-margin-top: 84px; }
 .qz-settle .osatsu, .qz-final .osatsu { margin: 10px auto; justify-content: center; text-align: left; }
 .welcome-back .osatsu { margin: 0 0 8px; }
 @media (prefers-reduced-motion: reduce) { .osatsu.is-happy .os-svg { animation: none; } }
+
+/* ################################################################
+   ▼ v98 — 用語辞典：お札マンの 3 コマ解説
+   ################################################################ */
+.koma { margin-bottom: 36px; padding: clamp(18px, 3vw, 28px); border-radius: 24px; background: #fffaf0; background-image: var(--grain, none); border: 2px solid #6b4a22; box-shadow: 4px 5px 0 rgba(107, 74, 34, 0.2); color: #2a2015; }
+.km-head { margin: 0 0 12px; display: flex; align-items: center; gap: 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(18px, 2.2vw, 22px); }
+.km-head span { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 7px; background: #c98a1c; color: #fff; font-size: 17px; transform: rotate(-5deg); }
+.km-head small { font-family: var(--font-body, sans-serif); font-size: 12px; font-weight: 700; color: #8a7c66; }
+.km-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.km-tabs button { padding: 7px 14px; border-radius: 999px; border: 2px solid #6b4a22; background: #fff; color: #2a2015; font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; }
+.km-tabs [aria-selected="true"] { background: #6b4a22; color: #fffaf0; }
+.km-panels { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; counter-reset: km; }
+.km-p { position: relative; display: grid; align-content: start; gap: 6px; min-height: 170px; padding: 16px 16px 14px; background: #fff; border: 2.5px solid #2a2015; border-radius: 4px; animation: km-in 0.35s cubic-bezier(.2, 1.3, .4, 1) calc(var(--i) * 0.08s) both; }
+.km-p:not(:last-child)::after { content: '▶'; position: absolute; right: -14px; top: 50%; translate: 0 -50%; z-index: 1; font-size: 13px; color: #b5432f; }
+.km-no { position: absolute; left: -2px; top: -2px; display: grid; place-items: center; width: 26px; height: 26px; background: #2a2015; color: #fff; font-size: 13px; font-weight: 800; }
+.km-p small { margin-left: 28px; font-size: 12px; font-weight: 700; color: #8a7c66; }
+.km-p b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(22px, 2.6vw, 28px); line-height: 1.3; color: #b5432f; }
+.km-p p { margin: 0; font-size: 13.5px; line-height: 1.75; }
+.km-sum { margin-top: 10px; }
+.km-sum .osatsu { margin: 6px 0 4px; max-width: none; }
+.km-more { font-size: 13px; font-weight: 800; color: #6b4a22; }
+@keyframes km-in { from { opacity: 0; transform: translateY(10px) rotate(-1deg); } }
+@media (max-width: 680px) { .km-panels { grid-template-columns: 1fr; gap: 18px; } .km-p { min-height: 0; } .km-p:not(:last-child)::after { content: '▼'; right: 50%; top: auto; bottom: -17px; translate: 50% 0; } }
+@media (prefers-reduced-motion: reduce) { .km-p { animation: none; } }
+.koma .os-man small { color: #8a7c66; }
