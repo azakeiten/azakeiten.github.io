@@ -21,14 +21,40 @@
   };
   const Q = window.AZAKEI_QUIZ_Q;   // 問題は quiz-data.js
 
-  const BEST_KEY = 'azakei_quiz_best';
+  const BEST_KEY = 'azakei_quiz_best', NEWS_BEST_KEY = 'azakei_quiz_best_news';
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let chips, round, used, cur, life, history, log;
-  let best = 0;
-  try { best = +localStorage.getItem(BEST_KEY) || 0; } catch (e) {}
+  let chips, round, used, cur, life, history, log, mode = 'festival', news = null;
+  let best = 0, newsBest = 0;
+  try { best = +localStorage.getItem(BEST_KEY) || 0; newsBest = +localStorage.getItem(NEWS_BEST_KEY) || 0; } catch (e) {}
+
+  // ニュースモード（Web 版だけ）：毎ラウンド、麻経新聞のニュースが 1 つ出て、倍率やチップが変わる
+  const NEWS = [
+    { t: '好景気', d: 'モノがよく売れて、景気がいい！ このラウンドは、2 問正解の倍率が +1。', fx: { bonus2: 1 } },
+    { t: '不景気', d: '景気が悪く、みんな財布のひもが固い……。1 問正解の倍率が −1。', fx: { minus1: 1 } },
+    { t: '日銀が利上げ', d: '金利が上がった。賭けずに残したチップ 3 枚ごとに、利息 1 枚。', fx: { interest: 3 } },
+    { t: '増税', d: 'このラウンドでチップが増えたら、増えた分の 1 割（切り上げ）を税金として納める。', fx: { tax: 0.1 } },
+    { t: '技術革新', d: '新しい技術で大もうけのチャンス。激ムズの 2 問正解が ×8 に。', fx: { hard2: 8 } },
+    { t: 'バブル発生', d: '1 問でも正解すれば、倍率がすべて +1。ただし 0 問正解だと、残したチップも半分に。', fx: { bubble: 1 } },
+    { t: '平穏な一週間', d: '大きなニュースはなし。いつもどおりの倍率で勝負。', fx: {} }
+  ];
+  const rateFor = (k, c) => {
+    let r = LEVELS[k].rate[c];
+    const fx = mode === 'news' && news ? news.fx : {};
+    if (fx.hard2 && k === 'hard' && c === 2) r = fx.hard2;
+    if (fx.bonus2 && c === 2) r += fx.bonus2;
+    if (fx.minus1 && c === 1) r = Math.max(0, r - 1);
+    if (fx.bubble && c >= 1) r += 1;
+    return r;
+  };
 
   const shuffle = arr => arr.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(v => v[1]);
-  const chipRow = n => `<span class="qz-chips" aria-label="チップ ${n} 枚">${'<i></i>'.repeat(Math.min(n, 30))}${n > 30 ? `<em>+${n - 30}</em>` : ''}</span>`;
+  // 手持ちのチップを、3D の山で（30 枚まで積み、それより多い分は数で）
+  const chipRow = (n, from) => {
+    const shown = Math.min(n, 30);
+    let h = '';
+    for (let i = 0; i < shown; i++) h += `<span class="vt-chip${from !== undefined && i >= from ? ' is-drop' : ''}" style="--z:${i * 6}px;--d:${from !== undefined && i >= from ? ((i - from) * 0.05).toFixed(2) : 0}s;--c:${['#b5432f', '#2f6b3a', '#b08a4a'][Math.floor(i / 5) % 3]};--s:#fffaf0"><i></i><i></i><i></i><b></b></span>`;
+    return `<div class="qz-tower" aria-label="チップ ${n} 枚"><div class="qz-tower-stage" style="height:${Math.min(230, 76 + shown * 6)}px"><div class="vt-stack">${h}</div></div>${n > 30 ? `<em>＋${n - 30} 枚</em>` : ''}</div>`;
+  };
   const dots = () => `<span class="qz-dots" aria-hidden="true">${Array.from({ length: ROUNDS }, (_, i) => `<i class="${i < round - 1 ? 'done' : i === round - 1 ? 'now' : ''}"></i>`).join('')}</span>`;
 
   // 画面を切りかえたら、カードの頭が見えるようにする（スマホで下に取り残されないように）
@@ -188,10 +214,18 @@
         </ul>
         <p class="qz-small">おたすけは Web 版だけのルール。どちらも 1 ゲームに 1 回だけ使えます。問題は全 ${Q.easy.length + Q.normal.length + Q.hard.length} 問から毎回ランダムに出題。</p>
         <p class="qz-record">文化祭の最高記録は <b>120 枚（24 倍）</b>。${best ? `あなたの最高記録は <b>${best} 枚</b>。` : ''}</p>
+        <div class="qz-modes" role="radiogroup" aria-label="ルールをえらぶ">
+          <button type="button" role="radio" class="qz-mode" data-mode="festival" aria-checked="${mode === 'festival'}"><b>文化祭ルール</b><small>会場と同じ倍率で勝負。ランキングに参加できる</small></button>
+          <button type="button" role="radio" class="qz-mode" data-mode="news" aria-checked="${mode === 'news'}"><span class="qz-new">NEW</span><b>ニュースモード</b><small>毎ラウンド「麻経新聞」のニュースで、倍率やチップが変わる${newsBest ? `（最高 ${newsBest} 枚）` : ''}</small></button>
+        </div>
         <button type="button" class="btn-primary qz-start">ゲームをはじめる</button>
         ${RANK ? '<div class="qz-rank" data-rank-box><p class="qz-rank-head">Web 版ランキング <small>上位 5 人</small></p><p class="qz-small">読み込み中…</p></div>' : ''}
       </div>`);
     if (RANK) loadRank(root.querySelector('[data-rank-box]'), 5);
+    root.querySelectorAll('.qz-mode').forEach(b => b.addEventListener('click', () => {
+      mode = b.dataset.mode;
+      root.querySelectorAll('.qz-mode').forEach(x => x.setAttribute('aria-checked', x === b ? 'true' : 'false'));
+    }));
     root.querySelector('.qz-start').addEventListener('click', () => {
       chips = START_CHIPS; round = 0; used = { easy: new Set(), normal: new Set(), hard: new Set() };
       life = { half: true, swap: true }; history = [START_CHIPS]; log = [];
@@ -201,9 +235,12 @@
 
   function bet() {
     round++;
+    // 同じニュースが続かないように
+    if (mode === 'news') { const pool = NEWS.filter(x => x !== news); news = pool[(Math.random() * pool.length) | 0]; } else news = null;
     show(`
       <div class="dg-card qz-bet">
         <div class="qz-status"><span>ラウンド ${round} / ${ROUNDS} ${dots()}</span><span>手持ち <b>${chips}</b> 枚</span></div>
+        ${news ? `<div class="qz-news"><p class="qz-news-head"><span>麻経新聞</span><small>ラウンド ${round} 号</small></p><p class="qz-news-t">${news.t}</p><p class="qz-news-d">${news.d}</p></div>` : ''}
         ${chipRow(chips)}
         <h2>何枚賭ける？</h2>
         <div class="qz-amount">
@@ -215,7 +252,7 @@
         <p class="qz-preview"></p>
         <h2>難しさを選ぶ</h2>
         <div class="qz-levels">
-          ${Object.entries(LEVELS).map(([k, l]) => `<button type="button" class="qz-level qz-${k}" data-k="${k}"><b>${l.name}</b><small>2 問正解で ×${l.rate[2]}</small><span class="qz-max" data-r="${l.rate[2]}"></span></button>`).join('')}
+          ${Object.entries(LEVELS).map(([k, l]) => `<button type="button" class="qz-level qz-${k}" data-k="${k}"><b>${l.name}</b><small>2 問正解で ×${rateFor(k, 2)}${rateFor(k, 2) !== l.rate[2] ? '<i class="qz-up">ニュース</i>' : ''}</small><span class="qz-max" data-r="${rateFor(k, 2)}"></span></button>`).join('')}
         </div>
       </div>`);
     const out = root.querySelector('#qzBet');
@@ -306,10 +343,16 @@
   }
 
   function settle() {
-    const rate = LEVELS[cur.level].rate[cur.correct];
+    const rate = rateFor(cur.level, cur.correct);
     const back = cur.bet * rate;
     const before = chips;
-    chips = chips - cur.bet + back;
+    let kept = chips - cur.bet;
+    const notes = [];
+    const fx = news ? news.fx : {};
+    if (fx.interest && kept >= fx.interest) { const add = Math.floor(kept / fx.interest); kept += add; notes.push(`利上げ：残したチップに利息 +${add} 枚`); }
+    if (fx.bubble && cur.correct === 0 && kept > 0) { const cut = Math.ceil(kept / 2); kept -= cut; notes.push(`バブル崩壊：残したチップが半分に −${cut} 枚`); }
+    chips = kept + back;
+    if (fx.tax && chips > before) { const tax = Math.ceil((chips - before) * fx.tax); chips -= tax; notes.push(`増税：増えた分から税金 −${tax} 枚`); }
     history.push(chips);
     const diff = chips - before;
     const end = round >= ROUNDS || chips <= 0;
@@ -318,34 +361,35 @@
         <p class="dg-kicker">ラウンド ${round} の結果</p>
         <h2>${cur.correct} 問正解 → <em>×${rate}</em></h2>
         <p class="qz-calc">賭けた ${cur.bet} 枚 × ${rate} ＝ ${back} 枚</p>
+        ${notes.length ? `<ul class="qz-news-fx">${notes.map(n => `<li>${n}</li>`).join('')}</ul>` : ''}
         <p class="qz-diff ${diff > 0 ? 'up' : diff < 0 ? 'down' : ''}">${diff > 0 ? '+' : ''}${diff} 枚</p>
         <div class="qz-status"><span>手持ち</span><span><b class="qz-count">${before}</b> 枚</span></div>
-        ${chipRow(chips)}
+        ${chipRow(chips, diff > 0 ? Math.min(before, 30) : undefined)}
         ${chips <= 0 ? '<p class="qz-small">チップがなくなりました。ここでゲームオーバー。</p>' : ''}
         <button type="button" class="btn-primary qz-go">${end ? '最終結果を見る' : '次のラウンドへ'}</button>
       </div>`);
     countUp(root.querySelector('.qz-count'), before, chips);
-    if (diff > 0) root.querySelectorAll('.qz-chips i').forEach((c, i) => { if (i >= before) { c.classList.add('is-new'); c.style.animationDelay = `${Math.min(i - before, 25) * 30}ms`; } });
     root.querySelector('.qz-go').addEventListener('click', () => end ? finish() : bet());
   }
 
   function finish() {
     const times = Math.round(chips / START_CHIPS * 10) / 10;
-    const isBest = chips > best;
-    if (isBest) { best = chips; try { localStorage.setItem(BEST_KEY, chips); } catch (e) {} }
+    const prevBest = mode === 'news' ? newsBest : best;
+    const isBest = chips > prevBest;
+    if (isBest) { if (mode === 'news') { newsBest = chips; try { localStorage.setItem(NEWS_BEST_KEY, chips); } catch (e) {} } else { best = chips; try { localStorage.setItem(BEST_KEY, chips); } catch (e) {} } }
     const title = chips >= 120 ? '伝説の億万長者' : chips >= 40 ? '億万長者' : chips > START_CHIPS ? 'やり手の投資家' : chips > 0 ? '堅実な投資家' : '一文なし……';
     const okCount = log.filter(l => l.ok).length;
     const url = 'https://azakeiten.github.io/quiz.html';
     const text = `AZAKEI の億万長者クイズで、チップ ${START_CHIPS} 枚 → ${chips} 枚（${times} 倍）！ 称号「${title}」 #AZAKEI`;
     show(`
       <div class="dg-card qz-final">
-        <p class="dg-kicker">最終結果</p>
+        <p class="dg-kicker">最終結果${mode === 'news' ? '（ニュースモード）' : ''}</p>
         <p class="qz-big"><span class="qz-count">0</span><small>枚</small></p>
         <p class="qz-times">${START_CHIPS} 枚 → ${chips} 枚（${times} 倍）</p>
         <h2>称号：<em>${title}</em></h2>
         <p>${chips >= 40 ? '文化祭なら、シャーペンをプレゼントしていた成績です！' : '文化祭では、40 枚以上でシャーペンをプレゼントしていました。'}${isBest ? '<br><b>自己ベスト更新！</b>' : ''}</p>
         <p class="qz-record">文化祭の最高記録は 120 枚（24 倍）。${chips > 120 ? '<b>記録を超えました！</b>' : `あと ${121 - chips} 枚で記録更新。`}</p>
-        ${rankForm(chips)}
+        ${mode === 'news' ? '<p class="qz-small">ニュースモードの記録は、ランキングには入りません（自己ベストは別に残ります）。</p>' : rankForm(chips)}
         ${chart()}
         <details class="qz-review">
           <summary>出題された問題をふり返る（${log.length} 問中 ${okCount} 問正解）</summary>

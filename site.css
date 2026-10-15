@@ -5828,3 +5828,31 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .gl-rows button[aria-pressed="true"] small { color: rgba(255, 255, 255, 0.8); }
 .gl-rows button:disabled { opacity: 0.35; cursor: default; }
 @media (max-width: 420px) { .gl-rows button { width: 34px; height: 36px; font-size: 15px; } .gl-rows-label { width: 100%; } }
+
+/* ################################################################
+   ▼ v95 — 億万長者クイズ：ニュースモード（麻経新聞）・3D のチップの山
+   ################################################################ */
+.qz-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0 6px; }
+.qz-mode { position: relative; display: grid; gap: 4px; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; font: inherit; text-align: left; cursor: pointer; transition: border-color 0.2s, transform 0.15s; }
+.qz-mode b { font-size: 15.5px; }
+.qz-mode small { font-size: 12.5px; line-height: 1.6; color: var(--color-muted); }
+.qz-mode[aria-checked="true"] { border-color: var(--shu, #b5432f); box-shadow: 0 0 0 4px color-mix(in srgb, var(--shu, #b5432f) 14%, transparent); }
+.qz-mode[aria-checked="true"]::after { content: '✓'; position: absolute; right: 12px; top: 10px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--shu, #b5432f); color: #fff; font-size: 12px; font-weight: 800; }
+.qz-new { justify-self: start; padding: 1px 8px; border-radius: 999px; background: #c98a1c; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; }
+.qz-news { margin: 12px 0; padding: 14px 16px 16px; border-radius: 6px; background: #fbf7ec; color: #2a2015; border: 1px solid #d9cba8; box-shadow: 0 10px 22px -16px rgba(60, 40, 10, 0.6); transform: rotate(-0.6deg); animation: qz-news-in 0.5s cubic-bezier(.2, 1.3, .4, 1) both; }
+.qz-news-head { margin: 0 0 6px; display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 6px; border-bottom: 3px double #2a2015; }
+.qz-news-head span { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; letter-spacing: 0.3em; }
+.qz-news-head small { font-size: 11px; color: #7a6a50; }
+.qz-news-t { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(22px, 3vw, 28px); color: var(--shu, #b5432f); }
+.qz-news-d { margin: 4px 0 0; font-size: 14px; line-height: 1.75; }
+@keyframes qz-news-in { from { opacity: 0; transform: rotate(-8deg) scale(0.9); } }
+.qz-up { margin-left: 6px; padding: 0 6px; border-radius: 4px; background: #c98a1c; color: #fff; font-style: normal; font-size: 10px; font-weight: 800; }
+.qz-news-fx { list-style: none; margin: 6px 0; padding: 8px 12px; border-radius: 10px; background: color-mix(in srgb, #c98a1c 12%, transparent); font-size: 13.5px; }
+.qz-tower { position: relative; display: grid; justify-items: center; margin: 4px 0 8px; }
+.qz-tower-stage { position: relative; width: 120px; height: 230px; perspective: 700px; perspective-origin: 50% 0%; }
+.qz-tower .vt-stack { position: absolute; left: 50%; bottom: 22px; width: 56px; height: 56px; margin-left: -28px; transform-style: preserve-3d; transform: rotateX(62deg) rotateZ(-20deg); }
+.qz-tower .vt-chip { opacity: 1; }
+.qz-tower .vt-chip.is-drop { animation: vt-drop 0.4s cubic-bezier(.3, 1.4, .5, 1) var(--d) both; }
+.qz-tower em { position: absolute; right: calc(50% - 110px); bottom: 30px; font-style: normal; font-size: 13px; font-weight: 800; color: var(--color-accent-deep, #b08a4a); }
+@media (max-width: 520px) { .qz-modes { grid-template-columns: 1fr; } .qz-tower-stage { height: 200px; } }
+@media (prefers-reduced-motion: reduce) { .qz-news, .qz-tower .vt-chip.is-drop { animation: none; } }
