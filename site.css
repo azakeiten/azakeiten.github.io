@@ -5926,3 +5926,4 @@ section[id] { scroll-margin-top: 84px; }
 @media (max-width: 680px) { .km-panels { grid-template-columns: 1fr; gap: 18px; } .km-p { min-height: 0; } .km-p:not(:last-child)::after { content: '▼'; right: 50%; top: auto; bottom: -17px; translate: 50% 0; } }
 @media (prefers-reduced-motion: reduce) { .km-p { animation: none; } }
 .koma .os-man small { color: #8a7c66; }
+.km-tabs .km-rand { border-style: dashed; background: #fff3dc; } .km-tabs .km-rand::before { content: "↻ "; }

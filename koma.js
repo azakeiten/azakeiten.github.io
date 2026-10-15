@@ -12,16 +12,25 @@
     { k: '株', id: 'stock', p: [['会社', 'お金がほしい', '新しい工場をつくりたい！'], ['あなた', '株を買う', 'お金を出して、会社の持ち主のひとりに。'], ['その後', '配当 ／ 値上がり', 'もうかれば分け前がもらえる。でも、下がることもある。']], s: '株は「会社を応援して、いっしょにもうけを分け合う」しくみ。リスクもセットだよ。' },
     { k: '金利', id: 'interest', p: [['預ける', '100 万円', '銀行にお金を預ける。'], ['1 年後', '+1 万円', '金利 1％ なら、利息が 1 万円つく。'], ['借りると', '−利息', '反対に、借りたときは利息を払う側になる。']], s: '金利は「お金のレンタル料」。貸せばもらえて、借りれば払うんだ。' },
     { k: '複利', id: 'simple-compound', p: [['はじめ', '100 万円', '年 5％ で増やしていく。'], ['1 年後', '105 万円', '次の年は、105 万円に 5％ がつく。'], ['20 年後', '約 265 万円', '利息にも利息がついて、雪だるま式に。']], s: '時間を味方にするのが複利のコツ。早く始めるほど、差が大きくなるよ。' },
-    { k: '需要と供給', id: 'supply-demand', p: [['グッズ', '残り 10 個', '文化祭の限定グッズ。'], ['ほしい人', '100 人', '欲しい人のほうが、ずっと多い！'], ['だから', '値段 ↑', '少ないモノを取り合うと、値段は上がる。たくさん作れば下がる。']], s: '欲しい量と、売りたい量のつり合いで値段が決まる。シミュレーターでもためせるよ。' }
+    { k: '需要と供給', id: 'supply-demand', p: [['グッズ', '残り 10 個', '文化祭の限定グッズ。'], ['ほしい人', '100 人', '欲しい人のほうが、ずっと多い！'], ['だから', '値段 ↑', '少ないモノを取り合うと、値段は上がる。たくさん作れば下がる。']], s: '欲しい量と、売りたい量のつり合いで値段が決まる。シミュレーターでもためせるよ。' },
+    { k: '税金', id: 'tax', p: [['お買い物', '1,000 円', 'ノートとペンを買う。'], ['レジで', '1,100 円', '消費税 10％ が上乗せされる。'], ['その 100 円', '道路・学校・病院', '集まった税金は、みんなのために使われる。']], s: '税金は、みんなで使うものを、みんなで少しずつ出し合うしくみなんだ。' },
+    { k: 'GDP', id: 'gdp', p: [['材料', '小麦 100 円', 'パン屋さんが、小麦を仕入れる。'], ['売る', 'パン 300 円', 'おいしいパンにして売る。'], ['生まれた価値', '200 円', 'この「新しく生まれた価値」を国じゅうで足したのが GDP。']], s: 'GDP は、国の中で新しく生まれた価値の合計。国の経済の大きさがわかるよ。' },
+    { k: '分散投資', id: 'diversify', p: [['卵を', '1 つのかごに', '全部の卵を、1 つのかごに入れて運ぶ。'], ['もし', 'かごを落とすと', '全部割れてしまう！'], ['だから', 'かごを分ける', 'いくつかに分けておけば、割れるのは一部ですむ。']], s: '「卵は 1 つのかごに盛るな」。投資も、分けておくのが大事なんだ。' },
+    { k: 'リスクとリターン', id: 'risk-return', p: [['預金', '減りにくい', 'でも、ほとんど増えない。'], ['株', '増えやすい', 'でも、大きく減ることもある。'], ['つまり', 'セット', '大きなリターンを狙うなら、大きなリスクもついてくる。']], s: 'いいとこどりはできないんだ。自分に合ったバランスを見つけよう。' },
+    { k: '景気', id: 'keiki', p: [['お店で', 'よく売れる', 'みんながモノを買う。'], ['会社', 'もうかる', '給料が上がり、人も雇う。'], ['だから', 'もっと買う', 'お金がぐるぐる回る。これが「景気がいい」。']], s: '逆にお金が回らなくなると不景気。景気は、みんなの気持ちともつながっているんだ。' },
+    { k: '機会費用', id: 'opportunity-cost', p: [['放課後', '2 時間', '自由に使える時間がある。'], ['えらぶ', 'ゲーム', '2 時間、ゲームをした。'], ['あきらめたもの', '勉強の 2 時間', '選ばなかった方から得られたはずのもの。それが機会費用。']], s: '何かを選ぶと、何かをあきらめている。選ぶときに、ちょっと思い出してみて。' },
   ];
   let cur = 0;
   const draw = () => {
     const t = T[cur];
-    box.querySelector('.km-tabs').querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-selected', i === cur ? 'true' : 'false'));
+    box.querySelector('.km-tabs').querySelectorAll('[data-i]').forEach((b, i) => b.setAttribute('aria-selected', i === cur ? 'true' : 'false'));
     box.querySelector('.km-panels').innerHTML = t.p.map(([tag, big, txt], i) => `<li class="km-p" style="--i:${i}"><span class="km-no">${i + 1}</span><small>${tag}</small><b>${big}</b><p>${txt}</p></li>`).join('');
     box.querySelector('.km-sum').innerHTML = (window.AZAKEI_OSATSU ? AZAKEI_OSATSU(t.s, 'happy') : `<p>${t.s}</p>`) + `<a class="km-more" href="#${t.id}">「${t.k}」を辞典で読む →</a>`;
   };
-  box.innerHTML = `<div class="km-tabs" role="tablist" aria-label="話題をえらぶ">${T.map((t, i) => `<button type="button" role="tab" data-i="${i}">${t.k}</button>`).join('')}</div><ol class="km-panels" aria-live="polite"></ol><div class="km-sum"></div>`;
-  box.querySelector('.km-tabs').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; cur = +b.dataset.i; draw(); });
+  box.innerHTML = `<div class="km-tabs" role="tablist" aria-label="話題をえらぶ">${T.map((t, i) => `<button type="button" role="tab" data-i="${i}">${t.k}</button>`).join('')}<button type="button" class="km-rand">おまかせ</button></div><ol class="km-panels" aria-live="polite"></ol><div class="km-sum"></div>`;
+  box.querySelector('.km-tabs').addEventListener('click', e => {
+    if (e.target.closest('.km-rand')) { let n; do { n = (Math.random() * T.length) | 0; } while (n === cur); cur = n; return draw(); }
+    const b = e.target.closest('[data-i]'); if (!b) return; cur = +b.dataset.i; draw();
+  });
   draw();
 })();
