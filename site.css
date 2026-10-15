@@ -5927,3 +5927,11 @@ section[id] { scroll-margin-top: 84px; }
 @media (prefers-reduced-motion: reduce) { .km-p { animation: none; } }
 .koma .os-man small { color: #8a7c66; }
 .km-tabs .km-rand { border-style: dashed; background: #fff3dc; } .km-tabs .km-rand::before { content: "↻ "; }
+
+/* ▼ v99 — スマホの改行：小さな文字は行の長さをそろえ、数字のまとまりは切らない */
+small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim-asset small { text-wrap: balance; }
+.nw, .dbl-calc b, .ud-top p, .qz-status span, .qz-calc, .ex-title b, .r3-steps button, .gl-rows button { white-space: nowrap; }
+@media (max-width: 420px) { .purpose small, .sim small { word-break: auto-phrase; text-wrap: balance; } }
+/* スマホ：言葉のまとまりは、まとめて次の行へ（1 行より長いときだけ、中で折り返す） */
+@media (max-width: 400px) { .keep-phrase { display: inline-block !important; white-space: normal !important; max-width: 100%; } }
+.ex-title { white-space: nowrap; }

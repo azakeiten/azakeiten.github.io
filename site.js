@@ -887,7 +887,7 @@ try {
     const next = STAMPS.find(s => !visited.has(s[0]));
     box.innerHTML = `
       <div class="ex-head">
-        <p class="ex-title">サイト探検スタンプ <b>${n}</b> / ${all}</p>
+        <p class="ex-title">サイト探検スタンプ <span class="nw"><b>${n}</b> / ${all}</span></p>
         <p class="ex-msg">${done ? '全ページ制覇！ 隅々まで見てくれて、ありがとうございます。' : `まだ見ていないページ：<a href="${next[0]}">${next[1]}</a>`}</p>
       </div>
       <div class="ex-bar" aria-hidden="true"><i style="width:${n / all * 100}%"></i></div>
@@ -918,7 +918,7 @@ try {
     const got = BADGES.filter(b => b[2]).length;
     box.insertAdjacentHTML('beforeend', `
       <div class="ex-badges">
-        <p class="ex-title sm">バッジ <b>${got}</b> / ${BADGES.length}</p>
+        <p class="ex-title sm">バッジ <span class="nw"><b>${got}</b> / ${BADGES.length}</span></p>
         <ul>${BADGES.map(([ico, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}" title="${ok ? name + '（獲得済み）' : 'とり方：' + how}"><span aria-hidden="true">${ico}</span><b>${name}</b><small>${ok ? '獲得！' : how}</small></a></li>`).join('')}</ul>
       </div>`);
     if (done) {

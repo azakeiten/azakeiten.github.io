@@ -219,7 +219,7 @@
           <button type="button" role="radio" class="qz-mode" data-mode="news" aria-checked="${mode === 'news'}"><span class="qz-new">NEW</span><b>ニュースモード</b><small>毎ラウンド「麻経新聞」のニュースで、倍率やチップが変わる${newsBest ? `（最高 ${newsBest} 枚）` : ''}</small></button>
         </div>
         <button type="button" class="btn-primary qz-start">ゲームをはじめる</button>
-        ${RANK ? '<div class="qz-rank" data-rank-box><p class="qz-rank-head">Web 版ランキング <small>上位 5 人</small></p><p class="qz-small">読み込み中…</p></div>' : ''}
+        ${RANK ? '<div class="qz-rank" data-rank-box><p class="qz-rank-head">Web 版ランキング <small class="nw">上位 5 人</small></p><p class="qz-small">読み込み中…</p></div>' : ''}
       </div>`);
     if (RANK) loadRank(root.querySelector('[data-rank-box]'), 5);
     root.querySelectorAll('.qz-mode').forEach(b => b.addEventListener('click', () => {
