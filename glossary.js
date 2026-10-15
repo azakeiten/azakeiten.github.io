@@ -26,12 +26,32 @@
   };
   const text = items.map(it => norm(it.textContent + ' ' + (YOMI[it.id] || '') + ' ' + (it.dataset.yomi || '')));
   const total = items.length;
+  // 五十音で引く：読みのいちばん最初の文字で、あ・か・さ……の行に分ける
+  const ROWS = [['あ', 'あいうえおぁぃぅぇぉゔ'], ['か', 'かきくけこがぎぐげご'], ['さ', 'さしすせそざじずぜぞ'], ['た', 'たちつてとだぢづでどっ'], ['な', 'なにぬねの'], ['は', 'はひふへほばびぶべぼぱぴぷぺぽ'], ['ま', 'まみむめも'], ['や', 'やゆよゃゅょ'], ['ら', 'らりるれろ'], ['わ', 'わをん']];
+  const rowOf = items.map(it => {
+    const y = norm((YOMI[it.id] || it.dataset.yomi || it.querySelector('dt').textContent).split(/\s/)[0]);
+    const r = ROWS.find(([, ks]) => ks.includes(y[0]));
+    return r ? r[0] : '';
+  });
+  let row = '';
+  const rowBar = document.createElement('div');
+  rowBar.className = 'gl-rows'; rowBar.setAttribute('role', 'group'); rowBar.setAttribute('aria-label', '五十音で引く');
+  rowBar.innerHTML = `<span class="gl-rows-label">五十音</span>` + ROWS.map(([r]) => { const n = rowOf.filter(x => x === r).length; return `<button type="button" data-row="${r}" aria-pressed="false"${n ? '' : ' disabled'}>${r}<small>${n}</small></button>`; }).join('');
+  count.before(rowBar);
+  rowBar.addEventListener('click', e => {
+    const b = e.target.closest('[data-row]'); if (!b) return;
+    row = row === b.dataset.row ? '' : b.dataset.row;
+    rowBar.querySelectorAll('[data-row]').forEach(x => x.setAttribute('aria-pressed', x.dataset.row === row ? 'true' : 'false'));
+    if (row) input.value = '';
+    run();
+  });
+  input.addEventListener('input', () => { if (row) { row = ''; rowBar.querySelectorAll('[data-row]').forEach(x => x.setAttribute('aria-pressed', 'false')); } });
   const run = () => {
     const q = norm(input.value);
     let n = 0;
-    items.forEach((it, i) => { const hit = !q || text[i].includes(q); it.hidden = !hit; if (hit) n++; });
+    items.forEach((it, i) => { const hit = (!q || text[i].includes(q)) && (!row || rowOf[i] === row); it.hidden = !hit; if (hit) n++; });
     groups.forEach(g => { g.hidden = !g.querySelector('.gl-item:not([hidden])'); });
-    count.textContent = q ? `${n} 語みつかりました` : `全 ${total} 語`;
+    count.textContent = row ? `「${row}」行の言葉 ${n} 語` : q ? `${n} 語みつかりました` : `全 ${total} 語`;
     empty.hidden = n > 0;
   };
   const q0 = new URLSearchParams(location.search).get('q'); if (q0) input.value = q0;
