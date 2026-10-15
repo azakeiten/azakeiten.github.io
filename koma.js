@@ -4,8 +4,7 @@
    ・計画書にあった「中学生にもわかりやすい経済 1 分解説」をもとにしたコーナー
    ================================================================ */
 (function() {
-  const box = document.querySelector('[data-koma]');
-  if (!box) return;
+  const box = document.querySelector('[data-koma]'), daily = document.querySelector('[data-koma-daily]');  if (!box && !daily) return;
   const T = [
     { k: 'インフレ', id: 'inflation', p: [['去年', '100 円', 'お気に入りのパンが 100 円。'], ['今年', '110 円', '同じパンが 110 円に値上がり。'], ['つまり', '100 円 ＜ パン', '同じ 100 円で、買えるものが減った。']], s: 'モノの値段が上がり続けると、お金の値打ちは下がるんだ。これがインフレだよ。' },
     { k: '円安', id: 'yen', p: [['前は', '1 ドル ＝ 100 円', '1 ドルのお菓子が 100 円で買えた。'], ['いまは', '1 ドル ＝ 150 円', '同じお菓子に 150 円かかる。'], ['すると', '輸入 ↑ ／ 輸出 ◎', '外国の物は高くなるけど、外国に売る会社はうれしい。']], s: '円の値打ちが下がるのが円安。だれが得をして、だれが困るかが変わるんだ。' },
@@ -20,6 +19,15 @@
     { k: '景気', id: 'keiki', p: [['お店で', 'よく売れる', 'みんながモノを買う。'], ['会社', 'もうかる', '給料が上がり、人も雇う。'], ['だから', 'もっと買う', 'お金がぐるぐる回る。これが「景気がいい」。']], s: '逆にお金が回らなくなると不景気。景気は、みんなの気持ちともつながっているんだ。' },
     { k: '機会費用', id: 'opportunity-cost', p: [['放課後', '2 時間', '自由に使える時間がある。'], ['えらぶ', 'ゲーム', '2 時間、ゲームをした。'], ['あきらめたもの', '勉強の 2 時間', '選ばなかった方から得られたはずのもの。それが機会費用。']], s: '何かを選ぶと、何かをあきらめている。選ぶときに、ちょっと思い出してみて。' },
   ];
+  // トップの「今日の 3 コマ」：日本時間の日付で 1 つ（同じ日はだれが見ても同じ話題）
+  if (daily) {
+    const jst = new Date(Date.now() + 9 * 3600e3), day = Math.floor(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate()) / 864e5);
+    const t = T[day % T.length];
+    daily.innerHTML = `<p class="km-head"><span aria-hidden="true">解</span>今日の 3 コマ<small>${jst.getUTCMonth() + 1}/${jst.getUTCDate()}・${t.k}</small></p>`
+      + `<ol class="km-panels">${t.p.map(([tag, big, txt], i) => `<li class="km-p" style="--i:${i}"><span class="km-no">${i + 1}</span><small>${tag}</small><b>${big}</b><p>${txt}</p></li>`).join('')}</ol>`
+      + `<div class="km-sum">${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(t.s, 'happy') : `<p>${t.s}</p>`}<p class="km-links"><a class="km-more" href="glossary.html#${t.id}">「${t.k}」を辞典で読む →</a><a class="km-more" href="glossary.html">ほかの 3 コマも見る →</a></p></div>`;
+  }
+  if (!box) return;
   let cur = 0;
   const draw = () => {
     const t = T[cur];

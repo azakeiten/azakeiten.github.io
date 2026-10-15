@@ -5935,3 +5935,4 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 /* スマホ：言葉のまとまりは、まとめて次の行へ（1 行より長いときだけ、中で折り返す） */
 @media (max-width: 400px) { .keep-phrase { display: inline-block !important; white-space: normal !important; max-width: 100%; } }
 .ex-title { white-space: nowrap; }
+.km-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 4px 0 0; }
