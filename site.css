@@ -5936,3 +5936,37 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 @media (max-width: 400px) { .keep-phrase { display: inline-block !important; white-space: normal !important; max-width: 100%; } }
 .ex-title { white-space: nowrap; }
 .km-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 4px 0 0; }
+
+/* ################################################################
+   ▼ v100 — シミュレーター：おこづかい 12 か月チャレンジ
+   ################################################################ */
+.oz { padding: clamp(18px, 3vw, 28px); border-radius: 24px; background: #fffaf0; background-image: var(--grain, none); border: 2px solid #6b4a22; box-shadow: 4px 5px 0 rgba(107, 74, 34, 0.2); color: #2a2015; }
+.oz-intro { display: grid; justify-items: start; gap: 6px; }
+.oz-intro .osatsu { margin: 0; }
+.oz-start, .oz-btns button { padding: 13px 22px; border-radius: 999px; border: 0; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; transition: transform 0.15s; }
+.oz-start, .oz-yes, .oz-again { background: #b5432f; color: #fff; }
+.oz-no { background: #fff; color: #2a2015; border: 2px solid #6b4a22 !important; }
+.oz-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+.oz-btns button:active { transform: scale(0.97); }
+.oz-btns button:disabled { opacity: 0.4; cursor: default; }
+.oz-month { margin: 0 0 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.oz-month b { font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 3.4vw, 34px); color: #b5432f; }
+.oz-month small { font-size: 12.5px; color: #8a7c66; }
+.oz-status { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.oz-status p { margin: 0; padding: 8px 12px; border-radius: 12px; background: #fff; border: 1px solid #e3d6b8; display: grid; }
+.oz-status span { font-size: 11.5px; color: #8a7c66; }
+.oz-status b { font-size: 16px; white-space: nowrap; }
+.oz-joy { color: #c98a1c; font-size: 13px !important; letter-spacing: -0.05em; white-space: normal !important; }
+.oz-goal { position: relative; height: 26px; margin: 10px 0 14px; border-radius: 999px; background: #efe5cf; overflow: hidden; }
+.oz-goal i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, #2f6b3a, #6aa66f); border-radius: 999px; transition: width 0.5s; }
+.oz-goal span { position: relative; display: grid; place-items: center; height: 100%; font-size: 12px; font-weight: 800; color: #2a2015; }
+.oz-event { padding: 14px 16px; border-radius: 14px; background: #fff; border: 2px dashed #c98a1c; }
+.oz-event p { margin: 0; font-size: 15px; line-height: 1.8; }
+.oz-cost { margin-top: 4px !important; font-weight: 800; color: #b5432f; }
+.oz-warn { margin-top: 6px !important; color: #b5432f; font-size: 13.5px !important; }
+.oz-buy { margin: 8px 0; font-weight: 800; color: #2f6b3a; }
+.oz-log summary { cursor: pointer; font-weight: 700; font-size: 14px; }
+.oz-log ol { margin: 8px 0 0; padding-left: 1.4em; font-size: 13.5px; line-height: 1.8; }
+.oz-log li.n { color: #8a7c66; }
+.oz-link { font-size: 13.5px; font-weight: 800; color: #6b4a22; }
+@media (max-width: 520px) { .oz-status { grid-template-columns: 1fr 1fr; } .oz-status p:last-child { grid-column: 1 / -1; } }
