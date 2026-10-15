@@ -959,7 +959,7 @@ try {
     else if (weekly.week !== weekNo) items.push(`<a href="#weekly">今週の 1 問が、新しくなっています</a>`);
     else if (weekly.lastOk === weekNo && weekly.streak > 1) items.push(`<a href="#weekly">今週の 1 問、<b>${weekly.streak}</b> 週連続正解中！</a>`);
     if (visited.size < STAMPS.length) items.push(`<a href="#site-footer">探検スタンプ ${STAMPS.filter(s => visited.has(s[0])).length} / ${STAMPS.length}</a>`);
-    welcome.innerHTML = `<div class="container"><p class="wb-hello"><span class="wb-seal" aria-hidden="true">経</span>おかえりなさい。<small>前回は ${fmt(prev)} に来てくれました。</small></p>${items.length ? `<ul class="wb-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</div>`;
+    welcome.innerHTML = `<div class="container">${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(`おかえりなさい！ 前回は ${fmt(prev)} に来てくれたね。また会えてうれしいよ。`, 'happy') : `<p class="wb-hello"><span class="wb-seal" aria-hidden="true">経</span>おかえりなさい。<small>前回は ${fmt(prev)} に来てくれました。</small></p>`}${items.length ? `<ul class="wb-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</div>`;
     welcome.hidden = false;
   }
   update();

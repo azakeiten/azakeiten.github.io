@@ -363,6 +363,7 @@
         <p class="qz-calc">賭けた ${cur.bet} 枚 × ${rate} ＝ ${back} 枚</p>
         ${notes.length ? `<ul class="qz-news-fx">${notes.map(n => `<li>${n}</li>`).join('')}</ul>` : ''}
         <p class="qz-diff ${diff > 0 ? 'up' : diff < 0 ? 'down' : ''}">${diff > 0 ? '+' : ''}${diff} 枚</p>
+        ${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(chips <= 0 ? 'チップがなくなっちゃった……。でも、リスクの怖さがわかったのも大事な経験だよ。' : diff >= 10 ? 'すごい！ 一気に増えたね。この調子！' : diff > 0 ? 'やったね！ チップが増えたよ。' : diff < 0 ? 'ドンマイ！ 次のラウンドで取り返そう。残したチップがあってよかったね。' : 'プラマイゼロ。悪くないよ！', diff > 0 ? 'happy' : diff < 0 ? 'sad' : '') : ''}
         <div class="qz-status"><span>手持ち</span><span><b class="qz-count">${before}</b> 枚</span></div>
         ${chipRow(chips, diff > 0 ? Math.min(before, 30) : undefined)}
         ${chips <= 0 ? '<p class="qz-small">チップがなくなりました。ここでゲームオーバー。</p>' : ''}
@@ -387,6 +388,7 @@
         <p class="qz-big"><span class="qz-count">0</span><small>枚</small></p>
         <p class="qz-times">${START_CHIPS} 枚 → ${chips} 枚（${times} 倍）</p>
         <h2>称号：<em>${title}</em></h2>
+        ${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(chips >= 120 ? '伝説だ……！ 文化祭の最高記録をこえたかも！' : chips >= 40 ? '億万長者、おめでとう！ 文化祭ならシャーペンがもらえたよ。' : chips > START_CHIPS ? 'チップを増やせたね。リスクのとり方、うまかったよ！' : chips > 0 ? '堅実だね。次はもう少しだけ攻めてみる？' : '一文なし……。でも大丈夫、何度でも挑戦できるよ！', chips > START_CHIPS ? 'happy' : chips > 0 ? '' : 'sad') : ''}
         <p>${chips >= 40 ? '文化祭なら、シャーペンをプレゼントしていた成績です！' : '文化祭では、40 枚以上でシャーペンをプレゼントしていました。'}${isBest ? '<br><b>自己ベスト更新！</b>' : ''}</p>
         <p class="qz-record">文化祭の最高記録は 120 枚（24 倍）。${chips > 120 ? '<b>記録を超えました！</b>' : `あと ${121 - chips} 枚で記録更新。`}</p>
         ${mode === 'news' ? '<p class="qz-small">ニュースモードの記録は、ランキングには入りません（自己ベストは別に残ります）。</p>' : rankForm(chips)}

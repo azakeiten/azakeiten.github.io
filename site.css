@@ -5894,3 +5894,10 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .os-man, .os-svg { width: 100px; }
 @media (max-width: 520px) { .os-man, .os-svg { width: 72px; } }
 section[id] { scroll-margin-top: 84px; }
+/* お札マンの気分 */
+.osatsu.is-happy .os-svg { animation: os-hop 0.9s cubic-bezier(.3, 1.6, .5, 1) 2; }
+.osatsu.is-sad .os-svg { animation: none; transform: rotate(-8deg) translateY(3px); filter: saturate(0.7); }
+@keyframes os-hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-14px) rotate(4deg); } }
+.qz-settle .osatsu, .qz-final .osatsu { margin: 10px auto; justify-content: center; text-align: left; }
+.welcome-back .osatsu { margin: 0 0 8px; }
+@media (prefers-reduced-motion: reduce) { .osatsu.is-happy .os-svg { animation: none; } }
