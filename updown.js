@@ -47,6 +47,7 @@
   };
   const finish = () => {
     const wins = hist.filter(Boolean).length;
+    if (wins >= 5) { try { localStorage.setItem('azakei_chart_reader', '1'); } catch (e) {} }
     info.innerHTML = `<b>結果：チップ ${chips} 枚</b>${hist.length} 回中 ${wins} 回当たり。<br><span class="ud-reveal">種明かし：このチャートは、毎回サイコロのように<strong>でたらめに</strong>作っていました（ランダムウォーク）。本物の株価も、短い先の動きはとても予想しにくいもの。だからこそ、1 つに賭けずに「分散」したり、長い目で見たりすることが大切です。</span>`;
     btnUp.disabled = btnDown.disabled = true; btnNext.hidden = false; btnNext.textContent = 'もう一度あそぶ';
     btnNext.onclick = () => { btnNext.textContent = '次の回戦へ'; btnNext.onclick = null; start(); };

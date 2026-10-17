@@ -43,6 +43,7 @@
   const finish = () => {
     const ok = money >= GOAL, happy = joy >= 12;
     const title = ok && happy ? 'やりくり名人' : ok ? 'がまんの達人' : happy ? '今を楽しむ人' : 'これからの人';
+    if (ok && happy) { try { localStorage.setItem('azakei_ozk_master', '1'); } catch (e) {} }
     const msg = ok && happy ? '自転車も買えて、1 年も楽しめた！ 使うところと、がまんするところのメリハリが最高だね。'
       : ok ? '目標達成、おめでとう！ でも、ちょっとがまんしすぎたかも。楽しむことも、大事なお金の使い方だよ。'
       : happy ? 'たくさん楽しめた 1 年だったね。でも自転車には届かなかった……。何を優先するか、決めておくといいよ。'
