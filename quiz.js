@@ -21,11 +21,11 @@
   };
   const Q = window.AZAKEI_QUIZ_Q;   // 問題は quiz-data.js
 
-  const BEST_KEY = 'azakei_quiz_best', NEWS_BEST_KEY = 'azakei_quiz_best_news';
+  const BEST_KEY = 'azakei_quiz_best', NEWS_BEST_KEY = 'azakei_quiz_best_news', TIME_BEST_KEY = 'azakei_quiz_best_time';
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   let chips, round, used, cur, life, history, log, mode = 'festival', news = null;
-  let best = 0, newsBest = 0;
-  try { best = +localStorage.getItem(BEST_KEY) || 0; newsBest = +localStorage.getItem(NEWS_BEST_KEY) || 0; } catch (e) {}
+  let best = 0, newsBest = 0, timeBest = 0;
+  try { best = +localStorage.getItem(BEST_KEY) || 0; newsBest = +localStorage.getItem(NEWS_BEST_KEY) || 0; timeBest = +localStorage.getItem(TIME_BEST_KEY) || 0; } catch (e) {}
 
   // ニュースモード（Web 版だけ）：毎ラウンド、麻経新聞のニュースが 1 つ出て、倍率やチップが変わる
   const NEWS = [
@@ -216,7 +216,8 @@
         <p class="qz-record">文化祭の最高記録は <b>120 枚（24 倍）</b>。${best ? `あなたの最高記録は <b>${best} 枚</b>。` : ''}</p>
         <div class="qz-modes" role="radiogroup" aria-label="ルールをえらぶ">
           <button type="button" role="radio" class="qz-mode" data-mode="festival" aria-checked="${mode === 'festival'}"><b>文化祭ルール</b><small>会場と同じ倍率で勝負。ランキングに参加できる</small></button>
-          <button type="button" role="radio" class="qz-mode" data-mode="news" aria-checked="${mode === 'news'}"><span class="qz-new">NEW</span><b>ニュースモード</b><small>毎ラウンド「麻経新聞」のニュースで、倍率やチップが変わる${newsBest ? `（最高 ${newsBest} 枚）` : ''}</small></button>
+          <button type="button" role="radio" class="qz-mode" data-mode="news" aria-checked="${mode === 'news'}"><b>ニュースモード</b><small>毎ラウンド「麻経新聞」のニュースで、倍率やチップが変わる${newsBest ? `（最高 ${newsBest} 枚）` : ''}</small></button>
+          <button type="button" role="radio" class="qz-mode" data-mode="time" aria-checked="${mode === 'time'}"><span class="qz-new">NEW</span><b>タイムアタック</b><small>60 秒で何点とれる？ かんたん 1 点・普通 2 点・激ムズ 3 点${timeBest ? `（最高 ${timeBest} 点）` : ''}</small></button>
         </div>
         <button type="button" class="btn-primary qz-start">ゲームをはじめる</button>
         ${RANK ? '<div class="qz-rank" data-rank-box><p class="qz-rank-head">Web 版ランキング <small class="nw">上位 5 人</small></p><p class="qz-small">読み込み中…</p></div>' : ''}
@@ -229,8 +230,62 @@
     root.querySelector('.qz-start').addEventListener('click', () => {
       chips = START_CHIPS; round = 0; used = { easy: new Set(), normal: new Set(), hard: new Set() };
       life = { half: true, swap: true }; history = [START_CHIPS]; log = [];
+      if (mode === 'time') return timeAttack();
       bet();
     });
+  }
+
+  // タイムアタック：60 秒で、できるだけ多く答える。連続正解が続くほど、難しい問題が出やすくなる
+  function timeAttack() {
+    const LIMIT = 60, PTS = { easy: 1, normal: 2, hard: 3 };
+    const end = Date.now() + LIMIT * 1000;
+    let score = 0, right = 0, total = 0, streak = 0, timer = 0, busy = false;
+    const pick = () => streak >= 4 ? 'hard' : streak >= 2 ? (Math.random() < 0.6 ? 'normal' : 'hard') : (Math.random() < 0.6 ? 'easy' : 'normal');
+    const left = () => Math.max(0, (end - Date.now()) / 1000);
+    const next = () => {
+      if (left() <= 0) return over();
+      const k = pick(), q = draw(k);
+      const choices = shuffle(q.a.map((t, i) => ({ t, ok: i === 0 })));
+      show(`<div class="dg-card qz-ta">
+        <div class="qz-status"><span>タイムアタック</span><span>得点 <b>${score}</b></span></div>
+        <div class="qz-ta-bar"><i style="width:${left() / LIMIT * 100}%"></i><span class="qz-ta-sec">${Math.ceil(left())} 秒</span></div>
+        <p class="dg-kicker">${LEVELS[k].name}（${PTS[k]} 点）${streak >= 2 ? `<span class="qz-sofar">${streak} 問連続正解中</span>` : ''}</p>
+        <div class="dg-box"><h2>${q.q}</h2></div>
+        <div class="qz-choices">${choices.map((c, i) => `<button type="button" class="qz-choice" data-ok="${c.ok ? 1 : 0}"><span>${'ABCD'[i]}</span>${c.t}</button>`).join('')}</div>
+      </div>`);
+      busy = false;
+      root.querySelectorAll('.qz-choice').forEach(b => b.addEventListener('click', () => {
+        if (busy) return; busy = true;
+        const ok = b.dataset.ok === '1'; total++;
+        if (ok) { score += PTS[k]; right++; streak++; b.classList.add('is-right'); }
+        else { streak = 0; b.classList.add('is-wrong'); root.querySelector('.qz-choice[data-ok="1"]').classList.add('is-right'); }
+        log.push({ q: q.q, right: q.a[0], ok, level: k });
+        setTimeout(next, ok ? 350 : 900);
+      }));
+    };
+    const tick = () => {
+      const s = left(), bar = root.querySelector('.qz-ta-bar i'), sec = root.querySelector('.qz-ta-sec');
+      if (bar) bar.style.width = (s / LIMIT * 100) + '%';
+      if (sec) sec.textContent = Math.ceil(s) + ' 秒';
+      if (s <= 0 && !busy) over();
+    };
+    const over = () => {
+      if (!timer) return; clearInterval(timer); timer = 0;
+      const isBest = score > timeBest;
+      if (isBest) { timeBest = score; try { localStorage.setItem(TIME_BEST_KEY, score); } catch (e) {} }
+      show(`<div class="dg-card qz-final">
+        <p class="dg-kicker">タイムアップ！</p>
+        <p class="qz-big"><span class="qz-count">0</span><small>点</small></p>
+        <p class="qz-times">${total} 問中 ${right} 問正解${isBest ? '　<b>自己ベスト更新！</b>' : `（自己ベスト ${timeBest} 点）`}</p>
+        ${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(score >= 40 ? 'はやい！ 経済のことばが、体に入ってるね。' : score >= 20 ? 'いいペース！ 激ムズも狙っていこう。' : '60 秒って、あっという間だね。用語辞典で予習して、もう一回！', score >= 20 ? 'happy' : '') : ''}
+        <details class="qz-review"><summary>出題された問題をふり返る（${log.length} 問）</summary><ol>${log.map(l => `<li class="${l.ok ? 'ok' : 'ng'}"><span>${l.ok ? '○' : '×'}</span><div>${l.q}<small>正解：${l.right}</small></div></li>`).join('')}</ol></details>
+        <div class="dg-actions"><button type="button" class="btn-primary qz-retry">もう一度</button><a href="glossary.html" class="btn-ghost">用語辞典で予習する →</a></div>
+      </div>`);
+      countUp(root.querySelector('.qz-count'), 0, score);
+      root.querySelector('.qz-retry').addEventListener('click', intro);
+    };
+    timer = setInterval(tick, 200);
+    next();
   }
 
   function bet() {

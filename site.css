@@ -5983,3 +5983,13 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .lab-board i { position: absolute; right: 12px; top: 10px; font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: var(--color-muted); }
 @media (max-width: 860px) { .lab-board { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .lab-board { grid-template-columns: 1fr; gap: 8px; } .lab-board a { padding: 12px 14px; } }
+
+/* ▼ v102 — 軽くする：スマホでは小さいトップ写真、画面の外のセクションは描画を後回しに */
+@media (max-width: 760px) { .hero-bg { background-image: url('hero-s.jpg') !important; } }
+
+/* ▼ v103 — 億万長者クイズ：タイムアタック */
+.qz-modes { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 720px) { .qz-modes { grid-template-columns: 1fr; } }
+.qz-ta-bar { position: relative; height: 14px; margin: 8px 0 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+.qz-ta-bar i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, #b5432f, #e3c68e); border-radius: 999px; transition: width 0.2s linear; }
+.qz-ta-sec { position: absolute; right: 8px; top: 50%; translate: 0 -50%; font-size: 10px; font-weight: 800; color: #fff; }

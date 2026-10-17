@@ -25,8 +25,8 @@
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261017a" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.min.css?v=20261017c" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
@@ -255,7 +255,7 @@
         <h2 class="ap-title sm">ここで、できること。</h2>
       </div>
       <div class="ap-tiles">
-        <a class="ap-tile is-wide is-photo reveal" href="festival.html" style="--img:url('photos/balloons.jpg')">
+        <a class="ap-tile is-wide is-photo reveal" href="festival.html" data-img="photos/balloons.jpg">
           <p class="ap-tile-eyebrow">文化祭「麻布経済展」</p>
           <h3>次の麻布経済展へ。</h3>
           <p>チップを賭けて、経済で遊ぶ体験型展示。<br class="sp-only">2026 年は 3 日間で 2,364 人が来場。会場は 3D で歩けます。</p>
@@ -270,7 +270,7 @@
           </ul>
           <span class="ap-link">コンテストを見る</span>
         </a>
-        <a class="ap-tile is-photo is-low reveal" href="quiz.html" style="--img:url('photos/board-millionaire.jpg')">
+        <a class="ap-tile is-photo is-low reveal" href="quiz.html" data-img="photos/board-millionaire.jpg">
           <span class="ap-tile-art qz-promo-chips" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
           <p class="ap-tile-eyebrow">億万長者クイズ</p>
           <h3>チップ 5 枚から、<br>億万長者へ。</h3>
@@ -278,7 +278,7 @@
           <p class="qz-leader" data-rank-leader hidden></p>
           <span class="ap-link">挑戦する</span>
         </a>
-        <a class="ap-tile is-photo is-low reveal" href="diagnosis.html" style="--img:url('photos/room-diagnosis.jpg')">
+        <a class="ap-tile is-photo is-low reveal" href="diagnosis.html" data-img="photos/room-diagnosis.jpg">
           <p class="ap-tile-eyebrow">エコノミスト診断</p>
           <h3>あなたは、どの<br>投資家タイプ？</h3>
           <span class="ap-link">診断する</span>
@@ -374,24 +374,24 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261017a"></script>
-  <script src="layout.js?v=20261017a"></script>
-  <script src="brand.js?v=20261017a"></script>
-  <script src="live.js?v=20261017a"></script>
-  <script src="render.js?v=20261017a"></script>
-  <script src="loader.js?v=20261017a"></script>
-  <script src="nav.js?v=20261017a"></script>
-  <script src="hero.js?v=20261017a"></script>
-  <script src="countdown.js?v=20261017a"></script>
-  <script src="reveal.js?v=20261017a"></script>
-  <script src="osatsu.js?v=20261017a"></script>
-  <script src="koma.js?v=20261017a"></script>
-  <script src="site.js?v=20261017a"></script>
-  <script src="ranking.js?v=20261017a"></script>
-  <script src="quiz-data.js?v=20261017a"></script>
-  <script src="tryout.js?v=20261017a"></script>
-  <script src="daily.js?v=20261017a"></script>
-  <script src="chip3d.js?v=20261017a"></script>
-  <script src="herofloat.js?v=20261017a"></script>
+  <script src="content.js?v=20261017c"></script>
+  <script src="layout.js?v=20261017c"></script>
+  <script src="brand.js?v=20261017c"></script>
+  <script src="live.js?v=20261017c"></script>
+  <script src="render.js?v=20261017c"></script>
+  <script src="loader.js?v=20261017c"></script>
+  <script src="nav.js?v=20261017c"></script>
+  <script src="hero.js?v=20261017c"></script>
+  <script src="countdown.js?v=20261017c"></script>
+  <script src="reveal.js?v=20261017c"></script>
+  <script src="osatsu.js?v=20261017c"></script>
+  <script src="koma.js?v=20261017c"></script>
+  <script src="site.js?v=20261017c"></script>
+  <script src="ranking.js?v=20261017c"></script>
+  <script src="quiz-data.js?v=20261017c"></script>
+  <script src="tryout.js?v=20261017c"></script>
+  <script src="daily.js?v=20261017c"></script>
+  <script src="chip3d.js?v=20261017c"></script>
+  <script src="herofloat.js?v=20261017c"></script>
 </body>
 </html>

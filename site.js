@@ -1008,3 +1008,13 @@ try {
   document.addEventListener('click', e => { if (!e.target.closest('.nav-dd')) close(); });
 })();
 } catch (e) { console.error('[site.js / v44]', e); }
+
+/* ######## ▼ v110：画面の近くに来てから、背景の写真を読みこむ（data-img） ######## */
+(function() {
+  const els = document.querySelectorAll('[data-img]');
+  if (!els.length) return;
+  const set = el => el.style.setProperty('--img', `url('${el.dataset.img}')`);
+  if (!('IntersectionObserver' in window)) return els.forEach(set);
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { set(e.target); io.unobserve(e.target); } }), { rootMargin: '500px 0px' });
+  els.forEach(el => io.observe(el));
+})();

@@ -22,8 +22,8 @@
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261017a" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.min.css?v=20261017c" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -217,6 +217,8 @@
       <ol class="clog reveal">
         <li><time datetime="2026-10-17">2026.10.17</time><ul>
           <li><a href="sim.html">バッジを 15 種に</a>「やりくり名人」と「チャート読み」が、経済ラボのゲームでとれるように</li>
+          <li><a href="about.html#updates">サイトを軽く</a>フォントの太さを必要なものだけに、スマホのトップ写真を 310KB → 70KB、下の写真は近づいてから読みこむように</li>
+          <li><a href="quiz.html">億万長者クイズに「タイムアタック」</a>60 秒で何点とれる？ 連続正解で、問題がだんだん難しく</li>
         </ul></li>
         <li><time datetime="2026-10-16">2026.10.16</time><ul>
           <li><a href="index.html#koma-today">トップに「今日の 3 コマ」</a>お札マンの 3 コマ解説が、毎日ひとつ日替わりで</li>
@@ -320,13 +322,13 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261017a"></script>
-  <script src="layout.js?v=20261017a"></script>
-  <script src="brand.js?v=20261017a"></script>
-  <script src="render.js?v=20261017a"></script>
-  <script src="nav.js?v=20261017a"></script>
-  <script src="reveal.js?v=20261017a"></script>
-  <script src="pagetoc.js?v=20261017a"></script>
-  <script src="site.js?v=20261017a"></script>
+  <script src="content.js?v=20261017c"></script>
+  <script src="layout.js?v=20261017c"></script>
+  <script src="brand.js?v=20261017c"></script>
+  <script src="render.js?v=20261017c"></script>
+  <script src="nav.js?v=20261017c"></script>
+  <script src="reveal.js?v=20261017c"></script>
+  <script src="pagetoc.js?v=20261017c"></script>
+  <script src="site.js?v=20261017c"></script>
 </body>
 </html>

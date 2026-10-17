@@ -12,7 +12,7 @@
   const n = shots.length; if (n < 4) return;
   const step = 360 / n;
   host.innerHTML = `
-    <div class="rg-view"><div class="rg-ring">${shots.map((s, i) => `<button type="button" class="rg-card" style="--i:${i}" data-src="${s.src}" aria-label="${s.caption}（拡大）"><img src="${s.src}" alt="" decoding="async"><span>${s.caption}</span></button>`).join('')}</div><div class="rg-floor" aria-hidden="true"></div></div>
+    <div class="rg-view"><div class="rg-ring">${shots.map((s, i) => `<button type="button" class="rg-card" style="--i:${i}" data-src="${s.src}" aria-label="${s.caption}（拡大）"><img data-src="${s.src}" alt="" decoding="async"><span>${s.caption}</span></button>`).join('')}</div><div class="rg-floor" aria-hidden="true"></div></div>
     <div class="rg-ctrl"><button type="button" class="rg-prev" aria-label="前の写真へ">←</button><p class="rg-cap" aria-live="polite"></p><button type="button" class="rg-next" aria-label="次の写真へ">→</button></div>`;
   const view = host.querySelector('.rg-view'), ring = host.querySelector('.rg-ring'), cap = host.querySelector('.rg-cap');
   const cards = [...host.querySelectorAll('.rg-card')];
@@ -47,6 +47,6 @@
   }));
   // 画面に見えているときだけ動かす
   layout(); addEventListener('resize', layout);
-  new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { if (!raf) raf = requestAnimationFrame(tick); } else { cancelAnimationFrame(raf); raf = 0; } })).observe(host);
+  new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { host.querySelectorAll('img[data-src]').forEach(im => { im.src = im.dataset.src; im.removeAttribute('data-src'); }); if (!raf) raf = requestAnimationFrame(tick); } else { cancelAnimationFrame(raf); raf = 0; } })).observe(host);
   paint();
 })();
