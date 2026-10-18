@@ -1,6 +1,13 @@
 /* ================================================================
    layout.js — 全ページ共通のナビゲーションとフッター
    ================================================================ */
+// 動きを少なめにする（メモリの少ない端末・データ節約モードでは自動で。フッターの「動き」で切りかえも）
+(function() {
+  const h = document.documentElement, c = navigator.connection || {};
+  let m = null; try { m = localStorage.getItem("azakei-motion"); } catch (e) {}
+  const auto = (navigator.deviceMemory && navigator.deviceMemory <= 4) || c.saveData || /2g/.test(c.effectiveType || "");
+  if (m === "lite" || (m !== "full" && auto)) h.classList.add("is-lite");
+})();
 (function() {
   const LINKS = [
     { href: 'about.html',      label: 'About',    ja: '麻経とは' },
@@ -184,6 +191,7 @@
         <p class="footer-note">麻経 · Azabu Economics<br>Est. 2025 · 麻布中学校・高等学校</p>
         <p class="footer-mission">世の中の仕組みを理解し、<br>自分たちで仕組みを創り出す。</p>
         <div class="fs-switch" role="group" aria-label="文字の大きさ"><span>文字の大きさ</span><button type="button" data-fs="">標準</button><button type="button" data-fs="l">大</button><button type="button" data-fs="xl">特大</button></div>
+        <div class="fs-switch motion-switch" role="group" aria-label="動き"><span>動き</span><button type="button" data-motion="full">ふつう</button><button type="button" data-motion="lite">少なめ</button></div>
         <a class="footer-members" href="admin.html">部員用 更新ページ</a>
       </div>
       ${FOOT_GROUPS.map(g => `<div class="footer-col">

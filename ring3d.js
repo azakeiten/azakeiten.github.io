@@ -29,7 +29,7 @@
     cap.textContent = `${shots[f].caption}　${shots[f].date || ''}`;
   };
   const tick = () => {
-    if (!drag) { if (!reduce && Date.now() - idle > 2500) target -= 0.06; angle += (target - angle) * 0.08; }
+    if (!drag) { if (!reduce && !document.documentElement.classList.contains('is-lite') && Date.now() - idle > 2500) target -= 0.06; angle += (target - angle) * 0.08; }
     paint(); raf = requestAnimationFrame(tick);
   };
   const go = d => { idle = Date.now(); target = Math.round(target / step) * step - d * step; };

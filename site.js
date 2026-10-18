@@ -848,9 +848,9 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 try {
 (function() {
   const html = document.documentElement;
-  const sync = () => document.querySelectorAll(".fs-switch button").forEach(b => b.setAttribute("aria-pressed", String((html.dataset.fs || "") === b.dataset.fs)));
+  const sync = () => document.querySelectorAll(".fs-switch button[data-fs]").forEach(b => b.setAttribute("aria-pressed", String((html.dataset.fs || "") === b.dataset.fs)));
   document.addEventListener("click", e => {
-    const b = e.target.closest && e.target.closest(".fs-switch button");
+    const b = e.target.closest && e.target.closest(".fs-switch button[data-fs]");
     if (!b) return;
     if (b.dataset.fs) html.dataset.fs = b.dataset.fs; else delete html.dataset.fs;
     try { if (b.dataset.fs) localStorage.setItem("azakei-fs", b.dataset.fs); else localStorage.removeItem("azakei-fs"); } catch (err) {}
@@ -1018,3 +1018,19 @@ try {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { set(e.target); io.unobserve(e.target); } }), { rootMargin: '500px 0px' });
   els.forEach(el => io.observe(el));
 })();
+
+/* ######## ▼ v111：動きの切りかえ（フッター「動き：ふつう／少なめ」） ######## */
+try {
+(function() {
+  const html = document.documentElement;
+  const sync = () => document.querySelectorAll('.motion-switch button').forEach(b => b.setAttribute('aria-pressed', String(html.classList.contains('is-lite') === (b.dataset.motion === 'lite'))));
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('.motion-switch button');
+    if (!b) return;
+    html.classList.toggle('is-lite', b.dataset.motion === 'lite');
+    try { localStorage.setItem('azakei-motion', b.dataset.motion); } catch (err) {}
+    sync();
+  });
+  sync();
+})();
+} catch (e) { console.error('[site.js / motion]', e); }

@@ -5993,3 +5993,9 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .qz-ta-bar { position: relative; height: 14px; margin: 8px 0 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
 .qz-ta-bar i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, #b5432f, #e3c68e); border-radius: 999px; transition: width 0.2s linear; }
 .qz-ta-sec { position: absolute; right: 8px; top: 50%; translate: 0 -50%; font-size: 10px; font-weight: 800; color: #fff; }
+
+/* ▼ v104 — 動きを少なめに（is-lite）：くり返しのアニメは 1 回で止め、トップの浮かぶチップは出さない */
+.is-lite *, .is-lite *::before, .is-lite *::after { animation-iteration-count: 1 !important; }
+.is-lite .hf { display: none; }
+.is-lite .c3-stack, .is-lite .r3-route polyline, .is-lite .b3-bill, .is-lite .b3-face::after { animation: none !important; }
+.motion-switch { margin-top: 8px; }
