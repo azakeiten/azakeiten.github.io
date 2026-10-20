@@ -5999,3 +5999,31 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .is-lite .hf { display: none; }
 .is-lite .c3-stack, .is-lite .r3-route polyline, .is-lite .b3-bill, .is-lite .b3-face::after { animation: none !important; }
 .motion-switch { margin-top: 8px; }
+
+/* ################################################################
+   ▼ v105 — コンテスト：ビジネスプランのたね（ワークシート → カード）
+   ################################################################ */
+.ps { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(16px, 3vw, 28px); align-items: start; }
+.ps-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ps-steps label { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px 10px; padding: 12px 14px; border-radius: 16px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.ps-no { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; background: #1c2b23; color: #e3c68e; font-size: 12px; font-weight: 800; }
+.ps-steps b { font-size: 14.5px; }
+.ps-gl { font-size: 11.5px; font-weight: 700; color: var(--color-accent-deep, #8a6a2a); white-space: nowrap; }
+.ps-steps textarea { grid-column: 1 / -1; width: 100%; resize: vertical; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--color-border); background: var(--color-bg); color: inherit; font: inherit; font-size: 14.5px; line-height: 1.6; }
+.ps-steps textarea:focus { outline: 2px solid #b08a4a; outline-offset: 1px; }
+.ps-card { position: sticky; top: 90px; padding: 22px 22px 18px; border-radius: 6px; background: #fffaf0; background-image: linear-gradient(transparent 31px, rgba(90, 130, 170, 0.14) 32px); background-size: 100% 32px; color: #2a2015; border: 2px solid #6b4a22; box-shadow: 5px 6px 0 rgba(107, 74, 34, 0.22); }
+.ps-card-head { margin: 0 0 10px; display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 6px; border-bottom: 2px solid #b5432f; }
+.ps-card-head span { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; }
+.ps-card-head small { font-size: 12px; font-weight: 800; color: #b5432f; }
+.ps-pitch { margin: 6px 0 12px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(18px, 2.2vw, 22px); line-height: 1.6; color: #b5432f; }
+.ps-pitch i { font-style: normal; font-weight: 500; font-size: 14px; color: #a99a80; }
+.ps-card dl { margin: 0; display: grid; gap: 6px; }
+.ps-card dl div { display: grid; grid-template-columns: 7em 1fr; gap: 8px; font-size: 13.5px; line-height: 1.7; }
+.ps-card dt { font-weight: 800; color: #6b4a22; }
+.ps-card dd { margin: 0; overflow-wrap: anywhere; }
+.ps-card .osatsu { margin: 12px 0 0; }
+.ps-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.ps-actions button { padding: 10px 18px; border-radius: 999px; font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; border: 1px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; }
+.ps-copy { background: #1c2b23 !important; color: #f3eee4 !important; border-color: #1c2b23 !important; }
+.ps-note { grid-column: 1 / -1; margin: 0; font-size: 12.5px; color: var(--color-muted); }
+@media (max-width: 860px) { .ps { grid-template-columns: 1fr; } .ps-card { position: static; } }

@@ -229,6 +229,7 @@
     ['about.html#vision', '今後の展望', '麻経とは', 'これから 目標 ロードマップ'],
     ['contests.html#business', 'ビジネスコンテスト', 'コンテスト', '事業計画 高校生'],
     ['contests.html#stockleague', '日経ストックリーグ', 'コンテスト', '株 ポートフォリオ 投資 レポート'],
+    ['contests.html#plan-seed', 'ビジネスプランのたね', 'コンテスト', '起業 事業計画 アイデア ワークシート ピッチ'],
     ['events.html#follow', '予定を見逃さないために', '日程', 'カレンダー sns フォロー'],
     ['activities.html#making', '展示ができるまで', '活動風景', '写真 準備 フィナーレ'],
     ['azakei.html#unpack', '合言葉を、ほどくと。', 'AZAKEI として', '合言葉 理解 創造'],
