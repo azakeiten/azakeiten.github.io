@@ -6027,3 +6027,4 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .ps-copy { background: #1c2b23 !important; color: #f3eee4 !important; border-color: #1c2b23 !important; }
 .ps-note { grid-column: 1 / -1; margin: 0; font-size: 12.5px; color: var(--color-muted); }
 @media (max-width: 860px) { .ps { grid-template-columns: 1fr; } .ps-card { position: static; } }
+.qz-review-start { margin-left: 8px; }

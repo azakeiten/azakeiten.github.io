@@ -47,6 +47,15 @@
     return r;
   };
 
+  // まちがえた問題を、このブラウザの中に覚えておく（正解したら消す。多くても 40 問まで）
+  const MISS_KEY = 'azakei_quiz_miss';
+  const missList = () => { try { return JSON.parse(localStorage.getItem(MISS_KEY) || '[]'); } catch (e) { return []; } };
+  const miss = (q, ok) => {
+    let l = missList().filter(t => t !== q.q);
+    if (!ok) l.unshift(q.q);
+    try { localStorage.setItem(MISS_KEY, JSON.stringify(l.slice(0, 40))); } catch (e) {}
+  };
+
   const shuffle = arr => arr.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(v => v[1]);
   // 手持ちのチップを、3D の山で（30 枚まで積み、それより多い分は数で）
   const chipRow = (n, from) => {
@@ -220,6 +229,7 @@
           <button type="button" role="radio" class="qz-mode" data-mode="time" aria-checked="${mode === 'time'}"><span class="qz-new">NEW</span><b>タイムアタック</b><small>60 秒で何点とれる？ かんたん 1 点・普通 2 点・激ムズ 3 点${timeBest ? `（最高 ${timeBest} 点）` : ''}</small></button>
         </div>
         <button type="button" class="btn-primary qz-start">ゲームをはじめる</button>
+        ${missList().length ? `<button type="button" class="btn-ghost qz-review-start">前にまちがえた問題 ${missList().length} 問を復習する</button>` : ""}
         ${RANK ? '<div class="qz-rank" data-rank-box><p class="qz-rank-head">Web 版ランキング <small class="nw">上位 5 人</small></p><p class="qz-small">読み込み中…</p></div>' : ''}
       </div>`);
     if (RANK) loadRank(root.querySelector('[data-rank-box]'), 5);
@@ -227,6 +237,7 @@
       mode = b.dataset.mode;
       root.querySelectorAll('.qz-mode').forEach(x => x.setAttribute('aria-checked', x === b ? 'true' : 'false'));
     }));
+    const rv = root.querySelector('.qz-review-start'); if (rv) rv.addEventListener('click', review);
     root.querySelector('.qz-start').addEventListener('click', () => {
       chips = START_CHIPS; round = 0; used = { easy: new Set(), normal: new Set(), hard: new Set() };
       life = { half: true, swap: true }; history = [START_CHIPS]; log = [];
@@ -259,7 +270,7 @@
         const ok = b.dataset.ok === '1'; total++;
         if (ok) { score += PTS[k]; right++; streak++; b.classList.add('is-right'); }
         else { streak = 0; b.classList.add('is-wrong'); root.querySelector('.qz-choice[data-ok="1"]').classList.add('is-right'); }
-        log.push({ q: q.q, right: q.a[0], ok, level: k });
+        log.push({ q: q.q, right: q.a[0], ok, level: k }); miss(q, ok);
         setTimeout(next, ok ? 350 : 900);
       }));
     };
@@ -364,7 +375,7 @@
       document.removeEventListener('keydown', onKey);
       const ok = b.dataset.ok === '1';
       if (ok) cur.correct++;
-      log.push({ q: q.q, right: q.a[0], ok, level: cur.level });
+      log.push({ q: q.q, right: q.a[0], ok, level: cur.level }); miss(q, ok);
       btns.forEach(x => { x.disabled = true; if (x.dataset.ok === '1') x.classList.add('is-right'); });
       root.querySelectorAll('.qz-life button').forEach(x => { x.disabled = true; });
       if (!ok) { b.classList.add('is-wrong'); card.classList.add('qz-shake'); }
@@ -481,6 +492,48 @@
     });
     if (chips >= 40) setTimeout(confetti, 300);
     root.querySelector('.qz-retry').addEventListener('click', intro);
+  }
+
+  // 復習モード：前にまちがえた問題だけを、チップなしで 1 問ずつ。正解すると、まちがいリストから消える
+  function review() {
+    const all = Object.entries(Q).flatMap(([lv, list]) => list.map(q => ({ ...q, lv })));
+    const qs = missList().map(t => all.find(q => q.q === t)).filter(Boolean);
+    if (!qs.length) return intro();
+    let i = 0, ok = 0;
+    const one = () => {
+      if (i >= qs.length) return done();
+      const q = qs[i];
+      const choices = shuffle(q.a.map((t, j) => ({ t, ok: j === 0 })));
+      show(`<div class="dg-card qz-q qz-rv">
+        <div class="qz-status"><span>復習 ${i + 1} / ${qs.length}</span><span>${LEVELS[q.lv].name}</span></div>
+        <div class="dg-box"><h2>${q.q}</h2></div>
+        <div class="qz-choices">${choices.map((c, j) => `<button type="button" class="qz-choice" data-ok="${c.ok ? 1 : 0}"><span>${'ABCD'[j]}</span>${c.t}</button>`).join('')}</div>
+        <div class="qz-feedback" aria-live="polite"></div>
+      </div>`);
+      const btns = [...root.querySelectorAll('.qz-choice')], fb = root.querySelector('.qz-feedback');
+      btns.forEach(b => b.addEventListener('click', () => {
+        if (btns[0].disabled) return;
+        const right = b.dataset.ok === '1';
+        if (right) ok++;
+        miss(q, right);
+        btns.forEach(x => { x.disabled = true; if (x.dataset.ok === '1') x.classList.add('is-right'); });
+        if (!right) b.classList.add('is-wrong');
+        const g = window.AZAKEI_GL_FOR ? AZAKEI_GL_FOR(q) : [];
+        fb.innerHTML = `<p class="${right ? 'ok' : 'ng'}">${right ? '正解！ リストから消えました。' : '残念……もう一度、覚えよう。'}</p>${right ? '' : `<p class="qz-answer">正解は「<b>${q.a[0]}</b>」</p>`}<p>${q.note}</p>${g.length ? `<p class="gl-chips"><span>関連する言葉</span>${g.map(([, id, label]) => `<a href="glossary.html#${id}" target="_blank" rel="noopener">${label}</a>`).join('')}</p>` : ''}<button type="button" class="btn-primary qz-next">${i + 1 < qs.length ? '次の問題へ' : '復習を終える'}</button>`;
+        fb.querySelector('.qz-next').addEventListener('click', () => { i++; one(); });
+      }));
+    };
+    const done = () => {
+      const left = missList().length;
+      show(`<div class="dg-card qz-final">
+        <p class="dg-kicker">復習おわり</p>
+        <p class="qz-big"><span>${ok}</span><small>/ ${qs.length} 問</small></p>
+        ${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(left ? `あと ${left} 問、まちがいリストに残っているよ。また復習しよう！` : 'まちがいリストが空っぽになった！ 完ぺきだね。', left ? '' : 'happy') : ''}
+        <div class="dg-actions"><button type="button" class="btn-primary qz-retry">クイズのはじめにもどる</button><a href="glossary.html" class="btn-ghost">用語辞典で確かめる →</a></div>
+      </div>`);
+      root.querySelector('.qz-retry').addEventListener('click', intro);
+    };
+    one();
   }
 
   intro();
