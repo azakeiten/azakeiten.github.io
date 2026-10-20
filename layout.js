@@ -206,7 +206,7 @@
       </div>`).join('')}
     </div>
     <div class="footer-giant" aria-hidden="true">AZAKEI<span class="footer-giant-seal">麻経</span></div>
-    <div class="footer-bottom"><span>© ${new Date().getFullYear()} AZAKEI. All rights reserved.${(window.AZAKEI && AZAKEI.siteUpdated) ? `<a class="footer-updated" href="about.html#updates">最終更新 <time datetime="${AZAKEI.siteUpdated}">${AZAKEI.siteUpdated.replace(/-/g, ".")}</time></a>` : ""}</span><span class="footer-legal"><a href="about.html#profile">団体概要</a><a href="about.html#faq">よくある質問</a><a href="privacy.html">プライバシーポリシー</a></span></div>`;
+    <div class="footer-bottom"><span>© ${new Date().getFullYear()} AZAKEI. All rights reserved.${(window.AZAKEI && AZAKEI.siteUpdated) ? `<a class="footer-updated" href="about.html#updates">最終更新 <time datetime="${AZAKEI.siteUpdated}">${AZAKEI.siteUpdated.replace(/-/g, ".")}</time></a>` : ""}</span><span class="footer-legal"><a href="mypage.html">わたしの記録</a><a href="about.html#profile">団体概要</a><a href="about.html#faq">よくある質問</a><a href="privacy.html">プライバシーポリシー</a></span></div>`;
 })();
 
 /* ---- 目次の中の「さがす」：ページと、ページの中のコーナーを絞りこむ ---- */
@@ -245,6 +245,7 @@
     ['diagnosis.html#types', '投資家タイプ一覧', '診断', 'タイプ 結果'],
     ['sponsor.html', '協賛・取材のご相談', '協賛', 'スポンサー 企業 取材 メディア'],
     ['about.html#updates', 'ホームページの更新履歴', '麻経とは', 'あたらしい 新機能 お知らせ 更新'],
+    ['mypage.html', 'わたしの記録', 'その他', 'マイページ 自己ベスト 進み具合 記録'],
     ['privacy.html', 'プライバシーポリシー', 'その他', '個人情報 cookie']
   ].map(([href, ja, group, kw]) => ({ href, ja, group, kw }));
   const pages = (window.AZAKEI_PAGES || []).map(p => ({ href: p.href, ja: p.ja, group: p.group, kw: (p.en || '') + ' ' + (p.desc || '') }));

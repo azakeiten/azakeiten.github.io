@@ -888,7 +888,7 @@ try {
     box.innerHTML = `
       <div class="ex-head">
         <p class="ex-title">サイト探検スタンプ <span class="nw"><b>${n}</b> / ${all}</span></p>
-        <p class="ex-msg">${done ? '全ページ制覇！ 隅々まで見てくれて、ありがとうございます。' : `まだ見ていないページ：<a href="${next[0]}">${next[1]}</a>`}</p>
+        <p class="ex-msg">${done ? '全ページ制覇！ 隅々まで見てくれて、ありがとうございます。' : `まだ見ていないページ：<a href="${next[0]}">${next[1]}</a>`}<a class="ex-my" href="mypage.html">わたしの記録をぜんぶ見る →</a></p>
       </div>
       <div class="ex-bar" aria-hidden="true"><i style="width:${n / all * 100}%"></i></div>
       <ul class="ex-stamps">${STAMPS.map(([href, ja]) => `<li class="${visited.has(href) ? 'is-got' : ''}${href === page && firstTime ? ' is-new' : ''}"><a href="${href}" title="${ja}${visited.has(href) ? '（見た）' : '（まだ）'}"><span aria-hidden="true">${visited.has(href) ? '経' : ''}</span><small>${ja}</small></a></li>`).join('')}</ul>`;

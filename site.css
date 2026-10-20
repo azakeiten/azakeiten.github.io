@@ -6028,3 +6028,30 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .ps-note { grid-column: 1 / -1; margin: 0; font-size: 12.5px; color: var(--color-muted); }
 @media (max-width: 860px) { .ps { grid-template-columns: 1fr; } .ps-card { position: static; } }
 .qz-review-start { margin-left: 8px; }
+
+/* ################################################################
+   ▼ v106 — わたしの記録（mypage.html）
+   ################################################################ */
+.my-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; margin-top: 18px; }
+.my-summary { grid-column: 1 / -1; position: relative; display: flex; align-items: baseline; gap: 10px; padding: 18px 22px 22px; border-radius: 18px; background: #1c2b23; color: #f3eee4; overflow: hidden; }
+.my-summary b { font-family: 'DM Sans', sans-serif; font-size: 44px; font-weight: 700; line-height: 1; color: #e3c68e; }
+.my-summary span { font-size: 14px; font-weight: 700; }
+.my-summary i { position: absolute; left: 0; bottom: 0; height: 5px; width: var(--p); background: linear-gradient(90deg, #b08a4a, #e3c68e); border-radius: 0 3px 3px 0; }
+.my-card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 16px; border-radius: 16px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); color: inherit; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+.my-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(60, 40, 10, .1); }
+.my-seal { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; border: 2px solid #c9bfae; color: #a99a80; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 17px; transform: rotate(-6deg); }
+.my-card.is-done .my-seal { border-color: #b5432f; color: #fff; background: #b5432f; }
+.my-name { margin: 0; padding-right: 44px; font-size: 13.5px; font-weight: 800; color: #6b4a22; }
+.my-name em { margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: #2f6b3a; color: #fff; font-style: normal; font-size: 11px; vertical-align: 1px; }
+.my-big { margin: 4px 0 0; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.my-big b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 30px; line-height: 1.2; }
+.my-big small { font-size: 13px; font-weight: 700; color: var(--color-muted); white-space: nowrap; }
+.my-sub { margin: 0; font-size: 12.5px; line-height: 1.7; color: var(--color-muted); text-wrap: pretty; }
+.my-bar { display: block; height: 6px; margin-top: 6px; border-radius: 999px; background: rgba(176, 138, 74, .18); overflow: hidden; }
+.my-bar i { display: block; height: 100%; border-radius: inherit; background: #b08a4a; }
+.my-card.is-done .my-bar i { background: #2f6b3a; }
+.my-cta { margin-top: auto; padding-top: 10px; font-size: 13px; font-weight: 800; color: #b5432f; }
+.my-note { margin: 18px 0 0; font-size: 12.5px; color: var(--color-muted); line-height: 1.8; }
+.ex-my { display: block; width: fit-content; margin-top: 6px; font-size: 12.5px; font-weight: 800; color: #b5432f; }
+@media (max-width: 480px) { .my-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .my-card { padding: 14px 12px 12px; } .my-seal { width: 26px; height: 26px; font-size: 13px; top: 10px; right: 10px; } .my-name { padding-right: 30px; font-size: 12.5px; } .my-big b { font-size: 24px; } .my-sub { font-size: 11.5px; } .my-summary b { font-size: 36px; } }
+@media (max-width: 340px) { .my-grid { grid-template-columns: 1fr; } }
