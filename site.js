@@ -898,6 +898,7 @@ try {
     const best = +(get('azakei_quiz_best', 0)) || 0;
     const wk = get('azakei_weekly', {});
     let voted = false, dg = false, glKnown = 0, simRun = false, tour = false, ozk = false, chart = false;
+    let npBest = 0; try { npBest = +localStorage.getItem('azakei_np_best') || 0; } catch (e) {}
     try { glKnown = JSON.parse(localStorage.getItem('azakei_gl_known') || '[]').length; simRun = !!localStorage.getItem('azakei_sim_run'); tour = !!localStorage.getItem('azakei_room_tour'); ozk = !!localStorage.getItem('azakei_ozk_master'); chart = !!localStorage.getItem('azakei_chart_reader'); } catch (e) {}
     try { voted = Object.keys(localStorage).some(k => k.startsWith('azakei_vote_')); dg = !!localStorage.getItem('azakei_dg_type'); } catch (e) {}
     const BADGES = [
@@ -915,7 +916,8 @@ try {
       ['試', '未来をのぞく', simRun, 'シミュレーターで 10 年後へ', 'sim.html'],
       ['歩', '会場ツアー', tour, '3D の会場で、順路を最後まで', 'festival.html#room'],
       ['遣', 'やりくり名人', ozk, 'おこづかいチャレンジで「やりくり名人」', 'sim.html#okozukai'],
-      ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown']
+      ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown'],
+      ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo']
     ];
     window.AZAKEI_BADGES = BADGES;
     const got = BADGES.filter(b => b[2]).length;
@@ -961,7 +963,7 @@ try {
     if (weekly.week === undefined) items.push(`<a href="#weekly">今週の 1 問に、挑戦してみませんか</a>`);
     else if (weekly.week !== weekNo) items.push(`<a href="#weekly">今週の 1 問が、新しくなっています</a>`);
     else if (weekly.lastOk === weekNo && weekly.streak > 1) items.push(`<a href="#weekly">今週の 1 問、<b>${weekly.streak}</b> 週連続正解中！</a>`);
-    if (visited.size < STAMPS.length) items.push(`<a href="#site-footer">探検スタンプ ${STAMPS.filter(s => visited.has(s[0])).length} / ${STAMPS.length}</a>`);
+    if (window.AZAKEI_BADGES) items.push(`<a href="mypage.html">わたしの記録：バッジ <b>${AZAKEI_BADGES.filter(b => b[2]).length}</b> / ${AZAKEI_BADGES.length}</a>`);
     welcome.innerHTML = `<div class="container">${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(`おかえりなさい！ 前回は ${fmt(prev)} に来てくれたね。また会えてうれしいよ。`, 'happy') : `<p class="wb-hello"><span class="wb-seal" aria-hidden="true">経</span>おかえりなさい。<small>前回は ${fmt(prev)} に来てくれました。</small></p>`}${items.length ? `<ul class="wb-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</div>`;
     welcome.hidden = false;
   }

@@ -6092,3 +6092,29 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
   .my-badges { grid-template-columns: repeat(3, 1fr); gap: 8px; } .my-medal { width: 44px; height: 44px; font-size: 19px; }
 }
 .my-badges small, .my-badges b, .my-sub, .my-next small, .my-rank-msg { word-break: auto-phrase; }
+
+/* ---- v108：用語辞典 — 年表ゲーム「どっちが先？」 ---- */
+.npg { margin-top: 26px; padding: 22px; border-radius: 20px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.npg-title { margin: 0 0 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; }
+.npg-title small { flex-basis: 100%; font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400; font-size: 13px; color: var(--color-muted); word-break: auto-phrase; }
+.npg-seal { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 7px; background: #b5432f; color: #fff; font-size: 17px; transform: rotate(-6deg); }
+.npg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.npg-q { font-weight: 800; font-size: 15px; } .npg-q b { color: #b5432f; font-size: 18px; }
+.npg-score { font-size: 13px; font-weight: 700; white-space: nowrap; } .npg-score b { font-family: 'DM Sans', sans-serif; font-size: 22px; color: #b08a4a; margin: 0 2px; }
+.npg-score small { margin-left: 10px; color: var(--color-muted); font-weight: 400; }
+.npg-pair { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 10px; }
+.npg-vs { align-self: center; font-family: 'Cormorant', serif; font-style: italic; font-size: 22px; color: #b08a4a; }
+.npg-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 130px; padding: 16px 14px; border-radius: 16px; border: 2px solid var(--color-border); background: var(--color-bg, #faf7f1); color: inherit; font: inherit; cursor: pointer; text-align: center; transition: transform .2s, border-color .2s; }
+.npg-card:not(:disabled):hover { transform: translateY(-3px); border-color: #b08a4a; }
+.npg-year { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: .06em; color: #c9bfae; }
+.npg-t { font-weight: 700; font-size: 14.5px; line-height: 1.6; word-break: auto-phrase; text-wrap: balance; }
+.npg-card.is-first .npg-year { color: #2f6b3a; } .npg-card.is-later .npg-year { color: #b08a4a; }
+.npg-card.is-right { border-color: #2f6b3a; background: color-mix(in srgb, #2f6b3a 8%, var(--color-bg, #faf7f1)); }
+.npg-card.is-wrong { border-color: #b5432f; background: color-mix(in srgb, #b5432f 7%, var(--color-bg, #faf7f1)); }
+.npg-card:disabled { cursor: default; }
+.npg-fb > p { margin: 14px 0 0; font-weight: 700; font-size: 14px; word-break: auto-phrase; }
+.npg-fb .ok { color: #2f6b3a; } .npg-fb .ng { color: #b5432f; }
+.npg-fb .osatsu { margin: 10px 0 0; }
+.npg-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 12px; }
+.npg-link { font-size: 13px; font-weight: 700; color: #b5432f; }
+@media (max-width: 520px) { .npg { padding: 16px 14px; } .npg-pair { grid-template-columns: 1fr; gap: 6px; } .npg-vs { justify-self: center; font-size: 18px; } .npg-card { min-height: 0; padding: 14px 12px; flex-direction: row; justify-content: flex-start; text-align: left; } .npg-year { font-size: 20px; min-width: 3.2em; } }
