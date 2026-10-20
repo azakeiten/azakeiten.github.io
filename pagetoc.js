@@ -12,7 +12,9 @@
   const nav = document.createElement('nav');
   nav.className = 'ptoc';
   nav.setAttribute('aria-label', 'このページの中身');
-  nav.innerHTML = `<div class="container"><p class="ptoc-head"><span aria-hidden="true">目</span>このページの中身<small>${secs.length} つ</small></p><ol>${secs.map((s, i) => `<li><a href="#${s.id}"><b>${String(i + 1).padStart(2, '0')}</b>${label(s)}</a></li>`).join('')}</ol></div>`;
+  const en = /^en/.test(document.documentElement.lang);
+  if (en) nav.setAttribute('aria-label', 'On this page');
+  nav.innerHTML = `<div class="container"><p class="ptoc-head"><span aria-hidden="true">目</span>${en ? 'On this page' : 'このページの中身'}<small>${en ? secs.length + ' sections' : secs.length + ' つ'}</small></p><ol>${secs.map((s, i) => `<li><a href="#${s.id}"><b>${String(i + 1).padStart(2, '0')}</b>${label(s)}</a></li>`).join('')}</ol></div>`;
   hero.after(nav);
   // いま読んでいるところに印
   if (!('IntersectionObserver' in window)) return;
