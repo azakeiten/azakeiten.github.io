@@ -6055,3 +6055,40 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .ex-my { display: block; width: fit-content; margin-top: 6px; font-size: 12.5px; font-weight: 800; color: #b5432f; }
 @media (max-width: 480px) { .my-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .my-card { padding: 14px 12px 12px; } .my-seal { width: 26px; height: 26px; font-size: 13px; top: 10px; right: 10px; } .my-name { padding-right: 30px; font-size: 12.5px; } .my-big b { font-size: 24px; } .my-sub { font-size: 11.5px; } .my-summary b { font-size: 36px; } }
 @media (max-width: 340px) { .my-grid { grid-template-columns: 1fr; } }
+
+/* ---- v107：わたしの記録 — 称号・つぎのおすすめ・バッジの棚 ---- */
+.my-rank { grid-column: 1 / -1; display: flex; gap: 20px; align-items: center; padding: 22px 24px; border-radius: 20px; background: #1c2b23 var(--grain, none); color: #f3eee4; position: relative; overflow: hidden; }
+.my-rank::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; border: 1px dashed rgba(227, 198, 142, .3); pointer-events: none; }
+.my-rank-seal { flex: none; width: 76px; height: 76px; display: grid; place-items: center; border-radius: 14px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 40px; transform: rotate(-5deg); box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .25), 0 6px 16px rgba(0, 0, 0, .25); }
+.my-rank-body { flex: 1; min-width: 0; }
+.my-rank-label { margin: 0; font-size: 11.5px; font-weight: 700; letter-spacing: .12em; color: #e3c68e; }
+.my-rank-name { margin: 2px 0 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(24px, 4vw, 32px); line-height: 1.3; }
+.my-rank-msg { margin: 2px 0 10px; font-size: 13px; color: rgba(243, 238, 228, .75); }
+.my-rank-bar { display: block; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .12); overflow: hidden; }
+.my-rank-bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #b08a4a, #e3c68e); }
+.my-rank-meta { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: rgba(243, 238, 228, .8); }
+.my-rank-meta span { white-space: nowrap; }
+.my-rank-meta b { color: #e3c68e; font-family: 'DM Sans', sans-serif; font-size: 15px; }
+.my-next { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 14px; padding: 14px 18px; border-radius: 16px; border: 2px solid #b5432f; background: color-mix(in srgb, #b5432f 6%, var(--color-surface, #fff)); color: inherit; text-decoration: none; }
+.my-next-k { grid-row: 1 / 3; padding: 4px 10px; border-radius: 999px; background: #b5432f; color: #fff; font-size: 11.5px; font-weight: 800; white-space: nowrap; }
+.my-next b { font-size: 15px; }
+.my-next small { grid-column: 2; font-size: 12.5px; color: var(--color-muted); }
+.my-next-go { grid-column: 3; grid-row: 1 / 3; font-size: 13px; font-weight: 800; color: #b5432f; white-space: nowrap; }
+.my-h { grid-column: 1 / -1; margin: 18px 0 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; display: flex; align-items: baseline; gap: 10px; }
+.my-h::after { content: ""; flex: 1; height: 1px; background: var(--color-border); }
+.my-h small { font-family: 'DM Sans', sans-serif; font-size: 14px; color: #b08a4a; }
+.my-badges { grid-column: 1 / -1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 10px; }
+.my-badges a { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 8px 12px; border-radius: 14px; border: 1px dashed var(--color-border); color: var(--color-muted); text-decoration: none; text-align: center; height: 100%; }
+.my-medal { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; border: 2px dashed #c9bfae; color: #b5ab98; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; }
+.my-badges b { font-size: 12.5px; color: var(--color-text); opacity: .6; }
+.my-badges small { font-size: 10.5px; line-height: 1.5; text-wrap: balance; }
+.my-badges li.is-got a { border-style: solid; border-color: color-mix(in srgb, #b08a4a 45%, transparent); background: color-mix(in srgb, #b08a4a 8%, var(--color-surface, #fff)); }
+.my-badges li.is-got .my-medal { border: none; color: #5a3d16; background: radial-gradient(circle at 35% 30%, #fbecc6, #d6b97f 60%, #b08a4a); box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .35), 0 4px 10px rgba(120, 85, 30, .25); }
+.my-badges li.is-got b { opacity: 1; }
+.my-badges li.is-got small { color: #2f6b3a; font-weight: 700; }
+@media (max-width: 480px) {
+  .my-rank { padding: 18px 16px; gap: 14px; } .my-rank-seal { width: 56px; height: 56px; font-size: 30px; }
+  .my-next { grid-template-columns: 1fr auto; padding: 12px 14px; } .my-next-k { grid-row: auto; justify-self: start; grid-column: 1 / -1; } .my-next small { grid-column: 1; } .my-next-go { grid-column: 2; grid-row: 2 / 4; }
+  .my-badges { grid-template-columns: repeat(3, 1fr); gap: 8px; } .my-medal { width: 44px; height: 44px; font-size: 19px; }
+}
+.my-badges small, .my-badges b, .my-sub, .my-next small, .my-rank-msg { word-break: auto-phrase; }

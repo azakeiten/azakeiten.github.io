@@ -29,9 +29,26 @@
     ['種', 'ビジネスプランのたね', planN, '/ 6 欄', planN === 6 ? 'プランのカードが完成！' : '6 つの欄をうめて、カードを完成させよう', pct(planN, 6), 'contests.html#plan-seed', planN ? '続きを書く' : '書いてみる', planN === 6]
   ];
   const done = C.filter(c => c[8]).length;
-  box.innerHTML = `<div class="my-summary"><b>${done}</b><span>/ ${C.length} の記録が「達成」</span><i style="--p:${pct(done, C.length)}%"></i></div>`
+  const B = window.AZAKEI_BADGES || [];
+  const got = B.filter(b => b[2]).length;
+  // 称号：記録とバッジの合計で、5 段階
+  const score = done + got, max = C.length + B.length;
+  const RANKS = [[0, '見学者', '見', 'まずは、気になるカードから'], [4, '見習い部員', '習', 'いい調子。いろいろ試してみよう'], [10, '研究員', '研', 'サイトのことが、だいぶわかってきたね'], [16, '主任エコノミスト', '主', 'ここまで来た人は、なかなかいません'], [22, '麻経マスター', '極', 'ぜんぶの遊びを知りつくした人']];
+  const ri = RANKS.reduce((a, r, i) => score >= r[0] ? i : a, 0), rank = RANKS[ri], nextR = RANKS[ri + 1];
+  const nextC = C.find(c => !c[8]);
+  const NUDGE = { 探: 'まだ見ていないページに、新しい発見があるかも', 億: 'チップを賭けて答える経済クイズ。まずは 40 枚をめざそう', 復: 'まちがえた問題だけを、もう一度。全問正解でリストが空に', 辞: '1 枚ずつめくって覚える単語カード。まずは 30 語から', 週: '毎週月曜に変わる 1 問。3 週続けて正解しよう', 診: 'YES と NO で答えるだけ。あなたはどの動物タイプ？', 遣: '1 年でおこづかいをやりくり。自転車は買えるかな', 読: '株価のチャートは、上がる？ 下がる？', 歩: '文化祭の教室を、3D で順番に見て回ろう', 種: '6 つの欄をうめると、自分のビジネスプランが完成' };
+  box.innerHTML = `<div class="my-rank">
+      <span class="my-rank-seal" aria-hidden="true">${rank[2]}</span>
+      <div class="my-rank-body"><p class="my-rank-label">いまの称号</p><p class="my-rank-name">${rank[1]}</p><p class="my-rank-msg">${rank[3]}</p>
+        <span class="my-rank-bar"><i style="width:${pct(score, max)}%"></i></span>
+        <p class="my-rank-meta"><span>達成 <b>${done}</b> / ${C.length}</span><span>バッジ <b>${got}</b> / ${B.length}</span>${nextR ? `<span>「${nextR[1]}」まで あと <b>${nextR[0] - score}</b></span>` : '<span>最高の称号です</span>'}</p></div>
+    </div>
+    ${nextC ? `<a class="my-next" href="${nextC[6]}"><span class="my-next-k">つぎのおすすめ</span><b>${nextC[1]}</b><small>${NUDGE[nextC[0]] || nextC[4]}</small><span class="my-next-go">${nextC[7]} →</span></a>` : ''}
+    <h2 class="my-h">記録</h2>`
     + C.map(([s, name, big, unit, sub, p, href, cta, ok]) => `<a class="my-card${ok ? ' is-done' : ''}" href="${href}">
       <span class="my-seal">${s}</span><p class="my-name">${name}${ok ? '<em>達成</em>' : ''}</p>
       <p class="my-big"><b>${big}</b><small>${unit}</small></p><p class="my-sub">${sub}</p>
-      ${p !== null ? `<span class="my-bar"><i style="width:${p}%"></i></span>` : ''}<span class="my-cta">${cta} →</span></a>`).join('');
+      ${p !== null ? `<span class="my-bar"><i style="width:${p}%"></i></span>` : ''}<span class="my-cta">${cta} →</span></a>`).join('')
+    + (B.length ? `<h2 class="my-h">バッジ <small>${got} / ${B.length}</small></h2>
+      <ul class="my-badges">${B.map(([s, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}"><span class="my-medal" aria-hidden="true">${s}</span><b>${name}</b><small>${ok ? '獲得ずみ' : how}</small></a></li>`).join('')}</ul>` : '');
 })();

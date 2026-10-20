@@ -917,6 +917,7 @@ try {
       ['遣', 'やりくり名人', ozk, 'おこづかいチャレンジで「やりくり名人」', 'sim.html#okozukai'],
       ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown']
     ];
+    window.AZAKEI_BADGES = BADGES;
     const got = BADGES.filter(b => b[2]).length;
     box.insertAdjacentHTML('beforeend', `
       <div class="ex-badges">
