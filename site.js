@@ -898,7 +898,7 @@ try {
     const best = +(get('azakei_quiz_best', 0)) || 0;
     const wk = get('azakei_weekly', {});
     let voted = false, dg = false, glKnown = 0, simRun = false, tour = false, ozk = false, chart = false;
-    let npBest = 0; try { npBest = +localStorage.getItem('azakei_np_best') || 0; } catch (e) {}
+    let npBest = 0, fxM = false; try { npBest = +localStorage.getItem('azakei_np_best') || 0; fxM = !!localStorage.getItem('azakei_fx_master'); } catch (e) {}
     try { glKnown = JSON.parse(localStorage.getItem('azakei_gl_known') || '[]').length; simRun = !!localStorage.getItem('azakei_sim_run'); tour = !!localStorage.getItem('azakei_room_tour'); ozk = !!localStorage.getItem('azakei_ozk_master'); chart = !!localStorage.getItem('azakei_chart_reader'); } catch (e) {}
     try { voted = Object.keys(localStorage).some(k => k.startsWith('azakei_vote_')); dg = !!localStorage.getItem('azakei_dg_type'); } catch (e) {}
     const BADGES = [
@@ -917,7 +917,8 @@ try {
       ['歩', '会場ツアー', tour, '3D の会場で、順路を最後まで', 'festival.html#room'],
       ['遣', 'やりくり名人', ozk, 'おこづかいチャレンジで「やりくり名人」', 'sim.html#okozukai'],
       ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown'],
-      ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo']
+      ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo'],
+      ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx']
     ];
     window.AZAKEI_BADGES = BADGES;
     const got = BADGES.filter(b => b[2]).length;
