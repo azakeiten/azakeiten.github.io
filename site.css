@@ -6159,3 +6159,31 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 .fx-next, .fx-again { margin-top: 12px; background: #1c2b23; color: #f3eee4; border-color: #1c2b23; padding: 10px 20px; border-radius: 999px; }
 .fx-quiz .osatsu { margin: 10px 0 0; }
 @media (max-width: 640px) { .fx-cols { grid-template-columns: 1fr; } .fx-board { padding: 20px 16px 16px; } .fx-q-a { grid-template-columns: 1fr; } }
+
+/* ---- v110：用語辞典 — ニュースの見出しを読みとく（新聞の切り抜き） ---- */
+.hl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; align-items: start; }
+.hl { position: relative; background: #fffdf6; border: 1px solid #e3dccb; box-shadow: 0 1px 0 #e9e2d0, 0 12px 26px -20px rgba(60, 40, 10, .45); color: #2a2620; transition: transform .2s; }
+.hl:nth-child(odd) { transform: rotate(-.6deg); } .hl:nth-child(even) { transform: rotate(.5deg); }
+.hl[open], .hl:hover { transform: none; }
+.hl::before { content: ""; position: absolute; top: -9px; left: 50%; width: 70px; height: 18px; transform: translateX(-50%) rotate(-2deg); background: rgba(227, 198, 142, .55); }
+.hl summary { list-style: none; cursor: pointer; display: grid; gap: 8px; padding: 22px 20px 16px; border-bottom: 3px double transparent; }
+.hl summary::-webkit-details-marker { display: none; }
+.hl[open] summary { border-bottom-color: #d8ceb8; }
+.hl-tag { justify-self: start; padding: 1px 8px; border: 1px solid #2a2620; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+.hl-h { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(20px, 2.4vw, 24px); line-height: 1.45; word-break: auto-phrase; text-wrap: balance; }
+.hl-open { justify-self: end; font-size: 12.5px; font-weight: 800; color: #b5432f; }
+.hl-open::after { content: " ▾"; } .hl[open] .hl-open::after { content: " ▴"; }
+.hl[open] .hl-open { color: #8a7f6c; }
+.hl-body { padding: 14px 20px 18px; display: grid; gap: 10px; }
+.hl-body p { margin: 0; font-size: 14px; line-height: 1.85; word-break: auto-phrase; }
+.hl-body p > span { display: inline-block; margin-right: 8px; padding: 0 8px; border-radius: 999px; font-size: 11px; font-weight: 800; color: #fff; background: #1c2b23; vertical-align: 2px; }
+.hl-life > span { background: #b5432f !important; }
+.hl-say { font-weight: 700; }
+.hl-words { display: flex; flex-wrap: wrap; gap: 6px; }
+.hl-words a { padding: 4px 12px; border-radius: 999px; border: 1px solid #d8ceb8; font-size: 12.5px; font-weight: 700; color: #6b4a22; text-decoration: none; background: #fff; }
+.hl-words a:hover { border-color: #b08a4a; }
+[data-theme="dark"] .hl { background: #2a2721; border-color: #4a4335; color: #ece8dd; }
+[data-theme="dark"] .hl-tag { border-color: #ece8dd; }
+[data-theme="dark"] .hl-words a { background: #1f1d18; border-color: #4a4335; color: #e3c68e; }
+[data-theme="dark"] .hl[open] summary { border-bottom-color: #4a4335; }
+[data-theme="dark"] .hl-say > span { background: #2f6b3a; }
