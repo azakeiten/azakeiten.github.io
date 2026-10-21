@@ -6187,3 +6187,29 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 [data-theme="dark"] .hl-words a { background: #1f1d18; border-color: #4a4335; color: #e3c68e; }
 [data-theme="dark"] .hl[open] summary { border-bottom-color: #4a4335; }
 [data-theme="dark"] .hl-say > span { background: #2f6b3a; }
+
+/* ---- v111：トップ — 新しく、遊べるもの（横にめくるカード） ---- */
+.npl-wrap { padding: clamp(56px, 8vw, 96px) 0 clamp(40px, 6vw, 72px); }
+.npl-row { list-style: none; margin: 22px 0 0; display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px max(20px, calc((100vw - 1120px) / 2)) 22px; scroll-padding-inline: max(20px, calc((100vw - 1120px) / 2)); scrollbar-width: thin; }
+.npl-row > li { flex: 0 0 clamp(250px, 30vw, 320px); scroll-snap-align: start; }
+.npl-card { position: relative; display: flex; flex-direction: column; gap: 8px; height: 100%; min-height: 300px; padding: 22px 22px 20px; border-radius: 26px; color: #2a2620; text-decoration: none; overflow: hidden; background: #fffdf6; border: 1px solid #e6dfcf; transition: transform .25s, box-shadow .25s; }
+.npl-card:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -26px rgba(40, 30, 10, .55); }
+.npl-card.is-dark { background: #1c2b23; color: #f3eee4; border-color: #1c2b23; }
+.npl-card.is-shu { background: #b5432f; color: #fff6ee; border-color: #b5432f; }
+.npl-card.is-gold { background: linear-gradient(160deg, #f6e7c4, #e3c68e); border-color: #e3c68e; }
+.npl-card.is-green { background: #2f6b3a; color: #f1f5ec; border-color: #2f6b3a; }
+.npl-seal { position: absolute; right: -14px; bottom: -26px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 150px; line-height: 1; opacity: .12; pointer-events: none; }
+.npl-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .06em; opacity: .85; }
+.npl-meta time { font-family: 'DM Sans', sans-serif; font-weight: 600; opacity: .7; }
+.npl-meta em { font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 10.5px; letter-spacing: .1em; padding: 2px 8px; border-radius: 999px; background: #b5432f; color: #fff; opacity: 1; }
+.npl-card.is-shu .npl-meta em { background: #fff; color: #b5432f; }
+.npl-title { margin-top: 6px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 23px; line-height: 1.45; word-break: auto-phrase; text-wrap: balance; }
+.npl-text { font-size: 13.5px; line-height: 1.85; opacity: .85; word-break: auto-phrase; }
+.npl-go { margin-top: auto; padding-top: 10px; font-size: 13.5px; font-weight: 800; }
+.npl-go::after { content: " →"; }
+.npl-card.is-paper .npl-go, .npl-card.is-gold .npl-go { color: #b5432f; }
+.npl-card.is-dark .npl-go { color: #e3c68e; }
+[data-theme="dark"] .npl-card.is-paper { background: #26241f; color: #ece8dd; border-color: #3d382e; }
+[data-theme="dark"] .npl-card.is-dark { border-color: #3a4a40; }
+@media (max-width: 520px) { .npl-row { gap: 12px; } .npl-row > li { flex-basis: 78vw; } .npl-card { min-height: 260px; border-radius: 22px; } .npl-title { font-size: 21px; } }
+.npl-row { scrollbar-width: none; } .npl-row::-webkit-scrollbar { display: none; }

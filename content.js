@@ -7,6 +7,15 @@ window.AZAKEI = {
   /* ---- サイトの最終更新日（フッターに出す。更新したら書きかえる） ---- */
   siteUpdated: '2026-10-21',
 
+  /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
+  newPlay: [
+    { date: '2026-10-21', seal: '読', tone: 'paper', href: 'glossary.html#headline', eyebrow: '用語辞典', title: 'ニュースの見出しを、読みとく', text: '「日銀、利上げ」ってどういうこと？ よく見る見出し 6 つを、新聞の切り抜き風に。' },
+    { date: '2026-10-21', seal: '為', tone: 'dark', href: 'sim.html#fx', eyebrow: '経済ラボ', title: '円高・円安の両替所', text: '1 ドルが何円かを動かすと、ハンバーガーの値段が変わる。3 問全問正解でバッジ。' },
+    { date: '2026-10-20', seal: '歴', tone: 'shu', href: 'glossary.html#nenpyo', eyebrow: '用語辞典', title: '年表ゲーム「どっちが先？」', text: 'バブルとオイルショック、先に起きたのは？ 8 問連続正解で「歴史通」。' },
+    { date: '2026-10-20', seal: '録', tone: 'gold', href: 'mypage.html', eyebrow: 'あなたの記録', title: 'わたしの記録', text: '自己ベスト、覚えた言葉、集めたバッジ。5 段階の称号つき。' },
+    { date: '2026-10-20', seal: '種', tone: 'green', href: 'contests.html#plan-seed', eyebrow: 'コンテスト', title: 'ビジネスプランのたね', text: '6 つの欄をうめると、自分のビジネスプランが 1 枚のカードに。' }
+  ],
+
   /* ---- SNS ---- */
   sns: [
     { name: 'Instagram', handle: '@azakei_vlog', url: 'https://www.instagram.com/azakei_vlog/', desc: '活動報告・Vlog・お問い合わせ（DM）' },
