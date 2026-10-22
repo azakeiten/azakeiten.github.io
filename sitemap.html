@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>サイトマップ | 麻経 AZAKEI</title>
+  <meta name="description" content="麻経 AZAKEI のホームページの、すべてのページとコーナーの一覧。" />
+  <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="icon-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-title" content="麻経" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AZAKEI" />
+  <meta property="og:title" content="サイトマップ | 麻経 AZAKEI" />
+  <meta property="og:description" content="麻経 AZAKEI のホームページの、すべてのページとコーナーの一覧。" />
+  <meta property="og:url" content="https://azakeiten.github.io/sitemap.html" />
+  <link rel="canonical" href="https://azakeiten.github.io/sitemap.html" />
+  <meta property="og:image" content="https://azakeiten.github.io/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.min.css?v=20261023a" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S1YQ2P951D');
+  </script>
+</head>
+<body>
+
+  <header class="page-hero" data-bg="SITEMAP">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / サイトマップ</p>
+      <p class="section-label"><span class="ph-seal" aria-hidden="true">図</span>Sitemap</p>
+      <h1 class="section-title"><span class="keep-phrase">サイト</span><span class="keep-phrase"><em>マップ</em></span></h1>
+      <p class="page-hero-lead">このホームページの、すべてのページとコーナーの一覧です。<br>見たいところが見つからないときは、ここから。</p>
+    </div>
+  </header>
+
+  <section class="about tight">
+    <div class="container">
+      <div class="smap reveal" data-sitemap></div>
+      <noscript><p>ページ一覧：<a href="index.html">ホーム</a>・<a href="about.html">麻経とは</a>・<a href="festival.html">文化祭</a>・<a href="contests.html">コンテスト</a>・<a href="quiz.html">クイズ</a>・<a href="sim.html">経済ラボ</a>・<a href="glossary.html">用語辞典</a>・<a href="contact.html">お問い合わせ</a></p></noscript>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="content.js?v=20261023a"></script>
+  <script src="layout.js?v=20261023a"></script>
+  <script src="brand.js?v=20261023a"></script>
+  <script src="nav.js?v=20261023a"></script>
+  <script src="reveal.js?v=20261023a"></script>
+  <script>
+    (function () {
+      var box = document.querySelector('[data-sitemap]');
+      var pages = window.AZAKEI_PAGES || [], spots = window.AZAKEI_SPOTS || [];
+      if (!box || !pages.length) return;
+      var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+      var groups = [];
+      pages.forEach(function (p) { var g = groups.find(function (x) { return x.name === p.group; }); if (!g) groups.push(g = { name: p.group, pages: [] }); g.pages.push(p); });
+      var extra = { name: 'その他', pages: [
+        { href: 'mypage.html', ja: 'わたしの記録', desc: 'クイズの自己ベストやバッジを、1 ページで。' },
+        { href: 'en.html', ja: 'English', desc: 'AZAKEI in English.' },
+        { href: 'policy.html', ja: 'サイトポリシー', desc: '著作権・リンク・内容の扱い・写真の方針。' },
+        { href: 'privacy.html', ja: 'プライバシーポリシー', desc: '集める情報と、その使い方。' }
+      ] };
+      groups.push(extra);
+      var used = {};
+      box.innerHTML = groups.map(function (g) {
+        return '<div class="smap-group"><h2 class="smap-h">' + esc(g.name) + '</h2><ul>' + g.pages.map(function (p) {
+          var kids = spots.filter(function (s) { return s.href.indexOf(p.href + '#') === 0 && !used[s.href]; });
+          kids.forEach(function (s) { used[s.href] = 1; });
+          return '<li><a class="smap-page" href="' + p.href + '"><b>' + esc(p.ja) + '</b>' + (p.desc ? '<small>' + esc(p.desc) + '</small>' : '') + '</a>'
+            + (kids.length ? '<ul class="smap-kids">' + kids.map(function (s) { return '<li><a href="' + s.href + '">' + esc(s.ja) + '</a></li>'; }).join('') + '</ul>' : '') + '</li>';
+        }).join('') + '</ul></div>';
+      }).join('');
+    })();
+  </script>
+  <script src="site.js?v=20261023a"></script>
+</body>
+</html>
