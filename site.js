@@ -1153,3 +1153,27 @@ try {
   });
 })();
 } catch (e) { console.error('[site.js / v122]', e); }
+
+/* ######## ▼ v123：更新履歴は、新しい 3 日分だけ見せて、残りは「すべて見る」で開く ######## */
+try {
+(function() {
+  const log = document.querySelector('.clog');
+  if (!log) return;
+  const items = [...log.children];
+  if (items.length <= 3) return;
+  const total = items.reduce((n, li) => n + li.querySelectorAll('ul > li').length, 0);
+  log.classList.add('is-folded');
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'clog-more';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = `過去の更新をすべて見る<small>${items.length} 日分・${total} 件</small>`;
+  log.after(btn);
+  btn.addEventListener('click', () => {
+    const open = log.classList.toggle('is-folded') === false;
+    btn.setAttribute('aria-expanded', open);
+    btn.firstChild.textContent = open ? '新しい 3 日分だけにする' : '過去の更新をすべて見る';
+    if (!open) log.scrollIntoView({ block: 'start' });
+  });
+})();
+} catch (e) { console.error('[site.js / v123]', e); }

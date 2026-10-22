@@ -6470,3 +6470,13 @@ html.is-lite .os-man[role=button]::after { animation: none; }
   #activities .services-grid::-webkit-scrollbar { display: none; }
   #activities .services-grid > * { flex: 0 0 78%; scroll-snap-align: start; }
 }
+.sc-web { white-space: nowrap; } @media (max-width: 560px) { .sc-web { font-size: 12.5px; padding-inline: 12px; } }
+
+/* ---- v123：更新履歴をたたむ ---- */
+.clog.is-folded > li:nth-child(n+4) { display: none; }
+.clog.is-folded { position: relative; }
+.clog.is-folded::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: linear-gradient(transparent, var(--color-bg)); pointer-events: none; }
+.clog-more { display: flex; flex-direction: column; align-items: center; gap: 2px; margin: 14px auto 0; padding: 12px 26px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; font: inherit; font-weight: 800; font-size: 14px; cursor: pointer; transition: border-color .2s, transform .2s; }
+.clog-more:hover { border-color: #b08a4a; transform: translateY(-2px); }
+.clog-more small { font-size: 11.5px; font-weight: 600; color: var(--color-muted); }
+.clog-more::after { content: "▾"; color: #b08a4a; line-height: 1; } .clog-more[aria-expanded="true"]::after { content: "▴"; }
