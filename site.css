@@ -6457,3 +6457,16 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 }
 .ap-first-swipe { display: none; } @media (max-width: 560px) { .ap-first-swipe { display: block; } }
 @media (max-width: 560px) { .ap-tile.is-photo.is-low p:not(.ap-tile-eyebrow), .ap-tile.is-photo.is-low .qz-leader { display: none !important; } .ap-tile.is-photo.is-low h3 { font-size: 17px; word-break: auto-phrase; } .ap-tile.is-photo.is-low { justify-content: flex-end; gap: 6px; } }
+
+/* ---- v122：文化祭ページをスマホで短く（ルールはタブ・活動は横にめくる） ---- */
+.mtabs { display: none; }
+@media (max-width: 560px) {
+  .mtabs { display: flex; gap: 6px; margin: 4px 0 10px; padding: 4px; border-radius: 999px; background: color-mix(in srgb, var(--color-text) 6%, transparent); }
+  .mtabs button { flex: 1; padding: 9px 6px; border: none; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; transition: background .25s, color .25s; }
+  .mtabs button[aria-selected="true"] { background: #1c2b23; color: #f3eee4; box-shadow: 0 6px 14px -8px rgba(0, 0, 0, .5); }
+  .has-mtabs > * { display: none !important; }
+  .has-mtabs > .is-pick { display: block !important; animation: my-up .35s ease-out; }
+  #activities .services-grid { display: flex !important; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(-1 * var(--gutter, 20px)); padding: 4px var(--gutter, 20px) 14px; scroll-padding-inline: var(--gutter, 20px); scrollbar-width: none; }
+  #activities .services-grid::-webkit-scrollbar { display: none; }
+  #activities .services-grid > * { flex: 0 0 78%; scroll-snap-align: start; }
+}

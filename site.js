@@ -1134,3 +1134,22 @@ try {
   pick(0);
 })();
 } catch (e) { console.error('[site.js / v120]', e); }
+
+/* ######## ▼ v122：スマホでは、横に並ぶ説明をタブで切りかえる（data-mtabs。見出しは中の h3） ######## */
+try {
+(function() {
+  document.querySelectorAll('[data-mtabs]').forEach(box => {
+    const items = [...box.children];
+    if (items.length < 2) return;
+    const bar = document.createElement('div');
+    bar.className = 'mtabs';
+    bar.setAttribute('role', 'tablist');
+    bar.innerHTML = items.map((it, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${(it.querySelector('h3') || it).textContent.trim().slice(0, 14)}</button>`).join('');
+    box.before(bar);
+    const pick = i => { items.forEach((it, j) => it.classList.toggle('is-pick', j === i)); bar.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-selected', j === i)); };
+    bar.addEventListener('click', e => { const b = e.target.closest('button'); if (b) pick(+b.dataset.i); });
+    box.classList.add('has-mtabs');
+    pick(0);
+  });
+})();
+} catch (e) { console.error('[site.js / v122]', e); }
