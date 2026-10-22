@@ -895,13 +895,15 @@ try {
     if (done) box.classList.add('is-done');
 
     // バッジ：サイトのあちこちで遊ぶと集まる（記録はこのブラウザの中だけ）
+    // 遊んでいる途中でも取れたか確かめられるように、毎回よみ直す関数にしておく
+    const calcBadges = () => {
     const best = +(get('azakei_quiz_best', 0)) || 0;
     const wk = get('azakei_weekly', {});
     let voted = false, dg = false, glKnown = 0, simRun = false, tour = false, ozk = false, chart = false;
     let npBest = 0, fxM = false; try { npBest = +localStorage.getItem('azakei_np_best') || 0; fxM = !!localStorage.getItem('azakei_fx_master'); } catch (e) {}
     try { glKnown = JSON.parse(localStorage.getItem('azakei_gl_known') || '[]').length; simRun = !!localStorage.getItem('azakei_sim_run'); tour = !!localStorage.getItem('azakei_room_tour'); ozk = !!localStorage.getItem('azakei_ozk_master'); chart = !!localStorage.getItem('azakei_chart_reader'); } catch (e) {}
     try { voted = Object.keys(localStorage).some(k => k.startsWith('azakei_vote_')); dg = !!localStorage.getItem('azakei_dg_type'); } catch (e) {}
-    const BADGES = [
+    return [
       ['探', '探検家', n >= 7, 'ページを 7 つ見る', next ? next[0] : 'index.html'],
       ['覇', '探検マスター', done, '14 ページすべてを見る', next ? next[0] : 'index.html'],
       ['初', '投資家デビュー', best > 0, 'クイズをチップを残してクリア', 'quiz.html'],
@@ -918,14 +920,52 @@ try {
       ['遣', 'やりくり名人', ozk, 'おこづかいチャレンジで「やりくり名人」', 'sim.html#okozukai'],
       ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown'],
       ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo'],
-      ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx']
+      ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx'],
+      ['月', '夜の研究員', document.documentElement.dataset.theme === 'dark', 'ひみつのバッジ（ヒント：右上の月）', 'mypage.html']
     ];
+    };
+    const BADGES = calcBadges();
     window.AZAKEI_BADGES = BADGES;
+    window.AZAKEI_CALC_BADGES = calcBadges;
+
+    // 新しいバッジを取ったら、画面のはしに「獲得！」の演出（はじめて記録する人には出さない）
+    const SEEN = 'azakei_badges_seen';
+    const seenNow = get(SEEN, null);
+    if (!Array.isArray(seenNow)) set(SEEN, BADGES.filter(b => b[2]).map(b => b[1]));
+    const queue = [];
+    let showing = false;
+    const showNext = () => {
+      if (showing || !queue.length) return;
+      showing = true;
+      const [ico, name] = queue.shift();
+      const all = calcBadges(), have = all.filter(b => b[2]).length;
+      const t = document.createElement('a');
+      t.className = 'bdg-toast';
+      t.href = 'mypage.html';
+      t.setAttribute('role', 'status');
+      t.innerHTML = `<span class="bdg-medal" aria-hidden="true">${ico}</span><span class="bdg-txt"><small>バッジ獲得！</small><b>${name}</b><i>${have} / ${all.length} ・ わたしの記録で見る</i></span>${'<s></s>'.repeat(10)}`;
+      document.body.appendChild(t);
+      void t.offsetWidth; t.classList.add('is-in');
+      setTimeout(() => { t.classList.remove('is-in'); t.classList.add('is-out'); setTimeout(() => { t.remove(); showing = false; showNext(); }, 450); }, 4600);
+    };
+    const checkBadges = () => {
+      const seen = get(SEEN, []);
+      if (!Array.isArray(seen)) return;
+      const fresh = calcBadges().filter(b => b[2] && !seen.includes(b[1]));
+      if (!fresh.length) return;
+      set(SEEN, seen.concat(fresh.map(b => b[1])));
+      fresh.forEach(b => queue.push(b));
+      showNext();
+    };
+    window.AZAKEI_CHECK_BADGES = checkBadges;
+    setTimeout(checkBadges, 900);
+    let ct;
+    document.addEventListener('click', () => { clearTimeout(ct); ct = setTimeout(checkBadges, 700); }, true);
     const got = BADGES.filter(b => b[2]).length;
     box.insertAdjacentHTML('beforeend', `
       <div class="ex-badges">
         <p class="ex-title sm">バッジ <span class="nw"><b>${got}</b> / ${BADGES.length}</span></p>
-        <ul>${BADGES.map(([ico, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}" title="${ok ? name + '（獲得済み）' : 'とり方：' + how}"><span aria-hidden="true">${ico}</span><b>${name}</b><small>${ok ? '獲得！' : how}</small></a></li>`).join('')}</ul>
+        <ul>${BADGES.map(([ico, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}" title="${ok ? name + '（獲得済み）' : 'とり方：' + how}"><span aria-hidden="true">${ok || !how.startsWith('ひみつ') ? ico : '？'}</span><b>${ok || !how.startsWith('ひみつ') ? name : '？？？'}</b><small>${ok ? '獲得！' : how}</small></a></li>`).join('')}</ul>
       </div>`);
     if (done) {
       const share = `AZAKEI のホームページを全ページ制覇！ バッジ ${got} / ${BADGES.length} #AZAKEI`;

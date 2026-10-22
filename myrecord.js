@@ -47,10 +47,22 @@
     </div>
     ${nextC ? `<a class="my-next" href="${nextC[6]}"><span class="my-next-k">つぎのおすすめ</span><b>${nextC[1]}</b><small>${NUDGE[nextC[0]] || nextC[4]}</small><span class="my-next-go">${nextC[7]} →</span></a>` : ''}
     <h2 class="my-h">記録</h2>`
-    + C.map(([s, name, big, unit, sub, p, href, cta, ok]) => `<a class="my-card${ok ? ' is-done' : ''}" href="${href}">
+    + C.map(([s, name, big, unit, sub, p, href, cta, ok], ci) => `<a class="my-card${ok ? ' is-done' : ''}" href="${href}" style="--i:${ci}">
       <span class="my-seal">${s}</span><p class="my-name">${name}${ok ? '<em>達成</em>' : ''}</p>
       <p class="my-big"><b>${big}</b><small>${unit}</small></p><p class="my-sub">${sub}</p>
       ${p !== null ? `<span class="my-bar"><i style="width:${p}%"></i></span>` : ''}<span class="my-cta">${cta} →</span></a>`).join('')
     + (B.length ? `<h2 class="my-h">バッジ <small>${got} / ${B.length}</small></h2>
-      <ul class="my-badges">${B.map(([s, name, ok, how, href]) => `<li class="${ok ? 'is-got' : ''}"><a href="${href}"><span class="my-medal" aria-hidden="true">${s}</span><b>${name}</b><small>${ok ? '獲得ずみ' : how}</small></a></li>`).join('')}</ul>` : '');
+      <ul class="my-badges">${B.map(([s, name, ok, how, href], bi) => `<li class="${ok ? 'is-got' : ''}" style="--i:${bi}"><a href="${href}"><span class="my-medal" aria-hidden="true">${ok || !how.startsWith('ひみつ') ? s : '？'}</span><b>${ok || !how.startsWith('ひみつ') ? name : '？？？'}</b><small>${ok ? '獲得ずみ' : how}</small></a></li>`).join('')}</ul>` : '');
+  // 演出：数字を 0 から数えあげる（動きを減らす設定のときは、そのまま）
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !document.documentElement.classList.contains('is-lite')) {
+    box.querySelectorAll('.my-big b, .my-rank-meta b').forEach(el => {
+      const to = +el.textContent;
+      if (!(to > 0)) return;
+      const t0 = performance.now() + 200, dur = 900;
+      setTimeout(() => { el.textContent = to; }, 1400);
+      el.textContent = '0';
+      const tick = now => { const k = Math.min(1, Math.max(0, (now - t0) / dur)); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+  }
 })();

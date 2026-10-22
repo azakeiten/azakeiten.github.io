@@ -6213,3 +6213,35 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 [data-theme="dark"] .npl-card.is-dark { border-color: #3a4a40; }
 @media (max-width: 520px) { .npl-row { gap: 12px; } .npl-row > li { flex-basis: 78vw; } .npl-card { min-height: 260px; border-radius: 22px; } .npl-title { font-size: 21px; } }
 .npl-row { scrollbar-width: none; } .npl-row::-webkit-scrollbar { display: none; }
+
+/* ---- v112：演出 — バッジ獲得のトースト（朱印を押すように） ---- */
+.bdg-toast { position: fixed; left: 50%; bottom: 96px; z-index: 900; display: flex; align-items: center; gap: 14px; width: min(360px, calc(100vw - 32px)); padding: 14px 18px 14px 14px; border-radius: 20px; background: #1c2b23; color: #f3eee4; text-decoration: none; box-shadow: 0 24px 50px -18px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(227, 198, 142, .35); transform: translate(-50%, 140%); opacity: 0; transition: transform .55s cubic-bezier(.2, 1.3, .4, 1), opacity .3s; overflow: visible; }
+.bdg-toast.is-in { transform: translate(-50%, 0); opacity: 1; }
+.bdg-toast.is-out { transform: translate(-50%, 30px); opacity: 0; transition-duration: .4s; }
+@media (min-width: 900px) { .bdg-toast { left: 28px; bottom: 28px; transform: translate(0, 140%); } .bdg-toast.is-in { transform: none; } .bdg-toast.is-out { transform: translate(0, 30px); } }
+.bdg-medal { flex: none; width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 26px; color: #5a3d16; background: radial-gradient(circle at 35% 30%, #fbecc6, #d6b97f 60%, #b08a4a); box-shadow: inset 0 0 0 4px rgba(255, 255, 255, .35), 0 0 0 3px rgba(227, 198, 142, .25); }
+.bdg-toast.is-in .bdg-medal { animation: bdg-stamp .7s .25s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes bdg-stamp { 0% { transform: scale(2.4) rotate(-25deg); opacity: 0; } 60% { transform: scale(.9) rotate(4deg); opacity: 1; } 100% { transform: none; } }
+.bdg-txt { display: grid; gap: 1px; min-width: 0; }
+.bdg-txt small { font-size: 11.5px; font-weight: 800; letter-spacing: .12em; color: #e3c68e; }
+.bdg-txt b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; line-height: 1.35; }
+.bdg-txt i { font-style: normal; font-size: 11.5px; color: rgba(243, 238, 228, .7); }
+.bdg-toast s { position: absolute; left: 42px; top: 34px; width: 8px; height: 8px; border-radius: 50%; background: #e3c68e; opacity: 0; pointer-events: none; text-decoration: none; }
+.bdg-toast s:nth-child(3n) { background: #b5432f; border-radius: 2px; } .bdg-toast s:nth-child(3n+1) { background: #9fd0a8; }
+.bdg-toast.is-in s { animation: bdg-pop .9s .45s ease-out both; }
+.bdg-toast s:nth-of-type(1) { --x: -60px; --y: -70px; } .bdg-toast s:nth-of-type(2) { --x: -20px; --y: -95px; } .bdg-toast s:nth-of-type(3) { --x: 25px; --y: -88px; }
+.bdg-toast s:nth-of-type(4) { --x: 70px; --y: -60px; } .bdg-toast s:nth-of-type(5) { --x: 110px; --y: -40px; } .bdg-toast s:nth-of-type(6) { --x: -75px; --y: -25px; }
+.bdg-toast s:nth-of-type(7) { --x: 50px; --y: -110px; } .bdg-toast s:nth-of-type(8) { --x: -45px; --y: -105px; } .bdg-toast s:nth-of-type(9) { --x: 140px; --y: -75px; } .bdg-toast s:nth-of-type(10) { --x: 5px; --y: -60px; }
+@keyframes bdg-pop { 0% { opacity: 1; transform: translate(0, 0) scale(.4); } 70% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1) rotate(200deg); } }
+html.is-lite .bdg-toast s { display: none; }
+@media (prefers-reduced-motion: reduce) { .bdg-toast, .bdg-toast.is-in .bdg-medal { transition: opacity .2s; animation: none; } .bdg-toast s { display: none; } }
+
+/* ---- v112：演出 — わたしの記録（数字が数えあがる・バーが伸びる） ---- */
+.my-rank-bar i, .my-bar i { transform-origin: left; animation: my-grow 1.1s .2s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes my-grow { from { transform: scaleX(0); } }
+.my-rank-seal { animation: bdg-stamp .8s .1s cubic-bezier(.3, 1.6, .5, 1) backwards; }
+.my-card { animation: my-up .5s backwards; animation-delay: calc(var(--i, 0) * 45ms + .15s); }
+@keyframes my-up { from { opacity: 0; transform: translateY(14px); } }
+.my-badges li.is-got .my-medal { animation: my-shine 3.2s ease-in-out infinite; animation-delay: calc(var(--i, 0) * .25s); }
+@keyframes my-shine { 0%, 80%, 100% { filter: none; } 88% { filter: brightness(1.18); } }
+@media (prefers-reduced-motion: reduce) { .my-rank-bar i, .my-bar i, .my-rank-seal, .my-card, .my-badges li.is-got .my-medal { animation: none; } }
