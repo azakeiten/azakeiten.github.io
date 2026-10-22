@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.min.css?v=20261023m" />
+  <link rel="stylesheet" href="site.min.css?v=20261023n" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
@@ -406,25 +406,38 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261023m"></script>
-  <script src="layout.js?v=20261023m"></script>
-  <script src="brand.js?v=20261023m"></script>
-  <script src="live.js?v=20261023m"></script>
-  <script src="render.js?v=20261023m"></script>
-  <script src="loader.js?v=20261023m"></script>
-  <script src="nav.js?v=20261023m"></script>
-  <script src="hero.js?v=20261023m"></script>
-  <script src="countdown.js?v=20261023m"></script>
-  <script src="reveal.js?v=20261023m"></script>
-  <script src="osatsu.js?v=20261023m"></script>
-  <script src="koma.js?v=20261023m"></script>
-  <script src="newplay.js?v=20261023m"></script>
-  <script src="site.js?v=20261023m"></script>
-  <script src="ranking.js?v=20261023m"></script>
-  <script src="quiz-data.js?v=20261023m"></script>
-  <script src="tryout.js?v=20261023m"></script>
-  <script src="daily.js?v=20261023m"></script>
-  <script src="chip3d.js?v=20261023m"></script>
-  <script src="herofloat.js?v=20261023m"></script>
+  <script src="content.js?v=20261023n"></script>
+  <script src="layout.js?v=20261023n"></script>
+  <script src="brand.js?v=20261023n"></script>
+  <script src="live.js?v=20261023n"></script>
+  <script src="render.js?v=20261023n"></script>
+  <script src="loader.js?v=20261023n"></script>
+  <script src="nav.js?v=20261023n"></script>
+  <script src="hero.js?v=20261023n"></script>
+  <script src="countdown.js?v=20261023n"></script>
+  <script src="reveal.js?v=20261023n"></script>
+  <script src="osatsu.js?v=20261023n"></script>
+  <script src="koma.js?v=20261023n"></script>
+  <script src="newplay.js?v=20261023n"></script>
+  <script src="site.js?v=20261023n"></script>
+  <script src="ranking.js?v=20261023n"></script>
+  <script>
+    /* クイズの問題（約 12KB）は、「遊びかた」か「今週の 1 問」に近づいてから読みこむ（トップを軽く） */
+    (function () {
+      var V = '20261023n', done = false;
+      var load = function () {
+        if (done) return; done = true;
+        ['quiz-data.js', 'tryout.js', 'daily.js'].reduce(function (p, f) {
+          return p.then(function () { return new Promise(function (ok) { var s = document.createElement('script'); s.src = f + '?v=' + V; s.onload = s.onerror = ok; document.body.appendChild(s); }); });
+        }, Promise.resolve());
+      };
+      var targets = document.querySelectorAll('[data-tryout], [data-daily-q]');
+      if (!('IntersectionObserver' in window) || !targets.length) return load();
+      var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); load(); } }, { rootMargin: '900px 0px' });
+      targets.forEach(function (t) { io.observe(t); });
+    })();
+  </script>
+  <script src="chip3d.js?v=20261023n"></script>
+  <script src="herofloat.js?v=20261023n"></script>
 </body>
 </html>
