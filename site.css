@@ -6278,3 +6278,16 @@ html.is-lite .bdg-toast s { display: none; }
 .smap-kids { margin: 0 0 6px 4px !important; padding-left: 12px !important; border-left: 2px solid var(--color-border); }
 .smap-kids a { display: block; padding: 3px 0; font-size: 13px; color: var(--color-muted); text-decoration: none; }
 .smap-kids a:hover { color: #b5432f; }
+
+/* ---- v114：演出 — お札マンを押すと豆知識（はねて、文字が 1 つずつ） ---- */
+.os-man[role=button] { position: relative; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.os-man[role=button]::after { content: "押してね"; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); padding: 1px 7px; border-radius: 999px; background: #b5432f; color: #fff; font-size: 9.5px; font-weight: 800; letter-spacing: .04em; white-space: nowrap; animation: os-nudge 2.6s ease-in-out infinite; pointer-events: none; }
+.osatsu.is-talk .os-man::after, .osatsu:has(.is-mame) .os-man::after { content: none; }
+@keyframes os-nudge { 0%, 70%, 100% { transform: translate(-50%, 0); } 80% { transform: translate(-50%, -4px); } 90% { transform: translate(-50%, 0); } }
+.os-man[role=button]:focus-visible { outline: 2px solid #b5432f; outline-offset: 4px; border-radius: 12px; }
+.osatsu.is-talk .os-svg { animation: os-talk .6s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes os-talk { 0% { transform: none; } 35% { transform: translateY(-12px) rotate(-6deg) scale(1.05); } 70% { transform: translateY(0) rotate(3deg); } 100% { transform: none; } }
+.os-bubble.is-mame { position: relative; min-height: 3.4em; }
+.os-bubble.is-mame::after { content: attr(data-count); display: block; margin-top: 6px; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; color: #b08a4a; }
+html.is-lite .os-man[role=button]::after { animation: none; }
+@media (prefers-reduced-motion: reduce) { .os-man[role=button]::after, .osatsu.is-talk .os-svg { animation: none; } }

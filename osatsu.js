@@ -26,4 +26,46 @@
     if (el.dataset.osatsuSide === 'right') el.classList.add('is-right');
     el.innerHTML = `<span class="os-man" title="お札マン">${SVG}<small>お札マン</small></span><p class="os-bubble">${msg}</p>`;
   });
+
+  // お札マンを押すと、お金の豆知識をひとつ（文字が 1 つずつ出てくる）。ぜんぶ聞くと、ひみつのバッジ
+  const MAME = [
+    '一万円札の顔は、2024 年から渋沢栄一。日本で最初の銀行づくりにかかわった人だよ。',
+    'お札は「日本銀行券」。日本銀行が発行しているんだ。硬貨は、国（政府）が発行しているよ。',
+    '1 円玉の重さは、ちょうど 1 グラム。だから、はかりのチェックにも使えるんだって。',
+    '日本の硬貨は 1・5・10・50・100・500 円の 6 種類。穴があいているのは、5 円と 50 円だね。',
+    '2024 年の新しいお札には、角度を変えると肖像が回って見える 3D ホログラムがついているよ。',
+    '「円」が日本のお金の単位になったのは、1871 年の「新貨条例」から。150 年以上前だね。',
+    '日経平均は、日本を代表する 225 社の株価をもとにした数字。ニュースで毎日出てくるよ。',
+    '消費税は 1989 年に 3％で始まったんだ。いまは 10％（食べものなどは 8％）だね。',
+    '「72 の法則」：72 を年利で割ると、お金が 2 倍になるまでの年数の目安になるよ。6％なら 12 年！',
+    '世界で最初の株式会社は、1602 年にできたオランダ東インド会社だといわれているよ。',
+    'お札は使ううちに傷むから、古くなったものは日本銀行で新しいものに入れかえられているんだ。',
+    '「インフレ」は、ものの値段が全体に上がっていくこと。同じ 100 円で買える量が減るんだ。'
+  ];
+  const KEY = 'azakei_mame';
+  const typeIn = (el, text) => {
+    clearInterval(el._t);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('is-lite')) { el.textContent = text; return; }
+    let i = 0; el.textContent = '';
+    el._t = setInterval(() => { i += 1; el.textContent = text.slice(0, i); if (i >= text.length) clearInterval(el._t); }, 28);
+  };
+  const talk = man => {
+    const box = man.closest('.osatsu'), bubble = box && box.querySelector('.os-bubble');
+    if (!bubble) return;
+    let seen = []; try { seen = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
+    const rest = MAME.map((_, i) => i).filter(i => !seen.includes(i));
+    const pick = (rest.length ? rest : MAME.map((_, i) => i))[Math.random() * (rest.length || MAME.length) | 0];
+    if (!seen.includes(pick)) seen.push(pick);
+    try { localStorage.setItem(KEY, JSON.stringify(seen)); } catch (e) {}
+    box.classList.remove('is-talk'); void box.offsetWidth; box.classList.add('is-talk');
+    bubble.classList.add('is-mame');
+    bubble.setAttribute('data-count', `豆知識 ${Math.min(seen.length, MAME.length)} / ${MAME.length}`);
+    typeIn(bubble, MAME[pick]);
+  };
+  const prep = () => document.querySelectorAll('.os-man:not([tabindex])').forEach(m => { m.setAttribute('role', 'button'); m.setAttribute('tabindex', '0'); m.setAttribute('aria-label', 'お札マンに豆知識を聞く'); m.title = '押すと、お金の豆知識'; });
+  prep();
+  new MutationObserver(prep).observe(document.body, { childList: true, subtree: true });
+  document.addEventListener('click', e => { const m = e.target.closest('.os-man'); if (m) talk(m); });
+  document.addEventListener('keydown', e => { const m = e.target.closest && e.target.closest('.os-man'); if (m && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); talk(m); } });
+  window.AZAKEI_MAME_TOTAL = MAME.length;
 })();

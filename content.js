@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-23', seal: '豆', tone: 'green', href: 'glossary.html', eyebrow: 'お札マン', title: 'お札マンの、お金の豆知識', text: 'お札マンを押すと、1 円玉の重さや新しいお札のひみつを話してくれる。全 12 話。' },
     { date: '2026-10-21', seal: '読', tone: 'paper', href: 'glossary.html#headline', eyebrow: '用語辞典', title: 'ニュースの見出しを、読みとく', text: '「日銀、利上げ」ってどういうこと？ よく見る見出し 6 つを、新聞の切り抜き風に。' },
     { date: '2026-10-21', seal: '為', tone: 'dark', href: 'sim.html#fx', eyebrow: '経済ラボ', title: '円高・円安の両替所', text: '1 ドルが何円かを動かすと、ハンバーガーの値段が変わる。3 問全問正解でバッジ。' },
     { date: '2026-10-20', seal: '歴', tone: 'shu', href: 'glossary.html#nenpyo', eyebrow: '用語辞典', title: '年表ゲーム「どっちが先？」', text: 'バブルとオイルショック、先に起きたのは？ 8 問連続正解で「歴史通」。' },
