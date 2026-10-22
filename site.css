@@ -6327,3 +6327,38 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .dg-play b::after { content: " →"; color: var(--c); }
 @media (prefers-reduced-motion: reduce) { .dg-roll .dg-kicker, .dg-roll figure.is-hit, .dg-result.is-reveal::before, .dg-result.is-reveal h2, .dg-result.is-reveal .dg-en, .dg-result.is-reveal .dg-lead { animation: none; } }
 .dg-lead, .dg-detail dd, .dg-box h2, .dg-intro p { word-break: auto-phrase; }
+
+/* ---- v117：経済ラボ — 文化祭でお店をひらこう（損益分岐点） ---- */
+.lab-board { grid-template-columns: repeat(4, 1fr); }
+.lab-board li:last-child { grid-column: auto; }
+.sh { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: start; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.sh-ctrl { position: relative; display: grid; gap: 14px; }
+.sh-in { display: grid; gap: 4px; }
+.sh-in > span { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 13.5px; font-weight: 700; }
+.sh-in b { font-family: 'DM Sans', sans-serif; font-size: 18px; white-space: nowrap; } .sh-in b i { font-style: normal; font-variant-numeric: tabular-nums; }
+.sh-in input { width: 100%; accent-color: #b08a4a; }
+.sh-out { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sh-out p { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--color-bg, #faf7f1); display: grid; gap: 2px; }
+.sh-out span { font-size: 11.5px; font-weight: 800; color: var(--color-muted); }
+.sh-out b { font-family: 'DM Sans', sans-serif; font-size: 24px; font-variant-numeric: tabular-nums; } .sh-out b small { font-size: 12px; font-family: 'Zen Kaku Gothic New', sans-serif; }
+.sh-out b.is-plus { color: #2f6b3a; } .sh-out b.is-minus { color: #b5432f; }
+.sh-stamp { position: absolute; right: 2px; bottom: 74px; margin: 0; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; border: 3px double currentColor; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; transform: rotate(-12deg); opacity: .85; pointer-events: none; }
+.sh-stamp.is-plus { color: #2f6b3a; } .sh-stamp.is-minus { color: #b5432f; }
+.sh-stamp.is-pop { animation: bdg-stamp .6s cubic-bezier(.3, 1.6, .5, 1); }
+.sh-chart { width: 100%; height: auto; display: block; }
+.sh-grid { stroke: var(--color-border); stroke-width: 1; }
+.sh-ax { font-size: 9px; fill: var(--color-muted); font-family: 'DM Sans', sans-serif; }
+.sh-sales { stroke: #2f6b3a; stroke-width: 3; stroke-linecap: round; }
+.sh-cost { stroke: #b5432f; stroke-width: 3; stroke-linecap: round; }
+.sh-bep { stroke: #b08a4a; stroke-width: 1.5; stroke-dasharray: 4 4; }
+.sh-bep-dot { fill: #b08a4a; stroke: #fff; stroke-width: 2; }
+.sh-bep-t { font-size: 10px; font-weight: 800; fill: #b08a4a; }
+.sh-now { stroke: var(--color-text); stroke-width: 1; opacity: .35; }
+.sh-gap { stroke-width: 7; stroke-linecap: round; opacity: .55; } .sh-gap.is-plus { stroke: #2f6b3a; } .sh-gap.is-minus { stroke: #b5432f; }
+.sh-legend { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; font-weight: 700; }
+.sh-legend span::before { content: ""; display: inline-block; width: 16px; height: 3px; margin-right: 6px; vertical-align: middle; border-radius: 2px; }
+.sh-legend .is-sales::before { background: #2f6b3a; } .sh-legend .is-cost::before { background: #b5432f; } .sh-legend .is-bep::before { background: repeating-linear-gradient(90deg, #b08a4a 0 4px, transparent 4px 8px); }
+.sh-note { grid-column: 1 / -1; margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #b08a4a 10%, transparent); font-size: 14px; line-height: 1.8; word-break: auto-phrase; }
+.sh-note b { color: #b5432f; }
+@media (max-width: 960px) { .lab-board { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) { .sh { grid-template-columns: 1fr; padding: 16px; } .sh-stamp { bottom: auto; top: -8px; width: 54px; height: 54px; font-size: 17px; } .sh-in:first-child > span { padding-right: 60px; } }
