@@ -6437,3 +6437,23 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 /* 写真のタイル：文字の後ろを、少し濃く（風船などにぎやかな写真でも読めるように） */
 .ap-tile.is-wide.is-photo::after { background: radial-gradient(ellipse 85% 60% at 50% 38%, rgba(0, 0, 0, .58), rgba(0, 0, 0, .18) 75%), linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .05) 60%, rgba(0, 0, 0, .25)); }
 .ap-tile.is-photo :is(h3, p) { text-shadow: 0 1px 12px rgba(0, 0, 0, .45); }
+
+/* ---- v121：トップをスマホでさらに短く（はじめての人へ＝横にめくる／できること＝クイズと診断を横に 2 つ） ---- */
+@media (max-width: 560px) {
+  .ap-first-grid { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(-1 * var(--gutter, 20px)); padding: 4px var(--gutter, 20px) 14px; scroll-padding-inline: var(--gutter, 20px); scrollbar-width: none; }
+  .ap-first-grid::-webkit-scrollbar { display: none; }
+  .ap-first-card { flex: 0 0 80%; scroll-snap-align: start; grid-template-columns: 1fr; align-content: start; padding: 20px 18px; }
+  .ap-first-card > * { grid-column: auto !important; }
+  .ap-first-swipe { margin: -4px 0 12px; text-align: right; font-size: 11.5px; font-weight: 700; color: var(--color-muted); }
+  .ap-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ap-tiles > .ap-tile { grid-column: 1 / -1; }
+  .ap-tiles > .ap-tile.is-photo.is-low { grid-column: auto; min-height: 230px; padding: 18px 14px 16px; border-radius: 20px; }
+  .ap-tile.is-photo.is-low h3 { font-size: 18px; line-height: 1.4; }
+  .ap-tile.is-photo.is-low h3 br { display: none; }
+  .ap-tile.is-photo.is-low p:not(.ap-tile-eyebrow) { font-size: 11.5px; }
+  .ap-tile.is-photo.is-low .ap-tile-eyebrow { font-size: 11px; }
+  .ap-tile.is-photo.is-low .ap-link { font-size: 12.5px; }
+  .ap-tile.is-photo.is-low .qz-promo-chips { transform: scale(.75); }
+}
+.ap-first-swipe { display: none; } @media (max-width: 560px) { .ap-first-swipe { display: block; } }
+@media (max-width: 560px) { .ap-tile.is-photo.is-low p:not(.ap-tile-eyebrow), .ap-tile.is-photo.is-low .qz-leader { display: none !important; } .ap-tile.is-photo.is-low h3 { font-size: 17px; word-break: auto-phrase; } .ap-tile.is-photo.is-low { justify-content: flex-end; gap: 6px; } }
