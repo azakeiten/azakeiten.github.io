@@ -147,7 +147,7 @@
     const go = ans => {
       path.push({ id, ans });
       const next = ans ? node.yes : node.no;
-      if (next.startsWith('=')) { const key = next.slice(1); history.replaceState(null, '', '#' + key); show(key, true); }
+      if (next.startsWith('=')) { const key = next.slice(1); history.replaceState(null, '', '#' + key); roulette(key); }
       else ask(next);
     };
     root.querySelector('.dg-yes').addEventListener('click', () => go(true));
@@ -156,6 +156,36 @@
     if (back) back.addEventListener('click', () => { const prev = path.pop(); ask(prev.id); });
     root.querySelector('.dg-yes').focus({ preventScroll: true });
   }
+
+  // 演出：4 匹のあいだをスポットライトが回って、だんだんゆっくりになり、結果のタイプで止まる
+  function roulette(key) {
+    const keys = Object.keys(T);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('is-lite')) return show(key, true);
+    root.innerHTML = `
+      <div class="dg-card dg-roll" aria-live="polite">
+        <p class="dg-kicker">${EN ? 'Finding your type…' : '診断中…'}</p>
+        <div class="dg-animals">${keys.map(k => `<figure data-k="${k}" style="--c:${T[k].color}">${ART[k]}<figcaption>${T[k].name}</figcaption></figure>`).join('')}</div>
+      </div>`;
+    const figs = [...root.querySelectorAll('.dg-roll figure')];
+    const target = keys.indexOf(key);
+    const steps = 3 * keys.length + target;   // 3 周してから止まる
+    let i = 0;
+    const tick = () => {
+      figs.forEach((f, j) => f.classList.toggle('is-on', j === i % keys.length));
+      if (i >= steps) { figs[target].classList.add('is-hit'); setTimeout(() => show(key, true), 650); return; }
+      i++;
+      setTimeout(tick, 60 + Math.pow(i / steps, 3) * 320);
+    };
+    tick();
+  }
+
+  // このサイトで、そのタイプにおすすめの遊び（日本語版だけ）
+  const PLAY = {
+    lion: ['quiz.html', '億万長者クイズの「激ムズ」で、6 倍を狙う'],
+    fox: ['sim.html#updown', 'チャート予想ゲームで、値動きを読む'],
+    turtle: ['sim.html#double', '「お金が 2 倍になるまで」で、複利を体験'],
+    rabbit: ['sim.html#okozukai', 'おこづかいチャレンジで、使い方を考える']
+  };
 
   function show(key, played) {
     const t = T[key], m = T[t.match];
@@ -169,7 +199,7 @@
     const trail = played && path.length ? `
         <div class="dg-trail"><p class="dg-trail-head">${S.trail}</p><ol>${path.map(p => `<li><span>${N[p.id].q}</span><b class="${p.ans ? 'y' : 'n'}">${p.ans ? 'YES' : 'NO'}</b></li>`).join('')}</ol></div>` : '';
     root.innerHTML = `
-      <div class="dg-card dg-result" style="--c:${t.color}">
+      <div class="dg-card dg-result${played ? ' is-reveal' : ''}" style="--c:${t.color}">
         <p class="dg-kicker">${S.resultKicker}</p>
         <div class="dg-art">${ART[key]}</div>
         <h2>${t.name}</h2>
@@ -182,6 +212,7 @@
           <dt>${S.match}</dt><dd><a href="#${t.match}" class="dg-match">${m.name}</a></dd>
         </dl>
         ${trail}
+        ${!EN && PLAY[key] ? `<a class="dg-play" href="${PLAY[key][0]}"><span>あなたにおすすめの遊び</span><b>${PLAY[key][1]}</b></a>` : ''}
         ${next}
         <div class="share">
           <span class="share-label">${S.share}</span>
