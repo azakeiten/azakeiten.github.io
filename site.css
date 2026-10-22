@@ -6362,3 +6362,16 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .sh-note b { color: #b5432f; }
 @media (max-width: 960px) { .lab-board { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 760px) { .sh { grid-template-columns: 1fr; padding: 16px; } .sh-stamp { bottom: auto; top: -8px; width: 54px; height: 54px; font-size: 17px; } .sh-in:first-child > span { padding-right: 60px; } }
+.sh-mis { grid-column: 1 / -1; padding: 14px 18px; border-radius: 16px; border: 2px dashed color-mix(in srgb, #b08a4a 55%, transparent); }
+.sh-mis-h { margin: 0 0 8px; display: flex; align-items: baseline; gap: 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 17px; }
+.sh-mis-h small { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #b08a4a; }
+.sh-mis ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.sh-mis li { display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.6; word-break: auto-phrase; }
+.sh-mis-seal { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 2px dashed #c9bfae; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 14px; }
+.sh-mis li.is-done { color: var(--color-muted); }
+.sh-mis li.is-done .sh-mis-seal { border: none; background: #b5432f; color: #fff; transform: rotate(-8deg); }
+.sh-mis li.is-new .sh-mis-seal { animation: bdg-stamp .7s cubic-bezier(.3, 1.6, .5, 1); }
+.sh-mis li.is-new { animation: sh-glow 1.6s ease-out; }
+@keyframes sh-glow { 0% { background: color-mix(in srgb, #e3c68e 45%, transparent); } 100% { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .sh-mis li.is-new, .sh-mis li.is-new .sh-mis-seal { animation: none; } }
+.lab-board .lb-done { position: absolute; right: 10px; bottom: 8px; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 12px; transform: rotate(-10deg); animation: bdg-stamp .6s cubic-bezier(.3, 1.6, .5, 1) backwards; }

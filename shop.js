@@ -27,7 +27,22 @@
       <svg class="sh-chart" viewBox="0 0 340 240" role="img" aria-label="売上と費用のグラフ"></svg>
       <p class="sh-legend"><span class="is-sales">売上</span><span class="is-cost">費用</span><span class="is-bep">損益分岐点</span></p>
     </div>
-    <p class="sh-note" data-o="note"></p>`;
+    <p class="sh-note" data-o="note"></p>
+    <div class="sh-mis"><p class="sh-mis-h">店長ミッション<small data-o="mis-n"></small></p><ol data-o="mis"></ol></div>`;
+  // ミッション：条件をみたすと、ハンコが押される（3 つそろうとバッジ「店長」）
+  const MKEY = 'azakei_shop';
+  const MIS = [
+    ['few', '売れる数が 40 個以下でも、黒字にしよう', (p, c, f, q, bep, pr) => q <= 40 && pr >= 0],
+    ['cheap', '値段 150 円以下のまま、損益分岐点を 40 個以下に', (p, c, f, q, bep) => p <= 150 && bep <= 40],
+    ['big', '準備のお金を 1 万円以上かけて、もうけ 5,000 円以上', (p, c, f, q, bep, pr) => f >= 10000 && pr >= 5000]
+  ];
+  let done = []; try { done = JSON.parse(localStorage.getItem(MKEY) || '[]'); } catch (e) {}
+  const misBox = box.querySelector('[data-o="mis"]');
+  const drawMis = fresh => {
+    misBox.innerHTML = MIS.map(([id, t]) => `<li class="${done.includes(id) ? 'is-done' : ''}${fresh === id ? ' is-new' : ''}"><span class="sh-mis-seal" aria-hidden="true">${done.includes(id) ? '済' : ''}</span>${t}</li>`).join('');
+    box.querySelector('[data-o="mis-n"]').textContent = `${done.length} / ${MIS.length}`;
+  };
+  drawMis();
   const svg = box.querySelector('.sh-chart');
   const val = k => +box.querySelector(`[data-k="${k}"]`).value;
   const L = 40, R = 330, T = 14, B = 210;
@@ -64,6 +79,13 @@
       : bep > MAXQ
         ? `準備のお金を取りもどすには、${yen(bep)} 個も売る必要があります。準備のお金を減らすか、1 個のもうけ（${yen(margin)} 円）を大きくしてみよう。`
         : `1 個売るごとに <b>${yen(margin)} 円</b>（値段 − 材料費）が残ります。準備のお金 ${yen(f)} 円を取りもどせるのは、<b>${yen(bep)} 個</b>売れたとき。それより多く売れたぶんが、もうけになります。`;
+    const hit = MIS.find(([id, , ok]) => !done.includes(id) && ok(p, c, f, q, bep, profit));
+    if (hit) {
+      done.push(hit[0]);
+      try { localStorage.setItem(MKEY, JSON.stringify(done)); } catch (e) {}
+      drawMis(hit[0]);
+      if (window.AZAKEI_CHECK_BADGES) setTimeout(AZAKEI_CHECK_BADGES, 400);
+    }
   };
   box.addEventListener('input', e => { if (e.target.matches('input[type=range]')) draw(); });
   draw();

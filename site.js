@@ -921,6 +921,7 @@ try {
       ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown'],
       ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo'],
       ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx'],
+      ['店', '店長', get('azakei_shop', []).length >= 3, 'お店の「店長ミッション」を 3 つクリア', 'sim.html#shop'],
       ['月', '夜の研究員', document.documentElement.dataset.theme === 'dark', 'ひみつのバッジ（ヒント：右上の月）', 'mypage.html'],
       ['豆', '豆知識はかせ', get('azakei_mame', []).length >= 12, 'ひみつのバッジ（ヒント：お札マン）', 'mypage.html']
     ];
@@ -1079,3 +1080,17 @@ try {
   sync();
 })();
 } catch (e) { console.error('[site.js / motion]', e); }
+
+/* ######## ▼ v117：経済ラボのメニューに、クリアした実験は「済」の朱印 ######## */
+try {
+(function() {
+  const board = document.querySelector('[data-lab-board]');
+  if (!board) return;
+  const has = k => { try { const v = localStorage.getItem(k); return v !== null && v !== '[]' && v !== '0'; } catch (e) { return false; } };
+  const shopN = () => { try { return JSON.parse(localStorage.getItem('azakei_shop') || '[]').length; } catch (e) { return 0; } };
+  const DONE = { '#sim-main': () => has('azakei_sim_run'), '#updown': () => has('azakei_chart_reader'), '#okozukai': () => has('azakei_ozk_master'), '#fx': () => has('azakei_fx_master'), '#shop': () => shopN() >= 3 };
+  const mark = () => board.querySelectorAll('a').forEach(a => { const f = DONE[a.getAttribute('href')]; if (f && f() && !a.querySelector('.lb-done')) a.insertAdjacentHTML('beforeend', '<span class="lb-done" title="クリアずみ">済</span>'); });
+  mark();
+  document.addEventListener('click', () => setTimeout(mark, 800), true);
+})();
+} catch (e) { console.error('[site.js / v117]', e); }
