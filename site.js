@@ -1095,3 +1095,20 @@ try {
   document.addEventListener('click', () => setTimeout(mark, 800), true);
 })();
 } catch (e) { console.error('[site.js / v117]', e); }
+
+/* ######## ▼ v119：#ページ内リンクで開いたとき、あとから上の中身（ランキングなど）が増えても、目的の場所にきちんと着く ######## */
+try {
+(function() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id || !/^[\w-]+$/.test(id)) return;
+  let touched = false;
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, () => { touched = true; }, { once: true, passive: true }));
+  const fix = () => {
+    const el = document.getElementById(id);
+    if (!el || touched || !el.getClientRects().length) return;
+    const top = el.getBoundingClientRect().top;
+    if (Math.abs(top - 80) > 40) scrollTo({ top: scrollY + top - 80, behavior: 'instant' });
+  };
+  [400, 1200, 2500].forEach(t => setTimeout(fix, t));
+})();
+} catch (e) { console.error('[site.js / v119]', e); }

@@ -6401,3 +6401,17 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .cn-grid li.is-new b { animation: dg-rise .6s .5s ease-out both; }
 @media (max-width: 760px) { .cn { grid-template-columns: 1fr; } .cn-play, .cn-book { padding: 16px; } .cn-opts { grid-template-columns: 1fr 1fr; } .cn-coin { width: 44px; height: 44px; font-size: 16px; } }
 @media (prefers-reduced-motion: reduce) { .cn-grid li.is-new .cn-coin, .cn-grid li.is-new b { animation: none; } }
+/* 修正：バッジの棚・記録カードが、長い名前でスマホの右にはみ出さないように */
+.my-badges { grid-template-columns: repeat(auto-fill, minmax(min(118px, 100%), 1fr)); }
+.my-grid { grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); }
+.my-badges li, .my-card { min-width: 0; }
+.my-badges b { word-break: normal; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .my-badges { grid-template-columns: repeat(3, minmax(0, 1fr)); } .my-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .my-badges a { padding: 12px 4px 10px; } .my-badges b { font-size: 11.5px; } }
+@media (max-width: 340px) { .my-grid { grid-template-columns: minmax(0, 1fr); } }
+.cn-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .lab-board { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 960px) { .lab-board { grid-template-columns: repeat(2, minmax(0, 1fr)); } } @media (max-width: 520px) { .lab-board { grid-template-columns: minmax(0, 1fr); } }
+/* 修正：スマホで右がはみ出していたところ（挑戦マップ・ページの目次） */
+.cmap-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cmap-list li, .cmap-list a { min-width: 0; } .cmap-list b { overflow-wrap: anywhere; word-break: auto-phrase; }
+@media (max-width: 860px) { .cmap-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ptoc { min-width: 0; max-width: 100%; overflow: hidden; } .ptoc .container { min-width: 0; max-width: 100%; } .ptoc ol { max-width: 100%; }
