@@ -1112,3 +1112,25 @@ try {
   [400, 1200, 2500].forEach(t => setTimeout(fix, t));
 })();
 } catch (e) { console.error('[site.js / v119]', e); }
+
+/* ######## ▼ v120：トップ「あなたに合わせた、入口。」— スマホではタブで切りかえて、短く ######## */
+try {
+(function() {
+  const grid = document.querySelector('.aud-grid');
+  if (!grid) return;
+  const cards = [...grid.querySelectorAll('.aud-card')];
+  const SHORT = { 生: '生徒', 家: '保護者', 教: '先生', 社: '企業・取材' };
+  const label = c => SHORT[c.querySelector('.aud-seal').textContent] || c.querySelector('.aud-who').textContent.slice(1);
+  const tabs = document.createElement('div');
+  tabs.className = 'aud-tabs';
+  tabs.setAttribute('role', 'tablist');
+  tabs.innerHTML = cards.map((c, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}"><span aria-hidden="true">${c.querySelector('.aud-seal').textContent}</span>${label(c)}</button>`).join('');
+  grid.before(tabs);
+  const pick = i => {
+    cards.forEach((c, j) => c.classList.toggle('is-pick', j === i));
+    tabs.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-selected', j === i));
+  };
+  tabs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) pick(+b.dataset.i); });
+  pick(0);
+})();
+} catch (e) { console.error('[site.js / v120]', e); }
