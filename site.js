@@ -921,6 +921,7 @@ try {
       ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown'],
       ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo'],
       ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx'],
+      ['貨', '世界のお金博士', get('azakei_coins', []).length >= 12, '世界のお金図鑑のコインを 12 枚あつめる', 'quiz.html#coins'],
       ['店', '店長', get('azakei_shop', []).length >= 3, 'お店の「店長ミッション」を 3 つクリア', 'sim.html#shop'],
       ['月', '夜の研究員', document.documentElement.dataset.theme === 'dark', 'ひみつのバッジ（ヒント：右上の月）', 'mypage.html'],
       ['豆', '豆知識はかせ', get('azakei_mame', []).length >= 12, 'ひみつのバッジ（ヒント：お札マン）', 'mypage.html']
