@@ -373,8 +373,19 @@
       if (answered || b.disabled) return;
       answered = true;
       document.removeEventListener('keydown', onKey);
+      // 演出：選んだ答えに「ファイナルアンサー」の札。ほかを暗くして、少しためてから答え合わせ
+      btns.forEach(x => { x.disabled = true; });
+      root.querySelectorAll('.qz-life button').forEach(x => { x.disabled = true; });
+      b.classList.add('is-lock');
+      card.classList.add('is-suspense');
+      const wait = reduce || document.documentElement.classList.contains('is-lite') ? 0 : 1100;
+      setTimeout(() => reveal(b), wait);
+    };
+    const reveal = b => {
+      card.classList.remove('is-suspense');
+      b.classList.remove('is-lock');
       const ok = b.dataset.ok === '1';
-      if (ok) cur.correct++;
+      if (ok) { cur.correct++; b.classList.add('is-burst'); }
       log.push({ q: q.q, right: q.a[0], ok, level: cur.level }); miss(q, ok);
       btns.forEach(x => { x.disabled = true; if (x.dataset.ok === '1') x.classList.add('is-right'); });
       root.querySelectorAll('.qz-life button').forEach(x => { x.disabled = true; });

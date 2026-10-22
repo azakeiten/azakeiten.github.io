@@ -6291,3 +6291,16 @@ html.is-lite .bdg-toast s { display: none; }
 .os-bubble.is-mame::after { content: attr(data-count); display: block; margin-top: 6px; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; color: #b08a4a; }
 html.is-lite .os-man[role=button]::after { animation: none; }
 @media (prefers-reduced-motion: reduce) { .os-man[role=button]::after, .osatsu.is-talk .os-svg { animation: none; } }
+
+/* ---- v115：演出 — クイズの「ファイナルアンサー」（ためてから答え合わせ） ---- */
+.qz-q.is-suspense .qz-choice:not(.is-lock) { opacity: .35; filter: grayscale(.6); transition: opacity .3s, filter .3s; }
+.qz-q.is-suspense .dg-box { animation: qz-hush 1.1s ease-in-out; }
+@keyframes qz-hush { 50% { box-shadow: 0 0 0 6px rgba(227, 198, 142, .35); } }
+.qz-choice.is-lock { position: relative; border-color: #e3c68e !important; background: linear-gradient(90deg, #fff6dc, #f3dca8, #fff6dc) 0 0 / 200% 100% !important; color: #2a2620 !important; animation: qz-lock .9s linear infinite; opacity: 1 !important; }
+.qz-choice.is-lock::after { content: "ファイナルアンサー"; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 2px 8px; border-radius: 999px; background: #1c2b23; color: #e3c68e; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; }
+@keyframes qz-lock { to { background-position: -200% 0; } }
+.qz-choice.is-burst { position: relative; overflow: visible; }
+.qz-choice.is-burst::before { content: ""; position: absolute; inset: -4px; border-radius: inherit; border: 3px solid #2f6b3a; animation: qz-ring .7s ease-out both; pointer-events: none; }
+@keyframes qz-ring { from { opacity: .9; transform: scale(.96); } to { opacity: 0; transform: scale(1.12); } }
+@media (max-width: 420px) { .qz-choice.is-lock::after { top: -10px; right: 8px; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .qz-choice.is-lock, .qz-q.is-suspense .dg-box, .qz-choice.is-burst::before { animation: none; } }

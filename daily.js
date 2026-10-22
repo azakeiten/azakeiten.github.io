@@ -21,7 +21,9 @@
   // 毎週ちがう問題を、順番がわかりにくいように選ぶ（17 と問題数は互いに素になるよう調整）
   // 2026.10.14 に問題を増やしたので、10/19（月）の週の前までは、前からの問題だけで選ぶ（今週の問題が途中で変わらないように）
   const W0 = Math.floor((Date.UTC(2026, 9, 19) / 864e5 - 4) / 7);
-  const pickFor = w => { const pool = w < W0 ? all.filter(x => !x.added) : all; let s = 17; while (gcd(s, pool.length) !== 1) s++; return pool[((w * s) % pool.length + pool.length) % pool.length]; };
+  // 2026.10.23 にも問題を増やしたので（added: 2）、10/26（月）の週から使う
+  const W1 = Math.floor((Date.UTC(2026, 9, 26) / 864e5 - 4) / 7);
+  const pickFor = w => { const pool = w < W0 ? all.filter(x => !x.added) : w < W1 ? all.filter(x => x.added !== 2) : all; let s = 17; while (gcd(s, pool.length) !== 1) s++; return pool[((w * s) % pool.length + pool.length) % pool.length]; };
   const q = pickFor(weekNo);
   // 選択肢の並びも週で決める
   let seed = Math.abs(weekNo) + 1;

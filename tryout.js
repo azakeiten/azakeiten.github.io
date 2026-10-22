@@ -62,7 +62,7 @@
           <p class="to-verdict">${ok ? (lv.x >= 6 ? '激ムズ的中！ 会場なら、拍手が起きるところです。' : '正解！ チップが増えました。') : '残念……。でも、本番の展示ではここからが勝負です。'}</p>
           <p class="to-note">${esc(q.note || '')}</p>
           <div class="to-actions">
-            <a class="btn-primary" href="quiz.html">本番のクイズに挑戦（全 72 問）</a>
+            <a class="btn-primary" href="quiz.html">本番のクイズに挑戦（全 84 問）</a>
             <button type="button" class="to-again">もう 1 回</button>
           </div>
         </div>`);
