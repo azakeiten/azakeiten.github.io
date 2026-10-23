@@ -9,6 +9,9 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-24', seal: '億', tone: 'dark', href: 'sim.html#oku', eyebrow: '経済ラボ', title: '1 億円って、どれくらい？', text: '一万円札を積むと、高さと重さは？ 東京タワーや富士山とくらべてみよう。' },
+    { date: '2026-10-23', seal: '貨', tone: 'gold', href: 'quiz.html#coins', eyebrow: 'クイズ', title: '世界のお金図鑑', text: 'この国のお金は？ 正解すると、コインがくるっと回って図鑑に入る。' },
+    { date: '2026-10-23', seal: '店', tone: 'shu', href: 'sim.html#shop', eyebrow: '経済ラボ', title: '文化祭でお店をひらこう', text: '何個売れたら黒字？ 損益分岐点を、グラフと店長ミッションで。' },
     { date: '2026-10-23', seal: '豆', tone: 'green', href: 'glossary.html', eyebrow: 'お札マン', title: 'お札マンの、お金の豆知識', text: 'お札マンを押すと、1 円玉の重さや新しいお札のひみつを話してくれる。全 12 話。' },
     { date: '2026-10-21', seal: '読', tone: 'paper', href: 'glossary.html#headline', eyebrow: '用語辞典', title: 'ニュースの見出しを、読みとく', text: '「日銀、利上げ」ってどういうこと？ よく見る見出し 6 つを、新聞の切り抜き風に。' },
     { date: '2026-10-21', seal: '為', tone: 'dark', href: 'sim.html#fx', eyebrow: '経済ラボ', title: '円高・円安の両替所', text: '1 ドルが何円かを動かすと、ハンバーガーの値段が変わる。3 問全問正解でバッジ。' },
