@@ -1146,12 +1146,16 @@ try {
     const bar = document.createElement('div');
     bar.className = 'mtabs';
     bar.setAttribute('role', 'tablist');
-    bar.innerHTML = items.map((it, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${(it.querySelector('h3') || it).textContent.trim().slice(0, 14)}</button>`).join('');
+    bar.innerHTML = items.map((it, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-i="${i}">${it.dataset.tab || (it.querySelector('h3, h2') || it).textContent.trim().slice(0, 14)}</button>`).join('');
     box.before(bar);
-    const pick = i => { items.forEach((it, j) => it.classList.toggle('is-pick', j === i)); bar.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-selected', j === i)); };
+    const pick = i => { items.forEach((it, j) => it.classList.toggle('is-pick', j === i)); bar.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-selected', j === i)); items[i].querySelectorAll('.reveal:not(.visible)').forEach(r => r.classList.add('visible')); if (items[i].classList.contains('reveal')) items[i].classList.add('visible'); };
     bar.addEventListener('click', e => { const b = e.target.closest('button'); if (b) pick(+b.dataset.i); });
     box.classList.add('has-mtabs');
-    pick(0);
+    // 「#business」のようなリンク（ページ内・ほかのページから）でも、そのタブを開く
+    const byId = id => items.findIndex(it => it.id && it.id === id);
+    document.addEventListener('click', e => { const a = e.target.closest('a[href^="#"]'); if (!a || !matchMedia('(max-width: 560px)').matches) return; const i = byId(a.getAttribute('href').slice(1)); if (i >= 0) { e.preventDefault(); pick(i); history.replaceState(null, '', a.getAttribute('href')); scrollTo({ top: bar.getBoundingClientRect().top + scrollY - 80, behavior: 'smooth' }); } }, true);
+    const h = byId(decodeURIComponent(location.hash.slice(1)));
+    pick(h >= 0 ? h : 0);
   });
 })();
 } catch (e) { console.error('[site.js / v122]', e); }

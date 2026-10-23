@@ -6603,3 +6603,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .om-meaning p { margin: 0; font-size: 14px; line-height: 1.9; word-break: auto-phrase; } .om-meaning b { color: #e3c68e; }
 .om-motto { margin-top: 12px !important; padding-top: 12px; border-top: 1px dashed rgba(227, 198, 142, .35); font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(18px, 2.4vw, 22px) !important; text-align: center; }
 .om-motto em { font-style: normal; color: #e3c68e; }
+/* コンテスト：スマホではタブで（目次の横バーは重なるので隠す） */
+@media (max-width: 560px) { .toc-body:has(.contest-list.has-mtabs) .toc-mobile { display: none; } .contest-list.has-mtabs > .contest.is-pick { display: grid !important; } .mtabs button { font-size: 12px; padding-inline: 4px; } }
+.mtabs button { white-space: nowrap; }
+@media (max-width: 560px) { .cmap-list b { font-size: 12.5px; word-break: keep-all; overflow-wrap: anywhere; } .cmap-list a { padding: 12px 10px 14px; } .cmap-list em { font-size: 11px; padding: 3px 8px; } }
