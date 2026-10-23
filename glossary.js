@@ -53,7 +53,21 @@
     groups.forEach(g => { g.hidden = !g.querySelector('.gl-item:not([hidden])'); });
     count.textContent = row ? `「${row}」行の言葉 ${n} 語` : q ? `${n} 語みつかりました` : `全 ${total} 語`;
     empty.hidden = n > 0;
+    document.body.classList.toggle('gl-filtering', !!(q || row));   // さがしている間は、たたんだ分類もぜんぶ開く
   };
+  // スマホでは分類ごとにたたむ（見出しを押すと開く）。#gdp のように飛んできたら、その分類を開く
+  groups.forEach(g => {
+    const h = g.querySelector('.gl-head'); if (!h) return;
+    const n = g.querySelectorAll('.gl-item').length;
+    g.classList.add('is-closed');
+    h.insertAdjacentHTML('beforeend', `<button type="button" class="gl-fold" aria-expanded="false"><small>${n} 語</small><i aria-hidden="true">▾</i></button>`);
+    const b = h.querySelector('.gl-fold');
+    h.addEventListener('click', () => { const open = g.classList.toggle('is-closed') === false; b.setAttribute('aria-expanded', open); });
+  });
+  const openFor = id => { const t = id && document.getElementById(id); const g = t && (t.classList.contains('gl-group') ? t : t.closest('.gl-group')); if (g && g.classList.contains('is-closed')) { g.classList.remove('is-closed'); g.querySelector('.gl-fold')?.setAttribute('aria-expanded', 'true'); } };
+  openFor(decodeURIComponent(location.hash.slice(1)));
+  addEventListener('hashchange', () => openFor(decodeURIComponent(location.hash.slice(1))));
+  document.addEventListener('click', e => { const a = e.target.closest('a[href^="#g-"], a[href^="#"]'); if (a) openFor(decodeURIComponent(a.getAttribute('href').slice(1))); }, true);
   const q0 = new URLSearchParams(location.search).get('q'); if (q0) input.value = q0;
   input.addEventListener('input', run);
   run();

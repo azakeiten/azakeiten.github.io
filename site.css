@@ -6496,3 +6496,18 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .pnext-go i { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-style: normal; font-size: 22px; color: #e3c68e; transition: transform .25s; }
 .pnext-go:hover i { transform: translate(4px, -50%); }
 @media (max-width: 560px) { .pnext .container { grid-template-columns: 1fr; } .pnext-home { grid-auto-flow: column; justify-content: center; gap: 8px; padding: 12px; } .pnext-home svg { width: 20px; height: 20px; } }
+
+/* ---- v125：用語辞典をスマホで「分類ごとにたたむ」（見出しを押すと開く・さがす間はぜんぶ開く） ---- */
+.gl-fold { display: none; }
+@media (max-width: 760px) {
+  .gl-group .gl-head { position: relative; cursor: pointer; padding-right: 86px; -webkit-tap-highlight-color: transparent; }
+  .gl-fold { position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+  .gl-fold small { font-family: 'DM Sans', sans-serif; font-size: 12px; color: #b08a4a; }
+  .gl-fold i { font-style: normal; color: #b5432f; transition: transform .3s; }
+  .gl-group:not(.is-closed) .gl-fold i { transform: rotate(180deg); }
+  body:not(.gl-filtering) .gl-group.is-closed .gl-list { display: none; }
+  body:not(.gl-filtering) .gl-group.is-closed { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed var(--color-border); }
+  body.gl-filtering .gl-fold { display: none; }
+  .gl-group:not(.is-closed) .gl-list { animation: my-up .35s ease-out; }
+}
+@media (max-width: 760px) { .gl-tools { position: static; } }  /* スマホでは、さがす欄を画面にはりつけない（言葉の説明が隠れるため） */
