@@ -1108,6 +1108,8 @@ try {
     if (!el || touched || !el.getClientRects().length) return;
     const top = el.getBoundingClientRect().top;
     if (Math.abs(top - 80) > 40) scrollTo({ top: scrollY + top - 80, behavior: 'instant' });
+    // 着いた場所のフェードインは待たせずに、すぐ見せる
+    document.querySelectorAll('.reveal:not(.visible)').forEach(r => { const b = r.getBoundingClientRect(); if (b.top < innerHeight && b.bottom > 0) { r.style.transition = 'none'; r.classList.add('visible'); requestAnimationFrame(() => { r.style.transition = ''; }); } });
   };
   [400, 1200, 2500].forEach(t => setTimeout(fix, t));
 })();

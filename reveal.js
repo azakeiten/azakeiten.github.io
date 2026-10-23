@@ -9,5 +9,5 @@ const io = new IntersectionObserver((entries) => {
       io.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0, rootMargin: '0px 0px -8% 0px' });   // 背の高い要素でも、少し見えたら出す
 revealEls.forEach(el => io.observe(el));

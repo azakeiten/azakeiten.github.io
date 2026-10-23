@@ -6511,3 +6511,6 @@ html.is-lite .os-man[role=button]::after { animation: none; }
   .gl-group:not(.is-closed) .gl-list { animation: my-up .35s ease-out; }
 }
 @media (max-width: 760px) { .gl-tools { position: static; } }  /* スマホでは、さがす欄を画面にはりつけない（言葉の説明が隠れるため） */
+/* 夜モード：えらんでいるタブが背景にとけないように（金色に） */
+[data-theme="dark"] .aud-tabs button[aria-selected="true"], [data-theme="dark"] .mtabs button[aria-selected="true"] { background: #e3c68e; border-color: #e3c68e; color: #1c2b23; }
+[data-theme="dark"] .pnext-go { background: #26372d !important; border-color: #3a4a40 !important; }
