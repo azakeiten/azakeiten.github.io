@@ -6568,3 +6568,29 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @keyframes os-acc-in { from { transform: translateY(-14px) rotate(-12deg); opacity: 0; } }
 .os-svg.is-dressed { margin-top: 10px; }
 @media (prefers-reduced-motion: reduce) { .os-acc { animation: none; } }
+
+/* ---- v129：AZAKEI として — マスコット「お札マン」の紹介 ---- */
+.om { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.om-card { position: relative; padding: 26px 22px 20px; border-radius: 24px; background: #fffaf0; border: 2px solid #6b4a22; box-shadow: 6px 6px 0 #e3c68e; color: #2a2620; text-align: center; overflow: hidden; }
+.om-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 110px; background: radial-gradient(circle at 50% 120%, #f3dca8, transparent 70%); }
+.om-portrait { position: relative; width: 170px; margin: 0 auto; }
+.om-portrait .os-svg { width: 100% !important; animation: os-bob 3.2s ease-in-out infinite; }
+.om-name { position: relative; margin: 6px 0 14px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 32px; line-height: 1.2; }
+.om-name small { display: block; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; color: #b5432f; }
+.om-prof { margin: 0; display: grid; gap: 0; text-align: left; border-top: 2px dotted #c9bfae; }
+.om-prof div { display: grid; grid-template-columns: 5.2em 1fr; gap: 8px; padding: 9px 2px; border-bottom: 1px dashed #d8ceb8; font-size: 13.5px; line-height: 1.6; }
+.om-prof dt { font-weight: 800; color: #6b4a22; } .om-prof dd { margin: 0; word-break: auto-phrase; }
+.om-story-h { margin: 0 0 14px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; }
+.om-steps { list-style: none; margin: 0; padding: 0 0 0 22px; position: relative; display: grid; gap: 14px; }
+.om-steps::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(#c9bfae, #b5432f); }
+.om-steps li { position: relative; padding: 14px 16px; border-radius: 16px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.om-steps li::before { content: ""; position: absolute; left: -20px; top: 18px; width: 12px; height: 12px; border-radius: 50%; background: #c9bfae; box-shadow: 0 0 0 4px var(--color-bg, #faf7f1); }
+.om-steps li.is-now { border-color: #b5432f; background: color-mix(in srgb, #b5432f 6%, var(--color-surface, #fff)); }
+.om-steps li.is-now::before { background: #b5432f; animation: pulse 1.8s ease-in-out infinite; }
+.om-no { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 12px; color: #b08a4a; letter-spacing: .1em; }
+.om-steps b { display: block; margin: 2px 0 4px; font-size: 16px; }
+.om-steps p { margin: 0; font-size: 13.5px; line-height: 1.8; color: var(--color-muted); word-break: auto-phrase; }
+.om-story .osatsu { margin-top: 16px; }
+[data-theme="dark"] .om-card { background: #f3ead6; }
+@media (max-width: 760px) { .om { grid-template-columns: 1fr; } .om-card { max-width: 380px; margin: 0 auto; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .om-portrait .os-svg, .om-steps li.is-now::before { animation: none; } }
