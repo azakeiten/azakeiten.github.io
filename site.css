@@ -6514,3 +6514,25 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 /* 夜モード：えらんでいるタブが背景にとけないように（金色に） */
 [data-theme="dark"] .aud-tabs button[aria-selected="true"], [data-theme="dark"] .mtabs button[aria-selected="true"] { background: #e3c68e; border-color: #e3c68e; color: #1c2b23; }
 [data-theme="dark"] .pnext-go { background: #26372d !important; border-color: #3a4a40 !important; }
+
+/* ---- v126：経済ラボをスマホでタブ式に ---- */
+.lab-foot { display: none; }
+@media (max-width: 560px) {
+  body.lab-tabs .lab-sec:not(.is-pick) { display: none; }
+  body.lab-tabs .lab-sec.is-pick { animation: my-up .4s ease-out; }
+  body.lab-tabs .lab-board { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  body.lab-tabs .lab-board a { grid-template-columns: 30px 1fr; column-gap: 8px; padding: 9px 10px; border-radius: 14px; }
+  body.lab-tabs .lab-board small, body.lab-tabs .lab-board i { display: none; }
+  body.lab-tabs .lab-board b { font-size: 12.5px; line-height: 1.35; word-break: auto-phrase; }
+  body.lab-tabs .lab-board .lb-seal { width: 30px; height: 30px; font-size: 14px; }
+  body.lab-tabs .lab-board a.is-pick { background: #1c2b23; border-color: #1c2b23; color: #f3eee4; }
+  body.lab-tabs .lab-board a.is-pick b { color: #f3eee4; }
+  [data-theme="dark"] body.lab-tabs .lab-board a.is-pick { background: #e3c68e; border-color: #e3c68e; } [data-theme="dark"] body.lab-tabs .lab-board a.is-pick b { color: #1c2b23; }
+  body.lab-tabs .lab-board .lb-done { width: 18px; height: 18px; font-size: 10px; right: 6px; bottom: auto; top: 6px; }
+  body.lab-tabs .lab-foot { display: grid; gap: 8px; margin-top: 18px; }
+  .lab-next { position: relative; display: grid; gap: 2px; padding: 14px 44px 14px 18px; border-radius: 18px; background: #1c2b23; color: #f3eee4; text-decoration: none; }
+  .lab-next small { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #e3c68e; } .lab-next b { font-size: 16px; }
+  .lab-next i { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-style: normal; font-size: 20px; color: #e3c68e; }
+  .lab-up { justify-self: center; font-size: 12.5px; font-weight: 800; color: var(--color-muted); text-decoration: none; padding: 6px 12px; }
+}
+.pnext.is-home-only { padding: 18px 0; } .pnext.is-home-only .container { grid-template-columns: auto; justify-content: center; } .pnext.is-home-only .pnext-home { grid-auto-flow: column; gap: 8px; padding: 12px 26px; border-radius: 999px; font-size: 13.5px; } .pnext.is-home-only .pnext-home svg { width: 20px; height: 20px; }

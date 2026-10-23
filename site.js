@@ -1190,9 +1190,45 @@ try {
   if (i < 0 || page === 'index.html' || !foot) return;
   const next = pages[(i + 1) % pages.length].href === 'index.html' ? pages[(i + 2) % pages.length] : pages[(i + 1) % pages.length];
   const ico = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
-  foot.insertAdjacentHTML('beforebegin', `<div class="pnext" role="navigation" aria-label="次のページ"><div class="container">
+  // 写真つきの「Next page」（v13）がある時は、ここは「ホームへ戻る」だけにする（同じ案内を 2 回出さない）
+  foot.insertAdjacentHTML('beforebegin', `<div class="pnext${document.querySelector('.next-page') ? ' is-home-only' : ''}" role="navigation" aria-label="ホームへ戻る"><div class="container">
     <a class="pnext-home" href="index.html">${ico('M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10')}<span>ホームへ戻る</span></a>
-    <a class="pnext-go" href="${next.href}"><small>次に読む · ${next.group}</small><b>${ico(next.ico || '')}${next.ja}</b><span>${next.desc || ''}</span><i aria-hidden="true">→</i></a>
+    ${document.querySelector('.next-page') ? '' : `<a class="pnext-go" href="${next.href}"><small>次に読む · ${next.group}</small><b>${ico(next.ico || '')}${next.ja}</b><span>${next.desc || ''}</span><i aria-hidden="true">→</i></a>`}
   </div></div>`);
 })();
 } catch (e) { console.error('[site.js / v124]', e); }
+
+/* ######## ▼ v126：経済ラボ — スマホでは上のメニューで実験を切りかえる（1 つずつ表示して、ページを短く） ######## */
+try {
+(function() {
+  const board = document.querySelector('[data-lab-board]');
+  if (!board || !matchMedia('(max-width: 560px)').matches) return;
+  const links = [...board.querySelectorAll('a[href^="#"]')];
+  const secs = links.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if (secs.length < 3) return;
+  document.body.classList.add('lab-tabs');
+  secs.forEach((s, i) => {
+    s.classList.add('lab-sec');
+    const nx = secs[i + 1], nl = nx && links.find(a => a.getAttribute('href') === '#' + nx.id);
+    s.querySelector('.container')?.insertAdjacentHTML('beforeend', `<div class="lab-foot">${nx ? `<a href="#${nx.id}" class="lab-next"><small>次の実験</small><b>${nl.querySelector('b').textContent}</b><i aria-hidden="true">→</i></a>` : ''}<a href="#lab-top" class="lab-up">実験のメニューへ ↑</a></div>`);
+  });
+  board.closest('section').id = board.closest('section').id || 'lab-top';
+  const pick = (id, scroll) => {
+    const s = secs.find(x => x.id === id) || secs[0];
+    secs.forEach(x => x.classList.toggle('is-pick', x === s));
+    links.forEach(a => a.classList.toggle('is-pick', a.getAttribute('href') === '#' + s.id));
+    s.querySelectorAll('.reveal:not(.visible)').forEach(r => r.classList.add('visible'));
+    if (scroll) scrollTo({ top: s.getBoundingClientRect().top + scrollY - 70, behavior: 'smooth' });
+  };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    if (id === 'lab-top') { e.preventDefault(); scrollTo({ top: board.getBoundingClientRect().top + scrollY - 90, behavior: 'smooth' }); return; }
+    if (!secs.some(x => x.id === id)) return;
+    e.preventDefault();
+    history.replaceState(null, '', '#' + id);
+    pick(id, true);
+  });
+  pick(location.hash.slice(1), false);
+})();
+} catch (e) { console.error('[site.js / v126]', e); }
