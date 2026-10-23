@@ -6562,3 +6562,9 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @media (max-width: 560px) { .ok { grid-template-columns: 1fr; padding: 18px 16px; } }
 @media (prefers-reduced-motion: reduce) { .ok-bar i { transition: none; } .ok-stack.is-grow i:last-child { animation: none; } }
 .ok-stage { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } @media (max-width: 560px) { .ok-stage { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- v128：季節の仮装（お札マン） ---- */
+.os-acc { transform-origin: 60px 30px; animation: os-acc-in .6s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes os-acc-in { from { transform: translateY(-14px) rotate(-12deg); opacity: 0; } }
+.os-svg.is-dressed { margin-top: 10px; }
+@media (prefers-reduced-motion: reduce) { .os-acc { animation: none; } }

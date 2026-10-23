@@ -52,6 +52,9 @@
   const talk = man => {
     const box = man.closest('.osatsu'), bubble = box && box.querySelector('.os-bubble');
     if (!bubble) return;
+    // 仮装している季節は、最初の 1 回だけ季節のあいさつ
+    const SEASON = { halloween: 'ハロウィンだから、かぼちゃの帽子をかぶってみたよ。似合う？ もう一度押すと、お金の豆知識を話すね。', xmas: 'メリークリスマス！ サンタの帽子をかぶってみたよ。もう一度押すと、お金の豆知識を話すね。', newyear: 'あけましておめでとう！ 今年もよろしくね。もう一度押すと、お金の豆知識を話すね。' };
+    if (ACC && !talk.greeted) { talk.greeted = true; box.classList.remove('is-talk'); void box.offsetWidth; box.classList.add('is-talk'); typeIn(bubble, SEASON[ACC[0]]); return; }
     let seen = []; try { seen = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
     const rest = MAME.map((_, i) => i).filter(i => !seen.includes(i));
     const pick = (rest.length ? rest : MAME.map((_, i) => i))[Math.random() * (rest.length || MAME.length) | 0];
@@ -62,7 +65,15 @@
     bubble.setAttribute('data-count', `豆知識 ${Math.min(seen.length, MAME.length)} / ${MAME.length}`);
     typeIn(bubble, MAME[pick]);
   };
-  const prep = () => document.querySelectorAll('.os-man:not([tabindex])').forEach(m => { m.setAttribute('role', 'button'); m.setAttribute('tabindex', '0'); m.setAttribute('aria-label', 'お札マンに豆知識を聞く'); m.title = '押すと、お金の豆知識'; });
+  // 季節の仮装（日本時間の日付で自動）：ハロウィンはかぼちゃ帽子、クリスマスはサンタ帽、お正月は「賀」の印
+  const jst = new Date(Date.now() + 9 * 3600e3), md = (jst.getUTCMonth() + 1) * 100 + jst.getUTCDate();
+  const ACC = md >= 1024 && md <= 1031 ? ['halloween', '<g class="os-acc"><path d="M60 13c-2-4-1-8 3-9" stroke="#2f6b3a" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="24" rx="19" ry="12" fill="#e08a2c" stroke="#6b4a22" stroke-width="2"/><path d="M52 14q-4 10 0 20M68 14q4 10 0 20M60 12v24" stroke="#b5662a" stroke-width="1.6" fill="none"/></g>']
+    : md >= 1218 && md <= 1225 ? ['xmas', '<g class="os-acc"><path d="M38 31 Q52 2 82 12 L80 31 Z" fill="#c8392b" stroke="#6b4a22" stroke-width="2" stroke-linejoin="round"/><rect x="34" y="27" width="50" height="8" rx="4" fill="#fffaf0" stroke="#6b4a22" stroke-width="1.6"/><circle cx="84" cy="12" r="5" fill="#fffaf0" stroke="#6b4a22" stroke-width="1.6"/></g>']
+    : md >= 101 && md <= 107 ? ['newyear', '<g class="os-acc"><circle cx="100" cy="20" r="12" fill="#b5432f" stroke="#fffaf0" stroke-width="2"/><text x="100" y="25" font-family="Shippori Mincho, serif" font-weight="800" font-size="13" fill="#fffaf0" text-anchor="middle">賀</text></g>']
+    : null;
+  const dress = () => { if (!ACC) return; document.querySelectorAll('.os-svg:not(.is-dressed)').forEach(s => { s.classList.add('is-dressed', 'is-' + ACC[0]); s.insertAdjacentHTML('beforeend', ACC[1]); }); };
+  dress();
+  const prep = () => document.querySelectorAll('.os-man:not([tabindex])').forEach(m => { dress(); m.setAttribute('role', 'button'); m.setAttribute('tabindex', '0'); m.setAttribute('aria-label', 'お札マンに豆知識を聞く'); m.title = '押すと、お金の豆知識'; });
   prep();
   new MutationObserver(prep).observe(document.body, { childList: true, subtree: true });
   document.addEventListener('click', e => { const m = e.target.closest('.os-man'); if (m) talk(m); });
