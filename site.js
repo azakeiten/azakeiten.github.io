@@ -1177,3 +1177,20 @@ try {
   });
 })();
 } catch (e) { console.error('[site.js / v123]', e); }
+
+/* ######## ▼ v124：ページのいちばん下に「次に読む」と「ホームへ戻る」（目次の順で、となりのページへ） ######## */
+try {
+(function() {
+  const pages = window.AZAKEI_PAGES || [];
+  const page = location.pathname.split('/').pop() || 'index.html';
+  const i = pages.findIndex(p => p.href === page);
+  const foot = document.getElementById('site-footer');
+  if (i < 0 || page === 'index.html' || !foot) return;
+  const next = pages[(i + 1) % pages.length].href === 'index.html' ? pages[(i + 2) % pages.length] : pages[(i + 1) % pages.length];
+  const ico = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+  foot.insertAdjacentHTML('beforebegin', `<div class="pnext" role="navigation" aria-label="次のページ"><div class="container">
+    <a class="pnext-home" href="index.html">${ico('M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10')}<span>ホームへ戻る</span></a>
+    <a class="pnext-go" href="${next.href}"><small>次に読む · ${next.group}</small><b>${ico(next.ico || '')}${next.ja}</b><span>${next.desc || ''}</span><i aria-hidden="true">→</i></a>
+  </div></div>`);
+})();
+} catch (e) { console.error('[site.js / v124]', e); }

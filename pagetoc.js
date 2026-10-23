@@ -9,7 +9,8 @@
   const secs = [...document.querySelectorAll('section[id]')].filter(s => (s.dataset.toc || s.querySelector('h2')) && !s.closest('.page-hero'));
   if (secs.length < 4) return;
   const label = s => (s.dataset.toc || s.querySelector('h2').textContent).replace(/\s+/g, ' ').replace(/[。、]$/, '').trim();
-  const nav = document.createElement('nav');
+  const nav = document.createElement('div');   // <nav> にすると、上の帯（nav）の見た目がうつって画面の上に固定されてしまう
+  nav.setAttribute('role', 'navigation');
   nav.className = 'ptoc';
   nav.setAttribute('aria-label', 'このページの中身');
   const en = /^en/.test(document.documentElement.lang);
