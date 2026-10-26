@@ -45,7 +45,8 @@
       <span class="my-rank-seal" aria-hidden="true">${rank[2]}</span>
       <div class="my-rank-body"><p class="my-rank-label">いまの称号</p><p class="my-rank-name">${rank[1]}</p><p class="my-rank-msg">${rank[3]}</p>
         <span class="my-rank-bar"><i style="width:${pct(score, max)}%"></i></span>
-        <p class="my-rank-meta"><span>達成 <b>${done}</b> / ${C.length}</span><span>バッジ <b>${got}</b> / ${B.length}</span>${nextR ? `<span>「${nextR[1]}」まで あと <b>${nextR[0] - score}</b></span>` : '<span>最高の称号です</span>'}</p></div>
+        <p class="my-rank-meta"><span>達成 <b>${done}</b> / ${C.length}</span><span>バッジ <b>${got}</b> / ${B.length}</span>${nextR ? `<span>「${nextR[1]}」まで あと <b>${nextR[0] - score}</b></span>` : '<span>最高の称号です</span>'}</p>
+        ${window.AZAKEI_SHARE_IMG ? '<button type="button" class="my-share">称号を画像で保存・シェア</button>' : ''}</div>
     </div>
     ${nextC ? `<a class="my-next" href="${nextC[6]}"><span class="my-next-k">つぎのおすすめ</span><b>${nextC[1]}</b><small>${NUDGE[nextC[0]] || nextC[4]}</small><span class="my-next-go">${nextC[7]} →</span></a>` : ''}
     <h2 class="my-h">記録</h2>`
@@ -55,6 +56,17 @@
       ${p !== null ? `<span class="my-bar"><i style="width:${p}%"></i></span>` : ''}<span class="my-cta">${cta} →</span></a>`).join('')
     + (B.length ? `<h2 class="my-h">バッジ <small>${got} / ${B.length}</small></h2>
       <ul class="my-badges">${B.map(([s, name, ok, how, href], bi) => `<li class="${ok ? 'is-got' : ''}" style="--i:${bi}"><a href="${href}"><span class="my-medal" aria-hidden="true">${ok || !how.startsWith('ひみつ') ? s : '？'}</span><b>${ok || !how.startsWith('ひみつ') ? name : '？？？'}</b><small>${ok ? '獲得ずみ' : how}</small></a></li>`).join('')}</ul>` : '');
+  // 称号を、縦長の画像に（インスタのストーリーなどに）
+  const shareBtn = box.querySelector('.my-share');
+  if (shareBtn) shareBtn.addEventListener('click', async () => {
+    const label = shareBtn.textContent; shareBtn.disabled = true; shareBtn.textContent = '…';
+    const art = `<svg viewBox="0 0 120 120"><rect x="14" y="14" width="92" height="92" rx="16" fill="#b5432f" transform="rotate(-6 60 60)"/><rect x="22" y="22" width="76" height="76" rx="11" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3" transform="rotate(-6 60 60)"/><text x="60" y="80" font-family="Shippori Mincho, serif" font-weight="800" font-size="58" fill="#fff" text-anchor="middle" transform="rotate(-6 60 60)">${rank[2]}</text></svg>`;
+    try {
+      const r = await window.AZAKEI_SHARE_IMG({ kicker: 'AZAKEI での、わたしの称号', art, title: rank[1], subtitle: `記録の達成 ${done} / ${C.length} ・ バッジ ${got} / ${B.length}`, lines: [rank[3]], cta: 'あなたは、どの称号？', url: 'azakeiten.github.io/mypage.html', filename: 'azakei-rank', text: `AZAKEI のホームページで、称号「${rank[1]}」になりました！ #AZAKEI` });
+      shareBtn.textContent = r === 'cancel' ? label : '保存しました！';
+    } catch (e) { shareBtn.textContent = '画像を作れませんでした'; }
+    setTimeout(() => { shareBtn.textContent = label; shareBtn.disabled = false; }, 2200);
+  });
   // 演出：数字を 0 から数えあげる（動きを減らす設定のときは、そのまま）
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !document.documentElement.classList.contains('is-lite')) {
     box.querySelectorAll('.my-big b, .my-rank-meta b').forEach(el => {

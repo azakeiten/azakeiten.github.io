@@ -6636,3 +6636,4 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .qm-send p { margin: 8px 0 0; font-size: 12px; color: var(--color-muted); line-height: 1.7; }
 .qm-go.is-off { opacity: .45; }
 @media (max-width: 760px) { .qm { grid-template-columns: 1fr; } .qm-side { position: static; } }
+.my-share { margin-top: 12px; padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(227, 198, 142, .55); background: transparent; color: #e3c68e; font: inherit; font-size: 12.5px; font-weight: 800; cursor: pointer; transition: background .2s; } .my-share:hover { background: rgba(227, 198, 142, .12); }
