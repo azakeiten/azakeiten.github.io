@@ -1259,3 +1259,58 @@ try {
   addEventListener('pagehide', save);
 })();
 } catch (e) { console.error('[site.js / v127]', e); }
+
+/* ######## ▼ v128：今日のミッション（日替わりの小さなお題。達成すると演出、連続日数も）— 記録はこのブラウザの中だけ ######## */
+try {
+(function() {
+  const KEY = 'azakei_mission';
+  const jget = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
+  const len = k => { const v = jget(k, []); return Array.isArray(v) ? v.length : (+v || 0); };
+  const labN = () => ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (len('azakei_shop') >= 3 ? 1 : 0);
+  // [id, お題, どこで, 今の数を読む関数]
+  const M = [
+    ['gacha', 'ことばガチャで、新しい言葉に 1 つ出会う', 'glossary.html#gacha', () => len('azakei_gacha')],
+    ['card', '単語カードで、言葉を 1 つ覚える', 'glossary.html#glCards', () => len('azakei_gl_known')],
+    ['mame', 'お札マンを押して、豆知識を 1 つ聞く', 'glossary.html', () => len('azakei_mame')],
+    ['coin', '世界のお金図鑑に、コインを 1 枚ふやす', 'quiz.html#coins', () => len('azakei_coins')],
+    ['np', '年表ゲームで、自己ベストを 1 つ更新する', 'glossary.html#nenpyo', () => len('azakei_np_best')],
+    ['lab', '経済ラボで、「済」を 1 つふやす', 'sim.html', labN],
+    ['shop', '文化祭のお店で、ミッションを 1 つクリア', 'sim.html#shop', () => len('azakei_shop')]
+  ];
+  const jst = new Date(Date.now() + 9 * 3600e3);
+  const day = Math.floor(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate()) / 864e5);
+  let s = jget(KEY, {});
+  if (s.day !== day) {
+    // 新しい日：お題を決めて、いまの数を「スタート」として覚える（ぜんぶ終わっているお題は飛ばす）
+    let i = (day * 7 + 3) % M.length, tries = 0;
+    while (tries++ < M.length && ((M[i][0] === 'lab' && labN() >= 7) || (M[i][0] === 'shop' && len('azakei_shop') >= 3) || (M[i][0] === 'coin' && len('azakei_coins') >= 12) || (M[i][0] === 'gacha' && len('azakei_gacha') >= document.querySelectorAll('.gl-item').length && document.querySelectorAll('.gl-item').length > 0))) i = (i + 1) % M.length;
+    const streak = s.done && s.day === day - 1 ? (s.streak || 0) : 0;
+    s = { day, id: M[i][0], base: M[i][3](), done: false, streak };
+    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  const cur = M.find(m => m[0] === s.id) || M[0];
+  const render = () => {
+    document.querySelectorAll('[data-mission]').forEach(el => {
+      el.innerHTML = `<div class="ms${s.done ? ' is-done' : ''}"><span class="ms-seal" aria-hidden="true">${s.done ? '済' : '今'}</span>
+        <div class="ms-body"><p class="ms-k">今日のミッション${s.streak ? `<em>${s.streak} 日連続</em>` : ''}</p><p class="ms-t">${cur[1]}</p></div>
+        ${s.done ? '<span class="ms-ok">達成！</span>' : `<a class="ms-go" href="${cur[2]}">やってみる →</a>`}</div>`;
+    });
+  };
+  const check = () => {
+    if (s.done) return;
+    if (cur[3]() > s.base) {
+      s.done = true; s.streak = (s.streak || 0) + 1;
+      try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+      render();
+      const t = document.createElement('a');
+      t.className = 'bdg-toast is-mission'; t.href = 'mypage.html'; t.setAttribute('role', 'status');
+      t.innerHTML = `<span class="bdg-medal" aria-hidden="true">今</span><span class="bdg-txt"><small>今日のミッション達成！</small><b>${s.streak} 日連続</b><i>あしたも、新しいお題が出ます</i></span>${'<s></s>'.repeat(10)}`;
+      setTimeout(() => { document.body.appendChild(t); void t.offsetWidth; t.classList.add('is-in'); setTimeout(() => { t.classList.remove('is-in'); t.classList.add('is-out'); setTimeout(() => t.remove(), 450); }, 4200); }, 5200);
+    }
+  };
+  render(); check();
+  // 遊びによっては記録が少しあとに残る（ガチャは約 1 秒）ので、2 回たしかめる
+  let ct, ct2; document.addEventListener('click', () => { clearTimeout(ct); clearTimeout(ct2); ct = setTimeout(check, 900); ct2 = setTimeout(check, 2200); }, true);
+  document.addEventListener('input', () => { clearTimeout(ct); ct = setTimeout(check, 900); }, true);
+})();
+} catch (e) { console.error('[site.js / v128]', e); }

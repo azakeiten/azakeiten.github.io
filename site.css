@@ -6727,3 +6727,17 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .ga-link { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 800; color: #b5432f; }
 @media (max-width: 560px) { [data-gacha] { grid-template-columns: 1fr; justify-items: center; } .ga-side { width: 100%; text-align: center; } .ga-open { text-align: left; } }
 @media (prefers-reduced-motion: reduce) { .ga-machine.is-turn * { animation: none !important; } .ga-machine.is-turn .ga-cap { opacity: 1; transform: translate(80px, 6px); } }
+
+/* ---- v134：今日のミッション ---- */
+.ms { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 18px; background: var(--color-surface, #fff); border: 2px dashed color-mix(in srgb, #b08a4a 60%, transparent); }
+.ms-seal { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; background: #1c2b23; color: #e3c68e; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 19px; transform: rotate(-6deg); }
+.ms.is-done { border-style: solid; border-color: #2f6b3a; background: color-mix(in srgb, #2f6b3a 7%, var(--color-surface, #fff)); }
+.ms.is-done .ms-seal { background: #b5432f; color: #fff; animation: bdg-stamp .7s cubic-bezier(.3, 1.6, .5, 1) backwards; }
+.ms-k { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; color: #b08a4a; }
+.ms-k em { font-style: normal; padding: 1px 8px; border-radius: 999px; background: #b5432f; color: #fff; letter-spacing: 0; }
+.ms-t { margin: 2px 0 0; font-weight: 800; font-size: 15px; line-height: 1.5; word-break: auto-phrase; }
+.ms-go { font-size: 13px; font-weight: 800; color: #b5432f; white-space: nowrap; text-decoration: none; }
+.ms-ok { font-family: 'Shippori Mincho', serif; font-weight: 800; color: #2f6b3a; white-space: nowrap; }
+.mission-wrap { padding-bottom: clamp(20px, 3vw, 32px); margin-top: clamp(16px, 2.4vw, 24px); }
+.bdg-toast.is-mission .bdg-medal { background: radial-gradient(circle at 35% 30%, #f6b8a8, #b5432f 70%); color: #fff; }
+@media (max-width: 560px) { .ms { grid-template-columns: auto 1fr; } .ms-go, .ms-ok { grid-column: 2; justify-self: start; } }
