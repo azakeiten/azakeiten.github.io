@@ -922,6 +922,7 @@ try {
       ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo'],
       ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx'],
       ['貨', '世界のお金博士', get('azakei_coins', []).length >= 12, '世界のお金図鑑のコインを 12 枚あつめる', 'quiz.html#coins'],
+      ['研', 'ラボ制覇', ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget'].every(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }) && get('azakei_shop', []).length >= 3, '経済ラボの 7 つの実験に「済」をそろえる', 'sim.html'],
       ['店', '店長', get('azakei_shop', []).length >= 3, 'お店の「店長ミッション」を 3 つクリア', 'sim.html#shop'],
       ['月', '夜の研究員', document.documentElement.dataset.theme === 'dark', 'ひみつのバッジ（ヒント：右上の月）', 'mypage.html'],
       ['豆', '豆知識はかせ', get('azakei_mame', []).length >= 12, 'ひみつのバッジ（ヒント：お札マン）', 'mypage.html']
@@ -1089,7 +1090,7 @@ try {
   if (!board) return;
   const has = k => { try { const v = localStorage.getItem(k); return v !== null && v !== '[]' && v !== '0'; } catch (e) { return false; } };
   const shopN = () => { try { return JSON.parse(localStorage.getItem('azakei_shop') || '[]').length; } catch (e) { return 0; } };
-  const DONE = { '#sim-main': () => has('azakei_sim_run'), '#updown': () => has('azakei_chart_reader'), '#okozukai': () => has('azakei_ozk_master'), '#fx': () => has('azakei_fx_master'), '#shop': () => shopN() >= 3 };
+  const DONE = { '#sim-main': () => has('azakei_sim_run'), '#updown': () => has('azakei_chart_reader'), '#okozukai': () => has('azakei_ozk_master'), '#fx': () => has('azakei_fx_master'), '#oku': () => has('azakei_oku'), '#budget': () => has('azakei_budget'), '#shop': () => shopN() >= 3 };
   const mark = () => board.querySelectorAll('a').forEach(a => { const f = DONE[a.getAttribute('href')]; if (f && f() && !a.querySelector('.lb-done')) a.insertAdjacentHTML('beforeend', '<span class="lb-done" title="クリアずみ">済</span>'); });
   mark();
   document.addEventListener('click', () => setTimeout(mark, 800), true);

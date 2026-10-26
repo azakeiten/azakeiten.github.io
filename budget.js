@@ -37,7 +37,7 @@
     box.classList.add('is-open');
   };
   box.querySelectorAll('.bg-opts button').forEach(b => b.addEventListener('click', () => {
-    pickIdx = +b.dataset.i;
+    pickIdx = +b.dataset.i; try { localStorage.setItem('azakei_budget', '1'); } catch (e) {}
     box.querySelectorAll('.bg-opts button').forEach(x => { x.disabled = true; x.classList.toggle('is-me', x === b); });
     show();
   }));

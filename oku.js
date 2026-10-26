@@ -58,6 +58,6 @@
       : i === STEPS.length - 1 ? '日本の国の 1 年の予算（一般会計）は、ここ数年 <b>110 兆円台</b>。積むと 1,000 km をこえて、宇宙ステーションが飛ぶ高さ（約 400 km）よりずっと高くなります。'
       : 'ケタが 1 つ上がるたびに、高さも重さも 10 倍。ニュースの「◯兆円」の大きさが、少し見えてきたかな？';
   };
-  $('rng').addEventListener('input', draw);
+  $('rng').addEventListener('input', () => { draw(); if (+$('rng').value === STEPS.length - 1) { try { localStorage.setItem('azakei_oku', '1'); } catch (e) {} } });
   draw();
 })();
