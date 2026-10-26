@@ -5,10 +5,11 @@
 window.AZAKEI = {
 
   /* ---- サイトの最終更新日（フッターに出す。更新したら書きかえる） ---- */
-  siteUpdated: '2026-10-24',
+  siteUpdated: '2026-10-26',
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-26', seal: '作', tone: 'paper', href: 'quiz.html#make', eyebrow: 'クイズ', title: '問題を、つくってみよう', text: '経済の問題と 4 つの答えを書くと、その場で遊べる。いい問題は AZAKEI に送れます。' },
     { date: '2026-10-24', seal: '億', tone: 'dark', href: 'sim.html#oku', eyebrow: '経済ラボ', title: '1 億円って、どれくらい？', text: '一万円札を積むと、高さと重さは？ 東京タワーや富士山とくらべてみよう。' },
     { date: '2026-10-23', seal: '貨', tone: 'gold', href: 'quiz.html#coins', eyebrow: 'クイズ', title: '世界のお金図鑑', text: 'この国のお金は？ 正解すると、コインがくるっと回って図鑑に入る。' },
     { date: '2026-10-23', seal: '店', tone: 'shu', href: 'sim.html#shop', eyebrow: '経済ラボ', title: '文化祭でお店をひらこう', text: '何個売れたら黒字？ 損益分岐点を、グラフと店長ミッションで。' },
