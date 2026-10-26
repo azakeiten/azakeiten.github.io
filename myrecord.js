@@ -20,7 +20,7 @@
     ['探', 'サイト探検', visited.length, '/ 14 ページ', visited.length >= 14 ? '全ページ制覇！ すみずみまで見てくれてありがとう' : 'まだ見ていないページを回ってみよう', pct(visited.length, 14), 'index.html', 'サイトを回る', visited.length >= 14],
     ['億', '億万長者クイズ', num('azakei_quiz_best'), '枚', `ニュースモード ${num('azakei_quiz_best_news')} 枚・タイムアタック ${num('azakei_quiz_best_time')} 点`, null, 'quiz.html', '挑戦する', num('azakei_quiz_best') >= 40],
     ['復', 'まちがえた問題', missN, '問', missN ? '復習して、リストを空っぽにしよう' : 'いまは、まちがいリストは空っぽ', null, 'quiz.html', missN ? '復習する' : 'クイズへ', missN === 0 && num('azakei_quiz_best') > 0],
-    ['辞', '単語カード', known.length, '/ 195 語', '覚えた言葉には、辞典で 済 の印', pct(known.length, 195), 'glossary.html#glCards', '続きを覚える', known.length >= 150],
+    ['辞', '単語カード', known.length, '/ 209 語', '覚えた言葉には、辞典で 済 の印', pct(known.length, 209), 'glossary.html#glCards', '続きを覚える', known.length >= 150],
     ['歴', '年表ゲーム', num('azakei_np_best'), '問連続', '先に起きたのはどっち？ 自己ベスト', null, 'glossary.html#nenpyo', '挑戦する', num('azakei_np_best') >= 8],
     ['週', '今週の 1 問', wk.streak || 0, '週連続', wk.week !== undefined ? '毎週月曜に新しい問題' : 'まだ挑戦していません', null, 'index.html#weekly', '今週の問題へ', (wk.streak || 0) >= 3],
     ['診', 'エコノミスト診断', dg ? TYPES[dg] || '診断ずみ' : '―', '', dg ? 'もう一度ためすと、タイプが変わるかも' : 'YES と NO で、あなたのタイプがわかる', null, 'diagnosis.html', dg ? 'もう一度' : '診断する', !!dg],

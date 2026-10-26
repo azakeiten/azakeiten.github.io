@@ -125,7 +125,7 @@ window.AZAKEI_GL_LINKS = [
   [['G7', 'サミット'], 'g7', 'G7'], [['G20'], 'g20', 'G20'], [['IMF', '国際通貨基金'], 'imf', 'IMF'], [['WTO', '世界貿易機関'], 'wto', 'WTO'], [['BRICS'], 'brics', 'BRICS'], [['変動相場'], 'floating', '変動相場制'], [['為替介入'], 'intervention', '為替介入'],
   [['高度経済成長'], 'high-growth', '高度経済成長'], [['いざなぎ'], 'izanagi', 'いざなぎ景気'], [['ハイパーインフレ'], 'hyperinflation', 'ハイパーインフレ'], [['資本論', 'マルクス'], 'das-kapital', 'マルクス『資本論』'],
   [['ふるさと納税'], 'furusato', 'ふるさと納税'], [['軽減税率'], 'reduced-rate', '軽減税率'], [['預金保険', 'ペイオフ'], 'deposit-insurance', '預金保険制度'], [['TOB', '公開買付'], 'tob', 'TOB'], [['自社株買い'], 'buyback', '自社株買い'], [['株主優待'], 'yutai', '株主優待'], [['倒産'], 'bankruptcy', '倒産'], [['フランチャイズ'], 'franchise', 'フランチャイズ'], [['ブロックチェーン'], 'blockchain', 'ブロックチェーン'], [['フィンテック'], 'fintech', 'フィンテック'],
-  [['NISA'], 'nisa', 'NISA'], [['iDeCo'], 'ideco', 'iDeCo'], [['リボ'], 'revolving', 'リボ払い'], [['クーリング'], 'cooling-off', 'クーリング・オフ'], [['サブスク'], 'subscription', 'サブスク'], [['クラウドファンディング'], 'crowdfunding', 'クラウドファンディング'], [['ユニコーン'], 'unicorn', 'ユニコーン'], [['損益分岐'], 'break-even', '損益分岐点']
+  [['NISA'], 'nisa', 'NISA'], [['iDeCo'], 'ideco', 'iDeCo'], [['リボ'], 'revolving', 'リボ払い'], [['クーリング'], 'cooling-off', 'クーリング・オフ'], [['サブスク'], 'subscription', 'サブスク'], [['クラウドファンディング'], 'crowdfunding', 'クラウドファンディング'], [['ユニコーン'], 'unicorn', 'ユニコーン'], [['損益分岐'], 'break-even', '損益分岐点'], [['購買力平価', 'ビッグマック'], 'ppp', '購買力平価'], [['価格弾力性'], 'price-elasticity', '価格弾力性'], [['プライベートブランド'], 'private-brand', 'PB'], [['政策金利', '利上げ'], 'policy-rate', '政策金利'], [['日本銀行券', 'お札'], 'bank-note', '日本銀行券'], [['硬貨', '造幣局'], 'coin', '硬貨'], [['証券会社'], 'securities-firm', '証券会社'], [['株式分割'], 'stock-split', '株式分割']
 ];
 // 問題 1 つ分の文章から、関連する言葉を最大 3 つ
 window.AZAKEI_GL_FOR = function(q) {
