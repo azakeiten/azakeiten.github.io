@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-26', seal: '予', tone: 'green', href: 'sim.html#budget', eyebrow: '経済ラボ', title: '国の予算を、100 円にたとえると？', text: 'いちばん多い使いみちを予想してから開くと、100 円玉がグラフに分かれる。' },
     { date: '2026-10-26', seal: '作', tone: 'paper', href: 'quiz.html#make', eyebrow: 'クイズ', title: '問題を、つくってみよう', text: '経済の問題と 4 つの答えを書くと、その場で遊べる。いい問題は AZAKEI に送れます。' },
     { date: '2026-10-24', seal: '億', tone: 'dark', href: 'sim.html#oku', eyebrow: '経済ラボ', title: '1 億円って、どれくらい？', text: '一万円札を積むと、高さと重さは？ 東京タワーや富士山とくらべてみよう。' },
     { date: '2026-10-23', seal: '貨', tone: 'gold', href: 'quiz.html#coins', eyebrow: 'クイズ', title: '世界のお金図鑑', text: 'この国のお金は？ 正解すると、コインがくるっと回って図鑑に入る。' },
