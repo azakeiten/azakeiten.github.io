@@ -1002,6 +1002,9 @@ try {
     });
     if (!welcome || !prev) return;
     const items = [];
+    // つづきから：前に最後に見ていたページ（やコーナー）へ
+    const lp = get('azakei_last_place', null);
+    if (lp && lp.href && lp.title && Date.now() - (lp.at || 0) < 30 * 864e5) items.push(`<a class="wb-cont" href="${lp.href}"><span>つづきから</span>${String(lp.title).replace(/[<>&"]/g, '')}</a>`);
     const siteUp = window.AZAKEI && AZAKEI.siteUpdated ? Date.parse(AZAKEI.siteUpdated + 'T00:00:00+09:00') : 0;
     if (siteUp > prev) items.push(`<a href="about.html#updates">ホームページに、新しいところがあります</a>`);
     if (fresh) items.push(`<a href="#news">お知らせが <b>${fresh}</b> 件増えています</a>`);
@@ -1237,3 +1240,22 @@ try {
   pick(location.hash.slice(1), false);
 })();
 } catch (e) { console.error('[site.js / v126]', e); }
+
+/* ######## ▼ v127：最後に見ていたページ（とコーナー）を覚えておく（トップの「つづきから」用・このブラウザの中だけ） ######## */
+try {
+(function() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  if (page === 'index.html' || /^(404|offline|admin)\.html$/.test(page)) return;
+  const save = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const sec = id && document.getElementById(id);
+    const h1 = (document.querySelector('.page-hero h1, h1') || {}).textContent || document.title;
+    const sub = sec && sec.querySelector('h2') ? sec.querySelector('h2').textContent : '';
+    const title = (h1.trim() + (sub ? '「' + sub.trim().replace(/[。、]$/, '') + '」' : '')).replace(/\s+/g, ' ').slice(0, 40);
+    try { localStorage.setItem('azakei_last_place', JSON.stringify({ href: page + (sub ? '#' + id : ''), title, at: Date.now() })); } catch (e) {}
+  };
+  save();
+  addEventListener('hashchange', save);
+  addEventListener('pagehide', save);
+})();
+} catch (e) { console.error('[site.js / v127]', e); }
