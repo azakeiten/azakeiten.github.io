@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-27', seal: '速', tone: 'shu', href: 'glossary.html#rush', eyebrow: '用語辞典', title: 'ことば○×ラッシュ', text: '言葉と説明、合ってる？ 30 秒で答えまくる。コンボで点がふえて、4 段階の称号つき。' },
     { date: '2026-10-27', seal: '税', tone: 'paper', href: 'sim.html#receipt', eyebrow: '経済ラボ', title: 'レシートの中の税金', text: '商品をかごに入れると、レシートが印字される。同じおにぎりでも、店内で食べると税率が変わる。' },
     { date: '2026-10-27', seal: '分', tone: 'green', href: 'sim.html#bungyo', eyebrow: '経済ラボ', title: '分業のふしぎ', text: '何でも速い A さんと、ゆっくりの B さん。ポスター 6 枚とクッキー、どう分けるといちばん得？' },
     { date: '2026-10-26', seal: '運', tone: 'gold', href: 'glossary.html#gacha', eyebrow: '用語辞典', title: '経済ことばガチャ', text: 'レバーを回すとカプセルが転がり出て、209 語のどれかに出会える。' },

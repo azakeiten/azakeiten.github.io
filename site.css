@@ -6831,3 +6831,40 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @media (prefers-reduced-motion: reduce) { .rc-lines li.is-new, .rc-paper.is-reprint { animation: none; } }
 [data-theme="dark"] .rc-eat button.is-on { background: #e3c68e; color: #1c2b23; }
 [data-theme="dark"] .bg-seal { background: #e3c68e; color: #1c2b23; }
+
+/* ---- v138：用語辞典「ことば○×ラッシュ」 ---- */
+.ru { margin-top: 18px; padding: 20px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+[data-rush] { position: relative; display: grid; gap: 10px; }
+.ru-top { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 13px; }
+.ru-top b { font-family: 'DM Sans', sans-serif; font-size: 22px; color: #b5432f; }
+.ru-time { margin-left: auto; } .ru-time b { color: inherit; }
+.ru-combo { padding: 2px 10px; border-radius: 999px; background: #d49a2a; color: #fff; font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: .06em; } .ru-combo:empty { display: none; }
+.ru-combo.is-pop { animation: bdg-stamp .45s cubic-bezier(.3, 1.6, .5, 1); }
+.ru-bar { height: 8px; border-radius: 99px; background: color-mix(in srgb, var(--color-text, #222) 8%, transparent); overflow: hidden; }
+.ru-bar span { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, #2f6b3a, #b08a4a); transition: width .1s linear; }
+.is-hurry .ru-bar span { background: #b5432f; } .is-hurry .ru-time { color: #b5432f; animation: ru-beat .5s infinite alternate; }
+@keyframes ru-beat { to { transform: scale(1.12); } }
+.ru-stage { min-height: 230px; display: grid; align-content: center; justify-items: center; gap: 14px; text-align: center; }
+.ru-intro { margin: 0; line-height: 1.9; font-size: 15px; } .ru-intro b { color: #b5432f; } .ru-intro small { display: block; font-size: 11.5px; color: var(--color-muted); }
+.ru-best { margin: 0; font-size: 12.5px; color: var(--color-muted); } .ru-best b { font-family: 'DM Sans', sans-serif; color: var(--color-text, #222); }
+.ru-q { width: 100%; padding: 16px 18px; border-radius: 18px; background: #1c2b23 var(--grain, none); color: #f3eee4; text-align: left; animation: ru-in .25s ease-out; }
+@keyframes ru-in { from { opacity: 0; transform: translateX(14px); } }
+.ru-word { margin: 0 0 8px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(20px, 3vw, 26px); color: #e3c68e; }
+.ru-def { margin: 0; font-size: 14px; line-height: 1.8; word-break: auto-phrase; }
+.ru-btns { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ru-btns button { padding: 12px 0; border-radius: 18px; border: 0; font-size: 34px; font-weight: 800; line-height: 1; cursor: pointer; color: #fff; transition: transform .1s; touch-action: manipulation; }
+.ru-btns button:active { transform: scale(.95); }
+.ru-o { background: #2f6b3a; } .ru-x { background: #b5432f; }
+[data-rush]::after { content: ''; position: absolute; inset: -8px; border-radius: 26px; pointer-events: none; opacity: 0; }
+[data-rush].is-right::after { animation: ru-flash .4s; box-shadow: inset 0 0 0 4px #2f6b3a; }
+[data-rush].is-wrong::after { animation: ru-flash .4s; box-shadow: inset 0 0 0 4px #b5432f; }
+[data-rush].is-wrong .ru-stage { animation: ru-shake .3s; }
+@keyframes ru-flash { from { opacity: 1; } }
+@keyframes ru-shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.ru-end { display: grid; justify-items: center; gap: 6px; animation: ru-in .3s ease-out; }
+.ru-seal { width: 60px; height: 60px; display: grid; place-items: center; border-radius: 14px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 30px; transform: rotate(-6deg); animation: bdg-stamp .7s cubic-bezier(.3, 1.6, .5, 1) backwards; }
+.ru-rank { margin: 4px 0 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; }
+.ru-final { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 10px; } .ru-final b { font-family: 'DM Sans', sans-serif; font-size: 40px; color: #b5432f; }
+.ru-final em { font-style: normal; padding: 2px 10px; border-radius: 999px; background: #d49a2a; color: #fff; font-size: 12px; font-weight: 800; } .ru-final small { color: var(--color-muted); }
+.ru-miss { margin: 0 0 8px; font-size: 13px; line-height: 1.8; word-break: auto-phrase; } .ru-miss a { color: #b5432f; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .ru-q, .ru-end, .ru-seal, [data-rush].is-wrong .ru-stage, .is-hurry .ru-time { animation: none; } }

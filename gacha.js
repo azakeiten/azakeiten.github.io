@@ -39,7 +39,7 @@
       if (isNew) { met.push(it.id); try { localStorage.setItem(KEY, JSON.stringify(met)); } catch (e) {} }
       box.querySelector('[data-n]').textContent = met.length;
       const cat = grp ? grp.querySelector('.gl-head').firstChild.nextSibling.textContent.trim() : '';
-      card.innerHTML = `<div class="ga-open" style="--c:${col}"><p class="ga-meta"><span>${cat}</span>${isNew ? '<em>NEW</em>' : '<small>もう出会った言葉</small>'}</p><p class="ga-word">${it.querySelector('dt').innerHTML}</p><p class="ga-def">${it.querySelector('dd').textContent.trim()}</p><a href="#${it.id}" class="ga-link">辞典で読む →</a></div>`;
+      card.innerHTML = `<div class="ga-open" style="--c:${col}"><p class="ga-meta"><span>${cat}</span>${isNew ? '<em>NEW</em>' : '<small>もう出会った言葉</small>'}</p><p class="ga-word">${it.querySelector('dt').innerHTML}</p><p class="ga-def">${(d => { d.querySelectorAll('.gl-rel').forEach(x => x.remove()); return d.textContent.trim(); })(it.querySelector('dd').cloneNode(true))}</p><a href="#${it.id}" class="ga-link">辞典で読む →</a></div>`;
       btn.disabled = false; btn.textContent = 'もう 1 回';
     }, reduce ? 0 : 1100);
   });
