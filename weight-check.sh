@@ -5,11 +5,11 @@
 #  ・予算（BUDGET_KB）をこえたページには「⚠ 重い」と出す
 BUDGET_KB=${BUDGET_KB:-175}
 cd "$(dirname "$0")"
-css=$(gzip -c site.min.css | wc -c)
 printf '%-18s %6s %6s %6s %7s\n' page html css js total
 for p in *.html; do
   case $p in admin.html|offline.html|404.html|sponsor-kit.html) continue;; esac
   html=$(gzip -c "$p" | wc -c)
+  c=$(grep -o "href=\"[a-z0-9-]*.min.css" "$p" | head -1 | sed "s/href=\"//"); css=0; [ -n "$c" ] && [ -f "$c" ] && css=$(gzip -c "$c" | wc -c)
   js=0
   for s in $(grep -o '<script src="[a-z0-9-]*\.js' "$p" | sed 's/<script src="//'); do
     [ -f "$s" ] && js=$((js + $(gzip -c "$s" | wc -c)))
