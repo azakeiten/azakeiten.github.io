@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-27', seal: '分', tone: 'green', href: 'sim.html#bungyo', eyebrow: '経済ラボ', title: '分業のふしぎ', text: '何でも速い A さんと、ゆっくりの B さん。ポスター 6 枚とクッキー、どう分けるといちばん得？' },
     { date: '2026-10-26', seal: '運', tone: 'gold', href: 'glossary.html#gacha', eyebrow: '用語辞典', title: '経済ことばガチャ', text: 'レバーを回すとカプセルが転がり出て、209 語のどれかに出会える。' },
     { date: '2026-10-26', seal: '昇', tone: 'shu', href: 'sim.html#infl', eyebrow: '経済ラボ', title: 'インフレのタイムマシン', text: '物価が上がると、1,000 円で買えるおにぎりは何個に？ 年数を動かすと、少しずつ消えていく。' },
     { date: '2026-10-26', seal: '予', tone: 'green', href: 'sim.html#budget', eyebrow: '経済ラボ', title: '国の予算を、100 円にたとえると？', text: 'いちばん多い使いみちを予想してから開くと、100 円玉がグラフに分かれる。' },

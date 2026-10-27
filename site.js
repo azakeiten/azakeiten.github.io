@@ -922,7 +922,7 @@ try {
       ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo'],
       ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx'],
       ['貨', '世界のお金博士', get('azakei_coins', []).length >= 12, '世界のお金図鑑のコインを 12 枚あつめる', 'quiz.html#coins'],
-      ['研', 'ラボ制覇', ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget'].every(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }) && get('azakei_shop', []).length >= 3, '経済ラボの 7 つの実験に「済」をそろえる', 'sim.html'],
+      ['研', 'ラボ制覇', ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo'].every(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }) && get('azakei_shop', []).length >= 3, '経済ラボの 8 つの実験に「済」をそろえる', 'sim.html'],
       ['店', '店長', get('azakei_shop', []).length >= 3, 'お店の「店長ミッション」を 3 つクリア', 'sim.html#shop'],
       ['月', '夜の研究員', document.documentElement.dataset.theme === 'dark', 'ひみつのバッジ（ヒント：右上の月）', 'mypage.html'],
       ['豆', '豆知識はかせ', get('azakei_mame', []).length >= 12, 'ひみつのバッジ（ヒント：お札マン）', 'mypage.html']
@@ -1093,7 +1093,7 @@ try {
   if (!board) return;
   const has = k => { try { const v = localStorage.getItem(k); return v !== null && v !== '[]' && v !== '0'; } catch (e) { return false; } };
   const shopN = () => { try { return JSON.parse(localStorage.getItem('azakei_shop') || '[]').length; } catch (e) { return 0; } };
-  const DONE = { '#sim-main': () => has('azakei_sim_run'), '#updown': () => has('azakei_chart_reader'), '#okozukai': () => has('azakei_ozk_master'), '#fx': () => has('azakei_fx_master'), '#oku': () => has('azakei_oku'), '#budget': () => has('azakei_budget'), '#shop': () => shopN() >= 3 };
+  const DONE = { '#sim-main': () => has('azakei_sim_run'), '#updown': () => has('azakei_chart_reader'), '#okozukai': () => has('azakei_ozk_master'), '#fx': () => has('azakei_fx_master'), '#oku': () => has('azakei_oku'), '#budget': () => has('azakei_budget'), '#shop': () => shopN() >= 3, '#bungyo': () => has('azakei_bungyo') };
   const mark = () => board.querySelectorAll('a').forEach(a => { const f = DONE[a.getAttribute('href')]; if (f && f() && !a.querySelector('.lb-done')) a.insertAdjacentHTML('beforeend', '<span class="lb-done" title="クリアずみ">済</span>'); });
   mark();
   document.addEventListener('click', () => setTimeout(mark, 800), true);
@@ -1266,7 +1266,7 @@ try {
   const KEY = 'azakei_mission';
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
   const len = k => { const v = jget(k, []); return Array.isArray(v) ? v.length : (+v || 0); };
-  const labN = () => ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (len('azakei_shop') >= 3 ? 1 : 0);
+  const labN = () => ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (len('azakei_shop') >= 3 ? 1 : 0);
   // [id, お題, どこで, 今の数を読む関数]
   const M = [
     ['gacha', 'ことばガチャで、新しい言葉に 1 つ出会う', 'glossary.html#gacha', () => len('azakei_gacha')],
@@ -1283,7 +1283,7 @@ try {
   if (s.day !== day) {
     // 新しい日：お題を決めて、いまの数を「スタート」として覚える（ぜんぶ終わっているお題は飛ばす）
     let i = (day * 7 + 3) % M.length, tries = 0;
-    while (tries++ < M.length && ((M[i][0] === 'lab' && labN() >= 7) || (M[i][0] === 'shop' && len('azakei_shop') >= 3) || (M[i][0] === 'coin' && len('azakei_coins') >= 12) || (M[i][0] === 'gacha' && len('azakei_gacha') >= document.querySelectorAll('.gl-item').length && document.querySelectorAll('.gl-item').length > 0))) i = (i + 1) % M.length;
+    while (tries++ < M.length && ((M[i][0] === 'lab' && labN() >= 8) || (M[i][0] === 'shop' && len('azakei_shop') >= 3) || (M[i][0] === 'coin' && len('azakei_coins') >= 12) || (M[i][0] === 'gacha' && len('azakei_gacha') >= document.querySelectorAll('.gl-item').length && document.querySelectorAll('.gl-item').length > 0))) i = (i + 1) % M.length;
     const streak = s.done && s.day === day - 1 ? (s.streak || 0) : 0;
     const hist = (s.hist || (s.done ? [s.day] : [])).filter(d => d > day - 14);
     s = { day, id: M[i][0], base: M[i][3](), done: false, streak, hist };
