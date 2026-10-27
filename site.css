@@ -6868,3 +6868,37 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .ru-final em { font-style: normal; padding: 2px 10px; border-radius: 999px; background: #d49a2a; color: #fff; font-size: 12px; font-weight: 800; } .ru-final small { color: var(--color-muted); }
 .ru-miss { margin: 0 0 8px; font-size: 13px; line-height: 1.8; word-break: auto-phrase; } .ru-miss a { color: #b5432f; font-weight: 700; }
 @media (prefers-reduced-motion: reduce) { .ru-q, .ru-end, .ru-seal, [data-rush].is-wrong .ru-stage, .is-hurry .ru-time { animation: none; } }
+
+/* ---- v139：経済ラボ「くじ引きの期待値」 ---- */
+.kj { display: grid; gap: 16px; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.kj-board { padding: 16px 18px; border-radius: 18px; background: #1c2b23 var(--grain, none); color: #f3eee4; }
+.kj-k { margin: 0 0 8px; font-weight: 800; font-size: 14px; color: #e3c68e; } .kj-k b { font-family: 'DM Sans', sans-serif; font-size: 20px; color: #fff; }
+.kj-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.kj-table th, .kj-table td { padding: 6px 4px; border-top: 1px dashed rgba(227, 198, 142, .25); text-align: left; font-weight: 700; }
+.kj-table td { font-family: 'DM Sans', sans-serif; text-align: right; } .kj-table td:last-child { color: #e3c68e; width: 4.5em; }
+.kj-table th i { display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; vertical-align: -1px; }
+.kj-q { margin: 0 0 10px; font-weight: 800; text-align: center; } .kj-q b { color: #b5432f; }
+.kj-opts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.kj-opts button { padding: 12px 4px; border-radius: 14px; border: 1.5px solid var(--color-border); background: transparent; color: inherit; font: inherit; font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 15px; cursor: pointer; white-space: nowrap; }
+.kj-opts button:hover { border-color: #b5432f; } .kj-opts button.is-on { background: #b5432f; border-color: #b5432f; color: #fff; }
+.kj-run { display: grid; gap: 12px; } .kj-run[hidden] { display: none; }
+.kj-balls { display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); gap: 3px; max-width: 520px; width: 100%; justify-self: center; min-height: 30px; }
+.kj-balls i { aspect-ratio: 1; border-radius: 50%; animation: kj-drop .35s cubic-bezier(.3, 1.5, .5, 1) backwards; }
+.kj-balls i.is-big { box-shadow: 0 0 0 2px #fff, 0 0 10px 2px #d49a2a; }
+@keyframes kj-drop { from { transform: translateY(-14px) scale(.3); opacity: 0; } }
+.kj-chart { width: 100%; height: auto; overflow: visible; }
+.kj-price { stroke: #b5432f; stroke-dasharray: 5 4; stroke-width: 1.5; }
+.kj-ev, .kj-evt { opacity: 0; transition: opacity .6s .2s; } .is-shown .kj-ev, .is-shown .kj-evt { opacity: 1; }
+.kj-ev { stroke: #2f6b3a; stroke-width: 2; }
+.kj-lb { font-size: 13px; fill: #b5432f; font-weight: 700; } .kj-evt { fill: #2f6b3a; }
+.kj-avg { fill: none; stroke: #d49a2a; stroke-width: 2.5; stroke-linejoin: round; }
+.kj-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.kj-stats p { margin: 0; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--color-text, #222) 5%, transparent); display: grid; gap: 2px; }
+.kj-stats span { font-size: 11px; color: var(--color-muted); word-break: auto-phrase; } .kj-stats b { font-family: 'DM Sans', sans-serif; font-size: 18px; }
+.kj-stats b.is-down { color: #b5432f; } .kj-stats b.is-up { color: #2f6b3a; }
+.kj-note { margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #b08a4a 10%, transparent); font-size: 14px; line-height: 1.85; word-break: auto-phrase; } .kj-note:empty { display: none; } .kj-note b { color: #b5432f; }
+.kj-again { justify-self: center; }
+[data-theme="dark"] .kj-ev { stroke: #9fd3a8; } [data-theme="dark"] .kj-evt { fill: #9fd3a8; }
+@media (max-width: 560px) { .kj { padding: 16px; } .kj-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kj-stats b { font-size: 15px; } }
+@media (prefers-reduced-motion: reduce) { .kj-balls i { animation: none; } }
+@media (max-width: 560px) { .kj-lb { font-size: 24px; } .kj-avg { stroke-width: 4; } }
