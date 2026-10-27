@@ -6741,3 +6741,14 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .mission-wrap { padding-bottom: clamp(20px, 3vw, 32px); margin-top: clamp(16px, 2.4vw, 24px); }
 .bdg-toast.is-mission .bdg-medal { background: radial-gradient(circle at 35% 30%, #f6b8a8, #b5432f 70%); color: #fff; }
 @media (max-width: 560px) { .ms { grid-template-columns: auto 1fr; } .ms-go, .ms-ok { grid-column: 2; justify-self: start; } }
+
+/* ---- v135：今日のミッションの、今週のスタンプカード ---- */
+.ms-week { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin: 4px 0 0; padding: 10px 0 0; list-style: none; border-top: 1px dashed color-mix(in srgb, #b08a4a 45%, transparent); }
+.ms-week li { display: grid; justify-items: center; gap: 3px; }
+.ms-week small { font-size: 10.5px; font-weight: 800; color: var(--color-text-muted, #8a8172); }
+.ms-week span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 1.5px dashed color-mix(in srgb, #b08a4a 55%, transparent); font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 14px; }
+.ms-week .is-today small { color: #b5432f; }
+.ms-week .is-today span { border-style: solid; border-color: #b5432f; }
+.ms-week .is-on span { border: 0; background: #b5432f; color: #fff; transform: rotate(-8deg); box-shadow: inset 0 0 0 2px rgba(255,255,255,.35); }
+.ms.is-done .ms-week .is-today span { animation: bdg-stamp .7s .2s cubic-bezier(.3, 1.6, .5, 1) backwards; }
+@media (max-width: 560px) { .ms-week span { width: 26px; height: 26px; font-size: 12.5px; } }

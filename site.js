@@ -1285,26 +1285,32 @@ try {
     let i = (day * 7 + 3) % M.length, tries = 0;
     while (tries++ < M.length && ((M[i][0] === 'lab' && labN() >= 7) || (M[i][0] === 'shop' && len('azakei_shop') >= 3) || (M[i][0] === 'coin' && len('azakei_coins') >= 12) || (M[i][0] === 'gacha' && len('azakei_gacha') >= document.querySelectorAll('.gl-item').length && document.querySelectorAll('.gl-item').length > 0))) i = (i + 1) % M.length;
     const streak = s.done && s.day === day - 1 ? (s.streak || 0) : 0;
-    s = { day, id: M[i][0], base: M[i][3](), done: false, streak };
+    const hist = (s.hist || (s.done ? [s.day] : [])).filter(d => d > day - 14);
+    s = { day, id: M[i][0], base: M[i][3](), done: false, streak, hist };
     try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
   }
   const cur = M.find(m => m[0] === s.id) || M[0];
+  // 今週（月〜日）のスタンプカード
+  const mon = day - (day + 3) % 7;
+  const week = () => `<ol class="ms-week" aria-label="今週のスタンプ">${[...'月火水木金土日'].map((w, k) => { const d = mon + k, on = (s.hist || []).includes(d); return `<li class="${on ? 'is-on' : ''}${d === day ? ' is-today' : ''}"><small>${w}</small><span>${on ? '済' : ''}</span></li>`; }).join('')}</ol>`;
+  const weekN = () => (s.hist || []).filter(d => d >= mon).length;
   const render = () => {
     document.querySelectorAll('[data-mission]').forEach(el => {
       el.innerHTML = `<div class="ms${s.done ? ' is-done' : ''}"><span class="ms-seal" aria-hidden="true">${s.done ? '済' : '今'}</span>
         <div class="ms-body"><p class="ms-k">今日のミッション${s.streak ? `<em>${s.streak} 日連続</em>` : ''}</p><p class="ms-t">${cur[1]}</p></div>
-        ${s.done ? '<span class="ms-ok">達成！</span>' : `<a class="ms-go" href="${cur[2]}">やってみる →</a>`}</div>`;
+        ${s.done ? '<span class="ms-ok">達成！</span>' : `<a class="ms-go" href="${cur[2]}">やってみる →</a>`}
+        ${week()}</div>`;
     });
   };
   const check = () => {
     if (s.done) return;
     if (cur[3]() > s.base) {
-      s.done = true; s.streak = (s.streak || 0) + 1;
+      s.done = true; s.streak = (s.streak || 0) + 1; s.hist = [...(s.hist || []).filter(d => d !== day), day];
       try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
       render();
       const t = document.createElement('a');
       t.className = 'bdg-toast is-mission'; t.href = 'mypage.html'; t.setAttribute('role', 'status');
-      t.innerHTML = `<span class="bdg-medal" aria-hidden="true">今</span><span class="bdg-txt"><small>今日のミッション達成！</small><b>${s.streak} 日連続</b><i>あしたも、新しいお題が出ます</i></span>${'<s></s>'.repeat(10)}`;
+      t.innerHTML = `<span class="bdg-medal" aria-hidden="true">今</span><span class="bdg-txt"><small>今日のミッション達成！</small><b>${weekN() >= 7 ? '今週 7 日、ぜんぶ！' : s.streak + ' 日連続'}</b><i>${weekN() >= 7 ? 'スタンプカードが、満タンになりました' : 'あしたも、新しいお題が出ます'}</i></span>${'<s></s>'.repeat(10)}`;
       setTimeout(() => { document.body.appendChild(t); void t.offsetWidth; t.classList.add('is-in'); setTimeout(() => { t.classList.remove('is-in'); t.classList.add('is-out'); setTimeout(() => t.remove(), 450); }, 4200); }, 5200);
     }
   };
