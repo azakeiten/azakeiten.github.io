@@ -6902,3 +6902,29 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @media (max-width: 560px) { .kj { padding: 16px; } .kj-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kj-stats b { font-size: 15px; } }
 @media (prefers-reduced-motion: reduce) { .kj-balls i { animation: none; } }
 @media (max-width: 560px) { .kj-lb { font-size: 24px; } .kj-avg { stroke-width: 4; } }
+
+/* ---- v140：用語辞典「ことばの地図」 ---- */
+[data-wordmap] { display: grid; gap: 12px; justify-items: center; }
+.wm-stage { position: relative; width: 100%; max-width: 560px; aspect-ratio: 1 / .82; border-radius: 22px; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, #b08a4a 14%, transparent), transparent 70%); }
+.wm-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wm-lines line { stroke: #b08a4a; stroke-width: .4; stroke-dasharray: 1.2 1; vector-effect: non-scaling-stroke; stroke-width: 1.5; opacity: .6; }
+.wm-lines.is-draw line { animation: wm-line .6s ease-out backwards; }
+@keyframes wm-line { from { opacity: 0; } }
+.wm-node { position: absolute; transform: translate(-50%, -50%); max-width: 32%; padding: 7px 12px; border-radius: 999px; border: 1.5px solid #b08a4a; background: var(--color-surface, #fff); color: inherit; font: inherit; font-size: 13px; font-weight: 700; line-height: 1.35; cursor: pointer; word-break: auto-phrase;
+  transition: left .55s cubic-bezier(.4, 1.3, .5, 1), top .55s cubic-bezier(.4, 1.3, .5, 1), opacity .4s, transform .4s, background .3s, color .3s; box-shadow: 0 4px 12px rgba(0, 0, 0, .08); }
+.wm-node:hover { border-color: #b5432f; color: #b5432f; }
+.wm-node.is-center { z-index: 2; max-width: 40%; padding: 12px 18px; border: 0; background: #1c2b23; color: #e3c68e; font-family: 'Shippori Mincho', serif; font-size: 17px; font-weight: 800; cursor: default; box-shadow: 0 0 0 6px color-mix(in srgb, #b08a4a 25%, transparent), 0 8px 22px rgba(0, 0, 0, .18); }
+.wm-node.is-new { opacity: 0; transform: translate(-50%, -50%) scale(.4); }
+.wm-node.is-out { opacity: 0; transform: translate(-50%, -50%) scale(.4); pointer-events: none; }
+.wm-info { width: 100%; max-width: 640px; padding: 14px 18px; border-radius: 16px; background: color-mix(in srgb, #b08a4a 9%, transparent); }
+.wm-word { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; }
+.wm-word small { font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 700; font-size: 11.5px; color: #b08a4a; }
+.wm-def { margin: 6px 0 4px; font-size: 14px; line-height: 1.8; word-break: auto-phrase; }
+.wm-read { font-size: 13px; font-weight: 800; color: #b5432f; }
+.wm-bar { width: 100%; max-width: 640px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.wm-path { margin: 0; font-size: 12.5px; color: var(--color-muted); line-height: 1.8; } .wm-path b { color: var(--color-text, #222); }
+.wm-path button { padding: 0; border: 0; background: none; color: #b5432f; font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; }
+.wm-rand { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--color-border); background: transparent; color: inherit; font: inherit; font-size: 12.5px; font-weight: 800; cursor: pointer; white-space: nowrap; }
+[data-theme="dark"] .wm-node.is-center { background: #e3c68e; color: #1c2b23; }
+@media (max-width: 560px) { .wm-stage { aspect-ratio: 1 / 1.05; } .wm-node { font-size: 11.5px; padding: 6px 9px; max-width: 30%; } .wm-node.is-center { font-size: 14.5px; padding: 10px 12px; } }
+@media (prefers-reduced-motion: reduce) { .wm-node { transition: none; } .wm-lines.is-draw line { animation: none; } }

@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-27', seal: '図', tone: 'dark', href: 'glossary.html#wordmap', eyebrow: '用語辞典', title: 'ことばの地図', text: 'まん中の言葉に、つながる言葉が輪になって並ぶ。押すたびに地図が動いて、言葉から言葉へ旅できる。' },
     { date: '2026-10-27', seal: '籤', tone: 'gold', href: 'sim.html#kuji', eyebrow: '経済ラボ', title: 'くじ引きの期待値', text: '300 円のくじ、平均するといくら戻る？ 予想して 100 回引くと、平均が「期待値」の線に近づいていく。' },
     { date: '2026-10-27', seal: '速', tone: 'shu', href: 'glossary.html#rush', eyebrow: '用語辞典', title: 'ことば○×ラッシュ', text: '言葉と説明、合ってる？ 30 秒で答えまくる。コンボで点がふえて、4 段階の称号つき。' },
     { date: '2026-10-27', seal: '税', tone: 'paper', href: 'sim.html#receipt', eyebrow: '経済ラボ', title: 'レシートの中の税金', text: '商品をかごに入れると、レシートが印字される。同じおにぎりでも、店内で食べると税率が変わる。' },

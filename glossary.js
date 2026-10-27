@@ -154,3 +154,12 @@
     });
   })();
 })();
+
+// ことばの地図：押したとき（または #wordmap で来たとき）だけ wordmap.js を読みこむ（ページを軽く保つ）
+(function() {
+  const btn = document.querySelector('.wm-open');
+  if (!btn) return;
+  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261027i'; document.body.appendChild(s); };
+  btn.addEventListener('click', load);
+  if (location.hash === '#wordmap') setTimeout(load, 600);
+})();
