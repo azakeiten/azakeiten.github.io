@@ -6960,3 +6960,22 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .kb-note { margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #b08a4a 10%, transparent); font-size: 14px; line-height: 1.85; word-break: auto-phrase; } .kb-note b { color: #b5432f; }
 @media (max-width: 640px) { .kb { padding: 16px; } .kb-people { grid-template-columns: minmax(0, 1fr); } .kb-mid { grid-template-columns: minmax(0, 1fr); justify-items: center; } .kb-pie { width: 190px; } .kb-ctrl { grid-template-columns: minmax(0, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .kb-seg, .kb-track i, .kb-div, .kb-keep { transition: none; } }
+
+/* ---- v142：経済ラボ — なかまで絞りこむ・サイコロで選ぶ ---- */
+.lm-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.lm-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.lm-chips button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background .2s, color .2s, border-color .2s; }
+.lm-chips small { min-width: 20px; padding: 0 6px; border-radius: 99px; background: color-mix(in srgb, var(--color-text, #222) 8%, transparent); font-family: 'DM Sans', sans-serif; font-size: 11px; text-align: center; }
+.lm-chips button[aria-pressed="true"] { background: #1c2b23; border-color: #1c2b23; color: #e3c68e; } .lm-chips button[aria-pressed="true"] small { background: rgba(227, 198, 142, .2); }
+[data-theme="dark"] .lm-chips button[aria-pressed="true"] { background: #e3c68e; border-color: #e3c68e; color: #1c2b23; }
+.lm-dice { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 18px -10px rgba(181, 67, 47, .8); transition: transform .15s; }
+.lm-dice:hover { transform: translateY(-2px) rotate(-1deg); } .lm-dice:active { transform: scale(.96); }
+.lm-die { font-size: 22px; line-height: 1; }
+.lab-board li.lm-hide { display: none; }
+.lab-board li.lm-in { animation: lm-in .35s var(--d, 0ms) cubic-bezier(.3, 1.4, .5, 1) backwards; }
+@keyframes lm-in { from { opacity: 0; transform: translateY(8px) scale(.96); } }
+.lab-board li.lm-lit a { border-color: #d49a2a; box-shadow: 0 0 0 3px color-mix(in srgb, #d49a2a 45%, transparent); transform: translateY(-2px); }
+.lab-board li.lm-win a { border-color: #b5432f; box-shadow: 0 0 0 4px #b5432f, 0 14px 30px -12px rgba(181, 67, 47, .7); animation: lm-win .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes lm-win { 40% { transform: scale(1.06) rotate(-1deg); } }
+@media (max-width: 560px) { .lm-bar { margin-bottom: 10px; } .lm-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; width: 100%; padding-bottom: 2px; } .lm-chips::-webkit-scrollbar { display: none; } .lm-dice { width: 100%; justify-content: center; } }
+@media (prefers-reduced-motion: reduce) { .lab-board li.lm-in, .lab-board li.lm-win a { animation: none; } }
