@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261028d" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261028g" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -61,6 +61,18 @@
     </div>
   </section>
 
+  <!-- 経済すごろく -->
+  <section class="about tight" id="sugoroku">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label">Money Sugoroku</p>
+        <h2 class="section-title"><span class="keep-phrase">経済すごろくで、</span><span class="keep-phrase"><em>お金を増やそう</em>。</span></h2>
+        <p class="lead">サイコロを 12 回ふって、1,000 円をいくらにできる？ 給料・税金・利息・投資のチャンス・保険・ハプニング。止まったマスで、お金が動きます。</p>
+      </div>
+      <div class="sg reveal" data-sugo></div>
+    </div>
+  </section>
+
   <!-- 世界のお金図鑑 -->
   <section class="services tight" id="coins">
     <div class="container">
@@ -87,23 +99,23 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261028d"></script>
-  <script src="layout.js?v=20261028d"></script>
-  <script src="brand.js?v=20261028d"></script>
-  <script src="nav.js?v=20261028d"></script>
-  <script src="reveal.js?v=20261028d"></script>
-  <script src="ranking.js?v=20261028d"></script>
-  <script src="quiz-data.js?v=20261028d"></script>
-  <script src="shareimg.js?v=20261028d"></script>
-  <script src="quiz.js?v=20261028d"></script>
-  <script src="osatsu.js?v=20261028d"></script>
-  <script src="pagetoc.js?v=20261028d"></script>
-  <script src="site.js?v=20261028d"></script>
+  <script src="content.js?v=20261028g"></script>
+  <script src="layout.js?v=20261028g"></script>
+  <script src="brand.js?v=20261028g"></script>
+  <script src="nav.js?v=20261028g"></script>
+  <script src="reveal.js?v=20261028g"></script>
+  <script src="ranking.js?v=20261028g"></script>
+  <script src="quiz-data.js?v=20261028g"></script>
+  <script src="shareimg.js?v=20261028g"></script>
+  <script src="quiz.js?v=20261028g"></script>
+  <script src="osatsu.js?v=20261028g"></script>
+  <script src="pagetoc.js?v=20261028g"></script>
+  <script src="site.js?v=20261028g"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261028d';
-      [['[data-coins]', 'coins.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
+      var V = '20261028g';
+      [['[data-sugo]', 'sugoroku.js'], ['[data-coins]', 'coins.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };
         if (location.hash || !('IntersectionObserver' in window)) return load();
