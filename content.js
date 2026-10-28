@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-28', seal: '株', tone: 'green', href: 'sim.html#kabu', eyebrow: '経済ラボ', title: '株式会社をつくろう', text: '3 人でお金を出しあって会社に。株の円グラフ、多数決で決められる人、配当の分け方が、スライダーで動く。' },
     { date: '2026-10-27', seal: '図', tone: 'dark', href: 'glossary.html#wordmap', eyebrow: '用語辞典', title: 'ことばの地図', text: 'まん中の言葉に、つながる言葉が輪になって並ぶ。押すたびに地図が動いて、言葉から言葉へ旅できる。' },
     { date: '2026-10-27', seal: '籤', tone: 'gold', href: 'sim.html#kuji', eyebrow: '経済ラボ', title: 'くじ引きの期待値', text: '300 円のくじ、平均するといくら戻る？ 予想して 100 回引くと、平均が「期待値」の線に近づいていく。' },
     { date: '2026-10-27', seal: '速', tone: 'shu', href: 'glossary.html#rush', eyebrow: '用語辞典', title: 'ことば○×ラッシュ', text: '言葉と説明、合ってる？ 30 秒で答えまくる。コンボで点がふえて、4 段階の称号つき。' },
