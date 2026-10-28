@@ -6979,3 +6979,32 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @keyframes lm-win { 40% { transform: scale(1.06) rotate(-1deg); } }
 @media (max-width: 560px) { .lm-bar { margin-bottom: 10px; } .lm-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; width: 100%; padding-bottom: 2px; } .lm-chips::-webkit-scrollbar { display: none; } .lm-dice { width: 100%; justify-content: center; } }
 @media (prefers-reduced-motion: reduce) { .lab-board li.lm-in, .lab-board li.lm-win a { animation: none; } }
+
+/* ---- v143：トップ「経済おみくじ」 ---- */
+.ok-wrap { padding-bottom: clamp(20px, 3vw, 32px); }
+.ok { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 20px; align-items: center; padding: 18px 20px; border-radius: 22px; background: linear-gradient(135deg, color-mix(in srgb, #b5432f 7%, var(--color-surface, #fff)), var(--color-surface, #fff)); border: 1px solid var(--color-border); }
+.ok-shrine { display: grid; justify-items: center; gap: 8px; text-align: center; }
+.ok-box { position: relative; width: 92px; height: 120px; padding: 0; border: 0; cursor: pointer; background: linear-gradient(90deg, #7a4a22, #a8713c 30%, #c48a4e 50%, #a8713c 70%, #7a4a22); border-radius: 14px 14px 8px 8px; box-shadow: inset 0 -10px 0 rgba(0, 0, 0, .15); transform-origin: 50% 90%; }
+.ok-box:hover { filter: brightness(1.06); }
+.ok-box-face { position: absolute; inset: 26px 18px 16px; display: grid; place-content: center; gap: 2px; background: #fffaf0; border: 2px solid #b5432f; writing-mode: vertical-rl; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 14px; color: #b5432f; line-height: 1.1; }
+.ok-stick { position: absolute; left: 50%; top: 2px; width: 6px; height: 0; margin-left: -3px; border-radius: 3px; background: #e9d3a8; transition: height .3s; }
+.ok-box.is-shake { animation: ok-shake 1.1s cubic-bezier(.36, .07, .19, .97); }
+.ok-box.is-shake .ok-stick { animation: ok-stick 1.3s ease-out forwards; }
+@keyframes ok-shake { 10%, 50% { transform: rotate(-14deg); } 30%, 70% { transform: rotate(14deg); } 85% { transform: rotate(-5deg); } 100% { transform: rotate(0); } }
+@keyframes ok-stick { 0%, 75% { height: 0; top: 2px; } 100% { height: 26px; top: -22px; } }
+.ok-hint { margin: 0; font-size: 12px; color: var(--color-muted); line-height: 1.6; word-break: auto-phrase; }
+.ok-slip:empty::before { content: '今日の運勢は、どうかな？'; display: block; text-align: center; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; color: var(--color-muted); }
+.ok-paper { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; padding: 16px 18px; background: #fffdf7 repeating-linear-gradient(0deg, transparent 0 27px, rgba(181, 67, 47, .06) 27px 28px); color: #2a2620; border: 1.5px solid #e2d5bb; border-top: 6px solid var(--c); border-radius: 4px; box-shadow: 0 10px 24px -14px rgba(0, 0, 0, .35); }
+.ok-slip.is-open .ok-paper { animation: ok-open .8s cubic-bezier(.3, 1.2, .5, 1) backwards; }
+@keyframes ok-open { from { clip-path: inset(0 0 100% 0); transform: translateY(-10px); } to { clip-path: inset(0 0 0 0); } }
+.ok-luck { margin: 0; display: grid; justify-items: center; align-content: start; gap: 6px; padding-right: 14px; border-right: 1px dashed #c9b994; }
+.ok-luck small { font-size: 11px; font-weight: 700; color: #8a8172; writing-mode: vertical-rl; letter-spacing: .2em; }
+.ok-luck b { writing-mode: vertical-rl; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 38px; line-height: 1; color: var(--c); }
+.ok-slip.is-open .ok-luck b { animation: bdg-stamp .7s .55s cubic-bezier(.3, 1.6, .5, 1) backwards; }
+.ok-body { display: grid; gap: 6px; align-content: start; }
+.ok-row { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; } .ok-row span { padding: 1px 8px; border-radius: 4px; background: #1c2b23; color: #e3c68e; font-size: 11px; font-weight: 800; }
+.ok-row a { font-weight: 800; color: #b5432f; text-decoration: none; border-bottom: 1px solid currentColor; }
+.ok-msg { margin: 0; font-size: 14px; line-height: 1.85; word-break: auto-phrase; }
+.ok-foot { margin: 4px 0 0; font-size: 10.5px; color: #8a8172; }
+@media (max-width: 640px) { .ok { grid-template-columns: minmax(0, 1fr); padding: 16px; } .ok-box { width: 80px; height: 104px; } .ok-luck b { font-size: 32px; } }
+@media (prefers-reduced-motion: reduce) { .ok-box.is-shake, .ok-box.is-shake .ok-stick, .ok-slip.is-open .ok-paper, .ok-slip.is-open .ok-luck b { animation: none; } }
