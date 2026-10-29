@@ -17,7 +17,7 @@
   const pct = (a, b) => Math.min(100, Math.round(a / b * 100));
   // [印, 名前, 大きな数字, 単位, 説明, 進み具合(0〜100 か null), リンク, リンクの文字, 済み？]
   // 経済ラボで「済」がついた実験の数（8 つ）
-  const LAB = ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (get('azakei_shop', []).length >= 3 ? 1 : 0);
+  const LAB = ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo', 'azakei_ginko'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (get('azakei_shop', []).length >= 3 ? 1 : 0);
   const C = [
     ['探', 'サイト探検', visited.length, '/ 14 ページ', visited.length >= 14 ? '全ページ制覇！ すみずみまで見てくれてありがとう' : 'まだ見ていないページを回ってみよう', pct(visited.length, 14), 'index.html', 'サイトを回る', visited.length >= 14],
     ['億', '億万長者クイズ', num('azakei_quiz_best'), '枚', `ニュースモード ${num('azakei_quiz_best_news')} 枚・タイムアタック ${num('azakei_quiz_best_time')} 点`, null, 'quiz.html', '挑戦する', num('azakei_quiz_best') >= 40],
@@ -28,7 +28,7 @@
     ['診', 'エコノミスト診断', dg ? TYPES[dg] || '診断ずみ' : '―', '', dg ? 'もう一度ためすと、タイプが変わるかも' : 'YES と NO で、あなたのタイプがわかる', null, 'diagnosis.html', dg ? 'もう一度' : '診断する', !!dg],
     ['遣', 'おこづかいチャレンジ', get('azakei_ozk_master', null) ? 'やりくり名人' : '―', '', '1 年後に自転車を買えるか', null, 'sim.html#okozukai', '挑戦する', !!get('azakei_ozk_master', null)],
     ['貨', '世界のお金図鑑', get('azakei_coins', []).length, '/ 12 枚', 'この国のお金は？ 4 択でコインを集める', pct(get('azakei_coins', []).length, 12), 'quiz.html#coins', '集める', get('azakei_coins', []).length >= 12],
-    ['研', '経済ラボ', LAB, '/ 8 実験', 'クリアした実験には、メニューに「済」の朱印', pct(LAB, 8), 'sim.html', '実験をする', LAB >= 8],
+    ['研', '経済ラボ', LAB, '/ 9 実験', 'クリアした実験には、メニューに「済」の朱印', pct(LAB, 9), 'sim.html', '実験をする', LAB >= 9],
     ['店', '文化祭のお店', get('azakei_shop', []).length, '/ 3 ミッション', '何個売れたら黒字になる？ 損益分岐点', pct(get('azakei_shop', []).length, 3), 'sim.html#shop', '挑戦する', get('azakei_shop', []).length >= 3],
     ['為', '円高・円安の両替所', get('azakei_fx_master', null) ? '為替マスター' : '―', '', '3 問チャレンジで全問正解すると称号', null, 'sim.html#fx', '挑戦する', !!get('azakei_fx_master', null)],
     ['読', 'チャート予想', get('azakei_chart_reader', null) ? 'チャート読み' : '―', '', '7 回中 5 回以上当てると称号', null, 'sim.html#updown', '挑戦する', !!get('azakei_chart_reader', null)],
@@ -43,7 +43,7 @@
   const RANKS = [[0, '見学者', '見', 'まずは、気になるカードから'], [4, '見習い部員', '習', 'いい調子。いろいろ試してみよう'], [10, '研究員', '研', 'サイトのことが、だいぶわかってきたね'], [16, '主任エコノミスト', '主', 'ここまで来た人は、なかなかいません'], [22, '麻経マスター', '極', 'ぜんぶの遊びを知りつくした人']];
   const ri = RANKS.reduce((a, r, i) => score >= r[0] ? i : a, 0), rank = RANKS[ri], nextR = RANKS[ri + 1];
   const nextC = C.find(c => !c[8]);
-  const NUDGE = { 研: '14 の実験のうち、まだ「済」がついていないものから', 貨: '「この国のお金は？」に答えて、コインを図鑑に', 店: '4 つのつまみで、文化祭のお店を黒字にしよう', 為: '1 ドルが何円かを動かして、円高・円安を体験', 歴: '年表のできごとを 2 つ。先に起きたのはどっち？', 探: 'まだ見ていないページに、新しい発見があるかも', 億: 'チップを賭けて答える経済クイズ。まずは 40 枚をめざそう', 復: 'まちがえた問題だけを、もう一度。全問正解でリストが空に', 辞: '1 枚ずつめくって覚える単語カード。まずは 30 語から', 週: '毎週月曜に変わる 1 問。3 週続けて正解しよう', 診: 'YES と NO で答えるだけ。あなたはどの動物タイプ？', 遣: '1 年でおこづかいをやりくり。自転車は買えるかな', 読: '株価のチャートは、上がる？ 下がる？', 歩: '文化祭の教室を、3D で順番に見て回ろう', 種: '6 つの欄をうめると、自分のビジネスプランが完成' };
+  const NUDGE = { 研: '15 の実験のうち、まだ「済」がついていないものから', 貨: '「この国のお金は？」に答えて、コインを図鑑に', 店: '4 つのつまみで、文化祭のお店を黒字にしよう', 為: '1 ドルが何円かを動かして、円高・円安を体験', 歴: '年表のできごとを 2 つ。先に起きたのはどっち？', 探: 'まだ見ていないページに、新しい発見があるかも', 億: 'チップを賭けて答える経済クイズ。まずは 40 枚をめざそう', 復: 'まちがえた問題だけを、もう一度。全問正解でリストが空に', 辞: '1 枚ずつめくって覚える単語カード。まずは 30 語から', 週: '毎週月曜に変わる 1 問。3 週続けて正解しよう', 診: 'YES と NO で答えるだけ。あなたはどの動物タイプ？', 遣: '1 年でおこづかいをやりくり。自転車は買えるかな', 読: '株価のチャートは、上がる？ 下がる？', 歩: '文化祭の教室を、3D で順番に見て回ろう', 種: '6 つの欄をうめると、自分のビジネスプランが完成' };
   box.innerHTML = `<div class="my-rank">
       <span class="my-rank-seal" aria-hidden="true">${rank[2]}</span>
       <div class="my-rank-body"><p class="my-rank-label">いまの称号</p><p class="my-rank-name">${rank[1]}</p><p class="my-rank-msg">${rank[3]}</p>

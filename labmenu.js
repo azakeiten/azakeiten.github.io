@@ -8,9 +8,9 @@
   if (!board) return;
   // なかま分け（1 つの実験が 2 つに入ることもある）
   const CAT = {
-    money: ['#sim-main', '#double', '#okozukai', '#infl', '#oku', '#kuji'],
+    money: ['#sim-main', '#double', '#okozukai', '#infl', '#oku', '#kuji', '#ginko'],
     biz: ['#shop', '#kabu', '#bungyo', '#market'],
-    world: ['#fx', '#budget', '#receipt', '#infl'],
+    world: ['#fx', '#budget', '#receipt', '#infl', '#ginko'],
     game: ['#updown', '#okozukai', '#kuji', '#bungyo']
   };
   const items = [...board.children].filter(li => li.querySelector('a[href^="#"]') && li.querySelector('a').getAttribute('href') !== '#words');

@@ -5,10 +5,11 @@
 window.AZAKEI = {
 
   /* ---- サイトの最終更新日（フッターに出す。更新したら書きかえる） ---- */
-  siteUpdated: '2026-10-28',
+  siteUpdated: '2026-10-29',
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-29', seal: '銀', tone: 'gold', href: 'sim.html#ginko', eyebrow: '経済ラボ', title: '銀行のふしぎ', text: 'あずけた 1 万円が貸し出されて、また預金に。12 人のお金の旅で、みんなの預金がいくらになるか。信用創造を体験。' },
     { date: '2026-10-28', seal: '双', tone: 'gold', href: 'quiz.html#sugoroku', eyebrow: 'クイズ', title: '経済すごろく', text: 'サイコロ 12 回で、1,000 円をいくらに？ 給料・税金・利息・投資・保険・ハプニングのマスをめぐる。' },
     { date: '2026-10-28', seal: '籤', tone: 'shu', href: 'index.html#omikuji', eyebrow: 'ホーム', title: '経済おみくじ', text: '箱をふると、おみくじがひらく。今日の運勢と、ラッキーことば・ラッキー実験。1 日 1 回。' },
     { date: '2026-10-28', seal: '株', tone: 'green', href: 'sim.html#kabu', eyebrow: '経済ラボ', title: '株式会社をつくろう', text: '3 人でお金を出しあって会社に。株の円グラフ、多数決で決められる人、配当の分け方が、スライダーで動く。' },

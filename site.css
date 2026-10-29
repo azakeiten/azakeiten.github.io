@@ -7041,3 +7041,33 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @media (max-width: 560px) { .sg-board { aspect-ratio: 1 / 1.3; } .sg-money b { font-size: 22px; } .sg-choice p { font-size: 12px; } .sg-choice small { font-size: 10px; } .sg-choice button { padding: 6px 10px; font-size: 12px; } }
 .sg-choice[hidden], .sg-turn span[hidden] { display: none; }
 .sg-roll { white-space: nowrap; } @media (max-width: 560px) { .sg-roll { padding: 8px 12px; gap: 6px; font-size: 12.5px; } .sg-die { font-size: 18px; } }
+
+/* ---- v145：経済ラボ「銀行のふしぎ（信用創造）」 ---- */
+.gk { display: grid; gap: 14px; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.gk-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; }
+.gk-rates { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; } .gk-rates > span { margin-right: 4px; font-size: 13.5px; font-weight: 800; } .gk-rates small { font-weight: 400; color: var(--color-muted); }
+.gk-rates button { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--color-border); background: transparent; color: inherit; font: inherit; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; }
+.gk-rates button[aria-pressed="true"] { background: #1c2b23; border-color: #1c2b23; color: #e3c68e; }
+[data-theme="dark"] .gk-rates button[aria-pressed="true"] { background: #e3c68e; border-color: #e3c68e; color: #1c2b23; }
+.gk-total { display: grid; justify-items: end; text-align: right; } .gk-total small { font-size: 11.5px; font-weight: 800; color: var(--color-muted); }
+.gk-total b { font-family: 'DM Sans', sans-serif; font-size: clamp(26px, 5vw, 36px); line-height: 1.1; color: #2f6b3a; font-variant-numeric: tabular-nums; } .gk-total span { font-size: 12.5px; font-weight: 700; color: #b5432f; }
+.gk-meter { position: relative; height: 26px; border-radius: 99px; background: color-mix(in srgb, var(--color-text, #222) 7%, transparent); overflow: hidden; }
+.gk-meter i { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg, #2f6b3a, #6fa86b); border-radius: 99px; transition: width .5s cubic-bezier(.3, 1.2, .5, 1); }
+.gk-meter span { position: relative; display: block; padding: 0 12px; font-size: 11.5px; font-weight: 800; line-height: 26px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gk-chart { width: 100%; height: auto; display: block; overflow: visible; }
+.gk-lend { fill: #d49a2a; } .gk-keep { fill: #4a6a8a; }
+.gk-arrow { fill: none; stroke: #b5432f; stroke-width: 2; stroke-dasharray: 4 4; opacity: .7; }
+.gk-who { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; fill: var(--color-muted); } .gk-amt { font-family: 'DM Sans', 'Zen Kaku Gothic New', sans-serif; font-size: 12.5px; font-weight: 800; fill: var(--color-text, #222); }
+.gk-bar { transform-box: fill-box; transform-origin: 50% 100%; animation: gk-up .5s cubic-bezier(.3, 1.4, .5, 1) backwards; }
+.gk-bar .gk-arrow { stroke-dashoffset: 40; animation: gk-dash .7s .25s ease-out forwards; }
+@keyframes gk-up { from { transform: scaleY(0); opacity: 0; } }
+@keyframes gk-dash { to { stroke-dashoffset: 0; } }
+.gk-legend { margin: -6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 12.5px; } .gk-legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 3px; } .gk-legend i.is-keep { background: #4a6a8a; } .gk-legend i.is-lend { background: #d49a2a; }
+.gk-say { margin: 0; min-height: 3.6em; padding: 12px 16px; border-radius: 16px; background: #1c2b23 var(--grain, none); color: #f3eee4; font-size: 14px; line-height: 1.8; word-break: auto-phrase; } .gk-say b { color: #e3c68e; font-family: 'DM Sans', 'Zen Kaku Gothic New', sans-serif; }
+.gk-btns { display: flex; flex-wrap: wrap; gap: 8px; } .gk-btns .btn-primary[disabled] { opacity: .45; cursor: default; }
+.gk-sub { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--color-border); background: transparent; color: inherit; font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; }
+.gk-note { margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #2f6b3a 10%, transparent); font-size: 14px; line-height: 1.85; word-break: auto-phrase; animation: sg-in .4s ease-out; } .gk-note b { color: #b5432f; }
+.gk.is-done .gk-total b { animation: gk-pulse .6s ease-out; } @keyframes gk-pulse { 40% { transform: scale(1.08); } }
+@media (max-width: 560px) { .gk { padding: 16px; } .gk-total { justify-items: start; text-align: left; } .gk-amt { font-size: 14.5px; } .gk-who { font-size: 14px; } .gk-rates > span { flex-basis: 100%; } .gk-rates button { flex: 1; } .gk-btns > * { flex: 1 1 auto; } }
+@media (prefers-reduced-motion: reduce) { .gk-bar, .gk-bar .gk-arrow, .gk-note, .gk.is-done .gk-total b { animation: none; } .gk-bar .gk-arrow { stroke-dashoffset: 0; } .gk-meter i { transition: none; } }
+.gk-meter { height: 14px; } .gk-cap { margin: -8px 0 0; font-size: 12.5px; font-weight: 800; color: var(--color-muted); text-align: right; word-break: auto-phrase; }
