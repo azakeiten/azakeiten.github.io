@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-10-30', seal: '録', tone: 'green', href: 'mypage.html', eyebrow: 'わたしの記録', title: '経済力レーダー', text: 'ことば・クイズ・実験・計画・探検。遊んだ記録から 5 つの力を五角形に。得意な力と、のびしろの力がわかる。' },
     { date: '2026-10-30', seal: '並', tone: 'shu', href: 'glossary.html#narabe', eyebrow: '用語辞典', title: 'ことばならべかえ', text: '説明を読んで、バラバラのひらがなを正しい順に。1 回 5 問、ヒントなしで正解すると 2 点。称号と自己ベストつき。' },
     { date: '2026-10-29', seal: '銀', tone: 'gold', href: 'sim.html#ginko', eyebrow: '経済ラボ', title: '銀行のふしぎ', text: 'あずけた 1 万円が貸し出されて、また預金に。12 人のお金の旅で、みんなの預金がいくらになるか。信用創造を体験。' },
     { date: '2026-10-28', seal: '双', tone: 'gold', href: 'quiz.html#sugoroku', eyebrow: 'クイズ', title: '経済すごろく', text: 'サイコロ 12 回で、1,000 円をいくらに？ 給料・税金・利息・投資・保険・ハプニングのマスをめぐる。' },
