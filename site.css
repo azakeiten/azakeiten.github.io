@@ -7126,3 +7126,43 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .rd-note { margin: 0; font-size: 11px; color: rgba(243, 238, 228, .55); line-height: 1.6; }
 @media (max-width: 640px) { .rd { grid-template-columns: minmax(0, 1fr); padding: 18px; } .rd-chart { max-width: 280px; justify-self: center; width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .rd-shape, .rd-dot { transition: none; } }
+
+/* ---- v148：経済ラボ「となりのお店と値下げ競争」 ---- */
+.ns { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 20px; align-items: start; }
+.ns-pay { padding: 16px 18px; border-radius: 20px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.ns-pay-k { margin: 0 0 8px; font-size: 12.5px; font-weight: 800; color: var(--color-muted); }
+.ns-pay table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: center; } .ns-pay th { font-weight: 700; font-size: 12px; padding: 6px 4px; line-height: 1.4; } .ns-pay tbody th { text-align: left; }
+.ns-pay td { padding: 10px 4px; font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 15px; border: 1px solid var(--color-border); } .ns-pay td.is-good { color: #2f6b3a; } .ns-pay td.is-bad { color: #b5432f; }
+.ns-pay-n { margin: 10px 0 0; font-size: 12.5px; line-height: 1.75; word-break: auto-phrase; }
+.ns-game { display: grid; gap: 14px; padding: 20px; border-radius: 22px; background: #1c2b23 var(--grain, none); color: #f3eee4; }
+.ns-shops { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
+.ns-shop { display: grid; justify-items: center; gap: 8px; text-align: center; } .ns-shop p { margin: 0; font-size: 13px; font-weight: 800; line-height: 1.4; } .ns-shop small { display: block; font-weight: 400; font-size: 11px; color: rgba(243, 238, 228, .65); }
+.ns-shop.is-them small { color: #e3c68e; } .ns-shop b { font-family: 'DM Sans', sans-serif; font-size: 34px; line-height: 1; }
+.ns-shop.is-you b { color: #9fd3a8; } .ns-shop.is-them b { color: #f0a493; }
+.ns-vs { font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: .1em; color: #e3c68e; }
+.ns-card { width: 64px; height: 84px; display: grid; place-items: center; border-radius: 12px; background: repeating-linear-gradient(45deg, #2a3d32 0 6px, #24362c 6px 12px); border: 2px solid rgba(227, 198, 142, .45); font-size: 30px; font-family: 'DM Sans', sans-serif; font-weight: 800; color: #e3c68e; }
+.ns-card.is-K { background: #fffaf0; border-color: #2f6b3a; } .ns-card.is-C { background: #fff1ec; border-color: #b5432f; }
+.ns-card.is-flip { animation: ns-flip .45s cubic-bezier(.3, 1.3, .5, 1); } @keyframes ns-flip { 0% { transform: rotateY(90deg) scale(.9); } 100% { transform: none; } }
+.ns-track { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
+.ns-track li { display: grid; justify-items: center; gap: 1px; padding: 4px 0; border-radius: 8px; background: rgba(255, 255, 255, .06); font-size: 13px; line-height: 1.2; min-height: 52px; }
+.ns-track span { font-family: 'DM Sans', sans-serif; font-size: 10px; color: rgba(243, 238, 228, .55); } .ns-track i { font-style: normal; }
+.ns-track li.is-KK { background: rgba(111, 168, 107, .35); } .ns-track li.is-CC { background: rgba(181, 67, 47, .35); } .ns-track li.is-CK { background: rgba(212, 154, 42, .3); } .ns-track li.is-KC { background: rgba(74, 106, 138, .45); }
+.ns-track li[class] { animation: sg-in .3s ease-out; }
+.ns-say { margin: 0; min-height: 3.4em; font-size: 14px; line-height: 1.75; word-break: auto-phrase; } .ns-say b { color: #e3c68e; font-family: 'DM Sans', sans-serif; }
+.ns-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; } .ns-btns[hidden] { display: none; }
+.ns-btns button { padding: 14px 10px; border-radius: 16px; border: 0; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; transition: transform .15s, filter .15s; }
+.ns-btns button:hover { transform: translateY(-2px); filter: brightness(1.06); } .ns-btns button:active { transform: scale(.97); }
+.ns-k { background: #e9f1e4; color: #1c2b23; } .ns-c { background: #b5432f; color: #fff; }
+.ns-end { display: grid; gap: 10px; animation: sg-in .4s ease-out; }
+.ns-end-k { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #e3c68e; }
+.ns-end-s { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; } .ns-end-s b { font-family: 'DM Sans', sans-serif; font-size: 22px; margin-left: 4px; }
+.ns-end-who { margin: 0; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(255, 255, 255, .07); font-size: 14px; line-height: 1.6; }
+.ns-end-who > span:first-child { flex: none; width: 36px; height: 36px; display: grid; place-items: center; border: 2px solid #e3c68e; border-radius: 6px; color: #e3c68e; font-family: 'Shippori Mincho', serif; font-weight: 800; transform: rotate(-6deg); animation: nb-seal .5s .2s cubic-bezier(.3, 1.6, .5, 1) backwards; }
+.ns-end-who b { color: #e3c68e; } .ns-end-who small { display: block; font-size: 12px; color: rgba(243, 238, 228, .7); }
+.ns-end-m { margin: 0; font-size: 13.5px; line-height: 1.85; word-break: auto-phrase; } .ns-end-m b { color: #e3c68e; }
+@media (max-width: 760px) { .ns { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .ns-game { padding: 16px; } .ns-card { width: 54px; height: 70px; font-size: 26px; } .ns-shop b { font-size: 28px; } .ns-track { grid-template-columns: repeat(5, minmax(0, 1fr)); } .ns-btns button { font-size: 14px; padding: 12px 6px; } }
+@media (prefers-reduced-motion: reduce) { .ns-card.is-flip, .ns-track li[class], .ns-end, .ns-end-who > span:first-child { animation: none; } }
+[data-theme="dark"] .ns-pay td.is-good { color: #8fcf8a; } [data-theme="dark"] .ns-pay td.is-bad { color: #f0a493; }
+.ns-card.is-K { color: #2f6b3a; } .ns-card.is-C { color: #b5432f; }
+.ns-shops { align-items: end; } .ns-vs { align-self: center; }

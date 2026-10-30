@@ -9,9 +9,9 @@
   // なかま分け（1 つの実験が 2 つに入ることもある）
   const CAT = {
     money: ['#sim-main', '#double', '#okozukai', '#infl', '#oku', '#kuji', '#ginko'],
-    biz: ['#shop', '#kabu', '#bungyo', '#market'],
+    biz: ['#shop', '#kabu', '#bungyo', '#market', '#nesage'],
     world: ['#fx', '#budget', '#receipt', '#infl', '#ginko'],
-    game: ['#updown', '#okozukai', '#kuji', '#bungyo']
+    game: ['#updown', '#okozukai', '#kuji', '#bungyo', '#nesage']
   };
   const items = [...board.children].filter(li => li.querySelector('a[href^="#"]') && li.querySelector('a').getAttribute('href') !== '#words');
   const href = li => li.querySelector('a').getAttribute('href');

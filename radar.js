@@ -13,13 +13,13 @@
   const cap = (v, m) => Math.min(1, v / m);
   const plan = get('azakei_planseed', {}) || {};
   const planN = ['problem', 'idea', 'persona', 'model', 'diff', 'pitch'].filter(k => (plan[k] || '').trim()).length;
-  const lab = ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo', 'azakei_ginko'].filter(has).length + (len('azakei_shop') >= 3 ? 1 : 0);
+  const lab = ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo', 'azakei_ginko', 'azakei_nesage'].filter(has).length + (len('azakei_shop') >= 3 ? 1 : 0);
   const ms = get('azakei_mission', {}) || {}, wk = get('azakei_weekly', {}) || {};
   // [名前, 0〜100, のばせる場所, その場所の名前]
   const A = [
     ['ことば', cap(len('azakei_gl_known'), 209) * 40 + cap(len('azakei_gacha'), 209) * 30 + cap(num('azakei_narabe_best'), 10) * 15 + cap(num('azakei_rush_best'), 20) * 15, 'glossary.html#narabe', 'ことばならべかえ'],
     ['クイズ', cap(num('azakei_quiz_best'), 120) * 50 + cap(wk.streak || 0, 3) * 25 + cap(len('azakei_coins'), 12) * 25, 'quiz.html', '億万長者クイズ'],
-    ['実験', cap(lab, 9) * 80 + cap(num('azakei_sugo_best'), 1800) * 20, 'sim.html', '経済ラボ'],
+    ['実験', cap(lab, 10) * 80 + cap(num('azakei_sugo_best'), 1800) * 20, 'sim.html', '経済ラボ'],
     ['計画', cap(len('azakei_shop'), 3) * 35 + (has('azakei_ozk_master') ? 25 : 0) + cap(planN, 6) * 40, 'contests.html#plan-seed', 'ビジネスプランのたね'],
     ['探検', cap(len('azakei-visited'), 14) * 50 + (has('azakei_room_tour') ? 15 : 0) + cap(ms.streak || 0, 7) * 20 + (has('azakei_omikuji') ? 15 : 0), 'index.html#omikuji', '経済おみくじ']
   ].map(a => [a[0], Math.round(a[1]), a[2], a[3]]);
