@@ -159,7 +159,7 @@
 (function() {
   const btn = document.querySelector('.wm-open');
   if (!btn) return;
-  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261029a'; document.body.appendChild(s); };
+  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261030a'; document.body.appendChild(s); };
   btn.addEventListener('click', load);
   if (location.hash === '#wordmap') setTimeout(load, 600);
 })();
