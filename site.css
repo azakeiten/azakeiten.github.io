@@ -6539,7 +6539,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 
 /* ---- v127：経済ラボ — 1 億円って、どれくらい？（札束が育つ・高さと重さをくらべる） ---- */
 .lab-board li:last-child { grid-column: 1 / -1; }
-.ok { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 22px; border-radius: 22px; background: #1c2b23 var(--grain, none); color: #f3eee4; position: relative; overflow: hidden; }
+.ok[data-oku] { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 22px; border-radius: 22px; background: #1c2b23 var(--grain, none); color: #f3eee4; position: relative; overflow: hidden; }
 .ok-ctrl { grid-column: 1 / -1; text-align: center; }
 .ok-amount { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(28px, 6vw, 44px); color: #e3c68e; line-height: 1.3; word-break: auto-phrase; }
 .ok-ctrl input { width: 100%; max-width: 520px; margin: 10px 0 4px; accent-color: #e3c68e; }
@@ -6558,8 +6558,8 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @keyframes ok-drop { from { transform: translateY(-40px); opacity: 0; } }
 .ok-note { grid-column: 1 / -1; margin: 0; padding: 12px 16px; border-radius: 14px; background: rgba(227, 198, 142, .12); font-size: 14px; line-height: 1.8; word-break: auto-phrase; position: relative; z-index: 1; }
 .ok-note b { color: #e3c68e; }
-.ok-foot { grid-column: 1 / -1; margin: 0; font-size: 11.5px; color: rgba(243, 238, 228, .55); position: relative; z-index: 1; }
-@media (max-width: 560px) { .ok { grid-template-columns: 1fr; padding: 18px 16px; } }
+[data-oku] .ok-foot { grid-column: 1 / -1; margin: 0; font-size: 11.5px; color: rgba(243, 238, 228, .55); position: relative; z-index: 1; }
+@media (max-width: 560px) { .ok[data-oku] { grid-template-columns: 1fr; padding: 18px 16px; } }
 @media (prefers-reduced-motion: reduce) { .ok-bar i { transition: none; } .ok-stack.is-grow i:last-child { animation: none; } }
 .ok-stage { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } @media (max-width: 560px) { .ok-stage { grid-template-columns: minmax(0, 1fr); } }
 
@@ -6639,7 +6639,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .my-share { margin-top: 12px; padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(227, 198, 142, .55); background: transparent; color: #e3c68e; font: inherit; font-size: 12.5px; font-weight: 800; cursor: pointer; transition: background .2s; } .my-share:hover { background: rgba(227, 198, 142, .12); }
 
 /* ---- v131：経済ラボ — 国の予算を 100 円にたとえると（予想 → ドーナツグラフ） ---- */
-.bg { padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.bg[data-budget] { display: grid; gap: 16px; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
 .bg-q-h { margin: 0 0 12px; font-weight: 800; font-size: 15.5px; line-height: 1.6; word-break: auto-phrase; } .bg-q-h b { color: #b5432f; }
 .bg-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .bg-opts button { padding: 12px 8px; border-radius: 14px; border: 2px solid var(--color-border); background: var(--color-bg, #faf7f1); color: inherit; font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; word-break: auto-phrase; }
@@ -6663,12 +6663,12 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .bg-verdict { margin: 14px 0 0; font-size: 14.5px; line-height: 1.8; word-break: auto-phrase; } .bg-verdict:empty { display: none; } .bg-verdict b { color: #b5432f; }
 .bg-foot { margin: 12px 0 0; font-size: 11.5px; color: var(--color-muted); line-height: 1.7; }
 [data-theme="dark"] .bg-hole { fill: #3a3326; } [data-theme="dark"] .bg-center { color: #e3c68e; }
-@media (max-width: 640px) { .bg { padding: 16px; } .bg-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bg-stage { grid-template-columns: 1fr; justify-items: center; } .bg-coin { width: 200px; } .bg-list { width: 100%; } }
+@media (max-width: 640px) { .bg[data-budget] { padding: 16px; } .bg-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bg-stage { grid-template-columns: 1fr; justify-items: center; } .bg-coin { width: 200px; } .bg-list { width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .bg-arc, .bg-list li { animation: none; } }
 .lab-board li:last-child { grid-column: auto; }  /* 実験 9 つ＋ことば＝10 こなので、ふつうに並べる */
 
 /* ---- v132：経済ラボ — インフレのタイムマシン（買えなくなったおにぎりが、うすくなって消える） ---- */
-.in { display: grid; gap: 16px; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.in[data-infl] { display: grid; gap: 16px; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
 .in-ctrl { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .in-ctrl label { display: grid; gap: 4px; }
 .in-ctrl span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; font-size: 13.5px; font-weight: 700; }
@@ -6689,7 +6689,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .in-out b.is-down { color: #f0a493; }
 .in-note { margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #b08a4a 10%, transparent); font-size: 14px; line-height: 1.8; word-break: auto-phrase; } .in-note b { color: #b5432f; }
 .in-foot { margin: 0; font-size: 11.5px; color: var(--color-muted); }
-@media (max-width: 560px) { .in { padding: 16px; } .in-ctrl { grid-template-columns: 1fr; } .in-oni { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; } .in-out { grid-template-columns: 1fr; } .in-out p { grid-template-columns: 1fr auto; align-items: baseline; } body.lab-tabs .lab-board li:last-child { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .in[data-infl] { padding: 16px; } .in-ctrl { grid-template-columns: 1fr; } .in-oni { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; } .in-out { grid-template-columns: 1fr; } .in-out p { grid-template-columns: 1fr auto; align-items: baseline; } body.lab-tabs .lab-board li:last-child { grid-column: 1 / -1; } }
 @media (prefers-reduced-motion: reduce) { .in-oni span { transition: none; } }
 /* トップ「おかえりなさい」の「つづきから」 */
 .wb-list a.wb-cont { background: #1c2b23; color: #f3eee4; font-weight: 700; }
@@ -6754,8 +6754,8 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 @media (max-width: 560px) { .ms-week span { width: 26px; height: 26px; font-size: 12.5px; } }
 
 /* ---- v136：経済ラボ「分業のふしぎ」（比較優位） ---- */
-.bg { display: grid; gap: 16px; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); transition: box-shadow .5s, border-color .5s; }
-.bg.is-win { border-color: #2f6b3a; box-shadow: 0 0 0 3px color-mix(in srgb, #2f6b3a 25%, transparent); }
+.bg[data-bungyo] { display: grid; gap: 16px; padding: 22px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); transition: box-shadow .5s, border-color .5s; }
+.bg[data-bungyo].is-win { border-color: #2f6b3a; box-shadow: 0 0 0 3px color-mix(in srgb, #2f6b3a 25%, transparent); }
 .bg-mission { margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #b08a4a 10%, transparent); font-size: 14px; line-height: 1.8; word-break: auto-phrase; }
 .bg-mission span { display: inline-block; margin-right: 8px; padding: 0 9px; border-radius: 6px; background: #b5432f; color: #fff; font-size: 12px; font-weight: 800; }
 .bg-mission b { color: #b5432f; }
@@ -6787,7 +6787,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .bg-win span { flex: none; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; transform: rotate(-8deg); animation: bdg-stamp .7s cubic-bezier(.3, 1.6, .5, 1) backwards; }
 .bg-why { border-radius: 14px; border: 1px dashed var(--color-border); padding: 10px 14px; font-size: 14px; line-height: 1.8; }
 .bg-why summary { cursor: pointer; font-weight: 800; color: #b5432f; } .bg-why p { margin: 8px 0 0; word-break: auto-phrase; } .bg-why b { color: #b5432f; }
-@media (max-width: 640px) { .bg { padding: 16px; } .bg-people { grid-template-columns: minmax(0, 1fr); } .bg-total b { font-size: 26px; } }
+@media (max-width: 640px) { .bg[data-bungyo] { padding: 16px; } .bg-people { grid-template-columns: minmax(0, 1fr); } .bg-total b { font-size: 26px; } }
 @media (prefers-reduced-motion: reduce) { .bg-c, .bg-p, .bg-win span { animation: none; } }
 
 /* ---- v137：経済ラボ「レシートの中の税金」 ---- */
@@ -6982,7 +6982,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 
 /* ---- v143：トップ「経済おみくじ」 ---- */
 .ok-wrap { padding-bottom: clamp(20px, 3vw, 32px); }
-.ok { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 20px; align-items: center; padding: 18px 20px; border-radius: 22px; background: linear-gradient(135deg, color-mix(in srgb, #b5432f 7%, var(--color-surface, #fff)), var(--color-surface, #fff)); border: 1px solid var(--color-border); }
+.ok[data-omikuji] { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr); gap: 20px; align-items: center; padding: 18px 20px; border-radius: 22px; background: linear-gradient(135deg, color-mix(in srgb, #b5432f 7%, var(--color-surface, #fff)), var(--color-surface, #fff)); border: 1px solid var(--color-border); }
 .ok-shrine { display: grid; justify-items: center; gap: 8px; text-align: center; }
 .ok-box { position: relative; width: 92px; height: 120px; padding: 0; border: 0; cursor: pointer; background: linear-gradient(90deg, #7a4a22, #a8713c 30%, #c48a4e 50%, #a8713c 70%, #7a4a22); border-radius: 14px 14px 8px 8px; box-shadow: inset 0 -10px 0 rgba(0, 0, 0, .15); transform-origin: 50% 90%; }
 .ok-box:hover { filter: brightness(1.06); }
@@ -7005,8 +7005,8 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .ok-row { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; } .ok-row span { padding: 1px 8px; border-radius: 4px; background: #1c2b23; color: #e3c68e; font-size: 11px; font-weight: 800; }
 .ok-row a { font-weight: 800; color: #b5432f; text-decoration: none; border-bottom: 1px solid currentColor; }
 .ok-msg { margin: 0; font-size: 14px; line-height: 1.85; word-break: auto-phrase; }
-.ok-foot { margin: 4px 0 0; font-size: 10.5px; color: #8a8172; }
-@media (max-width: 640px) { .ok { grid-template-columns: minmax(0, 1fr); padding: 16px; } .ok-box { width: 80px; height: 104px; } .ok-luck b { font-size: 32px; } }
+[data-omikuji] .ok-foot { margin: 4px 0 0; font-size: 10.5px; color: #8a8172; }
+@media (max-width: 640px) { .ok[data-omikuji] { grid-template-columns: minmax(0, 1fr); padding: 16px; } .ok-box { width: 80px; height: 104px; } .ok-luck b { font-size: 32px; } }
 @media (prefers-reduced-motion: reduce) { .ok-box.is-shake, .ok-box.is-shake .ok-stick, .ok-slip.is-open .ok-paper, .ok-slip.is-open .ok-luck b { animation: none; } }
 
 /* ---- v144：クイズ「経済すごろく」 ---- */
@@ -7166,3 +7166,6 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 [data-theme="dark"] .ns-pay td.is-good { color: #8fcf8a; } [data-theme="dark"] .ns-pay td.is-bad { color: #f0a493; }
 .ns-card.is-K { color: #2f6b3a; } .ns-card.is-C { color: #b5432f; }
 .ns-shops { align-items: end; } .ns-vs { align-self: center; }
+
+/* ---- v149：トップの大見出しを、ひかえめに（大げさになりすぎないよう） ---- */
+.hero-wordmark { font-size: clamp(48px, min(10vw, 15vh), 128px); }
