@@ -7169,3 +7169,15 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 
 /* ---- v149：トップの大見出しを、ひかえめに（大げさになりすぎないよう） ---- */
 .hero-wordmark { font-size: clamp(48px, min(10vw, 15vh), 128px); }
+
+/* ---- v150：用語辞典 — 読み上げボタン（ひかえめに、右上に小さく） ---- */
+.gl-group .gl-item:has(> .gl-say) { position: relative; }
+.gl-group .gl-item:has(> .gl-say) > dt { padding-right: 40px; }
+.gl-say { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; display: grid; place-items: center; padding: 0; border-radius: 50%; border: 1px solid var(--color-border); background: transparent; color: var(--color-muted); cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+.gl-say svg { width: 17px; height: 17px; }
+.gl-say:hover { color: #b5432f; border-color: color-mix(in srgb, #b5432f 45%, transparent); }
+.gl-say .gl-say-w { opacity: .35; }
+.gl-say.is-on { color: #fff; background: #b5432f; border-color: #b5432f; }
+.gl-say.is-on .gl-say-w { animation: gl-say 1.1s ease-in-out infinite; } .gl-say.is-on .gl-say-w + .gl-say-w { animation-delay: .25s; }
+@keyframes gl-say { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .gl-say.is-on .gl-say-w { animation: none; opacity: 1; } }

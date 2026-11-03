@@ -159,7 +159,49 @@
 (function() {
   const btn = document.querySelector('.wm-open');
   if (!btn) return;
-  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261031b'; document.body.appendChild(s); };
+  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261103a'; document.body.appendChild(s); };
   btn.addEventListener('click', load);
   if (location.hash === '#wordmap') setTimeout(load, 600);
+})();
+
+// 読み上げ：言葉と説明を、ブラウザの日本語の声で読む（日本語の声がない端末では、ボタンを出さない）
+(function() {
+  if (!('speechSynthesis' in window) || !window.SpeechSynthesisUtterance) return;
+  const synth = window.speechSynthesis;
+  const items = [...document.querySelectorAll('.gl-group .gl-item')];
+  if (!items.length) return;
+  let voice = null, added = false, cur = null;
+  const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="gl-say-w" d="M16.5 8.5a5 5 0 0 1 0 7"/><path class="gl-say-w" d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+  const text = it => {
+    const dt = it.querySelector('dt').textContent.replace(/[（(]/g, '、').replace(/[）)]/g, '').trim();
+    const dd = it.querySelector('dd').cloneNode(true); dd.querySelectorAll('.gl-rel').forEach(x => x.remove());
+    return dt + '。' + dd.textContent.trim();
+  };
+  const stop = () => { synth.cancel(); if (cur) { cur.classList.remove('is-on'); cur.setAttribute('aria-pressed', 'false'); } cur = null; };
+  const speak = b => {
+    const was = cur === b; stop(); if (was) return;
+    const u = new SpeechSynthesisUtterance(text(b.closest('.gl-item')));
+    u.lang = 'ja-JP'; if (voice) u.voice = voice; u.rate = 1;
+    u.onend = u.onerror = () => { if (cur === b) stop(); };
+    cur = b; b.classList.add('is-on'); b.setAttribute('aria-pressed', 'true');
+    synth.speak(u);
+  };
+  const add = () => {
+    if (added) return;
+    const vs = synth.getVoices();
+    voice = vs.find(v => /^ja/i.test(v.lang)) || null;
+    if (vs.length && !voice) return; // 声の一覧はあるのに日本語がない
+    added = true;
+    items.forEach(it => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'gl-say'; b.setAttribute('aria-pressed', 'false');
+      b.setAttribute('aria-label', it.querySelector('dt').textContent.trim() + 'を読み上げる'); b.title = '読み上げる';
+      b.innerHTML = ICON;
+      it.prepend(b);
+    });
+    document.addEventListener('click', e => { const b = e.target.closest('.gl-say'); if (b) speak(b); });
+    addEventListener('pagehide', stop);
+  };
+  if (synth.getVoices().length) add();
+  else { synth.addEventListener && synth.addEventListener('voiceschanged', add); setTimeout(add, 1500); }
 })();
