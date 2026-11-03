@@ -7181,3 +7181,23 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .gl-say.is-on .gl-say-w { animation: gl-say 1.1s ease-in-out infinite; } .gl-say.is-on .gl-say-w + .gl-say-w { animation-delay: .25s; }
 @keyframes gl-say { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .gl-say.is-on .gl-say-w { animation: none; opacity: 1; } }
+
+/* ---- v151：絵文字をやめて、サイトの朱印（漢字 1 文字）にそろえる ---- */
+.sg-sq span { width: 1.6em; height: 1.6em; display: grid; place-items: center; border: 1.5px solid currentColor; border-radius: 5px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(14px, 2.6vw, 19px); line-height: 1; transform: rotate(-4deg); }
+.sg-sq.is-in span, .sg-sq.is-int span, .sg-sq.is-start span { color: #2f6b3a; } .sg-sq.is-out span, .sg-sq.is-tax span, .sg-sq.is-hap span { color: #b5432f; }
+.sg-sq.is-inv span { color: #a57414; } .sg-sq.is-ins span { color: #4a6a8a; }
+[data-theme="dark"] .sg-sq.is-in span, [data-theme="dark"] .sg-sq.is-int span, [data-theme="dark"] .sg-sq.is-start span { color: #8fcf8a; } [data-theme="dark"] .sg-sq.is-out span, [data-theme="dark"] .sg-sq.is-tax span, [data-theme="dark"] .sg-sq.is-hap span { color: #f0a493; } [data-theme="dark"] .sg-sq.is-inv span { color: #e3c68e; } [data-theme="dark"] .sg-sq.is-ins span { color: #9db7d1; }
+.sg-token { background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 14px; box-shadow: 0 3px 8px rgba(0, 0, 0, .35), inset 0 0 0 2px rgba(255, 255, 255, .5); }
+.ns-card { font-family: 'Shippori Mincho', serif; font-weight: 800; }
+.ns-card.is-K, .ns-card.is-C { font-size: 32px; }
+.ns-track i { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 12px; } .ns-track li.is-KK i, .ns-track li.is-CC i, .ns-track li.is-CK i, .ns-track li.is-KC i { color: #f3eee4; }
+.rc-item { padding: 12px 4px; } .rc-item b { font-size: 13.5px; }
+@media (max-width: 560px) { .sg-sq span { font-size: 13px; } .sg-token { font-size: 12px; } }
+
+/* ---- v152：「AI でつくった感じ」を減らす ----
+   ・見出しラベルの線の先の 4 本光の星（よくある「AI」の印に見える）をやめ、ただの短い線に
+   ・経済ラボの見出しは、英語の飾りラベルではなく、ノートのような「実験 01」 */
+.section-label::before { -webkit-mask: none; mask: none; width: 24px; height: 1px; }
+.section-label.lab-no { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: none; color: #b5432f; }
+.section-label.lab-no::before { width: 18px; background: currentColor; }
+[data-theme="dark"] .section-label.lab-no { color: #e3a08f; }

@@ -17,7 +17,7 @@
     ['根にもつ', '最初は守る。でも、あなたが 1 回でも値下げしたら、そのあとずっと値下げ', (m, y) => y.includes('C') ? 'C' : 'K'],
     ['気まぐれ', '毎回、コインを投げるように半々で決める', () => Math.random() < .5 ? 'K' : 'C']
   ];
-  const ICON = { K: '🏷', C: '✂' };
+  const ICON = { K: '守', C: '下' };
   // 色分けのクラス（CSS を分けるときに見つけられるよう、ここに書いておく）：is-K is-C is-KK is-KC is-CK is-CC
   let ai, you, them, sy, st, busy;
   box.innerHTML = `
@@ -35,7 +35,7 @@
       </div>
       <ol class="ns-track" data-o="track" aria-label="これまでの結果">${Array.from({ length: ROUNDS }, (_, i) => `<li><span>${i + 1}</span></li>`).join('')}</ol>
       <p class="ns-say" data-o="say" aria-live="polite">${ROUNDS} 回、くり返します。となりのお店がどんな作戦か、さぐりながら選ぼう。</p>
-      <div class="ns-btns" data-o="btns"><button type="button" class="ns-k" data-m="K">🏷 値段を守る</button><button type="button" class="ns-c" data-m="C">✂ 値下げする</button></div>
+      <div class="ns-btns" data-o="btns"><button type="button" class="ns-k" data-m="K">値段を守る</button><button type="button" class="ns-c" data-m="C">値下げする</button></div>
       <div class="ns-end" data-o="end" hidden></div>
     </div>
     <p class="in-foot">※ もうけの数字は、しくみを見るための「たとえ」です。</p>`;

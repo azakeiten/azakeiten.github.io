@@ -9,14 +9,14 @@
   if (!box) return;
   // [名前, 税抜きの値段, 食べもの？, 絵]
   const ITEMS = [
-    ['おにぎり', 140, true, '🍙'], ['お茶', 130, true, '🍵'], ['からあげ', 240, true, '🍗'], ['アイス', 160, true, '🍦'],
-    ['ノート', 180, false, '📓'], ['電池', 300, false, '🔋'], ['ばんそうこう', 250, false, '🩹'], ['ボールペン', 120, false, '🖊']
+    ['おにぎり', 140, true], ['お茶', 130, true], ['からあげ', 240, true], ['アイス', 160, true],
+    ['ノート', 180, false], ['電池', 300, false], ['ばんそうこう', 250, false], ['ボールペン', 120, false]
   ];
   const yen = n => '¥' + n.toLocaleString('ja-JP');
   box.innerHTML = `
     <div class="rc-shop">
       <p class="rc-k">かごに入れる（もう一度押すと出す）</p>
-      <div class="rc-items">${ITEMS.map((it, i) => `<button type="button" class="rc-item" data-i="${i}" aria-pressed="false"><span aria-hidden="true">${it[3]}</span><b>${it[0]}</b><small>${yen(it[1])}${it[2] ? '<em>食</em>' : ''}</small></button>`).join('')}</div>
+      <div class="rc-items">${ITEMS.map((it, i) => `<button type="button" class="rc-item" data-i="${i}" aria-pressed="false"><b>${it[0]}</b><small>${yen(it[1])}${it[2] ? '<em>食</em>' : ''}</small></button>`).join('')}</div>
       <div class="rc-eat" role="group" aria-label="食べる場所">
         <button type="button" class="is-on" data-eat="0">持ち帰る</button><button type="button" data-eat="1">店内で食べる</button>
       </div>
