@@ -69,22 +69,23 @@
   }
 
   // リールを指定桁に合わせてアニメーション
+  // リールは 30 段（0〜9 を 3 回）。px ではなく % で動かすので、画面の大きさが変わっても数字がずれない
+  const rowY = row => `translateY(-${(row * 100 / 30).toFixed(4)}%)`;
+
   function spinReel(reel, fromDigit, toDigit, duration, delay) {
-    const firstSpan = reel.querySelector('span');
-    const slotH = firstSpan.offsetHeight; // スロット1段の高さ
 
     const fromRow = 10 + fromDigit;
     let toRow = 10 + toDigit;
     if (toRow >= fromRow) toRow += 10;
 
     reel.style.transition = 'none';
-    reel.style.transform  = `translateY(-${fromRow * slotH}px)`;
+    reel.style.transform  = rowY(fromRow);
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setTimeout(() => {
           reel.style.transition = `transform ${duration}ms cubic-bezier(0.22, 0.08, 0.08, 1.0)`;
-          reel.style.transform  = `translateY(-${toRow * slotH}px)`;
+          reel.style.transform  = rowY(toRow);
         }, delay);
       });
     });
@@ -131,11 +132,9 @@
   requestAnimationFrame(() => {
     slots.forEach((s, i) => {
       s.current = startDigits[i];
-      const firstSpan = s.reel.querySelector('span');
-      const slotH =  firstSpan.offsetHeight;
       const row   = 10 + startDigits[i];
       s.reel.style.transition = 'none';
-      s.reel.style.transform  = `translateY(-${row * slotH}px)`;
+      s.reel.style.transform  = rowY(row);
     });
 
     wrap.classList.add('active');
@@ -145,4 +144,15 @@
   setTimeout(() => {
     animateToDigits(startDigits, targetDigits);
   }, 900); // v36：待ち時間を短く
+})();
+
+// スマホ（大きな数字が出ない幅）用：ボタンの下に 1 行で「次の文化祭まで あと ○ 日（予定）」
+(function() {
+  const el = document.getElementById('heroDays');
+  if (!el) return;
+  const jst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  const today = new Date(jst.getFullYear(), jst.getMonth(), jst.getDate());
+  const n = Math.max(0, Math.ceil((new Date(2027, 4, 1) - today) / 86400000));
+  el.innerHTML = `次の文化祭まで あと <b>${n}</b> 日<small>（予定）</small>`;
+  el.hidden = false;
 })();

@@ -5744,7 +5744,7 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
    ▼ v90 — トップの一番最初の画面：奥行きのあるチップと紙幣が浮かぶ
    ################################################################ */
 .hf { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
-.hero-content, .hero-counter, .scroll-cue { position: relative; z-index: 2; }
+.hero-content { position: relative; z-index: 2; }  /* 残り日数とScroll は、もとの absolute（右下・下中央）のまま。relative にすると上にずれる */
 .hf-item { position: absolute; width: var(--s); aspect-ratio: 1; perspective: 600px; filter: drop-shadow(0 calc(var(--d) * 26px) calc(var(--d) * 22px) rgba(0, 0, 0, 0.45)) blur(calc((1 - var(--d)) * 1.6px)); opacity: calc(0.55 + var(--d) * 0.45); will-change: translate; }
 .hf-spin { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(var(--rx)) rotateY(var(--ry)); animation: hf-float var(--dur, 8s) ease-in-out var(--dl, 0s) infinite; }
 .hf-chip i, .hf-chip b { position: absolute; inset: 0; border-radius: 50%; }
@@ -7201,3 +7201,18 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .section-label.lab-no { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: none; color: #b5432f; }
 .section-label.lab-no::before { width: 18px; background: currentColor; }
 [data-theme="dark"] .section-label.lab-no { color: #e3a08f; }
+
+/* ---- v153：トップの「次の文化祭まで」— タブレットくらいの幅では小さめにして、説明の文と重ならないように ---- */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hero-counter { bottom: 28px; }
+  .digit-slot, .digit-reel span { height: 56px; }
+  .digit-reel span { font-size: 46px; min-width: 28px; }
+}
+.hero-days { display: none; }
+@media (max-width: 760px) {
+  .hero-days { display: inline-flex; align-items: baseline; gap: 4px; margin: 18px 0 0; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .35); color: rgba(255, 255, 255, .9); font-size: 12.5px; letter-spacing: .04em; }
+  .hero-days[hidden] { display: none; }
+  .hero-days b { font-family: var(--font-display); font-weight: 400; font-size: 18px; color: var(--color-accent); margin: 0 2px; }
+  .hero-days small { font-size: 10.5px; opacity: .75; }
+}
+@media (max-width: 760px) { .hero-days { margin-top: 24px; line-height: 1.4; } }
