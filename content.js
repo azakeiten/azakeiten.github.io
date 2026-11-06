@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-06', seal: '暦', tone: 'green', href: 'events.html#yearplan', eyebrow: '日程とイベント', title: '1 年の流れ', text: 'ストックリーグのレポート提出は 1/8、文化祭は 11 月下旬に査定。コンテストと文化祭の準備が、いつ何をするかを 1 枚の表に。' },
     { date: '2026-10-31', seal: '策', tone: 'shu', href: 'sim.html#nesage', eyebrow: '経済ラボ', title: 'となりのお店と値下げ競争', text: '値段を守る？ 値下げする？ となりのお店と同時に選んで 10 回勝負。相手の作戦は最後にわかる。ゲーム理論の体験。' },
     { date: '2026-10-30', seal: '録', tone: 'green', href: 'mypage.html', eyebrow: 'わたしの記録', title: '経済力レーダー', text: 'ことば・クイズ・実験・計画・探検。遊んだ記録から 5 つの力を五角形に。得意な力と、のびしろの力がわかる。' },
     { date: '2026-10-30', seal: '並', tone: 'shu', href: 'glossary.html#narabe', eyebrow: '用語辞典', title: 'ことばならべかえ', text: '説明を読んで、バラバラのひらがなを正しい順に。1 回 5 問、ヒントなしで正解すると 2 点。称号と自己ベストつき。' },
@@ -125,6 +126,6 @@ window.AZAKEI = {
     // stat（大きく出す数字）・unit・label・link は書かなくても OK
     { year: '2026', title: '文化祭「麻布経済展」を開催', stat: '2,364', unit: '人', label: '3 日間の来場者', link: 'festival.html' },
     { year: '2026', title: '日経ストックリーグに応募', label: '7 月 20 日に応募。ポートフォリオとレポートに挑戦中', link: 'contests.html#stockleague' },
-    { year: '2026', title: '高校生ビジネスコンテストに出場', label: '9 月 24 日、チームでつくった事業計画を提出', link: 'contests.html#business' }
+    { year: '2026', title: '高校生ビジネスプラン・グランプリに応募', label: '9 月 24 日、ビジネスプランのシートを提出。結果発表は 11 月中', link: 'contests.html#business' }
   ]
 };
