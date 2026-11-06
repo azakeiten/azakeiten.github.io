@@ -116,7 +116,7 @@ try {
         <li><a href="#${it.id}">
           <span class="toc-track"><span class="toc-fill"></span></span>
           <span class="toc-num">${it.num}</span>
-          <span class="toc-text"><b>${it.ja}</b><small>${it.en}</small></span>
+          <span class="toc-text"><b>${it.ja}</b></span>
           <svg class="toc-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a></li>`).join('')}
       </ol>`;
@@ -693,7 +693,7 @@ try {
       <a class="next-page" href="${href}">
         <img src="${img}" alt="" loading="lazy" decoding="async">
         <div class="container">
-          <small>Next page</small>
+          <small>次のページ</small>
           <b>${ja}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 12h17M14 5l7 7-7 7"/></svg></b>
           <span class="np-desc">${desc}</span>
         </div>

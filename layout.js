@@ -51,10 +51,10 @@
   let n = 0;
   const indexGroups = INDEX.map(g => `
     <div class="si-group si-g-${g.en.toLowerCase()}">
-      <p class="si-group-head"><span>${g.en}</span>${g.group}</p>
+      <p class="si-group-head">${g.group}</p>
       <ul>${g.pages.map(p => { n++; const cur = p.href === here; return `
         <li><a href="${p.href}" class="mobile-link si-link${cur ? ' is-current' : ''}"${cur ? ' aria-current="page"' : ''}
-               data-en="${p.en}" data-desc="${p.desc}" data-img="${p.img}" style="--d:${n}">
+               data-en="${p.en}" data-ja="${p.ja}" data-desc="${p.desc}" data-img="${p.img}" style="--d:${n}">
           <span class="si-num">${String(n).padStart(2, '0')}</span>
           <span class="si-name"><svg class="si-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p.ico || ''}"/></svg>${p.ja}${p.badge ? `<em class="si-badge">${p.badge}</em>` : ''}${cur ? '<em class="si-here">現在のページ</em>' : ''}</span>
           <span class="si-en">${p.en}</span>
@@ -77,7 +77,7 @@
     return `<li class="nav-dd${on ? ' is-active' : ''}">
       <button type="button" class="nav-top nav-dd-btn" aria-expanded="false" aria-controls="navp${i}">${m.ja}<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
       <div class="nav-panel" id="navp${i}">
-        <div class="nav-panel-head"><p><span>${m.en}</span>${m.ja}</p><small>${m.lead}</small></div>
+        <div class="nav-panel-head"><p>${m.ja}</p><small>${m.lead}</small></div>
         <ul>${m.pages.map(h => { const p = P[h] || { ja: h, desc: '' }; const cur = h === here; return `
           <li><a href="${h}"${cur ? ' aria-current="page" class="active"' : ''}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${p.ico || ''}"/></svg>
@@ -104,7 +104,7 @@
     <div class="site-index" id="mobileMenu" role="dialog" aria-modal="true" aria-label="サイトの目次" aria-hidden="true">
       <div class="si-inner">
         <div class="si-list">
-          <p class="si-title">Index <span>サイトの目次</span></p>
+          <p class="si-title">サイトの目次</p>
           <label class="si-search"><span class="sr-only">サイトの中をさがす</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="siSearch" placeholder="さがす（例：来場ガイド、配当、FAQ）" autocomplete="off" enterkeyhint="search"></label>
           <ul class="si-results" id="siResults" hidden></ul>
           ${indexGroups}
@@ -140,7 +140,7 @@
   function preview(a) {
     if (!a) return;
     pv.img.style.backgroundImage = `url("${a.dataset.img}")`;
-    pv.en.textContent = a.dataset.en;
+    pv.en.textContent = a.dataset.ja;
     pv.desc.textContent = a.dataset.desc;
     menu.querySelectorAll('.si-link').forEach(l => l.classList.toggle('is-hover', l === a));
   }
@@ -173,7 +173,7 @@
   const footer = document.getElementById('site-footer');
   if (!footer) return;
   footer.className = 'site-footer';
-  const tick = '<span>仕組みを、<em>つくろう。</em></span><span>Let\'s build <em>the system</em> —</span>';
+  const tick = '<span>仕組みを、<em>つくろう。</em></span>';
   // フッターのリンクは「知る」「遊ぶ・学ぶ」「つながる」の 3 つに分ける
   const FOOT_GROUPS = [
     { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['azakei.html', 'AZAKEI として'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
@@ -182,20 +182,20 @@
   ];
   footer.innerHTML = `
     <a class="footer-ticker" href="contact.html" aria-label="お問い合わせへ">
-      <span class="footer-ticker-track">${tick.repeat(4)}</span>
+      <span class="footer-ticker-track">${tick.repeat(8)}</span>
     </a>
     <div class="explore" data-explore></div>
     <div class="footer-grid">
       <div>
         <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="index.html" class="wordmark footer-wordmark">AZA<span>KEI</span><small class="footer-kanji">麻経</small></a></div>
-        <p class="footer-note">麻経 · Azabu Economics<br>Est. 2025 · 麻布中学校・高等学校</p>
+        <p class="footer-note">麻経（Azabu Economics）<br>麻布中学校・高等学校の経済系同好会</p>
         <p class="footer-mission">世の中の仕組みを理解し、<br>自分たちで仕組みを創り出す。</p>
         <div class="fs-switch" role="group" aria-label="文字の大きさ"><span>文字の大きさ</span><button type="button" data-fs="">標準</button><button type="button" data-fs="l">大</button><button type="button" data-fs="xl">特大</button></div>
         <div class="fs-switch motion-switch" role="group" aria-label="動き"><span>動き</span><button type="button" data-motion="full">ふつう</button><button type="button" data-motion="lite">少なめ</button></div>
         <a class="footer-members" href="admin.html">部員用 更新ページ</a>
       </div>
       ${FOOT_GROUPS.map(g => `<div class="footer-col">
-        <p class="footer-head">${g.en}<span>${g.ja}</span></p>
+        <p class="footer-head">${g.ja}</p>
         <ul class="footer-list">
           ${g.links.map(([href, label, sub]) => {
             const ext = /^https:/.test(href);

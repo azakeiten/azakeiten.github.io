@@ -7276,3 +7276,10 @@ html[lang="ja"] section .section-label:not(.lab-no):not(.jp-label) { display: no
 @media (max-width: 640px) { .cstep:has(> li:nth-child(7)) { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 12px; } }
 .yp-link { margin: -6px 0 14px; font-size: 13px; }
 .yp-label small { margin-left: 6px; font-size: 11px; color: var(--color-muted); opacity: .85; white-space: nowrap; }
+
+/* ---- v156：全ページ共通の英語の飾り（目次・フッター）を日本語だけに ---- */
+.si-en { display: none; }
+.si-preview-en { font-family: 'Shippori Mincho', serif; font-style: normal; font-weight: 800; letter-spacing: .04em; }
+.footer-head { text-transform: none; letter-spacing: .12em; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 13px; }
+.contest .en { display: none; }
+.toc-text small:empty { display: none; }
