@@ -955,6 +955,8 @@ try {
       setTimeout(() => { t.classList.remove('is-in'); t.classList.add('is-out'); setTimeout(() => { t.remove(); showing = false; showNext(); }, 450); }, 4600);
     };
     const checkBadges = () => {
+      // 協賛のご案内・文化祭など「見てもらう」ページでは、バッジのお知らせを出さない（取ったバッジは、遊びのページで後から知らせる）
+      if (box.hasAttribute('data-quiet')) return;
       const seen = get(SEEN, []);
       if (!Array.isArray(seen)) return;
       const fresh = calcBadges().filter(b => b[2] && !seen.includes(b[1]));

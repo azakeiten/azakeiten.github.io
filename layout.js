@@ -184,7 +184,7 @@
     <a class="footer-ticker" href="contact.html" aria-label="お問い合わせへ">
       <span class="footer-ticker-track">${tick.repeat(8)}</span>
     </a>
-    <div class="explore" data-explore></div>
+    <div class="explore" data-explore${['quiz.html', 'sim.html', 'glossary.html', 'diagnosis.html', 'mypage.html'].includes(here) ? '' : ' data-quiet'}></div>
     <div class="footer-grid">
       <div>
         <div class="footer-brand"><div class="footer-emblem" data-emblem></div><a href="index.html" class="wordmark footer-wordmark">AZA<span>KEI</span><small class="footer-kanji">麻経</small></a></div>

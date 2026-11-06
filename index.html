@@ -30,7 +30,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-index.min.css?v=20261107c" />
+  <link rel="stylesheet" href="p-index.min.css?v=20261107d" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
@@ -199,6 +199,30 @@
     </div>
   </section>
 
+  <!-- 実績 -->
+  <section class="about tight">
+    <div class="container">
+      <div class="split" style="align-items: start;">
+        <div class="reveal">
+          <h2 class="ap-title sm">歩みと実績</h2>
+          <p class="ap-lead left">まだ始まったばかり。<br>挑戦の記録を、ここに積み重ねていきます。</p>
+        </div>
+        <ul class="achievements reveal" data-render="achievements"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 活動のようす（写真を横に流して見る） -->
+  <section class="ap-strip-wrap band">
+    <div class="container">
+      <div class="ap-head row reveal">
+        <h2 class="ap-title sm">活動のようす</h2>
+        <a href="activities.html" class="ap-link">写真をもっと見る</a>
+      </div>
+    </div>
+    <div class="ap-strip reveal" data-render="strip" data-limit="10"></div>
+  </section>
+
   <!-- 合言葉（縦書き） -->
   <section class="motto" aria-label="AZAKEI の合言葉">
     <div class="motto-inner" data-motto>
@@ -273,6 +297,30 @@
   </section>
 
 
+  <!-- 日程・イベント -->
+  <section class="about tight">
+    <div class="container">
+      <div class="ap-head row reveal">
+        <h2 class="ap-title sm">これからの予定</h2>
+        <a href="events.html" class="ap-link">すべての日程</a>
+      </div>
+      <p class="yp-now-h reveal">いま進んでいること <a href="events.html#yearplan">1 年の流れ →</a></p>
+      <div class="reveal" data-yearplan="now"></div>
+      <div class="reveal" data-render="events" data-scope="upcoming" data-limit="8"></div>
+    </div>
+  </section>
+
+  <!-- お知らせ（管理ページの更新から自動で） -->
+  <section class="about tight" id="news">
+    <div class="container">
+      <div class="ap-head row reveal">
+        <h2 class="ap-title sm">お知らせ <small class="last-updated" data-last-updated hidden></small></h2>
+        <a href="activities.html" class="ap-link">活動日誌を見る</a>
+      </div>
+      <div class="reveal" data-render="news" data-limit="5"></div>
+    </div>
+  </section>
+
   <!-- タイル（見る・遊ぶ・挑む） -->
   <section class="ap-tiles-wrap" id="overview">
     <div class="container">
@@ -335,17 +383,6 @@
     <div class="container ok-wrap reveal" id="omikuji"><div class="ok" data-omikuji></div></div>
   </section>
 
-  <!-- 活動のようす（写真を横に流して見る） -->
-  <section class="ap-strip-wrap band">
-    <div class="container">
-      <div class="ap-head row reveal">
-        <h2 class="ap-title sm">活動のようす</h2>
-        <a href="activities.html" class="ap-link">写真をもっと見る</a>
-      </div>
-    </div>
-    <div class="ap-strip reveal" data-render="strip" data-limit="10"></div>
-  </section>
-
   <!-- 今週の 1 問（クイズの問題から、週ごとに自動で選ぶ） -->
   <section class="about tight daily-q-wrap" id="weekly">
     <div class="container">
@@ -359,43 +396,6 @@
   <section class="about tight" id="koma-today">
     <div class="container">
       <div class="koma reveal" data-koma-daily></div>
-    </div>
-  </section>
-
-  <!-- お知らせ（管理ページの更新から自動で） -->
-  <section class="about tight" id="news">
-    <div class="container">
-      <div class="ap-head row reveal">
-        <h2 class="ap-title sm">お知らせ <small class="last-updated" data-last-updated hidden></small></h2>
-        <a href="activities.html" class="ap-link">活動日誌を見る</a>
-      </div>
-      <div class="reveal" data-render="news" data-limit="5"></div>
-    </div>
-  </section>
-
-  <!-- 日程・イベント -->
-  <section class="about tight">
-    <div class="container">
-      <div class="ap-head row reveal">
-        <h2 class="ap-title sm">これからの予定</h2>
-        <a href="events.html" class="ap-link">すべての日程</a>
-      </div>
-      <p class="yp-now-h reveal">いま進んでいること <a href="events.html#yearplan">1 年の流れ →</a></p>
-      <div class="reveal" data-yearplan="now"></div>
-      <div class="reveal" data-render="events" data-scope="upcoming" data-limit="8"></div>
-    </div>
-  </section>
-
-  <!-- 実績 -->
-  <section class="about tight">
-    <div class="container">
-      <div class="split" style="align-items: start;">
-        <div class="reveal">
-          <h2 class="ap-title sm">歩みと実績</h2>
-          <p class="ap-lead left">まだ始まったばかり。<br>挑戦の記録を、ここに積み重ねていきます。</p>
-        </div>
-        <ul class="achievements reveal" data-render="achievements"></ul>
-      </div>
     </div>
   </section>
 
@@ -414,27 +414,27 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261107c"></script>
-  <script src="layout.js?v=20261107c"></script>
-  <script src="brand.js?v=20261107c"></script>
-  <script src="live.js?v=20261107c"></script>
-  <script src="yearplan.js?v=20261107c"></script>
-  <script src="render.js?v=20261107c"></script>
-  <script src="loader.js?v=20261107c"></script>
-  <script src="nav.js?v=20261107c"></script>
-  <script src="hero.js?v=20261107c"></script>
-  <script src="countdown.js?v=20261107c"></script>
-  <script src="reveal.js?v=20261107c"></script>
-  <script src="osatsu.js?v=20261107c"></script>
-  <script src="koma.js?v=20261107c"></script>
-  <script src="newplay.js?v=20261107c"></script>
-  <script src="omikuji.js?v=20261107c"></script>
-  <script src="site.js?v=20261107c"></script>
-  <script src="ranking.js?v=20261107c"></script>
+  <script src="content.js?v=20261107d"></script>
+  <script src="layout.js?v=20261107d"></script>
+  <script src="brand.js?v=20261107d"></script>
+  <script src="live.js?v=20261107d"></script>
+  <script src="yearplan.js?v=20261107d"></script>
+  <script src="render.js?v=20261107d"></script>
+  <script src="loader.js?v=20261107d"></script>
+  <script src="nav.js?v=20261107d"></script>
+  <script src="hero.js?v=20261107d"></script>
+  <script src="countdown.js?v=20261107d"></script>
+  <script src="reveal.js?v=20261107d"></script>
+  <script src="osatsu.js?v=20261107d"></script>
+  <script src="koma.js?v=20261107d"></script>
+  <script src="newplay.js?v=20261107d"></script>
+  <script src="omikuji.js?v=20261107d"></script>
+  <script src="site.js?v=20261107d"></script>
+  <script src="ranking.js?v=20261107d"></script>
   <script>
     /* クイズの問題（約 12KB）は、「遊びかた」か「今週の 1 問」に近づいてから読みこむ（トップを軽く） */
     (function () {
-      var V = '20261107c', done = false;
+      var V = '20261107d', done = false;
       var load = function () {
         if (done) return; done = true;
         ['quiz-data.js', 'tryout.js', 'daily.js'].reduce(function (p, f) {
@@ -449,7 +449,7 @@
       if (location.hash) load(); else setTimeout(load, 3000);
     })();
   </script>
-  <script src="chip3d.js?v=20261107c"></script>
-  <script src="herofloat.js?v=20261107c"></script>
+  <script src="chip3d.js?v=20261107d"></script>
+  <script src="herofloat.js?v=20261107d"></script>
 </body>
 </html>

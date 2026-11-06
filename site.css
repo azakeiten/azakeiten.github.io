@@ -7297,3 +7297,14 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 
 /* ---- v159：見出しの写真（スマホは軽い写真）。<picture> で包んでも、もとどおり全面に ---- */
 .ph-photo picture { display: block; width: 100%; height: 100%; }
+
+/* ---- v160：協賛・文化祭など「見てもらう」ページでは、ページ下のスタンプとバッジの棚を出さない（遊びのページと、わたしの記録では今までどおり） ---- */
+.explore[data-quiet] { display: none; }
+
+/* ---- v161：協賛のご案内 — 2026 年の展示の写真と、次の文化祭までの準備 ---- */
+.sp-photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.sp-photos figure { margin: 0; }
+.sp-photos img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; border: 6px solid #f6f1e7; box-shadow: 0 14px 28px -18px rgba(0, 0, 0, .45); }
+.sp-photos figcaption { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: var(--color-muted); }
+.sp-next-title { margin: 34px 0 6px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; }
+@media (max-width: 760px) { .sp-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
