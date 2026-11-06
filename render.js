@@ -18,8 +18,10 @@
   // 未来（・日程未定）→ 過去 の順に並べる
   function sortedEvents() {
     const t = todayStr();
-    const ev = (D.events || []).map(e => ({ ...e, past: !!e.date && (e.end || e.date) < t }));
-    const upcoming = ev.filter(e => !e.past).sort((a, b) => (a.date || '9999') < (b.date || '9999') ? -1 : 1);
+    // 管理ページの日程に、1 年の流れ（yearplan.js）の節目もまぜる。並べる順：受付中 → 日付（日付がないものは sort の日）→ 未定
+    const ev = (D.events || []).concat(window.AZAKEI_PLAN_EVENTS || []).map(e => ({ ...e, past: !!e.date && (e.end || e.date) < t }));
+    const key = e => e.when === '受付中' && !e.date ? '0000' : e.date || e.sort || '9999';
+    const upcoming = ev.filter(e => !e.past).sort((a, b) => key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0);
     const past = ev.filter(e => e.past).sort((a, b) => a.date < b.date ? 1 : -1);
     return { upcoming, past };
   }
@@ -41,6 +43,8 @@
       const days = Math.round((new Date(e.date) - new Date(t)) / 86400000);
       badge = days <= 0 ? `<span class="event-countdown is-now">${e.tag === 'コンテスト' ? '参加中' : '開催中'}</span>`
                         : `<span class="event-countdown">あと <b>${days}</b> 日</span>`;
+    } else if (e.badge) {
+      badge = `<span class="event-countdown is-now">${e.badge}</span>`;
     } else if (!e.date && e.when === '受付中') {
       badge = '<span class="event-countdown is-now">受付中</span>';
     }
@@ -61,7 +65,7 @@
       }
     }
     return `<${tag} class="event-row${e.past ? ' is-past' : ''}${next ? ' is-next' : ''}${e.date ? ' has-cal' : ''}"${e.link ? ` href="${e.link}"` : ''}>
-      <div class="event-when">${next ? '<span class="event-next">Next Event</span>' : ''}${cal}<span class="ev-range">${!e.date && e.when === '受付中' ? '' : when}</span>${badge}</div>
+      <div class="event-when">${next ? '<span class="event-next">いちばん近い予定</span>' : ''}${cal}<span class="ev-range">${!e.date && e.when === '受付中' ? '' : when}</span>${badge}</div>
       <div class="event-main">
         <span class="chip">${e.tag || 'Event'}</span>
         <h3>${e.title}</h3>
