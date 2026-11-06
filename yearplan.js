@@ -72,5 +72,11 @@
       return `<li class="is-${l.key}"><a href="${l.href}"><span class="yp-now-k">${l.short}</span><b>${c.length ? c.join('・') : n ? 'つぎ：' + n.it[2] : 'ひと区切り'}</b><small>${n && c.length ? `つぎ：${when(n.it)} ${n.it[2]}` : n ? when(n.it) : ''}</small></a></li>`;
     }).join('')}</ul>`;
   };
-  boxes.forEach(b => { b.innerHTML = b.dataset.yearplan === 'now' ? now() : full(); });
+  // [data-yearplan="lane:fes"]：1 つの取り組みだけを、コンテストのページと同じ「進み具合」の帯で
+  const lane = key => {
+    const l = PLAN.find(x => x.key === key); if (!l) return '';
+    return `<ol class="cstep" aria-label="${l.name}の進み具合">${l.items.map(it => { const r = rows.find(x => x.it === it);
+      return `<li class="${r.st === 'is-next' ? '' : r.st}"><b>${it[2]}</b><small>${r.st === 'is-now' ? 'いま・' : ''}${it[3]}</small></li>`; }).join('')}</ol>`;
+  };
+  boxes.forEach(b => { const v = b.dataset.yearplan; b.innerHTML = v === 'now' ? now() : v.startsWith('lane:') ? lane(v.slice(5)) : full(); });
 })();
