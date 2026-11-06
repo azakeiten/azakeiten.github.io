@@ -502,7 +502,9 @@ try {
   if (hero && PHOTO[page] && !hero.classList.contains('en-hero')) {
     const ph = document.createElement('div');
     ph.className = 'ph-photo'; ph.setAttribute('aria-hidden', 'true');
-    ph.innerHTML = `<img src="${PHOTO[page]}" alt="" decoding="async" fetchpriority="low">`;
+    // スマホでは、幅 800px の軽い写真（photos/s/）を使う（もとの写真の半分以下の重さ）
+    const small = 'photos/s/' + PHOTO[page].split('/').pop();
+    ph.innerHTML = `<picture><source media="(max-width: 760px)" srcset="${small}"><img src="${PHOTO[page]}" alt="" decoding="async" fetchpriority="low"></picture>`;
     hero.prepend(ph);
     hero.classList.add('has-photo');
   }

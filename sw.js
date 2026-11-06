@@ -8,8 +8,8 @@
      ・Firebase や送信（POST）は触らない
      ・一度サイトを開いたら、主なページとその見た目（CSS）・共通の JS を裏で保存しておく
    ================================================================ */
-const CACHE = 'azakei-v198';
-const VER = '20261107b'; // ?v= と同じ（公開のたびに、ほかのファイルといっしょに書きかわる）
+const CACHE = 'azakei-v199';
+const VER = '20261107c'; // ?v= と同じ（公開のたびに、ほかのファイルといっしょに書きかわる）
 const CORE = ['./', 'index.html', 'quiz.html', 'diagnosis.html', 'offline.html', 'icon-192.png', 'manifest.webmanifest'];
 const PAGES = ['about', 'activities', 'azakei', 'contact', 'contests', 'events', 'festival', 'glossary', 'mypage', 'sim', 'vote', 'sponsor', 'policy', 'privacy', 'sitemap'];
 const SHARED_JS = ['content', 'layout', 'brand', 'nav', 'reveal', 'site', 'render', 'yearplan', 'pagetoc', 'osatsu'];
