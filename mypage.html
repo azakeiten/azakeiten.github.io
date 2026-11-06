@@ -22,8 +22,11 @@
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="p-mypage.min.css?v=20261107a" />
+  <!-- 書体は、ページの表示を止めないように後から読みこむ（通信が遅いときも、先に文字が出る） -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="p-mypage.min.css?v=20261107b" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -55,15 +58,15 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261107a"></script>
-  <script src="layout.js?v=20261107a"></script>
-  <script src="brand.js?v=20261107a"></script>
-  <script src="nav.js?v=20261107a"></script>
-  <script src="reveal.js?v=20261107a"></script>
-  <script src="site.js?v=20261107a"></script>
-  <script src="osatsu.js?v=20261107a"></script>
-  <script src="shareimg.js?v=20261107a"></script>
-  <script src="myrecord.js?v=20261107a"></script>
-  <script src="radar.js?v=20261107a"></script>
+  <script src="content.js?v=20261107b"></script>
+  <script src="layout.js?v=20261107b"></script>
+  <script src="brand.js?v=20261107b"></script>
+  <script src="nav.js?v=20261107b"></script>
+  <script src="reveal.js?v=20261107b"></script>
+  <script src="site.js?v=20261107b"></script>
+  <script src="osatsu.js?v=20261107b"></script>
+  <script src="shareimg.js?v=20261107b"></script>
+  <script src="myrecord.js?v=20261107b"></script>
+  <script src="radar.js?v=20261107b"></script>
 </body>
 </html>

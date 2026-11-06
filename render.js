@@ -179,7 +179,8 @@
   /* ---- 部員が管理ページ（admin.html）から書いた「日誌」「日程」を Firebase から足す ---- */
   const live = [...document.querySelectorAll('[data-render="diary"], [data-render="events"], [data-render="news"]')];
   if (!live.length) loading = false;
-  else if (D.firebase) (async () => {
+  // 最初の表示のあとで読みこむ（ページが開ききったとき、または 1.5 秒後の早いほう）。通信が遅くても、先に中身が見える
+  else if (D.firebase) ((go) => { let done = false; const once = () => { if (!done) { done = true; go(); } }; if (document.readyState === 'complete') setTimeout(once, 50); else addEventListener('load', () => setTimeout(once, 50), { once: true }); setTimeout(once, 1500); })(async () => {
     try {
       const SDK = 'https://www.gstatic.com/firebasejs/12.19.0/';
       const [appMod, fs] = await Promise.all([import(SDK + 'firebase-app.js'), import(SDK + 'firebase-firestore.js')]);
@@ -219,7 +220,7 @@
     loading = false;
     live.forEach(el => { const fn = renderers[el.dataset.render]; if (fn) fn(el); });
     document.dispatchEvent(new Event('azakei:rerender'));
-  })();
+  });
 
   /* ---- 「カレンダーに追加」：カード全体のリンクとは別に、Google カレンダーを新しいタブで開く ---- */
   const openCal = (el, ev) => { ev.preventDefault(); ev.stopPropagation(); window.open(el.dataset.href, '_blank', 'noopener'); };
