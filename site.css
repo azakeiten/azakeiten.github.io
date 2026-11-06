@@ -7283,3 +7283,10 @@ html[lang="ja"] section .section-label:not(.lab-no):not(.jp-label) { display: no
 .footer-head { text-transform: none; letter-spacing: .12em; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 13px; }
 .contest .en { display: none; }
 .toc-text small:empty { display: none; }
+
+/* ---- v157：ページごとの英語の飾りも日本語に（文化祭・AZAKEI として・トップ） ---- */
+.marquee-item { font-family: 'Shippori Mincho', serif; font-weight: 800; letter-spacing: .12em; text-transform: none; }
+.story-tag, .motto-label { font-family: 'Shippori Mincho', serif; font-weight: 800; letter-spacing: .2em; text-transform: none; font-size: 13px; }
+.about-image-caption { letter-spacing: .08em; text-transform: none; }
+html[lang="ja"] .value-en, html[lang="ja"] .dg-type-en { display: none; }
+.bill3d-kicker, .fx-rule-tag, .sched-cap, .dynamic-subtitle, .live-tag { text-transform: none; letter-spacing: .1em; }
