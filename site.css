@@ -7290,3 +7290,7 @@ html[lang="ja"] section .section-label:not(.lab-no):not(.jp-label) { display: no
 .about-image-caption { letter-spacing: .08em; text-transform: none; }
 html[lang="ja"] .value-en, html[lang="ja"] .dg-type-en { display: none; }
 .bill3d-kicker, .fx-rule-tag, .sched-cap, .dynamic-subtitle, .live-tag { text-transform: none; letter-spacing: .1em; }
+
+/* ---- v158：日本語のページの上の見出し — 背景の透かしは、そのページの朱印の漢字 1 文字（英語の大きな文字をやめる） ---- */
+html[lang="ja"] .page-hero[data-bg]::after { font-family: 'Shippori Mincho', serif; font-style: normal; font-weight: 800; font-size: clamp(180px, 28vw, 380px); letter-spacing: 0; right: .04em; bottom: -.16em; -webkit-text-stroke: 1.5px rgba(200, 169, 110, .26); }
+html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { display: none; }
