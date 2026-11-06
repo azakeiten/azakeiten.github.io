@@ -7216,3 +7216,16 @@ html.is-lite .os-man[role=button]::after { animation: none; }
   .hero-days small { font-size: 10.5px; opacity: .75; }
 }
 @media (max-width: 760px) { .hero-days { margin-top: 24px; line-height: 1.4; } }
+
+/* ---- v154：テンプレートっぽさを、もう一段へらす ----
+   ・見出しの金の言葉に光が走る演出と、グラデーションの文字をやめ、ふつうの金色 1 色に
+   ・日本語のページでは、各セクションの上の英語の小さなラベル（Our Story など）を出さない
+     （ページの一番上の、朱印つきのラベルと「実験 01」は残す。英語のページはそのまま） */
+.section-title em, .reveal.visible .section-title em, .page-hero .section-title em { background: none; -webkit-text-fill-color: currentColor; animation: none; }
+.is-apple .section-title em, .is-apple h2 em, .is-apple h3 em { background: none; -webkit-text-fill-color: currentColor; color: #9a7638; }
+.is-apple[data-theme="dark"] :is(.section-title, h2, h3) em { background: none; color: #e3c68e; }
+.is-apple .hero h1 em { background: none; -webkit-text-fill-color: currentColor; color: #e8cf98; }
+.ap-numbers b, .ap-record b { background: none; -webkit-text-fill-color: currentColor; color: #9a7638; }
+.is-apple[data-theme="dark"] .ap-numbers b, [data-theme="dark"] .ap-record b { background: none; color: #e3c68e; }
+html[lang="ja"] section .section-label:not(.lab-no):not(.jp-label) { display: none; }
+.section-label.jp-label { font-family: "Shippori Mincho", serif; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: none; }
