@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-vote.min.css?v=20261107h" />
+  <link rel="stylesheet" href="p-vote.min.css?v=20261107i" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -80,13 +80,16 @@
     <div class="container">
       <div class="section-head reveal">
         <p class="section-label">After you vote</p>
-        <h2 class="section-title">いまの投票結果</h2>
+        <h2 class="section-title">投票したあと</h2>
       </div>
       <ol class="ballot reveal">
         <li><span class="bl-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="22" width="32" height="20" rx="3"/><path d="M14 22v-4h20v4M18 12h12v10H18z"/></svg></span><b>1. 票が集まる</b><p>結果はこのページで、だれでもリアルタイムに見られます。</p></li>
         <li><span class="bl-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="24" rx="2"/><path d="M14 40h20M24 34v6M13 26l7-7 5 5 9-9"/></svg></span><b>2. 部員で読む</b><p>どの展示が見たいと思われているか、黒板に書き出して話し合います。</p></li>
         <li><span class="bl-ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 6l5 11 12 1-9 8 3 12-11-7-11 7 3-12-9-8 12-1z"/></svg></span><b>3. 次の展示へ</b><p>次の麻布経済展をつくるときの、いちばんの参考にします。</p></li>
       </ol>
+      <h3 class="sp-next-title reveal"><span class="keep-phrase">次の麻布経済展</span><span class="keep-phrase">（2027 年 5 月・予定）</span><span class="keep-phrase">ができるまで</span></h3>
+      <div class="reveal" data-yearplan="lane:fes"></div>
+      <p class="yp-link reveal"><a href="events.html#yearplan">コンテストもふくめた 1 年の流れ →</a></p>
     </div>
   </section>
 
@@ -96,22 +99,23 @@
       <p>「こんな展示が見たい！」という声は、Instagram の DM やお問い合わせフォームからも送れます。</p>
       <div class="cta-actions">
         <a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener" class="btn-primary">DM で送る @azakei_vlog</a>
-        <a href="festival.html" class="btn-ghost">去年の展示を見る <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+        <a href="festival.html" class="btn-ghost">2026 年の展示を見る <svg width="18" height="14"><path d="M1 7h16M11 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
       </div>
     </div>
   </section>
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261107h"></script>
-  <script src="layout.js?v=20261107h"></script>
-  <script src="brand.js?v=20261107h"></script>
-  <script src="votetowers.js?v=20261107h"></script>
-  <script src="vote.js?v=20261107h"></script>
-  <script src="nav.js?v=20261107h"></script>
-  <script src="reveal.js?v=20261107h"></script>
-  <script src="pagetoc.js?v=20261107h"></script>
-  <script src="site.js?v=20261107h"></script>
+  <script src="content.js?v=20261107i"></script>
+  <script src="layout.js?v=20261107i"></script>
+  <script src="brand.js?v=20261107i"></script>
+  <script src="yearplan.js?v=20261107i"></script>
+  <script src="votetowers.js?v=20261107i"></script>
+  <script src="vote.js?v=20261107i"></script>
+  <script src="nav.js?v=20261107i"></script>
+  <script src="reveal.js?v=20261107i"></script>
+  <script src="pagetoc.js?v=20261107i"></script>
+  <script src="site.js?v=20261107i"></script>
   <script>
     document.getElementById('copyLink').addEventListener('click', async function () {
       var label = this.querySelector('span');

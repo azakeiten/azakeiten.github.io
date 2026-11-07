@@ -82,7 +82,7 @@ window.AZAKEI = {
     namespace: 'azakei-festival-vote-2027',
     question: '次の麻布経済展、どんな展示が見たい？',
     options: [
-      { key: 'same',    label: '去年と同じ',       en: 'Same as 2026', desc: 'チップを増やす体験型展示を、もう一度。' },
+      { key: 'same',    label: '2026 年と同じ',    en: 'Same as 2026', desc: 'チップを増やす体験型展示を、もう一度。' },
       { key: 'econ',    label: 'ガチ経済系',       en: 'Hardcore Economics', desc: '株・金融・マクロ経済を本気で深掘り。' },
       { key: 'fun',     label: '面白系',           en: 'Just for Fun', desc: 'とにかく笑えて、楽しい展示。' },
       { key: 'insta',   label: 'Instagram映え系',  en: 'Photogenic', desc: '思わず写真を撮りたくなる空間。' },
