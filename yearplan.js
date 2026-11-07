@@ -95,3 +95,13 @@
   };
   boxes.forEach(b => { const v = b.dataset.yearplan; b.innerHTML = v === 'now' ? now() : v.startsWith('lane:') ? lane(v.slice(5)) : full(); });
 })();
+
+// [data-days-to="YYYY-MM-DD"]：その日まで「あと ○ 日」（文化祭のページの、次の麻布経済展の帯など）
+(function() {
+  const jst = new Date(Date.now() + 9 * 3600e3);
+  const today = Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate());
+  document.querySelectorAll('[data-days-to]').forEach(el => {
+    const [y, m, d] = el.dataset.daysTo.split('-').map(Number), n = Math.round((Date.UTC(y, m - 1, d) - today) / 864e5);
+    if (n > 0) el.textContent = `あと ${n} 日`;
+  });
+})();

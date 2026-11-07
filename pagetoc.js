@@ -16,7 +16,9 @@
   const en = /^en/.test(document.documentElement.lang);
   if (en) nav.setAttribute('aria-label', 'On this page');
   nav.innerHTML = `<div class="container"><p class="ptoc-head"><span aria-hidden="true">目</span>${en ? 'On this page' : 'このページの中身'}<small>${en ? secs.length + ' sections' : secs.length + ' つ'}</small></p><ol>${secs.map((s, i) => `<li><a href="#${s.id}"><b>${String(i + 1).padStart(2, '0')}</b>${label(s)}</a></li>`).join('')}</ol></div>`;
-  hero.after(nav);
+  // 見出しのすぐ下に「次の麻布経済展」などの帯があるときは、その下に置く
+  const band = hero.nextElementSibling && hero.nextElementSibling.classList.contains('fes-next') ? hero.nextElementSibling : hero;
+  band.after(nav);
   // いま読んでいるところに印
   if (!('IntersectionObserver' in window)) return;
   const links = new Map(secs.map(s => [s, nav.querySelector(`a[href="#${s.id}"]`)]));

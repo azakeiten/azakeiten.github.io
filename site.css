@@ -7308,3 +7308,16 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 .sp-photos figcaption { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: var(--color-muted); }
 .sp-next-title { margin: 34px 0 6px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; }
 @media (max-width: 760px) { .sp-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---- v162：文化祭のページ — 見出しのすぐ下に「次の麻布経済展」（いつ・どこ・いまできること） ---- */
+.fes-next { position: relative; z-index: 2; border-bottom: 1px solid var(--color-border); background: var(--color-surface, #fff); }
+.fes-next-in { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 22px; padding-top: 14px; padding-bottom: 14px; }
+.fes-next-when { margin: 0; display: flex; align-items: baseline; gap: 8px; } .fes-next-when span { font-size: 12px; font-weight: 700; color: var(--color-muted); }
+.fes-next-when b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; } .fes-next-when small { font-size: 12px; color: var(--color-muted); }
+.fes-next-when em { font-style: normal; font-size: 12.5px; font-weight: 700; color: #b5432f; } .fes-next-when em:empty { display: none; }
+.fes-next-where { margin: 0; font-size: 13px; color: var(--color-muted); }
+.fes-next-links { margin-left: auto; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
+.fes-next-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
+.fes-next-links a.is-vote { color: #b5432f; font-weight: 700; }
+[data-theme="dark"] .fes-next-links a.is-vote, [data-theme="dark"] .fes-next-when em { color: #e3a08f; }
+@media (max-width: 760px) { .fes-next-links { margin-left: 0; width: 100%; } }
