@@ -27,6 +27,7 @@
     { group: '知る', en: 'Know', pages: [
       { ico: 'M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10', href: 'index.html',      ja: 'ホーム',           en: 'Home',     desc: 'AZAKEI の全体像と最新情報。',                 img: 'hero.jpg' },
       { ico: 'M12 3l2.6 4.5H20l-2.7 4.5L20 16.5h-5.4L12 21l-2.6-4.5H4l2.7-4.5L4 7.5h5.4z', href: 'about.html',      ja: '麻経とは',         en: 'About',    desc: '成り立ち・活動の全体説明・今後の展望。',       img: 'members.jpg' },
+      { ico: 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5M9 9h3', href: 'report.html',     ja: '2026 年の活動報告', en: 'Report', desc: '1 年を 1 ページに。数字・写真・月ごとの歩み。', img: 'photos/room-diagnosis.jpg' },
       { ico: 'M5 21V4M5 4h12l-2.5 4 2.5 4H5', href: 'azakei.html',     ja: 'AZAKEI として',    en: 'Identity', desc: '合言葉・大切にしていること・活動の地図・数字。', img: 'photos/board-special.jpg' },
       { ico: 'M4 8h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM10 8v10', href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'photos/room-diagnosis.jpg' },
       { ico: 'M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'photos/setup.jpg' },
@@ -65,7 +66,7 @@
   // v44：大きな会社のサイトのように、日本語の 5 つの入口＋開くと説明つきのページ一覧（メガメニュー）
   const P = Object.fromEntries(INDEX.flatMap(g => g.pages).map(p => [p.href, p]));
   const MENU = [
-    { ja: 'AZAKEIについて', en: 'About', lead: '私たちが何者で、何を大切にしているか。', pages: ['about.html', 'azakei.html', 'activities.html', 'glossary.html'] },
+    { ja: 'AZAKEIについて', en: 'About', lead: '私たちが何者で、何を大切にしているか。', pages: ['about.html', 'report.html', 'azakei.html', 'activities.html', 'glossary.html'] },
     { ja: '文化祭', en: 'Festival', lead: '体験型展示「麻布経済展」と、その日程。', pages: ['festival.html', 'events.html', 'vote.html'] },
     { ja: 'コンテスト', en: 'Contests', href: 'contests.html' },
     { ja: '体験する', en: 'Play', lead: '登録なし・スマホで、すぐに遊べます。', pages: ['quiz.html', 'diagnosis.html', 'sim.html'] },
@@ -176,7 +177,7 @@
   const tick = '<span>仕組みを、<em>つくろう。</em></span>';
   // フッターのリンクは「知る」「遊ぶ・学ぶ」「つながる」の 3 つに分ける
   const FOOT_GROUPS = [
-    { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['azakei.html', 'AZAKEI として'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
+    { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['report.html', '2026 年の活動報告'], ['azakei.html', 'AZAKEI として'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
     { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '億万長者クイズ'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', '経済ラボ'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
     { en: 'Connect', ja: 'つながる', links: [['contact.html', 'お問い合わせ'], ['sponsor.html', '協賛のご案内'], ...sns.map(s => [s.url, s.name, s.handle])] }
   ];
@@ -225,6 +226,7 @@
     ['azakei.html#kokoroe', '展示員の心得 拾参ヶ条', 'AZAKEI として', '心得 ルール 約束 マニュアル 裏側'],
     ['festival.html#story', '3 日間の物語', '文化祭', '来場者 2364 人数'],
     ['festival.html#exhibition', '展示の仕組み', '文化祭', 'チップ 倍率 賭ける'],
+    ['report.html', '2026 年の活動報告', '活動報告', '年報 実績 来場者 数字 1 年 まとめ 報告'],
     ['about.html#faq', 'よくある質問（FAQ）', '麻経とは', 'faq 質問 入部 部員'],
     ['about.html#profile', '団体概要', '麻経とは', '設立 学校 連絡先'],
     ['about.html#vision', '今後の展望', '麻経とは', 'これから 目標 ロードマップ'],

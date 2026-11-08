@@ -495,7 +495,7 @@ try {
   const PHOTO = {
     'about.html': 'members.jpg', 'azakei.html': 'photos/board-special.jpg', 'activities.html': 'photos/setup.jpg', 'contests.html': 'photos/star-bills.jpg',
     'events.html': 'photos/balloons.jpg', 'festival.html': 'photos/hallway-wave.jpg', 'vote.html': 'photos/hallway-game.jpg',
-    'sponsor.html': 'photos/room-paper.jpg', 'contact.html': 'photos/star-door.jpg', 'diagnosis.html': 'photos/room-diagnosis.jpg',
+    'sponsor.html': 'photos/room-paper.jpg', 'report.html': 'photos/room-diagnosis.jpg', 'contact.html': 'photos/star-door.jpg', 'diagnosis.html': 'photos/room-diagnosis.jpg',
     'en-diagnosis.html': 'photos/room-diagnosis.jpg', 'quiz.html': 'photos/board-millionaire.jpg', 'sim.html': 'photos/board-special.jpg', 'glossary.html': 'photos/rules-posters.jpg', '404.html': 'photos/entrance.jpg'
   };
   const hero = document.querySelector('.page-hero');
@@ -674,6 +674,7 @@ try {
   /* ---- 各ページの最後：写真つきで次のページへ ---- */
   const ORDER = [
     ['about.html', '麻経とは', 'AZAKEI の成り立ちと、これから。', 'members.jpg'],
+    ['report.html', '2026 年の活動報告', '1 年を 1 ページに。', 'photos/room-diagnosis.jpg'],
     ['azakei.html', 'AZAKEI として', '合言葉と、大切にしていること。', 'photos/board-special.jpg'],
     ['festival.html', '文化祭「麻布経済展」', '経済とエンタメが交差する、体験型展示。', 'photos/hallway-wave.jpg'],
     ['contests.html', '各種コンテスト', '学校の外で、自分たちの力を試す。', 'photos/star-bills.jpg'],
@@ -1031,7 +1032,7 @@ try {
 (function() {
   const page = location.pathname.split('/').pop() || 'index.html';
   const CAT = {
-    know: ['about.html', 'azakei.html', 'festival.html', 'activities.html', 'glossary.html'],
+    know: ['about.html', 'report.html', 'azakei.html', 'festival.html', 'activities.html', 'glossary.html'],
     challenge: ['contests.html', 'events.html'],
     join: ['diagnosis.html', 'quiz.html', 'sim.html', 'vote.html', 'sponsor.html', 'contact.html']
   };
