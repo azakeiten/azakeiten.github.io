@@ -7321,3 +7321,4 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 .fes-next-links a.is-vote { color: #b5432f; font-weight: 700; }
 [data-theme="dark"] .fes-next-links a.is-vote, [data-theme="dark"] .fes-next-when em { color: #e3a08f; }
 @media (max-width: 760px) { .fes-next-links { margin-left: 0; width: 100%; } }
+
