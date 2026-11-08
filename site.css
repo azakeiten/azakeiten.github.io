@@ -7449,3 +7449,11 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
   html .rp-page .page-hero .section-label { display: none !important; }
 }
 @media print { html .rp-page .rp-intro-year { display: none !important; } html .rp-page .rp-print-head span { text-align: right; } }
+/* v165 トップ：数字の下に「2026 年の活動報告」への帯 */
+.rp-band { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; margin-top: 22px; padding: 16px 20px; border: 1px solid var(--color-border); border-left: 3px solid #b5432f; border-radius: 8px; color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+.rp-band:hover { border-color: #b08a4a; border-left-color: #b5432f; transform: translateY(-2px); }
+.rp-band-seal { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 4px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 21px; }
+.rp-band-text b { display: block; font-size: 16px; } .rp-band-text small { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.7; color: var(--color-muted); }
+.rp-band-go { font-size: 13px; font-weight: 700; color: var(--color-accent-deep); white-space: nowrap; }
+.rp-band-go::after { content: ' →'; }
+@media (max-width: 560px) { .rp-band { grid-template-columns: auto 1fr; } .rp-band-go { display: none; } }
