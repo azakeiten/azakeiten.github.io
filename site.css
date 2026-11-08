@@ -7387,3 +7387,65 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 .rp-photos figure.is-wide img { aspect-ratio: 4 / 3; }
 .rp-fig.is-main .rp-days { width: 100%; max-width: 440px; justify-self: end; }
 @media (max-width: 760px) { .rp-fig.is-main .rp-days { justify-self: stretch; max-width: none; } }
+/* v164 活動報告：印刷・PDF で保存（A4 の報告書の形に。画面では印刷用の帯は出さない） */
+.rp-print-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 22px; }
+.rp-print { padding: 10px 20px; border: 1px solid rgba(255, 255, 255, .55); border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .2s, border-color .2s; }
+.rp-print:hover { background: rgba(255, 255, 255, .12); border-color: #d6b270; }
+.rp-print-wrap small { font-size: 12.5px; opacity: .75; }
+.rp-print-head, .rp-print-foot { display: none; }
+@media print {
+  @page { size: A4; margin: 13mm 14mm; }
+  .rp-page { --color-bg: #fff; --color-text: #161616; --color-muted: #444; --color-border: #cfc8bb; --color-surface: #fff; background: #fff !important; color: #161616 !important; font-size: 12px; }
+  .rp-page #navbar, .rp-page #mobileMenu, .rp-page .skip-link, .rp-page .ptoc, .rp-page .next-page, .rp-page .wave-band, .rp-page .pnext, .rp-page #site-footer,
+  .rp-page .curtain, .rp-page .read-progress, .rp-page .to-top, .rp-page .dock, .rp-page .explore, .rp-page .rp-print-wrap, .rp-page .cta-band .cta-actions, .rp-page .yp-link { display: none !important; }
+  .rp-page .rp-print-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 6px; margin-bottom: 4px; border-bottom: 2px solid #b5432f; font-size: 10px; color: #444; }
+  .rp-page .rp-print-head b { font-size: 13px; color: #161616; }
+  .rp-page .rp-print-foot { display: block; margin-top: 10px; padding-top: 6px; border-top: 1px solid #cfc8bb; font-size: 10px; color: #444; }
+  .rp-page *, .rp-page *::before, .rp-page *::after { animation: none !important; transition: none !important; box-shadow: none !important; text-shadow: none !important; }
+  .rp-page .reveal { opacity: 1 !important; transform: none !important; clip-path: none !important; filter: none !important; }
+  .rp-page section, .rp-page .page-hero { background: none !important; color: #161616 !important; min-height: 0 !important; padding: 10px 0 !important; }
+  .rp-page section::before, .rp-page section::after, .rp-page .page-hero::before, .rp-page .page-hero::after { display: none !important; }
+  .rp-page .page-hero * { color: #161616 !important; }
+  .rp-page .page-hero .ph-seal { color: #fff !important; }
+  .rp-page .page-hero .section-title { font-size: 28px !important; }
+  .rp-page .breadcrumb { display: none; }
+  .rp-page .container { max-width: none !important; padding: 0 !important; }
+  .rp-page .section-head { margin-bottom: 8px !important; }
+  .rp-page .section-title { font-size: 19px !important; }
+  .rp-page .lead { font-size: 12px !important; }
+  .rp-page .rp-intro-text { font-size: 15px; }
+  .rp-page .rp-intro-year { font-size: 72px; color: #eee7da; }
+  .rp-page .rp-fig { padding: 10px 10px 10px 0; break-inside: avoid; }
+  .rp-page .rp-fig b { font-size: 26px; }
+  .rp-page .rp-fig.is-main b { font-size: 44px; color: #b5432f !important; }
+  .rp-page .rp-days { height: 90px; } .rp-page .rp-days span { transform: none !important; }
+  .rp-page .rp-days span.is-top { background: #b5432f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .rp-page .rp-days span:not(.is-top) { background: #dccfb4 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .rp-page #months { break-before: page; }
+  .rp-page .rp-months > li { padding: 9px 0; grid-template-columns: 90px 1fr; break-inside: avoid; }
+  .rp-page .rp-months p { font-size: 11.5px; line-height: 1.7; } .rp-page .rp-months a { display: none; }
+  .rp-page .rp-photos { grid-template-columns: repeat(4, 1fr); gap: 6px; } .rp-page .rp-photos figure { break-inside: avoid; }
+  .rp-page .rp-photos figcaption { font-size: 9.5px; }
+  .rp-page .rp-web { grid-template-columns: repeat(5, 1fr); gap: 6px; } .rp-page .rp-web a { padding: 8px; grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .rp-page .rp-seal, .rp-page .ph-seal, .rp-page .rp-months li.is-now .rp-m b { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .rp-page .rp-web small { font-size: 9.5px; }
+  .rp-page #next { break-before: page; }
+  .rp-page .cta-band { padding: 10px 0 0 !important; text-align: left; }
+  .rp-page .cta-band .section-title { font-size: 16px !important; }
+}
+/* v164b 活動報告の印刷：暗い帯（section.services）にも負けないように、白地・黒字にそろえる */
+@media print {
+  html:not(.is-apple) .rp-page section.services:not(.cta-band), html .rp-page section, html .rp-page .page-hero { background: #fff !important; background-image: none !important; margin: 0 !important; }
+  html .rp-page section, html .rp-page .page-hero, html .rp-page .page-hero * { --color-text: #161616; --color-muted: #444; --color-border: #cfc8bb; --color-surface: #fff; color: #161616 !important; }
+  html .rp-page section p, html .rp-page section small, html .rp-page section em, html .rp-page section i, html .rp-page section figcaption { color: #444 !important; }
+  html .rp-page .rp-fig b, html .rp-page .rp-months h3, html .rp-page .rp-web b, html .rp-page .section-title { color: #161616 !important; }
+  html .rp-page .rp-fig.is-main b, html .rp-page .rp-months > li.is-big .rp-m, html .rp-page .rp-days-to { color: #b5432f !important; border-color: #b5432f !important; }
+  html .rp-page .rp-seal, html .rp-page .ph-seal, html .rp-page .rp-months li.is-now .rp-m b { color: #fff !important; }
+  html .rp-page .section-title em, html .rp-page .page-hero em { -webkit-text-fill-color: currentColor; background: none !important; }
+  html .rp-page .rp-print-head b { white-space: nowrap; }
+  html .rp-page #next { break-before: auto; }
+  html .rp-page #web { break-before: page; }
+  html .rp-page .ph-seal { background: #b5432f !important; }
+  html .rp-page .page-hero .section-label { display: none !important; }
+}
+@media print { html .rp-page .rp-intro-year { display: none !important; } html .rp-page .rp-print-head span { text-align: right; } }

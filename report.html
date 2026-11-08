@@ -17,7 +17,7 @@
   <meta property="og:description" content="AZAKEI（麻経）の 2026 年を 1 ページに。文化祭「麻布経済展」に 3 日間で 2,364 人が来場、2 つのコンテストに挑戦。数字と写真と月ごとの歩み、次の麻布経済展（2027 年 5 月・予定）への準備。" />
   <meta property="og:url" content="https://azakeiten.github.io/report.html" />
   <link rel="canonical" href="https://azakeiten.github.io/report.html" />
-  <meta property="og:image" content="https://azakeiten.github.io/og.jpg" />
+  <meta property="og:image" content="https://azakeiten.github.io/og-report.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-report.min.css?v=20261108e" />
+  <link rel="stylesheet" href="p-report.min.css?v=20261108g" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -36,7 +36,10 @@
     gtag('config', 'G-S1YQ2P951D');
   </script>
 </head>
-<body>
+<body class="rp-page">
+
+    <!-- 印刷したときだけ出る表紙の帯と、終わりの連絡先 -->
+  <div class="rp-print-head" aria-hidden="true"><b>AZAKEI（麻経）　2026 年の活動報告</b><span>麻布中学校・高等学校 経済系同好会　｜　2026 年 11 月版　｜　https://azakeiten.github.io/report.html</span></div>
 
   <header class="page-hero" data-bg="報">
     <div class="container">
@@ -44,6 +47,7 @@
       <p class="section-label"><span class="ph-seal" aria-hidden="true">報</span></p>
       <h1 class="section-title"><span class="keep-phrase">2026 年の</span><span class="keep-phrase"><em>活動報告</em></span></h1>
       <p class="page-hero-lead">AZAKEI（麻経）の 1 年を、1 ページにまとめました。協賛を考えてくださっている方にも、はじめての方にも、まずここから。</p>
+      <p class="rp-print-wrap"><button type="button" class="rp-print" onclick="window.print()">印刷・PDF で保存</button><small>A4 の報告書の形で保存できます</small></p>
     </div>
   </header>
 
@@ -159,15 +163,21 @@
     </div>
   </section>
 
+  <div class="rp-print-foot" aria-hidden="true">お問い合わせ：https://azakeiten.github.io/contact.html　｜　Instagram @azakei_vlog　｜　azakeiten@gmail.com</div>
+
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261108e"></script>
-  <script src="layout.js?v=20261108e"></script>
-  <script src="brand.js?v=20261108e"></script>
-  <script src="yearplan.js?v=20261108e"></script>
-  <script src="nav.js?v=20261108e"></script>
-  <script src="reveal.js?v=20261108e"></script>
-  <script src="pagetoc.js?v=20261108e"></script>
-  <script src="site.js?v=20261108e"></script>
+  <script src="content.js?v=20261108g"></script>
+  <script src="layout.js?v=20261108g"></script>
+  <script src="brand.js?v=20261108g"></script>
+  <script src="yearplan.js?v=20261108g"></script>
+  <script src="nav.js?v=20261108g"></script>
+  <script src="reveal.js?v=20261108g"></script>
+  <script src="pagetoc.js?v=20261108g"></script>
+  <script src="site.js?v=20261108g"></script>
+  <script>
+    /* 印刷・PDF にするときは、明るい見た目にしてから（終わったらもとにもどす） */
+    (function () { var prev; addEventListener('beforeprint', function () { prev = document.documentElement.dataset.theme; document.documentElement.dataset.theme = 'light'; }); addEventListener('afterprint', function () { if (prev) document.documentElement.dataset.theme = prev; }); })();
+  </script>
 </body>
 </html>
