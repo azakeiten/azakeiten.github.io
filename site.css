@@ -7541,3 +7541,56 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 .gl-rows button.gl-row-new { width: auto; padding: 0 30px 0 12px; font-size: 13px; font-weight: 700; border-color: color-mix(in srgb, var(--shu, #b5432f) 45%, var(--color-border)); }
 .gl-rows button.gl-row-new small { right: 8px; bottom: auto; font-size: 11px; color: var(--shu, #b5432f); }
 .gl-rows button.gl-row-new[aria-pressed="true"] small { color: #fff; }
+
+/* v168 授業で使えることばプリント（glossary.html#sheet） */
+.ws[data-ws] { display: grid; gap: 16px; }
+.ws[data-ws] .ws-ctrl { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 16px; padding: 18px 20px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.ws[data-ws] .ws-ctrl label { display: grid; gap: 4px; font-size: 12.5px; font-weight: 700; color: var(--color-muted); }
+.ws[data-ws] .ws-ctrl select { min-width: 9em; padding: 9px 12px; border-radius: 12px; border: 1.5px solid var(--color-border); background: var(--color-bg, #faf7f1); color: var(--color-text); font: inherit; font-size: 14.5px; font-weight: 700; }
+.ws[data-ws] .ws-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
+.ws[data-ws] .ws-btns button { padding: 10px 18px; border-radius: 999px; font: inherit; font-weight: 800; font-size: 14px; cursor: pointer; }
+.ws[data-ws] .ws-re { border: 1.5px solid var(--color-border); background: none; color: var(--color-text); }
+.ws[data-ws] .ws-print { border: none; background: #b5432f; color: #fff; }
+.ws[data-ws] .ws-paper { max-height: 640px; overflow: auto; border-radius: 10px; box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 12px 32px rgba(0, 0, 0, .12); }
+.ws[data-ws] .ws-note { margin: 0; font-size: 12.5px; color: var(--color-muted); line-height: 1.8; word-break: auto-phrase; }
+/* 紙のプリント（画面の見本と、印刷の両方） */
+.ws-page { background: #fffdf8; color: #1d1d1d; padding: 34px 38px 26px; font-family: 'Zen Kaku Gothic New', sans-serif; }
+.ws-page + .ws-page { border-top: 2px dashed #d8cdb9; }
+.ws-h { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: end; padding-bottom: 10px; border-bottom: 2px solid #b5432f; }
+.ws-h-k { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; color: #1d1d1d; }
+.ws-h-k small { margin-left: 10px; padding: 2px 8px; border-radius: 3px; background: #b5432f; color: #fff; font-size: 12px; vertical-align: .25em; }
+.ws-h-meta { margin: 0; grid-column: 1; font-size: 12px; color: #666; }
+.ws-name { margin: 0; grid-column: 2; grid-row: 1 / 3; align-self: end; min-width: 15em; padding: 4px 6px; border-bottom: 1px solid #1d1d1d; font-size: 12.5px; white-space: pre; color: #1d1d1d; }
+.ws-lead { margin: 14px 0 8px; font-size: 13px; line-height: 1.8; color: #333; }
+.ws-q, .ws-a { list-style: none; margin: 0; padding: 0; }
+.ws-q li { display: grid; grid-template-columns: 26px 1fr 7.5em; gap: 10px; align-items: start; padding: 9px 0; border-bottom: 1px solid #e6dccb; break-inside: avoid; }
+.ws-no { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1px solid #b08a4a; font-size: 11.5px; font-weight: 700; color: #6b5226; }
+.ws-q p { margin: 0; font-size: 13px; line-height: 1.75; color: #1d1d1d; }
+.ws-ans { align-self: stretch; min-height: 30px; border: 1px solid #9a8f7c; border-radius: 4px; background: #fff; }
+.ws-bank { margin-top: 14px; padding: 10px 14px; border: 1px solid #b08a4a; border-radius: 6px; break-inside: avoid; }
+.ws-bank p { margin: 0 0 6px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 14px; color: #1d1d1d; }
+.ws-bank ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(12em, 1fr)); gap: 4px 14px; }
+.ws-bank li { font-size: 12.5px; line-height: 1.6; color: #1d1d1d; }
+.ws-bank b { display: inline-block; width: 1.6em; color: #b5432f; }
+.ws-a li { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid #e6dccb; }
+.ws-a b { font-size: 14px; color: #1d1d1d; }
+.ws-a a { font-size: 11.5px; color: #8a6a32; }
+.ws-f { margin-top: 16px; font-size: 10.5px; color: #777; }
+#wsPrint { display: none; }
+@media (max-width: 640px) {
+  .ws[data-ws] .ws-ctrl label { flex: 1 1 40%; } .ws[data-ws] .ws-ctrl select { width: 100%; min-width: 0; }
+  .ws[data-ws] .ws-btns { margin-left: 0; width: 100%; } .ws[data-ws] .ws-btns button { flex: 1; }
+  .ws-page { padding: 22px 16px 18px; }
+  .ws-h { grid-template-columns: 1fr; } .ws-name { grid-column: 1; grid-row: auto; min-width: 0; margin-top: 6px; }
+  .ws-q li { grid-template-columns: 24px 1fr; } .ws-ans { grid-column: 2; min-height: 26px; }
+}
+@media print {
+  body.ws-printing > *:not(#wsPrint) { display: none !important; }
+  body.ws-printing { background: #fff !important; }
+  body.ws-printing #wsPrint { display: block; }
+  body.ws-printing .ws-page { padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.ws-printing .ws-page + .ws-page { border: none; break-before: page; }
+  body.ws-printing .ws-a a { display: none; }
+}
+@media print { html:has(body.ws-printing) { background: #fff !important; color-scheme: light; } }
+.ws[data-ws] .ws-btns button { white-space: nowrap; padding-left: 14px; padding-right: 14px; }
