@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261108h" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261109a" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -61,6 +61,18 @@
         <p class="qz-venue-note">会場では、最後のチップが 40 枚以上の人にシャーペンをプレゼントしました。Web で、この記録をこえられるか。</p>
       </div>
       <p class="dg-note">※ 遊びのゲームです。チップに実際の価値はありません。</p>
+    </div>
+  </section>
+
+  <!-- 経済クロスワード -->
+  <section class="services tight" id="crossword">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title"><span class="keep-phrase">経済</span><span class="keep-phrase"><em>クロスワード</em></span></h2>
+        <p class="lead">文化祭の 3 つめのコーナー「クロスワード」を、Web 用に新しく作りました。カギを選んで、ひらがなで答えるだけ。チップ 10 枚から始めて、正解で 2 枚ふえます。14 語をうめたら、二重マスで最後の問題。</p>
+      </div>
+      <div class="cw reveal" data-cw></div>
+      <p class="dg-note">※ 会場の問題とは別の、Web 版の問題です。小さい「ャ」「ョ」なども、大きい字で 1 マスに入ります。</p>
     </div>
   </section>
 
@@ -102,23 +114,23 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261108h"></script>
-  <script src="layout.js?v=20261108h"></script>
-  <script src="brand.js?v=20261108h"></script>
-  <script src="nav.js?v=20261108h"></script>
-  <script src="reveal.js?v=20261108h"></script>
-  <script src="ranking.js?v=20261108h"></script>
-  <script src="quiz-data.js?v=20261108h"></script>
-  <script src="shareimg.js?v=20261108h"></script>
-  <script src="quiz.js?v=20261108h"></script>
-  <script src="osatsu.js?v=20261108h"></script>
-  <script src="pagetoc.js?v=20261108h"></script>
-  <script src="site.js?v=20261108h"></script>
+  <script src="content.js?v=20261109a"></script>
+  <script src="layout.js?v=20261109a"></script>
+  <script src="brand.js?v=20261109a"></script>
+  <script src="nav.js?v=20261109a"></script>
+  <script src="reveal.js?v=20261109a"></script>
+  <script src="ranking.js?v=20261109a"></script>
+  <script src="quiz-data.js?v=20261109a"></script>
+  <script src="shareimg.js?v=20261109a"></script>
+  <script src="quiz.js?v=20261109a"></script>
+  <script src="osatsu.js?v=20261109a"></script>
+  <script src="pagetoc.js?v=20261109a"></script>
+  <script src="site.js?v=20261109a"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261108h';
-      [['[data-sugo]', 'sugoroku.js'], ['[data-coins]', 'coins.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
+      var V = '20261109a';
+      [['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-coins]', 'coins.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };
         if (location.hash || !('IntersectionObserver' in window)) return load();

@@ -924,6 +924,7 @@ try {
       ['読', 'チャート読み', chart, 'チャート予想で 7 回中 5 回以上当てる', 'sim.html#updown'],
       ['歴', '歴史通', npBest >= 8, '年表ゲームで 8 問連続正解', 'glossary.html#nenpyo'],
       ['為', '為替マスター', fxM, '両替所のチャレンジで 3 問全問正解', 'sim.html#fx'],
+      ['字', 'クロスワード名人', (+get('azakei_cw_best', 0) || 0) > 0, '経済クロスワードを最後の問題までクリア', 'quiz.html#crossword'],
       ['貨', '世界のお金博士', get('azakei_coins', []).length >= 12, '世界のお金図鑑のコインを 12 枚あつめる', 'quiz.html#coins'],
       ['研', 'ラボ制覇', ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo'].every(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }) && get('azakei_shop', []).length >= 3, '経済ラボの 8 つの実験に「済」をそろえる', 'sim.html'],
       ['店', '店長', get('azakei_shop', []).length >= 3, 'お店の「店長ミッション」を 3 つクリア', 'sim.html#shop'],
