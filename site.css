@@ -7531,3 +7531,13 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
   .rp-page .rp-web .rp-seal { grid-row: span 2; width: 30px; height: 30px; font-size: 16px; }
   .rp-page .rp-web small br { display: none; }
 }
+
+/* v167 用語辞典：276 語に（はたらくこと・環境と資源）・新しく入った言葉 */
+#g-work { --gc: #8a5a3a; } #g-env { --gc: #3f7a4a; }
+:root[data-theme="dark"] #g-work { --gc: #d9a57f; } :root[data-theme="dark"] #g-env { --gc: #8fcf9a; }
+.gl-cats a[href="#g-work"] { --gc: #8a5a3a; } .gl-cats a[href="#g-env"] { --gc: #3f7a4a; }
+.gl-cats a small { font-size: 10.5px; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.gl-item[data-new] dt::after { content: "新"; display: inline-grid; place-items: center; width: 1.45em; height: 1.45em; margin-left: .5em; vertical-align: .15em; border-radius: 3px; background: var(--shu, #b5432f); color: #fff; font-family: 'Shippori Mincho', serif; font-size: .62em; font-weight: 800; line-height: 1; }
+.gl-rows button.gl-row-new { width: auto; padding: 0 30px 0 12px; font-size: 13px; font-weight: 700; border-color: color-mix(in srgb, var(--shu, #b5432f) 45%, var(--color-border)); }
+.gl-rows button.gl-row-new small { right: 8px; bottom: auto; font-size: 11px; color: var(--shu, #b5432f); }
+.gl-rows button.gl-row-new[aria-pressed="true"] small { color: #fff; }

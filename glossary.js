@@ -36,7 +36,7 @@
   let row = '';
   const rowBar = document.createElement('div');
   rowBar.className = 'gl-rows'; rowBar.setAttribute('role', 'group'); rowBar.setAttribute('aria-label', '五十音で引く');
-  rowBar.innerHTML = `<span class="gl-rows-label">五十音</span>` + ROWS.map(([r]) => { const n = rowOf.filter(x => x === r).length; return `<button type="button" data-row="${r}" aria-pressed="false"${n ? '' : ' disabled'}>${r}<small>${n}</small></button>`; }).join('');
+  rowBar.innerHTML = `<span class="gl-rows-label">五十音</span>` + ROWS.map(([r]) => { const n = rowOf.filter(x => x === r).length; return `<button type="button" data-row="${r}" aria-pressed="false"${n ? '' : ' disabled'}>${r}<small>${n}</small></button>`; }).join('') + `<button type="button" data-row="新" class="gl-row-new" aria-pressed="false">新しく入った言葉<small>${items.filter(x => x.hasAttribute('data-new')).length}</small></button>`;
   count.before(rowBar);
   rowBar.addEventListener('click', e => {
     const b = e.target.closest('[data-row]'); if (!b) return;
@@ -46,12 +46,14 @@
     run();
   });
   input.addEventListener('input', () => { if (row) { row = ''; rowBar.querySelectorAll('[data-row]').forEach(x => x.setAttribute('aria-pressed', 'false')); } });
+  // 分類のボタンに、言葉の数をそえる
+  document.querySelectorAll('.gl-cats a[href^="#g-"]').forEach(a => { const g = document.querySelector(a.getAttribute('href')); if (g) a.insertAdjacentHTML('beforeend', `<small>${g.querySelectorAll('.gl-item').length}</small>`); });
   const run = () => {
     const q = norm(input.value);
     let n = 0;
-    items.forEach((it, i) => { const hit = (!q || text[i].includes(q)) && (!row || rowOf[i] === row); it.hidden = !hit; if (hit) n++; });
+    items.forEach((it, i) => { const hit = (!q || text[i].includes(q)) && (!row || (row === '新' ? it.hasAttribute('data-new') : rowOf[i] === row)); it.hidden = !hit; if (hit) n++; });
     groups.forEach(g => { g.hidden = !g.querySelector('.gl-item:not([hidden])'); });
-    count.textContent = row ? `「${row}」行の言葉 ${n} 語` : q ? `${n} 語みつかりました` : `全 ${total} 語`;
+    count.textContent = row === '新' ? `新しく入った言葉 ${n} 語` : row ? `「${row}」行の言葉 ${n} 語` : q ? `${n} 語みつかりました` : `全 ${total} 語`;
     empty.hidden = n > 0;
     document.body.classList.toggle('gl-filtering', !!(q || row));   // さがしている間は、たたんだ分類もぜんぶ開く
   };
@@ -159,7 +161,7 @@
 (function() {
   const btn = document.querySelector('.wm-open');
   if (!btn) return;
-  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261109a'; document.body.appendChild(s); };
+  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261109b'; document.body.appendChild(s); };
   btn.addEventListener('click', load);
   if (location.hash === '#wordmap') setTimeout(load, 600);
 })();

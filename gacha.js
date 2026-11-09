@@ -9,7 +9,7 @@
   const KEY = 'azakei_gacha';
   let met = []; try { met = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
   // 分類ごとの色（カプセルの色）
-  const COLOR = { 'g-basic': '#b08a4a', 'g-money': '#b5432f', 'g-company': '#2f6b3a', 'g-society': '#4a6a8a', 'g-history': '#6b4a22', 'g-life': '#d49a2a', 'g-biz': '#7a5aa0', 'g-world': '#2f7a8a', 'g-tech': '#555' };
+  const COLOR = { 'g-basic': '#b08a4a', 'g-money': '#b5432f', 'g-company': '#2f6b3a', 'g-society': '#4a6a8a', 'g-history': '#6b4a22', 'g-life': '#d49a2a', 'g-biz': '#7a5aa0', 'g-world': '#2f7a8a', 'g-tech': '#555', 'g-work': '#8a5a3a', 'g-env': '#3f7a4a' };
   box.innerHTML = `
     <div class="ga-machine" aria-hidden="true">
       <div class="ga-dome">${Array.from({ length: 9 }, (_, i) => `<i style="--c:${Object.values(COLOR)[i]};--x:${(i % 3) * 30 + 8}%;--y:${Math.floor(i / 3) * 26 + 18}%"></i>`).join('')}</div>
