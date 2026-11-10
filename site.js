@@ -1327,3 +1327,15 @@ try {
   document.addEventListener('input', () => { clearTimeout(ct); ct = setTimeout(check, 900); }, true);
 })();
 } catch (e) { console.error('[site.js / v128]', e); }
+
+/* トップ：「家で回る麻布経済展」のスタンプの数を、帯の 5 つの点で見せる（rally.js と同じ記録を読む） */
+(function() {
+  const a = document.querySelector('[data-rally-mini]');
+  if (!a) return;
+  const has = k => { try { return localStorage.getItem(k) !== null; } catch (e) { return false; } };
+  const ok = [has('azakei_room_tour'), has('azakei_quiz_best') || has('azakei_quiz_best_news') || has('azakei_quiz_best_time'), has('azakei_card_best'), has('azakei_cw_best'), has('azakei_dg_type')];
+  const n = ok.filter(Boolean).length;
+  a.querySelectorAll('.cz-dots i').forEach((d, i) => d.classList.toggle('is-on', ok[i]));
+  if (n) a.querySelector('[data-rally-n]').textContent = n === 5 ? 'スタンプがそろいました。修了証をどうぞ' : `スタンプ ${n} / 5。あと ${5 - n} つで修了`;
+  if (n === 5) a.classList.add('is-all');
+})();

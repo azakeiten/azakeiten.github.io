@@ -9,6 +9,11 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-10', seal: '修', tone: 'shu', href: 'festival.html#athome', eyebrow: '文化祭', title: '家で回る麻布経済展', text: '会場を歩く・クイズ・カード・クロスワード・診断の 5 つで、朱印のスタンプ。そろったら、修了証を画像で。' },
+    { date: '2026-11-10', seal: '札', tone: 'green', href: 'quiz.html#cardgame', eyebrow: 'クイズ', title: '経済カード勝負', text: '預金・債券・株・外貨・起業の 5 枚。ニュースの予報を読んで出して、相手と 5 回勝負。' },
+    { date: '2026-11-10', seal: '刷', tone: 'gold', href: 'glossary.html#sheet', eyebrow: '用語辞典', title: '授業で使えることばプリント', text: '分類と問題の数を選んで、印刷するだけ。説明を読んで言葉を答える A4 プリント。答えは 2 枚目に。' },
+    { date: '2026-11-09', seal: '辞', tone: 'green', href: 'glossary.html', eyebrow: '用語辞典', title: '辞典が 276 語に', text: '「はたらくこと」「環境と資源」の分類が新しく。賃金・春闘・カーボンニュートラルなど 67 語を足しました。' },
+    { date: '2026-11-09', seal: '字', tone: 'shu', href: 'quiz.html#crossword', eyebrow: 'クイズ', title: '経済クロスワード', text: '為替・株式・金利など 14 語。ひらがなで答えて、二重マスの最後の問題へ。' },
     { date: '2026-11-06', seal: '暦', tone: 'green', href: 'events.html#yearplan', eyebrow: '日程とイベント', title: '1 年の流れ', text: 'ストックリーグのレポート提出は 1/8、文化祭は 11 月下旬に査定。コンテストと文化祭の準備が、いつ何をするかを 1 枚の表に。' },
     { date: '2026-10-31', seal: '策', tone: 'shu', href: 'sim.html#nesage', eyebrow: '経済ラボ', title: 'となりのお店と値下げ競争', text: '値段を守る？ 値下げする？ となりのお店と同時に選んで 10 回勝負。相手の作戦は最後にわかる。ゲーム理論の体験。' },
     { date: '2026-10-30', seal: '録', tone: 'green', href: 'mypage.html', eyebrow: 'わたしの記録', title: '経済力レーダー', text: 'ことば・クイズ・実験・計画・探検。遊んだ記録から 5 つの力を五角形に。得意な力と、のびしろの力がわかる。' },
