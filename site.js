@@ -1339,3 +1339,19 @@ try {
   if (n) a.querySelector('[data-rally-n]').textContent = n === 5 ? 'スタンプがそろいました。修了証をどうぞ' : `スタンプ ${n} / 5。あと ${5 - n} つで修了`;
   if (n === 5) a.classList.add('is-all');
 })();
+
+/* クイズのページ：上の「遊びの目次」に、このブラウザの自己ベストを出す */
+(function() {
+  const nav = document.querySelector('[data-gnav]');
+  if (!nav) return;
+  nav.querySelectorAll('small[data-k]').forEach(s => {
+    let v = null;
+    try { v = localStorage.getItem(s.dataset.k); } catch (e) {}
+    if (v === null) return;
+    let n = 0;
+    if ('len' in s.dataset) { try { n = JSON.parse(v).length; } catch (e) { n = 0; } } else n = +v || 0;
+    if (!n) return;
+    s.textContent = `${n.toLocaleString()} ${s.dataset.u}`;
+    s.closest('a').classList.add('has-rec');
+  });
+})();

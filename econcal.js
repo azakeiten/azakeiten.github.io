@@ -64,6 +64,14 @@
     mini.hidden = false;
   }
 
+  // ── トップの最初の画面：今日の日付と、経済の何の日（1 行）
+  const ht = document.querySelector('[data-hero-today]');
+  if (ht) {
+    const e = (today.length ? today : upcoming)[0], n = daysTo(e[0], e[1]);
+    ht.innerHTML = `<span class="ht-date"><b>${M}</b>月<b>${D}</b>日</span><span class="ht-t">${today.length ? '今日は' : `あと ${n} 日で`}、<b>${e[2]} 年 ${e[3]}</b> の日</span><span class="ht-go" aria-hidden="true">→</span>`;
+    ht.hidden = false;
+  }
+
   // ── 日程とイベント：12 か月のこよみ
   const box = document.querySelector('[data-ecal]');
   if (!box) return;

@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261110g" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261111a" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -44,8 +44,22 @@
       <p class="section-label"><span class="ph-seal" aria-hidden="true">億</span></p>
       <h1 class="section-title"><span class="keep-phrase">億万長者</span><span class="keep-phrase"><em>クイズ</em></span></h1>
       <p class="page-hero-lead">文化祭で人気だったチップのクイズを、Web で遊べるようにしました。賭ける枚数と難しさを選んで 2 問に挑戦。正解数で、賭けたチップが最大 6 倍に。</p>
+      <p class="ph-stats"><span><b data-count>6</b>つの遊び</span><span><b data-count>84</b>問のクイズ</span><span><b data-count>120</b>枚が会場の最高記録</span></p>
     </div>
   </header>
+
+  <div class="gn-wrap" role="navigation" aria-label="このページの遊び">
+    <div class="container">
+      <ul class="gn" data-gnav>
+        <li><a href="#quiz"><span class="gn-seal">億</span><b>億万長者クイズ</b><small data-k="azakei_quiz_best" data-u="枚">挑戦する</small></a></li>
+        <li><a href="#crossword"><span class="gn-seal">字</span><b>クロスワード</b><small data-k="azakei_cw_best" data-u="枚">14 語</small></a></li>
+        <li><a href="#cardgame"><span class="gn-seal">札</span><b>カード勝負</b><small data-k="azakei_card_win" data-u="勝">5 回勝負</small></a></li>
+        <li><a href="#sugoroku"><span class="gn-seal">双</span><b>すごろく</b><small data-k="azakei_sugo_best" data-u="円">12 回</small></a></li>
+        <li><a href="#coins"><span class="gn-seal">貨</span><b>お金図鑑</b><small data-k="azakei_coins" data-u="/ 12 枚" data-len>12 枚</small></a></li>
+        <li><a href="#make"><span class="gn-seal">作</span><b>問題づくり</b><small>つくる</small></a></li>
+      </ul>
+    </div>
+  </div>
 
   <section class="about tight">
     <div class="container">
@@ -126,22 +140,21 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261110g"></script>
-  <script src="layout.js?v=20261110g"></script>
-  <script src="brand.js?v=20261110g"></script>
-  <script src="nav.js?v=20261110g"></script>
-  <script src="reveal.js?v=20261110g"></script>
-  <script src="ranking.js?v=20261110g"></script>
-  <script src="quiz-data.js?v=20261110g"></script>
-  <script src="shareimg.js?v=20261110g"></script>
-  <script src="quiz.js?v=20261110g"></script>
-  <script src="osatsu.js?v=20261110g"></script>
-  <script src="pagetoc.js?v=20261110g"></script>
-  <script src="site.js?v=20261110g"></script>
+  <script src="content.js?v=20261111a"></script>
+  <script src="layout.js?v=20261111a"></script>
+  <script src="brand.js?v=20261111a"></script>
+  <script src="nav.js?v=20261111a"></script>
+  <script src="reveal.js?v=20261111a"></script>
+  <script src="ranking.js?v=20261111a"></script>
+  <script src="quiz-data.js?v=20261111a"></script>
+  <script src="shareimg.js?v=20261111a"></script>
+  <script src="quiz.js?v=20261111a"></script>
+  <script src="osatsu.js?v=20261111a"></script>
+  <script src="site.js?v=20261111a"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261110g';
+      var V = '20261111a';
       [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-coins]', 'coins.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };
