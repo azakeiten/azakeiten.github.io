@@ -7734,3 +7734,48 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
   .cz-rally-t { grid-column: 1 / -1; padding-left: 0; }
   .cz-rally .cz-go { display: none; }
 }
+
+/* v172 経済の暦（events.html#koyomi）・トップの「今日は、経済の何の日」 */
+.ec[data-ecal] { display: grid; gap: 16px; }
+.ec[data-ecal] .ec-tabs { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; }
+.ec[data-ecal] .ec-tabs button { position: relative; display: flex; align-items: baseline; justify-content: center; gap: 1px; padding: 10px 0 9px; border-radius: 10px; border: 1px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; font: inherit; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; cursor: pointer; transition: background .2s, border-color .2s; }
+.ec[data-ecal] .ec-tabs button small { font-size: 11px; font-weight: 700; }
+.ec[data-ecal] .ec-tabs button i { position: absolute; top: -6px; right: -4px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: #b08a4a; color: #fff; font-style: normal; font-family: 'DM Sans', sans-serif; font-size: 10px; line-height: 17px; text-align: center; }
+.ec[data-ecal] .ec-tabs button.is-now { border-color: #b5432f; }
+.ec[data-ecal] .ec-tabs button[aria-selected="true"] { background: #b5432f; border-color: #b5432f; color: #fff; }
+.ec[data-ecal] .ec-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ec[data-ecal] .ec-list li { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 16px; align-items: start; padding: 16px 18px; border-radius: 16px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); animation: ec-in .45s cubic-bezier(.2, .9, .3, 1) both; animation-delay: calc(var(--i) * 60ms); }
+@keyframes ec-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.ec[data-ecal] .ec-list li.is-today, .ec[data-ecal] .ec-list li.is-next { border-color: #b5432f; box-shadow: inset 4px 0 0 #b5432f; }
+.ec[data-ecal] .ec-date { display: grid; justify-items: center; align-content: center; height: 74px; border-radius: 8px; background: #1c2b23; color: #f3eee4; }
+.ec[data-ecal] .ec-date b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 32px; line-height: 1; }
+.ec[data-ecal] .ec-date small { font-size: 11px; opacity: .75; margin-top: 4px; }
+.ec[data-ecal] .ec-body p { margin: 0; }
+.ec[data-ecal] .ec-t { font-weight: 800; font-size: 16.5px; line-height: 1.5; word-break: auto-phrase; }
+.ec[data-ecal] .ec-t span { display: inline-block; margin-right: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #b08a4a; }
+.ec[data-ecal] .ec-t em { margin-left: 10px; padding: 2px 10px; border-radius: 999px; background: #b5432f; color: #fff; font-style: normal; font-size: 11.5px; vertical-align: .15em; }
+.ec[data-ecal] .ec-s { margin-top: 4px !important; font-size: 13.5px; line-height: 1.8; color: var(--color-muted); word-break: auto-phrase; }
+.ec[data-ecal] .ec-gl { display: inline-block; margin-top: 6px; font-size: 12.5px; font-weight: 700; color: #b5432f; }
+.ec[data-ecal] .ec-gl::after { content: ' →'; }
+.ec[data-ecal] .ec-empty { display: block !important; text-align: center; color: var(--color-muted); }
+@media (max-width: 760px) {
+  .ec[data-ecal] .ec-tabs { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .ec[data-ecal] .ec-list li { grid-template-columns: 56px minmax(0, 1fr); gap: 12px; padding: 14px; }
+  .ec[data-ecal] .ec-date { height: 60px; } .ec[data-ecal] .ec-date b { font-size: 26px; }
+}
+.ecm-wrap { padding-bottom: 0 !important; }
+.ecm[data-ecal-mini] { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 20px; align-items: center; padding: 20px 24px; border-radius: var(--radius-panel, 22px); background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.ecm[data-ecal-mini][hidden] { display: none; }
+.ecm[data-ecal-mini] .ecm-day { position: relative; display: grid; justify-items: center; align-content: center; height: 96px; border-radius: 8px; background: #fbf6ea; color: #1d1d1d; border-top: 14px solid #b5432f; box-shadow: 0 6px 14px rgba(0, 0, 0, .12); }
+.ecm[data-ecal-mini] .ecm-day small { font-size: 12px; font-weight: 700; color: #b5432f; }
+.ecm[data-ecal-mini] .ecm-day b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 40px; line-height: 1; }
+.ecm[data-ecal-mini] .ecm-body p { margin: 0; }
+.ecm[data-ecal-mini] .ecm-k { font-size: 12px; font-weight: 800; letter-spacing: .06em; color: #b08a4a; }
+.ecm[data-ecal-mini] .ecm-t { margin-top: 4px !important; font-weight: 800; font-size: 18px; line-height: 1.5; word-break: auto-phrase; }
+.ecm[data-ecal-mini] .ecm-t span { margin-right: 10px; font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: var(--color-muted); }
+.ecm[data-ecal-mini] .ecm-t small { margin-left: 8px; font-size: 12px; font-weight: 700; color: var(--color-muted); }
+.ecm[data-ecal-mini] .ecm-s { margin-top: 4px !important; font-size: 13.5px; line-height: 1.8; color: var(--color-muted); word-break: auto-phrase; }
+.ecm[data-ecal-mini] .ecm-go { display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 800; color: #b5432f; }
+.ecm[data-ecal-mini] .ecm-go::after { content: ' →'; }
+@media (max-width: 560px) { .ecm[data-ecal-mini] { grid-template-columns: 64px minmax(0, 1fr); gap: 14px; padding: 16px; } .ecm[data-ecal-mini] .ecm-day { height: 72px; border-top-width: 10px; } .ecm[data-ecal-mini] .ecm-day b { font-size: 30px; } }
+@media (prefers-reduced-motion: reduce) { .ec[data-ecal] .ec-list li { animation: none; } }

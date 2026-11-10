@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-10', seal: '暦', tone: 'gold', href: 'events.html#koyomi', eyebrow: '日程とイベント', title: '経済の暦', text: '「円」が生まれた日、プラザ合意、リーマン・ショック。月ごとに 33 のできごと。今日は、経済の何の日？' },
     { date: '2026-11-10', seal: '修', tone: 'shu', href: 'festival.html#athome', eyebrow: '文化祭', title: '家で回る麻布経済展', text: '会場を歩く・クイズ・カード・クロスワード・診断の 5 つで、朱印のスタンプ。そろったら、修了証を画像で。' },
     { date: '2026-11-10', seal: '札', tone: 'green', href: 'quiz.html#cardgame', eyebrow: 'クイズ', title: '経済カード勝負', text: '預金・債券・株・外貨・起業の 5 枚。ニュースの予報を読んで出して、相手と 5 回勝負。' },
     { date: '2026-11-10', seal: '刷', tone: 'gold', href: 'glossary.html#sheet', eyebrow: '用語辞典', title: '授業で使えることばプリント', text: '分類と問題の数を選んで、印刷するだけ。説明を読んで言葉を答える A4 プリント。答えは 2 枚目に。' },
