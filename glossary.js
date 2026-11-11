@@ -66,7 +66,9 @@
     const b = h.querySelector('.gl-fold');
     h.addEventListener('click', () => { const open = g.classList.toggle('is-closed') === false; b.setAttribute('aria-expanded', open); });
   });
-  const openFor = id => { const t = id && document.getElementById(id); const g = t && (t.classList.contains('gl-group') ? t : t.closest('.gl-group')); if (g && g.classList.contains('is-closed')) { g.classList.remove('is-closed'); g.querySelector('.gl-fold')?.setAttribute('aria-expanded', 'true'); } };
+  const openFor = id => { const t = id && document.getElementById(id); const g = t && (t.classList.contains('gl-group') ? t : t.closest('.gl-group'));
+    // さがしている途中で、かくれている言葉（関連の言葉など）へ飛ぶときは、しぼりこみを解いてから
+    if (g && (t.hidden || g.hidden)) { input.value = ''; row = ''; rowBar.querySelectorAll('[data-row]').forEach(x => x.setAttribute('aria-pressed', 'false')); run(); } if (g && g.classList.contains('is-closed')) { g.classList.remove('is-closed'); g.querySelector('.gl-fold')?.setAttribute('aria-expanded', 'true'); } };
   openFor(decodeURIComponent(location.hash.slice(1)));
   addEventListener('hashchange', () => openFor(decodeURIComponent(location.hash.slice(1))));
   document.addEventListener('click', e => { const a = e.target.closest('a[href^="#g-"], a[href^="#"]'); if (a) openFor(decodeURIComponent(a.getAttribute('href').slice(1))); }, true);
@@ -161,7 +163,7 @@
 (function() {
   const btn = document.querySelector('.wm-open');
   if (!btn) return;
-  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261111a'; document.body.appendChild(s); };
+  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261111b'; document.body.appendChild(s); };
   btn.addEventListener('click', load);
   if (location.hash === '#wordmap') setTimeout(load, 600);
 })();
