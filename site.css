@@ -7962,3 +7962,39 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 #making.fp-on .section-head { margin-bottom: 10px; }
 #making.fp-on .film { grid-auto-columns: min(40vw, calc((100vh - 470px) * 1.33)); padding: 20px 24px; }
 html[lang="ja"] section .section-label:not(.lab-no):not(.jp-label):has(.sl-seal) { display: flex; margin-bottom: 18px; }
+
+/* v177 トップを 3 つの章に整理（章のとびら・右はしの章の目次） */
+.chp { position: relative; padding: 110px 0 40px; scroll-margin-top: 40px; }
+.chp .container { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: 'seal no' 'seal title' 'seal lead'; column-gap: 30px; align-items: end; }
+.chp .container::before { content: ''; position: absolute; left: 0; right: 0; top: -44px; height: 1px; background: linear-gradient(90deg, #b5432f, rgba(181, 67, 47, .25) 40%, transparent); transform-origin: left; }
+.chp .chp-no { grid-area: no; margin: 0; display: contents; }
+.chp .chp-seal { grid-area: seal; align-self: center; display: grid; place-items: center; width: 112px; height: 112px; border-radius: 10px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 64px; line-height: 1; transform: rotate(-4deg); box-shadow: 0 14px 34px rgba(181, 67, 47, .28); }
+.chp .chp-no span:last-child { grid-area: no; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 15px; letter-spacing: .3em; color: #b08a4a; }
+.chp .chp-title { grid-area: title; margin: 6px 0 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(38px, 5.4vw, 68px); line-height: 1.15; color: var(--color-text); }
+.chp .chp-lead { grid-area: lead; margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: var(--color-muted); }
+.chp .container.reveal::before { transform: scaleX(0); transition: transform 1s cubic-bezier(.2, .8, .2, 1); }
+.chp .container.reveal.visible::before { transform: scaleX(1); }
+.chp .container.reveal .chp-seal { opacity: 0; }
+.chp .container.reveal.visible .chp-seal { animation: sl-stamp .6s cubic-bezier(.2, 1.4, .4, 1) .15s both; }
+@media (max-width: 760px) {
+  .chp { padding: 76px 0 18px; }
+  .chp .container { column-gap: 18px; }
+  .chp .container::before { top: -30px; }
+  .chp .chp-seal { width: 72px; height: 72px; font-size: 40px; }
+  .chp .chp-no span:last-child { font-size: 12.5px; }
+  .chp .chp-lead { grid-column: 1 / -1; grid-area: auto; font-size: 14px; }
+  .chp .container { grid-template-areas: 'seal no' 'seal title'; }
+}
+@media (prefers-reduced-motion: reduce) { .chp .container.reveal .chp-seal { opacity: 1; animation: none !important; } .chp .container.reveal::before { transform: none; transition: none; } }
+
+.chp-rail { position: fixed; right: 18px; top: 50%; z-index: 40; transform: translate(12px, -50%); opacity: 0; pointer-events: none; transition: opacity .35s, transform .35s; }
+.chp-rail.is-shown { opacity: 1; transform: translate(0, -50%); pointer-events: auto; }
+.chp-rail ol { list-style: none; margin: 0; padding: 8px; display: grid; gap: 6px; border-radius: 16px; background: rgba(250, 247, 240, .82); border: 1px solid rgba(0, 0, 0, .08); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0, 0, 0, .1); }
+:root[data-theme="dark"] .chp-rail ol { background: rgba(28, 26, 22, .82); border-color: rgba(255, 255, 255, .1); }
+.chp-rail a { position: relative; display: flex; align-items: center; justify-content: flex-end; text-decoration: none; color: var(--color-text); }
+.chp-rail .cr-seal { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 6px; border: 1.5px solid rgba(181, 67, 47, .5); color: #b5432f; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 17px; transition: background .25s, color .25s, transform .25s; }
+.chp-rail a.is-on .cr-seal { background: #b5432f; border-color: #b5432f; color: #fff; transform: rotate(-4deg); }
+.chp-rail .cr-t { position: absolute; right: 46px; padding: 5px 12px; border-radius: 999px; background: #1c2b23; color: #f3eee4; font-size: 12.5px; font-weight: 700; white-space: nowrap; opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none; }
+.chp-rail a:hover .cr-t, .chp-rail a:focus-visible .cr-t { opacity: 1; transform: none; }
+@media (max-width: 1100px) { .chp-rail { display: none; } }
+html .chp h2.chp-title { font-family: 'Shippori Mincho', serif; font-weight: 800; letter-spacing: .02em; }
