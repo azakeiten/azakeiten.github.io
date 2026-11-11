@@ -534,7 +534,7 @@ try {
       rows = [{ label: '2 日目', n: peak, w: peak / max * 100, peak: true }, { label: '1・3 日目', n: rest, w: rest / max * 100 }];
     }
     vz.innerHTML = `
-      <p class="section-label">Visitors</p>
+      <p class="section-label"><span class="sl-seal" aria-hidden="true">客</span></p>
       <h3>3 日間の来場者</h3>
       <p class="vz-total"><span data-count>${fmt(V.total)}</span><small>人</small></p>
       <div class="vz-bars">${rows.map(r => `<div class="vz-row${r.peak ? ' is-peak' : ''}"><span>${r.label}</span><span class="vz-track"><span class="vz-fill" style="--w:${r.w.toFixed(1)}%"></span></span><span>${fmt(r.n)} 人</span></div>`).join('')}</div>

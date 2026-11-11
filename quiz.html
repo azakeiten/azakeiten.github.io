@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261111c" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261111e" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -106,7 +106,7 @@
   <section class="services tight" id="sugoroku">
     <div class="container">
       <div class="section-head reveal">
-        <p class="section-label">Money Sugoroku</p>
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">双</span></p>
         <h2 class="section-title">経済すごろく</h2>
         <p class="lead">サイコロを 12 回ふって、1,000 円をいくらにできる？ 給料・税金・利息・投資のチャンス・保険・ハプニング。止まったマスで、お金が動きます。</p>
       </div>
@@ -118,7 +118,7 @@
   <section class="about tight" id="coins">
     <div class="container">
       <div class="section-head reveal">
-        <p class="section-label">World Money</p>
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">貨</span></p>
         <h2 class="section-title">世界のお金図鑑</h2>
         <p class="lead">「この国のお金は？」6 問の 4 択クイズ。正解すると、そのお金のコインが図鑑に入ります。12 枚ぜんぶ集めると、バッジがもらえます。</p>
       </div>
@@ -130,7 +130,7 @@
   <section class="services tight" id="make">
     <div class="container">
       <div class="section-head reveal">
-        <p class="section-label">Make a Quiz</p>
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">作</span></p>
         <h2 class="section-title">問題をつくってみよう</h2>
         <p class="lead">経済の問題を考えて、4 つの答えと解説を書くと、その場でクイズとして遊べます。いい問題ができたら、AZAKEI に送ってください。</p>
       </div>
@@ -140,21 +140,21 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261111c"></script>
-  <script src="layout.js?v=20261111c"></script>
-  <script src="brand.js?v=20261111c"></script>
-  <script src="nav.js?v=20261111c"></script>
-  <script src="reveal.js?v=20261111c"></script>
-  <script src="ranking.js?v=20261111c"></script>
-  <script src="quiz-data.js?v=20261111c"></script>
-  <script src="shareimg.js?v=20261111c"></script>
-  <script src="quiz.js?v=20261111c"></script>
-  <script src="osatsu.js?v=20261111c"></script>
-  <script src="site.js?v=20261111c"></script>
+  <script src="content.js?v=20261111e"></script>
+  <script src="layout.js?v=20261111e"></script>
+  <script src="brand.js?v=20261111e"></script>
+  <script src="nav.js?v=20261111e"></script>
+  <script src="reveal.js?v=20261111e"></script>
+  <script src="ranking.js?v=20261111e"></script>
+  <script src="quiz-data.js?v=20261111e"></script>
+  <script src="shareimg.js?v=20261111e"></script>
+  <script src="quiz.js?v=20261111e"></script>
+  <script src="osatsu.js?v=20261111e"></script>
+  <script src="site.js?v=20261111e"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261111c';
+      var V = '20261111e';
       [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-coins]', 'coins.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };

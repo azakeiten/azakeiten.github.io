@@ -19,7 +19,7 @@
       for (let c = 0; c < cnt; c++) h += `<span class="vt-chip" style="--z:${c * 7}px;--d:${(c * 0.04).toFixed(3)}s;--c:${COL[i % COL.length][0]};--s:${COL[i % COL.length][1]}"><i></i><i></i><i></i><b></b></span>`;
       return `<div class="vt-col${it.n === max ? ' is-top' : ''}"><div class="vt-stage"><div class="vt-stack">${h}</div></div><p><b>${it.n}</b> 票<small>${it.label}</small></p></div>`;
     };
-    box.innerHTML = `<p class="section-label">Live</p><h3>いまの票を、チップで積むと。</h3>
+    box.innerHTML = `<p class="section-label"><span class="sl-seal" aria-hidden="true">票</span></p><h3>いまの票を、チップで積むと。</h3>
       <div class="vt-towers vote-vt" aria-hidden="true">${items.map(tower).join('')}</div>
       <p class="vz-note">いちばん多い選択肢を 16 枚にして、ほかは票の数に合わせて積んでいます。票が入ると、その場で積み直します。</p>`;
     box.hidden = false;
