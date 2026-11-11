@@ -1355,3 +1355,16 @@ try {
     s.closest('a').classList.add('has-rec');
   });
 })();
+
+/* 手書きの書体（Klee One）は、ページを開き終わってから読みこむ（最初の表示を軽く） */
+(function() {
+  const go = () => {
+    if (document.querySelector('link[data-klee]')) return;
+    const l = document.createElement('link');
+    l.rel = 'stylesheet'; l.dataset.klee = '';
+    l.href = 'https://fonts.googleapis.com/css2?family=Klee+One:wght@400&display=swap';
+    document.head.appendChild(l);
+  };
+  const later = () => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 2500 }) : setTimeout(go, 1200));
+  document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
+})();

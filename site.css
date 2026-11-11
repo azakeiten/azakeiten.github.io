@@ -1199,7 +1199,7 @@ a.event-row:hover { background: rgba(200,169,110,0.05); padding-left: 12px; padd
    ================================================================ */
 :root {
   --font-display: 'Cormorant Garamond', 'Shippori Mincho', 'Yu Mincho', serif;
-  --font-body:    'DM Sans', 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+  --font-body:    'DM Sans', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, 'Hiragino Sans', sans-serif;
   --color-accent-deep: #9a7a45;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1751,7 +1751,7 @@ body:has(#navbar.nav-hidden) .toc { top: 40px; }
 
 /* 幕で移動してきた直後は、幕が出るまで本文を隠す（JSが動かなくても1.5秒で表示） */
 html.curtain-pending { background: #14120f; }
-html.curtain-pending body { opacity: 0; animation: failsafe 0.01s 1.5s forwards; }
+html.curtain-pending body { opacity: 0; animation: failsafe 0.01s 0.9s forwards; }
 @keyframes failsafe { to { opacity: 1; } }
 
 /* ================================================================
@@ -3056,7 +3056,7 @@ html.index-open #navbar .nav-kanji { background: var(--color-accent); color: #1a
 .mm-b2 .mm-leaves, .mm-b4 .mm-leaves { justify-content: flex-end; }
 .mm-leaves a {
   position: relative; z-index: 1; background: #1f3a2e;
-  display: inline-block; padding: 5px 12px; font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; font-size: 15px; color: var(--chalk); text-decoration: none;
+  display: inline-block; padding: 5px 12px; font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 15px; color: var(--chalk); text-decoration: none;
   border: 1.5px dashed rgba(246, 244, 236, 0.35); border-radius: 999px; transition: border-color 0.25s, background 0.25s, color 0.25s;
 }
 .mm-leaves a:hover, .mm-leaves a:focus-visible { border-style: solid; border-color: var(--chalk-gold); color: #fff; background: rgba(241, 212, 143, 0.12); }
@@ -4018,7 +4018,7 @@ html.is-apple {
   --color-border: rgba(0, 0, 0, 0.08);
   --color-accent: #b8955a;
   --color-accent-deep: #8a6a2f;
-  --font-head: 'DM Sans', 'Zen Kaku Gothic New', 'Hiragino Sans', system-ui, sans-serif;
+  --font-head: 'DM Sans', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, 'Hiragino Sans', system-ui, sans-serif;
   --font-display: var(--font-head);
   --section-pad: clamp(64px, 9vw, 120px);
   --radius: 20px;
@@ -4467,7 +4467,7 @@ html.is-apple[data-theme="dark"] {
 .is-apple .welcome-back { background: color-mix(in srgb, var(--green) 9%, var(--color-surface)); }
 
 /* 手書きメモ（Klee One）：部員が書きこんだような一言 */
-.hand-note { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-weight: 600; color: var(--green, #2f6b3a); font-size: 15px; line-height: 1.5; transform: rotate(-2deg); }
+.hand-note { font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, cursive; font-weight: 600; color: var(--green, #2f6b3a); font-size: 15px; line-height: 1.5; transform: rotate(-2deg); }
 .ap-steps .hand-note { margin: 10px 0 0; padding-top: 8px; border-top: 1px dashed var(--color-border); }
 .ap-steps li > p:not(.ap-step-no):not(.hand-note) { margin: 4px 0 0; color: var(--color-muted); font-size: 15px; line-height: 1.75; }
 .bar-note { position: absolute; left: 50%; top: -48px; translate: -50% 0; white-space: nowrap; font-size: 13px; }
@@ -4481,7 +4481,7 @@ html.is-apple[data-theme="dark"] {
 .is-apple .strip-item:nth-child(even) { --tilt: 0.7deg; }
 .is-apple .strip-item:hover { --tilt: 0deg; }
 .is-apple .strip-item img { border-radius: 12px; }
-.is-apple .strip-item figcaption { margin: 10px 6px 0; font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; font-weight: 600; color: var(--color-text); font-size: 14.5px; }
+.is-apple .strip-item figcaption { margin: 10px 6px 0; font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-weight: 600; color: var(--color-text); font-size: 14.5px; }
 .is-apple .strip-track { padding-top: 6px; padding-bottom: 14px; }
 
 /* ヒーロー：「（予定）」は小さく */
@@ -4495,8 +4495,8 @@ html.is-apple[data-theme="dark"] {
 :root { --shu: #b5432f; }
 :root[data-theme="dark"] { --shu: #c9573f; }
 @media (prefers-reduced-motion: reduce) { .is-apple .strip-item { transition: none; } }
-.ap-numbers .ap-bars b.bar-note { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-size: 13px; font-weight: 600; letter-spacing: 0; line-height: 1.4; background: none; -webkit-text-fill-color: currentColor; color: var(--green, #2f6b3a); }
-.ap-steps li > p.hand-note:last-child { font-family: 'Klee One', 'Zen Kaku Gothic New', cursive; font-weight: 600; font-size: 15px; color: var(--green, #2f6b3a); line-height: 1.6; }
+.ap-numbers .ap-bars b.bar-note { font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, cursive; font-size: 13px; font-weight: 600; letter-spacing: 0; line-height: 1.4; background: none; -webkit-text-fill-color: currentColor; color: var(--green, #2f6b3a); }
+.ap-steps li > p.hand-note:last-child { font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, cursive; font-weight: 600; font-size: 15px; color: var(--green, #2f6b3a); line-height: 1.6; }
 
 /* ################################################################
    ▼ v37 — 1 回だけ賭けてみる（おためし版）・麻経のこだわり
@@ -5035,7 +5035,7 @@ html:not(.is-apple) .diary-item .diary-img { width: calc(100% + 26px); margin-le
 #quiz .qz-rank::after { content: ''; position: absolute; left: 22%; right: 22%; bottom: -10px; height: 7px; border-radius: 3px 3px 0 0; background: #6e4826; }
 #quiz .qz-rank-head { justify-content: center; font-family: 'Klee One', 'Shippori Mincho', serif; font-weight: 600; font-size: 21px; color: #fff; letter-spacing: 0.08em; }
 #quiz .qz-rank-head small { color: #f3dca8; font-family: 'Klee One', sans-serif; }
-#quiz .qz-rank-list li { font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; font-weight: 600; color: #f1ede2; border-color: rgba(241, 237, 226, 0.18) !important; border-bottom-style: dashed !important; }
+#quiz .qz-rank-list li { font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-weight: 600; color: #f1ede2; border-color: rgba(241, 237, 226, 0.18) !important; border-bottom-style: dashed !important; }
 #quiz .qz-rank-no { color: #f3dca8; font-family: 'Klee One', sans-serif; }
 #quiz .qz-rank-list li:nth-child(1) .qz-rank-no { display: inline-grid; place-items: center; width: 28px; height: 28px; border: 2px solid #f3dca8; border-radius: 50%; }
 #quiz .qz-rank-list li:nth-child(1) .qz-rank-score { color: #ffe08a; font-size: 1.15em; }
@@ -5045,7 +5045,7 @@ html:not(.is-apple) .diary-item .diary-img { width: calc(100% + 26px); margin-le
 #quiz .qz-rank .qz-small { color: rgba(241, 237, 226, 0.75); }
 #quiz .qz-rank-form input { background: rgba(255, 255, 255, 0.92); color: #1e1a15; }
 /* 会場の黒板の記録（クイズの下） */
-.qz-venue { max-width: 560px; margin: 26px auto 0; padding: 20px 22px 22px; border: 10px solid #8a5e34; border-radius: 10px; background: #24382c; background-image: var(--grain); color: #f1ede2; box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35), 0 14px 30px -16px rgba(0, 0, 0, 0.6); font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; text-align: center; }
+.qz-venue { max-width: 560px; margin: 26px auto 0; padding: 20px 22px 22px; border: 10px solid #8a5e34; border-radius: 10px; background: #24382c; background-image: var(--grain); color: #f1ede2; box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.35), 0 14px 30px -16px rgba(0, 0, 0, 0.6); font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; text-align: center; }
 .qz-venue-head { margin: 0 0 12px; font-weight: 600; font-size: 21px; color: #fff; letter-spacing: 0.08em; display: grid; gap: 2px; }
 .qz-venue-head small { font-size: 12px; color: #f3dca8; letter-spacing: 0.04em; }
 .qz-venue ol { list-style: none; margin: 0 auto; padding: 0; display: grid; gap: 6px; max-width: 320px; }
@@ -5867,7 +5867,7 @@ html[data-theme="dark"] .kokoroe { background-color: #f3ead6; }
 .os-svg { width: 84px; height: auto; overflow: visible; animation: os-bob 3.2s ease-in-out infinite; }
 .os-eyes { transform-origin: 63px 50px; animation: os-blink 4.6s infinite; }
 .os-arm-r { transform-origin: 98px 52px; animation: os-wave 2.4s ease-in-out infinite; }
-.os-bubble { position: relative; margin: 0 0 22px; padding: 12px 16px; border-radius: 18px 18px 18px 4px; background: #fffaf0; color: #3a2f1f; border: 2px solid #6b4a22; font-family: 'Klee One', 'Zen Kaku Gothic New', sans-serif; font-size: 15px; line-height: 1.7; box-shadow: 3px 4px 0 rgba(107, 74, 34, 0.25); }
+.os-bubble { position: relative; margin: 0 0 22px; padding: 12px 16px; border-radius: 18px 18px 18px 4px; background: #fffaf0; color: #3a2f1f; border: 2px solid #6b4a22; font-family: 'Klee One', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 15px; line-height: 1.7; box-shadow: 3px 4px 0 rgba(107, 74, 34, 0.25); }
 .os-bubble::before { content: ''; position: absolute; left: -10px; bottom: 6px; width: 14px; height: 14px; background: #fffaf0; border-left: 2px solid #6b4a22; border-bottom: 2px solid #6b4a22; transform: skewY(-35deg); }
 .osatsu.is-right .os-bubble { border-radius: 18px 18px 4px 18px; }
 .osatsu.is-right .os-bubble::before { left: auto; right: -10px; border-left: 0; border-right: 2px solid #6b4a22; transform: skewY(35deg); }
@@ -6096,7 +6096,7 @@ small, figcaption, .os-bubble, .lead, .page-hero-lead, .dg-type p, .km-p p, .sim
 /* ---- v108：用語辞典 — 年表ゲーム「どっちが先？」 ---- */
 .npg { margin-top: 26px; padding: 22px; border-radius: 20px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
 .npg-title { margin: 0 0 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; }
-.npg-title small { flex-basis: 100%; font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400; font-size: 13px; color: var(--color-muted); word-break: auto-phrase; }
+.npg-title small { flex-basis: 100%; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-weight: 400; font-size: 13px; color: var(--color-muted); word-break: auto-phrase; }
 .npg-seal { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 7px; background: #b5432f; color: #fff; font-size: 17px; transform: rotate(-6deg); }
 .npg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
 .npg-q { font-weight: 800; font-size: 15px; } .npg-q b { color: #b5432f; font-size: 18px; }
@@ -6340,7 +6340,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .sh-out { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .sh-out p { margin: 0; padding: 12px 14px; border-radius: 14px; background: var(--color-bg, #faf7f1); display: grid; gap: 2px; }
 .sh-out span { font-size: 11.5px; font-weight: 800; color: var(--color-muted); }
-.sh-out b { font-family: 'DM Sans', sans-serif; font-size: 24px; font-variant-numeric: tabular-nums; } .sh-out b small { font-size: 12px; font-family: 'Zen Kaku Gothic New', sans-serif; }
+.sh-out b { font-family: 'DM Sans', sans-serif; font-size: 24px; font-variant-numeric: tabular-nums; } .sh-out b small { font-size: 12px; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; }
 .sh-out b.is-plus { color: #2f6b3a; } .sh-out b.is-minus { color: #b5432f; }
 .sh-stamp { position: absolute; right: 2px; bottom: 74px; margin: 0; width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; border: 3px double currentColor; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; transform: rotate(-12deg); opacity: .85; pointer-events: none; }
 .sh-stamp.is-plus { color: #2f6b3a; } .sh-stamp.is-minus { color: #b5432f; }
@@ -6576,7 +6576,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .om-portrait { position: relative; width: 170px; margin: 0 auto; }
 .om-portrait .os-svg { width: 100% !important; animation: os-bob 3.2s ease-in-out infinite; }
 .om-name { position: relative; margin: 6px 0 14px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 32px; line-height: 1.2; }
-.om-name small { display: block; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; color: #b5432f; }
+.om-name small { display: block; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; color: #b5432f; }
 .om-prof { margin: 0; display: grid; gap: 0; text-align: left; border-top: 2px dotted #c9bfae; }
 .om-prof div { display: grid; grid-template-columns: 5.2em 1fr; gap: 8px; padding: 9px 2px; border-bottom: 1px dashed #d8ceb8; font-size: 13.5px; line-height: 1.6; }
 .om-prof dt { font-weight: 800; color: #6b4a22; } .om-prof dd { margin: 0; word-break: auto-phrase; }
@@ -6685,7 +6685,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .in-out { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
 .in-out p { margin: 0; padding: 10px 12px; border-radius: 12px; background: rgba(255, 255, 255, .06); display: grid; gap: 2px; }
 .in-out span { font-size: 11px; color: rgba(243, 238, 228, .7); word-break: auto-phrase; }
-.in-out b { font-family: 'DM Sans', sans-serif; font-size: 22px; } .in-out b small { font-size: 12px; font-family: 'Zen Kaku Gothic New', sans-serif; }
+.in-out b { font-family: 'DM Sans', sans-serif; font-size: 22px; } .in-out b small { font-size: 12px; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; }
 .in-out b.is-down { color: #f0a493; }
 .in-note { margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #b08a4a 10%, transparent); font-size: 14px; line-height: 1.8; word-break: auto-phrase; } .in-note b { color: #b5432f; }
 .in-foot { margin: 0; font-size: 11.5px; color: var(--color-muted); }
@@ -6701,7 +6701,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .ga { margin: 18px 0; padding: 20px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
 .ga-title { margin: 0 0 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 19px; }
 .ga-title span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 7px; background: #b5432f; color: #fff; font-size: 15px; transform: rotate(-6deg); }
-.ga-title small { flex-basis: 100%; font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400; font-size: 12.5px; color: var(--color-muted); }
+.ga-title small { flex-basis: 100%; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-weight: 400; font-size: 12.5px; color: var(--color-muted); }
 [data-gacha] { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; align-items: start; }
 .ga-machine { position: relative; width: 150px; height: 210px; }
 .ga-dome { position: absolute; left: 15px; top: 0; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), rgba(255,255,255,.25) 60%), #e9f1ee; border: 3px solid #1c2b23; overflow: hidden; }
@@ -6800,7 +6800,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .rc-item:hover { transform: translateY(-2px); }
 .rc-item span { font-size: 24px; line-height: 1.2; }
 .rc-item b { font-size: 12.5px; white-space: nowrap; } .rc-item small { font-family: 'DM Sans', sans-serif; font-size: 11.5px; color: var(--color-muted); }
-.rc-item em { margin-left: 3px; padding: 0 4px; border-radius: 4px; background: #2f6b3a; color: #fff; font-style: normal; font-size: 10px; font-family: 'Zen Kaku Gothic New', sans-serif; }
+.rc-item em { margin-left: 3px; padding: 0 4px; border-radius: 4px; background: #2f6b3a; color: #fff; font-style: normal; font-size: 10px; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; }
 .rc-item[aria-pressed="true"] { border-color: #b5432f; background: color-mix(in srgb, #b5432f 8%, transparent); }
 .rc-item[aria-pressed="true"]::after { content: '✓'; position: absolute; top: -7px; right: -5px; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: #b5432f; color: #fff; font-size: 11px; font-weight: 800; }
 .rc-eat { display: inline-grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: color-mix(in srgb, var(--color-text, #222) 7%, transparent); justify-self: start; }
@@ -6812,20 +6812,20 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .rc-paper.is-reprint { animation: rc-feed .5s ease-out; }
 @keyframes rc-feed { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
 .rc-logo { margin: 0 0 10px; padding-bottom: 10px; border-bottom: 1px dashed #b9ae98; text-align: center; font-weight: 800; letter-spacing: .2em; }
-.rc-logo small { display: block; font-weight: 400; letter-spacing: 0; font-size: 10.5px; color: #8a8172; font-family: 'Zen Kaku Gothic New', sans-serif; }
+.rc-logo small { display: block; font-weight: 400; letter-spacing: 0; font-size: 10.5px; color: #8a8172; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; }
 .rc-lines { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; }
 .rc-lines li { display: flex; justify-content: space-between; gap: 8px; }
-.rc-lines li span { font-family: 'Zen Kaku Gothic New', sans-serif; } .rc-lines i { font-style: normal; color: #2f6b3a; font-weight: 800; }
+.rc-lines li span { font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; } .rc-lines i { font-style: normal; color: #2f6b3a; font-weight: 800; }
 .rc-lines li.is-new { animation: rc-print .45s steps(6) backwards; }
 @keyframes rc-print { from { clip-path: inset(0 100% 0 0); background: #f6ecd6; } }
-.rc-empty { justify-content: center !important; color: #8a8172; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12px; }
+.rc-empty { justify-content: center !important; color: #8a8172; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 12px; }
 .rc-sum { margin-top: 10px; display: grid; gap: 3px; } .rc-sum:empty { display: none; }
 .rc-sum p { margin: 0; display: flex; justify-content: space-between; gap: 8px; } .rc-sum p:first-child { padding-top: 8px; border-top: 1px dashed #b9ae98; }
-.rc-sum span { font-family: 'Zen Kaku Gothic New', sans-serif; }
+.rc-sum span { font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; }
 .rc-t { font-size: 12px; color: #6b6253; }
 .rc-total { margin-top: 4px !important; padding-top: 6px; border-top: 2px solid #2a2620; font-size: 18px; font-weight: 800; }
 .rc-mark { font-size: 10.5px; color: #6b6253; }
-.rc-tax { margin-top: 8px !important; padding: 8px 10px; justify-content: center !important; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 12.5px; font-weight: 700; }
+.rc-tax { margin-top: 8px !important; padding: 8px 10px; justify-content: center !important; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 12.5px; font-weight: 700; }
 .rc-tax b { font-family: var(--mono); font-size: 15px; margin-left: 4px; }
 @media (max-width: 760px) { .rc { grid-template-columns: minmax(0, 1fr); padding: 16px; } .rc-items { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; } .rc-item b { font-size: 11px; } }
 @media (prefers-reduced-motion: reduce) { .rc-lines li.is-new, .rc-paper.is-reprint { animation: none; } }
@@ -6918,7 +6918,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .wm-node.is-out { opacity: 0; transform: translate(-50%, -50%) scale(.4); pointer-events: none; }
 .wm-info { width: 100%; max-width: 640px; padding: 14px 18px; border-radius: 16px; background: color-mix(in srgb, #b08a4a 9%, transparent); }
 .wm-word { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; }
-.wm-word small { font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 700; font-size: 11.5px; color: #b08a4a; }
+.wm-word small { font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-weight: 700; font-size: 11.5px; color: #b08a4a; }
 .wm-def { margin: 6px 0 4px; font-size: 14px; line-height: 1.8; word-break: auto-phrase; }
 .wm-read { font-size: 13px; font-weight: 800; color: #b5432f; }
 .wm-bar { width: 100%; max-width: 640px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
@@ -6947,7 +6947,7 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .kb-pie-c { position: absolute; inset: 0; margin: 0; display: grid; place-content: center; text-align: center; } .kb-pie-c small { font-size: 11px; color: var(--color-muted); } .kb-pie-c b { font-family: 'DM Sans', sans-serif; font-size: 22px; }
 .kb-vote { padding: 16px 18px; border-radius: 18px; background: #1c2b23 var(--grain, none); color: #f3eee4; }
 .kb-v-k { margin: 0 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .06em; color: #e3c68e; }
-.kb-v-t { margin: 0; font-size: 15px; line-height: 1.8; word-break: auto-phrase; } .kb-v-t b { font-family: 'DM Sans', 'Zen Kaku Gothic New', sans-serif; font-size: 17px; filter: brightness(1.35); }
+.kb-v-t { margin: 0; font-size: 15px; line-height: 1.8; word-break: auto-phrase; } .kb-v-t b { font-family: 'DM Sans', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 17px; filter: brightness(1.35); }
 .kb-ctrl { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; } .kb-ctrl label { display: grid; gap: 4px; } .kb-ctrl span { font-size: 13.5px; font-weight: 700; } .kb-ctrl b { font-family: 'DM Sans', sans-serif; font-size: 18px; color: #b5432f; margin-left: 6px; } .kb-ctrl input { width: 100%; accent-color: #b5432f; }
 .kb-split { display: flex; height: 16px; border-radius: 99px; overflow: hidden; background: color-mix(in srgb, var(--color-text, #222) 8%, transparent); }
 .kb-div, .kb-keep { display: block; height: 100%; transition: width .4s; } .kb-div { background: #d49a2a; } .kb-keep { background: #4a6a8a; }
@@ -7057,13 +7057,13 @@ html.is-lite .os-man[role=button]::after { animation: none; }
 .gk-chart { width: 100%; height: auto; display: block; overflow: visible; }
 .gk-lend { fill: #d49a2a; } .gk-keep { fill: #4a6a8a; }
 .gk-arrow { fill: none; stroke: #b5432f; stroke-width: 2; stroke-dasharray: 4 4; opacity: .7; }
-.gk-who { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; fill: var(--color-muted); } .gk-amt { font-family: 'DM Sans', 'Zen Kaku Gothic New', sans-serif; font-size: 12.5px; font-weight: 800; fill: var(--color-text, #222); }
+.gk-who { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; fill: var(--color-muted); } .gk-amt { font-family: 'DM Sans', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 12.5px; font-weight: 800; fill: var(--color-text, #222); }
 .gk-bar { transform-box: fill-box; transform-origin: 50% 100%; animation: gk-up .5s cubic-bezier(.3, 1.4, .5, 1) backwards; }
 .gk-bar .gk-arrow { stroke-dashoffset: 40; animation: gk-dash .7s .25s ease-out forwards; }
 @keyframes gk-up { from { transform: scaleY(0); opacity: 0; } }
 @keyframes gk-dash { to { stroke-dashoffset: 0; } }
 .gk-legend { margin: -6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 12.5px; } .gk-legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 3px; } .gk-legend i.is-keep { background: #4a6a8a; } .gk-legend i.is-lend { background: #d49a2a; }
-.gk-say { margin: 0; min-height: 3.6em; padding: 12px 16px; border-radius: 16px; background: #1c2b23 var(--grain, none); color: #f3eee4; font-size: 14px; line-height: 1.8; word-break: auto-phrase; } .gk-say b { color: #e3c68e; font-family: 'DM Sans', 'Zen Kaku Gothic New', sans-serif; }
+.gk-say { margin: 0; min-height: 3.6em; padding: 12px 16px; border-radius: 16px; background: #1c2b23 var(--grain, none); color: #f3eee4; font-size: 14px; line-height: 1.8; word-break: auto-phrase; } .gk-say b { color: #e3c68e; font-family: 'DM Sans', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; }
 .gk-btns { display: flex; flex-wrap: wrap; gap: 8px; } .gk-btns .btn-primary[disabled] { opacity: .45; cursor: default; }
 .gk-sub { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--color-border); background: transparent; color: inherit; font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; }
 .gk-note { margin: 0; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #2f6b3a 10%, transparent); font-size: 14px; line-height: 1.85; word-break: auto-phrase; animation: sg-in .4s ease-out; } .gk-note b { color: #b5432f; }
@@ -7260,7 +7260,7 @@ html[lang="ja"] section .section-label:not(.lab-no):not(.jp-label) { display: no
   [data-theme="dark"] .yp-l.is-bpg { --c: #e0806c; } [data-theme="dark"] .yp-l.is-nsl { --c: #7fbf7a; } [data-theme="dark"] .yp-l.is-fes { --c: #e3c68e; }
   .yp-l ol { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 2px; }
   .yp-l li { display: grid; grid-template-columns: 6.5em minmax(0, 1fr) auto; gap: 8px; align-items: baseline; padding: 5px 0; border-bottom: 1px dotted var(--color-border); font-size: 13.5px; } .yp-l li:last-child { border-bottom: 0; }
-  .yp-l li span { font-family: 'DM Sans', 'Zen Kaku Gothic New', sans-serif; font-size: 12px; color: var(--color-muted); white-space: nowrap; }
+  .yp-l li span { font-family: 'DM Sans', 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 12px; color: var(--color-muted); white-space: nowrap; }
   .yp-l li.is-done { opacity: .5; } .yp-l li.is-now b { color: var(--c); }
   .yp-l li em { font-style: normal; font-size: 11px; font-weight: 700; padding: 0 6px; border-radius: 3px; background: var(--c); color: #fff; }
 }
@@ -7554,7 +7554,7 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 .ws[data-ws] .ws-paper { max-height: 640px; overflow: auto; border-radius: 10px; box-shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 12px 32px rgba(0, 0, 0, .12); }
 .ws[data-ws] .ws-note { margin: 0; font-size: 12.5px; color: var(--color-muted); line-height: 1.8; word-break: auto-phrase; }
 /* 紙のプリント（画面の見本と、印刷の両方） */
-.ws-page { background: #fffdf8; color: #1d1d1d; padding: 34px 38px 26px; font-family: 'Zen Kaku Gothic New', sans-serif; }
+.ws-page { background: #fffdf8; color: #1d1d1d; padding: 34px 38px 26px; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; }
 .ws-page + .ws-page { border-top: 2px dashed #d8cdb9; }
 .ws-h { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: end; padding-bottom: 10px; border-bottom: 2px solid #b5432f; }
 .ws-h-k { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; color: #1d1d1d; }
@@ -7866,3 +7866,62 @@ html[lang="ja"] .page-hero .section-label:has(> .ph-seal:only-child)::before { d
 .nf[data-nf] .nf-pop .nf-pop-x { width: 28px; height: 28px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .12); color: #fff; font-size: 16px; line-height: 1; cursor: pointer; }
 .nf[data-nf] .nf-pop a { display: inline-block; margin-top: 6px; font-weight: 800; color: #f3e3bd; }
 .nf[data-nf] .nf-pop a::after { content: ' →'; }
+
+/* v175 トップ「4 つの場面で、麻経を。」（スクロールで写真と数字が入れかわる） */
+.sty[data-sty] { position: relative; padding: 120px 0 140px; background: #14120f; color: #f3eee4; overflow: clip; }
+.sty[data-sty]::before { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 40% at 15% 10%, rgba(181, 67, 47, .18), transparent 70%), radial-gradient(50% 40% at 90% 80%, rgba(176, 138, 74, .14), transparent 70%); pointer-events: none; }
+.sty[data-sty] .container { position: relative; }
+.sty[data-sty] .sty-head { max-width: 760px; margin-bottom: 64px; }
+.sty[data-sty] .sty-title { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(36px, 5.6vw, 72px); line-height: 1.2; letter-spacing: .02em; color: #fff; }
+.sty[data-sty] .sty-lead { margin: 18px 0 0; font-size: 15.5px; line-height: 1.9; color: rgba(243, 238, 228, .72); }
+.sty[data-sty] .sty-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.sty[data-sty] .sty-media { position: sticky; top: 96px; display: grid; grid-template-columns: minmax(0, 1fr) 6px; gap: 18px; }
+.sty[data-sty] .sty-frame { position: relative; aspect-ratio: 4 / 3.4; border-radius: 22px; overflow: hidden; background: #221f1a; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); }
+.sty[data-sty] .sty-ph { position: absolute; inset: 0; margin: 0; opacity: 0; transform: scale(1.08); transition: opacity .8s ease, transform 1.6s cubic-bezier(.2, .8, .2, 1); }
+.sty[data-sty] .sty-ph.is-on { opacity: 1; transform: scale(1); }
+.sty[data-sty] .sty-ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sty[data-sty] .sty-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 55%, rgba(0, 0, 0, .55)); pointer-events: none; }
+.sty[data-sty] .sty-cap { position: absolute; left: 20px; bottom: 18px; z-index: 1; display: flex; align-items: center; gap: 12px; margin: 0; font-size: 13.5px; font-weight: 700; color: #fff; }
+.sty[data-sty] .sty-cap-no { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 5px; background: #b5432f; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; }
+.sty[data-sty] .sty-rail { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; align-content: center; }
+.sty[data-sty] .sty-rail li { width: 6px; height: 44px; border-radius: 3px; background: rgba(255, 255, 255, .16); transition: background .4s, height .4s; }
+.sty[data-sty] .sty-rail li.is-past { background: rgba(181, 67, 47, .55); }
+.sty[data-sty] .sty-rail li.is-on { height: 72px; background: #b5432f; }
+.sty[data-sty] .sty-steps { list-style: none; margin: 0; padding: 0; }
+.sty[data-sty] .sty-step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; padding: 20px 0; opacity: .28; transform: translateY(16px); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1); }
+.sty[data-sty] .sty-step:first-child { min-height: 60vh; justify-content: flex-start; padding-top: 40px; }
+.sty[data-sty] .sty-step.is-on { opacity: 1; transform: none; }
+.sty[data-sty] .sty-step p { margin: 0; }
+.sty[data-sty] .sty-no { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 22px !important; border-radius: 6px; border: 2px solid #b5432f; color: #e9a493; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 26px; transform: rotate(-3deg); }
+.sty[data-sty] .sty-step.is-on .sty-no { background: #b5432f; color: #fff; }
+.sty[data-sty] .sty-step h3 { margin: 0 0 22px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.4; color: #fff; }
+.sty[data-sty] .sty-big { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 18px !important; padding-bottom: 18px; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.sty[data-sty] .sty-big b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(56px, 7vw, 92px); line-height: 1; color: #f3e3bd; }
+.sty[data-sty] .sty-big small { font-size: 18px; font-weight: 800; color: #f3e3bd; }
+.sty[data-sty] .sty-big span { flex-basis: 100%; font-size: 13px; color: rgba(243, 238, 228, .6); }
+.sty[data-sty] .sty-step > p:not([class]) { font-size: 15px; line-height: 2; color: rgba(243, 238, 228, .82); word-break: auto-phrase; }
+.sty[data-sty] .sty-go { align-self: flex-start; margin-top: 22px; padding: 11px 22px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .3); color: #fff; font-size: 14px; font-weight: 800; text-decoration: none; transition: background .25s, border-color .25s; }
+.sty[data-sty] .sty-go::after { content: ' →'; }
+.sty[data-sty] .sty-go:hover { background: #b5432f; border-color: #b5432f; }
+@media (max-width: 860px) {
+  .sty[data-sty] { padding: 80px 0 90px; }
+  .sty[data-sty] .sty-head { margin-bottom: 28px; }
+  .sty[data-sty] .sty-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .sty[data-sty] .sty-media { top: 64px; z-index: 2; grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 10px 0 12px; background: linear-gradient(#14120f 85%, rgba(20, 18, 15, 0)); }
+  .sty[data-sty] .sty-frame { aspect-ratio: 16 / 10; border-radius: 16px; }
+  .sty[data-sty] .sty-rail { grid-auto-flow: column; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .sty[data-sty] .sty-rail li, .sty[data-sty] .sty-rail li.is-on { width: auto; height: 4px; }
+  .sty[data-sty] .sty-step, .sty[data-sty] .sty-step:first-child { min-height: 64vh; justify-content: flex-start; padding: 36px 0 20px; }
+  .sty[data-sty] .sty-no { width: 42px; height: 42px; font-size: 21px; margin-bottom: 16px !important; }
+  .sty[data-sty] .sty-cap { left: 14px; bottom: 12px; font-size: 12.5px; }
+  .sty[data-sty] .sty-cap-no { width: 28px; height: 28px; font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sty[data-sty] .sty-ph, .sty[data-sty] .sty-step { transition: none; transform: none; }
+}
+.sty[data-sty] .sty-frame { max-height: calc(100vh - 150px); }
+@media (max-width: 860px) { .sty[data-sty] .sty-frame { aspect-ratio: auto; height: min(36vh, 58vw); max-height: none; } }
+@media (max-width: 860px) {
+  .sty[data-sty] .sty-media { background: #14120f; }
+  .sty[data-sty] .sty-media::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 28px; background: linear-gradient(#14120f, rgba(20, 18, 15, 0)); pointer-events: none; }
+}

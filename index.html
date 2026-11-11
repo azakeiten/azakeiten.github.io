@@ -27,10 +27,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- 書体は、ページの表示を止めないように後から読みこむ（通信が遅いときも、先に文字が出る） -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&family=Klee+One:wght@400&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-index.min.css?v=20261111b" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="p-index.min.css?v=20261111c" />
   <style>.keep-phrase { display: inline-block; white-space: nowrap; }</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
@@ -70,16 +70,6 @@
 </head>
 <body>
 
-  <!-- LOADER -->
-  <div id="loader">
-    <div id="loader-brand">
-      <div id="loader-brand-logo" class="wordmark has-emblem"><div class="loader-emblem emblem-draw" data-emblem></div><span class="loader-word">AZA<span>KEI</span></span><span class="loader-seal" aria-hidden="true">麻経</span></div>
-      <div id="loader-brand-line"></div>
-      <div id="loader-brand-sub">Est. 2025 · Azabu</div>
-    </div>
-    <div id="loader-progress"></div>
-  </div>
-
   <!-- HERO -->
   <div class="hero-sticky-wrap">
     <div class="hero-progress-bar"><div class="hero-progress-fill" id="heroProgressFill"></div></div>
@@ -112,6 +102,7 @@
       </div>
     </section>
   </div>
+<script>/* 最初の画面の文字は、ほかのスクリプトを待たずに、すぐ順番に出す（開くのを速く） */(function(){var ids=['heroLabel','heroLine0','heroLine1','heroSub','heroActions'],r=matchMedia('(prefers-reduced-motion: reduce)').matches;ids.forEach(function(id,i){setTimeout(function(){var e=document.getElementById(id);if(e)e.classList.add('in')},r?0:60+i*110)})})();</script>
 
   <!-- 2 回目以降に来た人へ（おかえりなさい） -->
   <div class="welcome-back" data-welcome hidden></div>
@@ -127,6 +118,58 @@
         <a href="about.html" class="ap-link">麻経とは</a>
         <a href="azakei.html" class="ap-link">AZAKEI として</a>
         <a href="activities.html" class="ap-link">活動風景を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 つの場面で見る麻経（スクロールすると、写真と数字が入れかわる。sty.js） -->
+  <section class="sty" id="scenes" data-sty aria-labelledby="sty-h">
+    <div class="container">
+      <div class="sty-head reveal">
+        <h2 class="sty-title" id="sty-h"><span class="keep-phrase">4 つの場面で、</span><span class="keep-phrase">麻経を。</span></h2>
+        <p class="sty-lead">教室の入口から、黒板、手づくりの飾り、そして Web へ。下へ進むと、写真が入れかわります。</p>
+      </div>
+      <div class="sty-grid">
+        <div class="sty-media">
+          <div class="sty-frame">
+            <figure class="sty-ph is-on" data-i="0"><img src="photos/s/star-door.jpg" width="800" height="600" alt="教室の入口。「入門」の札と、経の字の六芒星" loading="lazy" decoding="async"></figure>
+            <figure class="sty-ph" data-i="1"><img src="photos/s/board-millionaire.jpg" width="680" height="600" alt="黒板の「本日の億万長者」。1 位 120 枚" loading="lazy" decoding="async"></figure>
+            <figure class="sty-ph" data-i="2"><img src="photos/s/hallway-wave.jpg" width="800" height="600" alt="廊下の飾りつけ「麻経」の大波" loading="lazy" decoding="async"></figure>
+            <figure class="sty-ph" data-i="3"><img src="photos/s/room-diagnosis.jpg" width="800" height="600" alt="展示会場。エコノミスト診断のポスターと「紙展」のパネル" loading="lazy" decoding="async"></figure>
+            <p class="sty-cap" aria-hidden="true"><span class="sty-cap-no">一</span><span class="sty-cap-t">教室の入口</span></p>
+          </div>
+          <ol class="sty-rail" aria-hidden="true"><li class="is-on"></li><li></li><li></li><li></li></ol>
+        </div>
+        <ol class="sty-steps">
+          <li class="sty-step is-on" data-i="0" data-cap="教室の入口">
+            <p class="sty-no" aria-hidden="true">一</p>
+            <h3>「入門」をくぐると、<br>経済の町。</h3>
+            <p class="sty-big"><b data-count>2,364</b><small>人</small><span>2026 年の文化祭、3 日間の来場者</span></p>
+            <p>入口には「入門」の札と、経の字の六芒星。中は、チップを賭けて 6 つのコーナーで遊ぶ体験型展示「麻布経済展」です。</p>
+            <a class="sty-go" href="festival.html">文化祭のページへ</a>
+          </li>
+          <li class="sty-step" data-i="1" data-cap="黒板の「本日の億万長者」">
+            <p class="sty-no" aria-hidden="true">二</p>
+            <h3>黒板に、<br>「本日の億万長者」。</h3>
+            <p class="sty-big"><b data-count>120</b><small>枚</small><span>会場の最高記録（黒板には 24 倍と）</span></p>
+            <p>増やしたチップの枚数で、その日の上位が黒板に書かれました。Web の億万長者クイズでも、同じように挑戦できます。</p>
+            <a class="sty-go" href="quiz.html">クイズで挑戦する</a>
+          </li>
+          <li class="sty-step" data-i="2" data-cap="廊下の飾りつけ">
+            <p class="sty-no" aria-hidden="true">三</p>
+            <h3>飾りも、パネルも、<br>手づくり。</h3>
+            <p class="sty-big"><b data-count>6</b><small>コーナー</small><span>クイズ・カードゲーム・クロスワードほか</span></p>
+            <p>廊下の「麻経」の大波から、ルールのポスター、診断のパネルまで。部員が準備して、教室ひとつを会場にしました。</p>
+            <a class="sty-go" href="activities.html">活動のようすを見る</a>
+          </li>
+          <li class="sty-step" data-i="3" data-cap="展示は Web でも">
+            <p class="sty-no" aria-hidden="true">四</p>
+            <h3>展示は、<br>Web でも続く。</h3>
+            <p class="sty-big"><b data-count>276</b><small>語</small><span>用語辞典の言葉。経済ラボの実験は 16</span></p>
+            <p>エコノミスト診断・クイズに、Web 用に作ったクロスワードとカード勝負。登録なし、無料で、スマホからすぐ遊べます。</p>
+            <a class="sty-go" href="quiz.html">遊んでみる</a>
+          </li>
+        </ol>
       </div>
     </div>
   </section>
@@ -449,28 +492,28 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261111b"></script>
-  <script src="layout.js?v=20261111b"></script>
-  <script src="brand.js?v=20261111b"></script>
-  <script src="live.js?v=20261111b"></script>
-  <script src="yearplan.js?v=20261111b"></script>
-  <script src="render.js?v=20261111b"></script>
-  <script src="loader.js?v=20261111b"></script>
-  <script src="nav.js?v=20261111b"></script>
-  <script src="hero.js?v=20261111b"></script>
-  <script src="countdown.js?v=20261111b"></script>
-  <script src="reveal.js?v=20261111b"></script>
-  <script src="osatsu.js?v=20261111b"></script>
-  <script src="koma.js?v=20261111b"></script>
-  <script src="newplay.js?v=20261111b"></script>
-  <script src="omikuji.js?v=20261111b"></script>
-  <script src="site.js?v=20261111b"></script>
-  <script src="econcal.js?v=20261111b"></script>
-  <script src="ranking.js?v=20261111b"></script>
+  <script src="content.js?v=20261111c"></script>
+  <script src="layout.js?v=20261111c"></script>
+  <script src="brand.js?v=20261111c"></script>
+  <script src="live.js?v=20261111c"></script>
+  <script src="yearplan.js?v=20261111c"></script>
+  <script src="render.js?v=20261111c"></script>
+  <script src="nav.js?v=20261111c"></script>
+  <script src="hero.js?v=20261111c"></script>
+  <script src="countdown.js?v=20261111c"></script>
+  <script src="reveal.js?v=20261111c"></script>
+  <script src="osatsu.js?v=20261111c"></script>
+  <script src="koma.js?v=20261111c"></script>
+  <script src="newplay.js?v=20261111c"></script>
+  <script src="omikuji.js?v=20261111c"></script>
+  <script src="site.js?v=20261111c"></script>
+  <script src="econcal.js?v=20261111c"></script>
+  <script src="sty.js?v=20261111c"></script>
+  <script src="ranking.js?v=20261111c"></script>
   <script>
     /* クイズの問題（約 12KB）は、「遊びかた」か「今週の 1 問」に近づいてから読みこむ（トップを軽く） */
     (function () {
-      var V = '20261111b', done = false;
+      var V = '20261111c', done = false;
       var load = function () {
         if (done) return; done = true;
         ['quiz-data.js', 'tryout.js', 'daily.js'].reduce(function (p, f) {
@@ -485,7 +528,7 @@
       if (location.hash) load(); else setTimeout(load, 3000);
     })();
   </script>
-  <script src="chip3d.js?v=20261111b"></script>
-  <script src="herofloat.js?v=20261111b"></script>
+  <script src="chip3d.js?v=20261111c"></script>
+  <script src="herofloat.js?v=20261111c"></script>
 </body>
 </html>
