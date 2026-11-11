@@ -1368,3 +1368,16 @@ try {
   const later = () => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 2500 }) : setTimeout(go, 1200));
   document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
 })();
+
+/* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
+(function() {
+  let loading = null;
+  const V = '20261111i';
+  const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
+  const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
+  const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
+  const open = () => load().then(() => window.AZAKEI_DECK && window.AZAKEI_DECK.open()).catch(() => {});
+  document.addEventListener('click', e => { const b = e.target.closest('[data-deck]'); if (!b) return; e.preventDefault(); open(); });
+  if (location.hash === '#deck') open();
+  addEventListener('hashchange', () => { if (location.hash === '#deck') open(); });
+})();

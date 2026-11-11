@@ -3,8 +3,8 @@
      繝ｻ繝壹・繧ｸ・・TML・・   窶ｦ 繝阪ャ繝医°繧画怙譁ｰ繧偵ゅ◆縺縺嶺ｿ晏ｭ倡沿縺後≠繧後・縲・ 遘貞ｾ・▲縺ｦ繧よ擂縺ｪ縺・→縺阪・菫晏ｭ倡沿繧貞・縺・                          ・医ロ繝・ヨ縺ｮ蛻・・陬上〒蜿励￠蜿悶▲縺ｦ菫晏ｭ倥＠縲∵ｬ｡縺ｫ髢九＞縺溘→縺阪↓譁ｰ縺励￥縺ｪ繧具ｼ・     繝ｻ?v= 縺､縺阪・ CSS/JS 窶ｦ 迚医＃縺ｨ縺ｫ URL 縺悟､峨ｏ繧九・縺ｧ縲∽ｸ蠎ｦ隱ｭ繧薙□繧ゅ・縺ｯ菫晏ｭ倡沿繧剃ｽｿ縺・     繝ｻ蜀咏悄繝ｻ繧｢繧､繧ｳ繝ｳ     窶ｦ 菫晏ｭ倡沿繧貞・縺励▽縺､縲∬｣上〒譁ｰ縺励＞繧ゅ・縺ｫ蜈･繧後°縺医ｋ
      繝ｻ繝輔か繝ｳ繝医↑縺ｩ螟夜Κ   窶ｦ 蜷御ｸ・     繝ｻFirebase 繧・∽ｿ｡・・OST・峨・隗ｦ繧峨↑縺・     繝ｻ荳蠎ｦ繧ｵ繧､繝医ｒ髢九＞縺溘ｉ縲∽ｸｻ縺ｪ繝壹・繧ｸ縺ｨ縺昴・隕九◆逶ｮ・・SS・峨・蜈ｱ騾壹・ JS 繧定｣上〒菫晏ｭ倥＠縺ｦ縺翫￥
    ================================================================ */
-const CACHE = 'azakei-v229';
-const VER = '20261111h'; // ?v= 縺ｨ蜷後§・亥・髢九・縺溘・縺ｫ縲√⊇縺九・繝輔ぃ繧､繝ｫ縺ｨ縺・▲縺励ｇ縺ｫ譖ｸ縺阪°繧上ｋ・・const CORE = ['./', 'index.html', 'quiz.html', 'diagnosis.html', 'offline.html', 'icon-192.png', 'manifest.webmanifest'];
+const CACHE = 'azakei-v230';
+const VER = '20261111i'; // ?v= 縺ｨ蜷後§・亥・髢九・縺溘・縺ｫ縲√⊇縺九・繝輔ぃ繧､繝ｫ縺ｨ縺・▲縺励ｇ縺ｫ譖ｸ縺阪°繧上ｋ・・const CORE = ['./', 'index.html', 'quiz.html', 'diagnosis.html', 'offline.html', 'icon-192.png', 'manifest.webmanifest'];
 const PAGES = ['about', 'report', 'activities', 'azakei', 'contact', 'contests', 'events', 'festival', 'glossary', 'mypage', 'sim', 'vote', 'sponsor', 'policy', 'privacy', 'sitemap'];
 const EXTRA_PAGES = ['sponsor-kit.html', 'en.html']; // 蜊碑ｳ帙・雉・侭・郁ｦ九◆逶ｮ縺ｯ繝壹・繧ｸ縺ｮ荳ｭ・峨→縲∬恭隱槭・繝壹・繧ｸ繧・const SHARED_JS = ['content', 'layout', 'brand', 'nav', 'reveal', 'site', 'render', 'yearplan', 'pagetoc', 'osatsu'];
 const LATER = [

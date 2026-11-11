@@ -7998,3 +7998,14 @@ html[lang="ja"] section .section-label:not(.lab-no):not(.jp-label):has(.sl-seal)
 .chp-rail a:hover .cr-t, .chp-rail a:focus-visible .cr-t { opacity: 1; transform: none; }
 @media (max-width: 1100px) { .chp-rail { display: none; } }
 html .chp h2.chp-title { font-family: 'Shippori Mincho', serif; font-weight: 800; letter-spacing: .02em; }
+
+/* v178 「1 分でわかる麻経」スライドを開くボタン */
+.deck-btn { display: inline-flex; align-items: center; gap: 14px; margin: 26px 0 6px; padding: 10px 24px 10px 10px; border-radius: 999px; border: 0; background: #1c2b23; color: #f3eee4; font: inherit; text-align: left; cursor: pointer; box-shadow: 0 12px 30px rgba(28, 43, 35, .22); transition: transform .2s, box-shadow .2s; }
+.deck-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(28, 43, 35, .3); }
+.deck-btn .deck-btn-play { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #b5432f; color: #fff; font-size: 15px; padding-left: 3px; box-sizing: border-box; animation: deck-pulse 2.6s ease-out infinite; }
+@keyframes deck-pulse { 0% { box-shadow: 0 0 0 0 rgba(181, 67, 47, .55); } 70%, 100% { box-shadow: 0 0 0 14px rgba(181, 67, 47, 0); } }
+.deck-btn .deck-btn-t { display: grid; gap: 1px; font-weight: 800; font-size: 16px; }
+.deck-btn .deck-btn-t small { font-weight: 500; font-size: 12px; color: rgba(243, 238, 228, .7); }
+:root[data-theme="dark"] .deck-btn { background: #f3eee4; color: #1c2b23; }
+:root[data-theme="dark"] .deck-btn .deck-btn-t small { color: rgba(28, 43, 35, .7); }
+@media (prefers-reduced-motion: reduce) { .deck-btn .deck-btn-play { animation: none; } }

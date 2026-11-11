@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-11', seal: '映', tone: 'green', href: 'index.html#deck', eyebrow: '紹介', title: '1 分でわかる麻経', text: '画面いっぱいの 7 枚のスライドで、文化祭・数字・コンテスト・Web の遊びを紹介。自動で進みます。' },
     { date: '2026-11-11', seal: '探', tone: 'shu', href: 'glossary.html#newsfind', eyebrow: '用語辞典', title: 'ニュースの言葉さがし', text: '読みたい記事を貼りつけると、辞典にある言葉に印がつく。押せば、その場で意味が開きます。' },
     { date: '2026-11-10', seal: '暦', tone: 'gold', href: 'events.html#koyomi', eyebrow: '日程とイベント', title: '経済の暦', text: '「円」が生まれた日、プラザ合意、リーマン・ショック。月ごとに 33 のできごと。今日は、経済の何の日？' },
     { date: '2026-11-10', seal: '修', tone: 'shu', href: 'festival.html#athome', eyebrow: '文化祭', title: '家で回る麻布経済展', text: '会場を歩く・クイズ・カード・クロスワード・診断の 5 つで、朱印のスタンプ。そろったら、修了証を画像で。' },
