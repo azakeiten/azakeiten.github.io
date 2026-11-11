@@ -8009,3 +8009,16 @@ html .chp h2.chp-title { font-family: 'Shippori Mincho', serif; font-weight: 800
 :root[data-theme="dark"] .deck-btn { background: #f3eee4; color: #1c2b23; }
 :root[data-theme="dark"] .deck-btn .deck-btn-t small { color: rgba(28, 43, 35, .7); }
 @media (prefers-reduced-motion: reduce) { .deck-btn .deck-btn-play { animation: none; } }
+
+/* v179 「歩み」の線がのびて、できごとが順に出る・挑戦マップの「あと ○ 日」 */
+.ayumi.reveal::before { transform: scaleX(0); transform-origin: left; transition: transform 1.8s cubic-bezier(.2, .8, .2, 1) .1s; }
+.ayumi.reveal.visible::before { transform: scaleX(1); }
+.ayumi.reveal li { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1); }
+.ayumi.reveal.visible li { opacity: 1; transform: none; }
+.ayumi.reveal.visible li:nth-child(2) { transition-delay: .18s; } .ayumi.reveal.visible li:nth-child(3) { transition-delay: .36s; } .ayumi.reveal.visible li:nth-child(4) { transition-delay: .54s; }
+.ayumi.reveal.visible li:nth-child(5) { transition-delay: .72s; } .ayumi.reveal.visible li:nth-child(6) { transition-delay: .9s; } .ayumi.reveal.visible li:nth-child(7) { transition-delay: 1.08s; } .ayumi.reveal.visible li:nth-child(8) { transition-delay: 1.26s; }
+.ayumi .ay-now { font-size: 12px; letter-spacing: .1em; }
+@media (prefers-reduced-motion: reduce) { .ayumi.reveal::before, .ayumi.reveal li { transform: none; opacity: 1; transition: none; } }
+.cmap .cmap-left { display: inline-flex; align-items: baseline; gap: 6px; margin-top: 8px; padding: 4px 12px; border-radius: 999px; background: #b5432f; color: #fff; font-size: 12px; font-weight: 700; }
+.cmap .cmap-left[hidden] { display: none; }
+.cmap .cmap-left b { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 800; }

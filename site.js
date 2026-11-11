@@ -1372,7 +1372,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261111i';
+  const V = '20261111j';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1380,4 +1380,16 @@ try {
   document.addEventListener('click', e => { const b = e.target.closest('[data-deck]'); if (!b) return; e.preventDefault(); open(); });
   if (location.hash === '#deck') open();
   addEventListener('hashchange', () => { if (location.hash === '#deck') open(); });
+})();
+
+/* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */
+(function() {
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  document.querySelectorAll('[data-until]').forEach(el => {
+    const [y, m, d] = el.dataset.until.split('-').map(Number);
+    const n = Math.round((new Date(y, m - 1, d) - now) / 864e5);
+    if (!(n >= 0)) return;
+    el.innerHTML = `${el.dataset.label || ''}<b>${n === 0 ? '今日' : 'あと ' + n + ' 日'}</b>`;
+    el.hidden = false;
+  });
 })();
