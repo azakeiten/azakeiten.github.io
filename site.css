@@ -8058,3 +8058,43 @@ html .chp h2.chp-title { font-family: 'Shippori Mincho', serif; font-weight: 800
   .bm[data-billmaker] .bm-view canvas { max-height: 34vh; width: auto; max-width: 100%; margin: 0 auto; }
   .bm[data-billmaker] .bm-note { margin-top: 8px; font-size: 11.5px; }
 }
+
+/* v181 経済ラボ「お金のめぐり」 */
+.fl-sec { padding: clamp(80px, 10vw, 120px) 0; background: #14120f; color: #f3eee4; }
+.fl-sec .section-title { color: #fff; }
+.fl-sec .section-title em { color: #f3e3bd; }
+.fl-sec .lead { color: rgba(243, 238, 228, .76); }
+.fl-sec .section-label .sl-seal { border-color: #e9a493; color: #e9a493; }
+.fl[data-flow] .fl-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.fl[data-flow] svg { display: block; width: 100%; height: auto; overflow: visible; color: #b08a4a; }
+.fl[data-flow] .fl-f { cursor: pointer; outline: none; transition: opacity .35s; }
+.fl[data-flow] .fl-hit { fill: none; stroke: transparent; stroke-width: 26; }
+.fl[data-flow] .fl-p { fill: none; stroke: #b08a4a; stroke-width: 2.5; stroke-dasharray: 6 7; animation: fl-dash 1.2s linear infinite; }
+@keyframes fl-dash { to { stroke-dashoffset: -26; } }
+.fl[data-flow] .fl-c { fill: #f3e3bd; stroke: #b08a4a; stroke-width: 2; }
+.fl[data-flow] .fl-l { fill: #f3eee4; font-size: 15px; font-weight: 800; text-anchor: middle; paint-order: stroke; stroke: #14120f; stroke-width: 6px; stroke-linejoin: round; }
+.fl[data-flow] .fl-n { cursor: pointer; outline: none; }
+.fl[data-flow] .fl-n circle { fill: #1f2b23; stroke: #b5432f; stroke-width: 3; transition: fill .3s, transform .3s; }
+.fl[data-flow] .fl-n[data-n="bank"] circle { fill: #241d14; stroke: #b08a4a; }
+.fl[data-flow] .fl-nt { fill: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 30px; text-anchor: middle; }
+.fl[data-flow] .fl-ns { fill: rgba(243, 238, 228, .65); font-size: 12px; text-anchor: middle; }
+.fl[data-flow] .fl-n:hover circle, .fl[data-flow] .fl-n:focus-visible circle, .fl[data-flow] .fl-n.is-on circle { fill: #b5432f; }
+.fl[data-flow] .fl-f:hover .fl-p, .fl[data-flow] .fl-f:focus-visible .fl-p, .fl[data-flow] .fl-f.is-on .fl-p { stroke: #f3e3bd; stroke-width: 4; }
+.fl[data-flow] .fl-f.is-on { color: #f3e3bd; }
+.fl[data-flow] svg.is-focus .fl-f:not(.is-on) { opacity: .2; }
+.fl[data-flow] svg.is-focus .fl-n:not(.is-on) { opacity: .45; }
+.fl[data-flow] .fl-side { display: grid; gap: 16px; }
+.fl[data-flow] .fl-info { min-height: 210px; padding: 24px; border-radius: 18px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .12); }
+.fl[data-flow] .fl-info p { margin: 0; }
+.fl[data-flow] .fl-i-k { font-size: 12.5px; font-weight: 800; letter-spacing: .08em; color: #e9a493; }
+.fl[data-flow] .fl-i-t { margin-top: 6px !important; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 30px; color: #fff; }
+.fl[data-flow] .fl-i-x { margin-top: 10px !important; font-size: 14.5px; line-height: 1.9; color: rgba(243, 238, 228, .85); }
+.fl[data-flow] .fl-gl { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px !important; }
+.fl[data-flow] .fl-gl a { padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(243, 227, 189, .4); color: #f3e3bd; font-size: 12.5px; font-weight: 700; text-decoration: none; }
+.fl[data-flow] .fl-gl a:hover { background: #b5432f; border-color: #b5432f; color: #fff; }
+.fl[data-flow] .fl-go { padding: 13px 24px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font: inherit; font-weight: 800; font-size: 15px; cursor: pointer; }
+.fl[data-flow] .fl-note { margin: 8px 0 0; font-size: 12px; color: rgba(243, 238, 228, .55); }
+@media (max-width: 900px) { .fl[data-flow] .fl-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; } .fl[data-flow] .fl-info { min-height: 0; } }
+@media (max-width: 560px) { .fl[data-flow] .fl-l { font-size: 19px; } .fl[data-flow] .fl-nt { font-size: 34px; } .fl[data-flow] .fl-ns { font-size: 14px; } }
+@media (prefers-reduced-motion: reduce) { .fl[data-flow] .fl-p { animation: none; } .fl[data-flow] .fl-c { display: none; } }
+.fl[data-flow] .fl-l { font-size: 19px; } .fl[data-flow] .fl-ns { font-size: 14px; } .fl[data-flow] .fl-nt { font-size: 32px; } @media (max-width: 560px) { .fl[data-flow] .fl-l { font-size: 22px; } .fl[data-flow] .fl-ns { font-size: 15px; } .fl[data-flow] .fl-nt { font-size: 36px; } }
