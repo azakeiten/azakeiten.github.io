@@ -24,6 +24,7 @@
     'invisible-hand': 'みえざるて あだむすみす', 'creative-destruction': 'そうぞうてきはかい', 'great-depression': 'せかいきょうこう', 'nixon-shock': 'にくそんしょっく',
     'plaza-accord': 'ぷらざごうい', lehman: 'りーまんしょっく', 'prisoners-dilemma': 'しゅうじんのじれんま', 'fallacy-composition': 'ごうせいのごびゅう せつやくのぱらどっくす'
   };
+  window.AZAKEI_YOMI = YOMI;   // ことばしりとり（shiri.js）でも読みを使う
   const text = items.map(it => norm(it.textContent + ' ' + (YOMI[it.id] || '') + ' ' + (it.dataset.yomi || '')));
   const total = items.length;
   // 五十音で引く：読みのいちばん最初の文字で、あ・か・さ……の行に分ける
@@ -163,7 +164,7 @@
 (function() {
   const btn = document.querySelector('.wm-open');
   if (!btn) return;
-  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261113l'; document.body.appendChild(s); };
+  const load = () => { if (btn.dataset.loading) return; btn.dataset.loading = '1'; btn.textContent = 'ひらいています…'; const s = document.createElement('script'); s.src = 'wordmap.js?v=20261114b'; document.body.appendChild(s); };
   btn.addEventListener('click', load);
   if (location.hash === '#wordmap') setTimeout(load, 600);
 })();

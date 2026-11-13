@@ -8136,3 +8136,42 @@ html[lang="ja"] .page-hero[data-bg]::after { color: rgba(181, 67, 47, .055); -we
 :root[data-theme="dark"] html[lang="ja"] .page-hero[data-bg]::after, html[lang="ja"][data-theme="dark"] .page-hero[data-bg]::after { color: rgba(233, 164, 147, .06); -webkit-text-stroke-color: rgba(233, 164, 147, .32); }
 @media (prefers-reduced-motion: reduce) { html[lang="ja"] .page-hero[data-bg]::after { animation: none; -webkit-mask-image: none; mask-image: none; translate: none; } }
 .ph-star-sparks { display: none !important; }
+
+/* v184 用語辞典「経済しりとり」 */
+.sh [data-shiri] { display: grid; gap: 14px; }
+.sh [data-shiri] .sh-rule { margin: 0; font-size: 14.5px; line-height: 1.9; }
+.sh [data-shiri] .sh-best { margin: 6px 0 0; font-size: 13px; color: var(--color-muted); }
+.sh [data-shiri] .sh-best b { color: #b5432f; font-size: 16px; }
+.sh [data-shiri] .sh-start { margin-top: 14px; padding: 11px 26px; border: 0; border-radius: 999px; background: #1c2b23; color: #f3eee4; font: inherit; font-weight: 800; font-size: 14.5px; cursor: pointer; }
+.sh [data-shiri] .sh-trail { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 4px; }
+.sh [data-shiri] .sh-trail li { display: inline-grid; padding: 6px 12px; border-radius: 10px; background: var(--color-bg, #f6f2ea); border: 1px solid var(--color-border); animation: sh-in .35s ease both; }
+.sh [data-shiri] .sh-trail li + li::before { content: '→'; position: absolute; margin-left: -18px; color: var(--color-muted); }
+.sh [data-shiri] .sh-trail li { position: relative; margin-left: 14px; }
+.sh [data-shiri] .sh-trail li:first-child { margin-left: 0; }
+.sh [data-shiri] .sh-trail li.is-me { border-color: #b5432f; background: rgba(181, 67, 47, .08); }
+.sh [data-shiri] .sh-trail b { font-size: 14px; } .sh [data-shiri] .sh-trail small { font-size: 11px; color: var(--color-muted); }
+@keyframes sh-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.sh [data-shiri] .sh-top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+.sh [data-shiri] .sh-need { margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--color-muted); }
+.sh [data-shiri] .sh-need b { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 32px; transform: rotate(-4deg); animation: eq-stamp .45s cubic-bezier(.2, 1.4, .4, 1) both; }
+.sh [data-shiri] .sh-time { height: 6px; border-radius: 3px; background: var(--color-border); overflow: hidden; }
+.sh [data-shiri] .sh-time i { display: block; height: 100%; background: linear-gradient(90deg, #b5432f, #b08a4a); transform-origin: left; }
+.sh [data-shiri] .sh-score { margin: 0; font-size: 12.5px; color: var(--color-muted); } .sh [data-shiri] .sh-score b { font-size: 18px; color: var(--color-text); }
+.sh [data-shiri] .sh-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.sh [data-shiri] .sh-opts button { display: grid; gap: 2px; padding: 12px 10px; border-radius: 12px; border: 2px solid var(--color-border); background: var(--color-surface, #fff); color: inherit; font: inherit; cursor: pointer; transition: border-color .2s, transform .2s; }
+.sh [data-shiri] .sh-opts button:hover { border-color: #b08a4a; transform: translateY(-2px); }
+.sh [data-shiri] .sh-opts b { font-size: 15px; word-break: auto-phrase; } .sh [data-shiri] .sh-opts small { font-size: 11.5px; color: var(--color-muted); }
+.sh [data-shiri] .sh-opts .is-ok { border-color: #2f6b4f; background: rgba(47, 107, 79, .1); }
+.sh [data-shiri] .sh-opts .is-ng { border-color: #b5432f; animation: eq-shake .4s; }
+@keyframes eq-shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+@keyframes eq-stamp { from { opacity: 0; transform: scale(1.8) rotate(-12deg); } to { opacity: 1; transform: scale(1) rotate(-4deg); } }
+.sh [data-shiri] .sh-msg { margin: 0; min-height: 1.5em; font-size: 13.5px; font-weight: 700; color: var(--color-muted); }
+.sh [data-shiri] .sh-end { text-align: center; }
+.sh [data-shiri] .sh-seal { display: grid; place-items: center; width: 64px; height: 64px; margin: 4px auto 10px; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 34px; transform: rotate(-4deg); }
+.sh [data-shiri] .sh-why { margin: 0; font-size: 14px; color: var(--color-muted); }
+.sh [data-shiri] .sh-res { margin: 6px 0 0; font-weight: 800; } .sh [data-shiri] .sh-res b { font-family: 'Shippori Mincho', serif; font-size: 40px; color: #b5432f; }
+.sh [data-shiri] .sh-res em { margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: #b5432f; color: #fff; font-style: normal; font-size: 11.5px; vertical-align: .3em; }
+.sh [data-shiri] .sh-btns { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 18px; }
+.sh [data-shiri] .sh-btns a { margin-top: 14px; font-weight: 800; font-size: 13.5px; color: #b5432f; }
+@media (max-width: 560px) { .sh [data-shiri] .sh-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sh [data-shiri] .sh-top { grid-template-columns: auto minmax(0, 1fr); } .sh [data-shiri] .sh-score { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: reduce) { .sh [data-shiri] * { animation: none !important; } }
