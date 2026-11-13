@@ -5,10 +5,11 @@
 window.AZAKEI = {
 
   /* ---- サイトの最終更新日（フッターに出す。更新したら書きかえる） ---- */
-  siteUpdated: '2026-11-11',
+  siteUpdated: '2026-11-13',
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-13', seal: '券', tone: 'shu', href: 'festival.html#bill', eyebrow: '文化祭', title: '麻経券をつくる', text: '金額・色・まん中の絵・名前を選んで、自分だけの遊び券を絵に。画像で保存できます。' },
     { date: '2026-11-11', seal: '映', tone: 'green', href: 'index.html#deck', eyebrow: '紹介', title: '1 分でわかる麻経', text: '画面いっぱいの 7 枚のスライドで、文化祭・数字・コンテスト・Web の遊びを紹介。自動で進みます。' },
     { date: '2026-11-11', seal: '探', tone: 'shu', href: 'glossary.html#newsfind', eyebrow: '用語辞典', title: 'ニュースの言葉さがし', text: '読みたい記事を貼りつけると、辞典にある言葉に印がつく。押せば、その場で意味が開きます。' },
     { date: '2026-11-10', seal: '暦', tone: 'gold', href: 'events.html#koyomi', eyebrow: '日程とイベント', title: '経済の暦', text: '「円」が生まれた日、プラザ合意、リーマン・ショック。月ごとに 33 のできごと。今日は、経済の何の日？' },

@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-festival.min.css?v=20261111j" />
+  <link rel="stylesheet" href="p-festival.min.css?v=20261113d" />
   <style>
     .keep-phrase { display: inline-block; white-space: nowrap; }
     .schedule-container { margin-top: 32px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -68,7 +68,7 @@
     <div class="container fes-next-in">
       <p class="fes-next-when"><span>次の麻布経済展</span><b>2027 年 5 月</b><small>（予定）</small><em data-days-to="2027-05-01"></em></p>
       <p class="fes-next-where">麻布中学校・高等学校（東京都港区元麻布）</p>
-      <nav class="fes-next-links" aria-label="次の麻布経済展"><a href="#next">準備の流れ</a><a href="#guide">はじめての来場ガイド</a><a href="vote.html" class="is-vote">次の展示への投票（受付中）</a></nav>
+      <div class="fes-next-links" role="navigation" aria-label="次の麻布経済展"><a href="#next">準備の流れ</a><a href="#guide">はじめての来場ガイド</a><a href="vote.html" class="is-vote">次の展示への投票（受付中）</a></div>
     </div>
   </div>
 
@@ -381,6 +381,18 @@
     </div>
   </section>
 
+  <!-- 麻経券をつくる（billmaker.js） -->
+  <section class="bm-sec" id="bill">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">券</span></p>
+        <h2 class="section-title"><span class="keep-phrase">自分だけの</span><span class="keep-phrase"><em>麻経券</em>を。</span></h2>
+        <p class="lead">会場では、入口でオリジナルの紙幣（チップ）を受けとって遊びました。ここでは、金額・色・まん中の絵・名前を選んで、自分だけの「麻経券」を絵にできます。本物のお金に似せないよう、単位は「チップ」で、大きく「見本」と入ります。</p>
+      </div>
+      <div class="bm reveal" data-billmaker></div>
+    </div>
+  </section>
+
   <section class="services tight" id="next">
     <div class="container">
       <div class="section-head reveal">
@@ -431,18 +443,19 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261111j"></script>
-  <script src="layout.js?v=20261111j"></script>
-  <script src="brand.js?v=20261111j"></script>
-  <script src="nav.js?v=20261111j"></script>
-  <script src="reveal.js?v=20261111j"></script>
-  <script src="yearplan.js?v=20261111j"></script>
-  <script src="bill3d.js?v=20261111j"></script>
-  <script src="room3d.js?v=20261111j"></script>
-  <script src="rally.js?v=20261111j"></script>
-  <script src="pagetoc.js?v=20261111j"></script>
-  <script src="site.js?v=20261111j"></script>
-  <script src="animation.js?v=20261111j"></script>
+  <script src="content.js?v=20261113d"></script>
+  <script src="layout.js?v=20261113d"></script>
+  <script src="brand.js?v=20261113d"></script>
+  <script src="nav.js?v=20261113d"></script>
+  <script src="reveal.js?v=20261113d"></script>
+  <script src="yearplan.js?v=20261113d"></script>
+  <script src="bill3d.js?v=20261113d"></script>
+  <script src="room3d.js?v=20261113d"></script>
+  <script src="rally.js?v=20261113d"></script>
+  <script src="billmaker.js?v=20261113d"></script>
+  <script src="pagetoc.js?v=20261113d"></script>
+  <script src="site.js?v=20261113d"></script>
+  <script src="animation.js?v=20261113d"></script>
   <script>
     (function () {
       var dayIds = ["day1Visitors", "day2Visitors", "day3Visitors"];
