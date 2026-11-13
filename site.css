@@ -8098,3 +8098,34 @@ html .chp h2.chp-title { font-family: 'Shippori Mincho', serif; font-weight: 800
 @media (max-width: 560px) { .fl[data-flow] .fl-l { font-size: 19px; } .fl[data-flow] .fl-nt { font-size: 34px; } .fl[data-flow] .fl-ns { font-size: 14px; } }
 @media (prefers-reduced-motion: reduce) { .fl[data-flow] .fl-p { animation: none; } .fl[data-flow] .fl-c { display: none; } }
 .fl[data-flow] .fl-l { font-size: 19px; } .fl[data-flow] .fl-ns { font-size: 14px; } .fl[data-flow] .fl-nt { font-size: 32px; } @media (max-width: 560px) { .fl[data-flow] .fl-l { font-size: 22px; } .fl[data-flow] .fl-ns { font-size: 15px; } .fl[data-flow] .fl-nt { font-size: 36px; } }
+
+/* v182 トップのしめくくりを「フィナーレ」に（風船の写真・3 つの関わり方） */
+.ap-end.fin { position: relative; padding: 0 0 clamp(80px, 10vw, 130px); overflow: clip; }
+.fin .fin-ph { position: relative; height: clamp(220px, 46vw, 560px); overflow: hidden; }
+.fin .fin-ph img { width: 100%; height: 100%; object-fit: cover; object-position: center 0%; display: block; transform: scale(1.08); transition: transform 2.4s cubic-bezier(.2, .8, .2, 1); }
+.fin .fin-ph.is-in img { transform: scale(1); }
+.fin .fin-ph::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, var(--footer-bg, #14120f) 100%); pointer-events: none; }
+.fin .fin-b { position: absolute; left: var(--x); bottom: -40px; z-index: 1; width: 18px; height: 22px; border-radius: 50% 50% 48% 48%; background: var(--c); opacity: .85; animation: fin-up 9s linear infinite; animation-delay: var(--d); }
+.fin .fin-b::after { content: ''; position: absolute; left: 50%; top: 100%; width: 1px; height: 26px; background: rgba(255, 255, 255, .5); }
+@keyframes fin-up { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: .85; } 50% { transform: translate(14px, -50vh); } 100% { transform: translate(-8px, -110vh); opacity: 0; } }
+.fin .fin-cap { position: absolute; right: clamp(16px, 4vw, 40px); bottom: 14px; z-index: 2; margin: 0; font-size: 12px; color: rgba(255, 255, 255, .7); }
+.fin .container { position: relative; z-index: 2; margin-top: clamp(-80px, -6vw, -30px); }
+.fin .fin-k { margin: 0 0 14px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(16px, 2vw, 20px); letter-spacing: .14em; color: #f3e3bd; }
+.fin .fin-ways { list-style: none; margin: 40px auto 0; padding: 0; max-width: 960px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; text-align: left; }
+.fin .fin-ways a { display: grid; grid-template-columns: 52px minmax(0, 1fr); grid-template-rows: auto auto; gap: 2px 14px; align-items: center; height: 100%; box-sizing: border-box; padding: 18px 20px; border-radius: 18px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .14); color: #f3eee4; text-decoration: none; transition: transform .25s, background .25s, border-color .25s; }
+.fin .fin-ways a:hover { transform: translateY(-3px); background: rgba(181, 67, 47, .22); border-color: #b5432f; }
+.fin .fin-seal { grid-row: 1 / 3; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 26px; transform: rotate(-4deg); }
+.fin .fin-ways b { font-size: 17px; font-weight: 800; }
+.fin .fin-ways small { font-size: 12.5px; line-height: 1.6; color: rgba(243, 238, 228, .7); }
+.fin .ap-end-actions { margin-top: 34px; }
+@media (max-width: 760px) { .fin .fin-ways { grid-template-columns: minmax(0, 1fr); } .fin .fin-b { width: 13px; height: 16px; } }
+@media (prefers-reduced-motion: reduce) { .fin .fin-b { display: none; } .fin .fin-ph img { transform: none; transition: none; } }
+html .ap-end.fin { background: #14120f; background-image: none; color: #f3eee4; }
+.ap-end.fin .ap-title { color: #fff; }
+.ap-end.fin .ap-lead { color: rgba(243, 238, 228, .78); }
+.ap-end.fin .ap-link { color: #f3e3bd; }
+.fin .fin-ph::after { background: linear-gradient(180deg, rgba(20, 18, 15, 0) 40%, #14120f 100%); }
+.fin .fin-cap { top: 12px; bottom: auto; text-shadow: 0 1px 4px rgba(0, 0, 0, .5); }
+.ap-end.fin .btn-primary { background: #b5432f; border-color: #b5432f; color: #fff; }
+.ap-end.fin .btn-primary:hover { background: #fff; color: #b5432f; }
+@media (max-width: 760px) { .fin .container { margin-top: -10px; } }

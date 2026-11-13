@@ -27,3 +27,12 @@
   addEventListener('resize', tick);
   tick();
 })();
+
+/* しめくくり（フィナーレ）の写真：画面に入ったら、ゆっくり寄りを戻す */
+(function() {
+  const ph = document.querySelector('.fin .fin-ph');
+  if (!ph) return;
+  if (!('IntersectionObserver' in window)) { ph.classList.add('is-in'); return; }
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { ph.classList.add('is-in'); io.disconnect(); } }, { rootMargin: '0px 0px -15% 0px' });
+  io.observe(ph);
+})();
