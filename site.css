@@ -8129,3 +8129,10 @@ html .ap-end.fin { background: #14120f; background-image: none; color: #f3eee4; 
 .ap-end.fin .btn-primary { background: #b5432f; border-color: #b5432f; color: #fff; }
 .ap-end.fin .btn-primary:hover { background: #fff; color: #b5432f; }
 @media (max-width: 760px) { .fin .container { margin-top: -10px; } }
+
+/* v183 各ページの見出しの大きな一字：筆でなぞるように左から現れ、下へ進むと少しずつ沈む */
+html[lang="ja"] .page-hero[data-bg]::after { color: rgba(181, 67, 47, .055); -webkit-text-stroke: 1.5px rgba(181, 67, 47, .3); -webkit-mask-image: linear-gradient(100deg, #000 42%, transparent 58%); mask-image: linear-gradient(100deg, #000 42%, transparent 58%); -webkit-mask-size: 280% 100%; mask-size: 280% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; animation: ph-brush 1.8s cubic-bezier(.6, .05, .2, 1) .2s both; translate: 0 calc(var(--phs, 0) * 1px); }
+@keyframes ph-brush { from { -webkit-mask-position: 100% 0; mask-position: 100% 0; } to { -webkit-mask-position: 0 0; mask-position: 0 0; } }
+:root[data-theme="dark"] html[lang="ja"] .page-hero[data-bg]::after, html[lang="ja"][data-theme="dark"] .page-hero[data-bg]::after { color: rgba(233, 164, 147, .06); -webkit-text-stroke-color: rgba(233, 164, 147, .32); }
+@media (prefers-reduced-motion: reduce) { html[lang="ja"] .page-hero[data-bg]::after { animation: none; -webkit-mask-image: none; mask-image: none; translate: none; } }
+.ph-star-sparks { display: none !important; }

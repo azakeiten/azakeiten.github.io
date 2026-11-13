@@ -17,7 +17,7 @@
   const ms = get('azakei_mission', {}) || {}, wk = get('azakei_weekly', {}) || {};
   // [名前, 0〜100, のばせる場所, その場所の名前]
   const A = [
-    ['ことば', cap(len('azakei_gl_known'), 276) * 40 + cap(len('azakei_gacha'), 276) * 30 + cap(num('azakei_narabe_best'), 10) * 15 + cap(num('azakei_rush_best'), 20) * 15, 'glossary.html#narabe', 'ことばならべかえ'],
+    ['ことば', cap(len('azakei_gl_known'), 300) * 40 + cap(len('azakei_gacha'), 300) * 30 + cap(num('azakei_narabe_best'), 10) * 15 + cap(num('azakei_rush_best'), 20) * 15, 'glossary.html#narabe', 'ことばならべかえ'],
     ['クイズ', cap(num('azakei_quiz_best'), 120) * 50 + cap(wk.streak || 0, 3) * 25 + cap(len('azakei_coins'), 12) * 25, 'quiz.html', '億万長者クイズ'],
     ['実験', cap(lab, 10) * 80 + cap(num('azakei_sugo_best'), 1800) * 20, 'sim.html', '経済ラボ'],
     ['計画', cap(len('azakei_shop'), 3) * 35 + (has('azakei_ozk_master') ? 25 : 0) + cap(planN, 6) * 40, 'contests.html#plan-seed', 'ビジネスプランのたね'],

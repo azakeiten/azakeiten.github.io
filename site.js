@@ -1372,7 +1372,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261113j';
+  const V = '20261113l';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1392,4 +1392,13 @@ try {
     el.innerHTML = `${el.dataset.label || ''}<b>${n === 0 ? '今日' : 'あと ' + n + ' 日'}</b>`;
     el.hidden = false;
   });
+})();
+
+/* 見出しの大きな一字を、下へ進むと少しだけ沈ませる（--phs） */
+(function() {
+  const ph = document.querySelector('.page-hero[data-bg]');
+  if (!ph || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let wait = false;
+  const tick = () => { wait = false; const y = scrollY; if (y > innerHeight * 1.2) return; ph.style.setProperty('--phs', Math.round(y * 0.22)); };
+  addEventListener('scroll', () => { if (!wait) { wait = true; requestAnimationFrame(tick); } }, { passive: true });
 })();

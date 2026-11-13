@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-13', seal: '辞', tone: 'green', href: 'glossary.html', eyebrow: '用語辞典', title: '辞典が 300 語に', text: '「経済」「一人あたり GDP」「日銀短観」「逆進性」「地租改正」「インバウンド」「生成 AI」など 24 語を新しく。'},
     { date: '2026-11-13', seal: '巡', tone: 'gold', href: 'sim.html#meguri', eyebrow: '経済ラボ', title: 'お金のめぐり', text: '家計・企業・銀行・政府のあいだを流れるお金を、動く図で。「1 万円のゆくえ」で順にたどれます。' },
     { date: '2026-11-13', seal: '券', tone: 'shu', href: 'festival.html#bill', eyebrow: '文化祭', title: '麻経券をつくる', text: '金額・色・まん中の絵・名前を選んで、自分だけの遊び券を絵に。画像で保存できます。' },
     { date: '2026-11-11', seal: '映', tone: 'green', href: 'index.html#deck', eyebrow: '紹介', title: '1 分でわかる麻経', text: '画面いっぱいの 7 枚のスライドで、文化祭・数字・コンテスト・Web の遊びを紹介。自動で進みます。' },
