@@ -8256,3 +8256,45 @@ html[lang="ja"] .page-hero[data-bg]::after { color: rgba(181, 67, 47, .055); -we
 @media (prefers-reduced-motion: reduce) { .st3 .st3-list.reveal > li { opacity: 1; transform: none; transition: none; } }
 html .st3 h2.st3-title, html .st3 .st3-list h3 { font-family: 'Shippori Mincho', serif; font-weight: 800; letter-spacing: .02em; }
 .st3 .st3-me[hidden] { display: none; }
+
+/* v187 経済ラボ「仕組みをつくる工房：村の税金」 */
+.vg[data-village] .vg-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); gap: 28px; align-items: start; }
+.vg[data-village] .vg-ctl, .vg[data-village] .vg-out { padding: 24px; border-radius: 20px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.vg[data-village] .vg-h { margin: 18px 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .06em; color: #b08a4a; }
+.vg[data-village] .vg-h:first-child { margin-top: 0; }
+.vg[data-village] .vg-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+.vg[data-village] .vg-seg button, .vg[data-village] .vg-pre button { padding: 9px 10px; border-radius: 10px; border: 1px solid var(--color-border); background: transparent; color: inherit; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.vg[data-village] .vg-seg button[aria-pressed="true"] { background: #1c2b23; border-color: #1c2b23; color: #f3eee4; }
+.vg[data-village] label { display: grid; gap: 4px; margin-bottom: 10px; font-size: 13px; font-weight: 700; }
+.vg[data-village] label b { font-family: 'Shippori Mincho', serif; font-size: 20px; color: #b5432f; }
+.vg[data-village] [hidden] { display: none !important; }
+.vg[data-village] input[type="range"] { width: 100%; accent-color: #b5432f; }
+.vg[data-village] .vg-give { grid-template-columns: 1fr; }
+.vg[data-village] .vg-give-r { text-align: right; }
+.vg[data-village] .vg-pre { display: flex; flex-wrap: wrap; gap: 6px; }
+.vg[data-village] .vg-pre button:hover { border-color: #b5432f; color: #b5432f; }
+.vg[data-village] .vg-kpi { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+.vg[data-village] .vg-kpi p { margin: 0; display: grid; align-content: start; }
+.vg[data-village] .vg-kpi span { font-size: 11.5px; line-height: 1.5; color: var(--color-muted); }
+.vg[data-village] .vg-kpi b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(26px, 3vw, 36px); line-height: 1.1; }
+.vg[data-village] .vg-kpi small { font-size: 12px; font-weight: 700; color: var(--color-muted); }
+.vg[data-village] .vg-bars { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; align-items: end; height: 220px; padding: 0 0 22px; border-bottom: 1px solid var(--color-border); }
+.vg[data-village] .vg-b { position: relative; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.vg[data-village] .vg-b0 { position: absolute; bottom: 0; left: 18%; right: 18%; border: 1.5px dashed rgba(176, 138, 74, .7); border-bottom: 0; border-radius: 4px 4px 0 0; transition: height .5s cubic-bezier(.2, .8, .2, 1); }
+.vg[data-village] .vg-b1 { position: absolute; bottom: 0; left: 28%; right: 28%; border-radius: 4px 4px 0 0; background: linear-gradient(#e0a38f, #b5432f); transition: height .5s cubic-bezier(.2, .8, .2, 1); }
+.vg[data-village] .vg-b em { position: absolute; bottom: -22px; font-style: normal; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 13px; }
+.vg[data-village] .vg-meters { display: grid; gap: 8px; margin-top: 16px; }
+.vg[data-village] .vg-meters p { margin: 0; display: grid; grid-template-columns: 110px minmax(0, 1fr); align-items: center; gap: 10px; font-size: 12.5px; font-weight: 700; }
+.vg[data-village] .vg-meters i { height: 10px; border-radius: 5px; background: var(--color-border); overflow: hidden; }
+.vg[data-village] .vg-meters em { display: block; height: 100%; background: #2f6b4f; transition: width .5s; }
+.vg[data-village] .vg-msg { margin: 16px 0 0; padding: 14px 16px; border-radius: 12px; background: rgba(181, 67, 47, .07); font-size: 14px; font-weight: 700; line-height: 1.8; }
+.vg[data-village] .vg-note { margin: 14px 0 0; font-size: 12px; color: var(--color-muted); }
+@media (max-width: 900px) { .vg[data-village] .vg-grid { grid-template-columns: minmax(0, 1fr); } .vg[data-village] .vg-kpi { grid-template-columns: minmax(0, 1fr); } .vg[data-village] .vg-kpi p { grid-template-columns: minmax(0, 1fr) auto auto; align-items: baseline; gap: 6px; } .vg[data-village] .vg-bars { height: 180px; gap: 3px; } .vg[data-village] .vg-meters p { grid-template-columns: 90px minmax(0, 1fr); } }
+.vg[data-village] label { display: block; }
+.vg[data-village] label b { margin: 0 2px 0 6px; }
+.vg[data-village] label input[type="range"] { display: block; margin-top: 4px; }
+.vg[data-village] .vg-give span { display: block; }
+.vg[data-village] .vg-leg { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 26px 0 0; font-size: 12px; color: var(--color-muted); }
+.vg[data-village] .vg-leg span { display: inline-block; width: 14px; height: 12px; border-radius: 2px; }
+.vg[data-village] .vg-leg0 { border: 1.5px dashed rgba(176, 138, 74, .8); }
+.vg[data-village] .vg-leg1 { margin-left: 10px; background: #b5432f; }

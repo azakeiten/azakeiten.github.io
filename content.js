@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-15', seal: '創', tone: 'shu', href: 'sim.html#koubou', eyebrow: '経済ラボ', title: '村の税の仕組みをつくる', text: '10 人の村で、税の集め方と使い道を自分で決める。手取りの差、道路や学校、働く気持ちはどう変わる？' },
     { date: '2026-11-14', seal: '町', tone: 'green', href: 'sitemap.html', eyebrow: 'サイトマップ', title: '経済の町の地図', text: 'このサイトの 14 のページを、町の建物に。行ったことのある建物には「済」の札。町をぜんぶ回れるかな。' },
     { date: '2026-11-14', seal: '尻', tone: 'shu', href: 'glossary.html#shiritori', eyebrow: '用語辞典', title: '経済しりとり', text: '辞典の言葉だけで、コンピューターとしりとり。15 秒以内に選んで、「ん」で終わる言葉にはご用心。' },
     { date: '2026-11-13', seal: '辞', tone: 'green', href: 'glossary.html', eyebrow: '用語辞典', title: '辞典が 300 語に', text: '「経済」「一人あたり GDP」「日銀短観」「逆進性」「地租改正」「インバウンド」「生成 AI」など 24 語を新しく。'},
