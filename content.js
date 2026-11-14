@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-15', seal: '報', tone: 'green', href: 'dayori.html', eyebrow: '麻経だより', title: '月刊「麻経だより」', text: 'その月に新しくなったこと、経済の暦、今月の言葉を、新聞のかたちで 1 枚に。A4 で印刷して掲示もできます。' },
     { date: '2026-11-15', seal: '釣', tone: 'gold', href: 'quiz.html#otsuri', eyebrow: 'クイズ', title: 'おつりの達人', text: 'お店の人になって、おつりをわたす 60 秒勝負。いちばん少ない枚数でわたせたら 2 点。小学生にもおすすめ。' },
     { date: '2026-11-15', seal: '創', tone: 'shu', href: 'sim.html#koubou', eyebrow: '経済ラボ', title: '村の税の仕組みをつくる', text: '10 人の村で、税の集め方と使い道を自分で決める。手取りの差、道路や学校、働く気持ちはどう変わる？' },
     { date: '2026-11-14', seal: '町', tone: 'green', href: 'sitemap.html', eyebrow: 'サイトマップ', title: '経済の町の地図', text: 'このサイトの 14 のページを、町の建物に。行ったことのある建物には「済」の札。町をぜんぶ回れるかな。' },
@@ -16,7 +17,7 @@ window.AZAKEI = {
     { date: '2026-11-13', seal: '辞', tone: 'green', href: 'glossary.html', eyebrow: '用語辞典', title: '辞典が 300 語に', text: '「経済」「一人あたり GDP」「日銀短観」「逆進性」「地租改正」「インバウンド」「生成 AI」など 24 語を新しく。'},
     { date: '2026-11-13', seal: '巡', tone: 'gold', href: 'sim.html#meguri', eyebrow: '経済ラボ', title: 'お金のめぐり', text: '家計・企業・銀行・政府のあいだを流れるお金を、動く図で。「1 万円のゆくえ」で順にたどれます。' },
     { date: '2026-11-13', seal: '券', tone: 'shu', href: 'festival.html#bill', eyebrow: '文化祭', title: '麻経券をつくる', text: '金額・色・まん中の絵・名前を選んで、自分だけの遊び券を絵に。画像で保存できます。' },
-    { date: '2026-11-11', seal: '映', tone: 'green', href: 'index.html#deck', eyebrow: '紹介', title: '1 分でわかる麻経', text: '画面いっぱいの 7 枚のスライドで、文化祭・数字・コンテスト・Web の遊びを紹介。自動で進みます。' },
+    { date: '2026-11-11', seal: '映', tone: 'green', href: 'index.html#deck', eyebrow: '紹介', title: '1 分でわかる麻経', text: '画面いっぱいの 9 枚のスライドで、親しむ・知る・つくるの流れにそって麻経を紹介。自動で進みます。' },
     { date: '2026-11-11', seal: '探', tone: 'shu', href: 'glossary.html#newsfind', eyebrow: '用語辞典', title: 'ニュースの言葉さがし', text: '読みたい記事を貼りつけると、辞典にある言葉に印がつく。押せば、その場で意味が開きます。' },
     { date: '2026-11-10', seal: '暦', tone: 'gold', href: 'events.html#koyomi', eyebrow: '日程とイベント', title: '経済の暦', text: '「円」が生まれた日、プラザ合意、リーマン・ショック。月ごとに 33 のできごと。今日は、経済の何の日？' },
     { date: '2026-11-10', seal: '修', tone: 'shu', href: 'festival.html#athome', eyebrow: '文化祭', title: '家で回る麻布経済展', text: '会場を歩く・クイズ・カード・クロスワード・診断の 5 つで、朱印のスタンプ。そろったら、修了証を画像で。' },

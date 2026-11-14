@@ -27,11 +27,12 @@
     { group: '知る', en: 'Know', pages: [
       { ico: 'M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10', href: 'index.html',      ja: 'ホーム',           en: 'Home',     desc: 'AZAKEI の全体像と最新情報。',                 img: 'hero.jpg' },
       { ico: 'M12 3l2.6 4.5H20l-2.7 4.5L20 16.5h-5.4L12 21l-2.6-4.5H4l2.7-4.5L4 7.5h5.4z', href: 'about.html',      ja: '麻経とは',         en: 'About',    desc: '成り立ち・活動の全体説明・今後の展望。',       img: 'members.jpg' },
+      { ico: 'M4 4h16v16H4zM8 8h8M8 12h8M8 16h5', href: 'dayori.html', ja: '麻経だより（月刊）', en: 'Newsletter', desc: 'その月に新しくなったことを、新聞のかたちで。印刷して掲示もできる。', img: 'photos/room-paper.jpg' },
       { ico: 'M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5M9 9h3', href: 'report.html',     ja: '2026 年の活動報告', en: 'Report', desc: '1 年を 1 ページに。数字・写真・月ごとの歩み。', img: 'photos/room-diagnosis.jpg' },
       { ico: 'M5 21V4M5 4h12l-2.5 4 2.5 4H5', href: 'azakei.html',     ja: 'AZAKEI として',    en: 'Identity', desc: '合言葉・大切にしていること・活動の地図・数字。', img: 'photos/board-special.jpg' },
       { ico: 'M4 8h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4zM10 8v10', href: 'festival.html',   ja: '文化祭「麻布経済展」', en: 'Festival', desc: '経済とエンタメが交差する、体験型展示。',       img: 'photos/room-diagnosis.jpg' },
       { ico: 'M4 8h3l2-3h6l2 3h3v11H4zM12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', href: 'activities.html', ja: '活動風景・日常',    en: 'Activity', desc: 'ミーティングから放課後の雑談まで。',           img: 'photos/setup.jpg' },
-      { ico: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6', href: 'glossary.html',   ja: '経済用語ミニ辞典', en: 'Glossary', desc: '190 語以上。GDP から NISA、世界の経済まで、やさしく。', img: 'photos/rules-posters.jpg', badge: 'NEW' },
+      { ico: 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11M9 8h6', href: 'glossary.html',   ja: '経済用語ミニ辞典', en: 'Glossary', desc: '300 語。GDP から NISA、世界の経済まで、やさしく。', img: 'photos/rules-posters.jpg', badge: 'NEW' },
     ]},
     { group: '挑む', en: 'Challenge', pages: [
       { ico: 'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M10 17h4', href: 'contests.html',   ja: '各種コンテスト',    en: 'Contests', desc: 'ビジネスコンテスト・日経ストックリーグ ほか。', img: 'tokyo-s.jpg' },
@@ -227,6 +228,7 @@
     ['festival.html#story', '3 日間の物語', '文化祭', '来場者 2364 人数'],
     ['festival.html#exhibition', '展示の仕組み', '文化祭', 'チップ 倍率 賭ける'],
     ['report.html', '2026 年の活動報告', '活動報告', '年報 実績 来場者 数字 1 年 まとめ 報告'],
+    ['dayori.html', '麻経だより（月刊）', '麻経だより', '新聞 だより 月刊 お知らせ 掲示 印刷 今月 更新'],
     ['about.html#faq', 'よくある質問（FAQ）', '麻経とは', 'faq 質問 入部 部員'],
     ['about.html#profile', '団体概要', '麻経とは', '設立 学校 連絡先'],
     ['about.html#vision', '今後の展望', '麻経とは', 'これから 目標 ロードマップ'],

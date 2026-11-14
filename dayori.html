@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>麻経だより（月刊） | 麻経 AZAKEI</title>
+  <meta name="description" content="麻経（AZAKEI）の月刊の新聞「麻経だより」。その月にホームページに加わった遊びや記事、経済の暦、今月の言葉を 1 枚に。A4 で印刷して掲示もできます。" />
+  <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="icon-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-title" content="麻経" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AZAKEI" />
+  <meta property="og:title" content="麻経だより（月刊） | 麻経 AZAKEI" />
+  <meta property="og:description" content="その月にホームページに加わったものを、新聞のかたちで 1 枚に。" />
+  <meta property="og:url" content="https://azakeiten.github.io/dayori.html" />
+  <link rel="canonical" href="https://azakeiten.github.io/dayori.html" />
+  <meta property="og:image" content="https://azakeiten.github.io/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script>/* テーマを描画前に決めてチラつきを防ぐ */(function(){var t;try{t=localStorage.getItem('azakei-theme')}catch(e){}document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');try{var fs=localStorage.getItem('azakei-fs');if(fs)document.documentElement.dataset.fs=fs}catch(e){}try{if(sessionStorage.getItem('azakei-curtain'))document.documentElement.classList.add('curtain-pending')}catch(e){}})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- 書体は、ページの表示を止めないように後から読みこむ（通信が遅いときも、先に文字が出る） -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
+  <link rel="stylesheet" href="p-dayori.min.css?v=20261115o" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S1YQ2P951D');
+  </script>
+</head>
+<body class="dy-page">
+
+  <header class="page-hero" data-bg="報">
+    <div class="container">
+      <p class="breadcrumb"><a href="index.html">AZAKEI</a> / 麻経だより</p>
+      <p class="section-label"><span class="ph-seal" aria-hidden="true">報</span></p>
+      <h1 class="section-title"><span class="keep-phrase">麻経</span><span class="keep-phrase"><em>だより</em></span></h1>
+      <p class="page-hero-lead">その月にホームページに加わったもの、経済の暦、今月の言葉を、新聞のかたちで 1 枚に。<br>A4 で印刷して、教室や掲示板に貼ることもできます。</p>
+    </div>
+  </header>
+
+  <section class="about tight">
+    <div class="container">
+      <div class="dy reveal" data-dayori></div>
+      <noscript><p>このページは、JavaScript をオンにすると表示されます。</p></noscript>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="content.js?v=20261115o"></script>
+  <script src="layout.js?v=20261115o"></script>
+  <script src="brand.js?v=20261115o"></script>
+  <script src="nav.js?v=20261115o"></script>
+  <script src="reveal.js?v=20261115o"></script>
+  <script src="site.js?v=20261115o"></script>
+  <script src="econcal.js?v=20261115o"></script>
+  <script src="dayori.js?v=20261115o"></script>
+</body>
+</html>

@@ -41,6 +41,7 @@
     [12, 18, 1971, 'スミソニアン協定', '1 ドル 360 円だった交換の比率が、308 円に変わりました。', ''],
     [12, 29, 1989, '日経平均が当時の最高値', '終値 38,915 円。このあとバブルがはじけ、長く下がりました。', 'bubble']
   ];
+  window.AZAKEI_ECAL = E;   // 麻経だより（dayori.js）でも使う
   const now = new Date(), M = now.getMonth() + 1, D = now.getDate();
   const ord = (m, d) => m * 100 + d;
   const today = E.filter(e => e[0] === M && e[1] === D);
