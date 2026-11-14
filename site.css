@@ -8175,3 +8175,46 @@ html[lang="ja"] .page-hero[data-bg]::after { color: rgba(181, 67, 47, .055); -we
 .sh [data-shiri] .sh-btns a { margin-top: 14px; font-weight: 800; font-size: 13.5px; color: #b5432f; }
 @media (max-width: 560px) { .sh [data-shiri] .sh-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .sh [data-shiri] .sh-top { grid-template-columns: auto minmax(0, 1fr); } .sh [data-shiri] .sh-score { grid-column: 1 / -1; } }
 @media (prefers-reduced-motion: reduce) { .sh [data-shiri] * { animation: none !important; } }
+
+/* v185 サイトマップ「経済の町」 */
+.tw[data-town] { display: grid; gap: 14px; margin-bottom: 48px; }
+.tw[data-town] .tw-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px; }
+.tw[data-town] .tw-prog { margin: 0; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; }
+.tw[data-town] .tw-prog b { font-family: 'Shippori Mincho', serif; font-size: 26px; color: #b5432f; }
+.tw[data-town] .tw-bar { display: inline-block; width: 140px; height: 6px; border-radius: 3px; background: var(--color-border); overflow: hidden; }
+.tw[data-town] .tw-bar i { display: block; height: 100%; background: #b5432f; }
+.tw[data-town] .tw-hint { margin: 0; font-size: 12.5px; color: var(--color-muted); }
+.tw[data-town] .tw-map { border-radius: 22px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, .12); }
+.tw[data-town] svg { display: block; width: 100%; height: auto; }
+.tw[data-town] .tw-ground { fill: #e9e1cf; }
+:root[data-theme="dark"] .tw[data-town] .tw-ground { fill: #23201b; }
+.tw[data-town] .tw-road { fill: #8f8676; }
+:root[data-theme="dark"] .tw[data-town] .tw-road { fill: #3a352d; }
+.tw[data-town] .tw-line { stroke: #f3eee4; stroke-width: 2; stroke-dasharray: 14 14; opacity: .7; }
+.tw[data-town] .tw-coin { fill: #f3e3bd; stroke: #b08a4a; stroke-width: 2.5; }
+.tw[data-town] .tw-tree rect { fill: #6b5235; } .tw[data-town] .tw-tree circle { fill: #2f6b4f; }
+.tw[data-town] .tw-b { cursor: pointer; outline: none; }
+.tw[data-town] .tw-in { transition: transform .25s cubic-bezier(.2, .8, .2, 1); }
+.tw[data-town] .tw-b:hover .tw-in, .tw[data-town] .tw-b:focus-visible .tw-in, .tw[data-town] .tw-b.is-on .tw-in { transform: translateY(-8px); }
+.tw[data-town] .tw-shadow { fill: rgba(0, 0, 0, .14); }
+.tw[data-town] .tw-body { fill: #fbf6ea; stroke: #1d1d1d; stroke-width: 2; }
+:root[data-theme="dark"] .tw[data-town] .tw-body { fill: #3b362e; stroke: #0d0c0a; }
+.tw[data-town] .tw-win { fill: #c9d6df; stroke: #1d1d1d; stroke-width: 1; }
+:root[data-theme="dark"] .tw[data-town] .tw-win { fill: #e9c97a; }
+.tw[data-town] .tw-door { fill: #6b5235; }
+.tw[data-town] .tw-col { fill: #efe6d2; stroke: #1d1d1d; stroke-width: 1; }
+.tw[data-town] .tw-clock { fill: #fff; stroke: #1d1d1d; stroke-width: 2; } .tw[data-town] .tw-hand { stroke: #1d1d1d; stroke-width: 2.5; stroke-linecap: round; }
+.tw[data-town] .tw-sign { fill: #b5432f; stroke: #fff; stroke-width: 3; }
+.tw[data-town] .tw-k { fill: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 19px; text-anchor: middle; }
+.tw[data-town] .tw-done rect { fill: #1c2b23; } .tw[data-town] .tw-done text { fill: #f3e3bd; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 15px; text-anchor: middle; }
+.tw[data-town] .tw-b:not(.is-v) .tw-body { fill: #f1ece1; }
+.tw[data-town] .tw-info { padding: 18px 22px; border-radius: 16px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); }
+.tw[data-town] .tw-info p { margin: 0; }
+.tw[data-town] .tw-i-k { display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 800; color: #b08a4a; }
+.tw[data-town] .tw-i-seal { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 5px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 16px; }
+.tw[data-town] .tw-i-t { margin-top: 6px !important; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; }
+.tw[data-town] .tw-i-x { margin-top: 4px !important; font-size: 14px; line-height: 1.8; color: var(--color-muted); }
+.tw[data-town] .tw-go { display: inline-block; margin-top: 12px; padding: 10px 22px; border-radius: 999px; background: #1c2b23; color: #f3eee4; font-weight: 800; font-size: 14px; text-decoration: none; }
+.tw[data-town] .tw-go::after { content: ' →'; }
+.tw-list-h { margin: 0 0 18px; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 24px; }
+@media (max-width: 760px) { .tw[data-town] .tw-map { margin: 0 -16px; border-radius: 0; overflow-x: auto; } .tw[data-town] .tw-map svg { width: 760px; max-width: none; } }

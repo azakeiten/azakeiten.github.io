@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-14', seal: '町', tone: 'green', href: 'sitemap.html', eyebrow: 'サイトマップ', title: '経済の町の地図', text: 'このサイトの 14 のページを、町の建物に。行ったことのある建物には「済」の札。町をぜんぶ回れるかな。' },
     { date: '2026-11-14', seal: '尻', tone: 'shu', href: 'glossary.html#shiritori', eyebrow: '用語辞典', title: '経済しりとり', text: '辞典の言葉だけで、コンピューターとしりとり。15 秒以内に選んで、「ん」で終わる言葉にはご用心。' },
     { date: '2026-11-13', seal: '辞', tone: 'green', href: 'glossary.html', eyebrow: '用語辞典', title: '辞典が 300 語に', text: '「経済」「一人あたり GDP」「日銀短観」「逆進性」「地租改正」「インバウンド」「生成 AI」など 24 語を新しく。'},
     { date: '2026-11-13', seal: '巡', tone: 'gold', href: 'sim.html#meguri', eyebrow: '経済ラボ', title: 'お金のめぐり', text: '家計・企業・銀行・政府のあいだを流れるお金を、動く図で。「1 万円のゆくえ」で順にたどれます。' },

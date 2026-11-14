@@ -285,7 +285,7 @@
     ['about.html#updates', 'ホームページの更新履歴', '麻経とは', 'あたらしい 新機能 お知らせ 更新'],
     ['mypage.html', 'わたしの記録', 'その他', 'マイページ 自己ベスト 進み具合 記録'],
     ['policy.html', 'サイトポリシー', 'その他', '著作権 リンク 免責 推奨環境 写真 アクセシビリティ 安心'],
-    ['sitemap.html', 'サイトマップ', 'その他', 'ページ一覧 全体 地図'],
+    ['sitemap.html', 'サイトマップ（経済の町の地図）', 'その他', 'ページ一覧 全体 地図 町 探検 建物 マップ'],
     ['privacy.html', 'プライバシーポリシー', 'その他', '個人情報 cookie']
   ].map(([href, ja, group, kw]) => ({ href, ja, group, kw }));
   window.AZAKEI_SPOTS = SPOTS;

@@ -19,7 +19,7 @@
   // 経済ラボで「済」がついた実験の数（8 つ）
   const LAB = ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo', 'azakei_ginko', 'azakei_nesage'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (get('azakei_shop', []).length >= 3 ? 1 : 0);
   const C = [
-    ['探', 'サイト探検', visited.length, '/ 14 ページ', visited.length >= 14 ? '全ページ制覇！ すみずみまで見てくれてありがとう' : 'まだ見ていないページを回ってみよう', pct(visited.length, 14), 'index.html', 'サイトを回る', visited.length >= 14],
+    ['探', 'サイト探検', visited.length, '/ 14 ページ', visited.length >= 14 ? '全ページ制覇！ すみずみまで見てくれてありがとう' : 'まだ見ていないページを回ってみよう', pct(visited.length, 14), 'sitemap.html', 'サイトを回る', visited.length >= 14],
     ['億', '億万長者クイズ', num('azakei_quiz_best'), '枚', `ニュースモード ${num('azakei_quiz_best_news')} 枚・タイムアタック ${num('azakei_quiz_best_time')} 点`, null, 'quiz.html', '挑戦する', num('azakei_quiz_best') >= 40],
     ['復', 'まちがえた問題', missN, '問', missN ? '復習して、リストを空っぽにしよう' : 'いまは、まちがいリストは空っぽ', null, 'quiz.html', missN ? '復習する' : 'クイズへ', missN === 0 && num('azakei_quiz_best') > 0],
     ['辞', '単語カード', known.length, '/ 300 語', '覚えた言葉には、辞典で 済 の印', pct(known.length, 300), 'glossary.html#glCards', '続きを覚える', known.length >= 150],
