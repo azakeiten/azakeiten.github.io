@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261115r" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261115s" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -128,6 +128,18 @@
     </div>
   </section>
 
+  <!-- 交換の島（barter.js・近づいてから読みこむ） -->
+  <section class="services tight bt-sec" id="koukan">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">換</span></p>
+        <h2 class="section-title">交換の島</h2>
+        <p class="lead">魚を持って、本がほしい。まずは物々交換で、次に同じ島で「貝のお金」を使って。お金があると、なぜ楽になるのかを、自分の手で確かめます。</p>
+      </div>
+      <div class="bt reveal" data-barter></div>
+    </div>
+  </section>
+
   <section class="about tight" id="coins">
     <div class="container">
       <div class="section-head reveal">
@@ -165,22 +177,22 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261115r"></script>
-  <script src="layout.js?v=20261115r"></script>
-  <script src="brand.js?v=20261115r"></script>
-  <script src="nav.js?v=20261115r"></script>
-  <script src="reveal.js?v=20261115r"></script>
-  <script src="ranking.js?v=20261115r"></script>
-  <script src="quiz-data.js?v=20261115r"></script>
-  <script src="shareimg.js?v=20261115r"></script>
-  <script src="quiz.js?v=20261115r"></script>
-  <script src="osatsu.js?v=20261115r"></script>
-  <script src="site.js?v=20261115r"></script>
+  <script src="content.js?v=20261115s"></script>
+  <script src="layout.js?v=20261115s"></script>
+  <script src="brand.js?v=20261115s"></script>
+  <script src="nav.js?v=20261115s"></script>
+  <script src="reveal.js?v=20261115s"></script>
+  <script src="ranking.js?v=20261115s"></script>
+  <script src="quiz-data.js?v=20261115s"></script>
+  <script src="shareimg.js?v=20261115s"></script>
+  <script src="quiz.js?v=20261115s"></script>
+  <script src="osatsu.js?v=20261115s"></script>
+  <script src="site.js?v=20261115s"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261115r';
-      [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-moneyevo]', 'moneyevo.js'], ['[data-coins]', 'coins.js'], ['[data-otsuri]', 'otsuri.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
+      var V = '20261115s';
+      [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-moneyevo]', 'moneyevo.js'], ['[data-barter]', 'barter.js'],['[data-coins]', 'coins.js'], ['[data-otsuri]', 'otsuri.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };
         if (location.hash || !('IntersectionObserver' in window)) return load();

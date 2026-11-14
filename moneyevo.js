@@ -27,7 +27,7 @@
       <div class="me-art" aria-hidden="true">${ART[k]}</div>
       <p class="me-era"><span>${['一', '二', '三', '四', '五', '六'][i]}</span>${era}</p>
       <h3>${t}</h3><p class="me-x">${x}</p>
-      <p class="me-gl">${gl.map(([id, n]) => `<a href="glossary.html#${id}">${n}</a>`).join('')}</p></article>`).join('')}</div>
+      <p class="me-gl">${gl.map(([id, n]) => `<a href="glossary.html#${id}">${n}</a>`).join('')}${k === 'barter' ? '<a class="me-try" href="#koukan">交換の島で試す</a>' : ''}</p></article>`).join('')}</div>
     <div class="me-ctl"><button type="button" class="me-prev" aria-label="前の場面">←</button><ol class="me-dots" aria-hidden="true">${S.map(() => '<li></li>').join('')}</ol><button type="button" class="me-next" aria-label="次の場面">→</button></div>`;
   const tr = box.querySelector('.me-track'), slides = [...tr.children], dots = [...box.querySelectorAll('.me-dots li')];
   let cur = 0;
