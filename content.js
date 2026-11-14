@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-15', seal: '進', tone: 'green', href: 'quiz.html#shinka', eyebrow: 'クイズ', title: 'お金の進化', text: '物々交換、貝、和同開珎、紙のお金、円と日本銀行券、そしてスマホの中の数字へ。6 つの場面を横にめくって。' },
     { date: '2026-11-15', seal: '報', tone: 'green', href: 'dayori.html', eyebrow: '麻経だより', title: '月刊「麻経だより」', text: 'その月に新しくなったこと、経済の暦、今月の言葉を、新聞のかたちで 1 枚に。A4 で印刷して掲示もできます。' },
     { date: '2026-11-15', seal: '釣', tone: 'gold', href: 'quiz.html#otsuri', eyebrow: 'クイズ', title: 'おつりの達人', text: 'お店の人になって、おつりをわたす 60 秒勝負。いちばん少ない枚数でわたせたら 2 点。小学生にもおすすめ。' },
     { date: '2026-11-15', seal: '創', tone: 'shu', href: 'sim.html#koubou', eyebrow: '経済ラボ', title: '村の税の仕組みをつくる', text: '10 人の村で、税の集め方と使い道を自分で決める。手取りの差、道路や学校、働く気持ちはどう変わる？' },
