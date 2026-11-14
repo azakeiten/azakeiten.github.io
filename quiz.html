@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261115h" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261115j" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -44,7 +44,7 @@
       <p class="section-label"><span class="ph-seal" aria-hidden="true">億</span></p>
       <h1 class="section-title"><span class="keep-phrase">億万長者</span><span class="keep-phrase"><em>クイズ</em></span></h1>
       <p class="page-hero-lead">文化祭で人気だったチップのクイズを、Web で遊べるようにしました。賭ける枚数と難しさを選んで 2 問に挑戦。正解数で、賭けたチップが最大 6 倍に。</p>
-      <p class="ph-stats"><span><b data-count>6</b>つの遊び</span><span><b data-count>84</b>問のクイズ</span><span><b data-count>120</b>枚が会場の最高記録</span></p>
+      <p class="ph-stats"><span><b data-count>7</b>つの遊び</span><span><b data-count>84</b>問のクイズ</span><span><b data-count>120</b>枚が会場の最高記録</span></p>
     </div>
   </header>
 
@@ -56,6 +56,7 @@
         <li><a href="#cardgame"><span class="gn-seal">札</span><b>カード勝負</b><small data-k="azakei_card_win" data-u="勝">5 回勝負</small></a></li>
         <li><a href="#sugoroku"><span class="gn-seal">双</span><b>すごろく</b><small data-k="azakei_sugo_best" data-u="円">12 回</small></a></li>
         <li><a href="#coins"><span class="gn-seal">貨</span><b>お金図鑑</b><small data-k="azakei_coins" data-u="/ 12 枚" data-len>12 枚</small></a></li>
+        <li><a href="#otsuri"><span class="gn-seal">釣</span><b>おつりの達人</b><small data-k="azakei_otsuri_best" data-u="点">60 秒</small></a></li>
         <li><a href="#make"><span class="gn-seal">作</span><b>問題づくり</b><small>つくる</small></a></li>
       </ul>
     </div>
@@ -126,8 +127,20 @@
     </div>
   </section>
 
+  <!-- おつりの達人（otsuri.js・近づいてから読みこむ） -->
+  <section class="services tight" id="otsuri">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">釣</span></p>
+        <h2 class="section-title"><span class="keep-phrase">おつりの</span><span class="keep-phrase"><em>達人</em></span></h2>
+        <p class="lead">お店の人になって、1,000 円札で払ったお客さんに、おつりをわたします。ぴったりで 1 点、いちばん少ない枚数なら 2 点。60 秒で何点とれるかな。小学生にもおすすめです。</p>
+      </div>
+      <div class="ot reveal" data-otsuri></div>
+    </div>
+  </section>
+
   <!-- 問題を、つくってみよう -->
-  <section class="services tight" id="make">
+  <section class="about tight" id="make">
     <div class="container">
       <div class="section-head reveal">
         <p class="section-label"><span class="sl-seal" aria-hidden="true">作</span></p>
@@ -140,22 +153,22 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261115h"></script>
-  <script src="layout.js?v=20261115h"></script>
-  <script src="brand.js?v=20261115h"></script>
-  <script src="nav.js?v=20261115h"></script>
-  <script src="reveal.js?v=20261115h"></script>
-  <script src="ranking.js?v=20261115h"></script>
-  <script src="quiz-data.js?v=20261115h"></script>
-  <script src="shareimg.js?v=20261115h"></script>
-  <script src="quiz.js?v=20261115h"></script>
-  <script src="osatsu.js?v=20261115h"></script>
-  <script src="site.js?v=20261115h"></script>
+  <script src="content.js?v=20261115j"></script>
+  <script src="layout.js?v=20261115j"></script>
+  <script src="brand.js?v=20261115j"></script>
+  <script src="nav.js?v=20261115j"></script>
+  <script src="reveal.js?v=20261115j"></script>
+  <script src="ranking.js?v=20261115j"></script>
+  <script src="quiz-data.js?v=20261115j"></script>
+  <script src="shareimg.js?v=20261115j"></script>
+  <script src="quiz.js?v=20261115j"></script>
+  <script src="osatsu.js?v=20261115j"></script>
+  <script src="site.js?v=20261115j"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261115h';
-      [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-coins]', 'coins.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
+      var V = '20261115j';
+      [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-coins]', 'coins.js'], ['[data-otsuri]', 'otsuri.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };
         if (location.hash || !('IntersectionObserver' in window)) return load();

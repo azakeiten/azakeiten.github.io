@@ -8,7 +8,7 @@
   const raw = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
   const has = k => { const v = raw(k); if (v === null || v === '' || v === '0' || v === '[]' || v === '{}') return false; return true; };
   const DONE = [
-    ['azakei_quiz_best', 'azakei_card_best', 'azakei_cw_best', 'azakei_shiri_best', 'azakei_room_tour'],
+    ['azakei_quiz_best', 'azakei_card_best', 'azakei_cw_best', 'azakei_shiri_best', 'azakei_otsuri_best', 'azakei_room_tour'],
     ['azakei_gl_known', 'azakei_sim_run', 'azakei_np_best', 'azakei_gacha'],
     ['azakei_planseed', 'azakei_village']
   ];

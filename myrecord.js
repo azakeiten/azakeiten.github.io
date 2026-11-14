@@ -29,6 +29,7 @@
     ['遣', 'おこづかいチャレンジ', get('azakei_ozk_master', null) ? 'やりくり名人' : '―', '', '1 年後に自転車を買えるか', null, 'sim.html#okozukai', '挑戦する', !!get('azakei_ozk_master', null)],
     ['勝', '経済カード勝負', num('azakei_card_win'), '勝', num('azakei_card_best') ? '自己ベスト ' + num('azakei_card_best') + ' 枚' : '予報を読んで、5 枚のカードで相手と勝負', null, 'quiz.html#cardgame', '勝負する', num('azakei_card_win') > 0],
     ['字', '経済クロスワード', num('azakei_cw_best'), '枚', num('azakei_cw_best') ? '最後の問題までクリアした自己ベスト' : '14 語をうめて、二重マスの最後の問題へ', null, 'quiz.html#crossword', '解いてみる', num('azakei_cw_best') > 0],
+    ['釣', 'おつりの達人', num('azakei_otsuri_best'), '点', num('azakei_otsuri_best') ? '60 秒でとった自己ベスト' : 'おつりを、いちばん少ない枚数で', null, 'quiz.html#otsuri', '挑戦する', num('azakei_otsuri_best') >= 12],
     ['貨', '世界のお金図鑑', get('azakei_coins', []).length, '/ 12 枚', 'この国のお金は？ 4 択でコインを集める', pct(get('azakei_coins', []).length, 12), 'quiz.html#coins', '集める', get('azakei_coins', []).length >= 12],
     ['研', '経済ラボ', LAB, '/ 10 実験', 'クリアした実験には、メニューに「済」の朱印', pct(LAB, 10), 'sim.html', '実験をする', LAB >= 10],
     ['店', '文化祭のお店', get('azakei_shop', []).length, '/ 3 ミッション', '何個売れたら黒字になる？ 損益分岐点', pct(get('azakei_shop', []).length, 3), 'sim.html#shop', '挑戦する', get('azakei_shop', []).length >= 3],

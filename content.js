@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-15', seal: '釣', tone: 'gold', href: 'quiz.html#otsuri', eyebrow: 'クイズ', title: 'おつりの達人', text: 'お店の人になって、おつりをわたす 60 秒勝負。いちばん少ない枚数でわたせたら 2 点。小学生にもおすすめ。' },
     { date: '2026-11-15', seal: '創', tone: 'shu', href: 'sim.html#koubou', eyebrow: '経済ラボ', title: '村の税の仕組みをつくる', text: '10 人の村で、税の集め方と使い道を自分で決める。手取りの差、道路や学校、働く気持ちはどう変わる？' },
     { date: '2026-11-14', seal: '町', tone: 'green', href: 'sitemap.html', eyebrow: 'サイトマップ', title: '経済の町の地図', text: 'このサイトの 14 のページを、町の建物に。行ったことのある建物には「済」の札。町をぜんぶ回れるかな。' },
     { date: '2026-11-14', seal: '尻', tone: 'shu', href: 'glossary.html#shiritori', eyebrow: '用語辞典', title: '経済しりとり', text: '辞典の言葉だけで、コンピューターとしりとり。15 秒以内に選んで、「ん」で終わる言葉にはご用心。' },

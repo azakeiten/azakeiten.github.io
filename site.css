@@ -8314,3 +8314,47 @@ html .st3 h2.st3-title, html .st3 .st3-list h3 { font-family: 'Shippori Mincho',
 .jg ol li a { font-weight: 800; color: inherit; text-decoration: underline; text-decoration-color: rgba(181, 67, 47, .5); text-underline-offset: 3px; }
 .jg-note { margin: 18px 0 0; font-size: 12.5px; color: var(--color-muted); }
 @media (max-width: 960px) { .jg { grid-template-columns: minmax(0, 1fr); } }
+
+/* v189 クイズ「おつりの達人」 */
+.gn[data-gnav] { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .gn[data-gnav] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 960px) { .gn[data-gnav] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .gn[data-gnav] { display: flex; } }
+.ot[data-otsuri] { max-width: 760px; margin: 0 auto; padding: 24px; border-radius: 22px; background: var(--color-surface, #fff); border: 1px solid var(--color-border); display: grid; gap: 14px; }
+.ot[data-otsuri] .ot-rule { margin: 0; font-size: 14.5px; line-height: 1.9; }
+.ot[data-otsuri] .ot-best { margin: 6px 0 0; font-size: 13px; color: var(--color-muted); } .ot[data-otsuri] .ot-best b { color: #b5432f; font-size: 16px; }
+.ot[data-otsuri] .ot-start, .ot[data-otsuri] .ot-give { padding: 12px 26px; border: 0; border-radius: 999px; background: #b5432f; color: #fff; font: inherit; font-weight: 800; font-size: 15px; cursor: pointer; }
+.ot[data-otsuri] .ot-start { margin-top: 14px; background: #1c2b23; }
+.ot[data-otsuri] .ot-clear { padding: 12px 20px; border-radius: 999px; border: 1px solid var(--color-border); background: transparent; color: inherit; font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+.ot[data-otsuri] .ot-top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; }
+.ot[data-otsuri] .ot-top p { margin: 0; font-size: 13px; font-weight: 700; color: var(--color-muted); }
+.ot[data-otsuri] .ot-top b { font-family: 'Shippori Mincho', serif; font-size: 24px; color: var(--color-text); }
+.ot[data-otsuri] .ot-time { height: 6px; border-radius: 3px; background: var(--color-border); overflow: hidden; }
+.ot[data-otsuri] .ot-time i { display: block; height: 100%; background: linear-gradient(90deg, #b5432f, #b08a4a); transform-origin: left; }
+.ot[data-otsuri] .ot-q { margin: 0; padding: 16px 18px; border-radius: 14px; background: #fbf6ea; color: #1d1d1d; font-weight: 800; font-size: 16px; line-height: 1.7; }
+.ot[data-otsuri] .ot-q b { font-family: 'Shippori Mincho', serif; font-size: 30px; color: #b5432f; margin: 0 2px 0 8px; }
+.ot[data-otsuri] .ot-item { display: inline-block; padding: 2px 10px; border-radius: 999px; background: #1c2b23; color: #f3eee4; font-size: 12.5px; vertical-align: .3em; }
+.ot[data-otsuri] .ot-paid { display: block; font-size: 13.5px; font-weight: 700; color: #6b6255; }
+.ot[data-otsuri] .ot-trayw { display: grid; gap: 6px; }
+.ot[data-otsuri] .ot-tray { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 64px; padding: 10px; border-radius: 14px; border: 2px dashed var(--color-border); background: var(--color-bg, #f6f2ea); }
+.ot[data-otsuri] .ot-empty { font-size: 12.5px; color: var(--color-muted); }
+.ot[data-otsuri] .ot-sum { margin: 0; text-align: right; font-size: 13px; font-weight: 700; color: var(--color-muted); } .ot[data-otsuri] .ot-sum b { font-size: 20px; color: var(--color-text); }
+.ot[data-otsuri] .ot-pad { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.ot[data-otsuri] .ot-c { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(0, 0, 0, .25); font: inherit; font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: 16px; color: #3a2e1a; cursor: pointer; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .15); transition: transform .12s; }
+.ot[data-otsuri] .ot-c:active { transform: scale(.92); }
+.ot[data-otsuri] .ot-500 { background: #e8d27a; } .ot[data-otsuri] .ot-100 { background: #d9d9d4; } .ot[data-otsuri] .ot-50 { background: #e3e3de; }
+.ot[data-otsuri] .ot-10 { background: #c98d58; } .ot[data-otsuri] .ot-5 { background: #e2c069; } .ot[data-otsuri] .ot-1 { background: #f4f4f1; }
+.ot[data-otsuri] .ot-tray .ot-c { width: 44px; font-size: 12.5px; animation: ot-in .2s ease both; }
+@keyframes ot-in { from { transform: translateY(-10px) scale(.8); opacity: 0; } to { transform: none; opacity: 1; } }
+.ot[data-otsuri] .ot-act { display: flex; justify-content: flex-end; gap: 8px; }
+.ot[data-otsuri] .ot-msg { margin: 0; min-height: 1.6em; font-weight: 800; font-size: 14px; }
+.ot[data-otsuri] .ot-msg.is-ok { color: #2f6b4f; } .ot[data-otsuri] .ot-msg.is-ng { color: #b5432f; }
+.ot[data-otsuri] .ot-end { text-align: center; }
+.ot[data-otsuri] .ot-seal { display: grid; place-items: center; width: 64px; height: 64px; margin: 4px auto 10px; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 34px; transform: rotate(-4deg); }
+.ot[data-otsuri] .ot-res { margin: 0; font-weight: 800; } .ot[data-otsuri] .ot-res b { font-family: 'Shippori Mincho', serif; font-size: 44px; color: #b5432f; }
+.ot[data-otsuri] .ot-res em { margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: #b5432f; color: #fff; font-style: normal; font-size: 11.5px; vertical-align: .3em; }
+.ot[data-otsuri] .ot-word { margin: 4px 0 0; font-size: 14px; color: var(--color-muted); }
+.ot[data-otsuri] .ot-tip { margin: 12px auto 0; max-width: 480px; font-size: 12.5px; line-height: 1.8; color: var(--color-muted); }
+@media (max-width: 560px) { .ot[data-otsuri] { padding: 16px; } .ot[data-otsuri] .ot-pad { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ot[data-otsuri] .ot-c { font-size: 18px; } }
+.ot[data-otsuri] .ot-pad { grid-template-columns: repeat(6, 62px); justify-content: center; gap: 12px; }
+@media (max-width: 560px) { .ot[data-otsuri] .ot-pad { grid-template-columns: repeat(3, 64px); gap: 12px 18px; } }
