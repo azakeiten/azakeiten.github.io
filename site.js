@@ -1372,14 +1372,16 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261114f';
+  const V = '20261115a';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
-  const open = () => load().then(() => window.AZAKEI_DECK && window.AZAKEI_DECK.open()).catch(() => {});
+  const open = (start = 0) => load().then(() => window.AZAKEI_DECK && window.AZAKEI_DECK.open(start)).catch(() => {});
   document.addEventListener('click', e => { const b = e.target.closest('[data-deck]'); if (!b) return; e.preventDefault(); open(); });
-  if (location.hash === '#deck') open();
-  addEventListener('hashchange', () => { if (location.hash === '#deck') open(); });
+  // #deck で最初から、#deck-3 のように番号をつけると、その場面から
+  const fromHash = () => { const m = location.hash.match(/^#deck(?:-(\d+))?$/); if (m) open(m[1] ? +m[1] - 1 : 0); };
+  fromHash();
+  addEventListener('hashchange', fromHash);
 })();
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */

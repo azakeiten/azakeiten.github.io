@@ -54,3 +54,43 @@ html.dk-open, html.dk-open body { overflow: hidden; }
 .dk-ctl .dk-x { margin-left: auto; }
 @media (max-width: 600px) { .dk-bars { height: 110px; } .dk-in { padding-bottom: 104px; } }
 @media (prefers-reduced-motion: reduce) { .dk *, .dk-s, .dk { animation: none !important; transition: none !important; } .dk-bg img { transform: none; } }
+
+/* 親しむ → 知る → つくる（麻経のめざすこと） */
+.dk-track { position: absolute; left: clamp(16px, 4vw, 40px); top: 34px; z-index: 2; display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; list-style: none; transition: opacity .4s; }
+.dk-track.is-hide { opacity: 0; }
+.dk-track li { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: rgba(243, 238, 228, .45); transition: color .4s; }
+.dk-track li span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 5px; border: 1.5px solid rgba(243, 238, 228, .35); font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 14px; transition: background .4s, border-color .4s, color .4s; }
+.dk-track li.is-on { color: #fff; }
+.dk-track li.is-on span { background: #b5432f; border-color: #b5432f; color: #fff; }
+.dk-track .dk-arr { color: rgba(243, 238, 228, .35); }
+.is-cover .dk-sub small { display: block; margin-top: 10px; font-size: .8em; color: rgba(243, 238, 228, .62); }
+.is-purpose, .is-cycle { align-items: center; background: radial-gradient(70% 70% at 30% 30%, rgba(176, 138, 74, .18), transparent 70%), #0f0d0b; }
+.is-purpose .dk-in, .is-cycle .dk-in { padding-bottom: 90px; }
+.dk-3 { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 30px 0 0; padding: 0; max-width: 860px; counter-reset: s; }
+.dk-3 li { position: relative; display: grid; gap: 4px; padding: 20px 20px 18px; border-radius: 16px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .14); }
+.dk-3 li + li::before { content: '→'; position: absolute; left: -14px; top: 50%; transform: translate(-50%, -50%); color: #e9a493; font-weight: 800; }
+.dk-3 span { display: grid; place-items: center; width: 52px; height: 52px; margin-bottom: 8px; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 28px; transform: rotate(-4deg); }
+.dk-3 b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 24px; color: #fff; }
+.dk-3 small { font-size: 13.5px; line-height: 1.7; color: rgba(243, 238, 228, .75); }
+.dk-s.is-on .dk-3 li { animation: dk-up .7s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(.45s + var(--j) * .35s); }
+.is-cycle .dk-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, 320px); grid-template-areas: 'k ring' 't ring' 's ring'; column-gap: 40px; align-content: center; }
+.is-cycle .dk-k { grid-area: k; } .is-cycle .dk-t { grid-area: t; } .is-cycle .dk-sub { grid-area: s; }
+.dk-ring { grid-area: ring; align-self: center; }
+.dk-ring svg { display: block; width: 100%; height: auto; overflow: visible; }
+.dk-ring-c { fill: none; stroke: rgba(255, 255, 255, .15); stroke-width: 3; }
+.dk-ring-run { fill: none; stroke: #b5432f; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 120 571; transform-origin: 150px 150px; }
+.dk-s.is-on .dk-ring-run { animation: dk-spin 6s linear infinite; }
+@keyframes dk-spin { to { transform: rotate(360deg); } }
+.dk-ring-s { fill: #1c2b23; stroke: #b5432f; stroke-width: 3; }
+.dk-ring text { fill: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 30px; text-anchor: middle; }
+@media (max-width: 760px) {
+  .dk-track li { font-size: 0; gap: 0; } .dk-track li span { font-size: 13px; } .dk-track .dk-arr { font-size: 11px; }
+  .dk-3 { grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 18px; }
+  .dk-3 li { grid-template-columns: 44px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 12px; padding: 12px 14px; }
+  .dk-3 li + li::before { display: none; }
+  .dk-3 span { grid-row: 1 / 3; width: 44px; height: 44px; margin: 0; font-size: 22px; }
+  .dk-3 b { font-size: 18px; } .dk-3 small { font-size: 12px; }
+  .is-purpose .dk-t { font-size: 30px; } .is-purpose .dk-sub { font-size: 13.5px; }
+  .is-cycle .dk-in { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'ring' 'k' 't' 's'; }
+  .dk-ring { width: 180px; justify-self: center; margin-bottom: 10px; }
+}
