@@ -64,7 +64,7 @@
       <circle cx="96" cy="95" r="44" class="dk-b-i"/><path d="M70 95h52M96 69v52M78 77l36 36M114 77l-36 36" class="dk-b-i"/>
       <path d="M170 60h140M170 132h140" class="dk-b-i"/>
       <text x="240" y="106" class="dk-b-t">麻経券</text><text x="320" y="160" class="dk-b-s">見本</text><text x="40" y="44" class="dk-b-n">100</text>
-    </svg><ul class="dk-b-q">${['何枚つくる？', 'いくらの価値？', 'どう増える？', 'どこで使える？'].map((q, j) => `<li style="--j:${j}">${q}</li>`).join('')}</ul></div>`;
+    </svg><ul class="dk-b-q">${['何枚つくる？', 'いくらの価値？', 'どう増える？', 'どこで使える？'].map((q, j) => `<li style="--j:${j}">${q}</li>`).join('')}</ul><a class="dk-b-go" href="sim.html#tsuuka">工房で、お金をつくってみる</a></div>`;
   // 親しむ：この場で選ぶ（A か B か。コインはこの画面の中だけ）
   const TRY = () => `<div class="dk-try"><div class="dk-try-ab"><button type="button" data-ab="A"><b>A</b>かならず<em>100</em>チップ</button><div class="dk-coin" aria-hidden="true"><span class="dk-coin-f">表</span><span class="dk-coin-b">裏</span></div><button type="button" data-ab="B"><b>B</b>表なら<em>200</em>裏なら 0</button></div>
       <p class="dk-try-r" aria-live="polite">A か B を押すと、コインを投げます。</p></div>`;

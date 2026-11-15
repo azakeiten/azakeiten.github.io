@@ -8541,3 +8541,56 @@ html section.services.bt-sec, html:not(.is-apple) section.services.bt-sec:not(.c
 html[data-theme="dark"] section.services.bt-sec, html[data-theme="dark"]:not(.is-apple) section.services.bt-sec:not(.cta-band) { --band: #17211c; background: #17211c !important; }
 .bt[data-barter] .bt-cnt { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 12px; }
 .bt[data-barter] .bt-cnt span { white-space: nowrap; }
+
+/* v193 経済ラボ「工房 二：お祭りのお金」（夜祭りの色） */
+html section.services.ts-sec, html:not(.is-apple) section.services.ts-sec:not(.cta-band) { --band: #1d2034; background: radial-gradient(80% 60% at 70% 0%, rgba(233, 164, 147, .16), transparent 70%), #1d2034 !important; }
+.ts-sec .section-title { color: #fff; } .ts-sec .section-title em { color: #f3e3bd; } .ts-sec .lead { color: rgba(243, 238, 228, .78); }
+.ts-sec .section-label .sl-seal { border-color: #e9a493; color: #e9a493; }
+.ts[data-tsuuka] { color: #f3eee4; }
+.ts[data-tsuuka] .ts-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 22px; }
+.ts[data-tsuuka] .ts-ctl, .ts[data-tsuuka] .ts-out { padding: 22px; border-radius: 22px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .12); }
+.ts[data-tsuuka] .ts-row { display: grid; gap: 8px; margin: 0 0 16px; font-size: 14px; font-weight: 700; }
+.ts[data-tsuuka] .ts-row b { font-family: 'Shippori Mincho', serif; font-size: 20px; color: #f3e3bd; }
+.ts[data-tsuuka] input[type=range] { width: 100%; accent-color: #e9a493; }
+.ts[data-tsuuka] .ts-h { margin: 4px 0 8px; font-size: 14px; font-weight: 700; }
+.ts[data-tsuuka] .ts-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 16px; }
+.ts[data-tsuuka] .ts-seg button, .ts[data-tsuuka] .ts-pre button { padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .22); background: transparent; color: #f3eee4; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; transition: background .2s, border-color .2s; }
+.ts[data-tsuuka] .ts-seg button[aria-pressed="true"] { background: #b5432f; border-color: #b5432f; color: #fff; }
+.ts[data-tsuuka] .ts-pre { display: flex; flex-wrap: wrap; gap: 6px; }
+.ts[data-tsuuka] .ts-pre button { padding: 7px 12px; border-radius: 999px; font-size: 12.5px; }
+.ts[data-tsuuka] .ts-pre button:hover, .ts[data-tsuuka] .ts-seg button:hover { border-color: #e9a493; }
+.ts[data-tsuuka] .ts-tag { position: relative; display: flex; align-items: baseline; gap: 10px; width: fit-content; margin: 0 auto 18px; padding: 14px 26px 14px 34px; border-radius: 6px 18px 18px 6px; background: #f3e3bd; color: #1d1d1d; box-shadow: 0 14px 30px rgba(0, 0, 0, .35); transform-origin: 0 50%; }
+.ts[data-tsuuka] .ts-tag::before { content: ''; position: absolute; left: 12px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: #1d2034; }
+.ts[data-tsuuka] .ts-tag.is-flip { animation: ts-swing .6s cubic-bezier(.2, 1.4, .4, 1); }
+@keyframes ts-swing { 0% { transform: rotate(-8deg); } 100% { transform: none; } }
+.ts[data-tsuuka] .ts-tag-k { font-size: 13px; font-weight: 700; color: #5b554a; }
+.ts[data-tsuuka] .ts-tag b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 44px; line-height: 1; color: #1c2b23; transition: color .3s; }
+.ts[data-tsuuka] .ts-tag.is-hot b { color: #b5432f; }
+.ts[data-tsuuka] .ts-tag small { font-size: 14px; font-weight: 800; }
+.ts[data-tsuuka] .ts-stalls { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px 8px; margin: 0 0 18px; padding: 0; }
+.ts[data-tsuuka] .ts-stalls li { display: grid; justify-items: center; gap: 4px; font-size: 11.5px; color: rgba(243, 238, 228, .45); transition: color .4s; }
+.ts[data-tsuuka] .ts-stalls i { display: grid; place-items: center; width: 44px; height: 54px; border-radius: 22px 22px 16px 16px; background: #2b2e45; border: 1px solid rgba(255, 255, 255, .12); color: rgba(243, 238, 228, .45); font-style: normal; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; transition: background .4s, box-shadow .4s, color .4s; }
+.ts[data-tsuuka] .ts-stalls li.is-on { color: #f3eee4; }
+.ts[data-tsuuka] .ts-stalls li.is-on i { background: radial-gradient(circle at 50% 40%, #ffd9a8, #e07a52 70%); color: #3a1608; border-color: transparent; box-shadow: 0 0 22px rgba(240, 150, 90, .55); animation: ts-glow 2.4s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -.3s); }
+@keyframes ts-glow { to { box-shadow: 0 0 10px rgba(240, 150, 90, .35); } }
+.ts[data-tsuuka] .ts-meters { display: grid; gap: 10px; }
+.ts[data-tsuuka] .ts-meters p { display: grid; grid-template-columns: 6.5em 1fr 4.5em; align-items: center; gap: 10px; margin: 0; font-size: 13px; font-weight: 700; }
+.ts[data-tsuuka] .ts-meters i { height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .1); overflow: hidden; }
+.ts[data-tsuuka] .ts-meters em { display: block; height: 100%; border-radius: 5px; background: #8fc0a0; transition: width .5s cubic-bezier(.2, .8, .2, 1), background .3s; }
+.ts[data-tsuuka] .ts-meters em.is-low { background: #e9a493; }
+.ts[data-tsuuka] .ts-meters b { text-align: right; font-family: 'Shippori Mincho', serif; font-size: 16px; color: #f3e3bd; }
+.ts[data-tsuuka] .ts-msg { margin: 16px 0 0; padding: 12px 16px; border-radius: 12px; background: rgba(0, 0, 0, .25); font-size: 14px; line-height: 1.8; }
+.ts[data-tsuuka] .ts-good { display: flex; align-items: center; gap: 12px; margin: 12px 0 0; padding: 12px 16px; border-radius: 12px; background: #f3e3bd; color: #1d1d1d; font-size: 13.5px; font-weight: 700; line-height: 1.7; animation: ts-in .5s cubic-bezier(.2, 1.3, .4, 1); }
+.ts[data-tsuuka] .ts-good[hidden] { display: none; }
+.ts[data-tsuuka] .ts-good span { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 6px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 22px; transform: rotate(-5deg); }
+@keyframes ts-in { from { transform: scale(.9); opacity: 0; } to { transform: none; opacity: 1; } }
+.ts[data-tsuuka] .ts-note { margin: 14px 0 0; font-size: 11.5px; color: rgba(243, 238, 228, .55); }
+@media (max-width: 760px) {
+  .ts[data-tsuuka] .ts-grid { grid-template-columns: minmax(0, 1fr); }
+  .ts[data-tsuuka] .ts-out { order: -1; }
+  .ts[data-tsuuka] .ts-ctl, .ts[data-tsuuka] .ts-out { padding: 16px; }
+  .ts[data-tsuuka] .ts-stalls i { width: 38px; height: 46px; font-size: 16px; }
+  .ts[data-tsuuka] .ts-tag b { font-size: 36px; }
+}
+@media (prefers-reduced-motion: reduce) { .ts[data-tsuuka] *, .ts[data-tsuuka] .ts-stalls li.is-on i { animation: none !important; transition: none !important; } }
+html section.ts-sec .section-head .lead { color: rgba(243, 238, 228, .82) !important; } html section.ts-sec .section-title { color: #fff !important; }

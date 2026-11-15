@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-15', seal: '券', tone: 'dark', href: 'sim.html#tsuuka', eyebrow: '経済ラボ', title: 'お祭りのお金をつくる工房', text: '何枚刷る？ どう配る？ 何軒で使える？ にせものは？ 券を設計すると、団子の値段も買える人も信用も変わる。'  },
     { date: '2026-11-15', seal: '映', tone: 'dark', href: 'index.html#deck', eyebrow: '紹介', title: '紹介スライドに、発表者メモと一覧', text: '12 枚に。会場に問いかけるコインの場面、流れるお金のめぐり、線で描かれる紙幣。「発表」を押すと、話す台本と経過時間が出ます。' },
     { date: '2026-11-15', seal: '換', tone: 'shu', href: 'quiz.html#koukan', eyebrow: 'クイズ', title: '交換の島', text: '魚を持って、本がほしい。物々交換だと何回かかる？ 同じ島に貝のお金があったら？ くらべて、お金の役割を手で確かめる。' },
     { date: '2026-11-15', seal: '進', tone: 'green', href: 'quiz.html#shinka', eyebrow: 'クイズ', title: 'お金の進化', text: '物々交換、貝、和同開珎、紙のお金、円と日本銀行券、そしてスマホの中の数字へ。6 つの場面を横にめくって。' },

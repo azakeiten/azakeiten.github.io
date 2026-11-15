@@ -214,3 +214,5 @@ html .dk h2.dk-t, html .dk .dk-t { font-family: 'Shippori Mincho', serif; font-w
 .dk-s.is-on .dk-b-q li { animation-delay: calc(1.7s + var(--j) * .2s); }
 @media (max-width: 760px) { .dk-try-ab { gap: 8px; } .dk-try-ab button { min-width: 0; width: 120px; } }
 @media (min-width: 761px) { html .dk .is-flow .dk-t, html .dk .is-bill .dk-t { font-size: clamp(32px, 4vw, 52px); } }
+.dk-b-go { display: inline-block; margin-top: 14px; padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(243, 227, 189, .5); color: #f3e3bd; font-size: 13.5px; font-weight: 800; text-decoration: none; }
+.dk-b-go:hover { background: #b5432f; border-color: #b5432f; color: #fff; }
