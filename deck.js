@@ -4,6 +4,8 @@
    ・自動で進む。← → キー・スワイプ・画面の左右を押しても動く。Esc で閉じる
    ・段（親しむ → 知る → つくる）が変わるところで、大きな印が出る
    ・「発表」（N キー）：自動送りを止め、話す台本・経過時間・次のスライドを出す（部員が人前で話すとき用）
+   ・「発表」（P キー）：お札マン（仮）が横に出てきて、ふきだしで 1 文ずつ発表する。「声を出す」で読み上げも。言い終わると次へ
+   ・「台本」（N キー）：自分で話すときの台本・経過時間
    ・「一覧」（G キー）：全部のスライドを並べて、好きな場面へ
    ・「指し棒」（L キー）：赤い光の点。「ペン」（D キー）：スライドに書きこむ（C で消す。スライドを変えると消える）
    ・発表者メモの「別の画面で台本を開く」：もう 1 つの窓に、台本・経過時間・目標との差・次のスライド
@@ -41,9 +43,40 @@
     { k: 'いっしょに', seal: '結', t: '一緒に、<br>仕組みをつくりませんか。', s: '協賛・取材・見学のご相談を、お待ちしています。<br>Instagram @azakei_vlog ／ azakeiten.github.io', cls: 'is-end', cta: true,
       n: '協賛や取材、見学のご相談をお待ちしています。Instagram は @azakei_vlog、ホームページは azakeiten.github.io です。ありがとうございました。' }
   ];
+  // お札マンが発表するときの言葉（スライドと同じ順。'@flip' はコインを投げる合図）。中身はスライドとサイトにあることだけ
+  const CL = [
+    ['こんにちは！ ぼくはお札マン。名前は、まだ「仮」なんだ。', 'AZAKEI の会長が、ぼくの生みの親だよ。', '今日は、ぼくが麻経を紹介するね。'],
+    ['麻経がめざしているのは、経済を「勉強」から「体験」にすること。', '親しむ、知る、つくる。この 3 つの段で進むよ。'],
+    ['まずは「親しむ」。', '文化祭では、教室ひとつを経済の町にしたんだ。', '入口でチップを受けとって、6 つのコーナーで遊ぶよ。'],
+    ['3 日間で、2,364 人が来てくれたよ！', 'いちばん多かったのは、2 日目の 1,152 人。'],
+    ['ここでクイズ。A は、かならず 100 チップ。B は、コインの表なら 200、裏なら 0。', 'みんなはどっち？ ……ぼくは、B にしてみる！', '@flip', '平均すると、どっちも 100。「確実」をとるか、「ふえるかも」をとるか。それが、リスクの考え方の入口だよ。'],
+    ['つぎは「知る」。', 'なぜチップが増えたのか、減ったのかを考えるんだ。', 'サイトには、用語辞典 300 語や、経済ラボの 16 の実験があるよ。'],
+    ['お金は、町の中をめぐっているよ。', '家計は働いて給料をもらって、企業から物を買う。', '預けたお金は銀行から企業へ。税金は、道路や学校になるんだ。'],
+    ['さいごは「つくる」。', '展示のゲームやルール、オリジナルの紙幣、会場の飾りは、部員が考えてつくったんだ。'],
+    ['お金を 1 枚つくるだけでも、決めることがたくさんあるよ。', '何枚つくる？ いくらの価値？ どこで使える？', 'ちなみに、ぼくの体もお札なんだ。'],
+    ['学校の外でも、挑戦しているよ。', '日経ストックリーグと、高校生ビジネスプラン・グランプリ。'],
+    ['つくった展示で、また次の人が経済に親しむ。', 'この輪を、少しずつ大きくしていくよ。'],
+    ['まとめるね。親しむ、知る、つくる。', '質問があったら、部員のみんなに聞いてね！'],
+    ['協賛や取材、見学のご相談を、待ってるよ。', '聞いてくれて、ありがとう！']
+  ];
+  // お札マン（osatsu.js と同じ絵。口がぱくぱく動く版）
+  const MAN = `<svg viewBox="0 0 120 112" aria-hidden="true">
+    <g stroke="#6b4a22" stroke-width="3.5" stroke-linecap="round"><path d="M50 76 L46 96"/><path d="M70 76 L74 96"/></g>
+    <ellipse cx="44" cy="98" rx="7" ry="3.5" fill="#6b4a22"/><ellipse cx="76" cy="98" rx="7" ry="3.5" fill="#6b4a22"/>
+    <g class="dk-ch-arm"><path d="M22 54 L8 62" stroke="#6b4a22" stroke-width="3.5" stroke-linecap="round"/><circle cx="7" cy="63" r="4.5" fill="#fffaf0" stroke="#6b4a22" stroke-width="2"/></g>
+    <g class="dk-ch-arm2"><path d="M98 52 L111 38" stroke="#6b4a22" stroke-width="3.5" stroke-linecap="round"/><circle cx="112" cy="36" r="4.5" fill="#fffaf0" stroke="#6b4a22" stroke-width="2"/></g>
+    <rect x="20" y="28" width="80" height="50" rx="7" fill="#e6d5b3" stroke="#6b4a22" stroke-width="3"/>
+    <rect x="26" y="34" width="68" height="38" rx="3" fill="none" stroke="#6b4a22" stroke-width="1.4" opacity=".6"/>
+    <g fill="#2f6b3a"><polygon points="35,37 41,47 29,47"/><polygon points="35,50 29,40 41,40"/></g>
+    <g class="dk-ch-eyes" fill="#2a2015"><ellipse cx="54" cy="50" rx="3.6" ry="4.2"/><ellipse cx="72" cy="50" rx="3.6" ry="4.2"/></g>
+    <circle cx="48" cy="59" r="4.2" fill="#f0957c" opacity=".55"/><circle cx="78" cy="59" r="4.2" fill="#f0957c" opacity=".55"/>
+    <path class="dk-m0" d="M57 58 Q63 64 69 58" fill="none" stroke="#2a2015" stroke-width="2.4" stroke-linecap="round"/>
+    <ellipse class="dk-m1" cx="63" cy="60" rx="5" ry="4" fill="#7a2b1c" stroke="#2a2015" stroke-width="1.6"/>
+    <text x="88" y="70" font-family="Shippori Mincho, serif" font-weight="800" font-size="9" fill="#b5432f" text-anchor="middle">経</text>
+  </svg>`;
   const DUR = 5500;
   const dur = n => S[n].dur || DUR;
-  let el, i = 0, timer = null, playing = true, startAt = 0, left = DUR, lastFocus = null, note = false, t0 = 0, clock = null, prevI = -1, tool = '', pv = null, pvT0 = 0, pvClock = null;
+  let el, i = 0, timer = null, playing = true, startAt = 0, left = DUR, lastFocus = null, note = false, t0 = 0, clock = null, prevI = -1, tool = '', pv = null, pvT0 = 0, pvClock = null, chara = false, voice = false, li = 0, tTok = 0, tt = null;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const label = s => s.step !== undefined ? STEPS[s.step][0] : s.seal;
   const plain = h => h.replace(/<small>.*?<\/small>/g, '').replace(/<span>(.*?)<\/span>/g, ' $1').replace(/<br>/g, '');
@@ -99,6 +132,7 @@
       <ol class="dk-track" aria-hidden="true">${STEPS.map(([k, t]) => `<li><span>${k}</span>${t}</li>`).join('<li class="dk-arr">→</li>')}</ol>
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
       <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
+      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p></div><div class="dk-ch-man">${MAN}</div></div>
       <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
       <div class="dk-ctl">
         <button type="button" class="dk-prev" aria-label="前のスライド">←</button>
@@ -108,7 +142,8 @@
         <button type="button" class="dk-lbtn" aria-pressed="false" title="指し棒（L）">指し棒</button>
         <button type="button" class="dk-dbtn" aria-pressed="false" title="ペンで書きこむ（D）。スライドを変えると消えます">ペン</button>
         <button type="button" class="dk-gbtn" aria-pressed="false" title="一覧（G）">一覧</button>
-        <button type="button" class="dk-nbtn" aria-pressed="false" title="発表者メモ（N）">発表</button>
+        <button type="button" class="dk-nbtn" aria-pressed="false" title="自分で話すときの台本（N）">台本</button>
+        <button type="button" class="dk-cbtn" aria-pressed="false" title="お札マンが発表（P）">発表</button>
         <button type="button" class="dk-x" aria-label="閉じる">閉じる</button>
       </div>`;
     document.body.appendChild(el);
@@ -118,6 +153,9 @@
     el.querySelector('.dk-play').onclick = () => setPlay(!playing);
     el.querySelector('.dk-gbtn').onclick = () => grid();
     el.querySelector('.dk-nbtn').onclick = () => setNote(!note);
+    el.querySelector('.dk-cbtn').onclick = () => setChara(!chara);
+    const vb = el.querySelector('.dk-ch-v');
+    if (vb) vb.onclick = () => { voice = !voice; vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
     el.querySelector('.dk-lbtn').onclick = () => setTool(tool === 'laser' ? '' : 'laser');
     el.querySelector('.dk-dbtn').onclick = () => setTool(tool === 'pen' ? '' : 'pen');
     el.querySelector('.dk-pv').onclick = presenter;
@@ -144,10 +182,10 @@
   const bars = () => el.querySelectorAll('.dk-bar i');
 
   // コインを投げる（この画面の中だけの遊び）
-  const flip = btn => {
+  const flip = (btn, auto) => {
     const box = btn.closest('.dk-try'), coin = box.querySelector('.dk-coin'), r = box.querySelector('.dk-try-r');
     if (coin.classList.contains('is-spin')) return;
-    setPlay(false);
+    if (!auto) setPlay(false);
     box.querySelectorAll('[data-ab]').forEach(b => b.setAttribute('aria-pressed', b === btn));
     const head = Math.random() < .5, pick = btn.dataset.ab;
     coin.classList.remove('is-h', 'is-t'); void coin.offsetWidth; coin.classList.add('is-spin', head ? 'is-h' : 'is-t');
@@ -193,6 +231,83 @@
     const tb = cur.querySelector('.dk-try'); if (tb) { tb.querySelectorAll('[data-ab]').forEach(b => b.removeAttribute('aria-pressed')); tb.querySelector('.dk-coin').className = 'dk-coin'; tb.querySelector('.dk-try-r').textContent = 'A か B を押すと、コインを投げます。'; }
     countUp(cur); stamp(); prevI = i;
     clearPen(); syncPv();
+    if (chara) { li = 0; stopTalk(); const c = el.querySelector('.dk-chara'); c.classList.remove('is-hop'); void c.offsetWidth; c.classList.add('is-hop'); }
+  };
+
+  // ── お札マンが発表：ふきだしに 1 文ずつ（文字が順に出る）。声を出すこともできる。言い終わると次のスライドへ
+  const stopTalk = () => {
+    tTok++; clearTimeout(tt);
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (el) el.querySelector('.dk-chara').classList.remove('is-talk');
+  };
+  const say = (txt, done) => {
+    const tok = tTok, t = el.querySelector('.dk-ch-t'), c = el.querySelector('.dk-chara');
+    let k = 0, typed = false, spoke = !voice;
+    c.classList.add('is-talk');
+    const fin = () => {
+      if (tok !== tTok || !typed || !spoke) return;
+      c.classList.remove('is-talk');
+      tt = setTimeout(() => { if (tok === tTok) done(); }, voice ? 350 : 650 + txt.length * 22);
+    };
+    if (voice) {
+      const u = new SpeechSynthesisUtterance(txt);
+      u.lang = 'ja-JP'; u.pitch = 1.45; u.rate = 1.05;
+      u.onend = u.onerror = () => { spoke = true; fin(); };
+      speechSynthesis.speak(u);
+    }
+    const type = () => {
+      if (tok !== tTok) return;
+      k = reduce ? txt.length : k + 1;
+      t.textContent = txt.slice(0, k);
+      if (k < txt.length) tt = setTimeout(type, /[、。！？]/.test(txt[k - 1]) ? 220 : 52); else { typed = true; fin(); }
+    };
+    type();
+  };
+  const talk = () => {
+    stopTalk();
+    if (!playing || !chara) return;
+    const tok = tTok, lines = CL[i] || [];
+    const bar = bars()[i];
+    const step = () => {
+      if (tok !== tTok) return;
+      bar.style.transition = 'transform .4s'; bar.style.transform = `scaleX(${li / Math.max(1, lines.length)})`;
+      if (li >= lines.length) {
+        if (i < S.length - 1) tt = setTimeout(() => { if (tok === tTok) go(i + 1); }, 700);
+        else { el.querySelector('.dk-chara').classList.add('is-bye'); setPlay(false, true); }
+        return;
+      }
+      const ln = lines[li];
+      if (ln === '@flip') {
+        // お札マンが B をえらんで、コインを投げる
+        const b = el.querySelector('.dk-s.is-on [data-ab="B"]');
+        if (b) flip(b, true);
+        el.querySelector('.dk-ch-t').textContent = 'えいっ！';
+        tt = setTimeout(() => {
+          if (tok !== tTok) return;
+          const head = el.querySelector('.dk-s.is-on .dk-coin').classList.contains('is-h');
+          say(head ? '表だ！ 200 チップ、もらえた！' : '裏……0 チップだった。ざんねん。', () => { li++; step(); });
+        }, reduce ? 100 : 1500);
+        return;
+      }
+      say(ln, () => { li++; step(); });
+    };
+    step();
+  };
+  const setChara = on => {
+    chara = on;
+    const c = el.querySelector('.dk-chara');
+    el.classList.toggle('is-chara', on);
+    c.hidden = !on; c.classList.remove('is-bye');
+    el.querySelector('.dk-cbtn').setAttribute('aria-pressed', on);
+    if (on) {
+      if (note) setNote(false);
+      setTool(''); li = 0;
+      el.querySelector('.dk-ch-t').textContent = '';
+      c.classList.remove('is-in'); void c.offsetWidth; c.classList.add('is-in');
+      // 最後のスライドから始めても最初に戻らないよう、setPlay を通さずに話しはじめる
+      clearTimeout(timer); playing = false;
+      setTimeout(() => { if (!chara) return; playing = true; const b = el.querySelector('.dk-play'); b.textContent = 'II'; b.setAttribute('aria-label', '一時停止'); run(); }, reduce ? 0 : 600);
+    } else { stopTalk(); setPlay(false); }
   };
   // 指し棒・ペン（どちらかひとつ）。使っている間は、画面を押してもスライドは進まない
   const setTool = t => {
@@ -262,6 +377,7 @@
   };
   const run = () => {
     clearTimeout(timer);
+    if (chara) { talk(); return; }
     if (!playing || i >= S.length - 1) { if (i >= S.length - 1) setPlay(false, true); return; }
     const b = bars()[i]; void b.offsetWidth;
     b.style.transition = `transform ${left}ms linear`; b.style.transform = 'scaleX(1)';
@@ -271,7 +387,7 @@
   const go = n => {
     if (n < 0 || n >= S.length) return;
     i = n; left = dur(i); paint();
-    requestAnimationFrame(run);
+    if (chara) setTimeout(run, 0); else requestAnimationFrame(run);
   };
   const setPlay = (on, ended) => {
     playing = on;
@@ -280,12 +396,14 @@
     const b = bars()[i];
     if (!on) {
       clearTimeout(timer);
-      if (!ended) { left = Math.max(400, left - (Date.now() - startAt)); const w = b.getBoundingClientRect().width / b.parentElement.getBoundingClientRect().width; b.style.transition = 'none'; b.style.transform = `scaleX(${w})`; }
+      if (chara) stopTalk();
+      if (!ended && !chara) { left = Math.max(400, left - (Date.now() - startAt)); const w = b.getBoundingClientRect().width / b.parentElement.getBoundingClientRect().width; b.style.transition = 'none'; b.style.transform = `scaleX(${w})`; }
     } else if (i >= S.length - 1) { go(0); }
     else run();
   };
   // 発表者メモ：自動送りを止め、台本と経過時間を出す
   const setNote = on => {
+    if (on && chara) setChara(false);
     note = on;
     el.classList.toggle('is-note', on);
     el.querySelector('.dk-note').hidden = !on;
@@ -313,24 +431,27 @@
     else if (e.key === 'ArrowRight' || e.key === 'PageDown') go(i + 1);
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
     else if (e.key === 'n' || e.key === 'N') setNote(!note);
+    else if (e.key === 'p' || e.key === 'P') setChara(!chara);
     else if (e.key === 'g' || e.key === 'G') grid(true);
     else if (e.key === ' ' && !e.target.closest('a, button')) { e.preventDefault(); setPlay(!playing); }
     else if (e.key === 'Tab') { const f = [...el.querySelectorAll('.dk-s.is-on a, .dk-s.is-on button, .dk-ctl button:not(:disabled)')]; if (!f.length) return; const a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
   };
-  const open = (start = 0) => {
+  const open = (start = 0, withChara = false) => {
     if (!el) build();
+    if (chara && !withChara) setChara(false);
     lastFocus = document.activeElement;
     document.documentElement.classList.add('dk-open');
     el.classList.add('is-open');
     prevI = -1;
     i = Math.max(0, Math.min(S.length - 1, start | 0)); left = dur(i); playing = !reduce && !note && i < S.length - 1; paint(); setPlay(playing, !playing && i >= S.length - 1);
     document.addEventListener('keydown', onKey);
+    if (withChara) setChara(true);
     el.querySelector('.dk-x').focus({ preventScroll: true });
     if (!/^#deck(-\d+)?$/.test(location.hash)) history.replaceState(null, '', '#deck');
   };
   function close() {
     clearTimeout(timer); clearInterval(clock); clearInterval(pvClock);
-    grid(false); setTool('');
+    grid(false); setTool(''); stopTalk();
     if (pv && !pv.closed) pv.close();
     el.classList.remove('is-open');
     document.documentElement.classList.remove('dk-open');

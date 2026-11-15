@@ -240,3 +240,67 @@ html .dk h2.dk-t, html .dk .dk-t { font-family: 'Shippori Mincho', serif; font-w
   .is-sum .dk-t { font-size: 28px; }
   .dk-ctl .dk-dbtn { display: none; }
 }
+
+/* v5 お札マンが発表 */
+.dk-chara { position: absolute; right: clamp(12px, 3vw, 36px); bottom: calc(74px + env(safe-area-inset-bottom)); z-index: 3; display: flex; align-items: flex-end; gap: 6px; pointer-events: none; }
+.dk-chara[hidden] { display: none; }
+.dk-ch-man { width: clamp(120px, 14vw, 190px); filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .45)); transform-origin: 50% 100%; animation: dk-ch-idle 2.6s ease-in-out infinite; }
+.dk-ch-man svg { display: block; width: 100%; height: auto; overflow: visible; }
+@keyframes dk-ch-idle { 50% { transform: translateY(-5px) rotate(1deg); } }
+.dk-chara.is-in .dk-ch-man { animation: dk-ch-in .8s cubic-bezier(.2, 1.4, .4, 1) both, dk-ch-idle 2.6s ease-in-out .8s infinite; }
+@keyframes dk-ch-in { from { transform: translateX(140%) rotate(16deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.dk-chara.is-hop .dk-ch-man { animation: dk-ch-hop .55s cubic-bezier(.3, 1.6, .5, 1), dk-ch-idle 2.6s ease-in-out .55s infinite; }
+@keyframes dk-ch-hop { 0% { transform: none; } 40% { transform: translateY(-22px) rotate(-5deg); } 100% { transform: none; } }
+/* 左手でスライドを指す */
+.dk-ch-arm { transform-box: fill-box; transform-origin: 100% 0; transition: transform .4s cubic-bezier(.2, 1.4, .4, 1); }
+.dk-chara.is-talk .dk-ch-arm { transform: rotate(52deg); }
+.dk-ch-arm2 { transform-box: fill-box; transform-origin: 0 100%; }
+.dk-chara.is-bye .dk-ch-arm2 { animation: dk-ch-wave .5s ease-in-out 6 alternate; }
+@keyframes dk-ch-wave { to { transform: rotate(-24deg); } }
+.dk-ch-eyes { transform-origin: 63px 50px; animation: dk-ch-blink 4.2s infinite; }
+@keyframes dk-ch-blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+/* 口：話しているあいだ、ぱくぱく */
+.dk-m1 { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.dk-chara.is-talk .dk-m0 { opacity: 0; }
+.dk-chara.is-talk .dk-m1 { opacity: 1; animation: dk-ch-mouth .18s ease-in-out infinite alternate; }
+@keyframes dk-ch-mouth { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+/* ふきだし */
+.dk-ch-b { position: relative; width: min(520px, 46vw); margin-bottom: clamp(70px, 9vw, 110px); padding: 14px 20px 16px; border-radius: 20px 20px 4px 20px; background: #fffaf0; color: #2a2015; box-shadow: 0 18px 40px rgba(0, 0, 0, .4); border: 2px solid #6b4a22; pointer-events: auto; animation: dk-ch-b-in .5s cubic-bezier(.2, 1.3, .4, 1) .35s both; }
+.dk-ch-b::after { content: ''; position: absolute; right: -12px; bottom: 14px; width: 18px; height: 18px; background: #fffaf0; border-right: 2px solid #6b4a22; border-bottom: 2px solid #6b4a22; transform: rotate(-45deg) skew(10deg, 10deg); }
+@keyframes dk-ch-b-in { from { opacity: 0; transform: translateY(12px) scale(.94); } to { opacity: 1; transform: none; } }
+.dk-ch-n { display: flex; align-items: center; gap: 6px; margin: 0 0 4px; font-size: 12px; font-weight: 800; color: #b5432f; letter-spacing: .08em; }
+.dk-ch-n small { font-size: 11px; color: #8a7a62; letter-spacing: 0; }
+.dk-ch-v { margin-left: auto; padding: 3px 10px; border-radius: 999px; border: 1px solid #c9b48c; background: transparent; color: #6b4a22; font: inherit; font-size: 11.5px; font-weight: 800; letter-spacing: 0; cursor: pointer; }
+.dk-ch-v[aria-pressed="true"] { background: #b5432f; border-color: #b5432f; color: #fff; }
+.dk-ch-t { min-height: 2.9em; margin: 0; font-size: clamp(16px, 1.65vw, 21px); font-weight: 700; line-height: 1.65; }
+.dk-chara.is-talk .dk-ch-t::after { content: ''; display: inline-block; width: .5em; height: 1em; margin-left: 2px; vertical-align: -.12em; background: #b5432f; animation: dk-ch-caret .5s steps(1) infinite; }
+@keyframes dk-ch-caret { 50% { opacity: 0; } }
+/* 発表のあいだは、スライドの説明文をしまい、下を空ける（お札マンが話すので） */
+.dk.is-chara .dk-sub, .dk.is-chara .dk-f-leg { display: none; }
+.dk.is-chara .dk-in { padding-bottom: clamp(200px, 30vh, 260px) !important; padding-right: clamp(20px, 16vw, 230px); }
+.dk.is-chara .is-cover .dk-in, .dk.is-chara .is-end .dk-in, .dk.is-chara .is-try .dk-in { padding-right: clamp(20px, 5vw, 60px); }
+.dk-ctl .dk-cbtn { background: #b5432f; border-color: #b5432f; }
+.dk-ctl .dk-cbtn[aria-pressed="true"] { background: #f3e3bd; border-color: #f3e3bd; color: #1c2b23; }
+@media (max-width: 760px) {
+  .dk-chara { left: 10px; right: 8px; bottom: calc(66px + env(safe-area-inset-bottom)); }
+  .dk-ch-man { width: 84px; flex: none; }
+  .dk-ch-b { flex: 1; width: auto; margin-bottom: 40px; padding: 10px 14px 12px; }
+  .dk-ch-t { font-size: 14.5px; min-height: 3.3em; }
+  .dk.is-chara .dk-in { padding-bottom: 210px !important; padding-right: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .dk-chara *, .dk-ch-man { animation: none !important; } }
+/* お札マンの発表中は、スライドを上にちぢめて、下の帯にお札マンとふきだし（重ならないように） */
+.dk.is-chara .dk-s { bottom: 196px; }
+.dk.is-chara .dk-in, .dk.is-chara .is-cover .dk-in, .dk.is-chara .is-end .dk-in, .dk.is-chara .is-try .dk-in { padding-bottom: 20px !important; padding-right: clamp(20px, 5vw, 60px); }
+.dk.is-chara .dk-chara { left: clamp(12px, 3vw, 36px); justify-content: flex-end; }
+.dk.is-chara .dk-ch-b { width: min(760px, 64vw); margin-bottom: 16px; }
+.dk.is-chara .dk-ch-man { width: clamp(110px, 10vw, 140px); }
+.dk.is-chara .is-cover .dk-t { font-size: clamp(56px, 10vw, 140px); }
+@media (max-width: 760px) {
+  .dk.is-chara .dk-s { bottom: 214px; }
+  .dk.is-chara .dk-ch-b { width: auto; margin-bottom: 26px; }
+  .dk.is-chara .dk-ch-man { width: 80px; }
+}
+.dk.is-chara .dk-ch-man { width: clamp(130px, 12vw, 170px); }
+.dk.is-chara .dk-bg { -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
+@media (max-width: 760px) { .dk.is-chara .dk-ch-man { width: 84px; } }

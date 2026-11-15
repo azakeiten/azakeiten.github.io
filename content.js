@@ -10,7 +10,7 @@ window.AZAKEI = {
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
     { date: '2026-11-15', seal: '券', tone: 'dark', href: 'sim.html#tsuuka', eyebrow: '経済ラボ', title: 'お祭りのお金をつくる工房', text: '何枚刷る？ どう配る？ 何軒で使える？ にせものは？ 券を設計すると、団子の値段も買える人も信用も変わる。'  },
-    { date: '2026-11-15', seal: '映', tone: 'dark', href: 'index.html#deck', eyebrow: '紹介', title: '紹介スライドに、発表者画面と指し棒', text: '13 枚に。会場に問いかけるコイン、流れるお金のめぐり、まとめと質問の場面。台本を別の画面に出す発表者画面、指し棒、ペンも。' },
+    { date: '2026-11-15', seal: '映', tone: 'dark', href: 'index.html#deck', eyebrow: '紹介', title: 'お札マンが、紹介スライドを発表', text: '「発表」を押すと、お札マン（仮）が横に出てきて、ふきだしで 1 文ずつ紹介。コインも自分で投げます。声で読み上げることも。' },
     { date: '2026-11-15', seal: '換', tone: 'shu', href: 'quiz.html#koukan', eyebrow: 'クイズ', title: '交換の島', text: '魚を持って、本がほしい。物々交換だと何回かかる？ 同じ島に貝のお金があったら？ くらべて、お金の役割を手で確かめる。' },
     { date: '2026-11-15', seal: '進', tone: 'green', href: 'quiz.html#shinka', eyebrow: 'クイズ', title: 'お金の進化', text: '物々交換、貝、和同開珎、紙のお金、円と日本銀行券、そしてスマホの中の数字へ。6 つの場面を横にめくって。' },
     { date: '2026-11-15', seal: '報', tone: 'green', href: 'dayori.html', eyebrow: '麻経だより', title: '月刊「麻経だより」', text: 'その月に新しくなったこと、経済の暦、今月の言葉を、新聞のかたちで 1 枚に。A4 で印刷して掲示もできます。' },

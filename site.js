@@ -1372,12 +1372,12 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261115v';
+  const V = '20261115w';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
-  const open = (start = 0) => load().then(() => window.AZAKEI_DECK && window.AZAKEI_DECK.open(start)).catch(() => {});
-  document.addEventListener('click', e => { const b = e.target.closest('[data-deck]'); if (!b) return; e.preventDefault(); open(); });
+  const open = (start = 0, chara = false) => load().then(() => window.AZAKEI_DECK && window.AZAKEI_DECK.open(start, chara)).catch(() => {});
+  document.addEventListener('click', e => { const b = e.target.closest('[data-deck]'); if (!b) return; e.preventDefault(); open(0, b.dataset.deck === 'chara'); });
   // #deck で最初から、#deck-3 のように番号をつけると、その場面から
   const fromHash = () => { const m = location.hash.match(/^#deck(?:-(\d+))?$/); if (m) open(m[1] ? +m[1] - 1 : 0); };
   fromHash();
