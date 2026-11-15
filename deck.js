@@ -43,21 +43,22 @@
     { k: 'いっしょに', seal: '結', t: '一緒に、<br>仕組みをつくりませんか。', s: '協賛・取材・見学のご相談を、お待ちしています。<br>Instagram @azakei_vlog ／ azakeiten.github.io', cls: 'is-end', cta: true,
       n: '協賛や取材、見学のご相談をお待ちしています。Instagram は @azakei_vlog、ホームページは azakeiten.github.io です。ありがとうございました。' }
   ];
-  // お札マンが発表するときの言葉（スライドと同じ順。'@flip' はコインを投げる合図）。中身はスライドとサイトにあることだけ
+  // お札マンが発表するときの言葉（スライドと同じ順）。中身はスライドとサイトにあることだけ
+  // 文字列か { t: せりふ, hl: 話している間に光らせる場所, m: 顔（happy・wow・think・sad） }。'@flip' はコインを投げる合図
   const CL = [
-    ['こんにちは！ ぼくはお札マン。名前は、まだ「仮」なんだ。', 'AZAKEI の会長が、ぼくの生みの親だよ。', '今日は、ぼくが麻経を紹介するね。'],
-    ['麻経がめざしているのは、経済を「勉強」から「体験」にすること。', '親しむ、知る、つくる。この 3 つの段で進むよ。'],
+    [{ t: 'こんにちは！ ぼくはお札マン。名前は、まだ「仮」なんだ。', m: 'happy' }, 'AZAKEI の会長が、ぼくの生みの親だよ。', { t: '今日は、ぼくが麻経を紹介するね。', m: 'happy' }],
+    ['麻経がめざしているのは、経済を「勉強」から「体験」にすること。', { t: 'まずは、遊んで親しむ。', hl: '.dk-3 li:nth-child(1)' }, { t: 'つぎに、仕組みを知る。', hl: '.dk-3 li:nth-child(2)' }, { t: 'そして、自分たちで仕組みをつくる。', hl: '.dk-3 li:nth-child(3)', m: 'happy' }],
     ['まずは「親しむ」。', '文化祭では、教室ひとつを経済の町にしたんだ。', '入口でチップを受けとって、6 つのコーナーで遊ぶよ。'],
-    ['3 日間で、2,364 人が来てくれたよ！', 'いちばん多かったのは、2 日目の 1,152 人。'],
-    ['ここでクイズ。A は、かならず 100 チップ。B は、コインの表なら 200、裏なら 0。', 'みんなはどっち？ ……ぼくは、B にしてみる！', '@flip', '平均すると、どっちも 100。「確実」をとるか、「ふえるかも」をとるか。それが、リスクの考え方の入口だよ。'],
-    ['つぎは「知る」。', 'なぜチップが増えたのか、減ったのかを考えるんだ。', 'サイトには、用語辞典 300 語や、経済ラボの 16 の実験があるよ。'],
-    ['お金は、町の中をめぐっているよ。', '家計は働いて給料をもらって、企業から物を買う。', '預けたお金は銀行から企業へ。税金は、道路や学校になるんだ。'],
+    [{ t: '3 日間で、2,364 人が来てくれたよ！', hl: '.dk-num', m: 'wow' }, { t: 'いちばん多かったのは、2 日目の 1,152 人。', hl: '.dk-bars span:nth-child(2)' }],
+    [{ t: 'ここでクイズ。A は、かならず 100 チップ。', hl: '[data-ab="A"]' }, { t: 'B は、コインの表なら 200、裏なら 0。', hl: '[data-ab="B"]' }, { t: 'みんなはどっち？ ……うーん。', m: 'think' }, { t: 'ぼくは、B にしてみる！', hl: '[data-ab="B"]', m: 'happy' }, '@flip', { t: '平均すると、どっちも 100。「確実」をとるか、「ふえるかも」をとるか。それが、リスクの考え方の入口だよ。', hl: '.dk-try-r' }],
+    ['つぎは「知る」。', { t: 'なぜチップが増えたのか、減ったのかを考えるんだ。', m: 'think' }, { t: 'サイトには、用語辞典 300 語や、経済ラボの 16 の実験があるよ。', hl: '.dk-chips li:nth-child(-n+3)' }],
+    ['お金は、町の中をめぐっているよ。', { t: '家計は企業で働いて給料をもらい、企業から物を買う。', hl: '[data-k="家計"], [data-k="企業"]' }, { t: '預けたお金は、銀行から企業へ貸し出される。', hl: '[data-k="銀行"]' }, { t: '税金は政府に集まって、道路や学校になるんだ。', hl: '[data-k="政府"]' }],
     ['さいごは「つくる」。', '展示のゲームやルール、オリジナルの紙幣、会場の飾りは、部員が考えてつくったんだ。'],
-    ['お金を 1 枚つくるだけでも、決めることがたくさんあるよ。', '何枚つくる？ いくらの価値？ どこで使える？', 'ちなみに、ぼくの体もお札なんだ。'],
+    [{ t: 'お金を 1 枚つくるだけでも、決めることがたくさんあるよ。', m: 'think' }, { t: '何枚つくる？ いくらの価値？', hl: '.dk-b-q li:nth-child(-n+2)' }, { t: 'どう増える？ どこで使える？', hl: '.dk-b-q li:nth-child(n+3)' }, { t: 'ちなみに、ぼくの体もお札なんだ。', m: 'happy' }],
     ['学校の外でも、挑戦しているよ。', '日経ストックリーグと、高校生ビジネスプラン・グランプリ。'],
-    ['つくった展示で、また次の人が経済に親しむ。', 'この輪を、少しずつ大きくしていくよ。'],
-    ['まとめるね。親しむ、知る、つくる。', '質問があったら、部員のみんなに聞いてね！'],
-    ['協賛や取材、見学のご相談を、待ってるよ。', '聞いてくれて、ありがとう！']
+    [{ t: 'つくった展示で、また次の人が経済に親しむ。', hl: '.dk-ring' }, { t: 'この輪を、少しずつ大きくしていくよ。', m: 'happy' }],
+    [{ t: 'まとめるね。遊んで、親しむ。', hl: '.dk-sum li:nth-child(1)' }, { t: '仕組みを、知る。', hl: '.dk-sum li:nth-child(2)' }, { t: '自分たちで、つくる。', hl: '.dk-sum li:nth-child(3)' }, { t: '質問があったら、部員のみんなに聞いてね！', m: 'happy' }],
+    [{ t: '協賛や取材、見学のご相談を、待ってるよ。', hl: '.dk-cta' }, { t: '聞いてくれて、ありがとう！', m: 'happy' }]
   ];
   // お札マン（osatsu.js と同じ絵。口がぱくぱく動く版）
   const MAN = `<svg viewBox="0 0 120 112" aria-hidden="true">
@@ -68,9 +69,14 @@
     <rect x="20" y="28" width="80" height="50" rx="7" fill="#e6d5b3" stroke="#6b4a22" stroke-width="3"/>
     <rect x="26" y="34" width="68" height="38" rx="3" fill="none" stroke="#6b4a22" stroke-width="1.4" opacity=".6"/>
     <g fill="#2f6b3a"><polygon points="35,37 41,47 29,47"/><polygon points="35,50 29,40 41,40"/></g>
-    <g class="dk-ch-eyes" fill="#2a2015"><ellipse cx="54" cy="50" rx="3.6" ry="4.2"/><ellipse cx="72" cy="50" rx="3.6" ry="4.2"/></g>
+    <g class="dk-ch-eyes dk-e-n" fill="#2a2015"><ellipse cx="54" cy="50" rx="3.6" ry="4.2"/><ellipse cx="72" cy="50" rx="3.6" ry="4.2"/></g>
+    <g class="dk-e-h" fill="none" stroke="#2a2015" stroke-width="2.6" stroke-linecap="round"><path d="M50 52 Q54 46 58 52"/><path d="M68 52 Q72 46 76 52"/></g>
+    <g class="dk-e-w"><circle cx="54" cy="49" r="5.2" fill="#fff" stroke="#2a2015" stroke-width="1.8"/><circle cx="72" cy="49" r="5.2" fill="#fff" stroke="#2a2015" stroke-width="1.8"/><circle cx="54" cy="49.5" r="2.6" fill="#2a2015"/><circle cx="72" cy="49.5" r="2.6" fill="#2a2015"/></g>
+    <g class="dk-e-t" fill="#2a2015"><ellipse cx="56" cy="47" rx="3.2" ry="3.8"/><ellipse cx="74" cy="47" rx="3.2" ry="3.8"/><path d="M49 41 L58 43 M67 43 L76 40" stroke="#2a2015" stroke-width="2" stroke-linecap="round"/></g>
+    <g class="dk-e-s" fill="none" stroke="#2a2015" stroke-width="2.4" stroke-linecap="round"><path d="M50 49 L58 52"/><path d="M68 52 L76 49"/><path d="M83 40 q2 5 0 7 q-2 -2 0 -7" fill="#9cc9e8" stroke="#5a8fb3" stroke-width="1.2"/></g>
     <circle cx="48" cy="59" r="4.2" fill="#f0957c" opacity=".55"/><circle cx="78" cy="59" r="4.2" fill="#f0957c" opacity=".55"/>
     <path class="dk-m0" d="M57 58 Q63 64 69 58" fill="none" stroke="#2a2015" stroke-width="2.4" stroke-linecap="round"/>
+    <path class="dk-m2" d="M57 63 Q63 58 69 63" fill="none" stroke="#2a2015" stroke-width="2.4" stroke-linecap="round"/>
     <ellipse class="dk-m1" cx="63" cy="60" rx="5" ry="4" fill="#7a2b1c" stroke="#2a2015" stroke-width="1.6"/>
     <text x="88" y="70" font-family="Shippori Mincho, serif" font-weight="800" font-size="9" fill="#b5432f" text-anchor="middle">経</text>
   </svg>`;
@@ -92,7 +98,7 @@
     return `<div class="dk-flow" aria-hidden="true"><svg viewBox="0 0 400 300">
       ${E.map((e, j) => `<path id="dkf${j}" d="${path(e)}" class="dk-f-p"/>`).join('')}
       ${E.map((e, j) => [0, 1].map(k => `<circle r="5" class="dk-f-d${j % 2 ? ' is-b' : ''}"><animateMotion dur="${3 + j * .35}s" begin="${k * 1.6 + j * .2}s" repeatCount="indefinite" rotate="auto"><mpath href="#dkf${j}"/></animateMotion></circle>`).join('')).join('')}
-      ${Object.values(N).map(([x, y, t], j) => `<g class="dk-f-n" style="--j:${j}" transform="translate(${x},${y})"><rect x="-40" y="-22" width="80" height="44" rx="10"/><text y="7">${t}</text></g>`).join('')}
+      ${Object.values(N).map(([x, y, t], j) => `<g class="dk-f-n" data-k="${t}" style="--j:${j}" transform="translate(${x},${y})"><rect x="-40" y="-22" width="80" height="44" rx="10"/><text y="7">${t}</text></g>`).join('')}
     </svg><p class="dk-f-leg">${E.map(e => `<span>${N[e[0]][2]} → ${N[e[1]][2]}<b>${e[3]}</b></span>`).join('')}</p></div>`;
   };
   // つくる：紙幣を 1 枚、線で描いていく（見本）
@@ -238,11 +244,17 @@
   const stopTalk = () => {
     tTok++; clearTimeout(tt);
     if (window.speechSynthesis) speechSynthesis.cancel();
-    if (el) el.querySelector('.dk-chara').classList.remove('is-talk');
+    if (el) { el.querySelector('.dk-chara').classList.remove('is-talk'); el.classList.remove('is-spot'); }
   };
-  const say = (txt, done) => {
+  // 顔（happy・wow・think・sad）と、話している間に光らせる場所
+  const MOODS = ['is-happy', 'is-wow', 'is-think', 'is-sad'];
+  const unHl = () => el.querySelectorAll('.dk-hl').forEach(x => x.classList.remove('dk-hl'));
+  const say = (line, done) => {
+    const o = typeof line === 'string' ? { t: line } : line, txt = o.t;
     const tok = tTok, t = el.querySelector('.dk-ch-t'), c = el.querySelector('.dk-chara');
     let k = 0, typed = false, spoke = !voice;
+    c.classList.remove(...MOODS); if (o.m) c.classList.add('is-' + o.m);
+    unHl(); if (o.hl) el.querySelectorAll('.dk-s.is-on ' + o.hl.split(',').join(', .dk-s.is-on ')).forEach(x => x.classList.add('dk-hl'));
     c.classList.add('is-talk');
     const fin = () => {
       if (tok !== tTok || !typed || !spoke) return;
@@ -271,13 +283,17 @@
     const step = () => {
       if (tok !== tTok) return;
       bar.style.transition = 'transform .4s'; bar.style.transform = `scaleX(${li / Math.max(1, lines.length)})`;
+      // 最初の 1 文は、スライドを暗くして、お札マンを大きく（あいさつ）
+      el.classList.toggle('is-spot', i === 0 && li === 0);
       if (li >= lines.length) {
+        unHl();
         if (i < S.length - 1) tt = setTimeout(() => { if (tok === tTok) go(i + 1); }, 700);
         else { el.querySelector('.dk-chara').classList.add('is-bye'); setPlay(false, true); }
         return;
       }
       const ln = lines[li];
       if (ln === '@flip') {
+        unHl();
         // お札マンが B をえらんで、コインを投げる
         const b = el.querySelector('.dk-s.is-on [data-ab="B"]');
         if (b) flip(b, true);
@@ -285,7 +301,7 @@
         tt = setTimeout(() => {
           if (tok !== tTok) return;
           const head = el.querySelector('.dk-s.is-on .dk-coin').classList.contains('is-h');
-          say(head ? '表だ！ 200 チップ、もらえた！' : '裏……0 チップだった。ざんねん。', () => { li++; step(); });
+          say(head ? { t: '表だ！ 200 チップ、もらえた！', m: 'wow', hl: '.dk-coin' } : { t: '裏……0 チップだった。ざんねん。', m: 'sad', hl: '.dk-coin' }, () => { li++; step(); });
         }, reduce ? 100 : 1500);
         return;
       }
@@ -307,7 +323,7 @@
       // 最後のスライドから始めても最初に戻らないよう、setPlay を通さずに話しはじめる
       clearTimeout(timer); playing = false;
       setTimeout(() => { if (!chara) return; playing = true; const b = el.querySelector('.dk-play'); b.textContent = 'II'; b.setAttribute('aria-label', '一時停止'); run(); }, reduce ? 0 : 600);
-    } else { stopTalk(); setPlay(false); }
+    } else { stopTalk(); setPlay(false); unHl(); el.classList.remove('is-spot'); c.classList.remove(...MOODS); }
   };
   // 指し棒・ペン（どちらかひとつ）。使っている間は、画面を押してもスライドは進まない
   const setTool = t => {

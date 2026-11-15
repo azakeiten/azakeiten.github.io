@@ -304,3 +304,50 @@ html .dk h2.dk-t, html .dk .dk-t { font-family: 'Shippori Mincho', serif; font-w
 .dk.is-chara .dk-ch-man { width: clamp(130px, 12vw, 170px); }
 .dk.is-chara .dk-bg { -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
 @media (max-width: 760px) { .dk.is-chara .dk-ch-man { width: 84px; } }
+
+/* v6 お札マンの顔（いつもの・うれしい・おどろき・考える・しょんぼり） */
+.dk-e-h, .dk-e-w, .dk-e-t, .dk-e-s, .dk-m2 { opacity: 0; }
+.dk-chara.is-happy .dk-e-n, .dk-chara.is-wow .dk-e-n, .dk-chara.is-think .dk-e-n, .dk-chara.is-sad .dk-e-n { opacity: 0; }
+.dk-chara.is-happy .dk-e-h, .dk-chara.is-wow .dk-e-w, .dk-chara.is-think .dk-e-t, .dk-chara.is-sad .dk-e-s { opacity: 1; }
+.dk-chara.is-sad .dk-m0 { opacity: 0; } .dk-chara.is-sad:not(.is-talk) .dk-m2 { opacity: 1; }
+.dk-chara.is-wow:not(.is-talk) .dk-m0 { opacity: 0; } .dk-chara.is-wow:not(.is-talk) .dk-m1 { opacity: 1; transform: scale(.9, 1.15); }
+.dk-chara.is-happy .dk-ch-man { animation: dk-ch-joy .5s ease-in-out 2 alternate, dk-ch-idle 2.6s ease-in-out 1s infinite; }
+@keyframes dk-ch-joy { to { transform: translateY(-12px); } }
+.dk-chara.is-wow .dk-ch-man { animation: dk-ch-wow .45s cubic-bezier(.3, 1.6, .5, 1), dk-ch-idle 2.6s ease-in-out .45s infinite; }
+@keyframes dk-ch-wow { 0% { transform: scale(1); } 40% { transform: scale(1.12) translateY(-8px); } 100% { transform: scale(1); } }
+.dk-chara.is-think .dk-ch-man { animation: none; transform: rotate(-7deg); transition: transform .4s; }
+.dk-chara.is-sad .dk-ch-man { animation: none; transform: translateY(4px) scaleY(.96); transition: transform .4s; }
+.dk-chara.is-think .dk-ch-b::before { content: '…'; position: absolute; right: 16px; top: -26px; padding: 0 10px; border-radius: 12px; background: #fffaf0; border: 2px solid #6b4a22; color: #6b4a22; font-weight: 800; line-height: 1.4; }
+
+/* 話している言葉に合わせて、スライドの場所を光らせる */
+.dk-hl { position: relative; z-index: 1; }
+.dk-3 li, .dk-sum li, .dk-chips li, .dk-b-q li, .dk-try-ab button, .dk-bars span, .dk-num, .dk-try-r, .dk-cta, .dk-ring { transition: scale .4s cubic-bezier(.2, 1.3, .4, 1), translate .4s cubic-bezier(.2, 1.3, .4, 1), box-shadow .4s, background .4s, filter .4s; }
+.dk-3 li.dk-hl, .dk-sum li.dk-hl, .dk-try-ab button.dk-hl { translate: 0 -6px; scale: 1.04; box-shadow: 0 0 0 3px #f3e3bd, 0 20px 40px rgba(0, 0, 0, .45); background: rgba(181, 67, 47, .28); }
+.dk-chips li.dk-hl, .dk-b-q li.dk-hl { scale: 1.08; background: #b5432f; border-color: #b5432f; color: #fff; box-shadow: 0 0 22px rgba(181, 67, 47, .6); }
+.dk-num.dk-hl b { text-shadow: 0 0 40px rgba(243, 227, 189, .55); }
+.dk-bars span.dk-hl::before { background: linear-gradient(#ffd9a8, #e0603f); box-shadow: 0 0 24px rgba(240, 150, 90, .6); }
+.dk-bars span.dk-hl i { color: #f3e3bd; scale: 1.3; display: inline-block; }
+.dk-try-r.dk-hl, .dk-cta.dk-hl { scale: 1.04; }
+.dk-ring.dk-hl { scale: 1.06; filter: drop-shadow(0 0 24px rgba(181, 67, 47, .55)); }
+.dk-coin.dk-hl { filter: drop-shadow(0 0 22px rgba(243, 227, 189, .7)); }
+.dk-f-n rect { transition: stroke .3s, stroke-width .3s, fill .3s; }
+.dk-f-n.dk-hl rect { stroke: #f3e3bd; stroke-width: 4; fill: #b5432f; }
+.dk-f-n.dk-hl { animation: dk-node 1s ease-in-out infinite alternate !important; opacity: 1; }
+@keyframes dk-node { from { scale: 1; } to { scale: 1.12; } }
+/* 光っていないところは少し沈める（話しているところに目が行くように） */
+.dk.is-chara .dk-s.is-on:has(.dk-hl) :is(.dk-3 li, .dk-sum li, .dk-chips li, .dk-b-q li, .dk-f-n):not(.dk-hl) { filter: brightness(.45) saturate(.6); }
+
+/* はじめのあいさつ：スライドを暗くして、お札マンを大きく */
+.dk-chara { transition: transform .9s cubic-bezier(.2, .9, .2, 1); transform-origin: 100% 100%; }
+.dk.is-spot .dk-chara { transform: translate(-6vw, -16vh) scale(1.35); }
+.dk-stage { transition: filter .9s; }
+.dk.is-spot .dk-stage { filter: brightness(.35) blur(2px); }
+@media (max-width: 760px) { .dk.is-spot .dk-chara { transform: translateY(-14vh) scale(1.1); } }
+@media (prefers-reduced-motion: reduce) { .dk-hl, .dk-f-n.dk-hl { animation: none !important; scale: none !important; translate: none !important; } .dk.is-spot .dk-chara { transform: none; } }
+/* お札マンの発表中は、見出しと数字を少し小さく（下の帯に入らないように） */
+html .dk.is-chara .dk-s:not(.is-cover) .dk-t { font-size: clamp(26px, 4vw, 52px); }
+.dk.is-chara .dk-num b { font-size: clamp(60px, 9vw, 116px); }
+.dk.is-chara .dk-bars { height: 96px; margin-top: 14px; }
+.dk.is-chara .dk-3 { margin-top: 18px; }
+.dk.is-chara .dk-k { margin-bottom: 10px; }
+.dk.is-chara .dk-url { display: none; }
