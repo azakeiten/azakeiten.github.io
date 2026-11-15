@@ -8602,3 +8602,10 @@ html section.ts-sec .section-head .lead { color: rgba(243, 238, 228, .82) !impor
 .deck-btn.is-os .deck-btn-t small { color: #8a7a62; }
 :root[data-theme="dark"] .deck-btn.is-os { background: #2a2418; color: #f3eee4; box-shadow: inset 0 0 0 2px #c9b48c; }
 :root[data-theme="dark"] .deck-btn.is-os .deck-btn-t small { color: #c9b48c; }
+
+/* v195 トップ：お札マンの案内ツアーの入口 */
+.tour-go { margin: 6px 0 0; text-align: center; }
+.tour-go button { display: inline-flex; align-items: center; gap: 8px; padding: 6px 4px; border: 0; border-bottom: 1.5px solid currentColor; background: transparent; color: #b5432f; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.tour-go button span { transition: transform .2s; }
+.tour-go button:hover span { transform: translateX(4px); }
+:root[data-theme="dark"] .tour-go button { color: #e9a493; }
