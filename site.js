@@ -1372,7 +1372,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261116a';
+  const V = '20261116b';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1384,12 +1384,21 @@ try {
   addEventListener('hashchange', fromHash);
 })();
 
-/* トップ「お札マンとページを回る」：[data-tour] を押したときだけ tour.js を読みこむ */
+/* 「お札マンと、このページを回る」：[data-tour] を押したときだけ tour.js を読みこむ
+   トップ以外（クイズ・経済ラボ・用語辞典・麻布経済展）は、ページの見出しの下に入口を足す */
+(function() {
+  const page = location.pathname.split('/').pop();
+  if (!['quiz.html', 'sim.html', 'glossary.html', 'festival.html'].includes(page)) return;
+  const c = document.querySelector('.page-hero .container'); if (!c) return;
+  const p = document.createElement('p'); p.className = 'tour-go is-ph';
+  p.innerHTML = '<button type="button" data-tour><span class="tour-face" aria-hidden="true">札</span>お札マンと、このページを回る<span aria-hidden="true">→</span></button>';
+  c.appendChild(p);
+})();
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-tour]'); if (!b) return;
   e.preventDefault();
   if (window.AZAKEI_TOUR) { window.AZAKEI_TOUR.start(); return; }
-  const s = document.createElement('script'); s.src = 'tour.js?v=20261116a'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
+  const s = document.createElement('script'); s.src = 'tour.js?v=20261116b'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
 });
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */
