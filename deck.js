@@ -5,6 +5,8 @@
    ・段（親しむ → 知る → つくる）が変わるところで、大きな印が出る
    ・「発表」（N キー）：自動送りを止め、話す台本・経過時間・次のスライドを出す（部員が人前で話すとき用）
    ・「一覧」（G キー）：全部のスライドを並べて、好きな場面へ
+   ・「指し棒」（L キー）：赤い光の点。「ペン」（D キー）：スライドに書きこむ（C で消す。スライドを変えると消える）
+   ・発表者メモの「別の画面で台本を開く」：もう 1 つの窓に、台本・経過時間・目標との差・次のスライド
    ・数字は、サイトのほかのページに出ているものだけ
    ================================================================ */
 (function() {
@@ -34,12 +36,14 @@
       n: '学校の外でも挑戦しています。日経ストックリーグでは企業を調べてポートフォリオを組み、高校生ビジネスプラン・グランプリには事業のプランをつくって応募しました。' },
     { k: 'めぐる', seal: '環', t: 'つくった仕組みで、<br>次の人が経済に親しむ。', s: 'つくった展示で、また誰かが経済を身近に感じる。親しむ → 知る → つくる の輪を、麻経は少しずつ大きくしていきます。', cls: 'is-cycle', cycle: true,
       n: 'そして、わたしたちがつくった展示で、また次の人が経済に親しみます。親しむ、知る、つくるの輪を、少しずつ大きくしていきたいと考えています。' },
+    { k: 'まとめ', seal: '要', t: '今日、お伝えしたこと。', s: 'ご質問があれば、どうぞ。', cls: 'is-sum', sum: [['親', '親しむ', '教室ひとつを経済の町に。3 日間で 2,364 人が遊んだ。'], ['知', '知る', '遊んだあとに、お金のめぐりと仕組みを知る。'], ['創', 'つくる', 'お金やルールを、自分たちの手で設計する。']], dur: 8000,
+      n: 'まとめます。親しむ：教室ひとつを経済の町にして、3 日間で 2,364 人が遊びました。知る：遊んだあとに、お金のめぐりと仕組みを知ります。つくる：お金やルールを、自分たちの手で設計します。ご質問があれば、どうぞ。（質問の間は、この画面のままにしておけます）' },
     { k: 'いっしょに', seal: '結', t: '一緒に、<br>仕組みをつくりませんか。', s: '協賛・取材・見学のご相談を、お待ちしています。<br>Instagram @azakei_vlog ／ azakeiten.github.io', cls: 'is-end', cta: true,
       n: '協賛や取材、見学のご相談をお待ちしています。Instagram は @azakei_vlog、ホームページは azakeiten.github.io です。ありがとうございました。' }
   ];
   const DUR = 5500;
   const dur = n => S[n].dur || DUR;
-  let el, i = 0, timer = null, playing = true, startAt = 0, left = DUR, lastFocus = null, note = false, t0 = 0, clock = null, prevI = -1;
+  let el, i = 0, timer = null, playing = true, startAt = 0, left = DUR, lastFocus = null, note = false, t0 = 0, clock = null, prevI = -1, tool = '', pv = null, pvT0 = 0, pvClock = null;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const label = s => s.step !== undefined ? STEPS[s.step][0] : s.seal;
   const plain = h => h.replace(/<small>.*?<\/small>/g, '').replace(/<span>(.*?)<\/span>/g, ' $1').replace(/<br>/g, '');
@@ -79,6 +83,7 @@
         ${s.bars ? `<div class="dk-bars">${s.bars.map((v, j) => `<span style="--h:${Math.round(v / Math.max(...s.bars) * 100)}%"><i>${v.toLocaleString('ja-JP')}</i><em>${j + 1} 日目</em></span>`).join('')}</div>` : ''}
         ${s.chips ? `<ul class="dk-chips">${s.chips.map((c, j) => `<li style="--j:${j}">${c}</li>`).join('')}</ul>` : ''}
         ${s.steps ? `<ol class="dk-3">${STEPS.map(([k, t], j) => `<li style="--j:${j}"><span>${k}</span><b>${t}</b><small>${['遊んで、経済を身近に感じる', 'お金の流れと、その仕組みを知る', '自分たちで、仕組みを創り出す'][j]}</small></li>`).join('')}</ol>` : ''}
+        ${s.sum ? `<ol class="dk-sum">${s.sum.map(([k, t, x], j) => `<li style="--j:${j}"><span>${k}</span><b>${t}</b><small>${x}</small></li>`).join('')}</ol><p class="dk-url">azakeiten.github.io</p>` : ''}
         ${s.flow ? FLOW() : ''}${s.bill ? BILL() : ''}${s.tryit ? TRY() : ''}
         ${s.cycle ? `<div class="dk-ring" aria-hidden="true"><svg viewBox="0 0 300 300"><circle cx="150" cy="150" r="110" class="dk-ring-c"/><circle cx="150" cy="150" r="110" class="dk-ring-run"/>${STEPS.map(([k], j) => { const a = -Math.PI / 2 + j * 2 * Math.PI / 3; return `<g transform="translate(${150 + Math.cos(a) * 110},${150 + Math.sin(a) * 110})"><rect x="-30" y="-30" width="60" height="60" rx="8" class="dk-ring-s"/><text y="11">${k}</text></g>`; }).join('')}</svg></div>` : ''}
         ${s.cta ? `<div class="dk-cta"><a href="sponsor.html">協賛のご案内</a><a href="contact.html">お問い合わせ</a><a href="https://www.instagram.com/azakei_vlog/" target="_blank" rel="noopener">Instagram</a></div>` : ''}
@@ -93,12 +98,15 @@
       <div class="dk-bar">${S.map(() => '<span><i></i></span>').join('')}</div>
       <ol class="dk-track" aria-hidden="true">${STEPS.map(([k, t]) => `<li><span>${k}</span>${t}</li>`).join('<li class="dk-arr">→</li>')}</ol>
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
-      <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span></div><p class="dk-note-t"></p></aside>
+      <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
+      <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
       <div class="dk-ctl">
         <button type="button" class="dk-prev" aria-label="前のスライド">←</button>
         <button type="button" class="dk-play" aria-label="一時停止">II</button>
         <button type="button" class="dk-next" aria-label="次のスライド">→</button>
         <span class="dk-count" aria-live="polite"></span>
+        <button type="button" class="dk-lbtn" aria-pressed="false" title="指し棒（L）">指し棒</button>
+        <button type="button" class="dk-dbtn" aria-pressed="false" title="ペンで書きこむ（D）。スライドを変えると消えます">ペン</button>
         <button type="button" class="dk-gbtn" aria-pressed="false" title="一覧（G）">一覧</button>
         <button type="button" class="dk-nbtn" aria-pressed="false" title="発表者メモ（N）">発表</button>
         <button type="button" class="dk-x" aria-label="閉じる">閉じる</button>
@@ -110,6 +118,19 @@
     el.querySelector('.dk-play').onclick = () => setPlay(!playing);
     el.querySelector('.dk-gbtn').onclick = () => grid();
     el.querySelector('.dk-nbtn').onclick = () => setNote(!note);
+    el.querySelector('.dk-lbtn').onclick = () => setTool(tool === 'laser' ? '' : 'laser');
+    el.querySelector('.dk-dbtn').onclick = () => setTool(tool === 'pen' ? '' : 'pen');
+    el.querySelector('.dk-pv').onclick = presenter;
+    // 指し棒：赤い光の点がマウスについてくる
+    const lz = el.querySelector('.dk-laser');
+    el.addEventListener('pointermove', e => { if (tool === 'laser') { lz.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; } });
+    // ペン：スライドの上に、朱色で書きこむ
+    const cv = el.querySelector('.dk-pen'), cx = cv.getContext('2d');
+    let drawing = false;
+    cv.addEventListener('pointerdown', e => { drawing = true; cv.setPointerCapture(e.pointerId); cx.beginPath(); cx.moveTo(e.clientX, e.clientY); });
+    cv.addEventListener('pointermove', e => { if (!drawing) return; cx.lineTo(e.clientX, e.clientY); cx.stroke(); });
+    const up = () => { drawing = false; };
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
     el.querySelector('.dk-grid').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) { grid(false); go(+b.dataset.go); } });
     // 画面の左 3 分の 1 で戻る、それ以外で進む（ボタンやリンクの上は除く）
     el.querySelector('.dk-stage').addEventListener('click', e => {
@@ -171,6 +192,73 @@
     // コインの遊びは、来るたびに最初から
     const tb = cur.querySelector('.dk-try'); if (tb) { tb.querySelectorAll('[data-ab]').forEach(b => b.removeAttribute('aria-pressed')); tb.querySelector('.dk-coin').className = 'dk-coin'; tb.querySelector('.dk-try-r').textContent = 'A か B を押すと、コインを投げます。'; }
     countUp(cur); stamp(); prevI = i;
+    clearPen(); syncPv();
+  };
+  // 指し棒・ペン（どちらかひとつ）。使っている間は、画面を押してもスライドは進まない
+  const setTool = t => {
+    tool = t;
+    el.classList.toggle('is-laser', t === 'laser');
+    el.querySelector('.dk-laser').hidden = t !== 'laser';
+    const cv = el.querySelector('.dk-pen');
+    cv.hidden = t !== 'pen';
+    if (t === 'pen') {
+      const r = devicePixelRatio || 1; cv.width = innerWidth * r; cv.height = innerHeight * r;
+      const cx = cv.getContext('2d'); cx.setTransform(r, 0, 0, r, 0, 0); cx.strokeStyle = '#e8553b'; cx.lineWidth = 5; cx.lineCap = cx.lineJoin = 'round'; cx.shadowColor = 'rgba(232, 85, 59, .6)'; cx.shadowBlur = 8;
+      setPlay(false);
+    }
+    if (t === 'laser') setPlay(false);
+    el.querySelector('.dk-lbtn').setAttribute('aria-pressed', t === 'laser');
+    el.querySelector('.dk-dbtn').setAttribute('aria-pressed', t === 'pen');
+  };
+  const clearPen = () => { const cv = el.querySelector('.dk-pen'); if (!cv.hidden) cv.getContext('2d').clearRect(0, 0, cv.width, cv.height); };
+
+  // 発表者画面：もう 1 つの窓に、台本・経過時間・目標との差・次のスライドを出す（プロジェクターとノートパソコンで分けて使う）
+  const presenter = () => {
+    if (pv && !pv.closed) { pv.focus(); return; }
+    pv = window.open('', 'azk-presenter', 'width=980,height=640');
+    if (!pv) { el.querySelector('.dk-pv').textContent = 'ポップアップが止められました（ブラウザで許可してください）'; return; }
+    el.querySelector('.dk-pv').textContent = '別の画面で台本を開く';
+    pv.document.open();
+    pv.document.write(`<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>発表者画面｜麻経</title><style>
+      body{margin:0;padding:22px 26px;background:#0f0d0b;color:#f3eee4;font-family:'Hiragino Sans','BIZ UDPGothic','Yu Gothic UI',Meiryo,sans-serif;display:grid;grid-template-rows:auto 1fr auto;gap:16px;height:100vh;box-sizing:border-box}
+      header{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+      .t{font-family:'Shippori Mincho',serif;font-weight:800;font-size:46px;line-height:1}
+      .pace{font-size:15px;font-weight:700;padding:6px 12px;border-radius:999px;background:#1c2b23}.pace.is-late{background:#b5432f}
+      label{font-size:13px;color:#bbb}select{font:inherit;padding:4px 6px;border-radius:6px}
+      .n{font-size:14px;color:#bbb}.n b{font-size:22px;color:#fff}
+      main{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:18px;min-height:0}
+      .cur,.nx{padding:20px 22px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);overflow:auto}
+      .k{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-weight:700;color:#f3e3bd}.k span{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:6px;background:#b5432f;color:#fff;font-weight:800}
+      h1{margin:0 0 14px;font-size:26px;line-height:1.4}.note{margin:0;font-size:22px;line-height:1.9}
+      .nx h2{margin:4px 0 0;font-size:18px;line-height:1.5;color:#ddd}.nx p{margin:0;font-size:13px;color:#999}
+      footer{display:flex;gap:10px}button{font:inherit;font-weight:800;font-size:18px;padding:12px 26px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;cursor:pointer}button.go{background:#b5432f;border-color:#b5432f;flex:1}
+    </style></head><body><header><span class="t" id="tm">0:00</span><span class="pace" id="pace">予定どおり</span><label>目標 <select id="goal"><option value="1">1 分</option><option value="3" selected>3 分</option><option value="5">5 分</option><option value="10">10 分</option></select></label><span class="n"><b id="no"></b></span><button id="rs" style="font-size:13px;padding:6px 14px">時間を 0 に</button></header>
+      <main><section class="cur"><p class="k"><span id="sl"></span><span id="sk" style="background:none;width:auto"></span></p><h1 id="st"></h1><p class="note" id="nt"></p></section><section class="nx"><p>次のスライド</p><h2 id="nx"></h2></section></main>
+      <footer><button id="pr">← 前へ</button><button class="go" id="ne">次へ →</button></footer></body></html>`);
+    pv.document.close();
+    const d = pv.document;
+    d.getElementById('pr').onclick = () => go(i - 1);
+    d.getElementById('ne').onclick = () => go(i + 1);
+    d.getElementById('rs').onclick = () => { pvT0 = Date.now(); };
+    d.getElementById('goal').onchange = syncPv;
+    d.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(i + 1); } if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1); });
+    pvT0 = Date.now(); setPlay(false);
+    clearInterval(pvClock); pvClock = setInterval(syncPv, 1000);
+    syncPv();
+  };
+  const syncPv = () => {
+    if (!pv || pv.closed) { clearInterval(pvClock); return; }
+    const d = pv.document, $ = id => d.getElementById(id); if (!$('tm')) return;
+    const s = Math.floor((Date.now() - pvT0) / 1000), mm = v => `${Math.floor(v / 60)}:${String(Math.abs(v) % 60).padStart(2, '0')}`;
+    $('tm').textContent = mm(s);
+    // 目標の時間を、スライドの枚数で割って「いまごろ何枚目にいるはずか」をくらべる
+    const goal = +$('goal').value * 60, plan = goal * i / (S.length - 1), diff = Math.round(s - plan);
+    $('pace').textContent = Math.abs(diff) < 10 ? '予定どおり' : diff > 0 ? `予定より ${mm(diff)} おくれ` : `予定より ${mm(-diff)} 早い`;
+    $('pace').className = 'pace' + (diff >= 10 ? ' is-late' : '');
+    $('no').textContent = `${i + 1} / ${S.length}`;
+    $('sl').textContent = label(S[i]); $('sk').textContent = S[i].k;
+    $('st').textContent = plain(S[i].t); $('nt').textContent = S[i].n;
+    $('nx').textContent = i < S.length - 1 ? plain(S[i + 1].t) : '（最後のスライドです）';
   };
   const run = () => {
     clearTimeout(timer);
@@ -217,8 +305,11 @@
   };
   const onKey = e => {
     const gOpen = !el.querySelector('.dk-grid').hidden;
-    if (e.key === 'Escape') { gOpen ? grid(false) : close(); }
+    if (e.key === 'Escape') { gOpen ? grid(false) : tool ? setTool('') : close(); }
     else if (gOpen) return;
+    else if (e.key === 'l' || e.key === 'L') setTool(tool === 'laser' ? '' : 'laser');
+    else if (e.key === 'd' || e.key === 'D') setTool(tool === 'pen' ? '' : 'pen');
+    else if (e.key === 'c' || e.key === 'C') clearPen();
     else if (e.key === 'ArrowRight' || e.key === 'PageDown') go(i + 1);
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
     else if (e.key === 'n' || e.key === 'N') setNote(!note);
@@ -238,8 +329,9 @@
     if (!/^#deck(-\d+)?$/.test(location.hash)) history.replaceState(null, '', '#deck');
   };
   function close() {
-    clearTimeout(timer); clearInterval(clock);
-    grid(false);
+    clearTimeout(timer); clearInterval(clock); clearInterval(pvClock);
+    grid(false); setTool('');
+    if (pv && !pv.closed) pv.close();
     el.classList.remove('is-open');
     document.documentElement.classList.remove('dk-open');
     document.removeEventListener('keydown', onKey);

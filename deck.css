@@ -216,3 +216,27 @@ html .dk h2.dk-t, html .dk .dk-t { font-family: 'Shippori Mincho', serif; font-w
 @media (min-width: 761px) { html .dk .is-flow .dk-t, html .dk .is-bill .dk-t { font-size: clamp(32px, 4vw, 52px); } }
 .dk-b-go { display: inline-block; margin-top: 14px; padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(243, 227, 189, .5); color: #f3e3bd; font-size: 13.5px; font-weight: 800; text-decoration: none; }
 .dk-b-go:hover { background: #b5432f; border-color: #b5432f; color: #fff; }
+
+/* v4 まとめ・指し棒・ペン・発表者画面 */
+.is-sum { align-items: center; background: radial-gradient(70% 70% at 50% 30%, rgba(181, 67, 47, .2), transparent 70%), #0f0d0b; }
+.is-sum .dk-in { padding-bottom: 90px; }
+.dk-sum { list-style: none; display: grid; gap: 10px; max-width: 760px; margin: 22px 0 0; padding: 0; }
+.dk-sum li { display: grid; grid-template-columns: 52px 6em minmax(0, 1fr); align-items: center; gap: 14px; padding: 14px 18px; border-radius: 14px; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .12); }
+.dk-sum span { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 8px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 24px; transform: rotate(-4deg); }
+.dk-sum b { font-family: 'Shippori Mincho', serif; font-size: 22px; color: #fff; }
+.dk-sum small { font-size: 15px; line-height: 1.7; color: rgba(243, 238, 228, .85); }
+.dk-s.is-on .dk-sum li { animation: dk-up .6s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(.4s + var(--j) * .3s); }
+.dk-url { margin: 22px 0 0; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(22px, 3vw, 34px); letter-spacing: .06em; color: #f3e3bd; }
+.dk-pen { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; cursor: crosshair; touch-action: none; }
+.dk-pen[hidden], .dk-laser[hidden] { display: none; }
+.dk-laser { position: fixed; left: -9px; top: -9px; z-index: 5; width: 18px; height: 18px; border-radius: 50%; background: #ff5a3c; box-shadow: 0 0 0 4px rgba(255, 90, 60, .3), 0 0 24px 6px rgba(255, 90, 60, .55); pointer-events: none; }
+.dk.is-laser, .dk.is-laser * { cursor: none !important; }
+.dk-pv { margin-left: 4px; padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(181, 67, 47, .5); background: transparent; color: #b5432f; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.dk-pv:hover { background: #b5432f; color: #fff; }
+@media (pointer: coarse) { .dk-ctl .dk-lbtn, .dk-pv { display: none; } }
+@media (max-width: 760px) {
+  .dk-sum li { grid-template-columns: 40px minmax(0, 1fr); grid-template-areas: "s b" "s x"; gap: 2px 12px; padding: 10px 12px; }
+  .dk-sum span { grid-area: s; width: 38px; height: 38px; font-size: 20px; } .dk-sum b { grid-area: b; font-size: 17px; } .dk-sum small { grid-area: x; font-size: 12.5px; }
+  .is-sum .dk-t { font-size: 28px; }
+  .dk-ctl .dk-dbtn { display: none; }
+}
