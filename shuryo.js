@@ -25,7 +25,7 @@
       ['azakei_fx_master', '円高・円安の両替所', 'sim.html#fx'], ['azakei_shop', '文化祭でお店', 'sim.html#shop'], ['azakei_oku', '1 億円', 'sim.html#oku'], ['azakei_budget', '国の予算', 'sim.html#budget']]],
     ['創', 'つくる', '自分たちで、仕組みを創り出す', [
       ['azakei_village', '村の税の工房', 'sim.html#koubou'], ['azakei_tsuuka', 'お祭りの券の工房', 'sim.html#tsuuka'], ['azakei-qmake', 'クイズの問題づくり', 'quiz.html#make'],
-      ['azakei_planseed', 'ビジネスプランのたね', 'contests.html#plan-seed'], ['azakei_pitch', 'ピッチの舞台', 'contests.html#pitch'], ['azakei_bill', '麻経券のデザイン', 'festival.html#bill']]]
+      ['azakei_planseed', 'ビジネスプランのたね', 'contests.html#plan-seed'], ['azakei_pitch', 'ピッチの舞台', 'contests.html#pitch'], ['azakei_kisekae', 'お札マンの着せかえ', 'azakei.html#kisekae'], ['azakei_bill', '麻経券のデザイン', 'festival.html#bill']]]
   ];
   const done = STEPS.map(s => s[3].filter(([k]) => has(k)));
   const ok = done.map(d => d.length > 0);

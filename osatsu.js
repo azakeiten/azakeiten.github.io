@@ -18,6 +18,7 @@
     <path d="M57 58 Q63 64 69 58" fill="none" stroke="#2a2015" stroke-width="2.4" stroke-linecap="round"/>
     <text x="88" y="70" font-family="Shippori Mincho, serif" font-weight="800" font-size="9" fill="#b5432f" text-anchor="middle">経</text>
   </svg>`;
+  window.AZAKEI_OSATSU_SVG = SVG;   // 着せかえ（kisekae.js）からも使う
   // 紹介ページの大きな肖像（data-osatsu-portrait）
   document.querySelectorAll('[data-osatsu-portrait]').forEach(el => { el.innerHTML = SVG; });
   // ほかのスクリプトからも呼べるように（気分：happy＝はねる／sad＝しょんぼり）

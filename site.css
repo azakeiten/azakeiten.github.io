@@ -8940,3 +8940,48 @@ html[data-theme="dark"] section.services.eh-sec, html[data-theme="dark"]:not(.is
 .pi-gl { fill: none; stroke: #2a2015; stroke-width: 2; }
 .pi-tie { fill: #b5432f; }
 @media (max-width: 640px) { .pi[data-pitch].is-end .pi-judge { display: flex; flex-direction: column; } .pi[data-pitch].is-end .pi-judge .pi-q { order: 3; } }
+
+/* ---- AZAKEI：お札マンの着せかえ（kisekae.js） ---- */
+.ki[data-kisekae] .ki-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 22px; align-items: start; }
+.ki[data-kisekae] .ki-stage { position: sticky; top: 90px; overflow: hidden; border-radius: 24px; padding: 18px 18px 12px; background: radial-gradient(ellipse at 50% 20%, #fffaf0, #efe3c8 70%); box-shadow: 0 20px 44px rgba(60, 40, 15, .16), inset 0 0 0 1px rgba(107, 74, 34, .18); }
+.ki[data-kisekae] .ki-frame { position: relative; border-radius: 16px; overflow: hidden; background: repeating-conic-gradient(#f4ecdb 0 25%, #fbf6ea 0 50%) 0 0 / 22px 22px; box-shadow: inset 0 0 0 6px #fffaf0, inset 0 0 0 7px rgba(107, 74, 34, .25); }
+.ki[data-kisekae] .ki-art { display: block; width: 100%; height: auto; overflow: hidden; }
+.ki-art .ki-holding .os-arm-r { animation: none; }
+.ki-art .ki-body { transform-box: view-box; transform-origin: 60px 100px; }
+.ki-art .ki-body.is-hop { animation: ki-hop .55s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes ki-hop { 30% { transform: translateY(-9px) scale(1.03, .97); } 60% { transform: translateY(0) scale(.97, 1.04); } }
+.ki-art .is-drop { transform-box: fill-box; transform-origin: 50% 100%; animation: ki-drop .5s cubic-bezier(.3, 1.5, .5, 1); }
+@keyframes ki-drop { from { transform: translateY(-26px) scale(.7); opacity: 0; } }
+.ki-art .ki-l-bg.is-drop { animation: ki-fade .45s ease-out; }
+@keyframes ki-fade { from { opacity: 0; } }
+.ki-art .ki-wave { transform-box: fill-box; transform-origin: 0 50%; animation: ki-flag 1.6s ease-in-out infinite; }
+@keyframes ki-flag { 50% { transform: skewY(-6deg) scaleX(.92); } }
+.ki-art .ki-say { animation: ki-fade .3s; }
+.ki[data-kisekae] .ki-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.ki[data-kisekae] .ki-flash.is-go { animation: ki-flash .6s ease-out; }
+@keyframes ki-flash { 10% { opacity: .9; } 100% { opacity: 0; } }
+.ki[data-kisekae].is-rolling .ki-frame { box-shadow: inset 0 0 0 6px #fffaf0, inset 0 0 0 9px #e3b341; }
+.ki[data-kisekae] .ki-cap { margin: 10px 0 0; text-align: center; font-family: "Shippori Mincho", serif; font-weight: 800; font-size: 15px; color: #6b4a22; min-height: 1.5em; }
+.ki[data-kisekae] .ki-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.ki[data-kisekae] .ki-tab { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(107, 74, 34, .3); background: transparent; color: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+.ki[data-kisekae] .ki-tab.is-on { background: #b5432f; border-color: #b5432f; color: #fff; }
+.ki[data-kisekae] .ki-opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.ki[data-kisekae] .ki-opts[hidden] { display: none; }
+.ki[data-kisekae] .ki-opt { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 6px; border-radius: 14px; border: 2px solid transparent; background: #fffaf0; color: #2a2015; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(60, 40, 15, .1); transition: transform .2s, border-color .2s; }
+.ki[data-kisekae] .ki-opt:hover { transform: translateY(-2px); }
+.ki[data-kisekae] .ki-opt.is-on { border-color: #b5432f; box-shadow: 0 6px 14px rgba(181, 67, 47, .22); }
+.ki[data-kisekae] .ki-th { display: block; width: 100%; height: 54px; border-radius: 9px; background: #f4ecdb; overflow: hidden; }
+.ki[data-kisekae] .ki-th svg { display: block; width: 100%; height: 100%; }
+.ki[data-kisekae] .ki-sayp { display: block; }
+.ki[data-kisekae] .ki-sayp label { display: block; font-size: 14px; font-weight: 700; }
+.ki[data-kisekae] .ki-sayp input { display: block; width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(107, 74, 34, .35); background: #fffaf0; color: #2a2015; font-size: 16px; box-sizing: border-box; }
+.ki[data-kisekae] .ki-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ki[data-kisekae] .ki-chips button { padding: 6px 12px; border-radius: 999px; border: 1px dashed rgba(107, 74, 34, .45); background: transparent; color: inherit; font-size: 13px; cursor: pointer; }
+.ki[data-kisekae] .ki-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.ki[data-kisekae] .ki-btns button { padding: 11px 18px; border-radius: 999px; border: 1px solid #b5432f; background: transparent; color: inherit; font-weight: 800; font-size: 14px; cursor: pointer; }
+.ki[data-kisekae] .ki-btns .ki-save { background: #b5432f; color: #fff; }
+.ki[data-kisekae] .ki-btns .ki-rand { background: #e3b341; border-color: #e3b341; color: #2a2015; }
+.ki[data-kisekae] .ki-btns button:disabled { opacity: .6; }
+.ki[data-kisekae] .ki-note { margin: 12px 0 0; font-size: 13px; opacity: .75; }
+@media (max-width: 760px) { .ki[data-kisekae] .ki-wrap { grid-template-columns: 1fr; } .ki[data-kisekae] .ki-stage { position: relative; top: 0; padding: 12px; } .ki[data-kisekae] .ki-opts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) { .ki[data-kisekae] * { animation: none !important; } }
