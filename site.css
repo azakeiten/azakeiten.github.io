@@ -8612,3 +8612,74 @@ html section.ts-sec .section-head .lead { color: rgba(243, 238, 228, .82) !impor
 .tour-go.is-ph { margin: 18px 0 0; text-align: left; }
 .tour-go.is-ph button { gap: 10px; padding: 6px 16px 6px 6px; border: 1.5px solid currentColor; border-radius: 999px; }
 .tour-face { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #e6d5b3; color: #6b4a22; box-shadow: inset 0 0 0 2px #6b4a22; font-family: 'Shippori Mincho', serif; font-size: 14px; }
+
+/* v196 クイズ「みんなでクイズ大会」 */
+.tk[data-taikai] .tk-set { max-width: 820px; margin: 0 auto; padding: 24px; border-radius: 24px; background: #1c2b23; color: #f3eee4; box-shadow: 0 20px 44px rgba(28, 43, 35, .25); }
+.tk[data-taikai] .tk-row { display: grid; grid-template-columns: 7em 1fr; align-items: center; gap: 10px; margin-bottom: 12px; }
+.tk[data-taikai] .tk-row p { margin: 0; font-weight: 800; font-size: 14px; color: #f3e3bd; }
+.tk[data-taikai] .tk-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.tk[data-taikai] .tk-seg button { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: transparent; color: #f3eee4; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.tk[data-taikai] .tk-seg button[aria-pressed="true"] { background: #b5432f; border-color: #b5432f; color: #fff; }
+.tk[data-taikai] .tk-go { display: grid; gap: 2px; width: 100%; margin-top: 10px; padding: 16px; border: 0; border-radius: 16px; background: #f3e3bd; color: #1c2b23; font: inherit; font-family: 'Shippori Mincho', serif; font-size: 22px; font-weight: 800; cursor: pointer; transition: transform .2s; }
+.tk[data-taikai] .tk-go:hover { transform: translateY(-2px); }
+.tk[data-taikai] .tk-go small { font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; font-size: 12px; font-weight: 700; color: #5b554a; }
+.tk[data-taikai] .tk-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.8; color: rgba(243, 238, 228, .7); }
+@media (max-width: 600px) { .tk[data-taikai] .tk-set { padding: 16px; } .tk[data-taikai] .tk-row { grid-template-columns: 1fr; gap: 6px; } .tk[data-taikai] .tk-seg button { padding: 8px 12px; font-size: 13px; } }
+
+html.tk-open, html.tk-open body { overflow: hidden; }
+.tk-full { position: fixed; inset: 0; z-index: 9000; display: grid; grid-template-rows: auto 1fr auto; background: radial-gradient(80% 60% at 50% 0%, rgba(181, 67, 47, .22), transparent 70%), #0f0d0b; color: #f3eee4; font-family: 'Hiragino Sans', 'BIZ UDPGothic', 'Yu Gothic UI', Meiryo, sans-serif; overflow: hidden; }
+.tk-top { display: flex; align-items: center; gap: 16px; padding: 16px clamp(16px, 4vw, 40px); }
+.tk-ttl { display: flex; align-items: center; gap: 10px; margin: 0; font-weight: 800; color: #f3e3bd; }
+.tk-ttl span { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 6px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; transform: rotate(-4deg); }
+.tk-cnt { margin: 0 0 0 auto; font-size: 15px; color: rgba(243, 238, 228, .75); }
+.tk-cnt b { font-family: 'Shippori Mincho', serif; font-size: 28px; color: #fff; }
+.tk-x, .tk-x2, .tk-again { padding: 9px 18px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .3); background: transparent; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+.tk-stage { position: relative; z-index: 1; display: grid; align-content: center; justify-items: center; gap: clamp(14px, 2.4vh, 26px); padding: 0 clamp(16px, 5vw, 70px); min-height: 0; overflow: auto; text-align: center; }
+.tk-big { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(40px, 7vw, 90px); color: #fff; }
+.tk-sub { margin: 0; font-size: clamp(16px, 2vw, 22px); color: rgba(243, 238, 228, .8); }
+.tk-q { max-width: 26em; margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(24px, 3.6vw, 48px); line-height: 1.45; color: #fff; animation: tk-in .6s cubic-bezier(.2, .8, .2, 1) both; }
+.tk-ch { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; width: min(1000px, 100%); margin: 0; padding: 0; }
+.tk-ch li { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 16px; background: rgba(255, 255, 255, .07); border: 1.5px solid rgba(255, 255, 255, .18); text-align: left; font-size: clamp(17px, 2.2vw, 28px); font-weight: 800; animation: tk-in .5s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(.35s + var(--j) * .12s); transition: background .4s, border-color .4s, opacity .4s, transform .4s; }
+.tk-ch li span { flex: none; display: grid; place-items: center; width: 1.8em; height: 1.8em; border-radius: 8px; background: #f3e3bd; color: #1c2b23; font-family: 'Shippori Mincho', serif; }
+.tk-ch li.is-ok { background: #2f6b3a; border-color: #8fc0a0; transform: scale(1.04); box-shadow: 0 0 40px rgba(143, 192, 160, .45); }
+.tk-ch li.is-ok span { background: #fff; }
+.tk-ch li.is-ng { opacity: .35; }
+@keyframes tk-in { from { opacity: 0; transform: translateY(18px); } }
+.tk-note-a { max-width: 900px; margin: 0; padding: 12px 20px; border-radius: 14px; background: rgba(243, 227, 189, .1); font-size: clamp(14px, 1.6vw, 19px); line-height: 1.8; animation: tk-in .5s both; }
+.tk-note-a b { display: block; font-family: 'Shippori Mincho', serif; font-size: 1.3em; color: #8fc0a0; }
+.tk-next { padding: 14px 40px; border: 0; border-radius: 999px; background: #b5432f; color: #fff; font: inherit; font-size: clamp(16px, 1.8vw, 22px); font-weight: 800; cursor: pointer; box-shadow: 0 12px 30px rgba(181, 67, 47, .4); }
+.tk-next:focus-visible, .tk-team:focus-visible { outline: 3px solid #f3e3bd; outline-offset: 3px; }
+.tk-ring { position: relative; width: clamp(70px, 9vw, 110px); }
+.tk-ring svg { display: block; width: 100%; transform: rotate(-90deg); }
+.tk-r0 { fill: none; stroke: rgba(255, 255, 255, .12); stroke-width: 8; }
+.tk-r1 { fill: none; stroke: #f3e3bd; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke .3s; }
+.tk-ring b { position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 3.4vw, 42px); color: #fff; }
+.tk-ring.is-low .tk-r1 { stroke: #e9a493; } .tk-ring.is-low b { color: #e9a493; animation: tk-beat 1s ease-in-out infinite; }
+.tk-ring.is-up b { color: #e9a493; }
+@keyframes tk-beat { 50% { transform: scale(1.18); } }
+.tk-board { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 14px clamp(16px, 4vw, 40px) calc(16px + env(safe-area-inset-bottom)); }
+.tk-team { position: relative; display: flex; align-items: center; gap: 10px; min-width: 120px; padding: 8px 14px 8px 8px; border-radius: 14px; border: 2px solid var(--c); background: rgba(255, 255, 255, .05); color: #fff; font: inherit; cursor: pointer; transition: background .2s; }
+.tk-team span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; background: var(--c); font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; }
+.tk-team b { font-family: 'Shippori Mincho', serif; font-size: 30px; min-width: 1.4em; }
+.tk-team i { margin-left: auto; padding: 3px 8px; border-radius: 999px; background: rgba(255, 255, 255, .12); font-style: normal; font-size: 12px; font-weight: 800; opacity: .55; }
+.tk-board.is-open .tk-team i { opacity: 1; background: var(--c); }
+.tk-team:hover { background: rgba(255, 255, 255, .12); }
+.tk-team.is-up b { animation: tk-pop .5s cubic-bezier(.2, 1.6, .4, 1); color: #f3e3bd; }
+@keyframes tk-pop { 40% { transform: scale(1.6); } }
+.tk-pod { display: flex; align-items: flex-end; justify-content: center; gap: 12px; }
+.tk-p { display: grid; justify-items: center; gap: 4px; width: clamp(100px, 16vw, 180px); padding: 16px 10px; border-radius: 16px 16px 0 0; background: linear-gradient(var(--c), rgba(0, 0, 0, .25)); animation: tk-rise .8s cubic-bezier(.2, 1.2, .4, 1) both; transform-origin: bottom; }
+.tk-p.r1 { min-height: 220px; animation-delay: .9s; } .tk-p.r2 { min-height: 160px; animation-delay: .5s; } .tk-p.r3 { min-height: 120px; animation-delay: .2s; }
+.tk-p-t { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(22px, 3vw, 34px); }
+.tk-p b { font-family: 'Shippori Mincho', serif; font-size: clamp(18px, 2.2vw, 26px); color: #f3e3bd; }
+.tk-p i { margin-top: auto; padding: 4px 12px; border-radius: 6px; background: #f3e3bd; color: #1c2b23; font-style: normal; font-weight: 800; transform: rotate(-4deg); }
+@keyframes tk-rise { from { transform: scaleY(0); opacity: 0; } }
+.tk-rest { margin: 0; color: rgba(243, 238, 228, .75); }
+.tk-os .osatsu { margin: 0 auto; color: #2a2015; }
+.tk-btns { display: flex; gap: 10px; }
+.tk-again { background: #f3e3bd; color: #1c2b23; border-color: #f3e3bd; }
+.tk-rain { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.tk-rain i { position: absolute; left: var(--x); top: -50px; padding: 8px 12px; border-radius: 4px; background: #e6d5b3; box-shadow: inset 0 0 0 2px #6b4a22; color: #b5432f; font-style: normal; font-family: 'Shippori Mincho', serif; font-size: 11px; font-weight: 800; opacity: 0; animation: tk-fall var(--t) cubic-bezier(.3, .1, .6, 1) var(--d) forwards; }
+@keyframes tk-fall { 10% { opacity: 1; } 90% { opacity: .9; } 100% { opacity: 0; transform: translate(-20px, 105vh) rotate(var(--r)); } }
+@media (max-width: 700px) { .tk-ch { grid-template-columns: 1fr; } .tk-team { min-width: 0; } .tk-team b { font-size: 22px; } .tk-ttl { font-size: 0; } .tk-ttl span { font-size: 16px; } }
+@media (prefers-reduced-motion: reduce) { .tk-full * { animation: none !important; transition: none !important; } }
+.tk-stage.is-rev .tk-ring { display: none; } .tk-stage.is-rev .tk-q { font-size: clamp(22px, 3vw, 40px); }

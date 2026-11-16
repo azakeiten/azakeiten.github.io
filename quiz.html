@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261116c" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261116d" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -164,6 +164,18 @@
   </section>
 
   <!-- 問題を、つくってみよう -->
+  <!-- みんなでクイズ大会（taikai.js・近づいてから読みこむ） -->
+  <section class="services tight tk-sec" id="taikai">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">大</span></p>
+        <h2 class="section-title">みんなでクイズ大会</h2>
+        <p class="lead">教室や文化祭の会場で、プロジェクターに映して班対抗で。問題を大きく出し、時間の輪が減っていき、答えを見たら正解した班に点を入れます。最後は表彰台で。</p>
+      </div>
+      <div class="tk reveal" data-taikai></div>
+    </div>
+  </section>
+
   <section class="about tight" id="make">
     <div class="container">
       <div class="section-head reveal">
@@ -177,22 +189,22 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261116c"></script>
-  <script src="layout.js?v=20261116c"></script>
-  <script src="brand.js?v=20261116c"></script>
-  <script src="nav.js?v=20261116c"></script>
-  <script src="reveal.js?v=20261116c"></script>
-  <script src="ranking.js?v=20261116c"></script>
-  <script src="quiz-data.js?v=20261116c"></script>
-  <script src="shareimg.js?v=20261116c"></script>
-  <script src="quiz.js?v=20261116c"></script>
-  <script src="osatsu.js?v=20261116c"></script>
-  <script src="site.js?v=20261116c"></script>
+  <script src="content.js?v=20261116d"></script>
+  <script src="layout.js?v=20261116d"></script>
+  <script src="brand.js?v=20261116d"></script>
+  <script src="nav.js?v=20261116d"></script>
+  <script src="reveal.js?v=20261116d"></script>
+  <script src="ranking.js?v=20261116d"></script>
+  <script src="quiz-data.js?v=20261116d"></script>
+  <script src="shareimg.js?v=20261116d"></script>
+  <script src="quiz.js?v=20261116d"></script>
+  <script src="osatsu.js?v=20261116d"></script>
+  <script src="site.js?v=20261116d"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261116c';
-      [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-moneyevo]', 'moneyevo.js'], ['[data-barter]', 'barter.js'],['[data-coins]', 'coins.js'], ['[data-otsuri]', 'otsuri.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
+      var V = '20261116d';
+      [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-moneyevo]', 'moneyevo.js'], ['[data-barter]', 'barter.js'],['[data-coins]', 'coins.js'], ['[data-otsuri]', 'otsuri.js'], ['[data-taikai]', 'taikai.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };
         if (location.hash || !('IntersectionObserver' in window)) return load();
