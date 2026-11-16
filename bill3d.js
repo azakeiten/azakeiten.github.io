@@ -1,5 +1,5 @@
 /* ================================================================
-   bill3d.js — 文化祭ページ：3D で少し回る「オリジナル紙幣」（CSS 3D・ライブラリなし）
+   bill3d.js — 文化祭ページ：3D で少し回る「オリジナルの券」（CSS 3D・ライブラリなし）
    ・ゆらゆら回り、押すと裏返る。マウスや指の位置で少し傾く
    ・実物をもとにしたイメージ（肖像の位置には AZAKEI の印）
    ================================================================ */
@@ -8,7 +8,7 @@
   if (!host) return;
   const star = `<svg class="b3-star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L90 73 L10 73 Z M50 96 L10 27 L90 27 Z" fill="#2f6b3a"/><circle cx="50" cy="50" r="21" fill="#f6efdc"/><text x="50" y="59" text-anchor="middle" font-family="Shippori Mincho, serif" font-weight="800" font-size="26" fill="#2f6b3a">経</text></svg>`;
   host.innerHTML = `
-    <button type="button" class="b3-stage" aria-label="オリジナル紙幣を裏返す">
+    <button type="button" class="b3-stage" aria-label="オリジナルの券を裏返す">
       <span class="b3-tilt"><span class="b3-bill">
         <span class="b3-face b3-front">
           <span class="b3-frame"></span>

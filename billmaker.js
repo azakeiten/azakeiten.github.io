@@ -1,6 +1,6 @@
 /* ================================================================
    billmaker.js — 文化祭：「麻経券」をつくる
-   ・会場のオリジナル紙幣にならって、自分だけの遊び券を絵にする
+   ・会場のオリジナルの券にならって、自分だけの遊び券を絵にする
    ・本物のお金に似せない：円の記号・人の顔は使わず、単位は「チップ」、大きく「見本」
    ・名前や言葉は絵に描くだけで、どこにも送らず、残さない
    ================================================================ */
@@ -125,7 +125,7 @@
   if (navigator.canShare && window.File) {
     try { if (navigator.canShare({ files: [new File([''], 'a.png', { type: 'image/png' })] })) sh.hidden = false; } catch (e) {}
   }
-  sh.addEventListener('click', () => cv.toBlob(b => { if (!b) return; navigator.share({ files: [new File([b], fileName(), { type: 'image/png' })], title: '麻経券をつくりました' }).catch(() => {}); }, 'image/png'));
+  sh.addEventListener('click', () => cv.toBlob(b => { if (!b) return; navigator.share({ files: [new File([b], fileName(), { type: 'image/png' })], title: '麻経券をデザインしました' }).catch(() => {}); }, 'image/png'));
   // 近づいてから描く（書体を待つため）
   if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { io.disconnect(); redraw(); } }, { rootMargin: '400px' }); io.observe(box); draw(); } else redraw();
 })();
