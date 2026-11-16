@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-16', seal: '舵', tone: 'dark', href: 'sim.html#kinri', eyebrow: '経済ラボ', title: '景気の舵とり', text: '日本銀行の会議のメンバーになって、3 か月ごとに政策金利を決める。物価 2% と町の景気を、3 年間守れるかな。' },
     { date: '2026-11-16', seal: '散', tone: 'green', href: 'contests.html#bunsan', eyebrow: 'コンテスト', title: 'ポートフォリオの 10 年', text: 'チップ 100 枚を 6 つの会社に分けて、猛暑や長雨や不景気の 10 年を進める。分けると、ゆれはどう変わる？' },
     { date: '2026-11-16', seal: '競', tone: 'dark', href: 'sim.html#seri', eyebrow: '経済ラボ', title: 'せりの会場', text: 'マグロやメロンを、4 人の仲買人と札を上げて競りあう。せり上げ式と封筒式。値段はだれが決める？' },
     { date: '2026-11-16', seal: '備', tone: 'paper', href: 'sim.html#hoken', eyebrow: '経済ラボ', title: 'みんなで備える箱', text: 'まちのみんなで掛け金を出し合い、こまった家へ箱からお金が届く。10 年間、箱は足りるかな。保険のしくみの実験。' },
