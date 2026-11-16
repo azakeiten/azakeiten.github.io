@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-17', seal: '算', tone: 'paper', href: 'contests.html#kessan', eyebrow: 'コンテスト', title: 'パン屋さんの決算発表', text: '値段・新商品・広告・人と機械を決めて 1 年営業。売上から利益までの滝グラフで、黒字か赤字かを発表。' },
     { date: '2026-11-17', seal: '模', tone: 'green', href: 'festival.html#room', eyebrow: '文化祭', title: '会場の 3D 模型が進化', text: '人形が順路を歩き、カメラがついていく。真上からの間取り図、会場の写真、にぎわいのようすも。' },
     { date: '2026-11-16', seal: '舵', tone: 'dark', href: 'sim.html#kinri', eyebrow: '経済ラボ', title: '景気の舵とり', text: '日本銀行の会議のメンバーになって、3 か月ごとに政策金利を決める。物価 2% と町の景気を、3 年間守れるかな。' },
     { date: '2026-11-16', seal: '散', tone: 'green', href: 'contests.html#bunsan', eyebrow: 'コンテスト', title: 'ポートフォリオの 10 年', text: 'チップ 100 枚を 6 つの会社に分けて、猛暑や長雨や不景気の 10 年を進める。分けると、ゆれはどう変わる？' },
