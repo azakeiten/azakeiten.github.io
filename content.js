@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-16', seal: '証', tone: 'shu', href: 'mypage.html#shuryo', eyebrow: 'わたしの記録', title: '麻経の修了証', text: '親しむ・知る・つくるの 3 つの段の遊びをすると、それぞれに判。3 つそろうと修了証が出て、なまえを書いて印刷できます。' },
     { date: '2026-11-16', seal: '配', tone: 'paper', href: 'index.html#deck', eyebrow: '紹介', title: '紹介スライドの資料を印刷', text: 'スライドの「資料」で、13 枚の見出しと説明を A4 1 枚に。お札マンの発表は、速さを変えられ、止まったら「つづける」が出ます。' },
     { date: '2026-11-16', seal: '取', tone: 'green', href: 'glossary.html#karuta', eyebrow: '用語辞典', title: '経済ことばかるた', text: 'お札マンが読む説明を聞いて、畳の上の 12 枚から言葉の札をとる。10 枚で勝負。分野もえらべます。' },
     { date: '2026-11-16', seal: '大', tone: 'shu', href: 'quiz.html#taikai', eyebrow: 'クイズ', title: 'みんなでクイズ大会', text: '教室や文化祭で、プロジェクターに映して班対抗。時間の輪、正解の発表、班ごとの点数、最後は表彰台。84 問から出題します。' },

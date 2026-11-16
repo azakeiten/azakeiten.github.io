@@ -112,6 +112,9 @@
     box.querySelector('.bm-k').hidden = st.m !== 'seal';
     draw();
   });
+  // 修了証（わたしの記録）の「つくる」に数えるための印
+  const mark = () => { try { localStorage.setItem('azakei_bill', '1'); } catch (e) {} };
+  box.addEventListener('click', mark);
   box.addEventListener('input', e => {
     const f = e.target.dataset.f; if (!f) return;
     st[f] = e.target.value.replace(/[<>]/g, '').trim();
