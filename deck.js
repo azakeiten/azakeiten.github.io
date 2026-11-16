@@ -83,6 +83,8 @@
   const DUR = 5500;
   const dur = n => S[n].dur || DUR;
   let el, i = 0, timer = null, playing = true, startAt = 0, left = DUR, lastFocus = null, note = false, t0 = 0, clock = null, prevI = -1, tool = '', pv = null, pvT0 = 0, pvClock = null, chara = false, voice = false, li = 0, tTok = 0, tt = null;
+  // お札マンの話す速さ（文字の出る速さと、間の長さにかける）
+  const SPD = [['ゆっくり', 1.5], ['ふつう', 1], ['はやい', .6]]; let spd = 1;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const label = s => s.step !== undefined ? STEPS[s.step][0] : s.seal;
   const plain = h => h.replace(/<small>.*?<\/small>/g, '').replace(/<span>(.*?)<\/span>/g, ' $1').replace(/<br>/g, '');
@@ -140,7 +142,7 @@
       <ol class="dk-track" aria-hidden="true">${STEPS.map(([k, t]) => `<li><span>${k}</span>${t}</li>`).join('<li class="dk-arr">→</li>')}</ol>
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
       <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
-      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p></div><div class="dk-ch-man">${MAN}</div></div>
+      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-sp">速さ：ふつう</button><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p><button type="button" class="dk-ch-go">止まっています。つづける ▶</button></div><div class="dk-ch-man">${MAN}</div></div>
       <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
       <div class="dk-ctl">
         <button type="button" class="dk-prev" aria-label="前のスライド">←</button>
@@ -149,6 +151,7 @@
         <span class="dk-count" aria-live="polite"></span>
         <button type="button" class="dk-lbtn" aria-pressed="false" title="指し棒（L）">指し棒</button>
         <button type="button" class="dk-dbtn" aria-pressed="false" title="ペンで書きこむ（D）。スライドを変えると消えます">ペン</button>
+        <button type="button" class="dk-hbtn" title="配る資料を印刷（A4）">資料</button>
         <button type="button" class="dk-gbtn" aria-pressed="false" title="一覧（G）">一覧</button>
         <button type="button" class="dk-nbtn" aria-pressed="false" title="自分で話すときの台本（N）">台本</button>
         <button type="button" class="dk-cbtn" aria-pressed="false" title="お札マンが発表（P）">発表</button>
@@ -160,8 +163,12 @@
     el.querySelector('.dk-x').onclick = close;
     el.querySelector('.dk-play').onclick = () => setPlay(!playing);
     el.querySelector('.dk-gbtn').onclick = () => grid();
+    el.querySelector('.dk-hbtn').onclick = handout;
     el.querySelector('.dk-nbtn').onclick = () => setNote(!note);
     el.querySelector('.dk-cbtn').onclick = () => setChara(!chara);
+    const sp = el.querySelector('.dk-ch-sp');
+    sp.onclick = () => { spd = (spd + 1) % SPD.length; sp.textContent = '速さ：' + SPD[spd][0]; };
+    el.querySelector('.dk-ch-go').onclick = () => setPlay(true);
     const sb = el.querySelector('.dk-ch-s');
     sb.onclick = () => { sfxOn = !sfxOn; sb.setAttribute('aria-pressed', sfxOn); sb.textContent = sfxOn ? '効果音：あり' : '効果音'; sfx('coin'); };
     const vb = el.querySelector('.dk-ch-v');
@@ -195,7 +202,8 @@
   const flip = (btn, auto) => {
     const box = btn.closest('.dk-try'), coin = box.querySelector('.dk-coin'), r = box.querySelector('.dk-try-r');
     if (coin.classList.contains('is-spin')) return;
-    if (!auto) setPlay(false);
+    // ふつうの発表では、押したら自動送りを止める。お札マンの発表中は止めない（あとでお札マンが結果を話す）
+    if (!auto && !chara) setPlay(false);
     box.querySelectorAll('[data-ab]').forEach(b => b.setAttribute('aria-pressed', b === btn));
     const head = Math.random() < .5, pick = btn.dataset.ab;
     coin.classList.remove('is-h', 'is-t'); void coin.offsetWidth; coin.classList.add('is-spin', head ? 'is-h' : 'is-t');
@@ -223,6 +231,7 @@
     sp.querySelector('span').textContent = STEPS[st][0];
     sp.querySelector('b').textContent = `${['一', '二', '三'][st]}　${STEPS[st][1]}`;
     sp.classList.remove('is-go'); void sp.offsetWidth; sp.classList.add('is-go');
+    clearTimeout(sp._t); sp._t = setTimeout(() => sp.classList.remove('is-go'), 1400);
     sfx('stamp');
   };
   const paint = () => {
@@ -246,6 +255,21 @@
     hideQA();
     if (S[i].cls === 'is-end') setTimeout(() => { if (S[i].cls === 'is-end') rain(); }, 500);
     if (chara) { li = 0; stopTalk(); const c = el.querySelector('.dk-chara'); c.classList.remove('is-hop'); void c.offsetWidth; c.classList.add('is-hop'); setTimeout(() => c.classList.remove('is-hop'), 600); }
+  };
+
+  // 配る資料：全部のスライドの見出しと説明を、A4 にならべて印刷する（聞いている人に配る用）
+  const handout = () => {
+    setPlay(false);
+    let h = document.querySelector('.dk-hand');
+    if (!h) { h = document.createElement('div'); h.className = 'dk-hand'; document.body.appendChild(h); }
+    const sub = s => s.s.replace(/<small>.*?<\/small>/g, '').replace(/<br>/g, ' ');
+    h.innerHTML = `<header class="dk-h-top"><p class="dk-h-t"><span>麻経</span>AZAKEI 紹介資料</p><p class="dk-h-m">麻布中学校・高等学校 経済系同好会　azakeiten.github.io　Instagram @azakei_vlog</p></header>
+      <ol class="dk-h-list">${S.map((s, n) => `<li><p class="dk-h-k"><span>${label(s)}</span>${n + 1}　${s.k}</p><h3>${plain(s.t)}</h3><p class="dk-h-s">${sub(s)}</p></li>`).join('')}</ol>
+      <p class="dk-h-motto">世の中の仕組みを理解し、自らで仕組みを創り出す。</p>`;
+    document.documentElement.classList.add('dk-printing');
+    const done = () => { document.documentElement.classList.remove('dk-printing'); removeEventListener('afterprint', done); };
+    addEventListener('afterprint', done);
+    setTimeout(() => { print(); setTimeout(done, 1500); }, 60);
   };
 
   // ── 効果音（ファイルは使わず、ブラウザの中で音をつくる）。「効果音」を押したときだけ鳴る
@@ -338,23 +362,27 @@
     unHl(); if (o.hl) el.querySelectorAll('.dk-s.is-on ' + o.hl.split(',').join(', .dk-s.is-on ')).forEach(x => x.classList.add('dk-hl'));
     if (o.ride) ride(o.ride);
     c.classList.add('is-talk');
+    let done1 = false;
     const fin = () => {
-      if (tok !== tTok || !typed || !spoke) return;
+      if (tok !== tTok || !typed || !spoke || done1) return;
+      done1 = true;
       c.classList.remove('is-talk');
-      tt = setTimeout(() => { if (tok === tTok) done(); }, voice ? 350 : 650 + txt.length * 22);
+      tt = setTimeout(() => { if (tok === tTok) done(); }, voice ? 350 * SPD[spd][1] : (650 + txt.length * 22) * SPD[spd][1]);
     };
     if (voice) {
+      // 読み上げの「終わった」の知らせが来ないことがあるブラウザのため、長さから見て遅すぎたら先へ進む（止まらないように）
       const u = new SpeechSynthesisUtterance(txt);
-      u.lang = 'ja-JP'; u.pitch = 1.45; u.rate = 1.05;
+      u.lang = 'ja-JP'; u.pitch = 1.45; u.rate = 1.05 / SPD[spd][1];
       u.onend = u.onerror = () => { spoke = true; fin(); };
-      speechSynthesis.speak(u);
+      setTimeout(() => { if (tok === tTok) speechSynthesis.speak(u); }, 80);
+      setTimeout(() => { if (tok === tTok && !spoke) { spoke = true; fin(); } }, 3000 + txt.length * 280 * SPD[spd][1]);
     }
     const type = () => {
       if (tok !== tTok) return;
       k = reduce ? txt.length : k + 1;
       t.textContent = txt.slice(0, k);
       if (!voice && k % 2) sfx('blip');
-      if (k < txt.length) tt = setTimeout(type, /[、。！？]/.test(txt[k - 1]) ? 220 : 52); else { typed = true; fin(); }
+      if (k < txt.length) tt = setTimeout(type, (/[、。！？]/.test(txt[k - 1]) ? 220 : 52) * SPD[spd][1]); else { typed = true; fin(); }
     };
     type();
   };
@@ -378,14 +406,15 @@
       const ln = lines[li];
       if (ln === '@flip') {
         unHl();
-        // お札マンが B をえらんで、コインを投げる
-        const b = el.querySelector('.dk-s.is-on [data-ab="B"]');
-        if (b) flip(b, true);
-        el.querySelector('.dk-ch-t').textContent = 'えいっ！';
+        // 会場の人がもう A か B を押していたら、その結果について話す。まだなら、お札マンが B をえらんでコインを投げる
+        const mine = el.querySelector('.dk-s.is-on [data-ab][aria-pressed="true"]');
+        if (!mine) { const b = el.querySelector('.dk-s.is-on [data-ab="B"]'); if (b) flip(b, true); el.querySelector('.dk-ch-t').textContent = 'えいっ！'; }
         tt = setTimeout(() => {
           if (tok !== tTok) return;
           const head = el.querySelector('.dk-s.is-on .dk-coin').classList.contains('is-h');
-          say(head ? { t: '表だ！ 200 チップ、もらえた！', m: 'wow', hl: '.dk-coin' } : { t: '裏……0 チップだった。ざんねん。', m: 'sad', hl: '.dk-coin' }, () => { li++; step(); });
+          say(mine
+            ? (head ? { t: '表が出たね！ B を選んだ人は 200 チップ。', m: 'wow', hl: '.dk-coin' } : { t: '裏が出たね。B を選んだ人は 0 チップ、A なら 100 だった。', m: 'think', hl: '.dk-coin' })
+            : (head ? { t: '表だ！ 200 チップ、もらえた！', m: 'wow', hl: '.dk-coin' } : { t: '裏……0 チップだった。ざんねん。', m: 'sad', hl: '.dk-coin' }), () => { li++; step(); });
         }, reduce ? 100 : 1500);
         return;
       }
@@ -408,7 +437,7 @@
       setTimeout(() => c.classList.remove('is-in'), 900);
       // 最後のスライドから始めても最初に戻らないよう、setPlay を通さずに話しはじめる
       clearTimeout(timer); playing = false;
-      setTimeout(() => { if (!chara) return; playing = true; const b = el.querySelector('.dk-play'); b.textContent = 'II'; b.setAttribute('aria-label', '一時停止'); run(); }, reduce ? 0 : 600);
+      setTimeout(() => { if (!chara) return; playing = true; c.classList.remove('is-paused'); const b = el.querySelector('.dk-play'); b.textContent = 'II'; b.setAttribute('aria-label', '一時停止'); run(); }, reduce ? 0 : 600);
     } else { stopTalk(); setPlay(false); unHl(); el.classList.remove('is-spot'); c.classList.remove(...MOODS); }
   };
   // 指し棒・ペン（どちらかひとつ）。使っている間は、画面を押してもスライドは進まない
@@ -495,6 +524,8 @@
     playing = on;
     const btn = el.querySelector('.dk-play');
     btn.textContent = on ? 'II' : '▶'; btn.setAttribute('aria-label', on ? '一時停止' : (ended ? '最初から' : '再生'));
+    // お札マンの発表が止まっているときは、ふきだしに「つづける」を出す
+    el.querySelector('.dk-chara').classList.toggle('is-paused', chara && !on && !ended);
     const b = bars()[i];
     if (!on) {
       clearTimeout(timer);
