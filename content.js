@@ -5,10 +5,11 @@
 window.AZAKEI = {
 
   /* ---- サイトの最終更新日（フッターに出す。更新したら書きかえる） ---- */
-  siteUpdated: '2026-11-16',
+  siteUpdated: '2026-11-17',
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-17', seal: '模', tone: 'green', href: 'festival.html#room', eyebrow: '文化祭', title: '会場の 3D 模型が進化', text: '人形が順路を歩き、カメラがついていく。真上からの間取り図、会場の写真、にぎわいのようすも。' },
     { date: '2026-11-16', seal: '舵', tone: 'dark', href: 'sim.html#kinri', eyebrow: '経済ラボ', title: '景気の舵とり', text: '日本銀行の会議のメンバーになって、3 か月ごとに政策金利を決める。物価 2% と町の景気を、3 年間守れるかな。' },
     { date: '2026-11-16', seal: '散', tone: 'green', href: 'contests.html#bunsan', eyebrow: 'コンテスト', title: 'ポートフォリオの 10 年', text: 'チップ 100 枚を 6 つの会社に分けて、猛暑や長雨や不景気の 10 年を進める。分けると、ゆれはどう変わる？' },
     { date: '2026-11-16', seal: '競', tone: 'dark', href: 'sim.html#seri', eyebrow: '経済ラボ', title: 'せりの会場', text: 'マグロやメロンを、4 人の仲買人と札を上げて競りあう。せり上げ式と封筒式。値段はだれが決める？' },

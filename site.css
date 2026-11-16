@@ -9378,3 +9378,71 @@ html[data-theme="dark"] section.services.eh-sec, html[data-theme="dark"]:not(.is
 @media (max-width: 760px) { .bs[data-bunsan] .bs-stage { grid-template-columns: 1fr; padding: 12px; } .bs[data-bunsan] .bs-card, .bs[data-bunsan] .bs-card-in { min-height: 170px; } .bs[data-bunsan] .bs-learn { grid-template-columns: 1fr; } .bs[data-bunsan] .bs-r-nums { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bs[data-bunsan] .bs-btns { margin-left: 0; } }
 @media (max-width: 480px) { .bs[data-bunsan] .bs-cos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bs[data-bunsan] .bs-result { flex-direction: column; gap: 10px; } .bs[data-bunsan] .bs-total b { font-size: 34px; } }
 @media (prefers-reduced-motion: reduce) { .bs[data-bunsan] *, .bs-l, .bs-lt, .bs-pt { animation: none !important; transition: none !important; } .bs-l.is-single { stroke-dashoffset: 0; } }
+
+/* ---- 文化祭：会場の 3D 模型（room3d.js・カメラ 3 つ・歩く人形・にぎわい） ---- */
+.room3d .r3-world { transition: none; }
+.room3d .r3-cams { display: flex; gap: 6px; flex-wrap: wrap; }
+.room3d .r3-cams [aria-pressed="true"] { background: #fffaf0; color: #1c2b23; border-color: #fffaf0; }
+.room3d .r3-view { height: clamp(320px, 56vw, 580px); background: radial-gradient(ellipse at 50% 35%, #34503f 0%, #1c2b23 60%, #121c17 100%); box-shadow: inset 0 0 80px rgba(0, 0, 0, .45); }
+.room3d .r3-view::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, .35), transparent 60%); }
+.room3d .r3-floor { box-shadow: 0 0 0 4px #b79f75, 0 30px 60px rgba(0, 0, 0, .45); }
+.r3-shadow { position: absolute; left: 0; top: 0; background: rgba(40, 25, 10, .3); filter: blur(4px); transform: translate(var(--sh), var(--sh)) translateZ(.5px); border-radius: 2px; pointer-events: none; }
+.r3-light { position: absolute; inset: 0; pointer-events: none; transform: translateZ(.3px); background: radial-gradient(circle at 22% 30%, rgba(255, 244, 210, .38), transparent 26%), radial-gradient(circle at 52% 30%, rgba(255, 244, 210, .38), transparent 26%), radial-gradient(circle at 82% 30%, rgba(255, 244, 210, .38), transparent 26%), radial-gradient(circle at 22% 72%, rgba(255, 244, 210, .3), transparent 24%), radial-gradient(circle at 52% 72%, rgba(255, 244, 210, .3), transparent 24%), radial-gradient(circle at 82% 72%, rgba(255, 244, 210, .3), transparent 24%); }
+.r3-sun { position: absolute; bottom: 0; height: calc(var(--k, .6) * 190px); pointer-events: none; transform: skewX(-24deg) translateZ(.4px); background: linear-gradient(0deg, rgba(255, 226, 140, .5), rgba(255, 226, 140, 0)); filter: blur(2px); }
+.r3-dim { position: absolute; font-size: 12px; font-weight: 800; color: #e3c68e; letter-spacing: .1em; opacity: 0; transition: opacity .5s; pointer-events: none; white-space: nowrap; }
+.r3-dim-x { left: 50%; top: -44px; translate: -50% 0; } .r3-dim-y { left: -48px; top: 50%; translate: 0 -50%; writing-mode: vertical-rl; }
+.room3d[data-cam="top"] .r3-dim { opacity: 1; }
+.room3d[data-cam="top"] .r3-floor { background-size: calc(var(--k, .6) * 25px) calc(var(--k, .6) * 25px); }
+.r3-route .r3-rt { fill: none; stroke: rgba(181, 67, 47, .55); stroke-width: 3; stroke-dasharray: 6 8; stroke-linecap: round; stroke-linejoin: round; }
+.r3-route .r3-walked { fill: none; stroke: #e3b341; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; filter: drop-shadow(0 0 4px rgba(227, 179, 65, .7)); }
+.r3-walker { position: absolute; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
+.r3-pawn { position: absolute; left: calc(var(--k, .6) * -24px); top: calc(var(--k, .6) * -96px); width: calc(var(--k, .6) * 48px); height: calc(var(--k, .6) * 96px); transform-origin: 50% 100%; transform: rotateZ(calc(-1 * var(--rz, 0deg))) rotateX(-90deg); }
+.r3-pawn svg { display: block; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 100%; }
+.r3-walker.is-moving .r3-pawn svg { animation: r3-step .42s ease-in-out infinite; }
+.r3-walker.is-crowd .r3-pawn { left: calc(var(--k, .6) * -18px); top: calc(var(--k, .6) * -72px); width: calc(var(--k, .6) * 36px); height: calc(var(--k, .6) * 72px); }
+.r3-walker.is-crowd .r3-pawn svg { animation: r3-step .5s ease-in-out infinite; }
+@keyframes r3-step { 50% { transform: translateY(-6%) scaleY(1.03); } }
+.r3-ring { position: absolute; left: calc(var(--k, .6) * -30px); top: calc(var(--k, .6) * -30px); width: calc(var(--k, .6) * 60px); height: calc(var(--k, .6) * 60px); border-radius: 50%; border: 3px solid #e3b341; transform: translateZ(1px); animation: r3-ring 1.6s ease-out infinite; }
+@keyframes r3-ring { from { opacity: .9; scale: .5; } to { opacity: 0; scale: 1.4; } }
+.r3-sign { position: absolute; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
+.r3-sign b { position: absolute; left: calc(var(--k, .6) * -40px); top: calc(var(--k, .6) * -120px); width: calc(var(--k, .6) * 80px); height: calc(var(--k, .6) * 120px); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; transform-origin: 50% 100%; transform: rotateZ(calc(-1 * var(--rz, 0deg))) rotateX(-90deg); }
+.r3-sign svg { width: calc(var(--k, .6) * 70px); height: calc(var(--k, .6) * 70px); filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .35)); animation: r3-spin 6s ease-in-out infinite; }
+@keyframes r3-spin { 50% { transform: translateY(-4px) rotateY(20deg); } }
+.r3-sign em { padding: 2px 8px; border-radius: 4px; background: #2f6b3a; color: #fff; font-style: normal; font-size: 12px; font-weight: 800; letter-spacing: .1em; font-family: "Shippori Mincho", serif; box-shadow: 0 3px 8px rgba(0, 0, 0, .3); }
+.r3-sign.is-out em { background: #b5432f; }
+.r3-pin.is-spot b { background: #2f6b3a; color: #fff; border-color: #fffaf0; font-family: "Shippori Mincho", serif; }
+.r3-hud { position: absolute; top: 12px; left: 12px; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px; background: rgba(18, 28, 23, .8); color: #fffaf0; font-size: 13px; font-weight: 700; backdrop-filter: blur(4px); }
+.r3-hud-n { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #b5432f; font-family: "Shippori Mincho", serif; }
+.r3-prog { display: flex; gap: 4px; margin-left: 4px; }
+.r3-prog i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255, 255, 255, .25); transition: background .4s; }
+.r3-prog i.is-done { background: #e3b341; }
+.r3-zoom { position: absolute; right: 12px; bottom: 12px; z-index: 2; display: flex; gap: 4px; }
+.r3-zoom button { min-width: 34px; height: 34px; padding: 0 8px; border-radius: 10px; border: 1px solid rgba(255, 250, 240, .3); background: rgba(18, 28, 23, .75); color: #fffaf0; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.r3-zoom button:hover { background: rgba(255, 255, 255, .15); }
+.r3-scale { position: absolute; left: 12px; bottom: 12px; z-index: 2; margin: 0; padding: 4px 10px; border-radius: 8px; background: rgba(18, 28, 23, .75); color: #e3c68e; font-size: 12px; font-weight: 700; opacity: 0; transition: opacity .4s; pointer-events: none; }
+.room3d[data-cam="top"] .r3-scale { opacity: 1; }
+.r3-hint { position: absolute; left: 50%; bottom: 14px; z-index: 2; margin: 0; translate: -50% 0; padding: 4px 12px; border-radius: 999px; background: rgba(18, 28, 23, .7); color: #fffaf0; font-size: 12px; pointer-events: none; animation: r3-hint 2.4s ease-in-out infinite; transition: opacity .5s; }
+@keyframes r3-hint { 50% { translate: -50% -4px; } }
+.room3d.is-touched .r3-hint, .room3d[data-cam="top"] .r3-hint, .room3d[data-cam="walk"] .r3-hint { opacity: 0; }
+.room3d .r3-under { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.room3d .r3-ctrl { display: flex; gap: 6px; }
+.room3d .r3-ctrl button { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(238, 231, 216, .3); background: transparent; color: inherit; font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; }
+.room3d .r3-ctrl .r3-play { background: #b5432f; border-color: #b5432f; color: #fff; box-shadow: 0 6px 16px rgba(181, 67, 47, .35); }
+.room3d .r3-crowd[aria-pressed="true"] { background: #e3c68e; color: #1c2b23; border-color: #e3c68e; }
+.room3d .r3-steps button.is-spot b { background: #2f6b3a; color: #fff; font-family: "Shippori Mincho", serif; }
+.room3d .r3-card { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 18px; background: #fffaf0; color: #2a2015; box-shadow: 0 10px 24px rgba(0, 0, 0, .25); }
+.room3d .r3-card.is-in { animation: r3-card .5s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes r3-card { from { opacity: 0; transform: translateY(10px); } }
+.room3d .r3-card-n { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; font-size: 24px; font-weight: 800; transform: rotate(-5deg); box-shadow: 0 3px 0 #7d2c1e; }
+.room3d .r3-card-b { flex: 1; min-width: 0; }
+.room3d .r3-card-h { margin: 0 0 2px; font-family: "Shippori Mincho", serif; font-size: 19px; font-weight: 800; }
+.room3d .r3-card-t { margin: 0; font-size: 14px; line-height: 1.75; color: #4a3a28; }
+.room3d .r3-card-ph { flex: none; width: min(240px, 36%); margin: 0; }
+.room3d .r3-card-ph[hidden] { display: none; }
+.room3d .r3-card-ph img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; box-shadow: 0 6px 14px rgba(0, 0, 0, .2); }
+.room3d .r3-card-ph figcaption { margin-top: 4px; font-size: 11px; line-height: 1.5; color: #6b5a44; }
+@media (max-width: 640px) { .room3d .r3-card { flex-wrap: wrap; } .room3d .r3-card-ph { width: 100%; } .r3-hud { font-size: 12px; } .r3-zoom button { min-width: 30px; height: 30px; font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { .r3-ring, .r3-sign svg, .r3-hint, .r3-walker .r3-pawn svg { animation: none !important; } }
+.r3-crowdg { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
+.r3-route .r3-walked { animation: none; }
+@media (max-width: 640px) { .r3-hint { display: none; } }
