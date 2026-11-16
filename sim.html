@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-sim.min.css?v=20261116n" />
+  <link rel="stylesheet" href="p-sim.min.css?v=20261116o" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -224,6 +224,19 @@
     </div>
   </section>
 
+  <!-- せりの会場（seri.js・近づいてから読みこむ） -->
+  <section class="services tight" id="seri">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">競</span></p>
+        <h2 class="section-title"><span class="keep-phrase">せりの</span><span class="keep-phrase"><em>会場</em></span></h2>
+        <p class="lead">マグロ、メロン、古い切手。4 人の仲買人と、札を上げて競りあいます。値段はだれが決めるのでしょう。あなたにとっての価値をこえないように、うまく買えるかな。</p>
+      </div>
+      <div class="sr reveal" data-seri></div>
+    </div>
+  </section>
+  <script>/* せりの会場（seri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-seri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="seri.js?v=20261116o";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+
   <!-- 朝ごはんの世界旅行（asagohan.js・近づいてから読みこむ） -->
   <section class="services tight" id="asagohan">
     <div class="container">
@@ -367,7 +380,7 @@
       <div class="hk reveal" data-hoken></div>
     </div>
   </section>
-  <script>/* みんなで備える箱（hoken.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-hoken]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="hoken.js?v=20261116n";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* みんなで備える箱（hoken.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-hoken]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="hoken.js?v=20261116o";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <section class="services tight" id="nesage">
     <div class="container">
@@ -404,35 +417,35 @@
   </section>
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261116n"></script>
-  <script src="layout.js?v=20261116n"></script>
-  <script src="brand.js?v=20261116n"></script>
-  <script src="nav.js?v=20261116n"></script>
-  <script src="reveal.js?v=20261116n"></script>
-  <script src="sim.js?v=20261116n"></script>
-  <script src="double.js?v=20261116n"></script>
-  <script src="market.js?v=20261116n"></script>
-  <script src="fx.js?v=20261116n"></script>
-  <script src="shop.js?v=20261116n"></script>
-  <script src="oku.js?v=20261116n"></script>
-  <script src="budget.js?v=20261116n"></script>
-  <script src="infl.js?v=20261116n"></script>
-  <script src="bungyo.js?v=20261116n"></script>
-  <script src="receipt.js?v=20261116n"></script>
-  <script src="kuji.js?v=20261116n"></script>
-  <script src="kabu.js?v=20261116n"></script>
-  <script src="ginko.js?v=20261116n"></script>
-  <script src="nesage.js?v=20261116n"></script>
-  <script src="labmenu.js?v=20261116n"></script>
-  <script src="flow.js?v=20261116n"></script>
-  <script src="village.js?v=20261116n"></script>
-  <script src="tsuuka.js?v=20261116n"></script>
-  <script>/* お金のめぐりパズル（pazuru.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-pazuru]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="pazuru.js?v=20261116n";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
-  <script>/* 朝ごはんの世界旅行（asagohan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-asagohan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="asagohan.js?v=20261116n";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
-  <script src="updown.js?v=20261116n"></script>
-  <script src="osatsu.js?v=20261116n"></script>
-  <script src="okozukai.js?v=20261116n"></script>
-  <script src="pagetoc.js?v=20261116n"></script>
-  <script src="site.js?v=20261116n"></script>
+  <script src="content.js?v=20261116o"></script>
+  <script src="layout.js?v=20261116o"></script>
+  <script src="brand.js?v=20261116o"></script>
+  <script src="nav.js?v=20261116o"></script>
+  <script src="reveal.js?v=20261116o"></script>
+  <script src="sim.js?v=20261116o"></script>
+  <script src="double.js?v=20261116o"></script>
+  <script src="market.js?v=20261116o"></script>
+  <script src="fx.js?v=20261116o"></script>
+  <script src="shop.js?v=20261116o"></script>
+  <script src="oku.js?v=20261116o"></script>
+  <script src="budget.js?v=20261116o"></script>
+  <script src="infl.js?v=20261116o"></script>
+  <script src="bungyo.js?v=20261116o"></script>
+  <script src="receipt.js?v=20261116o"></script>
+  <script src="kuji.js?v=20261116o"></script>
+  <script src="kabu.js?v=20261116o"></script>
+  <script src="ginko.js?v=20261116o"></script>
+  <script src="nesage.js?v=20261116o"></script>
+  <script src="labmenu.js?v=20261116o"></script>
+  <script src="flow.js?v=20261116o"></script>
+  <script src="village.js?v=20261116o"></script>
+  <script src="tsuuka.js?v=20261116o"></script>
+  <script>/* お金のめぐりパズル（pazuru.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-pazuru]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="pazuru.js?v=20261116o";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 朝ごはんの世界旅行（asagohan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-asagohan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="asagohan.js?v=20261116o";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script src="updown.js?v=20261116o"></script>
+  <script src="osatsu.js?v=20261116o"></script>
+  <script src="okozukai.js?v=20261116o"></script>
+  <script src="pagetoc.js?v=20261116o"></script>
+  <script src="site.js?v=20261116o"></script>
 </body>
 </html>

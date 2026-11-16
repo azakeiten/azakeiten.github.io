@@ -68,11 +68,19 @@
     const say = (st.say || '').trim();
     const w = Math.min(150, 14 + say.length * 9.5);
     const bubble = say ? `<g class="ki-say"><rect x="${-24}" y="-30" width="${w}" height="20" rx="10" fill="#fff" stroke="${INK}" stroke-width="1.6"/><path d="M8 -10.8 L14 -3 L18 -10.8" fill="#fff" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 -11.6 H17.4" stroke="#fff" stroke-width="2.4"/><text x="${-24 + w / 2}" y="-16" font-size="10" font-weight="700" fill="${INK}" text-anchor="middle" font-family="sans-serif">${esc(say)}</text></g>` : '';
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -36 180 160"${forFile ? ' width="900" height="800"' : ' class="ki-art" role="img" aria-label="着せかえたお札マン"'}>
+    // 麻経の印（六芒星に「経」）。画面にも画像にも入れて、AZAKEI のキャラクターだとわかるようにする
+    const mark = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M50 4 L90 73 L10 73 Z M50 96 L10 27 L90 27 Z" fill="#2f6b3a" stroke="#fffaf0" stroke-width="5" stroke-linejoin="round" paint-order="stroke"/><circle cx="50" cy="50" r="21" fill="#f6efdc"/><text x="50" y="59" text-anchor="middle" font-family="serif" font-weight="800" font-size="26" fill="#2f6b3a">経</text></g>`;
+    // 保存する画像だけ：下に「麻経 AZAKEI」の帯（名前・サイト・© を入れる）
+    const band = `<rect x="-30" y="124" width="180" height="26" fill="#1f3a2a"/><rect x="-30" y="124" width="180" height="1.2" fill="${GOLD}"/>${mark(-26, 127.5, .2)}
+      <text x="-3" y="137.5" font-family="serif" font-size="9" font-weight="800" fill="#fff3d0">麻経 AZAKEI</text><text x="-3" y="145.5" font-family="sans-serif" font-size="5.2" fill="#cfe0c8">お札マン（仮）は AZAKEI のキャラクター</text>
+      <text x="146" y="137.5" text-anchor="end" font-family="sans-serif" font-size="6" font-weight="700" fill="${GOLD}">azakeiten.github.io</text><text x="146" y="145.5" text-anchor="end" font-family="sans-serif" font-size="5" fill="#cfe0c8">© 麻経 AZAKEI</text>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -36 180 ${forFile ? 186 : 160}"${forFile ? ' width="900" height="930"' : ' class="ki-art" role="img" aria-label="着せかえたお札マン（右下に麻経の印）"'}>
       <g class="ki-l-bg">${p('bg')}</g>
       <ellipse cx="60" cy="100" rx="34" ry="5" fill="rgba(0,0,0,.14)"/>
       <g class="ki-body${st.hold ? ' ki-holding' : ''}">${body}<g class="ki-l-hold">${p('hold')}</g><g class="ki-l-hat">${p('hat')}</g></g>
       ${bubble}
+      <g class="ki-mark" opacity=".95">${mark(122, 92, .24)}</g>
+      ${forFile ? band : ''}
     </svg>`;
   };
   box.innerHTML = `<div class="ki-wrap">
@@ -82,7 +90,7 @@
       ${ORDER.map((k, j) => `<div class="ki-opts" data-pane="${k}"${j ? ' hidden' : ''}>${PARTS[k][1].map(([n], i) => `<button type="button" class="ki-opt${st[k] === i ? ' is-on' : ''}" data-k="${k}" data-i="${i}" aria-pressed="${st[k] === i}"><span class="ki-th">${thumb(k, i)}</span>${n}</button>`).join('')}</div>`).join('')}
       <div class="ki-opts ki-sayp" data-pane="say" hidden><label>ふきだしの言葉（12 文字まで）<input type="text" maxlength="12" value="${esc(st.say)}" placeholder="例：経済っておもしろい" data-say></label><div class="ki-chips">${['よろしくね', 'てっぺんをとる', '文化祭に来てね', '経済っておもしろい', '1 円を大切に'].map(t => `<button type="button" data-chip="${t}">${t}</button>`).join('')}</div></div>
       <div class="ki-btns"><button type="button" class="ki-rand">おまかせ</button><button type="button" class="ki-save">画像で保存</button><button type="button" class="ki-reset">もとにもどす</button></div>
-      <p class="ki-note">選んだものは、このブラウザの中にだけ残ります。保存した画像は、背景「なし」だと、まわりがすきとおったシールのような画像になります。</p>
+      <p class="ki-note">選んだものは、このブラウザの中にだけ残ります。保存した画像には、AZAKEI のキャラクターだとわかるように、麻経の印と「麻経 AZAKEI」の帯が入ります。背景「なし」だと、まわりがすきとおった画像になります。</p>
     </div>
   </div>`;
   // 選びの小さな見本（帽子・持ちもの・背景は、その部分だけ。かおは顔だけ）
@@ -134,8 +142,8 @@
     const url = URL.createObjectURL(new Blob([art(true)], { type: 'image/svg+xml' }));
     const img = new Image();
     img.onload = () => {
-      const c = document.createElement('canvas'); c.width = 900; c.height = 800;
-      c.getContext('2d').drawImage(img, 0, 0, 900, 800); URL.revokeObjectURL(url);
+      const c = document.createElement('canvas'); c.width = 900; c.height = 930;
+      c.getContext('2d').drawImage(img, 0, 0, 900, 930); URL.revokeObjectURL(url);
       c.toBlob(b => {
         if (!b) return;
         const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'osatsuman.png';
