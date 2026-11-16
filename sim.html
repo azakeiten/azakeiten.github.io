@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-sim.min.css?v=20261116i" />
+  <link rel="stylesheet" href="p-sim.min.css?v=20261116j" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -82,6 +82,18 @@
         <p class="lead">家計・企業・銀行・政府のあいだを、お金はどう流れているのか。矢印の上をコインが流れます。押すと、その流れの意味と、辞典の言葉が出ます。</p>
       </div>
       <div class="fl reveal" data-flow></div>
+    </div>
+  </section>
+
+  <!-- お金のめぐりパズル（pazuru.js・近づいてから読みこむ） -->
+  <section class="services tight pz-sec" id="pazuru">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">巡</span></p>
+        <h2 class="section-title">お金のめぐりパズル</h2>
+        <p class="lead">上の図を見たら、こんどは自分で。家計・企業・銀行・政府のあいだの 6 本の矢印に、給料・代金・預金・貸し出し・税金・公共サービスの札をはめてください。ぜんぶ合うと、お金がめぐりはじめます。</p>
+      </div>
+      <div class="pz reveal" data-pazuru></div>
     </div>
   </section>
 
@@ -367,33 +379,34 @@
   </section>
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261116i"></script>
-  <script src="layout.js?v=20261116i"></script>
-  <script src="brand.js?v=20261116i"></script>
-  <script src="nav.js?v=20261116i"></script>
-  <script src="reveal.js?v=20261116i"></script>
-  <script src="sim.js?v=20261116i"></script>
-  <script src="double.js?v=20261116i"></script>
-  <script src="market.js?v=20261116i"></script>
-  <script src="fx.js?v=20261116i"></script>
-  <script src="shop.js?v=20261116i"></script>
-  <script src="oku.js?v=20261116i"></script>
-  <script src="budget.js?v=20261116i"></script>
-  <script src="infl.js?v=20261116i"></script>
-  <script src="bungyo.js?v=20261116i"></script>
-  <script src="receipt.js?v=20261116i"></script>
-  <script src="kuji.js?v=20261116i"></script>
-  <script src="kabu.js?v=20261116i"></script>
-  <script src="ginko.js?v=20261116i"></script>
-  <script src="nesage.js?v=20261116i"></script>
-  <script src="labmenu.js?v=20261116i"></script>
-  <script src="flow.js?v=20261116i"></script>
-  <script src="village.js?v=20261116i"></script>
-  <script src="tsuuka.js?v=20261116i"></script>
-  <script src="updown.js?v=20261116i"></script>
-  <script src="osatsu.js?v=20261116i"></script>
-  <script src="okozukai.js?v=20261116i"></script>
-  <script src="pagetoc.js?v=20261116i"></script>
-  <script src="site.js?v=20261116i"></script>
+  <script src="content.js?v=20261116j"></script>
+  <script src="layout.js?v=20261116j"></script>
+  <script src="brand.js?v=20261116j"></script>
+  <script src="nav.js?v=20261116j"></script>
+  <script src="reveal.js?v=20261116j"></script>
+  <script src="sim.js?v=20261116j"></script>
+  <script src="double.js?v=20261116j"></script>
+  <script src="market.js?v=20261116j"></script>
+  <script src="fx.js?v=20261116j"></script>
+  <script src="shop.js?v=20261116j"></script>
+  <script src="oku.js?v=20261116j"></script>
+  <script src="budget.js?v=20261116j"></script>
+  <script src="infl.js?v=20261116j"></script>
+  <script src="bungyo.js?v=20261116j"></script>
+  <script src="receipt.js?v=20261116j"></script>
+  <script src="kuji.js?v=20261116j"></script>
+  <script src="kabu.js?v=20261116j"></script>
+  <script src="ginko.js?v=20261116j"></script>
+  <script src="nesage.js?v=20261116j"></script>
+  <script src="labmenu.js?v=20261116j"></script>
+  <script src="flow.js?v=20261116j"></script>
+  <script src="village.js?v=20261116j"></script>
+  <script src="tsuuka.js?v=20261116j"></script>
+  <script>/* お金のめぐりパズル（pazuru.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-pazuru]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="pazuru.js?v=20261116j";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script src="updown.js?v=20261116j"></script>
+  <script src="osatsu.js?v=20261116j"></script>
+  <script src="okozukai.js?v=20261116j"></script>
+  <script src="pagetoc.js?v=20261116j"></script>
+  <script src="site.js?v=20261116j"></script>
 </body>
 </html>

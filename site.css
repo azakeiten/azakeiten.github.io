@@ -8807,3 +8807,48 @@ html[data-theme="dark"] section.services.eh-sec, html[data-theme="dark"]:not(.is
 .eh[data-ehon] + .eh-note, .eh-sec .eh-note { margin: 12px auto 0; max-width: 900px; font-size: 11.5px; color: var(--color-muted, #6a6357); text-align: center; }
 @media (max-width: 760px) { .eh[data-ehon] .eh-leaf { grid-template-columns: 1fr; } .eh[data-ehon] .eh-text { border-left: 0; border-top: 1px dashed rgba(107, 74, 34, .3); padding: 16px 18px; } .eh[data-ehon] .eh-x { font-size: 14.5px; min-height: 5.8em; } .eh[data-ehon] .eh-book { padding: 8px; } }
 @media (prefers-reduced-motion: reduce) { .eh[data-ehon] * { animation: none !important; } .eh[data-ehon] .eh-run { transform: translate(var(--x2), var(--y2)); } }
+
+/* v200 経済ラボ「お金のめぐりパズル」 */
+.pz[data-pazuru] .pz-board { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 18px; align-items: center; padding: 18px; border-radius: 22px; background: #fffaf0; border: 1px solid rgba(107, 74, 34, .2); box-shadow: 0 18px 40px rgba(60, 40, 15, .1); color: #2a2015; }
+.pz[data-pazuru] .pz-map { display: block; width: 100%; height: auto; touch-action: none; user-select: none; }
+.pz-arrow { fill: none; stroke: #6b4a22; stroke-width: 3; stroke-dasharray: 7 6; opacity: .55; transition: opacity .4s, stroke .4s; }
+.pz[data-pazuru].is-solved .pz-arrow { stroke: #2f6b3a; opacity: .9; stroke-dasharray: none; }
+.pz-coin { fill: #e0a63a; stroke: #8a5a1f; stroke-width: 1.5; opacity: 0; }
+.pz-coin.is-on { opacity: 1; }
+.pz-node rect { fill: #1c2b23; }
+.pz-node text { fill: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; text-anchor: middle; }
+.pz-slot { cursor: pointer; outline: none; }
+.pz-slot rect { fill: #fff; stroke: #b5432f; stroke-width: 2; stroke-dasharray: 5 4; transition: fill .3s, stroke .3s; }
+.pz-slot text { fill: #b5432f; font-weight: 800; font-size: 15px; text-anchor: middle; pointer-events: none; }
+.pz-slot.is-filled rect { fill: #f3e3bd; stroke-dasharray: none; }
+.pz-slot.is-filled text { fill: #2a2015; }
+.pz-slot:focus-visible rect, .pz-slot.is-over rect { stroke-width: 3.5; fill: #fde9d6; }
+.pz[data-pazuru].is-picking .pz-slot:not(.is-ok) rect { animation: pz-blink 1s ease-in-out infinite; }
+@keyframes pz-blink { 50% { fill: #fde9d6; } }
+.pz-slot.is-ok rect { fill: #2f6b3a; stroke: #2f6b3a; stroke-dasharray: none; animation: none; }
+.pz-slot.is-ok text { fill: #fff; }
+.pz-slot { transform-box: fill-box; }
+.pz-slot.is-pop rect { animation: pz-pop .35s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes pz-pop { 40% { transform: scale(1.12); } }
+.pz-slot.is-ng rect { animation: pz-ng .45s; }
+@keyframes pz-ng { 0%, 100% { fill: #f3e3bd; } 30% { fill: #f7c2b4; transform: translateX(-5px); } 60% { transform: translateX(5px); } }
+.pz[data-pazuru] .pz-side { display: grid; gap: 12px; }
+.pz[data-pazuru] .pz-h { margin: 0; font-weight: 800; font-size: 14px; color: #6b4a22; }
+.pz[data-pazuru] .pz-cards { display: flex; flex-wrap: wrap; gap: 8px; }
+.pz[data-pazuru] .pz-card { padding: 9px 16px; border-radius: 10px; border: 2px solid #6b4a22; background: #fff; color: #2a2015; font: inherit; font-size: 15px; font-weight: 800; cursor: grab; touch-action: none; transition: transform .2s, background .2s, opacity .3s; box-shadow: 0 3px 0 #6b4a22; }
+.pz[data-pazuru] .pz-card:hover { transform: translateY(-2px); }
+.pz[data-pazuru] .pz-card.is-sel { background: #b5432f; border-color: #b5432f; color: #fff; box-shadow: 0 3px 0 #7a2b1c; transform: translateY(-3px); }
+.pz[data-pazuru] .pz-card.is-used { opacity: .35; }
+.pz[data-pazuru] .pz-card.is-ok { opacity: 1; background: #2f6b3a; border-color: #2f6b3a; color: #fff; box-shadow: none; cursor: default; }
+.pz[data-pazuru] .pz-msg { min-height: 3.4em; margin: 0; padding: 10px 14px; border-radius: 12px; background: #f3ead6; font-size: 13.5px; line-height: 1.8; }
+.pz[data-pazuru] .pz-msg b { font-family: 'Shippori Mincho', serif; font-size: 20px; color: #b5432f; }
+.pz[data-pazuru] .pz-msg span { display: block; font-size: 12.5px; color: #3e382f; }
+.pz[data-pazuru] .pz-btns { display: flex; gap: 8px; }
+.pz[data-pazuru] .pz-check { padding: 11px 22px; border: 0; border-radius: 999px; background: #b5432f; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+.pz[data-pazuru] .pz-reset { padding: 11px 18px; border-radius: 999px; border: 1.5px solid #b5432f; background: transparent; color: #b5432f; font: inherit; font-weight: 800; cursor: pointer; }
+.pz[data-pazuru] .pz-note { margin: 10px 0 0; font-size: 11.5px; color: var(--color-muted, #6a6357); text-align: center; }
+.pz[data-pazuru].is-solved .pz-board { animation: pz-win .8s cubic-bezier(.2, 1.3, .4, 1); }
+@keyframes pz-win { 40% { box-shadow: 0 0 0 6px rgba(47, 107, 58, .35), 0 18px 40px rgba(60, 40, 15, .1); } }
+.pz-ghost { position: fixed; left: 0; top: 0; z-index: 9999; margin: -20px 0 0 -40px; padding: 9px 16px; border-radius: 10px; background: #b5432f; color: #fff; font-weight: 800; font-size: 15px; pointer-events: none; box-shadow: 0 10px 20px rgba(0, 0, 0, .25); }
+@media (max-width: 760px) { .pz[data-pazuru] .pz-board { grid-template-columns: 1fr; padding: 12px; } .pz[data-pazuru] .pz-card { padding: 8px 12px; font-size: 14px; } }
+@media (prefers-reduced-motion: reduce) { .pz[data-pazuru] * { animation: none !important; } }
