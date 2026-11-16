@@ -52,7 +52,7 @@
     [{ t: '3 日間で、2,364 人が来てくれたよ！', hl: '.dk-num', m: 'wow' }, { t: 'いちばん多かったのは、2 日目の 1,152 人。', hl: '.dk-bars span:nth-child(2)' }],
     [{ t: 'ここでクイズ。A は、かならず 100 チップ。', hl: '[data-ab="A"]' }, { t: 'B は、コインの表なら 200、裏なら 0。', hl: '[data-ab="B"]' }, { t: 'みんなはどっち？ ……うーん。', m: 'think' }, { t: 'ぼくは、B にしてみる！', hl: '[data-ab="B"]', m: 'happy' }, '@flip', { t: '平均すると、どっちも 100。「確実」をとるか、「ふえるかも」をとるか。それが、リスクの考え方の入口だよ。', hl: '.dk-try-r' }],
     ['つぎは「知る」。', { t: 'なぜチップが増えたのか、減ったのかを考えるんだ。', m: 'think' }, { t: 'サイトには、用語辞典 300 語や、経済ラボの 16 の実験があるよ。', hl: '.dk-chips li:nth-child(-n+3)' }],
-    ['お金は、町の中をめぐっているよ。', { t: '家計は企業で働いて給料をもらい、企業から物を買う。', hl: '[data-k="家計"], [data-k="企業"]' }, { t: '預けたお金は、銀行から企業へ貸し出される。', hl: '[data-k="銀行"]' }, { t: '税金は政府に集まって、道路や学校になるんだ。', hl: '[data-k="政府"]' }],
+    [{ t: 'お金は、町の中をめぐっているよ。小さなお札に、図の上を回ってもらうね。', m: 'happy' }, { t: '家計は企業で働いて給料をもらい、企業から物を買う。', hl: '[data-k="家計"], [data-k="企業"]', ride: [1, 0] }, { t: '預けたお金は、銀行から企業へ貸し出される。', hl: '[data-k="銀行"]', ride: [2, 3] }, { t: '税金は政府に集まって、道路や学校になるんだ。', hl: '[data-k="政府"]', ride: [4, 5] }],
     ['さいごは「つくる」。', '展示のゲームやルール、オリジナルの紙幣、会場の飾りは、部員が考えてつくったんだ。'],
     [{ t: 'お金を 1 枚つくるだけでも、決めることがたくさんあるよ。', m: 'think' }, { t: '何枚つくる？ いくらの価値？', hl: '.dk-b-q li:nth-child(-n+2)' }, { t: 'どう増える？ どこで使える？', hl: '.dk-b-q li:nth-child(n+3)' }, { t: 'ちなみに、ぼくの体もお札なんだ。', m: 'happy' }],
     ['学校の外でも、挑戦しているよ。', '日経ストックリーグと、高校生ビジネスプラン・グランプリ。'],
@@ -99,6 +99,8 @@
       ${E.map((e, j) => `<path id="dkf${j}" d="${path(e)}" class="dk-f-p"/>`).join('')}
       ${E.map((e, j) => [0, 1].map(k => `<circle r="5" class="dk-f-d${j % 2 ? ' is-b' : ''}"><animateMotion dur="${3 + j * .35}s" begin="${k * 1.6 + j * .2}s" repeatCount="indefinite" rotate="auto"><mpath href="#dkf${j}"/></animateMotion></circle>`).join('')).join('')}
       ${Object.values(N).map(([x, y, t], j) => `<g class="dk-f-n" data-k="${t}" style="--j:${j}" transform="translate(${x},${y})"><rect x="-40" y="-22" width="80" height="44" rx="10"/><text y="7">${t}</text></g>`).join('')}
+      <g class="dk-rider"><animateMotion dur="1.5s" begin="indefinite" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".4 0 .2 1"><mpath href="#dkf0"/></animateMotion>
+        <g transform="translate(-15,-24)"><rect width="30" height="19" rx="3" fill="#e6d5b3" stroke="#6b4a22" stroke-width="2"/><circle cx="12" cy="9" r="1.7" fill="#2a2015"/><circle cx="19" cy="9" r="1.7" fill="#2a2015"/><path d="M12.5 13 Q15.5 15.5 18.5 13" fill="none" stroke="#2a2015" stroke-width="1.3" stroke-linecap="round"/><polygon points="5,4 7.5,8 2.5,8" fill="#2f6b3a"/></g></g>
     </svg><p class="dk-f-leg">${E.map(e => `<span>${N[e[0]][2]} → ${N[e[1]][2]}<b>${e[3]}</b></span>`).join('')}</p></div>`;
   };
   // つくる：紙幣を 1 枚、線で描いていく（見本）
@@ -138,7 +140,7 @@
       <ol class="dk-track" aria-hidden="true">${STEPS.map(([k, t]) => `<li><span>${k}</span>${t}</li>`).join('<li class="dk-arr">→</li>')}</ol>
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
       <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
-      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p></div><div class="dk-ch-man">${MAN}</div></div>
+      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p></div><div class="dk-ch-man">${MAN}</div></div>
       <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
       <div class="dk-ctl">
         <button type="button" class="dk-prev" aria-label="前のスライド">←</button>
@@ -160,6 +162,8 @@
     el.querySelector('.dk-gbtn').onclick = () => grid();
     el.querySelector('.dk-nbtn').onclick = () => setNote(!note);
     el.querySelector('.dk-cbtn').onclick = () => setChara(!chara);
+    const sb = el.querySelector('.dk-ch-s');
+    sb.onclick = () => { sfxOn = !sfxOn; sb.setAttribute('aria-pressed', sfxOn); sb.textContent = sfxOn ? '効果音：あり' : '効果音'; sfx('coin'); };
     const vb = el.querySelector('.dk-ch-v');
     if (vb) vb.onclick = () => { voice = !voice; vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
     el.querySelector('.dk-lbtn').onclick = () => setTool(tool === 'laser' ? '' : 'laser');
@@ -198,6 +202,7 @@
     r.textContent = 'コインを投げています…';
     setTimeout(() => {
       coin.classList.remove('is-spin');
+      sfx('coin');
       const got = pick === 'A' ? 100 : (head ? 200 : 0);
       r.innerHTML = `${head ? '表' : '裏'}でした。${pick} をえらんだあなたは <b>${got}</b> チップ。${pick === 'A' ? (head ? 'B なら 200 でした。' : 'B なら 0 でした。') : (head ? 'A より 100 多く。' : 'A なら 100 でした。')}<br><small>平均するとどちらも 100。「確実」か「ふえるかも」か、えらぶ気持ちがリスクの考え方の入口です。</small>`;
     }, reduce ? 50 : 1300);
@@ -218,6 +223,7 @@
     sp.querySelector('span').textContent = STEPS[st][0];
     sp.querySelector('b').textContent = `${['一', '二', '三'][st]}　${STEPS[st][1]}`;
     sp.classList.remove('is-go'); void sp.offsetWidth; sp.classList.add('is-go');
+    sfx('stamp');
   };
   const paint = () => {
     el.querySelectorAll('.dk-s').forEach((s, n) => { s.classList.toggle('is-on', n === i); s.classList.toggle('is-past', n < i); s.setAttribute('aria-hidden', n === i ? 'false' : 'true'); });
@@ -237,7 +243,82 @@
     const tb = cur.querySelector('.dk-try'); if (tb) { tb.querySelectorAll('[data-ab]').forEach(b => b.removeAttribute('aria-pressed')); tb.querySelector('.dk-coin').className = 'dk-coin'; tb.querySelector('.dk-try-r').textContent = 'A か B を押すと、コインを投げます。'; }
     countUp(cur); stamp(); prevI = i;
     clearPen(); syncPv();
-    if (chara) { li = 0; stopTalk(); const c = el.querySelector('.dk-chara'); c.classList.remove('is-hop'); void c.offsetWidth; c.classList.add('is-hop'); }
+    hideQA();
+    if (S[i].cls === 'is-end') setTimeout(() => { if (S[i].cls === 'is-end') rain(); }, 500);
+    if (chara) { li = 0; stopTalk(); const c = el.querySelector('.dk-chara'); c.classList.remove('is-hop'); void c.offsetWidth; c.classList.add('is-hop'); setTimeout(() => c.classList.remove('is-hop'), 600); }
+  };
+
+  // ── 効果音（ファイルは使わず、ブラウザの中で音をつくる）。「効果音」を押したときだけ鳴る
+  let sfxOn = false, ac = null;
+  const sfx = kind => {
+    if (!sfxOn) return;
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      const t0 = ac.currentTime;
+      const tone = (f, at, len, type = 'sine', vol = .12) => {
+        const o = ac.createOscillator(), g = ac.createGain();
+        o.type = type; o.frequency.setValueAtTime(f, t0 + at);
+        g.gain.setValueAtTime(vol, t0 + at); g.gain.exponentialRampToValueAtTime(.0001, t0 + at + len);
+        o.connect(g).connect(ac.destination); o.start(t0 + at); o.stop(t0 + at + len + .02);
+      };
+      if (kind === 'blip') tone(520 + Math.random() * 160, 0, .045, 'square', .025);
+      else if (kind === 'stamp') { tone(110, 0, .35, 'sine', .3); tone(70, .02, .4, 'triangle', .2); }
+      else if (kind === 'coin') { tone(1320, 0, .25, 'sine', .1); tone(1760, .08, .35, 'sine', .08); }
+      else if (kind === 'ride') tone(880, 0, .12, 'triangle', .06);
+      else if (kind === 'end') [523, 659, 784, 1047].forEach((f, j) => tone(f, j * .12, .4, 'triangle', .09));
+    } catch (e) {}
+  };
+
+  // 知る：小さなお札が、お金のめぐりの図の矢印の上を走る（[0〜5] の順に）
+  const ride = list => {
+    const s = el.querySelector('.dk-s.is-on'), r = s && s.querySelector('.dk-rider'); if (!r || reduce) return;
+    const am = r.querySelector('animateMotion'), mp = am.querySelector('mpath');
+    const tok = tTok;
+    list.forEach((j, k) => setTimeout(() => {
+      if (tok !== tTok) return;
+      mp.setAttribute('href', '#dkf' + j);
+      r.classList.add('is-go'); sfx('ride');
+      try { am.beginElement(); } catch (e) {}
+    }, k * 1700));
+  };
+
+  // まとめ：お札マンへの質問タイム（答えは、スライドとサイトにあることだけ）
+  const QA = [
+    ['麻経って、いつできたの？', { t: '2025 年にできた、麻布中学校・高等学校の経済系同好会だよ。', m: 'happy' }],
+    ['文化祭には、何人来たの？', { t: '3 日間で 2,364 人。いちばん多かったのは、2 日目の 1,152 人だよ！', m: 'wow' }],
+    ['Web では、何ができるの？', { t: 'クイズ 84 問、経済ラボの 16 の実験、用語辞典 300 語。お金を設計する工房もあるよ。' }],
+    ['次の文化祭は、いつ？', { t: '2027 年 5 月の予定だよ。準備の流れは「日程とイベント」のページで見られるよ。' }],
+    ['協賛するには？', { t: '「協賛のご案内」のページを見てね。お問い合わせからも相談できるよ。', m: 'happy' }]
+  ];
+  const showQA = () => {
+    const b = el.querySelector('.dk-ch-b');
+    let q = b.querySelector('.dk-qa');
+    if (!q) {
+      q = document.createElement('div'); q.className = 'dk-qa';
+      q.innerHTML = `${QA.map(([k], j) => `<button type="button" data-qa="${j}">${k}</button>`).join('')}<button type="button" class="dk-qa-go" data-qa="go">次へ進む →</button>`;
+      b.appendChild(q);
+      q.addEventListener('click', e => {
+        const x = e.target.closest('[data-qa]'); if (!x) return;
+        if (x.dataset.qa === 'go') { hideQA(); go(i + 1); return; }
+        stopTalk(); q.classList.add('is-busy');
+        x.classList.add('is-asked');
+        say(QA[+x.dataset.qa][1], () => { q.classList.remove('is-busy'); el.querySelector('.dk-chara').classList.remove(...MOODS); });
+      });
+    }
+    q.querySelectorAll('.is-asked').forEach(x => x.classList.remove('is-asked'));
+    q.hidden = false;
+    el.querySelector('.dk-ch-t').textContent = '質問があったら、下から選んでね。ぼくが答えるよ！';
+  };
+  const hideQA = () => { const q = el && el.querySelector('.dk-qa'); if (q) q.hidden = true; };
+
+  // しめくくり：麻経券が上から舞い落ちる
+  const rain = () => {
+    if (reduce) return;
+    const s = el.querySelector('.dk-s.is-on'); if (!s || s.querySelector('.dk-rain')) return;
+    const r = document.createElement('div'); r.className = 'dk-rain'; r.setAttribute('aria-hidden', 'true');
+    r.innerHTML = Array.from({ length: 18 }, (_, j) => `<i style="--x:${(j * 53) % 100}%;--d:${(j % 6) * .35}s;--t:${3.2 + (j % 5) * .5}s;--r:${(j % 2 ? 1 : -1) * (180 + j * 20)}deg"><b>麻経券</b></i>`).join('');
+    s.appendChild(r); sfx('end');
+    setTimeout(() => r.remove(), 7000);
   };
 
   // ── お札マンが発表：ふきだしに 1 文ずつ（文字が順に出る）。声を出すこともできる。言い終わると次のスライドへ
@@ -255,6 +336,7 @@
     let k = 0, typed = false, spoke = !voice;
     c.classList.remove(...MOODS); if (o.m) c.classList.add('is-' + o.m);
     unHl(); if (o.hl) el.querySelectorAll('.dk-s.is-on ' + o.hl.split(',').join(', .dk-s.is-on ')).forEach(x => x.classList.add('dk-hl'));
+    if (o.ride) ride(o.ride);
     c.classList.add('is-talk');
     const fin = () => {
       if (tok !== tTok || !typed || !spoke) return;
@@ -271,6 +353,7 @@
       if (tok !== tTok) return;
       k = reduce ? txt.length : k + 1;
       t.textContent = txt.slice(0, k);
+      if (!voice && k % 2) sfx('blip');
       if (k < txt.length) tt = setTimeout(type, /[、。！？]/.test(txt[k - 1]) ? 220 : 52); else { typed = true; fin(); }
     };
     type();
@@ -287,6 +370,7 @@
       el.classList.toggle('is-spot', i === 0 && li === 0);
       if (li >= lines.length) {
         unHl();
+        if (S[i].cls === 'is-sum') { showQA(); return; }
         if (i < S.length - 1) tt = setTimeout(() => { if (tok === tTok) go(i + 1); }, 700);
         else { el.querySelector('.dk-chara').classList.add('is-bye'); setPlay(false, true); }
         return;
@@ -319,7 +403,9 @@
       if (note) setNote(false);
       setTool(''); li = 0;
       el.querySelector('.dk-ch-t').textContent = '';
+      // 入ってくる動きは 1 回だけ（クラスを残すと、顔が変わるたびにもう一度入ってきてしまう）
       c.classList.remove('is-in'); void c.offsetWidth; c.classList.add('is-in');
+      setTimeout(() => c.classList.remove('is-in'), 900);
       // 最後のスライドから始めても最初に戻らないよう、setPlay を通さずに話しはじめる
       clearTimeout(timer); playing = false;
       setTimeout(() => { if (!chara) return; playing = true; const b = el.querySelector('.dk-play'); b.textContent = 'II'; b.setAttribute('aria-label', '一時停止'); run(); }, reduce ? 0 : 600);

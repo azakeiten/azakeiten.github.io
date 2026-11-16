@@ -351,3 +351,24 @@ html .dk.is-chara .dk-s:not(.is-cover) .dk-t { font-size: clamp(26px, 4vw, 52px)
 .dk.is-chara .dk-3 { margin-top: 18px; }
 .dk.is-chara .dk-k { margin-bottom: 10px; }
 .dk.is-chara .dk-url { display: none; }
+
+/* v7 小さなお札が図の上を走る・質問タイム・麻経券が舞う・効果音 */
+.dk-rider { opacity: 0; transition: opacity .3s; }
+.dk-rider.is-go { opacity: 1; }
+.dk-rider g { filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .5)); }
+.dk-ch-s { margin-left: auto; padding: 3px 10px; border-radius: 999px; border: 1px solid #c9b48c; background: transparent; color: #6b4a22; font: inherit; font-size: 11.5px; font-weight: 800; letter-spacing: 0; cursor: pointer; }
+.dk-ch-s + .dk-ch-v { margin-left: 4px; }
+.dk-ch-s[aria-pressed="true"] { background: #2f6b3a; border-color: #2f6b3a; color: #fff; }
+.dk-qa { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.dk-qa[hidden] { display: none; }
+.dk-qa button { padding: 6px 12px; border-radius: 999px; border: 1.5px solid #b5432f; background: #fff; color: #b5432f; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; transition: background .2s, color .2s; }
+.dk-qa button:hover { background: #b5432f; color: #fff; }
+.dk-qa button.is-asked { background: #f3e3bd; border-color: #c9b48c; color: #6b4a22; }
+.dk-qa .dk-qa-go { margin-left: auto; background: #1c2b23; border-color: #1c2b23; color: #f3e3bd; }
+.dk-qa.is-busy button { pointer-events: none; opacity: .55; }
+.dk-rain { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.dk-rain i { position: absolute; left: var(--x); top: -60px; display: grid; place-items: center; width: 64px; height: 34px; border-radius: 4px; background: #e6d5b3; box-shadow: inset 0 0 0 2px #6b4a22, inset 0 0 0 5px #e6d5b3, inset 0 0 0 6px rgba(107, 74, 34, .5); animation: dk-fall var(--t) cubic-bezier(.3, .1, .6, 1) var(--d) forwards; opacity: 0; }
+.dk-rain b { font-family: 'Shippori Mincho', serif; font-size: 11px; font-weight: 800; color: #b5432f; }
+@keyframes dk-fall { 0% { opacity: 0; transform: translate(0, 0) rotate(0); } 10% { opacity: 1; } 50% { transform: translate(30px, 50vh) rotate(calc(var(--r) / 2)) rotateX(60deg); } 90% { opacity: .9; } 100% { opacity: 0; transform: translate(-20px, 105vh) rotate(var(--r)); } }
+.is-end .dk-in { position: relative; z-index: 1; }
+@media (max-width: 760px) { .dk-qa button { font-size: 12px; padding: 5px 10px; } .dk-qa .dk-qa-go { margin-left: 0; } }
