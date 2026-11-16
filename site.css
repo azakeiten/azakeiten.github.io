@@ -8985,3 +8985,57 @@ html[data-theme="dark"] section.services.eh-sec, html[data-theme="dark"]:not(.is
 .ki[data-kisekae] .ki-note { margin: 12px 0 0; font-size: 13px; opacity: .75; }
 @media (max-width: 760px) { .ki[data-kisekae] .ki-wrap { grid-template-columns: 1fr; } .ki[data-kisekae] .ki-stage { position: relative; top: 0; padding: 12px; } .ki[data-kisekae] .ki-opts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .ki[data-kisekae] * { animation: none !important; } }
+
+/* ---- 経済ラボ：朝ごはんの世界旅行（asagohan.js） ---- */
+.as[data-asagohan] { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.as[data-asagohan] .as-map-wrap { position: relative; border-radius: 22px; padding: 14px; background: radial-gradient(ellipse at 45% 40%, #17324a, #0d1b2a 75%); box-shadow: 0 20px 44px rgba(10, 20, 35, .3); }
+.as[data-asagohan] .as-map { display: block; width: 100%; height: auto; overflow: visible; }
+.as-dots { fill: none; stroke: #5d86a8; stroke-width: 4.2; stroke-linecap: round; opacity: .55; }
+.as-line { fill: none; stroke: #e3b341; stroke-width: 1.6; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .9; animation: as-draw 1.1s ease-out forwards; }
+.as-r.is-feed .as-line { stroke: #9cc7a4; stroke-width: 1.2; opacity: .75; }
+@keyframes as-draw { to { stroke-dashoffset: 0; } }
+.as-ship rect { fill: #fffaf0; stroke: #b5432f; stroke-width: 1.4; }
+.as-r.is-feed .as-ship rect { fill: #9cc7a4; stroke: #2f6b3a; }
+.as-ship { opacity: 0; animation: as-in .3s 1s forwards; }
+@keyframes as-in { to { opacity: 1; } }
+.as-c text, .as-jp text { font-size: 11px; font-weight: 700; fill: #cfe0ee; text-anchor: middle; paint-order: stroke; stroke: #0d1b2a; stroke-width: 3px; opacity: 0; transition: opacity .3s; }
+.as-c-dot { fill: #8fb1cc; transition: fill .3s; }
+.as-c-ring { fill: none; stroke: #e3b341; stroke-width: 1.5; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.as-c.is-on text { opacity: 1; fill: #fff3d0; }
+.as-c.is-on .as-c-dot { fill: #e3b341; }
+.as-c.is-on .as-c-ring { animation: as-ping 1.8s ease-out infinite; }
+@keyframes as-ping { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.6); } }
+.as-jp text { opacity: 1; fill: #fff; font-size: 12px; }
+.as-jp-dot { fill: #b5432f; stroke: #fff; stroke-width: 2; }
+.as-jp-glow { opacity: .35; transform-box: fill-box; transform-origin: center; transition: opacity .4s; }
+.as-jp.is-local .as-jp-glow { opacity: 1; animation: as-breathe 2s ease-in-out infinite; }
+@keyframes as-breathe { 50% { transform: scale(1.25); } }
+.as[data-asagohan] .as-total { display: flex; align-items: baseline; justify-content: flex-end; gap: 8px; margin-top: 6px; color: #cfe0ee; }
+.as[data-asagohan] .as-total span { font-size: 13px; margin-right: auto; }
+.as[data-asagohan] .as-total b { font-family: "Shippori Mincho", serif; font-size: 34px; color: #e3b341; font-variant-numeric: tabular-nums; line-height: 1; }
+.as[data-asagohan] .as-h { margin: 0 0 8px; font-weight: 800; }
+.as[data-asagohan] .as-foods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.as[data-asagohan] .as-food { display: flex; align-items: center; gap: 7px; padding: 7px 8px; border-radius: 12px; border: 2px solid transparent; background: #fffaf0; color: #2a2015; font-size: 13px; font-weight: 700; text-align: left; cursor: pointer; box-shadow: 0 2px 8px rgba(60, 40, 15, .1); transition: transform .2s, border-color .2s, background .2s; }
+.as[data-asagohan] .as-food:hover { transform: translateY(-2px); }
+.as[data-asagohan] .as-food.is-on { border-color: #b5432f; background: #fff1dc; }
+.as[data-asagohan] .as-seal { flex: none; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; font-weight: 800; font-size: 14px; }
+.as[data-asagohan] .as-food:not(.is-on) .as-seal { background: #c9b48a; }
+.as[data-asagohan] .as-presets { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.as[data-asagohan] .as-presets button { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(107, 74, 34, .4); background: transparent; color: inherit; font-size: 13px; cursor: pointer; }
+.as[data-asagohan] .as-presets button[data-p="clear"] { border-style: dashed; }
+.as[data-asagohan] .as-tray { padding: 10px 12px; border-radius: 50% / 18px; background: linear-gradient(#8a5a2b, #6b4a22); box-shadow: inset 0 0 0 5px #a06c38, 0 10px 20px rgba(60, 40, 15, .2); }
+.as[data-asagohan] .as-tray ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 330px; overflow: auto; }
+.as[data-asagohan] .as-dish { display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px; border-radius: 12px; background: #fffaf0; color: #2a2015; animation: as-dish .4s cubic-bezier(.3, 1.5, .5, 1); }
+@keyframes as-dish { from { transform: translateY(-10px) scale(.95); opacity: 0; } }
+.as[data-asagohan] .as-dish-h { margin: 0; font-size: 13px; line-height: 1.5; }
+.as[data-asagohan] .as-dish-h b { margin-right: 6px; font-size: 14px; }
+.as[data-asagohan] .as-dish-h small { display: block; color: #b5432f; font-weight: 700; }
+.as[data-asagohan] .as-dish-t { margin: 2px 0 0; font-size: 12px; line-height: 1.55; color: #5a4630; }
+.as[data-asagohan] .as-empty { margin: 0; padding: 18px 8px; text-align: center; color: #fff3d0; font-size: 14px; }
+.as[data-asagohan] .as-learn { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.as[data-asagohan] .as-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(227, 179, 65, .12); font-size: 14px; line-height: 1.75; }
+.as[data-asagohan] .as-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.as[data-asagohan] .as-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+@media (max-width: 860px) { .as[data-asagohan] { grid-template-columns: 1fr; } .as[data-asagohan] .as-learn { grid-template-columns: 1fr; } .as[data-asagohan] .as-map-wrap { padding: 8px; } .as[data-asagohan] .as-total b { font-size: 28px; } }
+@media (max-width: 420px) { .as[data-asagohan] .as-foods { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) { .as[data-asagohan] * { animation: none !important; } .as-line { stroke-dashoffset: 0; } .as-ship { opacity: 1; } }

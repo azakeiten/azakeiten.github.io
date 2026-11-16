@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-16', seal: '旅', tone: 'dark', href: 'sim.html#asagohan', eyebrow: '経済ラボ', title: '朝ごはんの世界旅行', text: 'お盆に朝ごはんをのせると、材料のおもな輸入先から日本へ、地図の上を船が進む。旅したきょりの合計も。' },
     { date: '2026-11-16', seal: '装', tone: 'gold', href: 'azakei.html#kisekae', eyebrow: 'AZAKEI', title: 'お札マンの着せかえ', text: '王冠・学生帽・はちまき、にっこり・ウインク、旗・そろばん、紅白の幕・夜空。組み合わせて、画像で保存できる。' },
     { date: '2026-11-16', seal: '演', tone: 'shu', href: 'contests.html#pitch', eyebrow: 'コンテスト', title: 'ピッチの舞台', text: '幕が上がると、書いたプランが原稿に。60 秒の発表のあと、3 人の審査員から質問。最後に審査員がアドバイスの札をあげる。' },
     { date: '2026-11-16', seal: '巡', tone: 'green', href: 'sim.html#pazuru', eyebrow: '経済ラボ', title: 'お金のめぐりパズル', text: '家計・企業・銀行・政府のあいだの 6 本の矢印に、給料・代金・預金・貸し出し・税金・公共サービスの札をはめる。ぜんぶ合うとお金が流れだす。' },
