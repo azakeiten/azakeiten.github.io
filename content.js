@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-16', seal: '散', tone: 'green', href: 'contests.html#bunsan', eyebrow: 'コンテスト', title: 'ポートフォリオの 10 年', text: 'チップ 100 枚を 6 つの会社に分けて、猛暑や長雨や不景気の 10 年を進める。分けると、ゆれはどう変わる？' },
     { date: '2026-11-16', seal: '競', tone: 'dark', href: 'sim.html#seri', eyebrow: '経済ラボ', title: 'せりの会場', text: 'マグロやメロンを、4 人の仲買人と札を上げて競りあう。せり上げ式と封筒式。値段はだれが決める？' },
     { date: '2026-11-16', seal: '備', tone: 'paper', href: 'sim.html#hoken', eyebrow: '経済ラボ', title: 'みんなで備える箱', text: 'まちのみんなで掛け金を出し合い、こまった家へ箱からお金が届く。10 年間、箱は足りるかな。保険のしくみの実験。' },
     { date: '2026-11-16', seal: '旅', tone: 'dark', href: 'sim.html#asagohan', eyebrow: '経済ラボ', title: '朝ごはんの世界旅行', text: 'お盆に朝ごはんをのせると、材料のおもな輸入先から日本へ、地図の上を船が進む。旅したきょりの合計も。' },

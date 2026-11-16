@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-contests.min.css?v=20261116o" />
+  <link rel="stylesheet" href="p-contests.min.css?v=20261116p" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -93,7 +93,7 @@
           <h2>日経ストックリーグ</h2>
           <p class="contest-status is-live">2026.09.04 応募・参加中</p>
           <ol class="cstep" aria-label="日経ストックリーグの進み具合"><li class="is-done"><b>応募</b><small>9/4</small></li><li class="is-done"><b>テーマ選定</b><small>9 月</small></li><li class="is-done"><b>練り上げ</b><small>9〜10 月</small></li><li class="is-now"><b>ヒアリング</b><small>11〜12 月</small></li><li><b>仕上げ</b><small>12〜1 月</small></li><li><b>レポート提出</b><small>1/8</small></li><li><b>発表</b><small>2027 年 2 月中旬</small></li></ol>
-          <p class="yp-link"><a href="events.html#yearplan">1 年の流れを見る →</a></p>
+          <p class="yp-link"><a href="events.html#yearplan">1 年の流れを見る →</a>　<a href="#bunsan">ポートフォリオを体験する →</a></p>
           <p>テーマを決めて企業を調べ、仮想の資金でポートフォリオを組み、その考えをレポートにまとめる。日本経済新聞社が主催する、中高生・大学生向けの金融・経済学習コンテストです。</p>
           <dl>
             <dt>取り組み</dt><dd>テーマ設定 → 企業分析 → ポートフォリオ構築 → レポート作成</dd>
@@ -157,6 +157,19 @@
       <div class="pi reveal" data-pitch></div>
     </div>
   </section>
+  <!-- ポートフォリオの 10 年（bunsan.js・近づいてから読みこむ） -->
+  <section class="services tight" id="bunsan">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">散</span></p>
+        <h2 class="section-title"><span class="keep-phrase">ポートフォリオの</span><span class="keep-phrase"><em>10 年</em></span></h2>
+        <p class="lead">ストックリーグでは、いくつもの会社を組み合わせて「ポートフォリオ」をつくります。チップ 100 枚を 6 つの会社に分けて、猛暑や長雨、不景気がやってくる 10 年を進めてみましょう。</p>
+      </div>
+      <div class="bs reveal" data-bunsan></div>
+    </div>
+  </section>
+  <script>/* ポートフォリオの 10 年（bunsan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-bunsan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="bunsan.js?v=20261116p";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+
 
   <section class="services tight">
     <div class="container">
@@ -184,16 +197,16 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261116o"></script>
-  <script src="layout.js?v=20261116o"></script>
-  <script src="brand.js?v=20261116o"></script>
-  <script src="render.js?v=20261116o"></script>
-  <script src="nav.js?v=20261116o"></script>
-  <script src="reveal.js?v=20261116o"></script>
-  <script src="pagetoc.js?v=20261116o"></script>
-  <script src="osatsu.js?v=20261116o"></script>
-  <script src="planseed.js?v=20261116o"></script>
-  <script src="pitch.js?v=20261116o"></script>
-  <script src="site.js?v=20261116o"></script>
+  <script src="content.js?v=20261116p"></script>
+  <script src="layout.js?v=20261116p"></script>
+  <script src="brand.js?v=20261116p"></script>
+  <script src="render.js?v=20261116p"></script>
+  <script src="nav.js?v=20261116p"></script>
+  <script src="reveal.js?v=20261116p"></script>
+  <script src="pagetoc.js?v=20261116p"></script>
+  <script src="osatsu.js?v=20261116p"></script>
+  <script src="planseed.js?v=20261116p"></script>
+  <script src="pitch.js?v=20261116p"></script>
+  <script src="site.js?v=20261116p"></script>
 </body>
 </html>
