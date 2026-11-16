@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-glossary.min.css?v=20261116d" />
+  <link rel="stylesheet" href="p-glossary.min.css?v=20261116e" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -56,6 +56,7 @@
       <div class="ru reveal" id="rush"><p class="ga-title"><span aria-hidden="true">速</span>ことば○×ラッシュ<small>30 秒で、言葉と説明が合っているか</small></p><div data-rush></div></div>
       <div class="ru nb reveal" id="narabe"><p class="ga-title"><span aria-hidden="true">並</span>ことばならべかえ<small>説明を読んで、ひらがなを正しい順に</small></p><div data-narabe></div></div>
       <div class="ru sh reveal" id="shiritori"><p class="ga-title"><span aria-hidden="true">尻</span>経済しりとり<small>辞典の言葉だけで、コンピューターと勝負</small></p><div data-shiri></div></div>
+      <div class="ru kt reveal" id="karuta"><p class="ga-title"><span aria-hidden="true">取</span>経済ことばかるた<small>お札マンが読む説明を聞いて、言葉の札をとる</small></p><div data-karuta></div></div>
       <div class="ru wm reveal" id="wordmap"><p class="ga-title"><span aria-hidden="true">図</span>ことばの地図<small>言葉どうしのつながりを、たどってみよう</small></p><div data-wordmap><button type="button" class="btn-primary wm-open">地図をひらく</button></div></div>
       <div class="gl-cards reveal" id="glCards" hidden></div>
       <div class="koma reveal"><p class="km-head"><span aria-hidden="true">解</span>お札マンの 3 コマ解説<small>1 分でわかる</small></p><div data-koma></div></div>
@@ -591,22 +592,23 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261116d"></script>
-  <script src="layout.js?v=20261116d"></script>
-  <script src="brand.js?v=20261116d"></script>
-  <script src="nav.js?v=20261116d"></script>
-  <script src="reveal.js?v=20261116d"></script>
-  <script src="glossary.js?v=20261116d"></script>
-  <script src="wordsheet.js?v=20261116d"></script>
-  <script src="npgame.js?v=20261116d"></script>
-  <script src="newsfind.js?v=20261116d"></script>
-  <script src="gacha.js?v=20261116d"></script>
-  <script src="rush.js?v=20261116d"></script>
-  <script src="narabe.js?v=20261116d"></script>
-  <script src="shiri.js?v=20261116d"></script>
-  <script src="osatsu.js?v=20261116d"></script>
-  <script src="koma.js?v=20261116d"></script>
-  <script src="pagetoc.js?v=20261116d"></script>
-  <script src="site.js?v=20261116d"></script>
+  <script src="content.js?v=20261116e"></script>
+  <script src="layout.js?v=20261116e"></script>
+  <script src="brand.js?v=20261116e"></script>
+  <script src="nav.js?v=20261116e"></script>
+  <script src="reveal.js?v=20261116e"></script>
+  <script src="glossary.js?v=20261116e"></script>
+  <script src="wordsheet.js?v=20261116e"></script>
+  <script src="npgame.js?v=20261116e"></script>
+  <script src="newsfind.js?v=20261116e"></script>
+  <script src="gacha.js?v=20261116e"></script>
+  <script src="rush.js?v=20261116e"></script>
+  <script src="narabe.js?v=20261116e"></script>
+  <script src="shiri.js?v=20261116e"></script>
+  <script src="osatsu.js?v=20261116e"></script>
+  <script src="koma.js?v=20261116e"></script>
+  <script src="pagetoc.js?v=20261116e"></script>
+  <script src="site.js?v=20261116e"></script>
+  <script>/* ことばかるた（karuta.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-karuta]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="karuta.js?v=20261116e";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 </body>
 </html>

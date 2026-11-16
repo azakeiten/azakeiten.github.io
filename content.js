@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-16', seal: '取', tone: 'green', href: 'glossary.html#karuta', eyebrow: '用語辞典', title: '経済ことばかるた', text: 'お札マンが読む説明を聞いて、畳の上の 12 枚から言葉の札をとる。10 枚で勝負。分野もえらべます。' },
     { date: '2026-11-16', seal: '大', tone: 'shu', href: 'quiz.html#taikai', eyebrow: 'クイズ', title: 'みんなでクイズ大会', text: '教室や文化祭で、プロジェクターに映して班対抗。時間の輪、正解の発表、班ごとの点数、最後は表彰台。84 問から出題します。' },
     { date: '2026-11-16', seal: '問', tone: 'dark', href: 'index.html#deck', eyebrow: '紹介', title: 'お札マンに質問できるように', text: '発表のまとめで、お札マンに 5 つの質問ができます。お金のめぐりの図を小さなお札が走り、最後は麻経券が舞います。効果音も。' },
     { date: '2026-11-16', seal: '案', tone: 'green', href: 'quiz.html', eyebrow: '案内', title: 'お札マンの案内を、4 つのページにも', text: 'クイズ・経済ラボ・用語辞典・麻布経済展でも、見出しの下の「お札マンと、このページを回る」から、段ごとに案内します。' },

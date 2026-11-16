@@ -8683,3 +8683,41 @@ html.tk-open, html.tk-open body { overflow: hidden; }
 @media (max-width: 700px) { .tk-ch { grid-template-columns: 1fr; } .tk-team { min-width: 0; } .tk-team b { font-size: 22px; } .tk-ttl { font-size: 0; } .tk-ttl span { font-size: 16px; } }
 @media (prefers-reduced-motion: reduce) { .tk-full * { animation: none !important; transition: none !important; } }
 .tk-stage.is-rev .tk-ring { display: none; } .tk-stage.is-rev .tk-q { font-size: clamp(22px, 3vw, 40px); }
+
+/* v197 用語辞典「経済ことばかるた」（畳の上に札） */
+.kt [data-karuta], .ru.kt [data-karuta] { display: block; }
+.ru.kt .kt-intro, .ru.kt .kt-end { display: grid; justify-items: center; gap: 12px; padding: 8px 0; text-align: center; }
+.ru.kt .kt-rule { margin: 0; max-width: 36em; font-size: 14.5px; line-height: 1.85; }
+.ru.kt .kt-seg { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.ru.kt .kt-seg button { padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(107, 74, 34, .35); background: transparent; color: inherit; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.ru.kt .kt-seg button[aria-pressed="true"] { background: #b5432f; border-color: #b5432f; color: #fff; }
+.ru.kt .kt-best { margin: 0; font-size: 13px; color: #8a7a62; }
+.ru.kt .kt-start, .ru.kt .kt-back { padding: 12px 30px; border: 0; border-radius: 999px; background: #b5432f; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+.ru.kt .kt-back { background: transparent; color: #b5432f; box-shadow: inset 0 0 0 1.5px #b5432f; }
+.ru.kt .kt-top { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 12px; margin-bottom: 12px; }
+.ru.kt .kt-yomi { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 16px; background: #fffaf0; color: #2a2015; border: 2px solid #6b4a22; min-height: 5.4em; }
+.ru.kt .kt-os { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 8px; background: #e6d5b3; color: #6b4a22; box-shadow: inset 0 0 0 2px #6b4a22; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; }
+.ru.kt .kt-yh { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; font-size: 12px; font-weight: 800; color: #b5432f; }
+.ru.kt .kt-v { margin-left: auto; padding: 3px 10px; border-radius: 999px; border: 1px solid #c9b48c; background: transparent; color: #6b4a22; font: inherit; font-size: 11.5px; font-weight: 800; cursor: pointer; }
+.ru.kt .kt-v[aria-pressed="true"] { background: #2f6b3a; border-color: #2f6b3a; color: #fff; }
+.ru.kt .kt-def { margin: 0; font-size: 15.5px; font-weight: 700; line-height: 1.75; }
+.ru.kt .kt-score { margin: 0; font-size: 13px; text-align: right; white-space: nowrap; }
+.ru.kt .kt-score b { font-family: 'Shippori Mincho', serif; font-size: 22px; color: #b5432f; }
+.ru.kt .kt-field { list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 16px; border-radius: 18px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .06) 0 2px, transparent 2px 9px), linear-gradient(#c9c48e, #b9b47c); box-shadow: inset 0 0 0 6px #6b4a22, inset 0 0 0 8px #e6d5b3; }
+.ru.kt .kt-c { position: relative; display: grid; align-content: space-between; justify-items: center; gap: 6px; width: 100%; aspect-ratio: 5 / 7; padding: 10px 6px; border-radius: 6px; border: 0; background: #fffaf0; color: #2a2015; box-shadow: inset 0 0 0 3px #2f6b3a, inset 0 0 0 5px #fffaf0, inset 0 0 0 6px rgba(47, 107, 58, .45), 0 4px 8px rgba(0, 0, 0, .2); font: inherit; cursor: pointer; transform: rotate(var(--r)); transition: transform .2s, box-shadow .2s, opacity .4s; animation: kt-deal .45s cubic-bezier(.2, 1.2, .4, 1) both; animation-delay: calc(var(--j) * .04s); }
+.ru.kt .kt-c:hover { transform: rotate(0) translateY(-3px); box-shadow: inset 0 0 0 3px #b5432f, inset 0 0 0 5px #fffaf0, inset 0 0 0 6px rgba(181, 67, 47, .45), 0 10px 18px rgba(0, 0, 0, .25); }
+.ru.kt .kt-c i { justify-self: start; display: grid; place-items: center; width: 1.9em; height: 1.9em; border-radius: 50%; background: #2f6b3a; color: #fff; font-style: normal; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 15px; }
+.ru.kt .kt-c b { font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(13px, 1.4vw, 17px); line-height: 1.3; word-break: keep-all; overflow-wrap: anywhere; }
+@keyframes kt-deal { from { opacity: 0; transform: translateY(-30px) rotate(-20deg); } }
+.ru.kt .kt-c.is-ng { animation: kt-ng .4s; }
+@keyframes kt-ng { 25% { transform: translateX(-6px) rotate(-4deg); } 75% { transform: translateX(6px) rotate(4deg); } }
+.ru.kt .kt-c.is-got { animation: kt-got .7s cubic-bezier(.3, .1, .3, 1) forwards; pointer-events: none; }
+@keyframes kt-got { 30% { transform: scale(1.15) rotate(0); box-shadow: 0 0 0 4px #b5432f, 0 14px 30px rgba(0, 0, 0, .3); } 100% { transform: translateY(-40px) rotate(14deg) scale(.6); opacity: 0; } }
+.ru.kt .kt-seal { display: grid; place-items: center; width: 64px; height: 64px; margin: 0; border-radius: 10px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 34px; transform: rotate(-5deg); }
+.ru.kt .kt-res { margin: 0; } .ru.kt .kt-res b { font-family: 'Shippori Mincho', serif; font-size: 44px; color: #b5432f; } .ru.kt .kt-res span { display: block; font-size: 13px; color: #8a7a62; }
+.ru.kt .kt-res em { display: inline-block; margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: #2f6b3a; color: #fff; font-style: normal; font-size: 12px; font-weight: 800; }
+.ru.kt .kt-word { margin: 0; font-weight: 700; }
+.ru.kt .kt-miss { margin: 0; font-size: 13px; } .ru.kt .kt-miss a { margin: 0 4px; color: #b5432f; font-weight: 800; }
+@media (max-width: 760px) { .ru.kt .kt-field { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px; gap: 8px; } .ru.kt .kt-c { aspect-ratio: 4 / 5; } .ru.kt .kt-top { grid-template-columns: 1fr; } .ru.kt .kt-score { text-align: left; } }
+@media (prefers-reduced-motion: reduce) { .ru.kt .kt-c { animation: none !important; transition: none; } }
+@media (min-width: 761px) { .ru.kt .kt-field { grid-template-columns: repeat(6, minmax(0, 120px)); justify-content: center; } .ru.kt .kt-c { aspect-ratio: 3 / 4; } }
