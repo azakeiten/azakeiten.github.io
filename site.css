@@ -8770,3 +8770,40 @@ html.tk-open, html.tk-open body { overflow: hidden; }
 .sy-pw { display: none; }
 @media screen and (max-width: 560px) { .sy-cert { aspect-ratio: auto; min-height: 340px; gap: 6px; padding: 26px 22px 30px; } .sy-c-body { font-size: 13.5px; line-height: 1.85; } .sy-c-foot { flex-direction: column; gap: 6px; } .sy-c-by { text-align: center; } }
 .st3-cert { display: inline-flex; align-items: center; gap: 8px; padding: 6px 4px; border-bottom: 1.5px solid currentColor; color: #b5432f; font-size: 14px; font-weight: 800; text-decoration: none; } :root[data-theme="dark"] .st3-cert { color: #e9a493; }
+
+/* v199 クイズ：絵本「お札マンと千円札の旅」 */
+html section.services.eh-sec, html:not(.is-apple) section.services.eh-sec:not(.cta-band) { --band: #f3ead6; background: #f3ead6 !important; background-image: none !important; }
+html[data-theme="dark"] section.services.eh-sec, html[data-theme="dark"]:not(.is-apple) section.services.eh-sec:not(.cta-band) { --band: #221d15; background: #221d15 !important; }
+.eh[data-ehon] { max-width: 900px; margin: 0 auto; outline: none; }
+.eh[data-ehon] .eh-book { padding: 14px; border-radius: 10px 22px 22px 10px; background: #6b4a22; box-shadow: inset 10px 0 0 #553a1a, 0 24px 50px rgba(60, 40, 15, .3); perspective: 1600px; }
+.eh[data-ehon] .eh-page { border-radius: 4px 14px 14px 4px; background: var(--bg, #f3e6c8); overflow: hidden; }
+.eh[data-ehon] .eh-leaf { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); background: var(--bg); transform-origin: 0 50%; }
+.eh[data-ehon] .eh-leaf.is-fwd { animation: eh-fwd .7s cubic-bezier(.3, .7, .3, 1) both; }
+.eh[data-ehon] .eh-leaf.is-back { animation: eh-back .6s cubic-bezier(.3, .7, .3, 1) both; }
+@keyframes eh-fwd { from { transform: rotateY(-70deg); opacity: .2; box-shadow: inset 60px 0 60px rgba(0, 0, 0, .25); } to { transform: none; opacity: 1; } }
+@keyframes eh-back { from { transform: translateX(-30px); opacity: 0; } to { transform: none; opacity: 1; } }
+.eh[data-ehon] .eh-art { display: block; width: 100%; height: auto; background: var(--bg); }
+.eh[data-ehon] .eh-text { display: grid; align-content: center; gap: 8px; padding: 22px 24px; background: #fffaf0; border-left: 1px dashed rgba(107, 74, 34, .3); color: #2a2015; }
+.eh[data-ehon] .eh-no { margin: 0; font-size: 12px; font-weight: 800; color: #b5432f; letter-spacing: .1em; }
+.eh[data-ehon] .eh-text h3 { margin: 0; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.35; color: #2a2015; }
+.eh[data-ehon] .eh-x { min-height: 5.6em; margin: 0; font-size: 15.5px; line-height: 1.95; }
+.eh[data-ehon] .eh-gl { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+.eh[data-ehon] .eh-gl a { padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(181, 67, 47, .45); color: #b5432f; font-size: 12px; font-weight: 800; text-decoration: none; }
+.eh[data-ehon] .eh-run { animation: eh-run 2.4s cubic-bezier(.45, .05, .3, 1) .6s both; }
+@keyframes eh-run { 0% { transform: translate(var(--x1), var(--y1)) rotate(-8deg); opacity: 0; } 12% { opacity: 1; } 50% { transform: translate(calc((var(--x1) + var(--x2)) / 2), calc((var(--y1) + var(--y2)) / 2 - 50px)) rotate(10deg); } 100% { transform: translate(var(--x2), var(--y2)) rotate(0); opacity: 1; } }
+.eh[data-ehon] .eh-man-in { animation: eh-hop 1.8s ease-in-out infinite; }
+@keyframes eh-hop { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(-8px); } }
+.eh[data-ehon] .eh-loop { transform-origin: center; animation: eh-spin 8s linear infinite; }
+@keyframes eh-spin { to { stroke-dashoffset: -160; } }
+.eh[data-ehon] .eh-ctl { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 12px; }
+.eh[data-ehon] .eh-ctl button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255, 250, 240, .45); background: transparent; color: #fffaf0; font: inherit; font-size: 18px; font-weight: 800; cursor: pointer; }
+.eh[data-ehon] .eh-ctl button:disabled { opacity: .3; cursor: default; }
+.eh[data-ehon] .eh-dots { list-style: none; display: flex; gap: 6px; margin: 0; padding: 0; }
+.eh[data-ehon] .eh-dots li { width: 8px; height: 8px; border-radius: 4px; background: rgba(255, 250, 240, .35); transition: width .3s, background .3s; }
+.eh[data-ehon] .eh-dots li.is-on { width: 22px; background: #f3e3bd; }
+.eh[data-ehon] .eh-opts { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+.eh[data-ehon] .eh-opts button { padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255, 250, 240, .4); background: transparent; color: #fffaf0; font: inherit; font-size: 12.5px; font-weight: 800; cursor: pointer; }
+.eh[data-ehon] .eh-opts button[aria-pressed="true"] { background: #b5432f; border-color: #b5432f; }
+.eh[data-ehon] + .eh-note, .eh-sec .eh-note { margin: 12px auto 0; max-width: 900px; font-size: 11.5px; color: var(--color-muted, #6a6357); text-align: center; }
+@media (max-width: 760px) { .eh[data-ehon] .eh-leaf { grid-template-columns: 1fr; } .eh[data-ehon] .eh-text { border-left: 0; border-top: 1px dashed rgba(107, 74, 34, .3); padding: 16px 18px; } .eh[data-ehon] .eh-x { font-size: 14.5px; min-height: 5.8em; } .eh[data-ehon] .eh-book { padding: 8px; } }
+@media (prefers-reduced-motion: reduce) { .eh[data-ehon] * { animation: none !important; } .eh[data-ehon] .eh-run { transform: translate(var(--x2), var(--y2)); } }

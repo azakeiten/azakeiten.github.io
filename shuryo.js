@@ -16,7 +16,8 @@
   const STEPS = [
     ['親', '親しむ', '遊んで、経済を身近に感じる', [
       ['azakei_quiz_best', '億万長者クイズ', 'quiz.html#quiz'], ['azakei_cw_best', 'クロスワード', 'quiz.html#crossword'], ['azakei_card_best', 'カード勝負', 'quiz.html#cardgame'],
-      ['azakei_sugo_best', 'すごろく', 'quiz.html#sugoroku'], ['azakei_koukan', '交換の島', 'quiz.html#koukan'], ['azakei_otsuri_best', 'おつりの達人', 'quiz.html#otsuri'],
+      ['azakei_sugo_best', 'すごろく', 'quiz.html#sugoroku'], ['azakei_koukan', '交換の島', 'quiz.html#koukan'],
+      ['azakei_ehon', '絵本', 'quiz.html#ehon'], ['azakei_otsuri_best', 'おつりの達人', 'quiz.html#otsuri'],
       ['azakei_coins', '世界のお金図鑑', 'quiz.html#coins'], ['azakei_shiri_best', '経済しりとり', 'glossary.html#shiritori'], ['azakei_karuta', 'ことばかるた', 'glossary.html#karuta'], ['azakei_room_tour', '3D の会場', 'festival.html#room']]],
     ['知', '知る', 'お金の流れと、その仕組みを知る', [
       ['azakei_gl_known', '単語カード', 'glossary.html#glCards'], ['azakei_gacha', 'ことばガチャ', 'glossary.html#gacha'], ['azakei_np_best', '年表ゲーム', 'glossary.html#nenpyo'],

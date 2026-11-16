@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-16', seal: '絵', tone: 'gold', href: 'quiz.html#ehon', eyebrow: 'クイズ', title: '絵本「お札マンと千円札の旅」', text: '1 枚の千円札が、給料・買い物・お店・銀行・税金・学校や道路へ。8 ページの絵本で、お金のめぐりを。声で読む・自動でめくるも。' },
     { date: '2026-11-16', seal: '証', tone: 'shu', href: 'mypage.html#shuryo', eyebrow: 'わたしの記録', title: '麻経の修了証', text: '親しむ・知る・つくるの 3 つの段の遊びをすると、それぞれに判。3 つそろうと修了証が出て、なまえを書いて印刷できます。' },
     { date: '2026-11-16', seal: '配', tone: 'paper', href: 'index.html#deck', eyebrow: '紹介', title: '紹介スライドの資料を印刷', text: 'スライドの「資料」で、13 枚の見出しと説明を A4 1 枚に。お札マンの発表は、速さを変えられ、止まったら「つづける」が出ます。' },
     { date: '2026-11-16', seal: '取', tone: 'green', href: 'glossary.html#karuta', eyebrow: '用語辞典', title: '経済ことばかるた', text: 'お札マンが読む説明を聞いて、畳の上の 12 枚から言葉の札をとる。10 枚で勝負。分野もえらべます。' },
