@@ -27,7 +27,7 @@
   // [印, 名前, 形, 中心 x, 遊びの一覧]
   const D = [
     ['研', '経済ラボ', 'lab', 100, LAB],
-    ['遊', 'あそび場', 'quiz', 262, K([['azakei_quiz_best', '億万長者クイズ', 'quiz.html#quiz'], ['azakei_cw_best', 'クロスワード', 'quiz.html#crossword'], ['azakei_card_best', 'カード勝負', 'quiz.html#cardgame'], ['azakei_sugo_best', 'すごろく', 'quiz.html#sugoroku'], ['azakei_koukan', '交換の島', 'quiz.html#koukan'], ['azakei_ehon', '絵本', 'quiz.html#ehon'], ['azakei_otsuri_best', 'おつりの達人', 'quiz.html#otsuri'], ['azakei_coins', '世界のお金図鑑', 'quiz.html#coins'], ['azakei-qmake', 'クイズの問題づくり', 'quiz.html#make']])],
+    ['遊', 'あそび場', 'quiz', 262, K([['azakei_quiz_best', '億万長者クイズ', 'quiz.html#quiz'], ['azakei_cw_best', 'クロスワード', 'quiz.html#crossword'], ['azakei_card_best', 'カード勝負', 'quiz.html#cardgame'], ['azakei_sugo_best', 'すごろく', 'quiz.html#sugoroku'], ['azakei_koukan', '交換の島', 'quiz.html#koukan'], ['azakei_ehon', '絵本', 'quiz.html#ehon'], ['azakei_otsuri_best', 'おつりの達人', 'quiz.html#otsuri'], ['azakei_coins', '世界のお金図鑑', 'quiz.html#coins'], ['azakei-qmake', 'クイズの問題づくり', 'quiz.html#make'], ['azakei_atobarai', 'ゲーム機の払い方', 'quiz.html#atobarai']])],
     ['辞', '用語辞典', 'lib', 422, K([['azakei_gl_known', '単語カード', 'glossary.html#glCards'], ['azakei_gacha', 'ことばガチャ', 'glossary.html#gacha'], ['azakei_np_best', '年表ゲーム', 'glossary.html#nenpyo'], ['azakei_shiri_best', '経済しりとり', 'glossary.html#shiritori'], ['azakei_karuta', 'ことばかるた', 'glossary.html#karuta']])],
     ['祭', '文化祭', 'fest', 588, K([['azakei_room_tour', '3D の会場を歩く', 'festival.html#room'], ['azakei_bill', '麻経券のデザイン', 'festival.html#bill']])],
     ['競', 'コンテスト', 'hall', 752, K([['azakei_planseed', 'ビジネスプランのたね', 'contests.html#plan-seed'], ['azakei_pitch', 'ピッチの舞台', 'contests.html#pitch'], ['azakei_bunsan', 'ポートフォリオの 10 年', 'contests.html#bunsan'], ['azakei_kessan', 'パン屋さんの決算発表', 'contests.html#kessan']])],
@@ -40,7 +40,7 @@
     lab(c) { let s = `<path class="mc-wall" d="M${c - 80} 310 V172 H${c + 80} V310 Z"/><path class="mc-dome" d="M${c - 42} 172 A42 42 0 0 1 ${c + 42} 172 Z"/><rect class="mc-roofline" x="${c - 86}" y="166" width="172" height="8" rx="3"/><path class="mc-trim" d="M${c - 8} 130 v-12 h16 v12"/>`;
       for (let r = 0; r < 5; r++) for (let q = 0; q < 5; q++) s += win(c - 68 + q * 28, 184 + r * 24, 16, 14); return [s, 120]; },
     quiz(c) { let s = `<path class="mc-wall" d="M${c - 44} 310 V130 H${c + 44} V310 Z"/><path class="mc-roof" d="M${c - 52} 132 L${c} 72 L${c + 52} 132 Z"/><circle class="mc-face" cx="${c}" cy="112" r="15"/><text class="mc-q" x="${c}" y="119">?</text>`;
-      for (let r = 0; r < 3; r++) for (let q = 0; q < 3; q++) s += win(c - 32 + q * 24, 152 + r * 46, 16, 26); return [s, 72]; },
+      for (let r = 0; r < 3; r++) for (let q = 0; q < 3; q++) s += win(c - 32 + q * 24, 152 + r * 46, 16, 26); s += win(c - 8, 286, 16, 16); return [s, 72]; },
     lib(c) { let s = `<path class="mc-wall" d="M${c - 76} 310 V214 H${c + 76} V310 Z"/><path class="mc-roof" d="M${c - 86} 216 L${c} 172 L${c + 86} 216 Z"/><rect class="mc-roofline" x="${c - 84}" y="212" width="168" height="7"/>`;
       for (let i = 0; i < 6; i++) s += `<rect class="mc-col" x="${c - 68 + i * 26}" y="226" width="8" height="80"/>`;
       for (let i = 0; i < 5; i++) s += win(c - 57 + i * 26, 238, 12, 50); return [s, 172]; },
