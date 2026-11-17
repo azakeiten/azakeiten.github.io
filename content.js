@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-17', seal: '段', tone: 'green', href: 'quiz.html#zeidan', eyebrow: 'あそび場', title: '税の階段', text: '所得税の 7 段の税率。段が上がっても、高い税率がかかるのはこえた部分だけ。コインをためてたしかめる。' },
     { date: '2026-11-17', seal: '檸', tone: 'gold', href: 'quiz.html#lemon', eyebrow: 'あそび場', title: 'フリマのなぞ', text: '見た目そっくりの中古スマホ。値段を下げると、なぜか良品のお店から閉まっていく。情報の非対称性の体験。' },
     { date: '2026-11-17', seal: '星', tone: 'dark', href: 'glossary.html#seiza', eyebrow: '用語辞典', title: 'ことばの星座', text: '300 語が夜空の星に。説明の中で出てくる言葉どうしを線で結び、押すと星座のように光る。' },
     { date: '2026-11-17', seal: '支', tone: 'paper', href: 'quiz.html#nenkin', eyebrow: 'あそび場', title: '胴上げから肩車へ', text: '65 歳以上の 1 人を、働く世代の何人で支える？ 1965 年・2012 年・2050 年で、人形の組み方が変わる。' },
