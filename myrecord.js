@@ -16,8 +16,12 @@
   const TYPES = { lion: 'ライオンタイプ', fox: 'キツネタイプ', turtle: 'カメタイプ', rabbit: 'ウサギタイプ' };
   const pct = (a, b) => Math.min(100, Math.round(a / b * 100));
   // [印, 名前, 大きな数字, 単位, 説明, 進み具合(0〜100 か null), リンク, リンクの文字, 済み？]
-  // 経済ラボで「済」がついた実験の数（8 つ）
-  const LAB = ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo', 'azakei_ginko', 'azakei_nesage'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (get('azakei_shop', []).length >= 3 ? 1 : 0);
+  // 経済ラボで「済」がついた実験の数（25 の実験。ためした印 azakei_lab_tried ＋ クリアの記録）
+  const LAB_KEYS = { '#sim-main': 'azakei_sim_run', '#updown': 'azakei_chart_reader', '#okozukai': 'azakei_ozk_master', '#fx': 'azakei_fx_master', '#oku': 'azakei_oku', '#budget': 'azakei_budget', '#bungyo': 'azakei_bungyo', '#ginko': 'azakei_ginko', '#nesage': 'azakei_nesage', '#pazuru': 'azakei_pazuru', '#koubou': 'azakei_village', '#tsuuka': 'azakei_tsuuka', '#seri': 'azakei_seri', '#asagohan': 'azakei_asagohan', '#kinri': 'azakei_kinri', '#hoken': 'azakei_hoken', '#ike': 'azakei_ike' };
+  const labSet = new Set([].concat(get('azakei_lab_tried', []) || []));
+  Object.entries(LAB_KEYS).forEach(([h, k]) => { try { if (localStorage.getItem(k)) labSet.add(h); } catch (e) {} });
+  if (get('azakei_shop', []).length >= 3) labSet.add('#shop');
+  const LAB = Math.min(25, labSet.size);
   const C = [
     ['探', 'サイト探検', visited.length, '/ 14 ページ', visited.length >= 14 ? '全ページ制覇！ すみずみまで見てくれてありがとう' : 'まだ見ていないページを回ってみよう', pct(visited.length, 14), 'sitemap.html', 'サイトを回る', visited.length >= 14],
     ['億', '億万長者クイズ', num('azakei_quiz_best'), '枚', `ニュースモード ${num('azakei_quiz_best_news')} 枚・タイムアタック ${num('azakei_quiz_best_time')} 点`, null, 'quiz.html', '挑戦する', num('azakei_quiz_best') >= 40],
@@ -31,7 +35,7 @@
     ['字', '経済クロスワード', num('azakei_cw_best'), '枚', num('azakei_cw_best') ? '最後の問題までクリアした自己ベスト' : '14 語をうめて、二重マスの最後の問題へ', null, 'quiz.html#crossword', '解いてみる', num('azakei_cw_best') > 0],
     ['釣', 'おつりの達人', num('azakei_otsuri_best'), '点', num('azakei_otsuri_best') ? '60 秒でとった自己ベスト' : 'おつりを、いちばん少ない枚数で', null, 'quiz.html#otsuri', '挑戦する', num('azakei_otsuri_best') >= 12],
     ['貨', '世界のお金図鑑', get('azakei_coins', []).length, '/ 12 枚', 'この国のお金は？ 4 択でコインを集める', pct(get('azakei_coins', []).length, 12), 'quiz.html#coins', '集める', get('azakei_coins', []).length >= 12],
-    ['研', '経済ラボ', LAB, '/ 10 実験', 'クリアした実験には、メニューに「済」の朱印', pct(LAB, 10), 'sim.html', '実験をする', LAB >= 10],
+    ['研', '経済ラボ', LAB, '/ 25 実験', 'ためした実験には、メニューに「済」の朱印', pct(LAB, 25), 'sim.html', '実験をする', LAB >= 25],
     ['店', '文化祭のお店', get('azakei_shop', []).length, '/ 3 ミッション', '何個売れたら黒字になる？ 損益分岐点', pct(get('azakei_shop', []).length, 3), 'sim.html#shop', '挑戦する', get('azakei_shop', []).length >= 3],
     ['為', '円高・円安の両替所', get('azakei_fx_master', null) ? '為替マスター' : '―', '', '3 問チャレンジで全問正解すると称号', null, 'sim.html#fx', '挑戦する', !!get('azakei_fx_master', null)],
     ['読', 'チャート予想', get('azakei_chart_reader', null) ? 'チャート読み' : '―', '', '7 回中 5 回以上当てると称号', null, 'sim.html#updown', '挑戦する', !!get('azakei_chart_reader', null)],

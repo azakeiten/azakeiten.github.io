@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-17', seal: '町', tone: 'dark', href: 'mypage.html#machi', eyebrow: 'わたしの記録', title: '麻経の町', text: 'サイトの 6 つの場所が夕ぐれの町に。遊んだぶんだけ窓に明かりがともり、ぜんぶともると屋根に「済」の旗。' },
     { date: '2026-11-17', seal: '池', tone: 'green', href: 'sim.html#ike', eyebrow: '経済ラボ', title: 'みんなの池', text: '1 つの池で 4 人が 10 年、魚をとる。とりすぎると池は空っぽに。漁獲枠のルールを入れるとどうなる？' },
     { date: '2026-11-17', seal: '算', tone: 'paper', href: 'contests.html#kessan', eyebrow: 'コンテスト', title: 'パン屋さんの決算発表', text: '値段・新商品・広告・人と機械を決めて 1 年営業。売上から利益までの滝グラフで、黒字か赤字かを発表。' },
     { date: '2026-11-17', seal: '模', tone: 'green', href: 'festival.html#room', eyebrow: '文化祭', title: '会場の 3D 模型が進化', text: '人形が順路を歩き、カメラがついていく。真上からの間取り図、会場の写真、にぎわいのようすも。' },
