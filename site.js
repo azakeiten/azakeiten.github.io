@@ -14,11 +14,15 @@ try {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---- 幕：前のページから幕で移動してきたら、幕を上げて見せる ---- */
-  const curtain = document.createElement('div');
-  curtain.className = 'curtain';
-  curtain.setAttribute('aria-hidden', 'true');
-  curtain.textContent = 'AZAKEI';
-  document.body.appendChild(curtain);
+  // 幕は curtain.js がいちばん先に用意して上げている（v290）。無いときだけ、ここでつくる
+  const curtain = document.querySelector('.curtain') || (() => {
+    const c = document.createElement('div');
+    c.className = 'curtain';
+    c.setAttribute('aria-hidden', 'true');
+    c.textContent = 'AZAKEI';
+    document.body.appendChild(c);
+    return c;
+  })();
   let arrived = false;
   try { arrived = !!sessionStorage.getItem('azakei-curtain'); sessionStorage.removeItem('azakei-curtain'); } catch (e) {}
   if (arrived && !document.getElementById('loader') && !reduce) {
@@ -1372,7 +1376,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261117h';
+  const V = '20261117j';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1398,7 +1402,7 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-tour]'); if (!b) return;
   e.preventDefault();
   if (window.AZAKEI_TOUR) { window.AZAKEI_TOUR.start(); return; }
-  const s = document.createElement('script'); s.src = 'tour.js?v=20261117h'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
+  const s = document.createElement('script'); s.src = 'tour.js?v=20261117j'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
 });
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */
@@ -1421,3 +1425,36 @@ document.addEventListener('click', e => {
   const tick = () => { wait = false; const y = scrollY; if (y > innerHeight * 1.2) return; ph.style.setProperty('--phs', Math.round(y * 0.22)); };
   addEventListener('scroll', () => { if (!wait) { wait = true; requestAnimationFrame(tick); } }, { passive: true });
 })();
+
+/* ######## ▼ v291：「このページの中身」などのページ内リンクを押したとき、目的の場所にきちんと着く ########
+   なめらかに流れているあいだに、とちゅうの体験（近づくと読みこむもの）が中身をふやすと、
+   目的の見出しが下へずれて、ちがう場所で止まってしまうことがあった（用語辞典など）。
+   ふつうの動きはそのままにして、止まったあとにずれていたら、そっと合わせなおす。
+   自分でスクロールしたり、画面にさわったりしたら、合わせなおさない。 */
+try {
+(function() {
+  window.addEventListener('click', e => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    let id = a.getAttribute('href').slice(1);
+    try { id = decodeURIComponent(id); } catch (err) { return; }
+    if (!id || !/^[\w-]+$/.test(id)) return;
+    const el = document.getElementById(id);
+    if (!el || !el.getClientRects().length) return;
+    let touched = false;
+    const stop = () => { touched = true; };
+    setTimeout(() => ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => addEventListener(ev, stop, { once: true, passive: true })), 50);
+    const fix = () => {
+      if (touched || !el.getClientRects().length) return;
+      const top = el.getBoundingClientRect().top;
+      if (Math.abs(top - 80) > 40) scrollTo({ top: scrollY + top - 80, behavior: 'instant' });
+      document.querySelectorAll('.reveal:not(.visible)').forEach(r => { const b = r.getBoundingClientRect(); if (b.top < innerHeight && b.bottom > 0) r.classList.add('visible'); });
+    };
+    let done = false;
+    const after = () => { if (done) return; done = true; fix(); setTimeout(fix, 900); setTimeout(fix, 2200); };
+    if ('onscrollend' in window) addEventListener('scrollend', after, { once: true });
+    setTimeout(after, 1600);
+  });
+})();
+} catch (e) { console.error('[site.js / v291]', e); }

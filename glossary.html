@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-glossary.min.css?v=20261117h" />
+  <link rel="stylesheet" href="p-glossary.min.css?v=20261117j" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -454,6 +454,19 @@
   </section>
   <!-- 年表で見る、経済の歴史（辞典の言葉へリンク） -->
   <!-- 授業で使えるプリント -->
+  <!-- ことばの星座（seiza.js・seiza.css・近づいてから読みこむ） -->
+  <section class="about tight" id="seiza">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">星</span></p>
+        <h2 class="section-title"><span class="keep-phrase">ことばの</span><span class="keep-phrase"><em>星座</em></span></h2>
+        <p class="lead">この辞典の 300 語を、夜空の星にしました。ある言葉の説明の中に、別の言葉が出てくると、2 つの星が線で結ばれます。星を押すと、つながる言葉が星座のように光ります。</p>
+      </div>
+      <div class="sz reveal" data-seiza></div>
+    </div>
+  </section>
+  <script>/* ことばの星座（seiza.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-seiza]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="seiza.js?v=20261117j";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+
   <section class="services tight" id="sheet">
     <div class="container">
       <div class="section-head reveal">
@@ -592,23 +605,24 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261117h"></script>
-  <script src="layout.js?v=20261117h"></script>
-  <script src="brand.js?v=20261117h"></script>
-  <script src="nav.js?v=20261117h"></script>
-  <script src="reveal.js?v=20261117h"></script>
-  <script src="glossary.js?v=20261117h"></script>
-  <script src="wordsheet.js?v=20261117h"></script>
-  <script src="npgame.js?v=20261117h"></script>
-  <script src="newsfind.js?v=20261117h"></script>
-  <script src="gacha.js?v=20261117h"></script>
-  <script src="rush.js?v=20261117h"></script>
-  <script src="narabe.js?v=20261117h"></script>
-  <script src="shiri.js?v=20261117h"></script>
-  <script src="osatsu.js?v=20261117h"></script>
-  <script src="koma.js?v=20261117h"></script>
-  <script src="pagetoc.js?v=20261117h"></script>
-  <script src="site.js?v=20261117h"></script>
-  <script>/* ことばかるた（karuta.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-karuta]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="karuta.js?v=20261117h";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script src="curtain.js?v=20261117j"></script>
+  <script src="content.js?v=20261117j"></script>
+  <script src="layout.js?v=20261117j"></script>
+  <script src="brand.js?v=20261117j"></script>
+  <script src="nav.js?v=20261117j"></script>
+  <script src="reveal.js?v=20261117j"></script>
+  <script src="glossary.js?v=20261117j"></script>
+  <script src="wordsheet.js?v=20261117j"></script>
+  <script src="npgame.js?v=20261117j"></script>
+  <script src="newsfind.js?v=20261117j"></script>
+  <script src="gacha.js?v=20261117j"></script>
+  <script src="rush.js?v=20261117j"></script>
+  <script src="narabe.js?v=20261117j"></script>
+  <script src="shiri.js?v=20261117j"></script>
+  <script src="osatsu.js?v=20261117j"></script>
+  <script src="koma.js?v=20261117j"></script>
+  <script src="pagetoc.js?v=20261117j"></script>
+  <script src="site.js?v=20261117j"></script>
+  <script>/* ことばかるた（karuta.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-karuta]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="karuta.js?v=20261117j";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 </body>
 </html>

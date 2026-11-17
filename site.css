@@ -9483,3 +9483,12 @@ html[data-theme="dark"] section.services.eh-sec, html[data-theme="dark"]:not(.is
 .sy[data-shuryo] .sy-steps > li .sy-x, .sy[data-shuryo] .sy-steps > li .sy-n { color: #6a5a44; }
 .sy[data-shuryo] .sy-steps > li .sy-list a { color: #4a3a28; border-color: rgba(107, 74, 34, .3); background: #fff; }
 .sy[data-shuryo] .sy-steps > li .sy-list li.is-ok a { background: #2f6b3a; border-color: #2f6b3a; color: #fff; }
+
+/* ---- v290：ページ移動の幕を、つなぎ目なく（curtain.js がいちばん先に幕を上げる） ----
+   幕で移動してきた直後は、本文を隠すのではなく、幕と同じ見た目の板を上にかぶせておく。
+   curtain.js が本物の幕に入れかえて上げる。スクリプトが動かなくても 2.5 秒で板は消える。
+   ブラウザの「ページ切りかえの動き（view transition）」は、幕と二重になるので使わない。 */
+html.curtain-pending body { opacity: 1; animation: none; }
+html.curtain-pending::after { content: "AZAKEI"; position: fixed; inset: 0; z-index: 9001; display: grid; place-items: center; background: #14120f; color: #c8a96e; font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); letter-spacing: 0.3em; padding-left: 0.3em; pointer-events: none; animation: curtain-failsafe 0.4s 2.5s forwards; }
+@keyframes curtain-failsafe { to { opacity: 0; visibility: hidden; } }
+@view-transition { navigation: none; }
