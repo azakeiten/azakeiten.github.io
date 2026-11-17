@@ -9446,3 +9446,34 @@ html[data-theme="dark"] section.services.eh-sec, html[data-theme="dark"]:not(.is
 .r3-crowdg { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
 .r3-route .r3-walked { animation: none; }
 @media (max-width: 640px) { .r3-hint { display: none; } }
+
+/* ---- 経済ラボ：実験の地図（labmenu.js・ためした数の輪・次はこれ・新・みんなとルール） ---- */
+.lm-bar { display: grid; grid-template-columns: minmax(0, 1fr); justify-content: stretch; gap: 12px; margin-bottom: 14px; }
+.lm-tools > * { min-width: 0; }
+.lm-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 14px 18px; border-radius: 22px; background: radial-gradient(ellipse at 15% 20%, #2c4637, #1c2b23 70%); color: #f3eee4; box-shadow: 0 16px 36px -18px rgba(20, 35, 25, .7); }
+.lm-ring { position: relative; flex: none; width: 64px; height: 64px; }
+.lm-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.lm-ring-bg { fill: none; stroke: rgba(255, 255, 255, .12); stroke-width: 7; }
+.lm-ring-fg { fill: none; stroke: #e3b341; stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(.3, 1.2, .5, 1); }
+.lm-ring b { position: absolute; inset: 0; display: grid; place-items: center; font-family: 'Shippori Mincho', serif; font-size: 22px; color: #ffe08a; }
+.lm-bar.is-all .lm-ring-fg { stroke: #e0412b; }
+.lm-count { flex: 1 1 220px; margin: 0; }
+.lm-count b { display: block; font-size: 16px; }
+.lm-count small { display: block; margin-top: 2px; font-size: 12.5px; color: rgba(243, 238, 228, .72); }
+.lm-next { display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 10px; border-radius: 16px; background: #fffaf0; color: #1c2b23; text-decoration: none; box-shadow: 0 8px 18px -10px rgba(0, 0, 0, .6); transition: transform .2s; }
+.lm-next:hover { transform: translateY(-2px); }
+.lm-next[hidden] { display: none; }
+.lm-next small { font-size: 11px; font-weight: 800; color: #b5432f; letter-spacing: .08em; writing-mode: vertical-rl; }
+.lm-next .lb-seal { grid-row: auto; width: 34px; height: 34px; font-size: 17px; }
+.lm-next b { font-size: 14px; }
+.lm-next i { font-style: normal; font-weight: 800; color: #b5432f; animation: lm-nudge 1.6s ease-in-out infinite; }
+@keyframes lm-nudge { 50% { transform: translateX(4px); } }
+.lm-tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.lab-board .lb-new { position: absolute; left: 8px; top: -7px; padding: 1px 7px; border-radius: 999px; background: #e3b341; color: #1c2b23; font-style: normal; font-size: 10.5px; font-weight: 800; letter-spacing: .05em; box-shadow: 0 2px 6px rgba(0, 0, 0, .2); }
+.lab-board a { overflow: visible; }
+.lab-board li { position: relative; }
+.lab-board li a .lb-done { animation: lm-stamp .45s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes lm-stamp { from { transform: scale(2) rotate(-20deg); opacity: 0; } }
+@media (max-width: 560px) { .lm-head { padding: 12px 14px; gap: 10px 12px; } .lm-ring { width: 54px; height: 54px; } .lm-count b { font-size: 14px; } .lm-next { width: 100%; } body.lab-tabs .lab-board .lb-new { font-size: 9px; padding: 0 5px; top: -6px; } }
+@media (prefers-reduced-motion: reduce) { .lm-next i, .lab-board li a .lb-done { animation: none; } .lm-ring-fg { transition: none; } }
+.lab-board .lb-seal.is-d, .lm-next .lb-seal.is-d { box-shadow: inset 0 0 0 1.5px #e3c68e; }

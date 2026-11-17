@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-sim.min.css?v=20261117c" />
+  <link rel="stylesheet" href="p-sim.min.css?v=20261117d" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -52,24 +52,34 @@
   <section class="about tight lab-board-wrap">
     <div class="container">
       <ol class="lab-board reveal" data-lab-board>
-        <li><a href="#sim-main"><span class="lb-seal">配</span><b>チップ配分</b><small>株・債券・預金に分けて、10 年後へ</small><i>シミュレーター</i></a></li>
-        <li><a href="#double"><span class="lb-seal is-g">倍</span><b>お金が 2 倍になるまで</b><small>年利を動かして、72 の法則</small><i>計算</i></a></li>
-        <li><a href="#updown"><span class="lb-seal is-y">予</span><b>チャート予想</b><small>上がる？ 下がる？ 7 回戦</small><i>ゲーム</i></a></li>
-        <li><a href="#okozukai"><span class="lb-seal is-y">遣</span><b>おこづかいチャレンジ</b><small>1 年後に自転車を買えるか</small><i>ゲーム</i></a></li>
-        <li><a href="#market"><span class="lb-seal is-g">値</span><b>値段の決まり方</b><small>需要と供給を、動かして</small><i>グラフ</i></a></li>
-        <li><a href="#fx"><span class="lb-seal is-g">為</span><b>円高・円安の両替所</b><small>1 ドルが何円かを、動かして</small><i>体験</i></a></li>
-        <li><a href="#shop"><span class="lb-seal is-y">店</span><b>文化祭でお店をひらこう</b><small>何個売れたら黒字？ 損益分岐点</small><i>体験</i></a></li>
-        <li><a href="#oku"><span class="lb-seal">億</span><b>1 億円って、どれくらい？</b><small>一万円札を積むと、高さと重さは</small><i>体験</i></a></li>
-        <li><a href="#budget"><span class="lb-seal is-g">予</span><b>国の予算を 100 円にすると</b><small>いちばん多い使いみちは？ 予想して開く</small><i>クイズ</i></a></li>
-        <li><a href="#infl"><span class="lb-seal is-y">昇</span><b>インフレのタイムマシン</b><small>物価が上がると、買える数は？</small><i>体験</i></a></li>
-        <li><a href="#bungyo"><span class="lb-seal is-g">分</span><b>分業のふしぎ</b><small>何でも速い人がいても、分けると得？</small><i>パズル</i></a></li>
-        <li><a href="#receipt"><span class="lb-seal">税</span><b>レシートの中の税金</b><small>同じおにぎりでも、税率がちがう？</small><i>体験</i></a></li>
-        <li><a href="#kuji"><span class="lb-seal is-y">籤</span><b>くじ引きの期待値</b><small>300 円のくじ、平均でいくら戻る？</small><i>実験</i></a></li>
-        <li><a href="#kabu"><span class="lb-seal is-g">株</span><b>株式会社をつくろう</b><small>出したお金で、配当と決める力が変わる</small><i>体験</i></a></li>
-        <li><a href="#ginko"><span class="lb-seal is-y">銀</span><b>銀行のふしぎ</b><small>1 万円をあずけると、預金はいくらに？</small><i>体験</i></a></li>
-        <li><a href="#nesage"><span class="lb-seal">策</span><b>となりのお店と値下げ競争</b><small>相手の作戦を読んで、10 回勝負</small><i>ゲーム</i></a></li>
+        <li data-cat="world"><a href="#meguri"><span class="lb-seal is-d">巡</span><b>お金のめぐり</b><small>家計・会社・国・銀行を、コインが流れる</small><i>図</i></a></li>
+        <li data-cat="world game" data-new><a href="#pazuru"><span class="lb-seal is-d">嵌</span><b>めぐりパズル</b><small>6 本の矢印に、札をはめよう</small><i>パズル</i></a></li>
+        <li data-cat="rule"><a href="#koubou"><span class="lb-seal">創</span><b>仕組みをつくる工房</b><small>10 人の村の税を、自分で決める</small><i>体験</i></a></li>
+        <li data-cat="rule"><a href="#tsuuka"><span class="lb-seal">券</span><b>お祭りの券の工房</b><small>遊び用の券のルールを決める</small><i>体験</i></a></li>
+        <li data-cat="money"><a href="#sim-main"><span class="lb-seal">配</span><b>チップ配分</b><small>株・債券・預金に分けて、10 年後へ</small><i>シミュレーター</i></a></li>
+        <li data-cat="money"><a href="#double"><span class="lb-seal is-g">倍</span><b>お金が 2 倍になるまで</b><small>年利を動かして、72 の法則</small><i>計算</i></a></li>
+        <li data-cat="game"><a href="#updown"><span class="lb-seal is-y">予</span><b>チャート予想</b><small>上がる？ 下がる？ 7 回戦</small><i>ゲーム</i></a></li>
+        <li data-cat="money game"><a href="#okozukai"><span class="lb-seal is-y">遣</span><b>おこづかいチャレンジ</b><small>1 年後に自転車を買えるか</small><i>ゲーム</i></a></li>
+        <li data-cat="biz"><a href="#market"><span class="lb-seal is-g">値</span><b>値段の決まり方</b><small>需要と供給を、動かして</small><i>グラフ</i></a></li>
+        <li data-cat="biz game" data-new><a href="#seri"><span class="lb-seal is-d">競</span><b>せりの会場</b><small>4 人と札を上げて、競りあう</small><i>ゲーム</i></a></li>
+        <li data-cat="world" data-new><a href="#asagohan"><span class="lb-seal is-d">旅</span><b>朝ごはんの世界旅行</b><small>材料はどこから？ 地図の上を船が進む</small><i>地図</i></a></li>
+        <li data-cat="world"><a href="#fx"><span class="lb-seal is-g">為</span><b>円高・円安の両替所</b><small>1 ドルが何円かを、動かして</small><i>体験</i></a></li>
+        <li data-cat="biz"><a href="#shop"><span class="lb-seal is-y">店</span><b>文化祭でお店をひらこう</b><small>何個売れたら黒字？ 損益分岐点</small><i>体験</i></a></li>
+        <li data-cat="money"><a href="#oku"><span class="lb-seal">億</span><b>1 億円って、どれくらい？</b><small>一万円札を積むと、高さと重さは</small><i>体験</i></a></li>
+        <li data-cat="world rule"><a href="#budget"><span class="lb-seal is-g">予</span><b>国の予算を 100 円にすると</b><small>いちばん多い使いみちは？</small><i>クイズ</i></a></li>
+        <li data-cat="money world"><a href="#infl"><span class="lb-seal is-y">昇</span><b>インフレのタイムマシン</b><small>物価が上がると、買える数は？</small><i>体験</i></a></li>
+        <li data-cat="biz"><a href="#bungyo"><span class="lb-seal is-g">分</span><b>分業のふしぎ</b><small>何でも速い人がいても、分けると得？</small><i>パズル</i></a></li>
+        <li data-cat="world"><a href="#receipt"><span class="lb-seal">税</span><b>レシートの中の税金</b><small>同じおにぎりでも、税率がちがう？</small><i>体験</i></a></li>
+        <li data-cat="money game"><a href="#kuji"><span class="lb-seal is-y">籤</span><b>くじ引きの期待値</b><small>300 円のくじ、平均でいくら戻る？</small><i>実験</i></a></li>
+        <li data-cat="biz"><a href="#kabu"><span class="lb-seal is-g">株</span><b>株式会社をつくろう</b><small>出したお金で、配当と決める力が変わる</small><i>体験</i></a></li>
+        <li data-cat="money"><a href="#ginko"><span class="lb-seal is-y">銀</span><b>銀行のふしぎ</b><small>1 万円をあずけると、預金はいくらに？</small><i>体験</i></a></li>
+        <li data-cat="world game" data-new><a href="#kinri"><span class="lb-seal is-d">舵</span><b>景気の舵とり</b><small>日本銀行の会議で、金利を決める</small><i>ゲーム</i></a></li>
+        <li data-cat="money rule" data-new><a href="#hoken"><span class="lb-seal is-d">備</span><b>みんなで備える箱</b><small>保険のしくみを、10 年すすめて</small><i>体験</i></a></li>
+        <li data-cat="rule game" data-new><a href="#ike"><span class="lb-seal is-d">池</span><b>みんなの池</b><small>4 人で魚をとる。とりすぎると…</small><i>ゲーム</i></a></li>
+        <li data-cat="biz rule game"><a href="#nesage"><span class="lb-seal">策</span><b>となりのお店と値下げ競争</b><small>相手の作戦を読んで、10 回勝負</small><i>ゲーム</i></a></li>
         <li><a href="#words"><span class="lb-seal is-d">辞</span><b>出てきたことば</b><small>用語辞典で、もう少し</small><i>ことば</i></a></li>
       </ol>
+
     </div>
   </section>
 
@@ -235,7 +245,7 @@
       <div class="sr reveal" data-seri></div>
     </div>
   </section>
-  <script>/* せりの会場（seri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-seri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="seri.js?v=20261117c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* せりの会場（seri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-seri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="seri.js?v=20261117d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 朝ごはんの世界旅行（asagohan.js・近づいてから読みこむ） -->
   <section class="services tight" id="asagohan">
@@ -380,7 +390,7 @@
       <div class="kn reveal" data-kinri></div>
     </div>
   </section>
-  <script>/* 景気の舵とり（kinri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kinri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kinri.js?v=20261117c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 景気の舵とり（kinri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kinri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kinri.js?v=20261117d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- みんなで備える箱（hoken.js・近づいてから読みこむ） -->
   <section class="services tight" id="hoken">
@@ -393,7 +403,7 @@
       <div class="hk reveal" data-hoken></div>
     </div>
   </section>
-  <script>/* みんなで備える箱（hoken.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-hoken]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="hoken.js?v=20261117c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* みんなで備える箱（hoken.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-hoken]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="hoken.js?v=20261117d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- みんなの池（ike.js・ike.css・近づいてから読みこむ） -->
   <section class="services tight" id="ike">
@@ -406,7 +416,7 @@
       <div class="ik reveal" data-ike></div>
     </div>
   </section>
-  <script>/* みんなの池（ike.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-ike]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="ike.js?v=20261117c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* みんなの池（ike.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-ike]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="ike.js?v=20261117d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <section class="services tight" id="nesage">
     <div class="container">
@@ -443,35 +453,35 @@
   </section>
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261117c"></script>
-  <script src="layout.js?v=20261117c"></script>
-  <script src="brand.js?v=20261117c"></script>
-  <script src="nav.js?v=20261117c"></script>
-  <script src="reveal.js?v=20261117c"></script>
-  <script src="sim.js?v=20261117c"></script>
-  <script src="double.js?v=20261117c"></script>
-  <script src="market.js?v=20261117c"></script>
-  <script src="fx.js?v=20261117c"></script>
-  <script src="shop.js?v=20261117c"></script>
-  <script src="oku.js?v=20261117c"></script>
-  <script src="budget.js?v=20261117c"></script>
-  <script src="infl.js?v=20261117c"></script>
-  <script src="bungyo.js?v=20261117c"></script>
-  <script src="receipt.js?v=20261117c"></script>
-  <script src="kuji.js?v=20261117c"></script>
-  <script src="kabu.js?v=20261117c"></script>
-  <script src="ginko.js?v=20261117c"></script>
-  <script src="nesage.js?v=20261117c"></script>
-  <script src="labmenu.js?v=20261117c"></script>
-  <script src="flow.js?v=20261117c"></script>
-  <script src="village.js?v=20261117c"></script>
-  <script src="tsuuka.js?v=20261117c"></script>
-  <script>/* お金のめぐりパズル（pazuru.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-pazuru]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="pazuru.js?v=20261117c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
-  <script>/* 朝ごはんの世界旅行（asagohan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-asagohan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="asagohan.js?v=20261117c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
-  <script src="updown.js?v=20261117c"></script>
-  <script src="osatsu.js?v=20261117c"></script>
-  <script src="okozukai.js?v=20261117c"></script>
-  <script src="pagetoc.js?v=20261117c"></script>
-  <script src="site.js?v=20261117c"></script>
+  <script src="content.js?v=20261117d"></script>
+  <script src="layout.js?v=20261117d"></script>
+  <script src="brand.js?v=20261117d"></script>
+  <script src="nav.js?v=20261117d"></script>
+  <script src="reveal.js?v=20261117d"></script>
+  <script src="sim.js?v=20261117d"></script>
+  <script src="double.js?v=20261117d"></script>
+  <script src="market.js?v=20261117d"></script>
+  <script src="fx.js?v=20261117d"></script>
+  <script src="shop.js?v=20261117d"></script>
+  <script src="oku.js?v=20261117d"></script>
+  <script src="budget.js?v=20261117d"></script>
+  <script src="infl.js?v=20261117d"></script>
+  <script src="bungyo.js?v=20261117d"></script>
+  <script src="receipt.js?v=20261117d"></script>
+  <script src="kuji.js?v=20261117d"></script>
+  <script src="kabu.js?v=20261117d"></script>
+  <script src="ginko.js?v=20261117d"></script>
+  <script src="nesage.js?v=20261117d"></script>
+  <script src="labmenu.js?v=20261117d"></script>
+  <script src="flow.js?v=20261117d"></script>
+  <script src="village.js?v=20261117d"></script>
+  <script src="tsuuka.js?v=20261117d"></script>
+  <script>/* お金のめぐりパズル（pazuru.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-pazuru]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="pazuru.js?v=20261117d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 朝ごはんの世界旅行（asagohan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-asagohan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="asagohan.js?v=20261117d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script src="updown.js?v=20261117d"></script>
+  <script src="osatsu.js?v=20261117d"></script>
+  <script src="okozukai.js?v=20261117d"></script>
+  <script src="pagetoc.js?v=20261117d"></script>
+  <script src="site.js?v=20261117d"></script>
 </body>
 </html>
