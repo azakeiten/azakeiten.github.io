@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261117f" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261117g" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -186,7 +186,7 @@
       <div class="ah reveal" data-atobarai></div>
     </div>
   </section>
-  <script>/* 後払いの体験（atobarai.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-atobarai]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="atobarai.js?v=20261117f";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 後払いの体験（atobarai.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-atobarai]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="atobarai.js?v=20261117g";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 問題を、つくってみよう -->
   <!-- みんなでクイズ大会（taikai.js・近づいてから読みこむ） -->
@@ -214,21 +214,21 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="content.js?v=20261117f"></script>
-  <script src="layout.js?v=20261117f"></script>
-  <script src="brand.js?v=20261117f"></script>
-  <script src="nav.js?v=20261117f"></script>
-  <script src="reveal.js?v=20261117f"></script>
-  <script src="ranking.js?v=20261117f"></script>
-  <script src="quiz-data.js?v=20261117f"></script>
-  <script src="shareimg.js?v=20261117f"></script>
-  <script src="quiz.js?v=20261117f"></script>
-  <script src="osatsu.js?v=20261117f"></script>
-  <script src="site.js?v=20261117f"></script>
+  <script src="content.js?v=20261117g"></script>
+  <script src="layout.js?v=20261117g"></script>
+  <script src="brand.js?v=20261117g"></script>
+  <script src="nav.js?v=20261117g"></script>
+  <script src="reveal.js?v=20261117g"></script>
+  <script src="ranking.js?v=20261117g"></script>
+  <script src="quiz-data.js?v=20261117g"></script>
+  <script src="shareimg.js?v=20261117g"></script>
+  <script src="quiz.js?v=20261117g"></script>
+  <script src="osatsu.js?v=20261117g"></script>
+  <script src="site.js?v=20261117g"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261117f';
+      var V = '20261117g';
       [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-moneyevo]', 'moneyevo.js'], ['[data-barter]', 'barter.js'], ['[data-ehon]', 'ehon.js'], ['[data-coins]', 'coins.js'], ['[data-otsuri]', 'otsuri.js'], ['[data-taikai]', 'taikai.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };

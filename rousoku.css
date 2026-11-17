@@ -1,0 +1,72 @@
+/* rousoku.css — コンテスト：ローソク足をつくろう（rousoku.js が読みこむ） */
+.rs[data-rousoku] { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.rs[data-rousoku] .rs-board { display: grid; gap: 10px; padding: 16px; border-radius: 22px; background: #121a26; color: #e6edf5; box-shadow: 0 20px 44px -20px rgba(10, 15, 30, .8); }
+.rs[data-rousoku] .rs-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.rs[data-rousoku] .rs-co { display: flex; align-items: center; gap: 8px; margin: 0 auto 0 0; }
+.rs[data-rousoku] .rs-co-s { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; background: #2f6b3a; color: #fff; font-family: "Shippori Mincho", serif; font-weight: 800; }
+.rs[data-rousoku] .rs-co b { font-size: 15px; } .rs[data-rousoku] .rs-co small { font-size: 11.5px; opacity: .65; }
+.rs[data-rousoku] .rs-day { margin: 0; font-size: 12.5px; opacity: .8; } .rs[data-rousoku] .rs-day b { font-family: "Shippori Mincho", serif; font-size: 22px; color: #ffe08a; }
+.rs[data-rousoku] .rs-now { margin: 0; display: grid; text-align: right; font-size: 11px; opacity: .9; }
+.rs[data-rousoku] .rs-now b { font-size: 22px; font-variant-numeric: tabular-nums; color: #fff; }
+.rs[data-rousoku] .rs-svg { display: block; width: 100%; height: auto; }
+.rs-bg { fill: rgba(255, 255, 255, .03); stroke: rgba(255, 255, 255, .08); }
+.rs-line { fill: none; stroke: #ffe08a; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(255, 224, 138, .45)); }
+.rs-dot.is-o { fill: #fff; } .rs-dot.is-now { fill: #ffe08a; stroke: #121a26; stroke-width: 2; }
+.rs-guide { stroke-width: 1.2; stroke-dasharray: 4 4; opacity: .75; }
+.rs-guide.is-o { stroke: #fff; } .rs-guide.is-h { stroke: #ff9c86; } .rs-guide.is-l { stroke: #8fb7e3; } .rs-guide.is-c { stroke: #ffe08a; }
+.rs-gl { font-size: 11px; font-weight: 800; dominant-baseline: middle; }
+.rs-gl.is-o { fill: #fff; } .rs-gl.is-h { fill: #ff9c86; } .rs-gl.is-l { fill: #8fb7e3; } .rs-gl.is-c { fill: #ffe08a; }
+.rs-candle .rs-wick, .rs-wc .rs-wick { stroke-width: 2.5; }
+.rs-candle.is-up .rs-wick, .rs-wc.is-up .rs-wick { stroke: #e06a52; } .rs-candle.is-dn .rs-wick, .rs-wc.is-dn .rs-wick { stroke: #5a8bc4; }
+.rs-candle.is-up .rs-body, .rs-wc.is-up .rs-body { fill: #c8432f; } .rs-candle.is-dn .rs-body, .rs-wc.is-dn .rs-body { fill: #2f5a8a; }
+.rs-candle .rs-body { transition: fill .3s; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .45)); }
+.rs-ctag { font-size: 12px; font-weight: 800; text-anchor: middle; } .rs-ctag.is-up { fill: #ff9c86; } .rs-ctag.is-dn { fill: #8fb7e3; }
+.rs-ax, .rs-time { fill: rgba(230, 237, 245, .5); font-size: 10px; text-anchor: end; }
+.rs-time { text-anchor: start; }
+.rs[data-rousoku] .rs-ohlc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.rs[data-rousoku] .rs-ohlc li { padding: 7px 9px; border-radius: 10px; background: rgba(255, 255, 255, .05); border-top: 3px solid; }
+.rs[data-rousoku] .rs-ohlc [data-o] { border-color: #fff; } .rs[data-rousoku] .rs-ohlc [data-h] { border-color: #ff9c86; } .rs[data-rousoku] .rs-ohlc [data-l] { border-color: #8fb7e3; } .rs[data-rousoku] .rs-ohlc [data-c] { border-color: #ffe08a; }
+.rs[data-rousoku] .rs-ohlc span { display: block; font-size: 11.5px; font-weight: 800; }
+.rs[data-rousoku] .rs-ohlc b { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
+.rs[data-rousoku] .rs-ohlc small { display: block; font-size: 10.5px; line-height: 1.4; opacity: .6; }
+.rs[data-rousoku] .rs-msg { margin: 0; padding: 9px 12px; border-radius: 12px; background: rgba(255, 255, 255, .06); font-size: 13.5px; line-height: 1.7; min-height: 3.4em; }
+.rs[data-rousoku] .rs-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.rs[data-rousoku] .rs-btns button, .rs[data-rousoku] .rs-quiz button { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(230, 237, 245, .3); background: transparent; color: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; }
+.rs[data-rousoku] button.rs-go { background: #c8432f; border-color: #c8432f; color: #fff; box-shadow: 0 6px 16px rgba(200, 67, 47, .35); }
+.rs[data-rousoku].is-busy .rs-btns button { opacity: .45; pointer-events: none; }
+.rs[data-rousoku].is-fly .rs-candle { animation: rs-fly .45s ease-in forwards; transform-box: fill-box; transform-origin: center; }
+@keyframes rs-fly { to { transform: translate(60px, 120px) scale(.4); opacity: 0; } }
+.rs[data-rousoku] .rs-week { display: grid; gap: 8px; padding: 16px; border-radius: 22px; background: #fffaf0; color: #2a2015; box-shadow: 0 10px 26px -14px rgba(40, 30, 15, .4); }
+.rs[data-rousoku] .rs-week-h { margin: 0; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; }
+.rs[data-rousoku] .rs-week-h small { margin-left: 8px; font-family: inherit; font-size: 12px; font-weight: 400; opacity: .7; }
+.rs[data-rousoku] .rs-wsvg { display: block; width: 100%; height: auto; background: repeating-linear-gradient(0deg, transparent 0 43px, rgba(42, 32, 21, .06) 43px 44px); border-radius: 12px; }
+.rs-wd { fill: #6b5a44; font-size: 12px; font-weight: 800; text-anchor: middle; }
+.rs-empty { fill: rgba(42, 32, 21, .45); font-size: 12px; text-anchor: middle; }
+.rs-wlink { stroke: rgba(42, 32, 21, .25); stroke-dasharray: 3 3; }
+.rs-hit { fill: transparent; }
+.rs-wc { cursor: pointer; outline: none; transition: opacity .2s; }
+.rs-wc:hover .rs-hit, .rs-wc:focus-visible .rs-hit { fill: rgba(227, 179, 65, .14); }
+.rs-wc.is-new { animation: rs-land .5s cubic-bezier(.3, 1.6, .5, 1); transform-box: fill-box; transform-origin: center bottom; }
+@keyframes rs-land { from { transform: translateY(-40px) scale(1.3); opacity: 0; } }
+.rs-wc.is-mark .rs-hit { fill: rgba(47, 107, 58, .18); stroke: #2f6b3a; stroke-width: 2; }
+.rs[data-rousoku].is-pick .rs-wc .rs-hit { fill: rgba(227, 179, 65, .08); stroke: rgba(227, 179, 65, .5); stroke-dasharray: 4 3; }
+.rs[data-rousoku] .rs-quiz { padding: 12px 14px; border-radius: 14px; background: #24304f; color: #f3ecd8; }
+.rs[data-rousoku] .rs-quiz[hidden] { display: none; }
+.rs[data-rousoku] .rs-q-n { margin: 0; font-size: 11.5px; font-weight: 800; color: #ffe08a; letter-spacing: .08em; }
+.rs[data-rousoku] .rs-q-t { margin: 2px 0 8px; font-size: 14.5px; font-weight: 700; line-height: 1.6; }
+.rs[data-rousoku] .rs-q-h { margin: 0; font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; color: #ffe08a; }
+.rs[data-rousoku] .rs-q-hint { margin: 0; font-size: 12.5px; opacity: .75; }
+.rs[data-rousoku] .rs-q-nums { display: flex; flex-wrap: wrap; gap: 6px; }
+.rs[data-rousoku] .rs-q-nums button { padding: 6px 12px; }
+.rs[data-rousoku] .rs-q-r { margin: 8px 0 0; font-weight: 800; }
+.rs[data-rousoku] .rs-q-r.is-ok { color: #9fe0a4; } .rs[data-rousoku] .rs-q-r.is-ng { color: #ffb4a3; }
+.rs[data-rousoku] .rs-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.rs[data-rousoku] .rs-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(36, 48, 79, .07); font-size: 14px; line-height: 1.75; }
+.rs[data-rousoku] .rs-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.rs[data-rousoku] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.rs[data-rousoku] .rs-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .rs[data-rousoku] .rs-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rs[data-rousoku] .rs-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .rs[data-rousoku] { grid-template-columns: 1fr; } .rs[data-rousoku] .rs-learn { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .rs[data-rousoku] .rs-ohlc { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rs[data-rousoku] .rs-board { padding: 12px; } }
+@media (prefers-reduced-motion: reduce) { .rs[data-rousoku] *, .rs-wc, .rs-candle { animation: none !important; transition: none !important; } }
