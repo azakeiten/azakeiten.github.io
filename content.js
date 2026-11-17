@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-17', seal: '支', tone: 'paper', href: 'quiz.html#nenkin', eyebrow: 'あそび場', title: '胴上げから肩車へ', text: '65 歳以上の 1 人を、働く世代の何人で支える？ 1965 年・2012 年・2050 年で、人形の組み方が変わる。' },
     { date: '2026-11-17', seal: '燭', tone: 'dark', href: 'contests.html#rousoku', eyebrow: 'コンテスト', title: 'ローソク足をつくろう', text: '1 日の株価の線のとなりで、ローソク足が育っていく。始値・高値・安値・終値。5 日分そろったらクイズ。' },
     { date: '2026-11-17', seal: '払', tone: 'shu', href: 'quiz.html#atobarai', eyebrow: 'あそび場', title: '10 万円のゲーム機、どう払う？', text: '1 回払い・分割・リボ払い・ためてから買う。1 か月ずつ進めて、払った合計と月数をくらべる。' },
     { date: '2026-11-17', seal: '町', tone: 'dark', href: 'mypage.html#machi', eyebrow: 'わたしの記録', title: '麻経の町', text: 'サイトの 6 つの場所が夕ぐれの町に。遊んだぶんだけ窓に明かりがともり、ぜんぶともると屋根に「済」の旗。' },

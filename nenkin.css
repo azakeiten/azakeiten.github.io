@@ -1,0 +1,71 @@
+/* nenkin.css — あそび場：胴上げから肩車へ（nenkin.js が読みこむ） */
+.nk[data-nenkin] { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.nk[data-nenkin] .nk-stage { --strain: .1; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 16px; border-radius: 24px; background: linear-gradient(180deg, #ffe9c4 0%, #ffd7a0 55%, #e7c48c 56%, #d8b47a 100%); color: #2a2015; box-shadow: 0 20px 44px -20px rgba(90, 60, 20, .5); overflow: hidden; }
+.nk[data-nenkin] .nk-era { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.nk[data-nenkin] .nk-era button { display: grid; gap: 0; padding: 8px 6px; border-radius: 14px; border: 2px solid rgba(107, 74, 34, .25); background: rgba(255, 250, 240, .7); color: #2a2015; cursor: pointer; transition: transform .2s, background .2s; }
+.nk[data-nenkin] .nk-era b { font-family: "Shippori Mincho", serif; font-size: 22px; line-height: 1.1; }
+.nk[data-nenkin] .nk-era small { font-size: 12px; font-weight: 700; color: #6b4a22; }
+.nk[data-nenkin] .nk-era button[aria-pressed="true"] { background: #1c2b23; border-color: #1c2b23; color: #ffe08a; transform: translateY(-2px); }
+.nk[data-nenkin] .nk-era button[aria-pressed="true"] small { color: #e3c68e; }
+.nk[data-nenkin] .nk-floor { position: relative; height: 250px; }
+.nk[data-nenkin] .nk-floor::after { content: ""; position: absolute; left: 4%; right: 4%; bottom: 4px; height: 14px; border-radius: 50%; background: rgba(90, 60, 20, .18); }
+.nk[data-nenkin] .nk-w { position: absolute; bottom: 10px; z-index: 1; width: 46px; height: 82px; transform: translateX(-50%); transition: left .9s cubic-bezier(.3, 1.2, .5, 1) var(--d), opacity .5s; }
+.nk[data-nenkin] .nk-w.is-off { opacity: 0; }
+.nk[data-nenkin] .nk-w svg, .nk[data-nenkin] .nk-e svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.nk-arm { stroke: #f3d6b5; stroke-width: 6; stroke-linecap: round; }
+.nk-head { fill: #f3d6b5; }
+.nk-ehead { fill: #f3d6b5; } .nk-hair { fill: none; stroke: #f5f5f0; stroke-width: 6; stroke-linecap: round; }
+.nk-ebody { fill: #8a6aa8; } .nk-earm { stroke: #f3d6b5; stroke-width: 5; stroke-linecap: round; } .nk-cane { stroke: #6b4a22; stroke-width: 4; stroke-linecap: round; }
+.nk[data-nenkin] .nk-e { position: absolute; z-index: 2; width: 52px; height: 84px; transform: translateX(-50%); transition: bottom .9s cubic-bezier(.3, 1.3, .5, 1), transform .9s cubic-bezier(.3, 1.3, .5, 1); filter: drop-shadow(0 6px 8px rgba(60, 40, 15, .3)); }
+.nk[data-nenkin] .nk-e.is-dou { bottom: 112px; transform: translateX(-50%) rotate(-90deg); animation: nk-toss 1.4s ease-in-out infinite; }
+.nk[data-nenkin] .nk-e.is-kiba { bottom: 72px; }
+.nk[data-nenkin] .nk-e.is-kata { bottom: 66px; animation: nk-sway 1.2s ease-in-out infinite; }
+@keyframes nk-toss { 50% { bottom: 136px; } }
+@keyframes nk-sway { 50% { transform: translateX(-50%) rotate(4deg); } }
+.nk[data-nenkin] .nk-e-tag { position: absolute; left: 50%; top: -22px; translate: -50% 0; padding: 1px 8px; border-radius: 999px; background: #8a6aa8; color: #fff; font-style: normal; font-size: 10.5px; font-weight: 800; white-space: nowrap; }
+.nk[data-nenkin] .nk-e.is-dou .nk-e-tag { transform: rotate(90deg); top: 26px; left: -6px; }
+.nk[data-nenkin] [data-type="kiba"] .nk-w:not(.is-off) { animation: nk-push 1.6s ease-in-out infinite; }
+.nk[data-nenkin] [data-type="kata"] .nk-w:not(.is-off) { animation: nk-wobble .7s ease-in-out infinite; }
+@keyframes nk-push { 50% { transform: translateX(-50%) translateY(2px) scaleY(.97); } }
+@keyframes nk-wobble { 25% { transform: translateX(-50%) rotate(-3deg) scaleY(.94); } 75% { transform: translateX(-50%) rotate(3deg) scaleY(.94); } }
+.nk[data-nenkin] .nk-drop { position: absolute; left: calc(50% + 22px); bottom: 70px; width: 8px; height: 12px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #7cc3d8; opacity: 0; }
+.nk[data-nenkin] [data-type="kata"] .nk-drop { animation: nk-sweat 1.2s ease-in infinite; }
+@keyframes nk-sweat { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(24px); } }
+.nk[data-nenkin] .nk-read { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: center; padding: 12px 14px; border-radius: 16px; background: rgba(255, 250, 240, .9); }
+.nk[data-nenkin] .nk-ratio { margin: 0; display: flex; align-items: baseline; gap: 4px; font-size: 13px; font-weight: 700; }
+.nk[data-nenkin] .nk-ratio b { font-family: "Shippori Mincho", serif; font-size: 42px; line-height: 1; color: #b5432f; margin-left: 8px; font-variant-numeric: tabular-nums; }
+.nk[data-nenkin] .nk-type { grid-row: 2; margin: 0; font-family: "Shippori Mincho", serif; font-size: 20px; font-weight: 800; color: #1c2b23; }
+.nk[data-nenkin] .nk-load { grid-row: span 2; }
+.nk[data-nenkin] .nk-load p { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 4px; font-size: 12.5px; font-weight: 700; }
+.nk[data-nenkin] .nk-load b { font-family: "Shippori Mincho", serif; font-size: 26px; font-variant-numeric: tabular-nums; }
+.nk[data-nenkin] .nk-meter { height: 14px; border-radius: 7px; background: rgba(42, 32, 21, .1); overflow: hidden; }
+.nk[data-nenkin] .nk-meter i { display: block; height: 100%; border-radius: 7px; background: #4f9a5a; transition: width .9s cubic-bezier(.3, 1.2, .5, 1), background .5s; }
+.nk[data-nenkin] .nk-meter i.is-mid { background: #e3b341; } .nk[data-nenkin] .nk-meter i.is-hi { background: #e0412b; }
+.nk[data-nenkin] .nk-load small { display: block; margin-top: 3px; font-size: 11px; opacity: .7; }
+.nk[data-nenkin] .nk-msg { margin: 0; padding: 10px 14px; border-radius: 12px; background: #1c2b23; color: #f3ecd8; font-size: 14px; font-weight: 700; line-height: 1.7; min-height: 3.4em; }
+.nk[data-nenkin] .nk-play { justify-self: start; padding: 11px 20px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font-size: 14.5px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 16px rgba(181, 67, 47, .35); }
+.nk[data-nenkin].is-busy .nk-play, .nk[data-nenkin].is-busy .nk-era button { opacity: .5; pointer-events: none; }
+.nk[data-nenkin] .nk-ideas { display: grid; gap: 10px; padding: 16px; border-radius: 22px; background: #fffaf0; color: #2a2015; box-shadow: 0 10px 26px -14px rgba(40, 30, 15, .4); opacity: .55; transition: opacity .4s; }
+.nk[data-nenkin] .nk-ideas.is-on { opacity: 1; }
+.nk[data-nenkin] .nk-ideas-h { margin: 0; }
+.nk[data-nenkin] .nk-ideas-h span { display: block; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; }
+.nk[data-nenkin] .nk-ideas-h small { display: block; font-size: 12px; color: #b5432f; font-weight: 700; }
+.nk[data-nenkin] .nk-list { display: grid; gap: 8px; }
+.nk[data-nenkin] .nk-idea { position: relative; display: grid; grid-template-columns: 36px 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; border: 2px solid rgba(107, 74, 34, .2); background: #fff; cursor: pointer; transition: border-color .2s, background .2s, transform .2s; }
+.nk[data-nenkin] .nk-idea:hover { transform: translateY(-1px); }
+.nk[data-nenkin] .nk-idea input { position: absolute; opacity: 0; }
+.nk[data-nenkin] .nk-s { grid-row: span 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #c9b48a; color: #fff; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; transition: background .2s; }
+.nk[data-nenkin] .nk-idea b { font-size: 14px; line-height: 1.4; }
+.nk[data-nenkin] .nk-idea small { font-size: 12px; color: #6b5a44; }
+.nk[data-nenkin] .nk-idea:has(input:checked) { border-color: #2f6b3a; background: #f0f7ee; }
+.nk[data-nenkin] .nk-idea:has(input:checked) .nk-s { background: #2f6b3a; }
+.nk[data-nenkin] .nk-idea:has(input:focus-visible) { outline: 2px solid #b5432f; outline-offset: 2px; }
+.nk[data-nenkin] .nk-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.nk[data-nenkin] .nk-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(138, 106, 168, .1); font-size: 14px; line-height: 1.75; }
+.nk[data-nenkin] .nk-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.nk[data-nenkin] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+:root[data-theme="dark"] .nk[data-nenkin] .nk-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nk[data-nenkin] .nk-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .nk[data-nenkin] { grid-template-columns: 1fr; } .nk[data-nenkin] .nk-learn { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .nk[data-nenkin] .nk-floor { height: 220px; } .nk[data-nenkin] .nk-w { width: 34px; height: 62px; } .nk[data-nenkin] .nk-e { width: 42px; height: 68px; } .nk[data-nenkin] .nk-e.is-dou { bottom: 90px; } .nk[data-nenkin] .nk-e.is-kiba { bottom: 54px; } .nk[data-nenkin] .nk-e.is-kata { bottom: 50px; } .nk[data-nenkin] .nk-read { grid-template-columns: 1fr; } .nk[data-nenkin] .nk-load { grid-row: auto; } .nk[data-nenkin] .nk-ratio b { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) { .nk[data-nenkin] *, .nk[data-nenkin] *::before, .nk[data-nenkin] *::after { animation: none !important; transition: none !important; } }
