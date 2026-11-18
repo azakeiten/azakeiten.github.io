@@ -181,5 +181,58 @@ service cloud.firestore {
         allow update, delete: if false;
       }
     }
+    // ================================================================
+    //  お札マンの名前の投票（vote.html の namevote.js）
+    //    mascot/name              … 集計（osatsuman: 3, ...）誰でも読める
+    //    mascot/name/votes/{uid}  … 1 人 1 件の投票記録（本人だけ読める）
+    //    ・しくみは文化祭投票と同じ。候補を変えたら namevote.js の C も同じに直すこと
+    // ================================================================
+    function mascotOptions() {
+      return ['osatsuman', 'osatsukun', 'asafuda', 'fudamaru'];
+    }
+    function mascotVotePath(pollId) {
+      return /databases/$(database)/documents/mascot/$(pollId)/votes/$(request.auth.uid);
+    }
+
+    match /mascot/{pollId} {
+      allow read: if pollId == 'name';
+
+      allow create: if signedIn()
+        && pollId == 'name'
+        && request.resource.data.keys().hasOnly(mascotOptions())
+        && request.resource.data.keys().hasAll(mascotOptions())
+        && request.resource.data.osatsuman == 0
+        && request.resource.data.osatsukun == 0
+        && request.resource.data.asafuda == 0
+        && request.resource.data.fudamaru == 0;
+
+      allow update: if signedIn()
+        && pollId == 'name'
+        && !exists(mascotVotePath(pollId))
+        && existsAfter(mascotVotePath(pollId))
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly([getAfter(mascotVotePath(pollId)).data.choice])
+        && request.resource.data[getAfter(mascotVotePath(pollId)).data.choice]
+             == resource.data[getAfter(mascotVotePath(pollId)).data.choice] + 1;
+
+      allow delete: if false;
+
+      match /votes/{uid} {
+        allow get: if signedIn() && request.auth.uid == uid;
+        allow list: if false;
+
+        allow create: if signedIn()
+          && pollId == 'name'
+          && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['choice', 'at'])
+          && request.resource.data.choice in mascotOptions()
+          && request.resource.data.at == request.time
+          && getAfter(/databases/$(database)/documents/mascot/$(pollId)).data[request.resource.data.choice]
+               == get(/databases/$(database)/documents/mascot/$(pollId)).data[request.resource.data.choice] + 1;
+
+        allow update, delete: if false;
+      }
+    }
+
   }
 }

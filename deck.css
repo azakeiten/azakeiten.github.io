@@ -397,3 +397,27 @@ html .dk.is-chara .dk-s:not(.is-cover) .dk-t { font-size: clamp(26px, 4vw, 52px)
   .dk-h-motto { margin: 10pt 0 0; text-align: center; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 11pt; }
 }
 @media (max-width: 760px) { .dk-ctl .dk-hbtn { display: none; } }
+/* 案内の声：字幕と開演 */
+.dk-ctl .dk-obtn { border-color: #e3b341; color: #f3e3bd; }
+.dk-cap { position: absolute; left: 50%; top: clamp(70px, 12vh, 120px); z-index: 4; translate: -50% 0; display: flex; align-items: center; gap: 10px; max-width: min(90vw, 720px); padding: 10px 20px 10px 10px; border-radius: 999px; background: rgba(15, 13, 11, .82); box-shadow: 0 10px 30px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(243, 227, 189, .35); font-size: clamp(15px, 2vw, 20px); font-weight: 800; pointer-events: none; }
+.dk-cap[hidden] { display: none; }
+.dk-cap b { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #2a3d6e; color: #f3e3bd; font-family: 'Shippori Mincho', serif; font-size: 13px; }
+.dk-cap.is-in { animation: dk-cap-in .35s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes dk-cap-in { from { opacity: 0; transform: translateY(-10px); } }
+.dk-op { position: absolute; inset: 0; z-index: 8; display: grid; place-content: center; justify-items: center; gap: 18px; padding: 24px; background: radial-gradient(ellipse at 50% 45%, #2a2216, #0f0d0b 70%); text-align: center; animation: dk-op-in .5s ease-out; }
+.dk-op::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(120, 30, 20, .55) 0 34px, rgba(80, 18, 12, .65) 34px 68px); clip-path: inset(0 0 calc(100% - 46px) 0); opacity: .9; }
+@keyframes dk-op-in { from { opacity: 0; } }
+.dk-op.is-out { animation: dk-op-out .6s ease-in forwards; }
+@keyframes dk-op-out { to { opacity: 0; transform: scale(1.04); } }
+.dk-op-k { margin: 0; display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 800; letter-spacing: .3em; color: #e3b341; }
+.dk-op-k span { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 10px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 16px; letter-spacing: 0; transform: rotate(-4deg); }
+.dk-op-t { margin: 0; max-width: 18em; min-height: 2.8em; font-family: 'Shippori Mincho', serif; font-size: clamp(24px, 4.2vw, 46px); font-weight: 800; line-height: 1.4; color: #f3eee4; }
+.dk-op-t.is-in { animation: dk-cap-in .5s ease-out; }
+.dk-op-n { margin: 0; font-family: 'Shippori Mincho', serif; font-size: clamp(120px, 28vw, 300px); font-weight: 800; line-height: 1; color: #f3e3bd; text-shadow: 0 0 60px rgba(227, 179, 65, .5); }
+.dk-op:not(.is-count) .dk-op-n { display: none; }
+.dk-op.is-count .dk-op-t { display: none; }
+.dk-op-n.is-pop { animation: dk-op-pop .6s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes dk-op-pop { from { opacity: 0; transform: scale(1.8); } }
+.dk-op-x { position: absolute; right: 20px; bottom: 20px; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .08); color: #fff; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+@media (max-width: 760px) { .dk-ctl .dk-obtn, .dk-ctl .dk-lbtn { display: none; } }
+@media (prefers-reduced-motion: reduce) { .dk-cap, .dk-op, .dk-op-t, .dk-op-n { animation: none !important; } }

@@ -23,6 +23,11 @@
 
   const BEST_KEY = 'azakei_quiz_best', NEWS_BEST_KEY = 'azakei_quiz_best_news', TIME_BEST_KEY = 'azakei_quiz_best_time';
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 案内の声（voice.js：効果音ラボの声）。「案内の声」をオンにしたときだけ。「第一問」「正解です」など
+  const QV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
+  let vOn = false; try { vOn = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
+  const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + QV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
+  const vo = names => { if (vOn) VO().then(v => { if (v && vOn) v.say(names); }); };
   let chips, round, used, cur, life, history, log, mode = 'festival', news = null;
   let best = 0, newsBest = 0, timeBest = 0;
   try { best = +localStorage.getItem(BEST_KEY) || 0; newsBest = +localStorage.getItem(NEWS_BEST_KEY) || 0; timeBest = +localStorage.getItem(TIME_BEST_KEY) || 0; } catch (e) {}
@@ -228,6 +233,7 @@
           <button type="button" role="radio" class="qz-mode" data-mode="news" aria-checked="${mode === 'news'}"><b>ニュースモード</b><small>毎ラウンド「麻経新聞」のニュースで、倍率やチップが変わる${newsBest ? `（最高 ${newsBest} 枚）` : ''}</small></button>
           <button type="button" role="radio" class="qz-mode" data-mode="time" aria-checked="${mode === 'time'}"><span class="qz-new">NEW</span><b>タイムアタック</b><small>60 秒で何点とれる？ かんたん 1 点・普通 2 点・激ムズ 3 点${timeBest ? `（最高 ${timeBest} 点）` : ''}</small></button>
         </div>
+        <button type="button" class="qz-voice" aria-pressed="${vOn}">案内の声${vOn ? '：あり' : ''}<small>「第一問」「正解です」を声で</small></button>
         <button type="button" class="btn-primary qz-start">ゲームをはじめる</button>
         ${missList().length ? `<button type="button" class="btn-ghost qz-review-start">前にまちがえた問題 ${missList().length} 問を復習する</button>` : ""}
         ${RANK ? '<div class="qz-rank" data-rank-box><p class="qz-rank-head">Web 版ランキング <small class="nw">上位 5 人</small></p><p class="qz-small">読み込み中…</p></div>' : ''}
@@ -238,6 +244,8 @@
       root.querySelectorAll('.qz-mode').forEach(x => x.setAttribute('aria-checked', x === b ? 'true' : 'false'));
     }));
     const rv = root.querySelector('.qz-review-start'); if (rv) rv.addEventListener('click', review);
+    const vb = root.querySelector('.qz-voice');
+    vb.addEventListener('click', () => { vOn = !vOn; vb.setAttribute('aria-pressed', vOn); vb.firstChild.textContent = vOn ? '案内の声：あり' : '案内の声'; VO().then(v => { if (!v) return; v.set(vOn); if (vOn) v.say(['youkoso']); }); });
     root.querySelector('.qz-start').addEventListener('click', () => {
       chips = START_CHIPS; round = 0; used = { easy: new Set(), normal: new Set(), hard: new Set() };
       life = { half: true, swap: true }; history = [START_CHIPS]; log = [];
@@ -282,6 +290,7 @@
     };
     const over = () => {
       if (!timer) return; clearInterval(timer); timer = 0;
+      vo(['timeupdesu']);
       const isBest = score > timeBest;
       if (isBest) { timeBest = score; try { localStorage.setItem(TIME_BEST_KEY, score); } catch (e) {} }
       show(`<div class="dg-card qz-final">
@@ -296,6 +305,7 @@
       root.querySelector('.qz-retry').addEventListener('click', intro);
     };
     timer = setInterval(tick, 200);
+    vo(['start']);
     next();
   }
 
@@ -353,6 +363,7 @@
     if (onKey) document.removeEventListener('keydown', onKey);
     const q = cur.qs[cur.idx];
     const choices = shuffle(q.a.map((t, i) => ({ t, ok: i === 0 })));
+    vo([cur.idx ? 'dainimon' : 'daiichimon']);
     show(`
       <div class="dg-card qz-q">
         <div class="qz-status"><span>ラウンド ${round} · ${LEVELS[cur.level].name} ${dots()}</span><span>賭け <b>${cur.bet}</b> 枚</span></div>
@@ -386,7 +397,7 @@
       b.classList.remove('is-lock');
       const ok = b.dataset.ok === '1';
       if (ok) { cur.correct++; b.classList.add('is-burst'); }
-      log.push({ q: q.q, right: q.a[0], ok, level: cur.level }); miss(q, ok);
+      log.push({ q: q.q, right: q.a[0], ok, level: cur.level }); miss(q, ok); vo([ok ? 'seikaidesu' : 'zannen']);
       btns.forEach(x => { x.disabled = true; if (x.dataset.ok === '1') x.classList.add('is-right'); });
       root.querySelectorAll('.qz-life button').forEach(x => { x.disabled = true; });
       if (!ok) { b.classList.add('is-wrong'); card.classList.add('qz-shake'); }
@@ -457,6 +468,7 @@
     if (isBest) { if (mode === 'news') { newsBest = chips; try { localStorage.setItem(NEWS_BEST_KEY, chips); } catch (e) {} } else { best = chips; try { localStorage.setItem(BEST_KEY, chips); } catch (e) {} } }
     const title = chips >= 120 ? '伝説の億万長者' : chips >= 40 ? '億万長者' : chips > START_CHIPS ? 'やり手の投資家' : chips > 0 ? '堅実な投資家' : '一文なし……';
     const okCount = log.filter(l => l.ok).length;
+    setTimeout(() => vo([chips >= 40 ? 'omedetougozaimasu' : chips > START_CHIPS ? 'yokudekimashita' : 'ganbarimasyou']), 500);
     const url = 'https://azakeiten.github.io/quiz.html';
     const text = `AZAKEI の億万長者クイズで、チップ ${START_CHIPS} 枚 → ${chips} 枚（${times} 倍）！ 称号「${title}」 #AZAKEI`;
     show(`

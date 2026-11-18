@@ -10,6 +10,11 @@
   if (!box || box.dataset.ready) return;
   box.dataset.ready = '1';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 計時の声（voice.js：効果音ラボの声）。「始め」「残り 10 秒」「タイムアップです」
+  const PV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
+  let annOn = false; try { annOn = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
+  const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + PV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
+  const vo = names => { if (annOn) VO().then(v => { if (v && annOn) v.say(names, .03); }); };
   const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
   const SAMPLE = {
     problem: '朝の駅で、自転車を止める場所が足りない', idea: '空いている駐輪場を、アプリで予約できるようにする',
@@ -92,6 +97,7 @@
     <div class="pi-ctrl">
       <button type="button" class="pi-next" hidden>次へ</button>
       <label class="pi-tg"><input type="checkbox" class="pi-voice"${'speechSynthesis' in window ? '' : ' disabled'}>お札マンが原稿を読む</label>
+      <label class="pi-tg"><input type="checkbox" class="pi-ann">計時の声</label>
       <label class="pi-tg"><input type="checkbox" class="pi-sfx">効果音</label>
       <button type="button" class="pi-reset">はじめから</button>
     </div>
@@ -99,6 +105,7 @@
     <p class="pi-note">審査員は練習用の架空の人です。質問は、ビジネスコンテストでよく聞かれるたぐいのものを集めました。声に出して答えてみてください（声や答えは、どこにも送られません）。</p>`;
     box.querySelector('.pi-voice').checked = voiceOn;
     box.querySelector('.pi-sfx').checked = sfxOn;
+    box.querySelector('.pi-ann').checked = annOn;
     host('発表は、はじめの 10 秒が勝負！ 幕が上がったら、ゆっくり大きな声でね。');
   };
   const $ = s => box.querySelector(s);
@@ -112,7 +119,7 @@
     const tick = () => {
       const left = Math.max(0, sec - (performance.now() - t0) / 1000), s = Math.ceil(left);
       bar.style.transform = `scaleX(${left / sec})`;
-      if (s !== last) { last = s; tm.textContent = `のこり ${s} 秒`; box.classList.toggle('is-hurry', s <= 10 && s > 0); if (s <= 3 && s > 0) tone(880, .08, 'square', .04); }
+      if (s !== last) { last = s; tm.textContent = `のこり ${s} 秒`; box.classList.toggle('is-hurry', s <= 10 && s > 0); if (s <= 3 && s > 0) tone(880, .08, 'square', .04); if (s === 10 && sec > 20 && phase === 'pitch' && !voiceOn) vo(['nokori', 'zyuu', 'byou']); }
       if (left <= 0) { clearInterval(timer); box.classList.remove('is-hurry'); onEnd(); }
     };
     tick(); timer = setInterval(tick, 200);
@@ -148,8 +155,9 @@
     step('発表　60 秒');
     host(voiceOn ? 'ぼくが原稿を読むね。審査員の顔を見ながら、いっしょに口を動かしてみて。' : '光っている文を、声に出して読んでみよう。時計は気にしすぎずに！');
     const nx = $('.pi-next'); nx.hidden = false; nx.textContent = '発表を終える';
+    vo(['hazime']);
     setTimeout(prompter, reduce ? 0 : 900);
-    countdown(PITCH_S, toQA);
+    countdown(PITCH_S, () => { vo(['timeupdesu']); toQA(); });
   };
   const toQA = () => {
     if (phase !== 'pitch') return;
@@ -200,6 +208,7 @@
     if (e.target.closest('.pi-reset')) { stopAll(); phase = 'idle'; box.classList.remove('is-open', 'is-pitch', 'is-qa', 'is-end', 'is-hurry'); box.style.removeProperty('--spot'); build(); }
   });
   box.addEventListener('change', e => {
+    if (e.target.matches('.pi-ann')) { annOn = e.target.checked; VO().then(v => { if (v) v.set(annOn); }); }
     if (e.target.matches('.pi-voice')) { voiceOn = e.target.checked; if (!voiceOn && window.speechSynthesis) speechSynthesis.cancel(); }
     if (e.target.matches('.pi-sfx')) { sfxOn = e.target.checked; tone(660, .1); }
   });

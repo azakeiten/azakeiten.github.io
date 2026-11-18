@@ -1,0 +1,42 @@
+/* namevote.css — 投票：お札マンの名前を決めよう（namevote.js が読みこむ） */
+.nv[data-namevote] { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 18px; align-items: start; }
+.nv[data-namevote] .nv-stage { position: sticky; top: 90px; display: grid; justify-items: center; gap: 12px; padding: 26px 18px 18px; border-radius: 26px; background: radial-gradient(ellipse at 50% 30%, #fff6dc, #f1e2bd 70%); color: #2a2015; box-shadow: 0 20px 44px -24px rgba(107, 74, 34, .6), inset 0 0 0 1px rgba(107, 74, 34, .18); overflow: hidden; }
+.nv[data-namevote] .nv-stage::before { content: ''; position: absolute; inset: auto -10% 0; height: 34%; background: repeating-linear-gradient(90deg, rgba(107, 74, 34, .08) 0 22px, transparent 22px 44px); border-top: 3px solid rgba(107, 74, 34, .25); }
+.nv[data-namevote] .nv-man { position: relative; display: grid; justify-items: center; }
+.nv[data-namevote] .nv-fig { width: min(220px, 60vw); aspect-ratio: 120 / 112; }
+.nv[data-namevote] .nv-fig svg { display: block; width: 100%; height: 100%; }
+.nv[data-namevote] .nv-tag { position: relative; margin: -14px 0 0; padding: 8px 22px 10px; border-radius: 10px; background: #fffaf0; box-shadow: 0 6px 16px rgba(107, 74, 34, .25), inset 0 0 0 2px #b5432f; text-align: center; transform: rotate(-3deg); }
+.nv[data-namevote] .nv-tag::before, .nv[data-namevote] .nv-tag::after { content: ''; position: absolute; top: -16px; width: 2px; height: 18px; background: #6b4a22; }
+.nv[data-namevote] .nv-tag::before { left: 26%; } .nv[data-namevote] .nv-tag::after { right: 26%; }
+.nv[data-namevote] .nv-tag small { display: block; font-size: 11px; font-weight: 700; color: #8a7a62; }
+.nv[data-namevote] .nv-tag b { font-family: "Shippori Mincho", serif; font-size: clamp(26px, 4vw, 34px); font-weight: 800; color: #b5432f; letter-spacing: .04em; }
+.nv[data-namevote] .nv-man.is-hop { animation: nv-hop .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes nv-hop { 40% { transform: translateY(-14px); } }
+.nv[data-namevote] .nv-man.is-yay { animation: nv-yay .9s ease-in-out; }
+@keyframes nv-yay { 20% { transform: translateY(-18px) rotate(-6deg); } 50% { transform: translateY(0) rotate(5deg); } 75% { transform: translateY(-8px); } }
+.nv[data-namevote] .nv-say { position: relative; margin: 0; max-width: 24em; padding: 10px 14px; border-radius: 14px; background: #2a2015; color: #f3eee4; font-size: 13.5px; font-weight: 700; line-height: 1.7; text-align: center; }
+.nv[data-namevote] .nv-side { display: grid; gap: 10px; }
+.nv[data-namevote] .nv-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.nv[data-namevote] .nv-c { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; width: 100%; padding: 12px 16px; border-radius: 16px; border: 2px solid var(--color-border, rgba(107, 74, 34, .2)); background: var(--color-surface, #fffaf0); color: inherit; font: inherit; text-align: left; cursor: pointer; transition: border-color .2s, transform .2s; }
+.nv[data-namevote] .nv-c:hover { transform: translateY(-2px); }
+.nv[data-namevote] .nv-c[aria-pressed="true"] { border-color: #b5432f; box-shadow: 0 8px 20px -10px rgba(181, 67, 47, .6); }
+.nv[data-namevote] .nv-n b { font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; }
+.nv[data-namevote] .nv-n small { margin-left: 8px; font-size: 12px; opacity: .65; }
+.nv[data-namevote] .nv-why { grid-column: 1 / -1; font-size: 13px; line-height: 1.65; opacity: .85; }
+.nv[data-namevote] .nv-cnt { grid-row: 1; grid-column: 2; align-self: center; font-size: 12px; font-weight: 700; }
+.nv[data-namevote] .nv-cnt b { font-size: 18px; font-variant-numeric: tabular-nums; }
+.nv[data-namevote] .nv-bar { grid-column: 1 / -1; height: 6px; border-radius: 3px; background: rgba(107, 74, 34, .1); overflow: hidden; }
+.nv[data-namevote] .nv-bar i { display: block; height: 100%; width: 0; border-radius: 3px; background: #e3b341; transition: width .8s cubic-bezier(.3, 1, .4, 1); }
+.nv[data-namevote] .nv-c.is-top .nv-bar i { background: #b5432f; }
+.nv[data-namevote] .nv-mine { display: none; position: absolute; right: 12px; top: -10px; padding: 2px 10px; border-radius: 999px; background: #2a3d6e; color: #fff; font-size: 11px; font-weight: 800; }
+.nv[data-namevote] .nv-c.is-mine .nv-mine { display: block; }
+.nv[data-namevote] .nv-go { padding: 14px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 20px rgba(181, 67, 47, .35); }
+.nv[data-namevote] .nv-go:disabled { background: #8a8f86; box-shadow: none; cursor: default; }
+.nv[data-namevote].is-voted .nv-go:disabled { background: #2a3d6e; }
+.nv[data-namevote] .nv-status { margin: 0; min-height: 1.6em; font-size: 13px; font-weight: 700; }
+.nv[data-namevote] .nv-total { margin: 0; font-size: 13px; } .nv[data-namevote] .nv-total b { font-family: "Shippori Mincho", serif; font-size: 24px; color: #b5432f; }
+.nv[data-namevote] .nv-total small { font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .nv[data-namevote] .nv-c { background: rgba(255, 255, 255, .05); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nv[data-namevote] .nv-c { background: rgba(255, 255, 255, .05); } }
+@media (max-width: 820px) { .nv[data-namevote] { grid-template-columns: minmax(0, 1fr); } .nv[data-namevote] .nv-stage { position: relative; top: 0; } }
+@media (prefers-reduced-motion: reduce) { .nv[data-namevote] *, .nv[data-namevote] .nv-man { animation: none !important; transition: none !important; } }

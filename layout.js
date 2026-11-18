@@ -40,7 +40,7 @@
     ]},
     { group: '参加する', en: 'Join', pages: [
       { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.6M12 16.8v.2', href: 'diagnosis.html',  ja: 'エコノミスト診断',  en: 'Type Test', desc: 'YES か NO で、あなたの投資家タイプがわかる。', img: 'photos/room-diagnosis.jpg', badge: 'NEW' },
-      { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9 9h6M9 12h6M12 6v12', href: 'quiz.html',       ja: '億万長者クイズ',    en: 'Quiz',      desc: 'チップを賭けて 2 問に挑戦。目指せ 6 倍。', img: 'photos/board-special.jpg', badge: 'NEW' },
+      { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9 9h6M9 12h6M12 6v12', href: 'quiz.html',       ja: '経済のあそび場',    en: 'Play',      desc: '億万長者クイズなど、遊んで学ぶ。', img: 'photos/board-special.jpg', badge: 'NEW' },
       { ico: 'M4 19h16M7 16v-5M12 16V7M17 16v-8', href: 'sim.html',        ja: '経済ラボ', en: 'Lab', desc: 'シミュレーターとゲームで、経済を手で動かす。', img: 'photos/board-special.jpg', badge: 'NEW' },
       { ico: 'M5 11h14v9H5zM9 15l2 2 4-4M8 11V6h8v5', href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '次はどんな展示が見たい？ あなたの 1 票を参考に。',   img: 'photos/hallway-game.jpg', badge: '受付中' },
       { ico: 'M3 12l4-4 3 2 4-3 7 6M7 13l3 3 2-1 2 2 3-3', href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'photos/star-bills.jpg' },
@@ -179,7 +179,7 @@
   // フッターのリンクは「知る」「遊ぶ・学ぶ」「つながる」の 3 つに分ける
   const FOOT_GROUPS = [
     { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['report.html', '2026 年の活動報告'], ['azakei.html', 'AZAKEI として'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
-    { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '億万長者クイズ'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', '経済ラボ'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
+    { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '経済のあそび場'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', '経済ラボ'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
     { en: 'Connect', ja: 'つながる', links: [['contact.html', 'お問い合わせ'], ['sponsor.html', '協賛のご案内'], ...sns.map(s => [s.url, s.name, s.handle])] }
   ];
   footer.innerHTML = `
@@ -294,6 +294,9 @@
     ['quiz.html#koen', 'みんなの公園', 'あそび場', '公共財 ただ乗り フリーライダー 税金 公共事業 公園 出し合う 協力'],
     ['quiz.html#himitsu', '新しいお札のひみつ', 'あそび場', 'お札 新紙幣 偽造防止 ホログラム すかし 潜像模様 パールインキ マイクロ文字 識別マーク 渋沢栄一 日本銀行券'],
     ['quiz.html#subsc', 'サブスクと買い切り', 'あそび場', 'サブスク サブスクリプション 定額 買い切り 解約 損益分岐点 固定費 漫画 音楽 動画'],
+    ['vote.html#namevote', 'お札マンの名前を決めよう', '投票', 'お札マン キャラクター 名前 投票 おさつくん あさふだ ふだまる'],
+    ['sponsor.html#return', 'ご協賛へのお返し', '協賛', '協賛 スポンサー お返し 広報 返却 報告 将来'],
+    ['index.html#deck', '開演の案内から見るスライド', 'トップ', 'スライド 発表 開演 案内 声 アナウンス カウントダウン プレゼン'],
     ['quiz.html#otsuri', 'おつりの達人', 'クイズ', 'おつり お金 計算 小学生 レジ お店 ゲーム 硬貨'],
     ['glossary.html#jugyou', '授業で使う 3 つの 50 分', '用語辞典', '授業 先生 学校 教材 指導案 50分 流れ 公民 社会'],
     ['sim.html#ike', 'みんなの池', '経済ラボ', '共有地の悲劇 資源 魚 漁業 とりすぎ 漁獲枠 TAC SDGs 外部性 ルール'],

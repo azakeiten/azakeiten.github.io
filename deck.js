@@ -13,6 +13,7 @@
    ================================================================ */
 (function() {
   if (window.AZAKEI_DECK) return;
+  const DV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
   // 麻経のめざすこと：経済に「親しむ」→ 仕組みを「知る」→ 自分たちで仕組みを「つくる」。step は 0・1・2（なしは全体の話）
   const STEPS = [['親', '親しむ'], ['知', '知る'], ['創', 'つくる']];
   const S = [
@@ -22,12 +23,12 @@
       n: 'わたしたちがやっていることは、3 つの段に分けられます。親しむ、知る、つくる。この順に、紹介していきます。' },
     { k: '親しむ', step: 0, img: 'photos/s/star-door.jpg', t: '教室ひとつを、<br>経済の町に。', s: '文化祭の体験型展示「麻布経済展」。入口でチップを受けとり、6 つのコーナーで遊びながら、チップが増える・減るを体で感じます。',
       n: 'まず「親しむ」。文化祭では、教室ひとつを経済の町にした「麻布経済展」を開いています。入口でチップを受けとって、6 つのコーナーで遊びます。' },
-    { k: '親しむ', step: 0, num: '2,364', u: '人', t: '3 日間で、2,364 人が<br>経済で遊んだ。', s: '2026 年の文化祭。1 日目 492 人、2 日目 1,152 人、3 日目 720 人。', bars: [492, 1152, 720],
+    { k: '親しむ', step: 0, num: '2,364', u: '人', t: '3 日間で、2,364 人が<br>経済で遊んだ。', s: '2026 年の文化祭。1 日目 492 人、2 日目 1,152 人、3 日目 720 人。', bars: [492, 1152, 720], vo: [['nisen', 'sanbyaku', 'rokuzyuu', 'yo', 'nin'], '2,364 人'],
       n: '2026 年の文化祭では、3 日間で 2,364 人が来てくれました。いちばん多かったのは 2 日目の 1,152 人です。' },
-    { k: '親しむ', step: 0, seal: '試', t: 'この場で、<br>ひとつ選んでください。', s: 'A：かならず 100 チップもらえる。　B：コインを投げて、表なら 200 チップ、裏なら 0。', cls: 'is-try', tryit: true, dur: 12000,
+    { k: '親しむ', step: 0, seal: '試', t: 'この場で、<br>ひとつ選んでください。', s: 'A：かならず 100 チップもらえる。　B：コインを投げて、表なら 200 チップ、裏なら 0。', cls: 'is-try', tryit: true, dur: 12000, vo: [['sentakushite'], '選択してください。'],
       n: '会場のみなさんに、ひとつ質問です。A は、かならず 100 チップ。B は、コインの表なら 200、裏なら 0。どちらを選びますか。手をあげてもらってから、コインを投げます。どちらが正しい、ということはありません。「確実」と「ふえるかも」をくらべる気持ちが、経済のリスクの考え方の入口です。' },
-    { k: '知る', step: 1, img: 'photos/s/room-diagnosis.jpg', t: '遊んだあとに、<br>仕組みを知る。', s: 'なぜチップが増えたのか、減ったのか。お金は、家計・企業・銀行・政府のあいだを、どうめぐっているのか。Web でも、図や辞典で確かめられます。', chips: ['用語辞典 300 語', 'お金のめぐりの図', '経済ラボ 16 の実験', 'クイズ 84 問'],
-      n: '次に「知る」。遊んだあとで、なぜチップが増えたのか、減ったのかを考えます。ホームページには、用語辞典 300 語、経済ラボの 16 の実験、クイズ 84 問があります。' },
+    { k: '知る', step: 1, img: 'photos/s/room-diagnosis.jpg', t: '遊んだあとに、<br>仕組みを知る。', s: 'なぜチップが増えたのか、減ったのか。お金は、家計・企業・銀行・政府のあいだを、どうめぐっているのか。Web でも、図や辞典で確かめられます。', chips: ['用語辞典 300 語', 'お金のめぐりの図', '経済ラボ 25 の実験', 'クイズ 84 問'],
+      n: '次に「知る」。遊んだあとで、なぜチップが増えたのか、減ったのかを考えます。ホームページには、用語辞典 300 語、経済ラボの 25 の実験、クイズ 84 問があります。' },
     { k: '知る', step: 1, seal: '巡', t: 'お金は、<br>めぐっている。', s: '給料をもらい、買い物をし、預けたお金は貸し出され、税金は道路や学校になる。一人の 1 万円も、町の中をぐるりと回っています。', cls: 'is-flow', flow: true,
       n: 'たとえば、お金のめぐり。家計は働いて給料をもらい、企業から物を買います。預けたお金は銀行から企業に貸し出され、税金は道路や学校になって返ってきます。こうした仕組みを、図や実験で知ることができます。' },
     { k: 'つくる', step: 2, img: 'photos/s/room-paper.jpg', t: '仕組みを、<br>自分たちの手で。', s: '展示のゲームとルール、会場で使う券（チップ）、会場の飾り。どれも部員が考えて、つくりました。遊ぶ側から、仕組みをつくる側へ。',
@@ -51,7 +52,7 @@
     ['まずは「親しむ」。', '文化祭では、教室ひとつを経済の町にしたんだ。', '入口でチップを受けとって、6 つのコーナーで遊ぶよ。'],
     [{ t: '3 日間で、2,364 人が来てくれたよ！', hl: '.dk-num', m: 'wow' }, { t: 'いちばん多かったのは、2 日目の 1,152 人。', hl: '.dk-bars span:nth-child(2)' }],
     [{ t: 'ここでクイズ。A は、かならず 100 チップ。', hl: '[data-ab="A"]' }, { t: 'B は、コインの表なら 200、裏なら 0。', hl: '[data-ab="B"]' }, { t: 'みんなはどっち？ ……うーん。', m: 'think' }, { t: 'ぼくは、B にしてみる！', hl: '[data-ab="B"]', m: 'happy' }, '@flip', { t: '平均すると、どっちも 100。「確実」をとるか、「ふえるかも」をとるか。それが、リスクの考え方の入口だよ。', hl: '.dk-try-r' }],
-    ['つぎは「知る」。', { t: 'なぜチップが増えたのか、減ったのかを考えるんだ。', m: 'think' }, { t: 'サイトには、用語辞典 300 語や、経済ラボの 16 の実験があるよ。', hl: '.dk-chips li:nth-child(-n+3)' }],
+    ['つぎは「知る」。', { t: 'なぜチップが増えたのか、減ったのかを考えるんだ。', m: 'think' }, { t: 'サイトには、用語辞典 300 語や、経済ラボの 25 の実験があるよ。', hl: '.dk-chips li:nth-child(-n+3)' }],
     [{ t: 'お金は、町の中をめぐっているよ。小さなお札に、図の上を回ってもらうね。', m: 'happy' }, { t: '家計は企業で働いて給料をもらい、企業から物を買う。', hl: '[data-k="家計"], [data-k="企業"]', ride: [1, 0] }, { t: '預けたお金は、銀行から企業へ貸し出される。', hl: '[data-k="銀行"]', ride: [2, 3] }, { t: '税金は政府に集まって、道路や学校になるんだ。', hl: '[data-k="政府"]', ride: [4, 5] }],
     ['さいごは「つくる」。', '展示のゲームやルール、会場で使う券、会場の飾りは、部員が考えてつくったんだ。'],
     [{ t: '会場で使う券ひとつにも、決めることがたくさんあるよ。', m: 'think' }, { t: '何枚用意する？ 1 枚で何回遊べる？', hl: '.dk-b-q li:nth-child(-n+2)' }, { t: 'どう増える？ どこで使える？', hl: '.dk-b-q li:nth-child(n+3)' }, { t: 'ちなみに、ぼくの体はお札の形なんだ。', m: 'happy' }],
@@ -143,6 +144,7 @@
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
       <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
       <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-sp">速さ：ふつう</button><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p><button type="button" class="dk-ch-go">止まっています。つづける ▶</button></div><div class="dk-ch-man">${MAN}</div></div>
+      <div class="dk-cap" hidden aria-live="polite"><b>案内</b><span></span></div>
       <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
       <div class="dk-ctl">
         <button type="button" class="dk-prev" aria-label="前のスライド">←</button>
@@ -154,6 +156,8 @@
         <button type="button" class="dk-hbtn" title="配る資料を印刷（A4）">資料</button>
         <button type="button" class="dk-gbtn" aria-pressed="false" title="一覧（G）">一覧</button>
         <button type="button" class="dk-nbtn" aria-pressed="false" title="自分で話すときの台本（N）">台本</button>
+        <button type="button" class="dk-obtn" title="開演の案内からはじめる（O）">開演</button>
+        <button type="button" class="dk-abtn" aria-pressed="false" title="案内の声（V）">案内の声</button>
         <button type="button" class="dk-cbtn" aria-pressed="false" title="お札マンが発表（P）">発表</button>
         <button type="button" class="dk-x" aria-label="閉じる">閉じる</button>
       </div>`;
@@ -177,6 +181,9 @@
     el.querySelector('.dk-dbtn').onclick = () => setTool(tool === 'pen' ? '' : 'pen');
     el.querySelector('.dk-pv').onclick = presenter;
     // 指し棒：赤い光の点がマウスについてくる
+    el.querySelector('.dk-obtn').onclick = opening;
+    el.querySelector('.dk-abtn').onclick = () => setAnn(!ann);
+    setAnn(ann, true);
     const lz = el.querySelector('.dk-laser');
     el.addEventListener('pointermove', e => { if (tool === 'laser') { lz.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; } });
     // ペン：スライドの上に、朱色で書きこむ
@@ -251,6 +258,9 @@
     // コインの遊びは、来るたびに最初から
     const tb = cur.querySelector('.dk-try'); if (tb) { tb.querySelectorAll('[data-ab]').forEach(b => b.removeAttribute('aria-pressed')); tb.querySelector('.dk-coin').className = 'dk-coin'; tb.querySelector('.dk-try-r').textContent = 'A か B を押すと、コインを投げます。'; }
     countUp(cur); stamp(); prevI = i;
+    annTok++; annP = null; flipAsked = false; capHide(); if (window.AZAKEI_VOICE) AZAKEI_VOICE.stop();
+    if (ann && S[i].vo && !opBusy) annP = annSay(S[i].vo[0], S[i].vo[1]);
+    if (ann && !chara && S[i].cls === 'is-end') { const k = annTok; setTimeout(() => { if (k === annTok) annSay(['goseichouarigatou'], 'ご清聴ありがとうございました。', true); }, 1600); }
     clearPen(); syncPv();
     hideQA();
     if (S[i].cls === 'is-end') setTimeout(() => { if (S[i].cls === 'is-end') rain(); }, 500);
@@ -293,6 +303,69 @@
     } catch (e) {}
   };
 
+  // ── 案内の声（voice.js：効果音ラボの声）。「案内の声」を押したとき・「開演」のときだけ流れる。流れている文は字幕にも出す
+  let ann = false, annP = null, annTok = 0, flipAsked = false, opTok = 0, opBusy = false;
+  try { ann = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
+  const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + DV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
+  const capShow = t => { const c = el.querySelector('.dk-cap'); c.querySelector('span').textContent = t; c.hidden = false; c.classList.remove('is-in'); void c.offsetWidth; c.classList.add('is-in'); };
+  const capHide = () => { const c = el && el.querySelector('.dk-cap'); if (c) c.hidden = true; };
+  const annSay = async (names, cap, chime) => {
+    if (!ann) return;
+    const k = annTok, v = await VO();
+    if (!v || !ann || k !== annTok) return;
+    if (chime) { await v.chime(false); if (k !== annTok) return; }
+    capShow(cap); await v.say(names, .03);
+    if (k === annTok) capHide();
+  };
+  const setAnn = (on, quiet) => {
+    ann = on;
+    const b = el.querySelector('.dk-abtn'); b.setAttribute('aria-pressed', on); b.textContent = on ? '案内の声：あり' : '案内の声';
+    if (quiet) return;
+    if (!on) { annTok++; capHide(); }
+    VO().then(v => { if (!v) return; v.set(on); if (on && !opBusy) { annTok++; annSay(['youkoso'], 'ようこそ。'); } });
+  };
+  // 開演：チャイム →「お客様にご案内申し上げます」「間もなく開演となります…」→ 3・2・1・0 → お札マンが発表をはじめる
+  const opening = async () => {
+    if (opBusy) return;
+    opBusy = true; const k = ++opTok;
+    grid(false); setTool(''); if (note) setNote(false); if (chara) setChara(false);
+    go(0); setPlay(false);
+    if (!ann) setAnn(true);
+    const v = await VO();
+    if (v && !v.on()) v.set(true);
+    const oc = document.createElement('div'); oc.className = 'dk-op'; oc.setAttribute('role', 'status');
+    oc.innerHTML = '<p class="dk-op-k"><span>麻経</span>開演のご案内</p><p class="dk-op-t"></p><p class="dk-op-n" aria-hidden="true"></p><button type="button" class="dk-op-x">とばす</button>';
+    el.appendChild(oc);
+    const alive = () => k === opTok && el.classList.contains('is-open');
+    let skip = false;
+    oc.querySelector('.dk-op-x').onclick = () => { skip = true; if (v) v.stop(); };
+    const pause = ms => new Promise(r => setTimeout(r, reduce ? Math.min(ms, 400) : ms));
+    const line = async (t, names, least) => {
+      if (!alive() || skip) return;
+      const p = oc.querySelector('.dk-op-t'); p.textContent = t; p.classList.remove('is-in'); void p.offsetWidth; p.classList.add('is-in');
+      const t0 = Date.now();
+      if (v && v.on()) await v.say(names, .03);
+      const rest = least - (Date.now() - t0); if (rest > 0 && alive() && !skip) await pause(rest);
+    };
+    if (v) await v.chime(true);
+    await line('お客様にご案内申し上げます。', ['okyakusamanionegai'], 2200);
+    await line('間もなく開演となりますので、今しばらくお待ちください。', ['mamonakukaien'], 3400);
+    if (alive() && !skip) {
+      oc.classList.add('is-count'); oc.querySelector('.dk-op-t').textContent = '';
+      const sound = v && v.on(), total = sound ? await v.dur(['countdown']) : 3.2, n = oc.querySelector('.dk-op-n');
+      const p = sound ? v.say(['countdown']) : null;
+      for (const d of ['3', '2', '1', '0']) {
+        if (!alive() || skip) break;
+        n.textContent = d; n.classList.remove('is-pop'); void n.offsetWidth; n.classList.add('is-pop');
+        await pause(total * 1000 / 4);
+      }
+      if (p && alive() && !skip) await p;
+    }
+    oc.classList.add('is-out'); setTimeout(() => oc.remove(), reduce ? 0 : 600);
+    opBusy = false;
+    if (alive()) setChara(true);
+  };
+
   // 知る：小さなお札が、お金のめぐりの図の矢印の上を走る（[0〜5] の順に）
   const ride = list => {
     const s = el.querySelector('.dk-s.is-on'), r = s && s.querySelector('.dk-rider'); if (!r || reduce) return;
@@ -310,7 +383,7 @@
   const QA = [
     ['麻経って、いつできたの？', { t: '2025 年にできた、麻布中学校・高等学校の経済系同好会だよ。', m: 'happy' }],
     ['文化祭には、何人来たの？', { t: '3 日間で 2,364 人。いちばん多かったのは、2 日目の 1,152 人だよ！', m: 'wow' }],
-    ['Web では、何ができるの？', { t: 'クイズ 84 問、経済ラボの 16 の実験、用語辞典 300 語。お祭りの券のルールを決める工房もあるよ。' }],
+    ['Web では、何ができるの？', { t: 'クイズ 84 問、経済ラボの 25 の実験、用語辞典 300 語。お祭りの券のルールを決める工房もあるよ。' }],
     ['次の文化祭は、いつ？', { t: '2027 年 5 月の予定だよ。準備の流れは「日程とイベント」のページで見られるよ。' }],
     ['協賛するには？', { t: '「協賛のご案内」のページを見てね。お問い合わせからも相談できるよ。', m: 'happy' }]
   ];
@@ -400,11 +473,13 @@
         unHl();
         if (S[i].cls === 'is-sum') { showQA(); return; }
         if (i < S.length - 1) tt = setTimeout(() => { if (tok === tTok) go(i + 1); }, 700);
-        else { el.querySelector('.dk-chara').classList.add('is-bye'); setPlay(false, true); }
+        else { el.querySelector('.dk-chara').classList.add('is-bye'); setPlay(false, true); annSay(['goseichouarigatou'], 'ご清聴ありがとうございました。', true); }
         return;
       }
       const ln = lines[li];
+      if (ln === '@flip' && ann && !flipAsked) { flipAsked = true; unHl(); el.querySelector('.dk-ch-t').textContent = '……'; annSay(['zyunbihaiidesuka'], '準備はいいですか？').then(() => { if (tok === tTok) step(); }); return; }
       if (ln === '@flip') {
+        flipAsked = false;
         unHl();
         // 会場の人がもう A か B を押していたら、その結果について話す。まだなら、お札マンが B をえらんでコインを投げる
         const mine = el.querySelector('.dk-s.is-on [data-ab][aria-pressed="true"]');
@@ -420,7 +495,10 @@
       }
       say(ln, () => { li++; step(); });
     };
-    step();
+    // 案内の声が流れているあいだは、お札マンは話しはじめない
+    const wait = annP;
+    if (wait) el.querySelector('.dk-ch-t').textContent = '';
+    wait ? wait.then(() => { if (tok === tTok) step(); }) : step();
   };
   const setChara = on => {
     chara = on;
@@ -565,6 +643,8 @@
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
     else if (e.key === 'n' || e.key === 'N') setNote(!note);
     else if (e.key === 'p' || e.key === 'P') setChara(!chara);
+    else if (e.key === 'o' || e.key === 'O') opening();
+    else if (e.key === 'v' || e.key === 'V') setAnn(!ann);
     else if (e.key === 'g' || e.key === 'G') grid(true);
     else if (e.key === ' ' && !e.target.closest('a, button')) { e.preventDefault(); setPlay(!playing); }
     else if (e.key === 'Tab') { const f = [...el.querySelectorAll('.dk-s.is-on a, .dk-s.is-on button, .dk-ctl button:not(:disabled)')]; if (!f.length) return; const a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
@@ -584,6 +664,7 @@
   };
   function close() {
     clearTimeout(timer); clearInterval(clock); clearInterval(pvClock);
+    opTok++; annTok++; annP = null; if (window.AZAKEI_VOICE) AZAKEI_VOICE.stop(); const oc = el.querySelector('.dk-op'); if (oc) oc.remove(); capHide();
     grid(false); setTool(''); stopTalk();
     if (pv && !pv.closed) pv.close();
     el.classList.remove('is-open');
@@ -592,5 +673,5 @@
     if (/^#deck(-\d+)?$/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
     if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
-  window.AZAKEI_DECK = { open, close };
+  window.AZAKEI_DECK = { open, close, show: () => { open(0); opening(); } };
 })();

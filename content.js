@@ -180,7 +180,7 @@ window.AZAKEI = {
   achievements: [
     // stat（大きく出す数字）・unit・label・link は書かなくても OK
     { year: '2026', title: '文化祭「麻布経済展」を開催', stat: '2,364', unit: '人', label: '3 日間の来場者', link: 'festival.html' },
-    { year: '2026', title: '日経ストックリーグに応募', label: '7 月 20 日に応募。ポートフォリオとレポートに挑戦中', link: 'contests.html#stockleague' },
+    { year: '2026', title: '日経ストックリーグに応募', label: '9 月 4 日に応募。ポートフォリオとレポートに挑戦中', link: 'contests.html#stockleague' },
     { year: '2026', title: '高校生ビジネスプラン・グランプリに応募', label: '9 月 24 日、ビジネスプランのシートを提出。結果発表は 11 月中', link: 'contests.html#business' }
   ]
 };
