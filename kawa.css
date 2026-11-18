@@ -1,0 +1,61 @@
+/* kawa.css — あそび場：川上の工場（kawa.js が読みこむ） */
+.kw[data-kawa] { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.kw[data-kawa] .kw-stage { --dirt: 1; position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 44px -22px rgba(30, 50, 40, .6); }
+.kw[data-kawa] .kw-svg { display: block; width: 100%; height: auto; }
+.kw-sky { fill: url(#kw-sky); }
+.kw-haze rect { fill: #8a8070; opacity: calc(var(--dirt) * .45); transition: opacity .6s; }
+.kw-mt { fill: #9bb79a; }
+.kw-land { fill: color-mix(in srgb, #8fbf74 calc(100% - var(--dirt) * 45%), #a59b6e); transition: fill .6s; }
+.kw-river { fill: color-mix(in srgb, #4fa3c9 calc(100% - var(--dirt) * 100%), #7a6a45); transition: fill .6s; }
+.kw-flow path { fill: none; stroke: rgba(255, 255, 255, .55); stroke-width: 2; stroke-linecap: round; animation: kw-flow 2.5s linear infinite; }
+@keyframes kw-flow { from { transform: translateX(-20px); opacity: 0; } 30% { opacity: 1; } to { transform: translateX(30px); opacity: 0; } }
+.kw-fac-b { fill: #8f817a; } .kw-fac-r { fill: #a39389; stroke: #5d544e; stroke-width: 2; }
+.kw-chim { fill: #6b605a; } .kw-door { fill: #4a403a; }
+.kw-fac-t { fill: #fff; font-size: 12px; font-weight: 800; text-anchor: middle; }
+.kw-smoke circle { fill: #6d6a66; opacity: .7; animation: kw-smoke 3.2s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes kw-smoke { 0% { transform: translate(0, 8px) scale(.4); opacity: 0; } 20% { opacity: .75; } 100% { transform: translate(60px, -60px) scale(1.7); opacity: 0; } }
+.kw-boxes rect { fill: #e3b341; stroke: #a77b16; stroke-width: 1; }
+.kw-pipe { fill: none; stroke: #5d544e; stroke-width: 6; stroke-linecap: round; }
+.kw-f { fill: #f2a65a; stroke: #b5682a; stroke-width: 1; animation: kw-swim var(--d) ease-in-out var(--del) infinite alternate; transition: opacity .6s; }
+.kw-f.is-gone { opacity: 0; }
+@keyframes kw-swim { from { transform: translateX(-10px); } to { transform: translateX(10px); } }
+.kw-boat path:first-child { fill: #8a5a2b; } .kw-boat rect { fill: #5a3a18; } .kw-sail { fill: #fffaf0; } .kw-man { fill: #f3d6b5; }
+.kw-boat { transition: transform .6s; }
+.kw-boat.is-sad .kw-sail { fill: #c9c2b4; }
+.kw-lab { fill: #1c2b23; font-size: 12px; font-weight: 800; text-anchor: middle; paint-order: stroke; stroke: #fffaf0; stroke-width: 3px; }
+.kw[data-kawa] .kw-hud { position: absolute; top: 10px; right: 12px; display: flex; gap: 8px; }
+.kw[data-kawa] .kw-hud p { margin: 0; display: flex; align-items: baseline; gap: 4px; padding: 6px 12px; border-radius: 12px; background: rgba(28, 43, 35, .82); color: #fffaf0; font-size: 11.5px; font-weight: 700; }
+.kw[data-kawa] .kw-hud b { font-family: "Shippori Mincho", serif; font-size: 24px; color: #ffe08a; line-height: 1; font-variant-numeric: tabular-nums; }
+.kw[data-kawa] .kw-side { display: grid; gap: 10px; }
+.kw[data-kawa] .kw-tax { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 10px; padding: 14px; border-radius: 18px; background: #1c2b23; color: #f3ecd8; font-size: 13px; font-weight: 700; }
+.kw[data-kawa] .kw-tax output { font-family: "Shippori Mincho", serif; font-size: 30px; color: #ffe08a; font-variant-numeric: tabular-nums; }
+.kw[data-kawa] .kw-tax input { grid-column: 1 / -1; width: 100%; accent-color: #e3b341; }
+.kw[data-kawa] .kw-why { margin: 0; padding: 10px 12px; border-radius: 12px; background: rgba(47, 107, 58, .12); font-size: 13px; font-weight: 700; line-height: 1.7; min-height: 4.6em; }
+.kw[data-kawa] .kw-nums { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.kw[data-kawa] .kw-nums li { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 8px 12px; border-radius: 12px; background: #fffaf0; color: #2a2015; }
+.kw[data-kawa] .kw-nums small { font-size: 12px; font-weight: 700; }
+.kw[data-kawa] .kw-nums b { font-variant-numeric: tabular-nums; font-size: 16px; color: #2f6b3a; white-space: nowrap; }
+.kw[data-kawa] .kw-nums .is-bad b { color: #b5432f; }
+.kw[data-kawa] .kw-nums .is-sum { background: #24304f; color: #f3ecd8; }
+.kw[data-kawa] .kw-nums .is-sum b { font-family: "Shippori Mincho", serif; font-size: 22px; color: #ffe08a; }
+.kw[data-kawa] .kw-chart { display: block; width: 100%; height: auto; padding: 6px; border-radius: 14px; background: #fffaf0; box-sizing: border-box; }
+.kw-c-ax { stroke: rgba(42, 32, 21, .4); }
+.kw-c-t { fill: rgba(42, 32, 21, .6); font-size: 9.5px; text-anchor: middle; }
+.kw-c-l { fill: none; stroke: #24304f; stroke-width: 3; stroke-linejoin: round; }
+.kw-c-p { fill: #e3b341; stroke: #2a2015; stroke-width: 2; }
+.kw-c-best { stroke: #2f6b3a; stroke-width: 2; stroke-dasharray: 4 3; }
+.kw-c-bt { fill: #2f6b3a; font-size: 9.5px; font-weight: 800; }
+.kw[data-kawa] .kw-found { margin: 0; padding: 12px 14px; border-radius: 14px; background: #eef7ec; color: #1f4a28; font-size: 13.5px; font-weight: 700; line-height: 1.7; box-shadow: inset 0 0 0 2px #2f6b3a; animation: kw-in .5s cubic-bezier(.3, 1.5, .5, 1); }
+.kw[data-kawa] .kw-found[hidden] { display: none; }
+@keyframes kw-in { from { opacity: 0; transform: scale(.95); } }
+.kw[data-kawa] .kw-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.kw[data-kawa] .kw-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(47, 107, 58, .09); font-size: 14px; line-height: 1.75; }
+.kw[data-kawa] .kw-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.kw[data-kawa] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.kw[data-kawa] .kw-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .kw[data-kawa] .kw-learn p { background: rgba(255, 255, 255, .07); }
+:root[data-theme="dark"] .kw[data-kawa] .kw-why { background: rgba(255, 255, 255, .08); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kw[data-kawa] .kw-learn p { background: rgba(255, 255, 255, .07); } :root:not([data-theme="light"]) .kw[data-kawa] .kw-why { background: rgba(255, 255, 255, .08); } }
+@media (max-width: 900px) { .kw[data-kawa] { grid-template-columns: minmax(0, 1fr); } .kw[data-kawa] .kw-learn { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .kw[data-kawa] .kw-hud b { font-size: 18px; } .kw[data-kawa] .kw-hud p { padding: 4px 8px; } }
+@media (prefers-reduced-motion: reduce) { .kw[data-kawa] *, .kw-smoke circle, .kw-f { animation: none !important; transition: none !important; } }
