@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-18', seal: '園', tone: 'green', href: 'quiz.html#koen', eyebrow: 'あそび場', title: 'みんなの公園', text: 'みんなでコインを出し合って公園を育てる。出さない人も同じだけ受けとれたら？ 公共財とただ乗りの体験。' },
     { date: '2026-11-18', seal: '島', tone: 'green', href: 'contests.html#shimagdp', eyebrow: 'コンテスト', title: '島の GDP', text: '麦の農家・パン屋さん・家族の小さな島。お金がめぐると、生産・所得・支出の 3 つのメーターが同じになる。' },
     { date: '2026-11-18', seal: '浜', tone: 'gold', href: 'contests.html#hama', eyebrow: 'コンテスト', title: '浜辺のアイス屋さん', text: '浜辺でただ 1 つのお店なら、いくらにする？ となりにライバルが来たら？ 独占と競争で値段とお客さんが変わる。' },
     { date: '2026-11-18', seal: '川', tone: 'green', href: 'quiz.html#kawa', eyebrow: 'あそび場', title: '川上の工場', text: '工場がつくるほど川がよごれ、漁師さんの魚が減る。社会全体がいちばんよくなる環境税をさがす。' },
