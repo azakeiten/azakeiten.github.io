@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-19', seal: '札', tone: 'light', href: 'quiz.html#nefuda', eyebrow: 'あそび場', title: '値札のマジック', text: '半額・送料無料・残りわずか・ポイント還元。お店の値札にかくれた 7 つのしかけを、虫めがねで見破ります。' },
     { date: '2026-11-19', seal: '関', tone: 'dark', href: 'quiz.html#kanzei', eyebrow: 'あそび場', title: '関税のシーソー', text: '外国のトマトに関税をかけると、農家・政府・消費者はどうなる？ トラック・シーソー・需要と供給の図で、得する人と損する人を見くらべます。' },
     { date: '2026-11-19', seal: '価', tone: 'light', href: 'quiz.html#jika', eyebrow: 'あそび場', title: 'チケットの値段は時価', text: '遊園地の支配人になって 1 週間営業。毎日同じ値段か、曜日で変えるか。満員と空席、売上とお客さんの声をくらべます。' },
     { date: '2026-11-18', seal: '月', tone: 'dark', href: 'quiz.html#subsc', eyebrow: 'あそび場', title: 'サブスクと買い切り', text: '漫画・音楽・動画を、1 つずつ買うか、月ぎめの使い放題か。1 年をすすめてくらべる。解約忘れにも注意。' },
