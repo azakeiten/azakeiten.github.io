@@ -1,0 +1,67 @@
+/* imaato.css — あそび場：いま？ それとも あとで？（imaato.js が読みこむ） */
+.im[data-imaato] { display: grid; gap: 16px; }
+.im[data-imaato] .im-stage { padding: 20px; border-radius: 26px; background: radial-gradient(ellipse at 50% 0%, #3a2c55 0%, #1e1730 70%); color: #f3ecd8; text-align: center; box-shadow: 0 22px 46px -22px rgba(20, 12, 40, .85); }
+.im[data-imaato] .im-stage.is-in .im-pick { animation: im-in .5s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes im-in { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+.im[data-imaato] .im-stage[hidden] { display: none; }
+.im[data-imaato] .im-q { margin: 0; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; opacity: .7; }
+.im[data-imaato] .im-q span { font-family: "Shippori Mincho", serif; font-size: 22px; color: #ffd76a; }
+.im[data-imaato] .im-dots { display: flex; justify-content: center; gap: 6px; margin: 6px 0 10px; }
+.im[data-imaato] .im-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, .18); transition: background .3s, transform .3s; }
+.im[data-imaato] .im-dots i.is-cur { background: #fff; transform: scale(1.3); }
+.im[data-imaato] .im-dots i.is-a { background: #e3803a; } .im[data-imaato] .im-dots i.is-b { background: #6fb3d8; }
+.im[data-imaato] .im-ask { margin: 0 0 14px; font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; }
+.im[data-imaato] .im-pick { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; max-width: 700px; margin: 0 auto; }
+.im[data-imaato] .im-or { font-size: 13px; font-weight: 800; opacity: .6; }
+.im[data-imaato] .im-card { position: relative; display: grid; justify-items: center; gap: 6px; padding: 18px 14px 16px; border-radius: 22px; border: 3px solid transparent; background: #fffaf0; color: #2a2015; cursor: pointer; box-shadow: 0 12px 26px -10px rgba(0, 0, 0, .5); transition: transform .25s, border-color .25s, box-shadow .25s; }
+.im[data-imaato] .im-card:hover, .im[data-imaato] .im-card:focus-visible { transform: translateY(-5px) rotate(-1deg); outline: none; }
+.im[data-imaato] .im-card.is-now:hover, .im[data-imaato] .im-card.is-now:focus-visible { border-color: #e3803a; }
+.im[data-imaato] .im-card.is-later:hover, .im[data-imaato] .im-card.is-later:focus-visible { border-color: #3b84b0; transform: translateY(-5px) rotate(1deg); }
+.im[data-imaato] .im-card.is-chosen { animation: im-pick .55s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes im-pick { 40% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(255, 215, 106, .45); } }
+.im[data-imaato] .im-when { padding: 3px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; color: #fff; }
+.im[data-imaato] .is-now .im-when { background: #e3803a; } .im[data-imaato] .is-later .im-when { background: #3b84b0; }
+.im[data-imaato] .im-stack { position: relative; display: block; width: 70px; height: 74px; }
+.im[data-imaato] .im-stack i { position: absolute; left: 10px; bottom: calc(var(--i) * 5px); width: 50px; height: 12px; border-radius: 50%; background: radial-gradient(ellipse at 40% 30%, #ffe9a0, #c9921f); box-shadow: 0 2px 0 #a77b16; animation: im-coin .4s cubic-bezier(.3, 1.6, .5, 1) backwards; animation-delay: calc(var(--i) * 30ms); }
+@keyframes im-coin { from { transform: translateY(-30px); opacity: 0; } }
+.im[data-imaato] .im-card b { font-family: "Shippori Mincho", serif; font-size: 30px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.im[data-imaato] .im-card small { font-size: 12px; font-weight: 700; color: #6b5a44; }
+.im[data-imaato] .is-later small { color: #2f6b3a; }
+.im[data-imaato] .im-cal { position: absolute; top: 12px; right: 12px; width: 50px; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 3px 8px rgba(0, 0, 0, .18); }
+.im[data-imaato] .im-cal-top { display: block; height: 10px; background: #b5432f; }
+.im[data-imaato] .im-cal-n { display: block; padding: 3px 2px; font-size: 10.5px; font-weight: 800; line-height: 1.2; }
+.im[data-imaato] .im-hint { margin: 14px 0 0; font-size: 12.5px; opacity: .65; }
+.im[data-imaato] .im-result { padding: 20px 22px; border-radius: 24px; background: #fffaf0; color: #2a2015; box-shadow: 0 16px 36px -14px rgba(30, 20, 50, .45), inset 0 0 0 2px rgba(59, 132, 176, .3); animation: im-in .55s cubic-bezier(.3, 1.4, .5, 1); }
+.im[data-imaato] .im-result[hidden] { display: none; }
+.im[data-imaato] .im-r-top { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.im[data-imaato] .im-r-seal { flex: none; display: grid; place-items: center; width: 62px; height: 62px; border-radius: 16px; background: linear-gradient(135deg, #3b84b0, #2a3d6e); color: #fff; font-family: "Shippori Mincho", serif; font-size: 32px; font-weight: 800; transform: rotate(-6deg); box-shadow: 0 4px 0 #1b2a4e; }
+.im[data-imaato] .im-r-k { margin: 0; font-size: 12.5px; font-weight: 700; color: #6b5a44; }
+.im[data-imaato] .im-r-h { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-family: "Shippori Mincho", serif; font-size: 30px; font-weight: 800; color: #2a3d6e; line-height: 1.2; }
+.im[data-imaato] .im-r-h small { font-family: inherit; font-size: 13px; color: #6b5a44; font-weight: 700; }
+.im[data-imaato] .im-result > p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.8; }
+.im[data-imaato] .im-r-th { padding: 10px 14px; border-radius: 12px; background: rgba(59, 132, 176, .1); }
+.im[data-imaato] .im-r-th b { font-size: 18px; color: #2a3d6e; }
+.im[data-imaato] .im-chart { display: block; width: 100%; max-width: 640px; height: auto; margin: 4px auto 12px; }
+.im-c-ax { stroke: rgba(42, 32, 21, .35); } .im-c-g { stroke: rgba(42, 32, 21, .08); }
+.im-c-t { fill: rgba(42, 32, 21, .55); font-size: 9.5px; text-anchor: middle; }
+.im-c-k { fill: rgba(42, 32, 21, .7); font-size: 9.5px; font-weight: 800; }
+.im-c-th { stroke: #2f6b3a; stroke-width: 2; stroke-dasharray: 4 3; }
+.im-c-tl { fill: #2f6b3a; font-size: 9.5px; font-weight: 800; }
+.im-c-p.is-now { fill: #e3803a; } .im-c-p.is-later { fill: #3b84b0; }
+.im-c-p { stroke: #fffaf0; stroke-width: 2; }
+.im[data-imaato] .im-r-list { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.im[data-imaato] .im-r-list li { display: grid; grid-template-columns: 1fr auto; gap: 0 10px; align-items: center; padding: 7px 12px; border-radius: 12px; background: rgba(42, 32, 21, .05); font-size: 12.5px; }
+.im[data-imaato] .im-r-list small { grid-row: 2; opacity: .65; }
+.im[data-imaato] .im-r-list b { grid-row: span 2; padding: 2px 10px; border-radius: 999px; color: #fff; font-size: 12px; }
+.im[data-imaato] .im-r-list .is-now b { background: #e3803a; } .im[data-imaato] .im-r-list .is-later b { background: #3b84b0; }
+.im[data-imaato] .im-again { padding: 10px 18px; border-radius: 999px; border: 0; background: #2a3d6e; color: #fff; font-size: 14px; font-weight: 800; cursor: pointer; }
+.im[data-imaato] .im-learn { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.im[data-imaato] .im-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(59, 132, 176, .09); font-size: 14px; line-height: 1.75; }
+.im[data-imaato] .im-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.im[data-imaato] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.im[data-imaato] .im-note { margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .im[data-imaato] .im-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .im[data-imaato] .im-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 760px) { .im[data-imaato] .im-learn, .im[data-imaato] .im-r-list { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .im[data-imaato] .im-pick { grid-template-columns: 1fr; } .im[data-imaato] .im-or { margin: -4px 0; } .im[data-imaato] .im-stage { padding: 14px; } .im[data-imaato] .im-card b { font-size: 26px; } }
+@media (prefers-reduced-motion: reduce) { .im[data-imaato] *, .im[data-imaato] *::before { animation: none !important; transition: none !important; } }

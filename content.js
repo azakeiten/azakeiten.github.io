@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-18', seal: '待', tone: 'dark', href: 'quiz.html#imaato', eyebrow: 'あそび場', title: 'いま？ それとも あとで？', text: 'いまもらうか、あとで少し多くもらうか。8 回えらぶと、どれくらいふえるなら待てるかがわかる。' },
     { date: '2026-11-18', seal: '繋', tone: 'dark', href: 'contests.html#hirogari', eyebrow: 'コンテスト', title: 'アプリが広がるとき', text: '70 人の町で、新しいアプリを 5 人に配る。友だちが使うと自分も使う。だれに配ると町じゅうに広がる？' },
     { date: '2026-11-17', seal: '段', tone: 'green', href: 'quiz.html#zeidan', eyebrow: 'あそび場', title: '税の階段', text: '所得税の 7 段の税率。段が上がっても、高い税率がかかるのはこえた部分だけ。コインをためてたしかめる。' },
     { date: '2026-11-17', seal: '檸', tone: 'gold', href: 'quiz.html#lemon', eyebrow: 'あそび場', title: 'フリマのなぞ', text: '見た目そっくりの中古スマホ。値段を下げると、なぜか良品のお店から閉まっていく。情報の非対称性の体験。' },
