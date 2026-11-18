@@ -9,6 +9,8 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-19', seal: '関', tone: 'dark', href: 'quiz.html#kanzei', eyebrow: 'あそび場', title: '関税のシーソー', text: '外国のトマトに関税をかけると、農家・政府・消費者はどうなる？ トラック・シーソー・需要と供給の図で、得する人と損する人を見くらべます。' },
+    { date: '2026-11-19', seal: '価', tone: 'light', href: 'quiz.html#jika', eyebrow: 'あそび場', title: 'チケットの値段は時価', text: '遊園地の支配人になって 1 週間営業。毎日同じ値段か、曜日で変えるか。満員と空席、売上とお客さんの声をくらべます。' },
     { date: '2026-11-18', seal: '月', tone: 'dark', href: 'quiz.html#subsc', eyebrow: 'あそび場', title: 'サブスクと買い切り', text: '漫画・音楽・動画を、1 つずつ買うか、月ぎめの使い放題か。1 年をすすめてくらべる。解約忘れにも注意。' },
     { date: '2026-11-18', seal: '募', tone: 'shu', href: 'contests.html#cfund', eyebrow: 'コンテスト', title: 'クラウドファンディングに挑戦', text: '目標金額とお礼の値段を決めて、30 日間の募集。目標にとどかないと 1 円も受けとれない。' },
     { date: '2026-11-18', seal: '秘', tone: 'gold', href: 'quiz.html#himitsu', eyebrow: 'あそび場', title: '新しいお札のひみつ', text: 'かたむける、光にすかす、虫めがねで見る、さわる。新しいお札の、にせものを防ぐ 6 つのくふうをさがす。' },

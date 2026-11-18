@@ -1,0 +1,83 @@
+/* jika.css — あそび場：チケットの値段は時価（jika.js が読みこむ） */
+.jk[data-jika] { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.jk[data-jika] .jk-park { display: grid; gap: 12px; padding: 16px; border-radius: 26px; background: linear-gradient(180deg, #bfe3f2 0%, #e8f5ec 55%, #f6efd9 100%); color: #1f2a33; box-shadow: 0 20px 44px -24px rgba(30, 70, 90, .6), inset 0 0 0 1px rgba(30, 70, 90, .12); position: relative; overflow: hidden; }
+.jk[data-jika] .jk-park::before { content: ''; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 236, 160, .9), rgba(255, 236, 160, 0) 70%); pointer-events: none; }
+.jk[data-jika] .jk-gate { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 18px; background: #fffaf0; box-shadow: 0 6px 16px rgba(30, 70, 90, .15); }
+.jk[data-jika] .jk-seal { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: conic-gradient(#e0412b 0 25%, #f2b632 0 50%, #3b84b0 0 75%, #4f9a5a 0); color: #fff; font-family: "Shippori Mincho", serif; font-size: 24px; font-weight: 800; text-shadow: 0 1px 3px rgba(0, 0, 0, .4); }
+.jk[data-jika] .jk-name { margin: 0; font-family: "Shippori Mincho", serif; font-size: 19px; font-weight: 800; }
+.jk[data-jika] .jk-cap { margin: 0; font-size: 12px; opacity: .8; }
+.jk[data-jika] .jk-total { margin: 0 0 0 auto; text-align: right; }
+.jk[data-jika] .jk-total small { display: block; font-size: 11px; font-weight: 700; opacity: .7; }
+.jk[data-jika] .jk-total b { font-family: "Shippori Mincho", serif; font-size: 22px; color: #b5432f; font-variant-numeric: tabular-nums; }
+.jk[data-jika] .jk-week { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.jk[data-jika] .jk-day { display: grid; gap: 4px; align-content: start; padding: 8px 6px; border-radius: 14px; background: rgba(255, 255, 255, .75); box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .12); opacity: .7; transition: opacity .3s, transform .3s, box-shadow .3s; }
+.jk[data-jika] .jk-day.is-end { background: rgba(255, 246, 225, .9); }
+.jk[data-jika] .jk-day.is-on { opacity: 1; transform: translateY(-2px); }
+.jk[data-jika] .jk-day.is-full { box-shadow: inset 0 0 0 2px #e0412b; }
+.jk[data-jika] .jk-day.is-low { box-shadow: inset 0 0 0 2px #8a9aa6; }
+.jk[data-jika] .jk-dh { display: flex; justify-content: space-between; align-items: center; margin: 0; }
+.jk[data-jika] .jk-dh b { font-family: "Shippori Mincho", serif; font-size: 17px; }
+.jk[data-jika] .jk-day.is-end .jk-dh b { color: #b5432f; }
+.jk[data-jika] .jk-sky { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 800; color: #fff; }
+.jk[data-jika] .jk-sky.is-sun { background: #f0a12a; } .jk[data-jika] .jk-sky.is-rain { background: #3b84b0; } .jk[data-jika] .jk-sky.is-cloud { background: #8a9aa6; }
+.jk[data-jika] .jk-tag { margin: 0; padding: 2px 0; border-radius: 6px; background: #1f2a33; color: #ffe08a; font-size: 11.5px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
+.jk[data-jika] .jk-dots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; padding: 4px; border-radius: 8px; background: rgba(30, 70, 90, .06); }
+.jk[data-jika] .jk-dots i { aspect-ratio: 1; border-radius: 50%; background: rgba(30, 70, 90, .12); transition: background .2s, transform .2s; }
+.jk[data-jika] .jk-dots i.is-in { background: #4f9a5a; animation: jk-pop .3s cubic-bezier(.3, 1.8, .5, 1); }
+.jk[data-jika] .jk-dots i.is-empty { background: rgba(30, 70, 90, .1); box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .25); }
+@keyframes jk-pop { from { transform: scale(0); } }
+.jk[data-jika] .jk-line { display: flex; flex-wrap: wrap; gap: 2px; min-height: 8px; }
+.jk[data-jika] .jk-line i { width: 6px; height: 6px; border-radius: 50%; background: #e0412b; animation: jk-pop .3s ease-out backwards; }
+.jk[data-jika] .jk-line b { font-size: 10px; color: #e0412b; line-height: 6px; }
+.jk[data-jika] .jk-num { margin: 0; text-align: center; } .jk[data-jika] .jk-num b { font-size: 15px; font-variant-numeric: tabular-nums; } .jk[data-jika] .jk-num small { font-size: 10px; margin-left: 1px; }
+.jk[data-jika] .jk-sales { margin: 0; min-height: 1.4em; text-align: center; font-size: 11px; font-weight: 800; color: #b5432f; }
+.jk[data-jika] .jk-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; font-size: 11.5px; }
+.jk[data-jika] .jk-legend i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; vertical-align: -1px; }
+.jk[data-jika] .jk-legend .is-in { background: #4f9a5a; } .jk[data-jika] .jk-legend .is-out { background: #e0412b; } .jk[data-jika] .jk-legend .is-empty { box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .4); }
+.jk[data-jika] .jk-msg { margin: 0; padding: 10px 14px; border-radius: 12px; background: #1f2a33; color: #eef6fa; font-size: 13.5px; font-weight: 700; line-height: 1.7; min-height: 3.4em; }
+.jk[data-jika] .jk-side { display: grid; gap: 10px; }
+.jk[data-jika] .jk-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.jk[data-jika] .jk-mode button { display: grid; gap: 2px; padding: 10px 12px; border-radius: 14px; border: 2px solid var(--color-border, rgba(30, 70, 90, .2)); background: var(--color-surface, #fffaf0); color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.jk[data-jika] .jk-mode b { font-size: 14px; } .jk[data-jika] .jk-mode small { font-size: 11px; opacity: .7; }
+.jk[data-jika] .jk-mode button[aria-checked="true"] { border-color: #b5432f; background: #fff1dc; color: #2a2015; }
+.jk[data-jika] .jk-sl { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 10px; font-size: 13px; font-weight: 700; }
+.jk[data-jika] .jk-sl[hidden], .jk[data-jika] .jk-dyn[hidden] { display: none; }
+.jk[data-jika] .jk-sl output { font-family: "Shippori Mincho", serif; font-size: 24px; color: #b5432f; }
+.jk[data-jika] .jk-sl input { grid-column: 1 / -1; width: 100%; accent-color: #b5432f; }
+.jk[data-jika] .jk-dyn { display: grid; gap: 2px; padding: 8px 10px; border-radius: 14px; background: rgba(59, 132, 176, .08); }
+.jk[data-jika] .jk-row { display: grid; grid-template-columns: 22px minmax(0, 1fr) 70px; align-items: center; gap: 8px; font-size: 13px; }
+.jk[data-jika] .jk-row b { font-family: "Shippori Mincho", serif; }
+.jk[data-jika] .jk-row:nth-child(n+6) b { color: #b5432f; }
+.jk[data-jika] .jk-row input { width: 100%; accent-color: #3b84b0; }
+.jk[data-jika] .jk-row output { font-size: 12.5px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+.jk[data-jika] .jk-go { padding: 13px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 16px rgba(181, 67, 47, .35); }
+.jk[data-jika].is-busy .jk-side input, .jk[data-jika].is-busy .jk-side button { opacity: .5; pointer-events: none; }
+.jk[data-jika] .jk-res { display: grid; gap: 10px; padding: 14px 16px; border-radius: 18px; background: #fffaf0; color: #2a2015; box-shadow: inset 0 0 0 2px rgba(181, 67, 47, .3); animation: jk-in .5s cubic-bezier(.3, 1.4, .5, 1); }
+.jk[data-jika] .jk-res[hidden] { display: none; }
+@keyframes jk-in { from { opacity: 0; transform: translateY(10px); } }
+.jk[data-jika] .jk-r-top { display: flex; gap: 12px; align-items: center; }
+.jk[data-jika] .jk-r-seal { flex: none; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 12px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; font-size: 26px; font-weight: 800; transform: rotate(-6deg); animation: jk-stamp .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes jk-stamp { from { transform: rotate(-20deg) scale(2); opacity: 0; } }
+.jk[data-jika] .jk-r-h { margin: 0; font-family: "Shippori Mincho", serif; font-size: 20px; font-weight: 800; }
+.jk[data-jika] .jk-r-h small { margin-left: 10px; font-size: 15px; color: #b5432f; }
+.jk[data-jika] .jk-r-s { margin: 0; font-size: 12.5px; opacity: .8; }
+.jk[data-jika] .jk-r-cmp { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.jk[data-jika] .jk-r-cmp li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 8px; padding: 6px 10px; border-radius: 10px; background: rgba(42, 32, 21, .05); font-size: 12.5px; }
+.jk[data-jika] .jk-r-cmp li.is-me { box-shadow: inset 0 0 0 2px #e3b341; }
+.jk[data-jika] .jk-r-cmp small { grid-column: 1 / -1; font-size: 11px; opacity: .7; }
+.jk[data-jika] .jk-r-cmp b { font-size: 12.5px; } .jk[data-jika] .jk-r-cmp b i { font-style: normal; font-size: 10.5px; margin-left: 3px; opacity: .7; }
+.jk[data-jika] .jk-r-cmp span { font-weight: 800; color: #b5432f; }
+.jk[data-jika] .jk-r-voice { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.jk[data-jika] .jk-r-voice li { display: flex; gap: 8px; align-items: center; font-size: 12.5px; }
+.jk[data-jika] .jk-r-voice span { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #2a2015; color: #f3e3bd; font-size: 11px; font-weight: 800; }
+.jk[data-jika] .jk-r-tip { margin: 0; padding: 8px 10px; border-radius: 10px; background: rgba(59, 132, 176, .1); font-size: 12.5px; line-height: 1.7; }
+.jk[data-jika] .jk-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.jk[data-jika] .jk-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(59, 132, 176, .09); font-size: 14px; line-height: 1.75; }
+.jk[data-jika] .jk-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.jk[data-jika] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.jk[data-jika] .jk-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .jk[data-jika] .jk-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .jk[data-jika] .jk-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .jk[data-jika] { grid-template-columns: minmax(0, 1fr); } .jk[data-jika] .jk-learn { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .jk[data-jika] .jk-week { grid-template-columns: repeat(4, minmax(0, 1fr)); } .jk[data-jika] .jk-park { padding: 12px; } .jk[data-jika] .jk-total b { font-size: 18px; } }
+@media (prefers-reduced-motion: reduce) { .jk[data-jika] * { animation: none !important; transition: none !important; } }

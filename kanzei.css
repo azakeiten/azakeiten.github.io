@@ -1,0 +1,56 @@
+/* kanzei.css — あそび場：関税のシーソー（kanzei.js が読みこむ） */
+.kz[data-kanzei] { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.kz[data-kanzei] .kz-stage { display: grid; gap: 12px; padding: 14px; border-radius: 26px; background: linear-gradient(170deg, #1d3550, #142536); color: #eef4fa; box-shadow: 0 20px 44px -24px rgba(10, 25, 45, .8); }
+.kz[data-kanzei] .kz-map { display: block; width: 100%; height: auto; border-radius: 16px; }
+.kz-land { fill: #2a2015; font-family: "Shippori Mincho", serif; font-size: 15px; font-weight: 800; }
+.kz-gate-t { fill: #ffe08a; font-size: 13px; font-weight: 800; }
+.kz-bar { transform-box: fill-box; transform-origin: 0 50%; transition: transform .4s cubic-bezier(.3, 1.4, .5, 1); }
+.kz-truck { transform: translate(150px, 128px); animation: kz-drive 3.3s linear infinite; animation-delay: var(--d); opacity: 0; }
+@keyframes kz-drive { 0% { transform: translate(150px, 128px); opacity: 0; } 8% { opacity: 1; } 45% { transform: translate(240px, 128px); } 55% { transform: translate(250px, 128px); } 92% { opacity: 1; } 100% { transform: translate(370px, 128px); opacity: 0; } }
+.kz-coin { fill: #f2c94c; stroke: #a8761d; stroke-width: 1; animation: kz-coin 1.8s ease-in infinite; animation-delay: var(--d); }
+@keyframes kz-coin { 0% { transform: translateY(-10px); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(20px); opacity: 0; } }
+.kz[data-kanzei] .kz-saw { position: relative; height: 124px; margin-top: 4px; }
+.kz[data-kanzei] .kz-beam { position: absolute; left: 6%; right: 6%; top: 66px; height: 8px; border-radius: 4px; background: #c9b48a; transition: transform .7s cubic-bezier(.3, 1.4, .5, 1); }
+.kz[data-kanzei] .kz-pan { position: absolute; bottom: 8px; display: grid; justify-items: center; min-width: 120px; padding: 6px 10px; border-radius: 12px; font-size: 12px; text-align: center; }
+.kz[data-kanzei] .kz-pan b { font-size: 14px; } .kz[data-kanzei] .kz-pan small { font-size: 11px; opacity: .9; white-space: nowrap; }
+.kz[data-kanzei] .kz-pan.is-gain { left: 0; background: #4f9a5a; } .kz[data-kanzei] .kz-pan.is-loss { right: 0; background: #b5432f; }
+.kz[data-kanzei] .kz-pivot { position: absolute; left: 50%; top: 74px; width: 0; height: 0; margin-left: -18px; border-left: 18px solid transparent; border-right: 18px solid transparent; border-bottom: 34px solid #8a7a55; }
+.kz[data-kanzei] .kz-msg { margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(0, 0, 0, .3); font-size: 13.5px; font-weight: 700; line-height: 1.7; min-height: 3.4em; }
+.kz[data-kanzei] .kz-side { display: grid; gap: 10px; }
+.kz[data-kanzei] .kz-sl { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 10px; font-size: 13px; font-weight: 700; }
+.kz[data-kanzei] .kz-sl output { font-family: "Shippori Mincho", serif; font-size: 30px; color: #b5432f; }
+.kz[data-kanzei] .kz-sl input { grid-column: 1 / -1; width: 100%; accent-color: #b5432f; }
+.kz[data-kanzei] .kz-sw { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; line-height: 1.5; cursor: pointer; }
+.kz[data-kanzei] .kz-sw input { position: absolute; opacity: 0; }
+.kz[data-kanzei] .kz-sw span { flex: none; position: relative; width: 44px; height: 24px; border-radius: 12px; background: #8a8f86; transition: background .2s; }
+.kz[data-kanzei] .kz-sw span::after { content: ''; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.kz[data-kanzei] .kz-sw input:checked + span { background: #b5432f; } .kz[data-kanzei] .kz-sw input:checked + span::after { transform: translateX(20px); }
+.kz[data-kanzei] .kz-sw input:focus-visible + span { outline: 2px solid #3b84b0; outline-offset: 2px; }
+.kz[data-kanzei] .kz-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.kz[data-kanzei] .kz-cards li { padding: 8px 12px; border-radius: 12px; background: #fffaf0; color: #2a2015; box-shadow: inset 4px 0 0 #c9b48a; }
+.kz[data-kanzei] .kz-cards li[hidden] { display: none; }
+.kz[data-kanzei] .kz-cards li.is-up { box-shadow: inset 4px 0 0 #4f9a5a; } .kz[data-kanzei] .kz-cards li.is-down { box-shadow: inset 4px 0 0 #b5432f; }
+.kz[data-kanzei] .kz-cards li.is-net { grid-column: 1 / -1; background: #2a2015; color: #f3eee4; box-shadow: none; }
+.kz[data-kanzei] .kz-cards li.is-net.is-bad b { color: #ff9b85; }
+.kz[data-kanzei] .kz-cards small { display: block; font-size: 11px; font-weight: 700; opacity: .75; }
+.kz[data-kanzei] .kz-cards b { font-size: 17px; font-variant-numeric: tabular-nums; }
+.kz[data-kanzei] .kz-cards b i { font-style: normal; font-size: 11px; margin-left: 3px; opacity: .7; }
+.kz[data-kanzei] .kz-chart { margin: 0; padding: 8px; border-radius: 16px; background: #fffaf0; color: #2a2015; }
+.kz[data-kanzei] .kz-chart svg { display: block; width: 100%; height: auto; }
+.kz[data-kanzei] .kz-chart figcaption { font-size: 11.5px; padding: 0 6px; }
+.kz[data-kanzei] .kz-chart figcaption span { display: inline-block; width: 12px; height: 10px; margin: 0 4px 0 0; border-radius: 2px; vertical-align: -1px; }
+.kz[data-kanzei] .kz-chart .is-rev { background: rgba(227, 179, 65, .6); } .kz[data-kanzei] .kz-chart .is-dwl { background: rgba(224, 65, 43, .55); }
+.kz-ax { stroke: #2a2015; stroke-width: 1.5; } .kz-d { fill: none; stroke: #3b84b0; stroke-width: 3; } .kz-s { fill: none; stroke: #4f9a5a; stroke-width: 3; }
+.kz-pw { stroke: #2a2015; stroke-width: 1.5; stroke-dasharray: 5 4; } .kz-pt { stroke: #b5432f; stroke-width: 2; }
+.kz-rev { fill: rgba(227, 179, 65, .6); } .kz-dwl { fill: rgba(224, 65, 43, .55); }
+.kz-t { fill: #2a2015; font-size: 11px; font-weight: 700; } .kz-t.is-pt { fill: #b5432f; } .kz-t.is-d { fill: #3b84b0; } .kz-t.is-s { fill: #2f6b3a; }
+.kz[data-kanzei] .kz-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.kz[data-kanzei] .kz-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(59, 132, 176, .09); font-size: 14px; line-height: 1.75; }
+.kz[data-kanzei] .kz-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.kz[data-kanzei] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.kz[data-kanzei] .kz-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .kz[data-kanzei] .kz-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kz[data-kanzei] .kz-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .kz[data-kanzei] { grid-template-columns: minmax(0, 1fr); } .kz[data-kanzei] .kz-learn { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .kz[data-kanzei] .kz-pan { min-width: 96px; } .kz[data-kanzei] .kz-pan small { white-space: normal; } }
+@media (prefers-reduced-motion: reduce) { .kz-truck, .kz-coin { animation: none !important; opacity: 1; } .kz-truck { transform: translate(260px, 128px); } .kz[data-kanzei] .kz-beam, .kz-bar { transition: none !important; } }
