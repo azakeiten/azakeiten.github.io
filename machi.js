@@ -21,7 +21,7 @@
     ['double', 'お金が 2 倍になるまで'], ['updown', 'チャート予想', 'azakei_chart_reader'], ['okozukai', 'おこづかいチャレンジ', 'azakei_ozk_master'], ['market', '値段の決まり方'], ['seri', 'せりの会場', 'azakei_seri'],
     ['asagohan', '朝ごはんの世界旅行', 'azakei_asagohan'], ['fx', '円高・円安の両替所', 'azakei_fx_master'], ['shop', '文化祭でお店をひらこう', 'azakei_shop'], ['oku', '1 億円って、どれくらい？', 'azakei_oku'], ['budget', '国の予算を 100 円にすると', 'azakei_budget'],
     ['infl', 'インフレのタイムマシン'], ['bungyo', '分業のふしぎ', 'azakei_bungyo'], ['receipt', 'レシートの中の税金'], ['kuji', 'くじ引きの期待値'], ['kabu', '株式会社をつくろう'],
-    ['ginko', '銀行のふしぎ', 'azakei_ginko'], ['kinri', '景気の舵とり', 'azakei_kinri'], ['hoken', 'みんなで備える箱', 'azakei_hoken'], ['ike', 'みんなの池', 'azakei_ike'], ['nesage', 'となりのお店と値下げ競争', 'azakei_nesage']]
+    ['ginko', '銀行のふしぎ', 'azakei_ginko'], ['kinri', '景気の舵とり', 'azakei_kinri'], ['chiiki', 'めぐる町のお金', 'azakei_chiiki'], ['gurafu', 'グラフのうそを見破れ', 'azakei_gurafu'], ['hoken', 'みんなで備える箱', 'azakei_hoken'], ['ike', 'みんなの池', 'azakei_ike'], ['nesage', 'となりのお店と値下げ競争', 'azakei_nesage']]
     .map(([id, n, k]) => [n, 'sim.html#' + id, tried.includes('#' + id) || (k && has(k))]);
   const K = list => list.map(([k, n, h]) => [n, h, has(k)]);
   // [印, 名前, 形, 中心 x, 遊びの一覧]
@@ -38,7 +38,7 @@
   const win = (x, y, w, h) => `<rect class="mc-win" x="${x}" y="${y}" width="${w}" height="${h}" rx="2"/>`;
   const B = {
     lab(c) { let s = `<path class="mc-wall" d="M${c - 80} 310 V172 H${c + 80} V310 Z"/><path class="mc-dome" d="M${c - 42} 172 A42 42 0 0 1 ${c + 42} 172 Z"/><rect class="mc-roofline" x="${c - 86}" y="166" width="172" height="8" rx="3"/><path class="mc-trim" d="M${c - 8} 130 v-12 h16 v12"/>`;
-      for (let r = 0; r < 5; r++) for (let q = 0; q < 5; q++) s += win(c - 68 + q * 28, 184 + r * 24, 16, 14); return [s, 120]; },
+      for (let r = 0; r < 5; r++) for (let q = 0; q < 5; q++) s += win(c - 68 + q * 28, 184 + r * 24, 16, 14); s += win(c - 24, 150, 12, 12) + win(c + 12, 150, 12, 12); return [s, 120]; },
     quiz(c) { let s = `<path class="mc-wall" d="M${c - 44} 310 V130 H${c + 44} V310 Z"/><path class="mc-roof" d="M${c - 52} 132 L${c} 72 L${c + 52} 132 Z"/><circle class="mc-face" cx="${c}" cy="112" r="15"/><text class="mc-q" x="${c}" y="119">?</text>`;
       for (let r = 0; r < 3; r++) for (let q = 0; q < 3; q++) s += win(c - 32 + q * 24, 152 + r * 46, 16, 26); s += win(c - 30, 286, 16, 16) + win(c - 8, 286, 16, 16) + win(c + 14, 286, 16, 16) + win(c - 30, 128, 12, 12) + win(c + 18, 128, 12, 12) + win(c - 6, 128, 12, 12) + win(c + 32, 288, 10, 12) + win(c + 32, 134, 10, 12) + win(c - 42, 134, 10, 12) + win(c - 42, 288, 10, 12) + win(c + 34, 186, 8, 10) + win(c + 34, 232, 8, 10); return [s, 72]; },
     lib(c) { let s = `<path class="mc-wall" d="M${c - 76} 310 V214 H${c + 76} V310 Z"/><path class="mc-roof" d="M${c - 86} 216 L${c} 172 L${c + 86} 216 Z"/><rect class="mc-roofline" x="${c - 84}" y="212" width="168" height="7"/>`;

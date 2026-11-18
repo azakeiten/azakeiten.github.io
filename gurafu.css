@@ -1,0 +1,65 @@
+/* gurafu.css — 経済ラボ：グラフのうそを見破れ（gurafu.js が読みこむ） */
+.gu[data-gurafu] { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.gu[data-gurafu] .gu-news { display: grid; gap: 10px; padding: 0 0 16px; border-radius: 22px; background: #fbfaf7; color: #1f2329; box-shadow: 0 20px 44px -24px rgba(20, 20, 30, .7), inset 0 0 0 1px rgba(20, 20, 30, .12); overflow: hidden; }
+.gu[data-gurafu] .gu-bar-top { display: flex; align-items: center; gap: 10px; margin: 0; padding: 8px 16px; background: #1f2329; color: #fff; font-size: 12.5px; font-weight: 800; }
+.gu[data-gurafu] .gu-live { padding: 2px 10px; border-radius: 4px; background: #d23a2a; animation: gu-blink 1.6s steps(2) infinite; }
+@keyframes gu-blink { 50% { background: #8f2418; } }
+.gu[data-gurafu] .gu-chan { margin-left: auto; font-family: "Shippori Mincho", serif; font-size: 14px; letter-spacing: .1em; }
+.gu[data-gurafu] .gu-head { margin: 4px 16px 0; padding-left: 12px; border-left: 6px solid #d23a2a; font-family: "Shippori Mincho", serif; font-size: clamp(19px, 2.5vw, 26px); font-weight: 800; line-height: 1.4; }
+.gu[data-gurafu] .gu-head.is-in { animation: gu-in .5s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes gu-in { from { opacity: 0; transform: translateX(-16px); } }
+.gu[data-gurafu] .gu-fig { position: relative; margin: 0 16px; padding: 8px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px rgba(20, 20, 30, .1); transition: box-shadow .4s; }
+.gu[data-gurafu] .gu-fig.is-true { box-shadow: inset 0 0 0 3px #2f8a4a; }
+.gu[data-gurafu] .gu-fig.is-true::after { content: '正しく描きなおしたグラフ'; position: absolute; right: 10px; top: 8px; padding: 2px 10px; border-radius: 999px; background: #2f8a4a; color: #fff; font-size: 11px; font-weight: 800; }
+.gu[data-gurafu] .gu-fig svg { display: block; width: 100%; height: auto; }
+.gu[data-gurafu] .gu-fig figcaption { padding: 0 4px; font-size: 11.5px; color: #5d6470; }
+.gu-ax { stroke: #1f2329; stroke-width: 1.6; } .gu-g { stroke: rgba(31, 35, 41, .1); }
+.gu-t { fill: #5d6470; font-size: 10px; } .gu-bl { fill: #1f2329; font-size: 12px; font-weight: 800; } .gu-bv { fill: #d23a2a; font-size: 12px; font-weight: 800; } .gu-bv.is-med { fill: #2f6b3a; }
+.gu-bar { fill: #7a8aa0; } .gu-bar.is-hot { fill: #d23a2a; }
+.gu-line { fill: none; stroke: #d23a2a; stroke-width: 3; stroke-linejoin: round; } .gu-dot { fill: #d23a2a; stroke: #fff; stroke-width: 2; }
+.gu-house { fill: #e3b341; stroke: #6b4a22; stroke-width: 2; } .gu-door { fill: #6b4a22; }
+.gu-pp { fill: #3b84b0; stroke: #fff; stroke-width: 1.5; } .gu-med { stroke: #2f6b3a; stroke-width: 2.5; stroke-dasharray: 5 4; }
+.gu[data-gurafu] .gu-q { margin: 0 16px; font-size: 15px; font-weight: 800; }
+.gu[data-gurafu] .gu-opts { display: grid; gap: 6px; margin: 0 16px; }
+.gu[data-gurafu] .gu-opts button { padding: 11px 14px; border-radius: 12px; border: 2px solid rgba(31, 35, 41, .18); background: #fff; color: #1f2329; font: inherit; font-size: 14px; font-weight: 700; text-align: left; cursor: pointer; transition: transform .15s, border-color .15s; }
+.gu[data-gurafu] .gu-opts button:hover:not(:disabled) { transform: translateX(3px); border-color: #d23a2a; }
+.gu[data-gurafu] .gu-opts button:disabled { opacity: .6; cursor: default; }
+.gu[data-gurafu] .gu-opts button.is-right { opacity: 1; border-color: #2f8a4a; background: #e8f5ea; }
+.gu[data-gurafu] .gu-opts button.is-wrong { opacity: 1; border-color: #d23a2a; background: #fde8e3; }
+.gu[data-gurafu] .gu-reveal { margin: 0 16px; padding: 14px 16px; border-radius: 16px; background: #1f2329; color: #eef1f5; animation: gu-rev .5s cubic-bezier(.3, 1.3, .5, 1); }
+.gu[data-gurafu] .gu-reveal[hidden] { display: none; }
+@keyframes gu-rev { from { opacity: 0; transform: translateY(12px); } }
+.gu[data-gurafu] .gu-reveal p { margin: 0 0 6px; font-size: 13.5px; line-height: 1.75; }
+.gu[data-gurafu] .gu-r-h { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-family: "Shippori Mincho", serif; font-size: 20px; font-weight: 800; color: #ffd76a; }
+.gu[data-gurafu] .gu-r-h span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: #d23a2a; color: #fff; font-size: 18px; }
+.gu[data-gurafu] .gu-r-h small { font-family: inherit; font-size: 13px; color: #c9d0da; }
+.gu[data-gurafu] .gu-tip { padding: 6px 10px; border-radius: 10px; background: rgba(255, 255, 255, .08); }
+.gu[data-gurafu] .gu-tip b { display: block; font-size: 12px; color: #7cc3d8; }
+.gu[data-gurafu] .gu-r-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.gu[data-gurafu] .gu-fix, .gu[data-gurafu] .gu-next { padding: 9px 18px; border-radius: 999px; border: 0; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.gu[data-gurafu] .gu-fix { background: #2f8a4a; color: #fff; animation: gu-pulse 1.4s ease-out infinite; } .gu[data-gurafu] .gu-fix:disabled { animation: none; opacity: .5; cursor: default; }
+@keyframes gu-pulse { 0% { box-shadow: 0 0 0 0 rgba(47, 138, 74, .6); } 100% { box-shadow: 0 0 0 12px rgba(47, 138, 74, 0); } }
+.gu[data-gurafu] .gu-next { background: #d23a2a; color: #fff; }
+.gu[data-gurafu] .gu-side { display: grid; gap: 10px; }
+.gu[data-gurafu] .gu-h { margin: 0; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; }
+.gu[data-gurafu] .gu-h small { margin-left: 8px; font-size: 13px; } .gu[data-gurafu] .gu-h b { color: #d23a2a; }
+.gu[data-gurafu] .gu-book { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.gu[data-gurafu] .gu-book li { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 12px; background: var(--color-surface, #fbfaf7); box-shadow: inset 0 0 0 1px var(--color-border, rgba(31, 35, 41, .15)); font-size: 14px; opacity: .55; }
+.gu[data-gurafu] .gu-book span { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; background: #9aa3b0; color: #fff; font-family: "Shippori Mincho", serif; font-size: 17px; font-weight: 800; }
+.gu[data-gurafu] .gu-book li.is-got { opacity: 1; animation: gu-got .5s cubic-bezier(.3, 1.6, .5, 1); } .gu[data-gurafu] .gu-book li.is-got span { background: #2f8a4a; } .gu[data-gurafu] .gu-book li.is-miss span { background: #d23a2a; }
+@keyframes gu-got { 40% { transform: scale(1.05); } }
+.gu[data-gurafu] .gu-res { display: grid; justify-items: center; gap: 4px; padding: 18px; border-radius: 18px; background: #fbfaf7; color: #1f2329; box-shadow: inset 0 0 0 2px rgba(210, 58, 42, .35); text-align: center; animation: gu-rev .5s ease-out; }
+.gu[data-gurafu] .gu-res[hidden] { display: none; }
+.gu[data-gurafu] .gu-r-seal { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; border: 4px solid #d23a2a; color: #d23a2a; font-family: "Shippori Mincho", serif; font-size: 30px; font-weight: 800; transform: rotate(-10deg); animation: gu-stamp .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes gu-stamp { from { transform: rotate(-30deg) scale(2.2); opacity: 0; } }
+.gu[data-gurafu] .gu-r-t { margin: 0; font-family: "Shippori Mincho", serif; font-size: 20px; font-weight: 800; }
+.gu[data-gurafu] .gu-r-s { margin: 0; font-size: 13px; } .gu[data-gurafu] .gu-r-s b { font-size: 22px; color: #d23a2a; }
+.gu[data-gurafu] .gu-again { margin-top: 6px; padding: 8px 20px; border-radius: 999px; border: 0; background: #1f2329; color: #fff; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.gu[data-gurafu] .gu-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.gu[data-gurafu] .gu-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(210, 58, 42, .07); font-size: 14px; line-height: 1.75; }
+.gu[data-gurafu] .gu-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.gu[data-gurafu] .gu-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .gu[data-gurafu] .gu-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .gu[data-gurafu] .gu-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .gu[data-gurafu] { grid-template-columns: minmax(0, 1fr); } .gu[data-gurafu] .gu-learn { grid-template-columns: 1fr; } .gu[data-gurafu] .gu-book { grid-template-columns: 1fr 1fr; } }
+@media (prefers-reduced-motion: reduce) { .gu[data-gurafu] * { animation: none !important; transition: none !important; } }

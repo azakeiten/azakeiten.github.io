@@ -1,0 +1,59 @@
+/* chiiki.css — 経済ラボ：めぐる町のお金（chiiki.js が読みこむ） */
+.mg[data-chiiki] { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.mg[data-chiiki] .mg-town { display: grid; gap: 10px; padding: 14px; border-radius: 26px; background: #2b3a2c; color: #eef4ea; box-shadow: 0 20px 44px -24px rgba(20, 40, 20, .8); }
+.mg[data-chiiki] .mg-map { display: block; width: 100%; height: auto; border-radius: 18px; }
+.mg-roof { fill: #b5432f; } .mg-wall { fill: #fffaf0; stroke: #6b4a22; stroke-width: 2; }
+.mg-seal { fill: #6b4a22; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; }
+.mg-name { fill: #2a2015; font-size: 12px; font-weight: 800; }
+.mg-sale { fill: #2f6b3a; font-size: 11.5px; font-weight: 800; }
+.mg-shop { transition: transform .2s; }
+.mg-shop.is-hit .mg-wall { animation: mg-hit .6s ease-out; }
+@keyframes mg-hit { 0% { fill: #ffe08a; } 100% { fill: #fffaf0; } }
+.mg-out-t { fill: #2a2015; font-size: 12px; font-weight: 800; } .mg-gate-t { fill: #fff; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; }
+.mg-c-h { fill: #6b4a22; font-size: 12px; font-weight: 800; } .mg-c-n { fill: #b5432f; font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; }
+.mg-path { stroke: rgba(227, 179, 65, .7); stroke-width: 2.5; stroke-dasharray: 4 5; stroke-linecap: round; animation: mg-draw .5s ease-out; }
+.mg-path.is-cur { stroke: rgba(59, 132, 176, .85); }
+@keyframes mg-draw { from { opacity: 0; } }
+.mg-coin { fill: #f2c94c; stroke: #a8761d; stroke-width: 2; transform: translate(var(--fx), var(--fy)); animation: mg-fly ease-in-out forwards; }
+.mg-coin.is-cur { fill: #7cc3d8; stroke: #2a5f80; }
+.mg-coin.is-leak { fill: #c9b48a; stroke: #6b4a22; stroke-width: 1; animation-timing-function: ease-in; }
+@keyframes mg-fly { from { transform: translate(var(--fx), var(--fy)); } to { transform: translate(var(--tx), var(--ty)); } }
+.mg[data-chiiki] .mg-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.mg[data-chiiki] .mg-stats p { margin: 0; padding: 8px 10px; border-radius: 12px; background: rgba(255, 255, 255, .08); }
+.mg[data-chiiki] .mg-stats small { display: block; font-size: 11px; opacity: .75; }
+.mg[data-chiiki] .mg-stats b { font-size: 16px; font-variant-numeric: tabular-nums; }
+.mg[data-chiiki] .mg-stats p.is-out b { color: #ffb4a6; }
+.mg[data-chiiki] .mg-msg { margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(0, 0, 0, .3); font-size: 13.5px; font-weight: 700; line-height: 1.7; min-height: 3.4em; }
+.mg[data-chiiki] .mg-side { display: grid; gap: 10px; }
+.mg[data-chiiki] .mg-sl { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 10px; font-size: 13px; font-weight: 700; }
+.mg[data-chiiki] .mg-sl output { font-family: "Shippori Mincho", serif; font-size: 28px; color: #2f6b3a; }
+.mg[data-chiiki] .mg-sl input { grid-column: 1 / -1; width: 100%; accent-color: #2f6b3a; }
+.mg[data-chiiki] .mg-hint { margin: -4px 0 0; font-size: 12px; opacity: .75; }
+.mg[data-chiiki] .mg-sw { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 2px 10px; padding: 10px 12px; border-radius: 14px; background: rgba(59, 132, 176, .1); cursor: pointer; }
+.mg[data-chiiki] .mg-sw input { position: absolute; opacity: 0; }
+.mg[data-chiiki] .mg-sw span { grid-row: 1 / 3; position: relative; width: 44px; height: 24px; border-radius: 12px; background: #8a8f86; transition: background .2s; }
+.mg[data-chiiki] .mg-sw span::after { content: ''; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.mg[data-chiiki] .mg-sw input:checked + span { background: #3b84b0; } .mg[data-chiiki] .mg-sw input:checked + span::after { transform: translateX(20px); }
+.mg[data-chiiki] .mg-sw input:focus-visible + span { outline: 2px solid #3b84b0; outline-offset: 2px; }
+.mg[data-chiiki] .mg-sw b { font-size: 14px; } .mg[data-chiiki] .mg-sw small { font-size: 12px; opacity: .8; }
+.mg[data-chiiki] .mg-go { padding: 13px; border-radius: 999px; border: 0; background: #2f6b3a; color: #fff; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 16px rgba(47, 107, 58, .35); }
+.mg[data-chiiki].is-busy .mg-side input, .mg[data-chiiki].is-busy .mg-go { opacity: .5; pointer-events: none; }
+.mg[data-chiiki] .mg-res { display: grid; gap: 8px; padding: 14px 16px; border-radius: 18px; background: #fffaf0; color: #2a2015; box-shadow: inset 0 0 0 2px rgba(47, 107, 58, .35); animation: mg-in .5s cubic-bezier(.3, 1.4, .5, 1); }
+.mg[data-chiiki] .mg-res[hidden] { display: none; }
+@keyframes mg-in { from { opacity: 0; transform: translateY(10px); } }
+.mg[data-chiiki] .mg-r-h { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0; font-family: "Shippori Mincho", serif; font-size: 28px; font-weight: 800; color: #2f6b3a; }
+.mg[data-chiiki] .mg-r-h span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #2f6b3a; color: #fff; font-size: 20px; }
+.mg[data-chiiki] .mg-r-h small { font-family: inherit; font-size: 13px; color: #6b5a44; }
+.mg[data-chiiki] .mg-r-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.mg[data-chiiki] .mg-r-list li { display: flex; justify-content: space-between; gap: 8px; padding: 6px 10px; border-radius: 10px; background: rgba(42, 32, 21, .05); font-size: 12.5px; }
+.mg[data-chiiki] .mg-r-list b { white-space: nowrap; }
+.mg[data-chiiki] .mg-r-tip { margin: 0; font-size: 12.5px; line-height: 1.7; }
+.mg[data-chiiki] .mg-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mg[data-chiiki] .mg-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(47, 107, 58, .08); font-size: 14px; line-height: 1.75; }
+.mg[data-chiiki] .mg-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.mg[data-chiiki] .mg-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .mg[data-chiiki] .mg-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mg[data-chiiki] .mg-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .mg[data-chiiki] { grid-template-columns: minmax(0, 1fr); } .mg[data-chiiki] .mg-learn { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .mg[data-chiiki] .mg-stats { grid-template-columns: 1fr 1fr; } .mg[data-chiiki] .mg-town { padding: 10px; } }
+@media (prefers-reduced-motion: reduce) { .mg[data-chiiki] *, .mg-coin { animation: none !important; transition: none !important; } }
