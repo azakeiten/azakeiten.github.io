@@ -140,7 +140,9 @@
       const ms = Math.max(1600, budget * S[i].length / total), txt = S[i]; i++;
       if (voiceOn && window.speechSynthesis) {
         let fin = false; const done = () => { if (fin) return; fin = true; clearTimeout(w); setTimeout(next, 250); };
-        const u = new SpeechSynthesisUtterance(txt); u.lang = 'ja-JP'; u.rate = 1.05; u.onend = done; u.onerror = done;
+        // お札マンは男の人の声（voice.js の manTone）
+        const V = window.AZAKEI_VOICE, mt = V ? V.manTone() : { voice: null, pitch: .7, rate: 1 };
+        const u = new SpeechSynthesisUtterance(V ? V.fix(txt) : txt); u.lang = 'ja-JP'; if (mt.voice) u.voice = mt.voice; u.pitch = mt.pitch; u.rate = 1.05 * mt.rate; u.onend = done; u.onerror = done;
         const w = setTimeout(done, 2500 + txt.length * 300);   // 読み終わりの合図が来ないときのため
         setTimeout(() => speechSynthesis.speak(u), 60);
       } else setTimeout(next, ms);
@@ -180,7 +182,7 @@
     tone(392, .12, 'sine', .06);
     step(`質問 ${qi + 1} / 3　「${J[qi][1]}」の審査員`);
     $('.pi-next').textContent = qi < J.length - 1 ? '答えた。次の質問へ' : '答えた。講評へ';
-    if (voiceOn && window.speechSynthesis) { const u = new SpeechSynthesisUtterance(qs[qi]); u.lang = 'ja-JP'; u.pitch = .8; speechSynthesis.cancel(); setTimeout(() => speechSynthesis.speak(u), 60); }
+    if (voiceOn && window.speechSynthesis) { const u = new SpeechSynthesisUtterance(qs[qi]); u.lang = 'ja-JP'; u.pitch = [1, .85, 1.1][qi] || 1; const V = window.AZAKEI_VOICE; if (V) { const nv = V.pick(), mv = V.manPick(); const others = V.jaVoices().filter(x => !mv || x.name !== mv.name); const jv = others[qi % Math.max(1, others.length)] || nv; if (jv) u.voice = jv; } speechSynthesis.cancel(); setTimeout(() => speechSynthesis.speak(u), 60); }
     countdown(QA_S, nextQ);
   };
   const finish = () => {
@@ -209,7 +211,7 @@
   });
   box.addEventListener('change', e => {
     if (e.target.matches('.pi-ann')) { annOn = e.target.checked; VO().then(v => { if (v) v.set(annOn); }); }
-    if (e.target.matches('.pi-voice')) { voiceOn = e.target.checked; if (!voiceOn && window.speechSynthesis) speechSynthesis.cancel(); }
+    if (e.target.matches('.pi-voice')) { voiceOn = e.target.checked; if (voiceOn) VO(); if (!voiceOn && window.speechSynthesis) speechSynthesis.cancel(); }
     if (e.target.matches('.pi-sfx')) { sfxOn = e.target.checked; tone(660, .1); }
   });
   // 上の欄に書き足したら、まだ幕が上がる前なら原稿を作りなおす

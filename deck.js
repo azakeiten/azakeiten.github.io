@@ -145,7 +145,7 @@
       <ol class="dk-track" aria-hidden="true">${STEPS.map(([k, t]) => `<li><span>${k}</span>${t}</li>`).join('<li class="dk-arr">→</li>')}</ol>
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
       <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
-      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-sp">速さ：ふつう</button><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p><button type="button" class="dk-ch-go">止まっています。つづける ▶</button></div><div class="dk-ch-man">${MAN}</div></div>
+      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-sp">速さ：ふつう</button><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button><select class="dk-ch-vsel" aria-label="お札マンの声" hidden></select>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p><button type="button" class="dk-ch-go">止まっています。つづける ▶</button></div><div class="dk-ch-man">${MAN}</div></div>
       <div class="dk-jimaku" hidden aria-live="polite"><p></p></div>
       <div class="dk-cap" hidden aria-live="polite"><b>案内</b><span></span></div>
       <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
@@ -182,17 +182,18 @@
     const sb = el.querySelector('.dk-ch-s');
     sb.onclick = () => { sfxOn = !sfxOn; sb.setAttribute('aria-pressed', sfxOn); sb.textContent = sfxOn ? '効果音：あり' : '効果音'; sfx('coin'); };
     const vb = el.querySelector('.dk-ch-v');
-    if (vb) vb.onclick = () => { voice = !voice; if (voice) VO(); vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
+    if (vb) vb.onclick = () => { voice = !voice; if (voice) VO().then(manList); else el.querySelector('.dk-ch-vsel').hidden = true; vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
     el.querySelector('.dk-lbtn').onclick = () => setTool(tool === 'laser' ? '' : 'laser');
     el.querySelector('.dk-dbtn').onclick = () => setTool(tool === 'pen' ? '' : 'pen');
     el.querySelector('.dk-pv').onclick = presenter;
     // 指し棒：赤い光の点がマウスについてくる
     el.querySelector('.dk-obtn').onclick = opening;
+    el.querySelector('.dk-ch-vsel').onchange = e => { if (window.AZAKEI_VOICE) { AZAKEI_VOICE.setMan(e.target.value); stopTalk(); speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance('この声で話すよ。よろしく。'); const mt = AZAKEI_VOICE.manTone(); if (mt.voice) u.voice = mt.voice; u.lang = 'ja-JP'; u.pitch = mt.pitch; u.rate = mt.rate; speechSynthesis.speak(u); if (chara && playing) setTimeout(run, 1800); } };
     el.querySelector('.dk-rbtn').onclick = () => setNarr(!narr);
     el.querySelector('.dk-bbtn').onclick = () => setBgm(!bgmOn);
     setBgm(bgmOn);
     el.querySelector('.dk-vsel').onchange = e => { if (window.AZAKEI_VOICE) { AZAKEI_VOICE.setTTS(e.target.value); if (narr && playing) run(); } };
-    document.addEventListener('azakei-voices', () => { if (el) voiceList(); });
+    document.addEventListener('azakei-voices', () => { if (el) { voiceList(); manList(); } });
     el.querySelector('.dk-abtn').onclick = () => setAnn(!ann);
     setAnn(ann, true);
     const lz = el.querySelector('.dk-laser');
@@ -404,10 +405,19 @@
       });
     });
   };
+  // お札マンの声をえらぶ欄（男の声を上に）
+  const manList = () => {
+    const sel = el.querySelector('.dk-ch-vsel'); if (!sel || !window.AZAKEI_VOICE) return;
+    const V = AZAKEI_VOICE, vs = V.jaVoices().sort((a, b) => V.isMale(b) - V.isMale(a)), cur = V.manPick();
+    sel.innerHTML = vs.map(v => `<option value="${v.name.replace(/"/g, '&quot;')}"${cur && cur.name === v.name ? ' selected' : ''}>${V.label(v)}</option>`).join('');
+    if (!V.hasNatural()) sel.insertAdjacentHTML('beforeend', '<option disabled>Edge だと人の声に近い声</option>');
+    sel.hidden = !voice || !vs.length;
+  };
   const voiceList = () => {
     const sel = el.querySelector('.dk-vsel'); if (!sel || !window.AZAKEI_VOICE) return;
     const vs = AZAKEI_VOICE.jaVoices(), cur = AZAKEI_VOICE.pick();
-    sel.innerHTML = vs.length ? vs.map(v => `<option value="${v.name.replace(/"/g, '&quot;')}"${cur && cur.name === v.name ? ' selected' : ''}>声：${v.name.replace(/^Microsoft\s*/, '').replace(/\s*Online\s*\(Natural\)/, '（自然な声）').replace(/\s*-\s*Japanese.*$|\s*\(Japan\)$/g, '').slice(0, 16)}</option>`).join('') : '<option>日本語の声がありません</option>';
+    sel.innerHTML = vs.length ? vs.map(v => `<option value="${v.name.replace(/"/g, '&quot;')}"${cur && cur.name === v.name ? ' selected' : ''}>声：${AZAKEI_VOICE.label(v)}</option>`).join('') : '<option>日本語の声がありません</option>';
+    if (vs.length && !AZAKEI_VOICE.hasNatural()) sel.insertAdjacentHTML('beforeend', '<option disabled>Edge だと人の声に近い声</option>');
     sel.disabled = !vs.length;
   };
   const setNarr = on => {
@@ -416,7 +426,7 @@
     el.querySelector('.dk-rbtn').setAttribute('aria-pressed', on);
     if (on) {
       if (chara) setChara(false); if (note) setNote(false); setTool('');
-      VO().then(v => { if (!v || !narr) return; voiceList(); if (bgmOn) v.bgm(true); });
+      VO().then(v => { if (!v || !narr) return; voiceList(); if (bgmOn) v.bgm(true); setTimeout(() => { if (narr && v.jaVoices().length && !v.hasNatural() && !setNarr.tipped) { setNarr.tipped = true; capShow('人の声に近いナレーションは、Microsoft Edge で開くと聞けます。'); setTimeout(capHide, 5000); } }, 1500); });
       clearTimeout(timer); playing = true;
       const b = el.querySelector('.dk-play'); b.textContent = 'II'; b.setAttribute('aria-label', '一時停止');
       run();
@@ -507,8 +517,10 @@
     if (voice) {
       // 読み上げの「終わった」の知らせが来ないことがあるブラウザのため、長さから見て遅すぎたら先へ進む（止まらないように）
       const u = new SpeechSynthesisUtterance(window.AZAKEI_VOICE ? AZAKEI_VOICE.fix(txt) : txt);
-      if (window.AZAKEI_VOICE) { const pv = AZAKEI_VOICE.pick(); if (pv) u.voice = pv; }
-      u.lang = 'ja-JP'; u.pitch = 1.45; u.rate = 1.05 / SPD[spd][1];
+      // お札マンは男の人の声（voice.js の manTone）。少し低く、落ち着いて
+      const mt = window.AZAKEI_VOICE ? AZAKEI_VOICE.manTone() : { voice: null, pitch: .7, rate: 1 };
+      if (mt.voice) u.voice = mt.voice;
+      u.lang = 'ja-JP'; u.pitch = mt.pitch; u.rate = 1.02 * mt.rate / SPD[spd][1];
       u.onend = u.onerror = () => { spoke = true; fin(); };
       setTimeout(() => { if (tok === tTok) speechSynthesis.speak(u); }, 80);
       setTimeout(() => { if (tok === tTok && !spoke) { spoke = true; fin(); } }, 3000 + txt.length * 280 * SPD[spd][1]);

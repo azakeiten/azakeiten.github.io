@@ -439,3 +439,7 @@ html .dk.is-chara .dk-s:not(.is-cover) .dk-t { font-size: clamp(26px, 4vw, 52px)
 .dk-ctl button { white-space: nowrap; }
 .dk.is-narr .dk-ctl .dk-lbtn, .dk.is-narr .dk-ctl .dk-dbtn, .dk.is-narr .dk-ctl .dk-hbtn, .dk.is-narr .dk-ctl .dk-nbtn, .dk.is-narr .dk-ctl .dk-obtn { display: none; }
 @media (max-width: 1200px) { .dk.is-narr .dk-ctl .dk-gbtn, .dk.is-narr .dk-ctl .dk-cbtn { display: none; } }
+/* お札マンの声（男の声）をえらぶ */
+.dk-ch-vsel { margin-left: 4px; max-width: 150px; padding: 3px 8px; border-radius: 999px; border: 1px solid #2a3d6e; background: #2a3d6e; color: #fff; font: inherit; font-size: 11.5px; font-weight: 800; cursor: pointer; }
+.dk-ch-vsel[hidden] { display: none; }
+.dk-ch-vsel option { color: #2a2015; background: #fff; }

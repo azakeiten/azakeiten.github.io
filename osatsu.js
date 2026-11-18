@@ -5,6 +5,11 @@
    ・イラストはサイト用に描いたもの（まばたき・手をふる）
    ================================================================ */
 (function() {
+  // お札マンの声（voice.js の man：男の人の声で、少し低く）。「案内の声」がオンなら自動で、オフなら「声で聞く」で
+  const OV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
+  const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + OV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
+  const voiceOn = () => { try { return localStorage.getItem('azakei_voice') === '1'; } catch (e) { return false; } };
+  const speak = t => { if (!window.speechSynthesis) return; VO().then(v => { if (v) v.man(t); }); };
   const SVG = `<svg class="os-svg" viewBox="0 0 120 112" aria-hidden="true">
     <g class="os-legs" stroke="#6b4a22" stroke-width="3.5" stroke-linecap="round"><path d="M50 76 L46 96"/><path d="M70 76 L74 96"/></g>
     <ellipse cx="44" cy="98" rx="7" ry="3.5" fill="#6b4a22"/><ellipse cx="76" cy="98" rx="7" ry="3.5" fill="#6b4a22"/>
@@ -46,18 +51,27 @@
     '「インフレ」は、ものの値段が全体に上がっていくこと。同じ 100 円で買える量が減るんだ。'
   ];
   const KEY = 'azakei_mame';
-  const typeIn = (el, text) => {
+  const typeIn = (el, text, done) => {
     clearInterval(el._t);
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('is-lite')) { el.textContent = text; return; }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.classList.contains('is-lite')) { el.textContent = text; if (done) done(); return; }
     let i = 0; el.textContent = '';
-    el._t = setInterval(() => { i += 1; el.textContent = text.slice(0, i); if (i >= text.length) clearInterval(el._t); }, 28);
+    el._t = setInterval(() => { i += 1; el.textContent = text.slice(0, i); if (i >= text.length) { clearInterval(el._t); if (done) done(); } }, 28);
   };
+  // 声：オンならすぐ話す。オフなら、文字が出おわったあとに「声で聞く」
+  const voiced = (bubble, text) => {
+    const tok = bubble._vt = (bubble._vt || 0) + 1;
+    if (!window.speechSynthesis) return;
+    if (voiceOn()) { speak(text); return; }
+    // 文字が出おわったら（typeIn の done）、「声で聞く」を足す
+    return () => { if (bubble._vt !== tok) return; const b = document.createElement('button'); b.type = 'button'; b.className = 'os-say'; b.textContent = '声で聞く'; b.dataset.say = text; bubble.appendChild(b); };
+  };
+  document.addEventListener('click', e => { const b = e.target.closest('.os-say'); if (!b) return; e.stopPropagation(); b.classList.add('is-on'); speak(b.dataset.say); }, true);
   const talk = man => {
     const box = man.closest('.osatsu'), bubble = box && box.querySelector('.os-bubble');
     if (!bubble) return;
     // 仮装している季節は、最初の 1 回だけ季節のあいさつ
     const SEASON = { halloween: 'ハロウィンだから、かぼちゃの帽子をかぶってみたよ。似合う？ もう一度押すと、お金の豆知識を話すね。', xmas: 'メリークリスマス！ サンタの帽子をかぶってみたよ。もう一度押すと、お金の豆知識を話すね。', newyear: 'あけましておめでとう！ 今年もよろしくね。もう一度押すと、お金の豆知識を話すね。' };
-    if (ACC && !talk.greeted) { talk.greeted = true; box.classList.remove('is-talk'); void box.offsetWidth; box.classList.add('is-talk'); typeIn(bubble, SEASON[ACC[0]]); return; }
+    if (ACC && !talk.greeted) { talk.greeted = true; box.classList.remove('is-talk'); void box.offsetWidth; box.classList.add('is-talk'); typeIn(bubble, SEASON[ACC[0]], voiced(bubble, SEASON[ACC[0]])); return; }
     let seen = []; try { seen = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) {}
     const rest = MAME.map((_, i) => i).filter(i => !seen.includes(i));
     const pick = (rest.length ? rest : MAME.map((_, i) => i))[Math.random() * (rest.length || MAME.length) | 0];
@@ -66,7 +80,7 @@
     box.classList.remove('is-talk'); void box.offsetWidth; box.classList.add('is-talk');
     bubble.classList.add('is-mame');
     bubble.setAttribute('data-count', `豆知識 ${Math.min(seen.length, MAME.length)} / ${MAME.length}`);
-    typeIn(bubble, MAME[pick]);
+    typeIn(bubble, MAME[pick], voiced(bubble, MAME[pick]));
   };
   // 季節の仮装（日本時間の日付で自動）：ハロウィンはかぼちゃ帽子、クリスマスはサンタ帽、お正月は「賀」の印
   const jst = new Date(Date.now() + 9 * 3600e3), md = (jst.getUTCMonth() + 1) * 100 + jst.getUTCDate();

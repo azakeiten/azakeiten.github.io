@@ -6,6 +6,12 @@
    ================================================================ */
 (function() {
   const box = document.querySelector('[data-ehon]');
+  // 読むのはお札マン（voice.js の manTone：男の人の声で、少し低く）
+  const EV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
+  const speakIt = s => {
+    const go = () => { const V = window.AZAKEI_VOICE, u = new SpeechSynthesisUtterance(V ? V.fix(s) : s); u.lang = 'ja-JP'; if (V) { const mt = V.manTone(); if (mt.voice) u.voice = mt.voice; u.pitch = mt.pitch; u.rate = mt.rate; } speechSynthesis.speak(u); };
+    if (window.AZAKEI_VOICE) setTimeout(go, 80); else { const sc = document.createElement('script'); sc.src = 'voice.js?v=' + EV; sc.onload = go; sc.onerror = go; document.head.appendChild(sc); }
+  };
   if (!box || box.dataset.ready) return;
   box.dataset.ready = '1';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -69,7 +75,7 @@
     let k = 0;
     const step = () => { k = reduce ? x.length : k + 1; el.textContent = x.slice(0, k); if (k < x.length) typeT = setTimeout(step, /[、。]/.test(x[k - 1]) ? 180 : 38); else if (auto) timer = setTimeout(() => go(i + 1 < P.length ? i + 1 : 0), voice ? 2500 : 3500); };
     step();
-    if (voice && window.speechSynthesis) { const u = new SpeechSynthesisUtterance(t + '。' + x); u.lang = 'ja-JP'; u.rate = 1; setTimeout(() => speechSynthesis.speak(u), 80); }
+    if (voice && window.speechSynthesis) { speakIt(t + '。' + x); }
     box.querySelectorAll('.eh-dots li').forEach((d, j) => d.classList.toggle('is-on', j === i));
     box.querySelector('.eh-prev').disabled = i === 0;
     box.querySelector('.eh-next').disabled = i === P.length - 1 && !auto;

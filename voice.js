@@ -88,11 +88,35 @@
   let ttsName = null, ttsGen = 0;
   try { ttsName = localStorage.getItem('azakei_tts'); } catch (e) {}
   const jaVoices = () => (window.speechSynthesis ? speechSynthesis.getVoices() : []).filter(v => /^ja/i.test(v.lang));
-  const rank = v => (/(Natural|Online|Neural)/i.test(v.name) ? 50 : 0) + (/Google/i.test(v.name) ? 30 : 0) + (/(Kyoko|O-Ren|Otoya|Hattori)/i.test(v.name) ? 25 : 0) + (/Nanami/i.test(v.name) ? 10 : 0);
+  // 人の声に近い「新しい声」（Edge の自然な声、Apple の拡張・プレミアム、Google の声）を先に
+  const NATURAL = /(Natural|Online|Neural|Enhanced|Premium|拡張|プレミアム|Google)/i;
+  const isNatural = v => !!v && NATURAL.test(v.name);
+  const rank = v => (/(Natural|Online|Neural|Premium|プレミアム)/i.test(v.name) ? 60 : 0) + (/(Enhanced|拡張)/i.test(v.name) ? 45 : 0) + (/Google/i.test(v.name) ? 35 : 0) + (/(Kyoko|O-Ren|Otoya|Hattori)/i.test(v.name) ? 20 : 0) + (/(Nanami|七海)/i.test(v.name) ? 10 : 0) + (v.localService === false ? 5 : 0);
   const pick = () => { const vs = jaVoices(); return vs.find(v => v.name === ttsName) || vs.slice().sort((a, b) => rank(b) - rank(a))[0] || null; };
   if (window.speechSynthesis) { speechSynthesis.getVoices(); speechSynthesis.addEventListener && speechSynthesis.addEventListener('voiceschanged', () => document.dispatchEvent(new CustomEvent('azakei-voices'))); }
   // 読みまちがえやすい言葉
-  const READ = [[/@azakei_vlog/g, 'アットマーク、アザケイ ブイログ'], [/azakeiten\.github\.io/g, 'アザケイテン ドット ギットハブ ドット アイオー'], [/AZAKEI/g, 'アザケイ'], [/麻経/g, 'あざけい'], [/麻布/g, 'あざぶ'], [/Instagram/g, 'インスタグラム'], [/Web/g, 'ウェブ'], [/ホームページ/g, 'ホームページ'], [/(\d),(\d{3})/g, '$1$2'], [/（[^）]*）/g, '']];
+  // 読み方の辞書：読みまちがえやすい言葉を、ひらがなにしてから読ませる（字幕はもとの字のまま）
+  //   ・かっこの中（よみがな・補足）は読まない ・数字のまわりの空白をつめる（「3 日間」→「3日間」）
+  //   ・長い言葉から先に置きかえる。言葉を足すときは、このリストに足す
+  const READ = [
+    [/（[^）]*）|\([^)]*\)/g, ''],
+    [/(\d)\s+(?=[^\s\x00-\x7F])/g, '$1'], [/([^\s\x00-\x7F])\s+(?=\d)/g, '$1'], [/(\d),(\d{3})/g, '$1$2'],
+    [/@azakei_vlog/g, 'アットマーク、あざけい ブイログ'], [/azakeiten\.github\.io/g, 'あざけいてん ドット ギットハブ ドット アイオー'],
+    [/麻布中学校・高等学校/g, 'あざぶ中学校、高等学校'], [/麻布経済展/g, 'あざぶけいざいてん'], [/麻布生/g, 'あざぶせい'], [/麻経券/g, 'あざけいけん'],
+    [/AZAKEI/g, 'あざけい'], [/麻経/g, 'あざけい'], [/麻布/g, 'あざぶ'],
+    [/文化祭/g, 'ぶんかさい'], [/同好会/g, 'どうこうかい'], [/部員/g, 'ぶいん'], [/会長/g, 'かいちょう'], [/校長/g, 'こうちょう'], [/合言葉/g, 'あいことば'],
+    [/創り出す/g, 'つくりだす'], [/創る/g, 'つくる'], [/自らで/g, 'みずからで'], [/自ら/g, 'みずから'], [/親しむ/g, 'したしむ'], [/親しみ/g, 'したしみ'], [/生みの親/g, 'うみのおや'],
+    [/お札マン/g, 'おさつマン'], [/一万円札/g, 'いちまんえんさつ'], [/五千円札/g, 'ごせんえんさつ'], [/千円札/g, 'せんえんさつ'], [/お札/g, 'おさつ'], [/日本銀行券/g, 'にっぽんぎんこうけん'],
+    [/日経ストックリーグ/g, 'にっけいストックリーグ'], [/日経平均/g, 'にっけいへいきん'], [/日経/g, 'にっけい'],
+    [/中3-5/g, 'ちゅうさんのご'], [/(?<!\d)1日目/g, 'いちにちめ'], [/(?<!\d)2日目/g, 'ふつかめ'], [/(?<!\d)3日目/g, 'みっかめ'], [/(?<!\d)3日間/g, 'みっかかん'], [/(?<!\d)1分/g, 'いっぷん'], [/(?<!\d)1人/g, 'ひとり'], [/一人/g, 'ひとり'], [/(?<!\d)2人/g, 'ふたり'],
+    [/(?<!\d)1つ/g, 'ひとつ'], [/(?<!\d)2つ/g, 'ふたつ'], [/(?<!\d)3つ/g, 'みっつ'], [/(?<!\d)4つ/g, 'よっつ'], [/(?<!\d)5つ/g, 'いつつ'], [/(?<!\d)6つ/g, 'むっつ'],
+    [/円玉/g, 'えんだま'], [/豆知識/g, 'まめちしき'], [/新貨条例/g, 'しんかじょうれい'], [/入口/g, 'いりぐち'], [/今日/g, 'きょう'], [/上手/g, 'じょうず'],
+    [/(?<![一-龯])表(?=なら|が|だ|でした)/g, 'おもて'],
+    [/ご清聴/g, 'ごせいちょう'], [/登壇/g, 'とうだん'], [/協賛/g, 'きょうさん'],
+    [/Instagram/g, 'インスタグラム'], [/Web/g, 'ウェブ'], [/(?<![A-Za-z])SNS(?![A-Za-z])/g, 'エスエヌエス'], [/(?<![A-Za-z])NISA(?![A-Za-z])/g, 'ニーサ'], [/(?<![A-Za-z])GDP(?![A-Za-z])/g, 'ジーディーピー'], [/(?<![A-Za-z])AI(?![A-Za-z])/g, 'エーアイ'], [/(?<![A-Za-z])OB(?![A-Za-z])/g, 'オービー'], [/(?<![A-Za-z])IR(?![A-Za-z])/g, 'アイアール'],
+    [/(^|[^A-Za-z])A(?=[^A-Za-z]|$)/g, '$1エー'], [/(^|[^A-Za-z])B(?=[^A-Za-z]|$)/g, '$1ビー'],
+    [/％|%/g, 'パーセント']
+  ];
   const fix = t => READ.reduce((s, [a, b]) => s.replace(a, b), String(t));
   const split = t => String(t).replace(/\s+/g, ' ').split(/(?<=[。！？])/).map(s => s.trim()).filter(Boolean);
   const ttsStop = () => { ttsGen++; if (window.speechSynthesis) speechSynthesis.cancel(); };
@@ -104,7 +128,7 @@
       if (my !== ttsGen || k >= parts.length) return res();
       const s = parts[k]; if (o.onPart) o.onPart(s, k, parts.length); k++;
       const u = new SpeechSynthesisUtterance(fix(s)); u.lang = 'ja-JP';
-      const v = pick(); if (v) u.voice = v;
+      const v = o.voice || pick(); if (v) u.voice = v;
       u.rate = o.rate || 1; u.pitch = o.pitch || 1; u.volume = 1;
       let fin = false; const done = () => { if (fin) return; fin = true; clearTimeout(w); setTimeout(next, o.gap == null ? 220 : o.gap); };
       const t0 = Date.now();
@@ -137,5 +161,23 @@
       bg = { g, osc, iv };
     } catch (e) {}
   };
-  window.AZAKEI_VOICE = { on: () => on, set, say, dur, chime, stop, load, tts, ttsStop, jaVoices, pick, setTTS, fix, bgm };
+  // ── お札マンの声：男の人の声で、少し低く落ち着いて（かっこよく）。男の声がない機械では、声を低くして近づける
+  //    Edge：圭太（Keita・自然な声）／Windows：Ichiro／iPhone・Mac：Otoya・Hattori。えらんだ声は azakei_man_voice に
+  const FEMALE = /(Nanami|七海|Haruka|Ayumi|Sayaka|Kyoko|O-Ren|Mizuki|Aoi|葵|Shiori|志織|Mayu|真由|Google)/i;
+  const MALE = /(Keita|圭太|Daichi|大智|Naoki|直紀|Ichiro|Otoya|Hattori|Takumi|Kenji)/i;
+  const isMale = v => MALE.test(v.name) && !FEMALE.test(v.name);
+  let manName = null;
+  try { manName = localStorage.getItem('azakei_man_voice'); } catch (e) {}
+  const manRank = v => (isMale(v) ? 100 : 0) + (isNatural(v) ? 40 : 0) + (/(Keita|圭太)/i.test(v.name) ? 20 : 0) + (/(Otoya|Hattori)/i.test(v.name) ? 15 : 0);
+  const manPick = () => { const vs = jaVoices(); return vs.find(v => v.name === manName) || vs.slice().sort((a, b) => manRank(b) - manRank(a))[0] || null; };
+  // 人の声らしさを残すため、音の高さは大きく変えない。自然な男の声はほんの少し低く。古い男の声はそのまま。
+  // 男の声がない機械だけ、少し低くして近づける（下げすぎると機械っぽくなる）
+  const manTone = (v = manPick()) => !v ? { voice: null, pitch: .8, rate: .97 } : isMale(v) ? { voice: v, pitch: isNatural(v) ? .93 : 1, rate: .97 } : { voice: v, pitch: .78, rate: .95 };
+  const setMan = name => { manName = name; try { localStorage.setItem('azakei_man_voice', name); } catch (e) {} };
+  const man = (text, o = {}) => { const t = manTone(); return tts(text, { ...o, voice: t.voice, pitch: t.pitch, rate: (o.rate || 1) * t.rate }); };
+  // 声のえらぶ欄に出す名前（男の声には「男性」）
+  const label = v => v.name.replace(/^Microsoft\s*/, '').replace(/\s*Online\s*\(Natural\)/, '（自然な声）').replace(/\s*-\s*Japanese.*$|\s*\(Japan\)$/g, '').slice(0, 16) + (isMale(v) ? '・男性' : '');
+  // この機械に、人の声に近い声があるか（なければ「Edge だと自然な声」と案内する）
+  const hasNatural = () => jaVoices().some(isNatural);
+  window.AZAKEI_VOICE = { on: () => on, set, say, dur, chime, stop, load, tts, ttsStop, jaVoices, pick, setTTS, fix, bgm, man, manPick, manTone, setMan, isMale, isNatural, hasNatural, label };
 })();
