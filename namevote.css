@@ -40,3 +40,37 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nv[data-namevote] .nv-c { background: rgba(255, 255, 255, .05); } }
 @media (max-width: 820px) { .nv[data-namevote] { grid-template-columns: minmax(0, 1fr); } .nv[data-namevote] .nv-stage { position: relative; top: 0; } }
 @media (prefers-reduced-motion: reduce) { .nv[data-namevote] *, .nv[data-namevote] .nv-man { animation: none !important; transition: none !important; } }
+/* お客さんの案：候補に足す・新しい案の知らせ */
+.nv[data-namevote] .nv-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.nv[data-namevote] .nv-head p { margin: 0; font-size: 13px; }
+.nv[data-namevote] .nv-head b { font-family: "Shippori Mincho", serif; font-size: 26px; color: #b5432f; }
+.nv[data-namevote] .nv-live { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; opacity: .7; }
+.nv[data-namevote] .nv-live::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #8a8f86; }
+.nv[data-namevote].is-live .nv-live { opacity: 1; color: #2f8a4a; }
+.nv[data-namevote].is-live .nv-live::before { background: #2f8a4a; animation: nv-blink 1.6s ease-in-out infinite; }
+@keyframes nv-blink { 50% { opacity: .25; } }
+.nv[data-namevote] .nv-n small.nv-who, .nv[data-namevote] .nv-n small.nv-new, .nv[data-namevote] .nv-n small.nv-you { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; opacity: 1; vertical-align: 3px; }
+.nv[data-namevote] .nv-who { background: rgba(59, 132, 176, .15); color: #3b84b0; }
+.nv[data-namevote] .nv-new { background: #b5432f; color: #fff; }
+.nv[data-namevote] .nv-you { background: #2a3d6e; color: #fff; }
+.nv[data-namevote] .nv-c.is-fresh { animation: nv-fresh 1.2s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes nv-fresh { 0% { transform: translateX(30px); opacity: 0; box-shadow: 0 0 0 4px #e3b341; } 60% { box-shadow: 0 0 0 4px #e3b341; } }
+.nv[data-namevote] .nv-more { padding: 8px; border-radius: 12px; border: 1px dashed var(--color-border, rgba(107, 74, 34, .3)); background: transparent; color: inherit; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.nv[data-namevote] .nv-idea { display: grid; gap: 8px; margin-top: 6px; padding: 14px 16px; border-radius: 18px; background: rgba(227, 179, 65, .12); box-shadow: inset 0 0 0 2px rgba(227, 179, 65, .45); }
+.nv[data-namevote] .nv-idea[hidden] { display: none; }
+.nv[data-namevote] .nv-idea-h { display: flex; align-items: center; gap: 8px; margin: 0; font-family: "Shippori Mincho", serif; font-size: 17px; font-weight: 800; }
+.nv[data-namevote] .nv-idea-h span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: #e3b341; color: #2a2015; font-size: 15px; transform: rotate(-4deg); }
+.nv[data-namevote] .nv-idea-row { display: flex; gap: 8px; }
+.nv[data-namevote] .nv-idea input { flex: 1; min-width: 0; padding: 10px 14px; border-radius: 12px; border: 2px solid var(--color-border, rgba(107, 74, 34, .3)); background: var(--color-surface, #fffaf0); color: inherit; font-family: "Shippori Mincho", serif; font-size: 20px; font-weight: 800; }
+.nv[data-namevote] .nv-idea input:focus { outline: none; border-color: #e3b341; }
+.nv[data-namevote] .nv-idea button { flex: none; padding: 0 18px; border-radius: 12px; border: 0; background: #2a2015; color: #f3e3bd; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.nv[data-namevote] .nv-idea.is-busy button { opacity: .5; pointer-events: none; }
+.nv[data-namevote] .nv-idea-note { margin: 0; font-size: 12.5px; line-height: 1.6; opacity: .85; }
+.nv[data-namevote] .nv-idea-note.is-err { color: #c4442c; opacity: 1; font-weight: 700; }
+.nv[data-namevote] .nv-rule { margin: 0; font-size: 12px; line-height: 1.6; opacity: .7; }
+.nv[data-namevote] .nv-toast { position: absolute; left: 50%; top: 14px; z-index: 2; translate: -50% 0; padding: 7px 16px; border-radius: 999px; background: #2a3d6e; color: #fff; font-size: 13px; font-weight: 800; white-space: nowrap; box-shadow: 0 8px 20px rgba(42, 61, 110, .35); }
+.nv[data-namevote] .nv-toast[hidden] { display: none; }
+.nv[data-namevote] .nv-toast.is-in { animation: nv-toast 4.2s ease both; }
+@keyframes nv-toast { 0% { opacity: 0; transform: translateY(-12px); } 8%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+:root[data-theme="dark"] .nv[data-namevote] .nv-idea input { background: rgba(255, 255, 255, .06); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .nv[data-namevote] .nv-idea input { background: rgba(255, 255, 255, .06); } }

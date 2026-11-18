@@ -4,6 +4,8 @@
    ・自動で進む。← → キー・スワイプ・画面の左右を押しても動く。Esc で閉じる
    ・段（親しむ → 知る → つくる）が変わるところで、大きな印が出る
    ・「発表」（N キー）：自動送りを止め、話す台本・経過時間・次のスライドを出す（部員が人前で話すとき用）
+   ・「ナレーション」（R キー）：台本を、いちばん自然な日本語の声で 1 文ずつ読み、大きな字幕を出す。読み終わると次へ。声はえらべる。静かな BGM つき
+   ・「開演」（O キー）：チャイム → 開演の案内（効果音ラボの声）→ 3・2・1・0 → ナレーションで発表
    ・「発表」（P キー）：お札マン（仮）が横に出てきて、ふきだしで 1 文ずつ発表する。「声を出す」で読み上げも。言い終わると次へ
    ・「台本」（N キー）：自分で話すときの台本・経過時間
    ・「一覧」（G キー）：全部のスライドを並べて、好きな場面へ
@@ -144,6 +146,7 @@
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
       <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
       <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-sp">速さ：ふつう</button><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p><button type="button" class="dk-ch-go">止まっています。つづける ▶</button></div><div class="dk-ch-man">${MAN}</div></div>
+      <div class="dk-jimaku" hidden aria-live="polite"><p></p></div>
       <div class="dk-cap" hidden aria-live="polite"><b>案内</b><span></span></div>
       <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
       <div class="dk-ctl">
@@ -158,6 +161,9 @@
         <button type="button" class="dk-nbtn" aria-pressed="false" title="自分で話すときの台本（N）">台本</button>
         <button type="button" class="dk-obtn" title="開演の案内からはじめる（O）">開演</button>
         <button type="button" class="dk-abtn" aria-pressed="false" title="案内の声（V）">案内の声</button>
+        <button type="button" class="dk-rbtn" aria-pressed="false" title="ナレーションで発表（R）。台本を声で読み、字幕を出します">ナレーション</button>
+        <select class="dk-vsel" aria-label="ナレーションの声"></select>
+        <button type="button" class="dk-bbtn" aria-pressed="false" title="ナレーションの下に静かな音楽">BGM</button>
         <button type="button" class="dk-cbtn" aria-pressed="false" title="お札マンが発表（P）">発表</button>
         <button type="button" class="dk-x" aria-label="閉じる">閉じる</button>
       </div>`;
@@ -176,12 +182,17 @@
     const sb = el.querySelector('.dk-ch-s');
     sb.onclick = () => { sfxOn = !sfxOn; sb.setAttribute('aria-pressed', sfxOn); sb.textContent = sfxOn ? '効果音：あり' : '効果音'; sfx('coin'); };
     const vb = el.querySelector('.dk-ch-v');
-    if (vb) vb.onclick = () => { voice = !voice; vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
+    if (vb) vb.onclick = () => { voice = !voice; if (voice) VO(); vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
     el.querySelector('.dk-lbtn').onclick = () => setTool(tool === 'laser' ? '' : 'laser');
     el.querySelector('.dk-dbtn').onclick = () => setTool(tool === 'pen' ? '' : 'pen');
     el.querySelector('.dk-pv').onclick = presenter;
     // 指し棒：赤い光の点がマウスについてくる
     el.querySelector('.dk-obtn').onclick = opening;
+    el.querySelector('.dk-rbtn').onclick = () => setNarr(!narr);
+    el.querySelector('.dk-bbtn').onclick = () => setBgm(!bgmOn);
+    setBgm(bgmOn);
+    el.querySelector('.dk-vsel').onchange = e => { if (window.AZAKEI_VOICE) { AZAKEI_VOICE.setTTS(e.target.value); if (narr && playing) run(); } };
+    document.addEventListener('azakei-voices', () => { if (el) voiceList(); });
     el.querySelector('.dk-abtn').onclick = () => setAnn(!ann);
     setAnn(ann, true);
     const lz = el.querySelector('.dk-laser');
@@ -260,7 +271,8 @@
     countUp(cur); stamp(); prevI = i;
     annTok++; annP = null; flipAsked = false; capHide(); if (window.AZAKEI_VOICE) AZAKEI_VOICE.stop();
     if (ann && S[i].vo && !opBusy) annP = annSay(S[i].vo[0], S[i].vo[1]);
-    if (ann && !chara && S[i].cls === 'is-end') { const k = annTok; setTimeout(() => { if (k === annTok) annSay(['goseichouarigatou'], 'ご清聴ありがとうございました。', true); }, 1600); }
+    if (narr) { stopTalk(); subHide(); }
+    if (ann && !chara && !narr && S[i].cls === 'is-end') { const k = annTok; setTimeout(() => { if (k === annTok) annSay(['goseichouarigatou'], 'ご清聴ありがとうございました。', true); }, 1600); }
     clearPen(); syncPv();
     hideQA();
     if (S[i].cls === 'is-end') setTimeout(() => { if (S[i].cls === 'is-end') rain(); }, 500);
@@ -328,7 +340,7 @@
   const opening = async () => {
     if (opBusy) return;
     opBusy = true; const k = ++opTok;
-    grid(false); setTool(''); if (note) setNote(false); if (chara) setChara(false);
+    grid(false); setTool(''); if (note) setNote(false); if (chara) setChara(false); if (narr) setNarr(false);
     go(0); setPlay(false);
     if (!ann) setAnn(true);
     const v = await VO();
@@ -363,7 +375,57 @@
     }
     oc.classList.add('is-out'); setTimeout(() => oc.remove(), reduce ? 0 : 600);
     opBusy = false;
-    if (alive()) setChara(true);
+    if (alive()) setNarr(true);
+  };
+
+  // ── ナレーション：台本（S[i].n）を、いちばん自然な日本語の声で 1 文ずつ読み、大きな字幕を出す。読み終わると次へ
+  let narr = false, bgmOn = true;
+  try { bgmOn = localStorage.getItem('azakei_bgm') !== '0'; } catch (e) {}
+  const subShow = t => { const s = el.querySelector('.dk-jimaku'); s.querySelector('p').textContent = t; s.hidden = false; s.classList.remove('is-in'); void s.offsetWidth; s.classList.add('is-in'); };
+  const subHide = () => { const s = el && el.querySelector('.dk-jimaku'); if (s) s.hidden = true; };
+  const narrate = () => {
+    stopTalk();
+    if (!playing || !narr) return;
+    const tok = tTok, bar = bars()[i];
+    bar.style.transition = 'none'; bar.style.transform = 'scaleX(0)';
+    Promise.all([VO(), annP || Promise.resolve()]).then(([v]) => {
+      if (tok !== tTok || !v) return;
+      v.tts(S[i].n, {
+        rate: 1.02 / SPD[spd][1],
+        onPart: (s, k, n) => { if (tok !== tTok) return; subShow(s); bar.style.transition = 'transform .5s'; bar.style.transform = `scaleX(${(k + 1) / n})`; }
+      }).then(() => {
+        if (tok !== tTok) return;
+        subHide();
+        // コインの場面：読み終わったら、コインを投げて結果を見せる
+        const tb = S[i].tryit && el.querySelector('.dk-s.is-on [data-ab="B"]');
+        if (tb && !el.querySelector('.dk-s.is-on [data-ab][aria-pressed="true"]')) { flip(tb, true); tt = setTimeout(() => { if (tok === tTok) go(i + 1); }, reduce ? 300 : 3600); return; }
+        if (i < S.length - 1) tt = setTimeout(() => { if (tok === tTok) go(i + 1); }, 700);
+        else { setPlay(false, true); if (window.AZAKEI_VOICE) AZAKEI_VOICE.bgm(false); annSay(['goseichouarigatou'], 'ご清聴ありがとうございました。', true); }
+      });
+    });
+  };
+  const voiceList = () => {
+    const sel = el.querySelector('.dk-vsel'); if (!sel || !window.AZAKEI_VOICE) return;
+    const vs = AZAKEI_VOICE.jaVoices(), cur = AZAKEI_VOICE.pick();
+    sel.innerHTML = vs.length ? vs.map(v => `<option value="${v.name.replace(/"/g, '&quot;')}"${cur && cur.name === v.name ? ' selected' : ''}>声：${v.name.replace(/^Microsoft\s*/, '').replace(/\s*Online\s*\(Natural\)/, '（自然な声）').replace(/\s*-\s*Japanese.*$|\s*\(Japan\)$/g, '').slice(0, 16)}</option>`).join('') : '<option>日本語の声がありません</option>';
+    sel.disabled = !vs.length;
+  };
+  const setNarr = on => {
+    narr = on;
+    el.classList.toggle('is-narr', on);
+    el.querySelector('.dk-rbtn').setAttribute('aria-pressed', on);
+    if (on) {
+      if (chara) setChara(false); if (note) setNote(false); setTool('');
+      VO().then(v => { if (!v || !narr) return; voiceList(); if (bgmOn) v.bgm(true); });
+      clearTimeout(timer); playing = true;
+      const b = el.querySelector('.dk-play'); b.textContent = 'II'; b.setAttribute('aria-label', '一時停止');
+      run();
+    } else { stopTalk(); subHide(); if (window.AZAKEI_VOICE) AZAKEI_VOICE.bgm(false); setPlay(false); }
+  };
+  const setBgm = on => {
+    bgmOn = on; try { localStorage.setItem('azakei_bgm', on ? '1' : '0'); } catch (e) {}
+    const b = el.querySelector('.dk-bbtn'); b.setAttribute('aria-pressed', on); b.textContent = on ? 'BGM：あり' : 'BGM';
+    VO().then(v => { if (v) v.bgm(on && narr); });
   };
 
   // 知る：小さなお札が、お金のめぐりの図の矢印の上を走る（[0〜5] の順に）
@@ -421,7 +483,7 @@
   // ── お札マンが発表：ふきだしに 1 文ずつ（文字が順に出る）。声を出すこともできる。言い終わると次のスライドへ
   const stopTalk = () => {
     tTok++; clearTimeout(tt);
-    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (window.AZAKEI_VOICE) AZAKEI_VOICE.ttsStop(); else if (window.speechSynthesis) speechSynthesis.cancel();
     if (el) { el.querySelector('.dk-chara').classList.remove('is-talk'); el.classList.remove('is-spot'); }
   };
   // 顔（happy・wow・think・sad）と、話している間に光らせる場所
@@ -444,7 +506,8 @@
     };
     if (voice) {
       // 読み上げの「終わった」の知らせが来ないことがあるブラウザのため、長さから見て遅すぎたら先へ進む（止まらないように）
-      const u = new SpeechSynthesisUtterance(txt);
+      const u = new SpeechSynthesisUtterance(window.AZAKEI_VOICE ? AZAKEI_VOICE.fix(txt) : txt);
+      if (window.AZAKEI_VOICE) { const pv = AZAKEI_VOICE.pick(); if (pv) u.voice = pv; }
       u.lang = 'ja-JP'; u.pitch = 1.45; u.rate = 1.05 / SPD[spd][1];
       u.onend = u.onerror = () => { spoke = true; fin(); };
       setTimeout(() => { if (tok === tTok) speechSynthesis.speak(u); }, 80);
@@ -507,6 +570,7 @@
     c.hidden = !on; c.classList.remove('is-bye');
     el.querySelector('.dk-cbtn').setAttribute('aria-pressed', on);
     if (on) {
+      if (narr) setNarr(false);
       if (note) setNote(false);
       setTool(''); li = 0;
       el.querySelector('.dk-ch-t').textContent = '';
@@ -587,6 +651,7 @@
   const run = () => {
     clearTimeout(timer);
     if (chara) { talk(); return; }
+    if (narr) { narrate(); return; }
     if (!playing || i >= S.length - 1) { if (i >= S.length - 1) setPlay(false, true); return; }
     const b = bars()[i]; void b.offsetWidth;
     b.style.transition = `transform ${left}ms linear`; b.style.transform = 'scaleX(1)';
@@ -607,14 +672,16 @@
     const b = bars()[i];
     if (!on) {
       clearTimeout(timer);
-      if (chara) stopTalk();
-      if (!ended && !chara) { left = Math.max(400, left - (Date.now() - startAt)); const w = b.getBoundingClientRect().width / b.parentElement.getBoundingClientRect().width; b.style.transition = 'none'; b.style.transform = `scaleX(${w})`; }
+      if (chara || narr) stopTalk();
+      if (narr) subHide();
+      if (!ended && !chara && !narr) { left = Math.max(400, left - (Date.now() - startAt)); const w = b.getBoundingClientRect().width / b.parentElement.getBoundingClientRect().width; b.style.transition = 'none'; b.style.transform = `scaleX(${w})`; }
     } else if (i >= S.length - 1) { go(0); }
     else run();
   };
   // 発表者メモ：自動送りを止め、台本と経過時間を出す
   const setNote = on => {
     if (on && chara) setChara(false);
+    if (on && narr) setNarr(false);
     note = on;
     el.classList.toggle('is-note', on);
     el.querySelector('.dk-note').hidden = !on;
@@ -644,6 +711,7 @@
     else if (e.key === 'n' || e.key === 'N') setNote(!note);
     else if (e.key === 'p' || e.key === 'P') setChara(!chara);
     else if (e.key === 'o' || e.key === 'O') opening();
+    else if (e.key === 'r' || e.key === 'R') setNarr(!narr);
     else if (e.key === 'v' || e.key === 'V') setAnn(!ann);
     else if (e.key === 'g' || e.key === 'G') grid(true);
     else if (e.key === ' ' && !e.target.closest('a, button')) { e.preventDefault(); setPlay(!playing); }
@@ -664,6 +732,7 @@
   };
   function close() {
     clearTimeout(timer); clearInterval(clock); clearInterval(pvClock);
+    if (narr) setNarr(false);
     opTok++; annTok++; annP = null; if (window.AZAKEI_VOICE) AZAKEI_VOICE.stop(); const oc = el.querySelector('.dk-op'); if (oc) oc.remove(); capHide();
     grid(false); setTool(''); stopTalk();
     if (pv && !pv.closed) pv.close();

@@ -84,5 +84,58 @@
     if (!on) stop(); else try { ctx().resume(); } catch (e) {}
     document.dispatchEvent(new CustomEvent('azakei-voice', { detail: on }));
   };
-  window.AZAKEI_VOICE = { on: () => on, set, say, dur, chime, stop, load };
+  // ── ナレーション（ブラウザの読み上げ）。いちばん自然な日本語の声をえらび、読みまちがえやすい言葉を直して、1 文ずつ読む
+  let ttsName = null, ttsGen = 0;
+  try { ttsName = localStorage.getItem('azakei_tts'); } catch (e) {}
+  const jaVoices = () => (window.speechSynthesis ? speechSynthesis.getVoices() : []).filter(v => /^ja/i.test(v.lang));
+  const rank = v => (/(Natural|Online|Neural)/i.test(v.name) ? 50 : 0) + (/Google/i.test(v.name) ? 30 : 0) + (/(Kyoko|O-Ren|Otoya|Hattori)/i.test(v.name) ? 25 : 0) + (/Nanami/i.test(v.name) ? 10 : 0);
+  const pick = () => { const vs = jaVoices(); return vs.find(v => v.name === ttsName) || vs.slice().sort((a, b) => rank(b) - rank(a))[0] || null; };
+  if (window.speechSynthesis) { speechSynthesis.getVoices(); speechSynthesis.addEventListener && speechSynthesis.addEventListener('voiceschanged', () => document.dispatchEvent(new CustomEvent('azakei-voices'))); }
+  // 読みまちがえやすい言葉
+  const READ = [[/@azakei_vlog/g, 'アットマーク、アザケイ ブイログ'], [/azakeiten\.github\.io/g, 'アザケイテン ドット ギットハブ ドット アイオー'], [/AZAKEI/g, 'アザケイ'], [/麻経/g, 'あざけい'], [/麻布/g, 'あざぶ'], [/Instagram/g, 'インスタグラム'], [/Web/g, 'ウェブ'], [/ホームページ/g, 'ホームページ'], [/(\d),(\d{3})/g, '$1$2'], [/（[^）]*）/g, '']];
+  const fix = t => READ.reduce((s, [a, b]) => s.replace(a, b), String(t));
+  const split = t => String(t).replace(/\s+/g, ' ').split(/(?<=[。！？])/).map(s => s.trim()).filter(Boolean);
+  const ttsStop = () => { ttsGen++; if (window.speechSynthesis) speechSynthesis.cancel(); };
+  // o.onPart(文, 何番目, 全部で何文)。終わりの知らせが来ないブラウザのため、長さから見た時間がたったら先へ
+  const tts = (text, o = {}) => new Promise(res => {
+    if (!window.speechSynthesis) { const parts = split(text); let k = 0; const step = () => { if (k >= parts.length) return res(); if (o.onPart) o.onPart(parts[k], k, parts.length); setTimeout(step, 900 + parts[k++].length * 130); }; return step(); }
+    ttsStop(); const my = ttsGen, parts = split(text); let k = 0;
+    const next = () => {
+      if (my !== ttsGen || k >= parts.length) return res();
+      const s = parts[k]; if (o.onPart) o.onPart(s, k, parts.length); k++;
+      const u = new SpeechSynthesisUtterance(fix(s)); u.lang = 'ja-JP';
+      const v = pick(); if (v) u.voice = v;
+      u.rate = o.rate || 1; u.pitch = o.pitch || 1; u.volume = 1;
+      let fin = false; const done = () => { if (fin) return; fin = true; clearTimeout(w); setTimeout(next, o.gap == null ? 220 : o.gap); };
+      const t0 = Date.now();
+      u.onend = done;
+      // 声がない・失敗したときも、字幕は読める長さだけ出しておく
+      u.onerror = () => setTimeout(done, Math.max(0, 600 + s.length * 120 - (Date.now() - t0)));
+      const w = setTimeout(done, 2400 + s.length * 240 / u.rate);
+      speechSynthesis.speak(u);
+    };
+    setTimeout(next, 80);
+  });
+  const setTTS = name => { ttsName = name; try { localStorage.setItem('azakei_tts', name); } catch (e) {} };
+
+  // ── BGM：ナレーションの下に流す、静かな和音（ファイルを使わず、ブラウザでつくる）
+  let bg = null;
+  const bgm = want => {
+    try {
+      const c = ctx();
+      if (!want) { if (!bg) return; const b = bg; bg = null; clearInterval(b.iv); b.g.gain.setTargetAtTime(0, c.currentTime, .5); setTimeout(() => b.osc.forEach(x => { try { x.stop(); } catch (e) {} }), 2500); return; }
+      if (bg) return;
+      if (c.state === 'suspended') c.resume();
+      const CH = [[261.6, 329.6, 392, 493.9], [220, 261.6, 329.6, 392], [174.6, 220, 261.6, 349.2], [196, 246.9, 293.7, 392]];
+      const g = c.createGain(); g.gain.value = 0;
+      const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1100; lp.connect(g).connect(c.destination);
+      const osc = [];
+      CH[0].forEach(f => [-5, 5].forEach(det => { const x = c.createOscillator(); x.type = det < 0 ? 'sine' : 'triangle'; x.frequency.value = f; x.detune.value = det; const xg = c.createGain(); xg.gain.value = det < 0 ? 1 : .35; x.connect(xg).connect(lp); x.start(); osc.push(x); }));
+      g.gain.setTargetAtTime(.03, c.currentTime, 1.5);
+      let k = 0;
+      const iv = setInterval(() => { k = (k + 1) % CH.length; osc.forEach((x, n) => x.frequency.setTargetAtTime(CH[k][n >> 1], c.currentTime, .9)); }, 7000);
+      bg = { g, osc, iv };
+    } catch (e) {}
+  };
+  window.AZAKEI_VOICE = { on: () => on, set, say, dur, chime, stop, load, tts, ttsStop, jaVoices, pick, setTTS, fix, bgm };
 })();

@@ -81,7 +81,9 @@
       </form>
       <div class="adm-import" hidden></div>
       <div class="adm-list-head"><h2>これまでの投稿</h2><small>ここに出るのは、このページから書いたものだけです</small></div>
-      <ol class="adm-list"><li class="adm-msg">読みこみ中…</li></ol>`;
+      <ol class="adm-list"><li class="adm-msg">読みこみ中…</li></ol>
+      <div class="adm-list-head"><h2>お札マンの名前の案</h2><small>お客さんが足した案。ふさわしくないものは「かくす」（消さずに残ります。「もどす」で元どおり）</small></div>
+      <ol class="adm-list adm-names"><li class="adm-msg">読みこみ中…</li></ol>`;
     root.querySelector('.adm-logout').addEventListener('click', () => fb.authMod.signOut(fb.auth));
     const f = root.querySelector('.adm-form');
     const sync = () => {
@@ -96,6 +98,27 @@
     f.addEventListener('submit', e => { e.preventDefault(); save(f); });
     f.querySelector('.adm-cancel').addEventListener('click', () => { editing = null; view(); });
     load();
+    names();
+  }
+
+  // お札マンの名前の案（mascotNames）：かくす・もどす だけ（消さない）
+  function names() {
+    const ol = root.querySelector('.adm-names'); if (!ol) return;
+    fb.fs.onSnapshot(fb.fs.collection(fb.db, 'mascotNames'), snap => {
+      const all = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.votes || 0) - (a.votes || 0));
+      ol.innerHTML = all.length ? all.map(n => `
+        <li class="${n.hidden ? 'is-hidden' : ''}">
+          <span class="adm-k">${n.base ? 'はじめ' : '案'}</span>
+          <div><b>${esc(n.name)}</b><small>${n.votes || 0} 票${n.hidden ? '・かくし中' : ''}</small></div>
+          ${n.base ? '' : `<button type="button" class="btn-ghost" data-hide="${esc(n.id)}" data-v="${n.hidden ? '0' : '1'}">${n.hidden ? 'もどす' : 'かくす'}</button>`}
+        </li>`).join('') : '<li class="adm-msg">まだ案はありません。</li>';
+    }, e => { ol.innerHTML = `<li class="adm-err">読みこめませんでした（${esc(e.code || e.message)}）。firestore.rules を公開したか確かめてください。</li>`; });
+    ol.addEventListener('click', async e => {
+      const b = e.target.closest('[data-hide]'); if (!b) return;
+      b.disabled = true;
+      try { await fb.fs.updateDoc(fb.fs.doc(fb.db, 'mascotNames', b.dataset.hide), { hidden: b.dataset.v === '1' }); }
+      catch (er) { alert('切りかえられませんでした（' + (er.code || er.message) + '）'); b.disabled = false; }
+    });
   }
 
   async function login() {

@@ -9578,3 +9578,5 @@ html.curtain-pending::after { content: "AZAKEI"; position: fixed; inset: 0; z-in
 .rtn-why li b { display: block; margin-bottom: 2px; color: #b5432f; }
 .rtn-note { margin: 14px 0 0; font-size: 12.5px; line-height: 1.7; opacity: .8; }
 @media (max-width: 820px) { .rtn, .rtn-why ul { grid-template-columns: minmax(0, 1fr); } .rtn::before { display: none; } }
+/* 管理ページ：お札マンの名前の案（かくし中） */
+.adm-names li.is-hidden { opacity: .5; } .adm-names li.is-hidden b { text-decoration: line-through; }

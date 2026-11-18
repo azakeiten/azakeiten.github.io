@@ -182,56 +182,69 @@ service cloud.firestore {
       }
     }
     // ================================================================
-    //  お札マンの名前の投票（vote.html の namevote.js）
-    //    mascot/name              … 集計（osatsuman: 3, ...）誰でも読める
-    //    mascot/name/votes/{uid}  … 1 人 1 件の投票記録（本人だけ読める）
-    //    ・しくみは文化祭投票と同じ。候補を変えたら namevote.js の C も同じに直すこと
+    //  お札マンの名前の投票（vote.html の namevote.js）。お客さんも名前の案を足せる
+    //    mascotNames/{id}  … 候補 { name, votes, at, base, hidden }（誰でも読める）
+    //       ・はじめの 4 つ（base）は id と名前が決まっているものだけ作れる
+    //       ・お客さんの案は id = 自分の uid（1 人 1 案）。ひらがな・カタカナ・漢字・ー で 2〜8 字
+    //       ・部員（isEditor）は hidden を切りかえて、不適切な案をかくせる（消さない）
+    //    mascotVotes/{uid} … 1 人 1 票の記録 { choice, at }（本人だけ読める）
+    //       ・記録を作るときだけ、選んだ候補の votes を +1（文化祭投票と同じしくみ）
     // ================================================================
-    function mascotOptions() {
-      return ['osatsuman', 'osatsukun', 'asafuda', 'fudamaru'];
+    function baseNames() {
+      return { 'osatsuman': 'お札マン', 'osatsukun': 'おさつくん', 'asafuda': 'あさふだ', 'fudamaru': 'ふだまる' };
     }
-    function mascotVotePath(pollId) {
-      return /databases/$(database)/documents/mascot/$(pollId)/votes/$(request.auth.uid);
+    function mascotVotePath() {
+      return /databases/$(database)/documents/mascotVotes/$(request.auth.uid);
+    }
+    function mascotNamePath(id) {
+      return /databases/$(database)/documents/mascotNames/$(id);
     }
 
-    match /mascot/{pollId} {
-      allow read: if pollId == 'name';
+    match /mascotNames/{id} {
+      allow read: if true;
 
       allow create: if signedIn()
-        && pollId == 'name'
-        && request.resource.data.keys().hasOnly(mascotOptions())
-        && request.resource.data.keys().hasAll(mascotOptions())
-        && request.resource.data.osatsuman == 0
-        && request.resource.data.osatsukun == 0
-        && request.resource.data.asafuda == 0
-        && request.resource.data.fudamaru == 0;
+        && request.resource.data.keys().hasOnly(['name', 'votes', 'at', 'base', 'hidden'])
+        && request.resource.data.keys().hasAll(['name', 'votes', 'at', 'base', 'hidden'])
+        && request.resource.data.votes == 0
+        && request.resource.data.hidden == false
+        && request.resource.data.at == request.time
+        && (
+          (id in baseNames().keys() && request.resource.data.base == true && request.resource.data.name == baseNames()[id])
+          || (id == request.auth.uid && request.resource.data.base == false
+              && request.resource.data.name is string
+              && request.resource.data.name.matches('[ぁ-ゖァ-ヺー一-龯々]{2,8}'))
+        );
 
-      allow update: if signedIn()
-        && pollId == 'name'
-        && !exists(mascotVotePath(pollId))
-        && existsAfter(mascotVotePath(pollId))
-        && request.resource.data.diff(resource.data).affectedKeys()
-             .hasOnly([getAfter(mascotVotePath(pollId)).data.choice])
-        && request.resource.data[getAfter(mascotVotePath(pollId)).data.choice]
-             == resource.data[getAfter(mascotVotePath(pollId)).data.choice] + 1;
+      // 投票：自分の投票記録を同時に作るときだけ、votes を +1
+      allow update: if (signedIn()
+          && !exists(mascotVotePath())
+          && existsAfter(mascotVotePath())
+          && getAfter(mascotVotePath()).data.choice == id
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['votes'])
+          && request.resource.data.votes == resource.data.votes + 1)
+        // 部員：かくす・もどす だけ
+        || (isEditor()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['hidden'])
+          && request.resource.data.hidden is bool);
 
       allow delete: if false;
+    }
 
-      match /votes/{uid} {
-        allow get: if signedIn() && request.auth.uid == uid;
-        allow list: if false;
+    match /mascotVotes/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list: if false;
 
-        allow create: if signedIn()
-          && pollId == 'name'
-          && request.auth.uid == uid
-          && request.resource.data.keys().hasOnly(['choice', 'at'])
-          && request.resource.data.choice in mascotOptions()
-          && request.resource.data.at == request.time
-          && getAfter(/databases/$(database)/documents/mascot/$(pollId)).data[request.resource.data.choice]
-               == get(/databases/$(database)/documents/mascot/$(pollId)).data[request.resource.data.choice] + 1;
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['choice', 'at'])
+        && request.resource.data.choice is string
+        && exists(mascotNamePath(request.resource.data.choice))
+        && request.resource.data.at == request.time
+        && getAfter(mascotNamePath(request.resource.data.choice)).data.votes
+             == get(mascotNamePath(request.resource.data.choice)).data.votes + 1;
 
-        allow update, delete: if false;
-      }
+      allow update, delete: if false;
     }
 
   }

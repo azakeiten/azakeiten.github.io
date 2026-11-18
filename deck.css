@@ -421,3 +421,21 @@ html .dk.is-chara .dk-s:not(.is-cover) .dk-t { font-size: clamp(26px, 4vw, 52px)
 .dk-op-x { position: absolute; right: 20px; bottom: 20px; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .08); color: #fff; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
 @media (max-width: 760px) { .dk-ctl .dk-obtn, .dk-ctl .dk-lbtn { display: none; } }
 @media (prefers-reduced-motion: reduce) { .dk-cap, .dk-op, .dk-op-t, .dk-op-n { animation: none !important; } }
+/* ナレーション：字幕・声えらび・BGM */
+.dk-ctl .dk-vsel, .dk-ctl .dk-bbtn { display: none; }
+.dk.is-narr .dk-ctl .dk-vsel, .dk.is-narr .dk-ctl .dk-bbtn { display: inline-block; }
+.dk-ctl .dk-vsel { height: 44px; max-width: 190px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .08); color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.dk-ctl .dk-vsel option { color: #2a2015; }
+.dk-ctl .dk-rbtn { border-color: #7cc3d8; }
+.dk-jimaku { position: absolute; left: 50%; bottom: calc(92px + env(safe-area-inset-bottom)); z-index: 4; translate: -50% 0; width: min(92vw, 1000px); pointer-events: none; text-align: center; }
+.dk-jimaku[hidden] { display: none; }
+.dk-jimaku p { display: inline; margin: 0; padding: .2em .6em; border-radius: 10px; background: rgba(10, 9, 8, .78); box-decoration-break: clone; -webkit-box-decoration-break: clone; color: #fff; font-size: clamp(18px, 2.4vw, 30px); font-weight: 800; line-height: 1.75; text-shadow: 0 2px 8px rgba(0, 0, 0, .5); }
+.dk-jimaku.is-in { animation: dk-sub-in .45s ease-out; }
+@keyframes dk-sub-in { from { opacity: 0; transform: translateY(8px); } }
+.dk.is-narr .dk-in { padding-bottom: clamp(190px, 28vh, 250px); }
+@media (max-height: 520px) { .dk.is-narr .dk-s .dk-sub { display: none; } }
+@media (max-width: 760px) { .dk-jimaku { bottom: calc(76px + env(safe-area-inset-bottom)); } .dk.is-narr .dk-ctl .dk-vsel { max-width: 120px; } }
+@media (prefers-reduced-motion: reduce) { .dk-jimaku { animation: none !important; } }
+.dk-ctl button { white-space: nowrap; }
+.dk.is-narr .dk-ctl .dk-lbtn, .dk.is-narr .dk-ctl .dk-dbtn, .dk.is-narr .dk-ctl .dk-hbtn, .dk.is-narr .dk-ctl .dk-nbtn, .dk.is-narr .dk-ctl .dk-obtn { display: none; }
+@media (max-width: 1200px) { .dk.is-narr .dk-ctl .dk-gbtn, .dk.is-narr .dk-ctl .dk-cbtn { display: none; } }
