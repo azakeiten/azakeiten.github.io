@@ -1,0 +1,68 @@
+/* osatsuhimitsu.css — あそび場：新しいお札のひみつ（osatsuhimitsu.js が読みこむ） */
+.bz[data-osatsuhimitsu] { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.bz[data-osatsuhimitsu] .bz-stage { padding: 16px; border-radius: 24px; background: radial-gradient(ellipse at 50% 30%, #3a3448, #1a1724 75%); color: #f3ecd8; box-shadow: 0 20px 44px -22px rgba(15, 10, 30, .85); transition: background .5s; }
+.bz[data-osatsuhimitsu][data-tool="light"] .bz-stage { background: radial-gradient(ellipse at 50% 40%, #fff6d8, #8a7a55 80%); }
+.bz[data-osatsuhimitsu] .bz-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.bz[data-osatsuhimitsu] .bz-tools button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px 7px 7px; border-radius: 999px; border: 1px solid rgba(243, 236, 216, .3); background: rgba(255, 255, 255, .06); color: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.bz[data-osatsuhimitsu] .bz-tools span { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #e3b341; color: #2a2015; font-family: "Shippori Mincho", serif; font-size: 12px; }
+.bz[data-osatsuhimitsu] .bz-tools button[aria-pressed="true"] { background: #e3b341; color: #2a2015; } .bz[data-osatsuhimitsu] .bz-tools button[aria-pressed="true"] span { background: #2a2015; color: #e3b341; }
+.bz[data-osatsuhimitsu] .bz-scene { perspective: 900px; padding: 8px 4px 14px; }
+.bz[data-osatsuhimitsu] .bz-note { --tilt: 0; position: relative; transform: rotateY(calc(var(--tilt) * 1deg)) rotateX(calc(var(--tilt) * -.15deg)); transition: transform .12s; filter: drop-shadow(calc(var(--tilt) * -.4px) 18px 18px rgba(0, 0, 0, .45)); cursor: grab; touch-action: pan-y; }
+.bz[data-osatsuhimitsu][data-tool="lens"] .bz-note { cursor: none; }
+.bz[data-osatsuhimitsu] .bz-svg { display: block; width: 100%; height: auto; }
+.bz-frame { fill: none; stroke: #8a6a3a; stroke-width: 2; }
+.bz-guilloche { fill: none; stroke: rgba(138, 106, 58, .22); stroke-width: 1; }
+.bz-bank { fill: #6b4a22; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; text-anchor: middle; letter-spacing: .1em; }
+.bz-num { fill: #6b4a22; font-family: "Shippori Mincho", serif; font-size: 42px; font-weight: 800; text-anchor: middle; }
+.bz-num.is-s { font-size: 28px; }
+.bz-mihon rect { fill: rgba(181, 67, 47, .1); stroke: #b5432f; stroke-width: 3; } .bz-mihon text { fill: #b5432f; font-family: "Shippori Mincho", serif; font-size: 32px; font-weight: 800; text-anchor: middle; letter-spacing: .4em; }
+.bz-wm-c { fill: rgba(255, 255, 255, .35); stroke: rgba(138, 106, 58, .3); }
+.bz-wm-in { opacity: .06; transition: opacity .5s; } .bz-wm-in circle, .bz-wm-in path:not(.bz-fine) { fill: #6b5a3a; } .bz-fine { stroke: #6b5a3a; stroke-width: .8; }
+.bz[data-osatsuhimitsu][data-tool="light"] .bz-wm-in { opacity: .75; }
+.bz-glow { opacity: 0; transition: opacity .5s; pointer-events: none; }
+.bz[data-osatsuhimitsu][data-tool="light"] .bz-glow { opacity: .55; }
+.bz-h1 { stop-color: hsl(var(--hh, 180) 80% 70%); } .bz-h2 { stop-color: hsl(calc(var(--hh, 180) + 90) 80% 76%); } .bz-h3 { stop-color: hsl(calc(var(--hh, 180) + 180) 80% 70%); }
+.bz-holo-b { stroke: rgba(255, 255, 255, .8); stroke-width: 2; opacity: .55; transition: opacity .3s; }
+.bz-note.is-tilt .bz-holo-b { opacity: 1; filter: drop-shadow(0 0 8px rgba(255, 255, 255, .7)); }
+.bz-holo-face { fill: rgba(255, 255, 255, .85); transform: scaleX(calc(1 - var(--tilt) * var(--tilt) / 900)) ; transform-box: fill-box; transform-origin: center; }
+.bz-holo-t { fill: rgba(42, 32, 21, .55); font-size: 10px; font-weight: 800; text-anchor: middle; letter-spacing: .2em; }
+.bz-sengo-b { fill: rgba(138, 106, 58, .15); }
+.bz-sengo-l { stroke: rgba(138, 106, 58, .5); stroke-width: 2; }
+.bz-sengo-t { fill: #6b4a22; font-size: 22px; font-weight: 800; text-anchor: middle; opacity: 0; transition: opacity .3s; }
+.bz-note.is-big .bz-sengo-t { opacity: .9; } .bz-note.is-big .bz-sengo-l { opacity: .25; }
+.bz-pearl { fill: rgba(255, 180, 210, 0); transition: fill .3s; }
+.bz-note.is-big .bz-pearl { fill: rgba(255, 150, 200, .85); filter: drop-shadow(0 0 6px rgba(255, 150, 200, .9)); }
+.bz-micro { fill: #8a6a3a; font-size: 3.2px; text-anchor: middle; letter-spacing: .05em; }
+.bz-tact rect { fill: rgba(107, 74, 34, .25); transition: fill .3s; }
+.bz[data-osatsuhimitsu][data-tool="touch"] .bz-tact rect { fill: #e3b341; stroke: #2a2015; stroke-width: 1.5; animation: bz-bump 1s ease-in-out infinite; }
+@keyframes bz-bump { 50% { fill: #fff3c4; } }
+.bz[data-osatsuhimitsu] .bz-lens { position: absolute; left: 50%; top: 80%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 5px solid #2a2015; box-shadow: 0 6px 16px rgba(0, 0, 0, .4), inset 0 0 0 2px rgba(255, 255, 255, .6); pointer-events: none; display: none; overflow: hidden; background: radial-gradient(circle, rgba(255, 255, 255, .15), transparent); }
+.bz[data-osatsuhimitsu][data-tool="lens"] .bz-lens { display: block; }
+.bz[data-osatsuhimitsu][data-tool="lens"] .bz-micro { font-size: 3.2px; }
+.bz[data-osatsuhimitsu] .bz-lens::after { content: "NIPPONGINKO NIPPONGINKO"; position: absolute; left: 50%; top: 50%; translate: -50% -50%; white-space: nowrap; font-size: 13px; font-weight: 800; letter-spacing: .05em; color: #6b4a22; opacity: 0; }
+.bz[data-osatsuhimitsu].lens-micro .bz-lens::after { opacity: 1; }
+.bz[data-osatsuhimitsu] .bz-tilt { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 700; opacity: .85; }
+.bz[data-osatsuhimitsu] .bz-tilt input { width: 100%; accent-color: #e3b341; }
+.bz[data-osatsuhimitsu] .bz-msg { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; background: rgba(0, 0, 0, .3); font-size: 13.5px; font-weight: 700; line-height: 1.75; min-height: 3.4em; }
+.bz[data-osatsuhimitsu] .bz-side { display: grid; gap: 10px; }
+.bz[data-osatsuhimitsu] .bz-score { margin: 0; font-size: 14px; font-weight: 800; } .bz[data-osatsuhimitsu] .bz-score b { font-family: "Shippori Mincho", serif; font-size: 34px; color: #b5432f; }
+.bz[data-osatsuhimitsu].is-all .bz-score { color: #2f6b3a; }
+.bz[data-osatsuhimitsu] .bz-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.bz[data-osatsuhimitsu] .bz-list li { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 14px; background: #fffaf0; color: #2a2015; opacity: .55; transition: opacity .4s; }
+.bz[data-osatsuhimitsu] .bz-list li.is-found { opacity: 1; box-shadow: inset 0 0 0 2px #e3b341; animation: bz-found .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes bz-found { 40% { transform: scale(1.04); } }
+.bz[data-osatsuhimitsu] .bz-s { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #c9b48a; color: #fff; font-family: "Shippori Mincho", serif; font-size: 20px; font-weight: 800; }
+.bz[data-osatsuhimitsu] li.is-found .bz-s { background: #b5432f; }
+.bz[data-osatsuhimitsu] .bz-list b { font-size: 14px; }
+.bz[data-osatsuhimitsu] .bz-how { display: block; font-size: 11.5px; color: #8a5a2b; font-weight: 700; }
+.bz[data-osatsuhimitsu] .bz-list p { display: none; margin: 4px 0 0; font-size: 12.5px; line-height: 1.65; color: #4a3a28; }
+.bz[data-osatsuhimitsu] li.is-found p { display: block; } .bz[data-osatsuhimitsu] li.is-found .bz-how { display: none; }
+.bz[data-osatsuhimitsu] .bz-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.bz[data-osatsuhimitsu] .bz-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(227, 179, 65, .1); font-size: 14px; line-height: 1.75; }
+.bz[data-osatsuhimitsu] .bz-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.bz[data-osatsuhimitsu] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+:root[data-theme="dark"] .bz[data-osatsuhimitsu] .bz-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bz[data-osatsuhimitsu] .bz-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .bz[data-osatsuhimitsu] { grid-template-columns: minmax(0, 1fr); } .bz[data-osatsuhimitsu] .bz-learn { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .bz[data-osatsuhimitsu] .bz-stage { padding: 10px; } .bz[data-osatsuhimitsu] .bz-lens { width: 90px; height: 90px; margin: -45px 0 0 -45px; } }
+@media (prefers-reduced-motion: reduce) { .bz[data-osatsuhimitsu] *, .bz-note { animation: none !important; transition: none !important; } }
