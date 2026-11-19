@@ -42,7 +42,7 @@
       ['robot', 'sim', 'ロボット', 'ロボットがやってきた工場', '機械化と学び直し'], ['gurafu', 'sim', 'グラフ', 'グラフのうそを見破れ', '5 つのしかけ'], ['hirogari', 'con', 'アプリ', 'アプリが広がるとき', 'つながりで広がる'],
       ['himitsu', 'quiz', '新お札', '新しいお札のひみつ', 'にせもの防止の 6 つ'], ['shinka', 'quiz', 'お金の進化', 'お金の進化', '物々交換から電子マネー'], ['ehon', 'quiz', '絵本', '絵本：千円札の旅', '1 枚が町をめぐる']]]
   ];
-  const PLAZA = [['taikai', 'quiz', 'みんなでクイズ大会'], ['make', 'quiz', '問題をつくってみよう'], ['pitch', 'con', 'ピッチの舞台'], ['words', 'sim', '出てきたことば']];
+  const PLAZA = [['bakery', 'quiz', '麻経ベーカリー 12 か月（本格経営ゲーム）'], ['taikai', 'quiz', 'みんなでクイズ大会'], ['make', 'quiz', '問題をつくってみよう'], ['pitch', 'con', 'ピッチの舞台'], ['words', 'sim', '出てきたことば']];
   // ためした印
   const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
   const list = k => { try { const v = JSON.parse(get(k) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } };
