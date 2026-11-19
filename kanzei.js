@@ -17,6 +17,14 @@
   const okane = v => { const a = Math.abs(Math.round(v)); return (v < 0 ? '−' : '') + (a >= 10000 ? (Math.round(a / 1000) / 10).toLocaleString() + ' 億円' : a.toLocaleString() + ' 万円'); };
   const X0 = 400;   // 仕返しがないときの、島の自転車の輸出（万台）
   let t = 0, retal = false, seen = false;
+  // ミッション：ちょうどの関税をさがす（仕返しのあり・なしも条件）。達成すると「達」の判
+  const MIS = [
+    ['農', '農家の仕事を 500 人以上にして、島全体の損を 3,000 万円以内に（仕返しなし）', r => !retal && r.farm >= 500 && r.net >= -3000],
+    ['収', '政府の関税収入を 7,500 万円以上に。いちばん多くなる関税をさがそう（仕返しなし）', r => !retal && r.rev >= 7500],
+    ['難', '仕返しありで、農家の仕事 450 人以上、島全体の損 5,000 万円以内（ちょうどの関税は 1 つだけ）', r => retal && r.farm >= 450 && r.net >= -5000]
+  ];
+  let got = [];
+  try { got = JSON.parse(localStorage.getItem('azakei_kanzei_m') || '[]'); } catch (e) {}
 
   box.innerHTML = `
     <div class="kz-stage">
@@ -49,6 +57,7 @@
         <li class="is-down" data-k="factcard" hidden><small>自転車工場の仕事</small><b data-k="factjob">800 人</b></li>
         <li class="is-net"><small>島全体で見た得損</small><b data-k="net">0 万円</b></li>
       </ul>
+      <div class="kz-mis"><p class="kz-mis-h">ミッション <small data-k="mcount"></small></p><ol data-k="mis"></ol></div>
       <figure class="kz-chart"><svg viewBox="0 0 360 250" role="img" aria-label="トマトの需要と供給の図" data-k="chart"></svg><figcaption><span class="is-rev"></span>関税収入　<span class="is-dwl"></span>ムダ（だれのものにもならない）</figcaption></figure>
     </div>
     <div class="kz-learn">
@@ -104,6 +113,10 @@
     K('beam').style.transform = `rotate(${deg}deg)`;
     K('gainw').textContent = gain ? `農家・政府 ${okane(gain)}` : '—'; K('lossw').textContent = loss ? `消費者${retal && r.lostX ? '・工場' : ''} ${okane(loss)}` : '—';
     chart(r);
+    // ミッションの判定
+    MIS.forEach((m, k) => { if (m[2](r) && !got.includes(k)) { got.push(k); try { localStorage.setItem('azakei_kanzei_m', JSON.stringify(got)); } catch (e) {} box.dataset.flash = k; } });
+    K('mis').innerHTML = MIS.map((m, k) => `<li class="${got.includes(k) ? 'is-ok' : ''}${m[2](r) ? ' is-now' : ''}${box.dataset.flash == k ? ' is-flash' : ''}"><span aria-hidden="true">${got.includes(k) ? '達' : m[0]}</span>${m[1]}</li>`).join('');
+    K('mcount').textContent = `${got.length} / ${MIS.length}`; delete box.dataset.flash;
     K('msg').textContent = !t ? (retal ? '関税なしなら、仕返しもありません。トマトは安く、島の自転車も売れています。' : '関税なし（自由貿易）。トマトは 1 個 100 円。多くを輸入にたよっています。')
       : r.m <= 0 ? `関税 ${t}%：輸入が止まりました。値段は島の中だけで決まり、${Math.round(r.p)} 円に。政府の関税収入もなくなります。`
       : `関税 ${t}%：農家の仕事は +${(r.farm - S(PW) * 2).toLocaleString()} 人、政府に ${okane(r.rev)}。でも、トマトを買う人は ${okane(r.dcs)} 多く払います。${retal ? `仕返しで、自転車工場の仕事は −${(X0 * 2 - r.fact).toLocaleString()} 人。` : ''}`;

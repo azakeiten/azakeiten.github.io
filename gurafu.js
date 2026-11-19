@@ -18,7 +18,7 @@
   // 24 か月の株価（たとえ）：長く見ると下がり、最後の 3 か月だけ上がる
   const PRICE = [1500, 1470, 1490, 1420, 1380, 1400, 1350, 1300, 1320, 1270, 1240, 1250, 1190, 1150, 1170, 1120, 1080, 1090, 1040, 1000, 980, 1010, 1060, 1120];
   const INC = [300, 300, 300, 300, 300, 300, 300, 300, 300, 5000];
-  const C = [
+  let C = [
     { head: 'B 社の売上、A 社を大きく引きはなす！', src: 'A 社 98 億円・B 社 102 億円',
       q: 'B 社の売上は、A 社の何倍くらい？', opts: [['3 倍くらい', 0], ['ほとんど同じ（約 1.04 倍）', 1]], seal: '縦', name: '縦軸の切りとり',
       how: '縦軸が 0 からではなく 96 から始まっています。わずか 4 億円の差が、何倍もの差に見えます。', tip: '棒グラフを見たら、まず縦軸がいくつから始まっているかを見よう。',
@@ -48,10 +48,56 @@
         if (t > 0) { INC.forEach((v, i) => { const yy = B - 18 - (v === 300 ? i * 9 : 0); s += `<circle class="gu-pp" cx="${x(v)}" cy="${yy}" r="${6 * t}"/>`; }); s += `<line class="gu-med" x1="${x(300)}" x2="${x(300)}" y1="${T + 60}" y2="${B}" opacity="${t}"/><text class="gu-bv is-med" x="${x(300) + 6}" y="${T + 74}" opacity="${t}">中央値 300</text>`; }
         return s; } }
   ];
+  // 上級編：もっと見えにくいグラフのしかけ（数字はたとえ）
+  const AD6 = [2, 4, 6, 8, 9, 10], SA6 = [98, 98.8, 99.6, 100.6, 101.2, 102];
+  const DAYS = Array.from({ length: 12 }, (_, k) => { const tp = 15 + k * 1.8, r1 = Math.sin(k * 2.3) * 18, r2 = Math.cos(k * 1.7) * .9; return { tp, ice: Math.round(tp * 10 + r1), acc: Math.max(0, +((tp - 14) * .35 + r2).toFixed(1)) }; });
+  const NEW6 = [120, 100, 80, 60, 45, 30], CUM6 = NEW6.map((v, k) => NEW6.slice(0, k + 1).reduce((a, b) => a + b, 0));
+  const SUBJ = [['数学', 55, '#d23a2a'], ['英語', 40, '#2f6fb0'], ['国語', 25, '#2f8a4a'], ['理科', 20, '#c9922e']];
+  const ADV = [
+    { head: '広告費をふやしたら、売上がぐんぐん上昇！', src: '広告費（右の軸・億円）と売上（左の軸・億円）、半年分',
+      q: '広告費を 5 倍（2 → 10 億円）にしたら、売上は？', opts: [['広告費と同じくらい、大きく伸びた', 0], ['4% ほど（98 → 102 億円）しか伸びていない', 1]], seal: '二', name: '2 本の縦軸',
+      how: '左と右で、目もりのちがう縦軸を使っています。左の軸を 97〜102 億円にしぼると、2 本の線がぴったり重なり、広告がとても効いたように見えます。', tip: '縦軸が 2 本あるグラフは、それぞれの目もりの幅を見くらべよう。',
+      svg: t => { const R2 = 312, mn = lerp(97, 0, t), mx = lerp(102.5, 110, t), x = k => L + 14 + k / 5 * (R2 - L - 28), yl = v => B - (v - mn) / (mx - mn) * (B - T), yr = v => B - v / 11 * (B - T);
+        let s = `<line class="gu-ax" x1="${L}" y1="${T - 6}" x2="${L}" y2="${B}"/><line class="gu-ax" x1="${L}" y1="${B}" x2="${R2}" y2="${B}"/><line class="gu-ax" x1="${R2}" y1="${T - 6}" x2="${R2}" y2="${B}"/>`;
+        const rg = mx - mn, st = rg > 60 ? 20 : rg > 25 ? 10 : rg > 10 ? 5 : 1; for (let v = Math.ceil(mn / st) * st; v <= mx; v += st) s += `<text class="gu-t" x="${L - 6}" y="${(yl(v) + 4).toFixed(1)}" text-anchor="end">${v}</text>`;
+        [0, 5, 10].forEach(v => { s += `<text class="gu-t is-r" x="${R2 + 5}" y="${yr(v) + 4}">${v}</text>`; });
+        s += `<polyline class="gu-line is-blue" points="${AD6.map((v, k) => `${x(k)},${yr(v).toFixed(1)}`).join(' ')}"/><polyline class="gu-line" points="${SA6.map((v, k) => `${x(k)},${yl(v).toFixed(1)}`).join(' ')}"/>`;
+        s += `<text class="gu-bl" x="${L + 4}" y="${T - 10}">売上</text><text class="gu-bl is-blue" x="${R2}" y="${T - 10}" text-anchor="end">広告費</text>`;
+        return s; } },
+    { head: 'アイスが売れる日ほど、水の事故が多い！ アイスは危険？', src: '12 日分。横はアイスの売上（個）、縦は水の事故（件）',
+      q: 'アイスを売るのをやめれば、水の事故はへる？', opts: [['へる。アイスが事故の原因だ', 0], ['へらない。暑い日は両方ふえる（気温という別の原因）', 1]], seal: '因', name: '相関と因果',
+      how: '2 つがいっしょにふえる（相関がある）ことと、片方がもう片方の原因（因果）であることは別です。暑い日は、アイスを買う人も、海や川へ行く人もふえます。かくれた原因は「気温」です。', tip: '「A がふえると B もふえる」を見たら、両方を動かす別の原因がないか考えよう。',
+      svg: t => { const x = v => L + 8 + (v - 140) / 230 * (Rr - L - 20), y = v => B - v / 8 * (B - T);
+        let s = frame + [0, 2, 4, 6, 8].map(v => `<text class="gu-t" x="${L - 6}" y="${y(v) + 4}" text-anchor="end">${v}</text>`).join('') + [150, 250, 350].map(v => `<text class="gu-t" x="${x(v)}" y="${B + 14}" text-anchor="middle">${v}</text>`).join('');
+        DAYS.forEach(d => { const h = lerp(210, 220 - (d.tp - 15) / 20 * 220, t); s += `<circle cx="${x(d.ice).toFixed(1)}" cy="${y(d.acc).toFixed(1)}" r="${lerp(5, 7, t)}" fill="hsl(${h} ${lerp(15, 75, t)}% 50%)" stroke="#fff" stroke-width="1.5"/>`; });
+        s += `<line x1="${x(150)}" y1="${y(.4)}" x2="${x(350)}" y2="${y(7.2)}" class="gu-trend" opacity="${1 - t * .6}"/>`;
+        if (t > .3) s += `<g opacity="${(t - .3) / .7}"><text class="gu-bl is-blue" x="${x(160)}" y="${y(6.4)}">すずしい日</text><text class="gu-bl" x="${x(300)}" y="${y(1.2)}">暑い日</text><text class="gu-bv" x="${L + 10}" y="${T + 4}">色＝その日の気温</text></g>`;
+        return s; } },
+    { head: '会員数、ずっと右肩上がり！ 大人気のアプリ', src: 'アプリの会員（人）、6 か月分',
+      q: '新しく会員になる人は、ふえ続けている？', opts: [['ふえ続けている', 0], ['毎月の新しい会員は、へってきている', 1]], seal: '累', name: '累積のグラフ',
+      how: '「これまでの合計（累積）」のグラフは、1 人でもふえれば必ず右肩上がりになります。毎月の数にすると、120 人 → 30 人と、新しい会員はへり続けています。', tip: '「合計」「累計」のグラフを見たら、毎月の数ではどうなるかを考えよう。',
+      svg: t => { const mx = lerp(460, 140, t), x = k => L + 30 + k * 48, y = v => B - v / mx * (B - T), vals = CUM6.map((c, k) => lerp(c, NEW6[k], t));
+        let s = frame + axisY(0, mx, mx > 200 ? 100 : 20);
+        vals.forEach((v, k) => { s += `<rect class="gu-bar${t > .5 ? ' is-hot' : ''}" x="${x(k) - 14}" y="${y(v).toFixed(1)}" width="28" height="${(B - y(v)).toFixed(1)}" rx="3" opacity="${lerp(.35, 1, t)}"/><text class="gu-t" x="${x(k)}" y="${B + 14}" text-anchor="middle">${k + 1} 月</text>`; });
+        s += `<polyline class="gu-line" points="${vals.map((v, k) => `${x(k)},${y(v).toFixed(1)}`).join(' ')}" opacity="${1 - t * .5}"/>`;
+        s += `<text class="gu-bv" x="${Rr}" y="${T + 4}" text-anchor="end">${t < .5 ? 'これまでの合計' : '毎月ふえた人数'}</text>`;
+        return s; } },
+    { head: '好きな教科アンケート、数学がトップ！', src: '「好きな教科は？」（いくつ選んでもよい）',
+      q: 'この円グラフの数字を、ぜんぶ足すと何 %？', opts: [['100%', 0], ['140%（いくつも選べるので、円グラフにはできない）', 1]], seal: '円', name: '複数回答の円グラフ',
+      how: '円グラフは「全体を 100% で分ける」ときだけ使えます。いくつも選べるアンケートでは、合計が 100% をこえるので、円グラフにすると割合の大きさがくるいます。棒グラフで、それぞれの % を見るのが正しい形です。', tip: '円グラフを見たら、数字を足して 100% になるか確かめよう。',
+      svg: t => { const sum = SUBJ.reduce((a, s) => a + s[1], 0), cx = 130, cy = 120, r = 82; let a0 = -Math.PI / 2, s = `<g opacity="${1 - t}">`;
+        SUBJ.forEach(([n, v, c]) => { const a1 = a0 + v / sum * Math.PI * 2, big = a1 - a0 > Math.PI ? 1 : 0, mid = (a0 + a1) / 2; s += `<path d="M${cx} ${cy} L${(cx + r * Math.cos(a0)).toFixed(1)} ${(cy + r * Math.sin(a0)).toFixed(1)} A${r} ${r} 0 ${big} 1 ${(cx + r * Math.cos(a1)).toFixed(1)} ${(cy + r * Math.sin(a1)).toFixed(1)} Z" fill="${c}" stroke="#fff" stroke-width="2"/><text class="gu-pl" x="${(cx + r * .62 * Math.cos(mid)).toFixed(1)}" y="${(cy + r * .62 * Math.sin(mid) + 4).toFixed(1)}">${n} ${v}%</text>`; a0 = a1; });
+        s += `</g><g opacity="${t}">`;
+        SUBJ.forEach(([n, v, c], k) => { const y = 40 + k * 42; s += `<text class="gu-bl" x="56" y="${y + 16}" text-anchor="end">${n}</text><rect x="64" y="${y}" width="${(v / 100 * 250 * t).toFixed(1)}" height="24" rx="4" fill="${c}"/><rect x="64" y="${y}" width="250" height="24" rx="4" fill="none" stroke="rgba(31,35,41,.2)"/><text class="gu-bv" x="${(70 + v / 100 * 250 * t).toFixed(1)}" y="${y + 17}">${v}%</text>`; });
+        s += `<text class="gu-t" x="314" y="${B + 6}" text-anchor="end">それぞれ 100% のうち</text></g>`;
+        return s; } }
+  ];
+  const BASIC = C;
+  let mode = 'basic';
   let i = 0, ok = 0, busy = false, anim = 0;
   box.innerHTML = `
     <div class="gu-news">
-      <p class="gu-bar-top"><span class="gu-live" aria-hidden="true">速報</span><span data-k="n">1</span> / ${C.length}<b class="gu-chan">麻経ニュース</b></p>
+      <p class="gu-bar-top"><span class="gu-live" aria-hidden="true">速報</span><span data-k="n">1</span> / <span data-k="tot">${C.length}</span><b class="gu-chan">麻経ニュース</b></p>
       <h3 class="gu-head" data-k="head"></h3>
       <figure class="gu-fig"><svg viewBox="0 0 ${W} ${H}" role="img" data-k="svg"></svg><figcaption data-k="src"></figcaption></figure>
       <p class="gu-q" data-k="q"></p>
@@ -59,7 +105,8 @@
       <div class="gu-reveal" data-k="rev" hidden></div>
     </div>
     <div class="gu-side">
-      <p class="gu-h">見破ったしかけ <small><b data-k="ok">0</b> / ${C.length}</small></p>
+      <div class="gu-mode" role="radiogroup" aria-label="レベル"><button type="button" role="radio" data-mode="basic" aria-checked="true"><b>ふつう編</b><small>5 つのしかけ</small></button><button type="button" role="radio" data-mode="adv" aria-checked="false"><b>上級編</b><small>2 本の軸・相関と因果 など 4 つ</small></button></div>
+      <p class="gu-h">見破ったしかけ <small><b data-k="ok">0</b> / <span data-k="tot2">${C.length}</span></small></p>
       <ol class="gu-book">${C.map(c => `<li><span aria-hidden="true">${c.seal}</span><b>？？？</b></li>`).join('')}</ol>
       <div class="gu-res" hidden></div>
     </div>
@@ -94,18 +141,29 @@
     K('rev').hidden = false;
   };
   const finish = () => {
-    const t = ok >= 5 ? ['眼', 'グラフの名探偵'] : ok >= 3 ? ['鋭', 'するどい読者'] : ['初', 'これから見破れる'];
+    const rt = ok / C.length, adv = mode === 'adv';
+    const t = rt >= 1 ? ['眼', adv ? 'データの大名探偵' : 'グラフの名探偵'] : rt >= .6 ? ['鋭', 'するどい読者'] : ['初', 'これから見破れる'];
     const res = box.querySelector('.gu-res');
     res.innerHTML = `<span class="gu-r-seal" aria-hidden="true">${t[0]}</span><p class="gu-r-t">${t[1]}</p><p class="gu-r-s">見破った数 <b>${ok}</b> / ${C.length}</p><button type="button" class="gu-again" data-a="again">もう一度</button>`;
     res.hidden = false;
-    K('head').textContent = '本日のニュースは、ここまで。'; K('q').textContent = '右の一覧で、5 つのしかけをふり返ろう。'; K('opts').innerHTML = ''; K('rev').hidden = true; K('src').textContent = ''; K('svg').innerHTML = '';
-    try { const b = +localStorage.getItem('azakei_gurafu') || 0; localStorage.setItem('azakei_gurafu', String(Math.max(b, ok))); } catch (e) {}
+    K('head').textContent = '本日のニュースは、ここまで。'; K('q').textContent = `右の一覧で、${C.length} つのしかけをふり返ろう。${!adv && rt >= .6 ? ' つぎは「上級編」へ。' : ''}`; K('opts').innerHTML = ''; K('rev').hidden = true; K('src').textContent = ''; K('svg').innerHTML = '';
+    try { const key = adv ? 'azakei_gurafu_adv' : 'azakei_gurafu', b = +localStorage.getItem(key) || 0; localStorage.setItem(key, String(Math.max(b, ok))); } catch (e) {}
   };
   box.addEventListener('click', e => {
     const o = e.target.closest('[data-o]'); if (o) { answer(+o.dataset.o); return; }
     if (e.target.closest('[data-a="fix"]')) { morph(); e.target.closest('[data-a="fix"]').disabled = true; return; }
     if (e.target.closest('[data-a="next"]')) { cancelAnimationFrame(anim); i++; if (i < C.length) show(); else finish(); return; }
-    if (e.target.closest('[data-a="again"]')) { i = 0; ok = 0; K('ok').textContent = 0; box.querySelector('.gu-res').hidden = true; box.querySelectorAll('.gu-book li').forEach(li => { li.className = ''; li.querySelector('b').textContent = '？？？'; }); show(); }
+    const md = e.target.closest('[data-mode]'); if (md) { setMode(md.dataset.mode); return; }
+    if (e.target.closest('[data-a="again"]')) setMode(mode);
   });
+  // ふつう編 ⇄ 上級編
+  const setMode = m => {
+    cancelAnimationFrame(anim); mode = m; C = m === 'adv' ? ADV : BASIC; i = 0; ok = 0;
+    box.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-checked', b.dataset.mode === m));
+    box.querySelector('.gu-book').innerHTML = C.map(c => `<li><span aria-hidden="true">${c.seal}</span><b>？？？</b></li>`).join('');
+    K('ok').textContent = 0; K('tot').textContent = C.length; K('tot2').textContent = C.length; box.querySelector('.gu-res').hidden = true;
+    box.classList.toggle('is-adv', m === 'adv');
+    show();
+  };
   show();
 })();

@@ -12,7 +12,7 @@
   if (!document.querySelector('link[href^="nefuda.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'nefuda.css?v=' + ((document.currentScript && document.currentScript.src.split('v=')[1]) || '1'); document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   // 場面：店の名前・問い・値札（tags：表示する HTML）・えらぶもの（[文, 正解か]）・しかけの名前・印・説明・見破るコツ
-  const R = [
+  const BASIC = [
     { shop: '家電の店', q: '同じヘッドホン。安いのはどっち？', tags: [['A 店', '<s>定価 12,000 円</s><b>6,000 円</b><em>50% OFF！</em>'], ['B 店', '<b>5,800 円</b>']],
       opts: [['A 店（半額で大きくお得！）', 0], ['B 店', 1]], seal: '錨', name: 'アンカリング', how: '先に見た「12,000 円」が、心の中の基準（いかり）になります。そこから下がった 6,000 円は、とても安く感じます。でも、くらべるべきなのは今の値段どうしです。', tip: '線で消された「定価」より、ほかの店の今の値段とくらべよう。' },
     { shop: '映画館の売店', q: 'ポップコーンが 3 つ。M サイズは、何のためにありそう？', tags: [['S', '<b>300 円</b>'], ['M', '<b>650 円</b>'], ['L', '<b>700 円</b>']],
@@ -28,18 +28,36 @@
     { shop: '家電の店', q: 'A はポイント 20% 還元、B は値引き。得なのは？', tags: [['A', '<b>10,000 円</b><em>2,000 ポイントもどる</em>'], ['B', '<b>8,500 円</b>']],
       opts: [['いつでも A', 0], ['いつでも B', 0], ['ポイントを必ず使うなら A、使わないかもしれないなら B', 1]], seal: '点', name: 'ポイント還元', how: 'A は、もどった 2,000 ポイントを使えば実質 8,000 円。でも、ポイントはそのお店でしか使えなかったり、期限があったりします。使わなければ 10,000 円のままです。', tip: 'ポイントは「お金と同じ」ではない。いつ・どこで使うかまで考えよう。' }
   ];
+  // 上級編：もっと見えにくいしかけ（商品・値段はたとえ）
+  const ADV = [
+    { shop: 'お菓子の店', q: '1 個 300 円のお菓子が「2 個目半額！」。2 個買うと、1 個あたり何 % 引き？', tags: [['1 個目', '<b>300 円</b>'], ['2 個目', '<s>300 円</s><b>150 円</b><em>半額！</em>']],
+      opts: [['50% 引き', 0], ['25% 引き', 1], ['33% 引き', 0]], seal: '半', name: '「2 個目半額」の割引率', how: '2 個で 450 円。もとの 600 円とくらべると、引かれたのは 150 円で 25%。「半額」という言葉ほどは安くなっていません。しかも、2 個目がいらなければ得ではありません。', tip: '「全部でいくら払うか」と「いくつ必要か」で考えよう。' },
+    { shop: 'デパートのセール', q: '「最大 70% OFF」のセール。お店の商品はどうなっている？', tags: [['セール', '<b>最大 70% OFF</b><i>※一部商品</i>']],
+      opts: [['お店の商品が、だいたい 70% 引き', 0], ['70% 引きは一部だけ。10% 引きのものも多いかも', 1]], seal: '最', name: '「最大」の言葉', how: '「最大」は「いちばん多くて」という意味。70% 引きは、ごく一部の商品だけのこともあります。大きな数字が目に入ると、全部が安いように感じます。', tip: '「最大」「〜から」「一部」の小さな言葉を読もう。' },
+    { shop: 'スマホの店', q: '「実質 0 円！」のスマホ。本当に 0 円？', tags: [['スマホ', '<b>実質 0 円</b><i>※48 回払い・2 年後に返却</i>']],
+      opts: [['0 円でもらえる', 0], ['条件つき。2 年後に返す・ほかの料金がかかることも', 1]], seal: '実', name: '「実質」の言葉', how: '「実質 0 円」は、決められた条件（何年か使う・あとで返す・ほかの契約をする など）を守ったときに、払うお金が 0 円になる、という意味のことが多いです。条件を守れないと、残りのお金を払います。', tip: '「実質」を見たら、条件と、全部でいくら払うかを確かめよう。' },
+    { shop: 'スーパー', q: 'ポテトチップスが 85 g → 70 g に。値段は同じ 150 円。1 g あたりの値段は？', tags: [['去年', '<b>150 円</b><i>85 g</i>'], ['今年', '<b>150 円</b><i>70 g</i>']],
+      opts: [['同じ値段だから、変わらない', 0], ['約 21% の値上げと同じ', 1]], seal: '量', name: '内容量へらし（ステルス値上げ）', how: '値段を変えずに中身をへらすと、1 g あたりは 1.76 円 → 2.14 円で、約 21% の値上げと同じです。値札を見るだけでは気づきにくい値上げです。', tip: '「1 g あたり」「1 個あたり」の値段（単価）を見くらべよう。' },
+    { shop: 'ネットの広告', q: '「お客さま満足度 No.1」の小さな字に「※当社調べ・50 人」。どう考える？', tags: [['広告', '<b>満足度 No.1</b><i>※当社調べ・2025 年 3 月・50 人</i>']],
+      opts: [['日本一人気の商品だ', 0], ['調べ方しだいで No.1 はつくれる。条件を読む', 1]], seal: '一', name: '小さな注意書きの No.1', how: 'だれが、いつ、何人に、何とくらべて調べたかで、「No.1」の重みは大きく変わります。自分の会社が 50 人に聞いただけ、ということもあります。', tip: '「No.1」「人気」を見たら、※の小さな字まで読もう。' },
+    { shop: 'テレビの通販', q: '「初回 500 円！」の健康食品。小さな字に「4 回以上の購入が条件・2 回目から 4,980 円」。4 回で、全部でいくら？', tags: [['初回', '<b>500 円</b><em>お試し</em>'], ['2 回目から', '<b>4,980 円</b><i>※4 回以上の購入が条件</i>']],
+      opts: [['500 円で試せる', 0], ['4 回で 15,440 円', 1]], seal: '定', name: '定期購入のわな', how: '500 円 ＋ 4,980 円 × 3 回 ＝ 15,440 円。「お試し」のつもりが、何回も買う約束（定期購入）になっていることがあります。こまったら、消費者ホットライン 188 に相談できます。', tip: '「初回」「お試し」を見たら、何回目からいくらになるかを読もう。' }
+  ];
+  let R = BASIC, mode = 'basic';
+
   let i = 0, ok = 0, found = [], busy = false;
   box.innerHTML = `
     <div class="nd-shop">
       <div class="nd-awn" aria-hidden="true"></div>
-      <div class="nd-top"><p class="nd-name" data-k="shop"></p><p class="nd-step"><b data-k="n">1</b> / ${R.length}</p></div>
+      <div class="nd-top"><p class="nd-name" data-k="shop"></p><p class="nd-step"><b data-k="n">1</b> / <span data-k="tot">${R.length}</span></p></div>
       <p class="nd-q" data-k="q"></p>
       <div class="nd-shelf" data-k="shelf"></div>
       <div class="nd-opts" data-k="opts" role="group" aria-label="こたえ"></div>
       <div class="nd-reveal" data-k="rev" hidden></div>
     </div>
     <div class="nd-side">
-      <p class="nd-h">しかけ図鑑 <small><b data-k="got">0</b> / ${R.length}</small></p>
+      <div class="nd-mode" role="radiogroup" aria-label="レベル"><button type="button" role="radio" data-mode="basic" aria-checked="true"><b>ふつう編</b><small>7 つのしかけ</small></button><button type="button" role="radio" data-mode="adv" aria-checked="false"><b>上級編</b><small>6 つの、見えにくいしかけ</small></button></div>
+      <p class="nd-h">しかけ図鑑 <small><b data-k="got">0</b> / <span data-k="tot2">${R.length}</span></small></p>
       <ol class="nd-book">${R.map(r => `<li><span aria-hidden="true">${r.seal}</span><b>？？？</b></li>`).join('')}</ol>
       <div class="nd-res" hidden></div>
     </div>
@@ -70,22 +88,29 @@
     rv.hidden = false;
   };
   const finish = () => {
-    const title = ok >= 7 ? ['眼', '値札の名探偵'] : ok >= 5 ? ['鋭', 'かしこい買い物名人'] : ok >= 3 ? ['見', '見習い探偵'] : ['初', 'これから見破れる'];
+    const rt = ok / R.length, adv = mode === 'adv';
+    const title = rt >= 1 ? ['眼', adv ? '値札の大名探偵' : '値札の名探偵'] : rt >= .7 ? ['鋭', adv ? '上級の買い物名人' : 'かしこい買い物名人'] : rt >= .4 ? ['見', '見習い探偵'] : ['初', 'これから見破れる'];
     const res = box.querySelector('.nd-res');
     res.innerHTML = `<span class="nd-r-seal" aria-hidden="true">${title[0]}</span><p class="nd-r-t">${title[1]}</p><p class="nd-r-s">見破り度 <b>${ok}</b> / ${R.length}</p><button type="button" class="nd-again" data-a="again">もう一度</button>`;
     res.hidden = false;
-    K('q').textContent = 'おつかれさま！ 右の図鑑で、7 つのしかけをふり返ろう。';
+    K('q').textContent = `おつかれさま！ 右の図鑑で、${R.length} つのしかけをふり返ろう。${mode === 'basic' && rt >= .7 ? ' つぎは「上級編」にも挑戦してみよう。' : ''}`;
     K('shelf').innerHTML = ''; K('opts').innerHTML = ''; K('rev').hidden = true;
-    try { const b = +localStorage.getItem('azakei_nefuda') || 0; if (ok > b || !localStorage.getItem('azakei_nefuda')) localStorage.setItem('azakei_nefuda', String(Math.max(ok, b))); } catch (e) {}
+    try { const key = mode === 'adv' ? 'azakei_nefuda_adv' : 'azakei_nefuda', b = +localStorage.getItem(key) || 0; localStorage.setItem(key, String(Math.max(ok, b))); } catch (e) {}
   };
   box.addEventListener('click', e => {
     const o = e.target.closest('[data-o]'); if (o) { answer(+o.dataset.o); return; }
     if (e.target.closest('[data-a="next"]')) { i++; if (i < R.length) show(); else finish(); return; }
-    if (e.target.closest('[data-a="again"]')) {
-      i = 0; ok = 0; found = []; K('got').textContent = 0; box.querySelector('.nd-res').hidden = true;
-      box.querySelectorAll('.nd-book li').forEach(li => { li.classList.remove('is-got'); li.querySelector('b').textContent = '？？？'; });
-      show();
-    }
+    const md = e.target.closest('[data-mode]'); if (md) { setMode(md.dataset.mode); return; }
+    if (e.target.closest('[data-a="again"]')) setMode(mode);
   });
+  // ふつう編 ⇄ 上級編：図鑑をつくりなおして、はじめから
+  const setMode = m => {
+    mode = m; R = m === 'adv' ? ADV : BASIC; i = 0; ok = 0; found = [];
+    box.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-checked', b.dataset.mode === m));
+    box.querySelector('.nd-book').innerHTML = R.map(r => `<li><span aria-hidden="true">${r.seal}</span><b>？？？</b></li>`).join('');
+    K('got').textContent = 0; K('tot').textContent = R.length; K('tot2').textContent = R.length; box.querySelector('.nd-res').hidden = true;
+    box.classList.toggle('is-adv', m === 'adv');
+    show();
+  };
   show();
 })();

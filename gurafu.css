@@ -63,3 +63,14 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .gu[data-gurafu] .gu-learn p { background: rgba(255, 255, 255, .07); } }
 @media (max-width: 900px) { .gu[data-gurafu] { grid-template-columns: minmax(0, 1fr); } .gu[data-gurafu] .gu-learn { grid-template-columns: 1fr; } .gu[data-gurafu] .gu-book { grid-template-columns: 1fr 1fr; } }
 @media (prefers-reduced-motion: reduce) { .gu[data-gurafu] * { animation: none !important; transition: none !important; } }
+/* ふつう編 ⇄ 上級編 */
+.gu[data-gurafu] .gu-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.gu[data-gurafu] .gu-mode button { display: grid; gap: 2px; padding: 9px 12px; border-radius: 14px; border: 2px solid var(--color-border, rgba(31, 35, 41, .2)); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.gu[data-gurafu] .gu-mode b { font-size: 14px; } .gu[data-gurafu] .gu-mode small { font-size: 11px; opacity: .7; }
+.gu[data-gurafu] .gu-mode button[aria-checked="true"] { border-color: #d23a2a; background: rgba(210, 58, 42, .1); }
+.gu[data-gurafu] .gu-mode button[data-mode="adv"][aria-checked="true"] { border-color: #1f2329; background: #1f2329; color: #ffd76a; }
+.gu[data-gurafu].is-adv .gu-bar-top { background: #7a2418; }
+.gu-line.is-blue { stroke: #2f6fb0; } .gu-bl.is-blue { fill: #2f6fb0; } .gu-t.is-r { fill: #2f6fb0; }
+.gu-trend { stroke: #d23a2a; stroke-width: 2.5; stroke-dasharray: 6 4; }
+.gu-pl { fill: #fff; font-size: 11.5px; font-weight: 800; text-anchor: middle; paint-order: stroke; stroke: rgba(0, 0, 0, .35); stroke-width: 2px; }
+.gu[data-gurafu] .gu-fig.is-true::after { right: auto; left: 50%; transform: translateX(-50%); }

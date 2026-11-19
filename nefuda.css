@@ -63,3 +63,12 @@
 @media (max-width: 900px) { .nd[data-nefuda] { grid-template-columns: minmax(0, 1fr); } .nd[data-nefuda] .nd-learn { grid-template-columns: 1fr; } .nd[data-nefuda] .nd-book { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 520px) { .nd[data-nefuda] .nd-tag { min-width: 100px; } .nd[data-nefuda] .nd-tag b { font-size: 20px; } .nd[data-nefuda] .nd-reveal { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .nd[data-nefuda] * { animation: none !important; transition: none !important; } }
+/* ふつう編 ⇄ 上級編 */
+.nd[data-nefuda] .nd-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.nd[data-nefuda] .nd-mode button { display: grid; gap: 2px; padding: 9px 12px; border-radius: 14px; border: 2px solid var(--color-border, rgba(107, 74, 34, .25)); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.nd[data-nefuda] .nd-mode b { font-size: 14px; } .nd[data-nefuda] .nd-mode small { font-size: 11px; opacity: .7; }
+.nd[data-nefuda] .nd-mode button[aria-checked="true"] { border-color: #b5432f; background: rgba(181, 67, 47, .1); }
+.nd[data-nefuda] .nd-mode button[data-mode="adv"][aria-checked="true"] { border-color: #2a2015; background: #2a2015; color: #ffd76a; }
+.nd[data-nefuda].is-adv .nd-shop { background: linear-gradient(180deg, #f3ead8, #e2cfa8); }
+.nd[data-nefuda].is-adv .nd-awn { background: repeating-linear-gradient(90deg, #2a2015 0 36px, #e3b341 36px 72px); }
+.nd[data-nefuda] .nd-tag i { display: block; font-size: 10.5px; }

@@ -54,3 +54,14 @@
 @media (max-width: 900px) { .kz[data-kanzei] { grid-template-columns: minmax(0, 1fr); } .kz[data-kanzei] .kz-learn { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .kz[data-kanzei] .kz-pan { min-width: 96px; } .kz[data-kanzei] .kz-pan small { white-space: normal; } }
 @media (prefers-reduced-motion: reduce) { .kz-truck, .kz-coin { animation: none !important; opacity: 1; } .kz-truck { transform: translate(260px, 128px); } .kz[data-kanzei] .kz-beam, .kz-bar { transition: none !important; } }
+/* ミッション（ちょうどの関税をさがす） */
+.kz[data-kanzei] .kz-mis { padding: 12px 14px; border-radius: 16px; background: #fffaf0; color: #2a2015; box-shadow: inset 0 0 0 2px rgba(181, 67, 47, .3); }
+.kz[data-kanzei] .kz-mis-h { margin: 0 0 6px; font-family: "Shippori Mincho", serif; font-size: 17px; font-weight: 800; }
+.kz[data-kanzei] .kz-mis-h small { margin-left: 8px; font-size: 13px; color: #b5432f; }
+.kz[data-kanzei] .kz-mis ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.kz[data-kanzei] .kz-mis li { display: flex; gap: 10px; align-items: flex-start; padding: 6px 10px; border-radius: 10px; background: rgba(42, 32, 21, .05); font-size: 12.5px; line-height: 1.6; }
+.kz[data-kanzei] .kz-mis span { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: #8a8f86; color: #fff; font-family: "Shippori Mincho", serif; font-weight: 800; }
+.kz[data-kanzei] .kz-mis li.is-now { box-shadow: inset 0 0 0 2px #e3b341; }
+.kz[data-kanzei] .kz-mis li.is-ok { background: #e8f5ea; } .kz[data-kanzei] .kz-mis li.is-ok span { background: #b5432f; border-radius: 50%; transform: rotate(-10deg); }
+.kz[data-kanzei] .kz-mis li.is-flash span { animation: kz-stamp .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes kz-stamp { from { transform: rotate(-30deg) scale(2.2); opacity: 0; } }
