@@ -9585,3 +9585,8 @@ html.curtain-pending::after { content: "AZAKEI"; position: fixed; inset: 0; z-in
 .os-say::before { content: ''; width: 0; height: 0; border-left: 7px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
 .os-say.is-on { background: #b5432f; border-color: #b5432f; }
 @keyframes os-say-in { from { opacity: 0; transform: translateX(-6px); } }
+/* 経済の路線図への入口（あそび場・経済ラボ・わたしの記録） */
+.rs-link { margin: 14px 0 0; text-align: center; }
+.rs-link a { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px 8px 8px; border-radius: 999px; background: var(--color-surface, #fffaf0); color: inherit; font-size: 14px; font-weight: 800; text-decoration: none; box-shadow: inset 0 0 0 2px #2f6fb0, 0 6px 14px -8px rgba(47, 111, 176, .6); transition: transform .2s; }
+.rs-link a:hover { transform: translateY(-2px); }
+.rs-link span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: conic-gradient(#d6453a 0 20%, #2f6fb0 0 40%, #2f8a4a 0 60%, #c9922e 0 80%, #7b5fb0 0); color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; text-shadow: 0 1px 2px rgba(0, 0, 0, .5); }

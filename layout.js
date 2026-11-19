@@ -42,6 +42,7 @@
       { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.6M12 16.8v.2', href: 'diagnosis.html',  ja: 'エコノミスト診断',  en: 'Type Test', desc: 'YES か NO で、あなたの投資家タイプがわかる。', img: 'photos/room-diagnosis.jpg', badge: 'NEW' },
       { ico: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9 9h6M9 12h6M12 6v12', href: 'quiz.html',       ja: '経済のあそび場',    en: 'Play',      desc: '億万長者クイズなど、遊んで学ぶ。', img: 'photos/board-special.jpg', badge: 'NEW' },
       { ico: 'M4 19h16M7 16v-5M12 16V7M17 16v-8', href: 'sim.html',        ja: '経済ラボ', en: 'Lab', desc: 'シミュレーターとゲームで、経済を手で動かす。', img: 'photos/board-special.jpg', badge: 'NEW' },
+      { ico: 'M4 7h16M4 12h16M4 17h16M8 5v4M15 10v4M11 15v4', href: 'rosen.html',      ja: '経済の路線図', en: 'Map', desc: '体験を 5 つの路線の駅に。ためした駅には「済」。', img: 'photos/board-special.jpg', badge: 'NEW' },
       { ico: 'M5 11h14v9H5zM9 15l2 2 4-4M8 11V6h8v5', href: 'vote.html',       ja: '文化祭投票',        en: 'Vote',     desc: '次はどんな展示が見たい？ あなたの 1 票を参考に。',   img: 'photos/hallway-game.jpg', badge: '受付中' },
       { ico: 'M3 12l4-4 3 2 4-3 7 6M7 13l3 3 2-1 2 2 3-3', href: 'sponsor.html',    ja: '協賛のご案内',      en: 'Partner',  desc: '企業・団体の皆さまへ。募集項目と流れ。',       img: 'photos/star-bills.jpg' },
       { ico: 'M4 6h16v12H4zM4 7l8 6 8-6', href: 'contact.html',    ja: 'お問い合わせ',      en: 'Contact',  desc: 'フォーム、または Instagram の DM から。',      img: 'photos/star-door.jpg' }
@@ -70,7 +71,7 @@
     { ja: 'AZAKEIについて', en: 'About', lead: '私たちが何者で、何を大切にしているか。', pages: ['about.html', 'report.html', 'azakei.html', 'activities.html', 'glossary.html'] },
     { ja: '文化祭', en: 'Festival', lead: '体験型展示「麻布経済展」と、その日程。', pages: ['festival.html', 'events.html', 'vote.html'] },
     { ja: 'コンテスト', en: 'Contests', href: 'contests.html' },
-    { ja: '体験する', en: 'Play', lead: '登録なし・スマホで、すぐに遊べます。', pages: ['quiz.html', 'diagnosis.html', 'sim.html'] },
+    { ja: '体験する', en: 'Play', lead: '登録なし・スマホで、すぐに遊べます。', pages: ['quiz.html', 'sim.html', 'rosen.html', 'diagnosis.html'] },
     { ja: '協賛・取材', en: 'Partners', href: 'sponsor.html' }
   ];
   const navLinks = MENU.map((m, i) => {
@@ -179,7 +180,7 @@
   // フッターのリンクは「知る」「遊ぶ・学ぶ」「つながる」の 3 つに分ける
   const FOOT_GROUPS = [
     { en: 'Explore', ja: '知る', links: [['about.html', '麻経とは'], ['report.html', '2026 年の活動報告'], ['azakei.html', 'AZAKEI として'], ['contests.html', '各種コンテスト'], ['festival.html', '文化祭'], ['activities.html', '活動風景・日常'], ['events.html', '日程・イベント']] },
-    { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '経済のあそび場'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', '経済ラボ'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
+    { en: 'Play', ja: '遊ぶ・学ぶ', links: [['quiz.html', '経済のあそび場'], ['diagnosis.html', 'エコノミスト診断'], ['sim.html', '経済ラボ'], ['rosen.html', '経済の路線図'], ['glossary.html', '経済用語ミニ辞典'], ['vote.html', '文化祭投票']] },
     { en: 'Connect', ja: 'つながる', links: [['contact.html', 'お問い合わせ'], ['sponsor.html', '協賛のご案内'], ...sns.map(s => [s.url, s.name, s.handle])] }
   ];
   footer.innerHTML = `
@@ -297,6 +298,7 @@
     ['sim.html#robot', 'ロボットがやってきた工場', '経済ラボ', 'ロボット AI 機械化 自動化 仕事 生産性 学び直し リスキリング 工場 パン'],
     ['sim.html#chiiki', 'めぐる町のお金', '経済ラボ', '地域通貨 商店街 地元 乗数効果 お金のめぐり 町 プレミアム付き商品券 地域経済'],
     ['sim.html#gurafu', 'グラフのうそを見破れ', '経済ラボ', 'グラフ 統計 縦軸 期間 平均 中央値 割合 ニュース メディアリテラシー データ'],
+    ['rosen.html', '経済の路線図', 'ページ', '路線図 地図 一覧 体験 駅 路線 ためした 進み具合 おすすめ'],
     ['quiz.html#kyuyo', 'はじめての給料明細', 'あそび場', '給料 給料明細 額面 手取り 住民税 所得税 社会保険料 健康保険 年金 源泉徴収 働く'],
     ['sim.html#uchiwake', 'おにぎり 1 個の値段の中身', '経済ラボ', '値段 内訳 原価 付加価値 コンビニ おにぎり 流通 消費税 軽減税率 もうけ'],
     ['quiz.html#cashless', '店長のレジ', 'あそび場', 'キャッシュレス 現金 クレジットカード QR コード 手数料 入金 キャッシュフロー お店 レジ ポイント'],
