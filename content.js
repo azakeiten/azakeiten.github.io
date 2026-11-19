@@ -9,6 +9,8 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-19', seal: '機', tone: 'dark', href: 'sim.html#robot', eyebrow: '経済ラボ', title: 'ロボットがやってきた工場', text: '20 人のパン工場に機械がやってくる。パンの値段、売れる数、働く人の仕事は 5 年でどう変わる？ 学び直しの大切さを見ます。' },
+    { date: '2026-11-19', seal: 'レ', tone: 'light', href: 'quiz.html#cashless', eyebrow: 'あそび場', title: '店長のレジ', text: 'お弁当屋さんの店長として、現金・カード・QR コードのどれを受け付ける？ 100 人のお客さん、手数料、今日入るお金とあとで入るお金をくらべます。' },
     { date: '2026-11-19', seal: '図', tone: 'light', href: 'sim.html#gurafu', eyebrow: '経済ラボ', title: 'グラフのうそを見破れ', text: '縦軸の切りとり、期間の切りとり、絵の大きさ、割合のわな、平均のわな。ニュースのグラフの 5 つのしかけを見破って、正しく描きなおします。' },
     { date: '2026-11-19', seal: '巡', tone: 'dark', href: 'sim.html#chiiki', eyebrow: '経済ラボ', title: 'めぐる町のお金', text: '町で使った 1 万円が、お店からお店へめぐって何倍の売上に？ 町の外へぬけるお金と、地域通貨のしくみを見ます。' },
     { date: '2026-11-19', seal: '札', tone: 'light', href: 'quiz.html#nefuda', eyebrow: 'あそび場', title: '値札のマジック', text: '半額・送料無料・残りわずか・ポイント還元。お店の値札にかくれた 7 つのしかけを、虫めがねで見破ります。' },

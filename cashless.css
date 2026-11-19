@@ -1,0 +1,62 @@
+/* cashless.css — あそび場：店長のレジ（cashless.js が読みこむ） */
+.cl[data-cashless] { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.cl[data-cashless] .cl-shop { display: grid; gap: 12px; padding: 16px; border-radius: 26px; background: linear-gradient(180deg, #fdf3e1, #f5e2c0); color: #2a2015; box-shadow: 0 20px 44px -24px rgba(90, 60, 20, .6), inset 0 0 0 1px rgba(107, 74, 34, .18); }
+.cl[data-cashless] .cl-sign { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 16px; background: #2a2015; color: #f3e3bd; }
+.cl[data-cashless] .cl-seal { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; font-size: 24px; font-weight: 800; }
+.cl[data-cashless] .cl-name { margin: 0; font-family: "Shippori Mincho", serif; font-size: 19px; font-weight: 800; }
+.cl[data-cashless] .cl-sub { margin: 0; font-size: 12px; opacity: .85; } .cl[data-cashless] .cl-sub b { color: #ffd76a; }
+.cl[data-cashless] .cl-stick { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.cl[data-cashless] .cl-stick span { padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 800; color: #fff; transform: rotate(-3deg); animation: cl-stick .35s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes cl-stick { from { transform: scale(0) rotate(-20deg); } }
+.cl-stick .is-cash, .cl-legend .is-cash, .cl[data-cashless] .cl-grid i.is-cash, .cl[data-cashless] .cl-line i.is-cash { background: #4f9a5a; }
+.cl-stick .is-card, .cl-legend .is-card, .cl[data-cashless] .cl-grid i.is-card, .cl[data-cashless] .cl-line i.is-card { background: #3b6fb0; }
+.cl-stick .is-qr, .cl-legend .is-qr, .cl[data-cashless] .cl-grid i.is-qr, .cl[data-cashless] .cl-line i.is-qr { background: #d8822a; }
+.cl-stick .is-none { background: #8a8f86; }
+.cl[data-cashless] .cl-floor { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: repeating-linear-gradient(90deg, #e9d3a9 0 22px, #e2c99b 22px 44px); }
+.cl[data-cashless] .cl-line { flex: 1; display: flex; flex-direction: row-reverse; justify-content: flex-start; gap: 6px; min-height: 26px; }
+.cl[data-cashless] .cl-line i { width: 18px; height: 26px; border-radius: 9px 9px 4px 4px; animation: cl-walk .5s ease-in-out infinite alternate; }
+.cl[data-cashless] .cl-line i:nth-child(2n) { animation-delay: -.25s; }
+@keyframes cl-walk { to { transform: translateY(-3px); } }
+.cl[data-cashless] .cl-register { flex: none; display: grid; justify-items: end; padding: 6px 12px; border-radius: 10px; background: #2a2015; color: #9dffb0; font-family: "Courier New", monospace; }
+.cl[data-cashless] .cl-reg-t { font-size: 10px; color: #f3e3bd; font-family: inherit; } .cl[data-cashless] .cl-register b { font-size: 18px; font-variant-numeric: tabular-nums; }
+.cl[data-cashless] .cl-grid { display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px; padding: 8px; border-radius: 12px; background: rgba(255, 255, 255, .5); }
+.cl[data-cashless] .cl-grid i { aspect-ratio: 1; border-radius: 50%; background: rgba(42, 32, 21, .1); }
+.cl[data-cashless] .cl-grid i[class] { animation: cl-pop .3s cubic-bezier(.3, 1.8, .5, 1); }
+.cl[data-cashless] .cl-grid i.is-switch { box-shadow: 0 0 0 2px #ffd76a; }
+.cl[data-cashless] .cl-grid i.is-lost, .cl-legend .is-lost { background: transparent; box-shadow: inset 0 0 0 2px #c4442c; }
+@keyframes cl-pop { from { transform: scale(0); } }
+.cl[data-cashless] .cl-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; font-size: 11.5px; }
+.cl[data-cashless] .cl-legend i { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 50%; vertical-align: -1px; }
+.cl[data-cashless] .cl-msg { margin: 0; padding: 10px 14px; border-radius: 12px; background: #2a2015; color: #f3eee4; font-size: 13.5px; font-weight: 700; line-height: 1.7; min-height: 3.4em; }
+.cl[data-cashless] .cl-side { display: grid; gap: 10px; }
+.cl[data-cashless] .cl-h { margin: 0; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; }
+.cl[data-cashless] .cl-pays { display: grid; gap: 8px; }
+.cl[data-cashless] .cl-pay { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: 14px; background: var(--color-surface, #fffaf0); box-shadow: inset 0 0 0 2px var(--color-border, rgba(107, 74, 34, .2)); cursor: pointer; transition: box-shadow .2s, transform .2s; }
+.cl[data-cashless] .cl-pay input { position: absolute; opacity: 0; }
+.cl[data-cashless] .cl-ps { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: #8a8f86; color: #fff; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; transition: background .2s; }
+.cl[data-cashless] .cl-pay:has(input:checked) { box-shadow: inset 0 0 0 3px #2a2015; transform: translateX(3px); }
+.cl[data-cashless] .cl-pay.is-cash:has(input:checked) .cl-ps { background: #4f9a5a; } .cl[data-cashless] .cl-pay.is-card:has(input:checked) .cl-ps { background: #3b6fb0; } .cl[data-cashless] .cl-pay.is-qr:has(input:checked) .cl-ps { background: #d8822a; }
+.cl[data-cashless] .cl-pay input:focus-visible ~ .cl-ps { outline: 2px solid #3b84b0; outline-offset: 2px; }
+.cl[data-cashless] .cl-pt b { font-size: 15px; } .cl[data-cashless] .cl-pt small { display: block; font-size: 11.5px; opacity: .8; } .cl[data-cashless] .cl-pt .cl-pd { margin-top: 2px; font-size: 11.5px; opacity: .65; }
+.cl[data-cashless] .cl-go { padding: 13px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 16px rgba(181, 67, 47, .35); }
+.cl[data-cashless].is-busy .cl-side input, .cl[data-cashless].is-busy .cl-go { pointer-events: none; opacity: .5; }
+.cl[data-cashless] .cl-res { display: grid; gap: 8px; padding: 14px 16px; border-radius: 18px; background: #fffaf0; color: #2a2015; box-shadow: inset 0 0 0 2px rgba(181, 67, 47, .3); animation: cl-in .5s cubic-bezier(.3, 1.4, .5, 1); }
+.cl[data-cashless] .cl-res[hidden] { display: none; }
+@keyframes cl-in { from { opacity: 0; transform: translateY(10px); } }
+.cl[data-cashless] .cl-r { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.cl[data-cashless] .cl-r li { display: flex; justify-content: space-between; padding: 6px 10px; border-radius: 10px; background: rgba(42, 32, 21, .05); font-size: 13px; }
+.cl[data-cashless] .cl-r .is-minus b { color: #b5432f; } .cl[data-cashless] .cl-r .is-keep { background: #2a2015; color: #f3eee4; } .cl[data-cashless] .cl-r .is-keep b { color: #ffd76a; font-size: 16px; }
+.cl[data-cashless] .cl-when { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.cl[data-cashless] .cl-when p { margin: 0; padding: 8px 10px; border-radius: 10px; background: rgba(79, 154, 90, .12); } .cl[data-cashless] .cl-when p + p { background: rgba(59, 111, 176, .12); }
+.cl[data-cashless] .cl-when small { display: block; font-size: 11px; opacity: .75; } .cl[data-cashless] .cl-when b { font-size: 15px; }
+.cl[data-cashless] .cl-r-lost, .cl[data-cashless] .cl-r-best { margin: 0; font-size: 12.5px; line-height: 1.7; } .cl[data-cashless] .cl-r-lost b { color: #c4442c; } .cl[data-cashless] .cl-r-best b { color: #2f6b3a; }
+.cl[data-cashless] .cl-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.cl[data-cashless] .cl-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(181, 67, 47, .07); font-size: 14px; line-height: 1.75; }
+.cl[data-cashless] .cl-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
+.cl[data-cashless] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.cl[data-cashless] .cl-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+:root[data-theme="dark"] .cl[data-cashless] .cl-learn p { background: rgba(255, 255, 255, .07); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cl[data-cashless] .cl-learn p { background: rgba(255, 255, 255, .07); } }
+@media (max-width: 900px) { .cl[data-cashless] { grid-template-columns: minmax(0, 1fr); } .cl[data-cashless] .cl-learn { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .cl[data-cashless] .cl-grid { grid-template-columns: repeat(10, 1fr); } .cl[data-cashless] .cl-stick { margin-left: 0; } }
+@media (prefers-reduced-motion: reduce) { .cl[data-cashless] * { animation: none !important; transition: none !important; } }

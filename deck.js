@@ -29,8 +29,8 @@
       n: '2026 年の文化祭では、3 日間で 2,364 人が来てくれました。いちばん多かったのは 2 日目の 1,152 人です。' },
     { k: '親しむ', step: 0, seal: '試', t: 'この場で、<br>ひとつ選んでください。', s: 'A：かならず 100 チップもらえる。　B：コインを投げて、表なら 200 チップ、裏なら 0。', cls: 'is-try', tryit: true, dur: 12000, vo: [['sentakushite'], '選択してください。'],
       n: '会場のみなさんに、ひとつ質問です。A は、かならず 100 チップ。B は、コインの表なら 200、裏なら 0。どちらを選びますか。手をあげてもらってから、コインを投げます。どちらが正しい、ということはありません。「確実」と「ふえるかも」をくらべる気持ちが、経済のリスクの考え方の入口です。' },
-    { k: '知る', step: 1, img: 'photos/s/room-diagnosis.jpg', t: '遊んだあとに、<br>仕組みを知る。', s: 'なぜチップが増えたのか、減ったのか。お金は、家計・企業・銀行・政府のあいだを、どうめぐっているのか。Web でも、図や辞典で確かめられます。', chips: ['用語辞典 300 語', 'お金のめぐりの図', '経済ラボ 27 の実験', 'クイズ 84 問'],
-      n: '次に「知る」。遊んだあとで、なぜチップが増えたのか、減ったのかを考えます。ホームページには、用語辞典 300 語、経済ラボの 27 の実験、クイズ 84 問があります。' },
+    { k: '知る', step: 1, img: 'photos/s/room-diagnosis.jpg', t: '遊んだあとに、<br>仕組みを知る。', s: 'なぜチップが増えたのか、減ったのか。お金は、家計・企業・銀行・政府のあいだを、どうめぐっているのか。Web でも、図や辞典で確かめられます。', chips: ['用語辞典 300 語', 'お金のめぐりの図', '経済ラボ 28 の実験', 'クイズ 84 問'],
+      n: '次に「知る」。遊んだあとで、なぜチップが増えたのか、減ったのかを考えます。ホームページには、用語辞典 300 語、経済ラボの 28 の実験、クイズ 84 問があります。' },
     { k: '知る', step: 1, seal: '巡', t: 'お金は、<br>めぐっている。', s: '給料をもらい、買い物をし、預けたお金は貸し出され、税金は道路や学校になる。一人の 1 万円も、町の中をぐるりと回っています。', cls: 'is-flow', flow: true,
       n: 'たとえば、お金のめぐり。家計は働いて給料をもらい、企業から物を買います。預けたお金は銀行から企業に貸し出され、税金は道路や学校になって返ってきます。こうした仕組みを、図や実験で知ることができます。' },
     { k: 'つくる', step: 2, img: 'photos/s/room-paper.jpg', t: '仕組みを、<br>自分たちの手で。', s: '展示のゲームとルール、会場で使う券（チップ）、会場の飾り。どれも部員が考えて、つくりました。遊ぶ側から、仕組みをつくる側へ。',
@@ -54,7 +54,7 @@
     ['まずは「親しむ」。', '文化祭では、教室ひとつを経済の町にしたんだ。', '入口でチップを受けとって、6 つのコーナーで遊ぶよ。'],
     [{ t: '3 日間で、2,364 人が来てくれたよ！', hl: '.dk-num', m: 'wow' }, { t: 'いちばん多かったのは、2 日目の 1,152 人。', hl: '.dk-bars span:nth-child(2)' }],
     [{ t: 'ここでクイズ。A は、かならず 100 チップ。', hl: '[data-ab="A"]' }, { t: 'B は、コインの表なら 200、裏なら 0。', hl: '[data-ab="B"]' }, { t: 'みんなはどっち？ ……うーん。', m: 'think' }, { t: 'ぼくは、B にしてみる！', hl: '[data-ab="B"]', m: 'happy' }, '@flip', { t: '平均すると、どっちも 100。「確実」をとるか、「ふえるかも」をとるか。それが、リスクの考え方の入口だよ。', hl: '.dk-try-r' }],
-    ['つぎは「知る」。', { t: 'なぜチップが増えたのか、減ったのかを考えるんだ。', m: 'think' }, { t: 'サイトには、用語辞典 300 語や、経済ラボの 27 の実験があるよ。', hl: '.dk-chips li:nth-child(-n+3)' }],
+    ['つぎは「知る」。', { t: 'なぜチップが増えたのか、減ったのかを考えるんだ。', m: 'think' }, { t: 'サイトには、用語辞典 300 語や、経済ラボの 28 の実験があるよ。', hl: '.dk-chips li:nth-child(-n+3)' }],
     [{ t: 'お金は、町の中をめぐっているよ。小さなお札に、図の上を回ってもらうね。', m: 'happy' }, { t: '家計は企業で働いて給料をもらい、企業から物を買う。', hl: '[data-k="家計"], [data-k="企業"]', ride: [1, 0] }, { t: '預けたお金は、銀行から企業へ貸し出される。', hl: '[data-k="銀行"]', ride: [2, 3] }, { t: '税金は政府に集まって、道路や学校になるんだ。', hl: '[data-k="政府"]', ride: [4, 5] }],
     ['さいごは「つくる」。', '展示のゲームやルール、会場で使う券、会場の飾りは、部員が考えてつくったんだ。'],
     [{ t: '会場で使う券ひとつにも、決めることがたくさんあるよ。', m: 'think' }, { t: '何枚用意する？ 1 枚で何回遊べる？', hl: '.dk-b-q li:nth-child(-n+2)' }, { t: 'どう増える？ どこで使える？', hl: '.dk-b-q li:nth-child(n+3)' }, { t: 'ちなみに、ぼくの体はお札の形なんだ。', m: 'happy' }],
@@ -145,7 +145,7 @@
       <ol class="dk-track" aria-hidden="true">${STEPS.map(([k, t]) => `<li><span>${k}</span>${t}</li>`).join('<li class="dk-arr">→</li>')}</ol>
       <div class="dk-grid" hidden><p class="dk-grid-h">スライド一覧<small>押すと、その場面へ</small></p><ol>${S.map((s, n) => `<li><button type="button" data-go="${n}"><span>${label(s)}</span><small>${n + 1}　${s.k}</small><b>${plain(s.t)}</b></button></li>`).join('')}</ol></div>
       <aside class="dk-note" hidden aria-label="発表者メモ"><div class="dk-note-h"><b>台本</b><span class="dk-time">0:00</span><span class="dk-nx"></span><button type="button" class="dk-pv">別の画面で台本を開く</button></div><p class="dk-note-t"></p></aside>
-      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-sp">速さ：ふつう</button><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button><select class="dk-ch-vsel" aria-label="お札マンの声" hidden></select>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p><button type="button" class="dk-ch-go">止まっています。つづける ▶</button></div><div class="dk-ch-man">${MAN}</div></div>
+      <div class="dk-chara" hidden><div class="dk-ch-b"><p class="dk-ch-n">お札マン<small>（仮）</small><button type="button" class="dk-ch-sp">速さ：ふつう</button><button type="button" class="dk-ch-s" aria-pressed="false">効果音</button>${'speechSynthesis' in window ? '<button type="button" class="dk-ch-v" aria-pressed="false">声を出す</button><select class="dk-ch-vsel" aria-label="お札マンの声" hidden></select><button type="button" class="dk-ch-st" hidden>話し方：主人公</button>' : ''}</p><p class="dk-ch-t" aria-live="polite"></p><button type="button" class="dk-ch-go">止まっています。つづける ▶</button></div><div class="dk-ch-man">${MAN}</div></div>
       <div class="dk-jimaku" hidden aria-live="polite"><p></p></div>
       <div class="dk-cap" hidden aria-live="polite"><b>案内</b><span></span></div>
       <canvas class="dk-pen" hidden></canvas><div class="dk-laser" hidden aria-hidden="true"></div>
@@ -182,12 +182,14 @@
     const sb = el.querySelector('.dk-ch-s');
     sb.onclick = () => { sfxOn = !sfxOn; sb.setAttribute('aria-pressed', sfxOn); sb.textContent = sfxOn ? '効果音：あり' : '効果音'; sfx('coin'); };
     const vb = el.querySelector('.dk-ch-v');
-    if (vb) vb.onclick = () => { voice = !voice; if (voice) VO().then(manList); else el.querySelector('.dk-ch-vsel').hidden = true; vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
+    if (vb) vb.onclick = () => { voice = !voice; if (voice) VO().then(manList); else { el.querySelector('.dk-ch-vsel').hidden = true; el.querySelector('.dk-ch-st').hidden = true; } vb.setAttribute('aria-pressed', voice); vb.textContent = voice ? '声：あり' : '声を出す'; if (!voice) speechSynthesis.cancel(); };
     el.querySelector('.dk-lbtn').onclick = () => setTool(tool === 'laser' ? '' : 'laser');
     el.querySelector('.dk-dbtn').onclick = () => setTool(tool === 'pen' ? '' : 'pen');
     el.querySelector('.dk-pv').onclick = presenter;
     // 指し棒：赤い光の点がマウスについてくる
     el.querySelector('.dk-obtn').onclick = opening;
+    // 話し方（主人公 ⇄ クール）。押すと、その話し方でひとこと
+    el.querySelector('.dk-ch-st').onclick = () => { const V = window.AZAKEI_VOICE; if (!V) return; V.setStyle(V.getStyle() === 'hero' ? 'cool' : 'hero'); stLabel(); stopTalk(); speechSynthesis.cancel(); const line = V.getStyle() === 'hero' ? 'よーし、まかせて！ ぼくがお札マンだ！' : '……お札マンだ。よろしく。'; const u = new SpeechSynthesisUtterance(V.fix(line)); const mt = V.manTone(); if (mt.voice) u.voice = mt.voice; u.lang = 'ja-JP'; u.pitch = mt.pitch; u.rate = mt.rate; speechSynthesis.speak(u); if (chara && playing) setTimeout(run, 2200); };
     el.querySelector('.dk-ch-vsel').onchange = e => { if (window.AZAKEI_VOICE) { AZAKEI_VOICE.setMan(e.target.value); stopTalk(); speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance('この声で話すよ。よろしく。'); const mt = AZAKEI_VOICE.manTone(); if (mt.voice) u.voice = mt.voice; u.lang = 'ja-JP'; u.pitch = mt.pitch; u.rate = mt.rate; speechSynthesis.speak(u); if (chara && playing) setTimeout(run, 1800); } };
     el.querySelector('.dk-rbtn').onclick = () => setNarr(!narr);
     el.querySelector('.dk-bbtn').onclick = () => setBgm(!bgmOn);
@@ -405,6 +407,7 @@
       });
     });
   };
+  const stLabel = () => { const b = el && el.querySelector('.dk-ch-st'); if (!b) return; b.hidden = !voice || !window.AZAKEI_VOICE; if (window.AZAKEI_VOICE) b.textContent = '話し方：' + (AZAKEI_VOICE.getStyle() === 'hero' ? '主人公' : 'クール'); };
   // お札マンの声をえらぶ欄（男の声を上に）
   const manList = () => {
     const sel = el.querySelector('.dk-ch-vsel'); if (!sel || !window.AZAKEI_VOICE) return;
@@ -412,6 +415,7 @@
     sel.innerHTML = vs.map(v => `<option value="${v.name.replace(/"/g, '&quot;')}"${cur && cur.name === v.name ? ' selected' : ''}>${V.label(v)}</option>`).join('');
     if (!V.hasNatural()) sel.insertAdjacentHTML('beforeend', '<option disabled>Edge だと人の声に近い声</option>');
     sel.hidden = !voice || !vs.length;
+    stLabel();
   };
   const voiceList = () => {
     const sel = el.querySelector('.dk-vsel'); if (!sel || !window.AZAKEI_VOICE) return;
@@ -455,7 +459,7 @@
   const QA = [
     ['麻経って、いつできたの？', { t: '2025 年にできた、麻布中学校・高等学校の経済系同好会だよ。', m: 'happy' }],
     ['文化祭には、何人来たの？', { t: '3 日間で 2,364 人。いちばん多かったのは、2 日目の 1,152 人だよ！', m: 'wow' }],
-    ['Web では、何ができるの？', { t: 'クイズ 84 問、経済ラボの 27 の実験、用語辞典 300 語。お祭りの券のルールを決める工房もあるよ。' }],
+    ['Web では、何ができるの？', { t: 'クイズ 84 問、経済ラボの 28 の実験、用語辞典 300 語。お祭りの券のルールを決める工房もあるよ。' }],
     ['次の文化祭は、いつ？', { t: '2027 年 5 月の予定だよ。準備の流れは「日程とイベント」のページで見られるよ。' }],
     ['協賛するには？', { t: '「協賛のご案内」のページを見てね。お問い合わせからも相談できるよ。', m: 'happy' }]
   ];

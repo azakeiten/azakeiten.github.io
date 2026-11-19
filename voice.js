@@ -163,6 +163,7 @@
   };
   // ── お札マンの声：男の人の声で、少し低く落ち着いて（かっこよく）。男の声がない機械では、声を低くして近づける
   //    Edge：圭太（Keita・自然な声）／Windows：Ichiro／iPhone・Mac：Otoya・Hattori。えらんだ声は azakei_man_voice に
+  //    ふだんは「主人公」らしい、明るく元気な話し方（setStyle で「クール」にもできる）
   const FEMALE = /(Nanami|七海|Haruka|Ayumi|Sayaka|Kyoko|O-Ren|Mizuki|Aoi|葵|Shiori|志織|Mayu|真由|Google)/i;
   const MALE = /(Keita|圭太|Daichi|大智|Naoki|直紀|Ichiro|Otoya|Hattori|Takumi|Kenji)/i;
   const isMale = v => MALE.test(v.name) && !FEMALE.test(v.name);
@@ -172,12 +173,21 @@
   const manPick = () => { const vs = jaVoices(); return vs.find(v => v.name === manName) || vs.slice().sort((a, b) => manRank(b) - manRank(a))[0] || null; };
   // 人の声らしさを残すため、音の高さは大きく変えない。自然な男の声はほんの少し低く。古い男の声はそのまま。
   // 男の声がない機械だけ、少し低くして近づける（下げすぎると機械っぽくなる）
-  const manTone = (v = manPick()) => !v ? { voice: null, pitch: .8, rate: .97 } : isMale(v) ? { voice: v, pitch: isNatural(v) ? .93 : 1, rate: .97 } : { voice: v, pitch: .78, rate: .95 };
+  // 話し方：hero＝主人公（明るく元気、まっすぐ。少し高めでテンポよく）／cool＝クール（少し低く、落ち着いて）。azakei_man_style に
+  let manStyle = 'hero';
+  try { manStyle = localStorage.getItem('azakei_man_style') || 'hero'; } catch (e) {}
+  const STYLE = {
+    hero: { natural: [1.14, 1.07], male: [1.12, 1.06], other: [.92, 1.05] },
+    cool: { natural: [.93, .97], male: [1, .97], other: [.78, .95] }
+  };
+  const manTone = (v = manPick()) => { const s = STYLE[manStyle] || STYLE.hero, k = !v ? 'other' : isMale(v) ? (isNatural(v) ? 'natural' : 'male') : 'other'; return { voice: v, pitch: s[k][0], rate: s[k][1] }; };
+  const setStyle = st => { manStyle = STYLE[st] ? st : 'hero'; try { localStorage.setItem('azakei_man_style', manStyle); } catch (e) {} };
+  const getStyle = () => manStyle;
   const setMan = name => { manName = name; try { localStorage.setItem('azakei_man_voice', name); } catch (e) {} };
   const man = (text, o = {}) => { const t = manTone(); return tts(text, { ...o, voice: t.voice, pitch: t.pitch, rate: (o.rate || 1) * t.rate }); };
   // 声のえらぶ欄に出す名前（男の声には「男性」）
   const label = v => v.name.replace(/^Microsoft\s*/, '').replace(/\s*Online\s*\(Natural\)/, '（自然な声）').replace(/\s*-\s*Japanese.*$|\s*\(Japan\)$/g, '').slice(0, 16) + (isMale(v) ? '・男性' : '');
   // この機械に、人の声に近い声があるか（なければ「Edge だと自然な声」と案内する）
   const hasNatural = () => jaVoices().some(isNatural);
-  window.AZAKEI_VOICE = { on: () => on, set, say, dur, chime, stop, load, tts, ttsStop, jaVoices, pick, setTTS, fix, bgm, man, manPick, manTone, setMan, isMale, isNatural, hasNatural, label };
+  window.AZAKEI_VOICE = { on: () => on, set, say, dur, chime, stop, load, tts, ttsStop, jaVoices, pick, setTTS, fix, bgm, man, manPick, manTone, setMan, setStyle, getStyle, isMale, isNatural, hasNatural, label };
 })();

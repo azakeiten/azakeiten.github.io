@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-sim.min.css?v=20261119c" />
+  <link rel="stylesheet" href="p-sim.min.css?v=20261119d" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -44,11 +44,11 @@
       <p class="section-label"><span class="ph-seal" aria-hidden="true">試</span></p>
       <h1 class="section-title"><span class="keep-phrase">経済</span><span class="keep-phrase"><em>ラボ</em></span></h1>
       <p class="page-hero-lead">シミュレーターとゲームで、経済を手で動かしてみる実験室。チップの分け方、複利、株価の予想、おこづかいのやりくり、値段の決まり方。気になるものから、どうぞ。</p>
-      <p class="ph-stats"><span><b data-count>27</b>の実験</span><span><b>0</b>円・登録なし</span></p>
+      <p class="ph-stats"><span><b data-count>28</b>の実験</span><span><b>0</b>円・登録なし</span></p>
     </div>
   </header>
 
-  <!-- 経済ラボのメニュー（27 の実験） -->
+  <!-- 経済ラボのメニュー（28 の実験） -->
   <section class="about tight lab-board-wrap">
     <div class="container">
       <ol class="lab-board reveal" data-lab-board>
@@ -74,6 +74,7 @@
         <li data-cat="biz"><a href="#kabu"><span class="lb-seal is-g">株</span><b>株式会社をつくろう</b><small>出したお金で、配当と決める力が変わる</small><i>体験</i></a></li>
         <li data-cat="money"><a href="#ginko"><span class="lb-seal is-y">銀</span><b>銀行のふしぎ</b><small>1 万円をあずけると、預金はいくらに？</small><i>体験</i></a></li>
         <li data-cat="world game" data-new><a href="#kinri"><span class="lb-seal is-d">舵</span><b>景気の舵とり</b><small>日本銀行の会議で、金利を決める</small><i>ゲーム</i></a></li>
+        <li data-cat="biz world" data-new><a href="#robot"><span class="lb-seal is-d">機</span><b>ロボットがやってきた工場</b><small>機械化と学び直しで、仕事はどう変わる？</small><i>体験</i></a></li>
         <li data-cat="world rule" data-new><a href="#chiiki"><span class="lb-seal is-d">巡</span><b>めぐる町のお金</b><small>地域通貨で、お金を町でめぐらせる</small><i>体験</i></a></li>
         <li data-cat="rule game" data-new><a href="#gurafu"><span class="lb-seal">図</span><b>グラフのうそを見破れ</b><small>ニュースのグラフの 5 つのしかけ</small><i>ゲーム</i></a></li>
         <li data-cat="money rule" data-new><a href="#hoken"><span class="lb-seal is-d">備</span><b>みんなで備える箱</b><small>保険のしくみを、10 年すすめて</small><i>体験</i></a></li>
@@ -247,7 +248,7 @@
       <div class="sr reveal" data-seri></div>
     </div>
   </section>
-  <script>/* せりの会場（seri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-seri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="seri.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* せりの会場（seri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-seri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="seri.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 朝ごはんの世界旅行（asagohan.js・近づいてから読みこむ） -->
   <section class="services tight" id="asagohan">
@@ -392,7 +393,20 @@
       <div class="kn reveal" data-kinri></div>
     </div>
   </section>
-  <script>/* 景気の舵とり（kinri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kinri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kinri.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 景気の舵とり（kinri.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kinri]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kinri.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+
+  <!-- ロボットがやってきた工場（robot.js・robot.css・近づいてから読みこむ） -->
+  <section class="services tight" id="robot">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="section-label"><span class="sl-seal" aria-hidden="true">機</span></p>
+        <h2 class="section-title"><span class="keep-phrase">ロボットが</span><span class="keep-phrase"><em>やってきた工場</em></span></h2>
+        <p class="lead">20 人が働くパン工場に、ロボットがやってきます。パンは安くなる？ 働く人はどうなる？ 機械化の目標と学び直しを決めて、5 年すすめてみよう。</p>
+      </div>
+      <div class="rb reveal" data-robot></div>
+    </div>
+  </section>
+  <script>/* ロボットがやってきた工場（robot.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-robot]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="robot.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- めぐる町のお金（chiiki.js・chiiki.css・近づいてから読みこむ） -->
   <section class="services tight" id="chiiki">
@@ -405,7 +419,7 @@
       <div class="mg reveal" data-chiiki></div>
     </div>
   </section>
-  <script>/* めぐる町のお金（chiiki.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-chiiki]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="chiiki.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* めぐる町のお金（chiiki.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-chiiki]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="chiiki.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- グラフのうそを見破れ（gurafu.js・gurafu.css・近づいてから読みこむ） -->
   <section class="services tight" id="gurafu">
@@ -418,7 +432,7 @@
       <div class="gu reveal" data-gurafu></div>
     </div>
   </section>
-  <script>/* グラフのうそを見破れ（gurafu.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-gurafu]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="gurafu.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* グラフのうそを見破れ（gurafu.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-gurafu]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="gurafu.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- みんなで備える箱（hoken.js・近づいてから読みこむ） -->
   <section class="services tight" id="hoken">
@@ -431,7 +445,7 @@
       <div class="hk reveal" data-hoken></div>
     </div>
   </section>
-  <script>/* みんなで備える箱（hoken.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-hoken]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="hoken.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* みんなで備える箱（hoken.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-hoken]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="hoken.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- みんなの池（ike.js・ike.css・近づいてから読みこむ） -->
   <section class="services tight" id="ike">
@@ -444,7 +458,7 @@
       <div class="ik reveal" data-ike></div>
     </div>
   </section>
-  <script>/* みんなの池（ike.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-ike]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="ike.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* みんなの池（ike.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-ike]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="ike.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <section class="services tight" id="nesage">
     <div class="container">
@@ -481,19 +495,19 @@
   </section>
   <footer id="site-footer"></footer>
 
-  <script src="curtain.js?v=20261119c"></script>
-  <script src="content.js?v=20261119c"></script>
-  <script src="layout.js?v=20261119c"></script>
-  <script src="brand.js?v=20261119c"></script>
-  <script src="nav.js?v=20261119c"></script>
-  <script src="reveal.js?v=20261119c"></script>
-  <script src="sim.js?v=20261119c"></script>
-  <script src="labmenu.js?v=20261119c"></script>
-  <script>/* お金のめぐりパズル（pazuru.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-pazuru]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="pazuru.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
-  <script>/* 朝ごはんの世界旅行（asagohan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-asagohan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="asagohan.js?v=20261119c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
-  <script src="osatsu.js?v=20261119c"></script>
-  <script>/* 体験のプログラムは、近づいてから読みこむ（はじめに届く重さを軽くする） */(function(){var v="20261119c",L=[["[data-double]","double.js"],["[data-market]","market.js"],["[data-fx]","fx.js"],["[data-shop]","shop.js"],["[data-oku]","oku.js"],["[data-budget]","budget.js"],["[data-infl]","infl.js"],["[data-bungyo]","bungyo.js"],["[data-receipt]","receipt.js"],["[data-kuji]","kuji.js"],["[data-kabu]","kabu.js"],["[data-ginko]","ginko.js"],["[data-nesage]","nesage.js"],["[data-flow]","flow.js"],["[data-village]","village.js"],["[data-tsuuka]","tsuuka.js"],["[data-updown]","updown.js"],["[data-okozukai]","okozukai.js"]];L.forEach(function(p){var el=document.querySelector(p[0]);if(!el)return;var go=function(){var s=document.createElement("script");s.src=p[1]+"?v="+v;document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"900px 0px"});io.observe(el);});})();</script>
-  <script src="pagetoc.js?v=20261119c"></script>
-  <script src="site.js?v=20261119c"></script>
+  <script src="curtain.js?v=20261119d"></script>
+  <script src="content.js?v=20261119d"></script>
+  <script src="layout.js?v=20261119d"></script>
+  <script src="brand.js?v=20261119d"></script>
+  <script src="nav.js?v=20261119d"></script>
+  <script src="reveal.js?v=20261119d"></script>
+  <script src="sim.js?v=20261119d"></script>
+  <script src="labmenu.js?v=20261119d"></script>
+  <script>/* お金のめぐりパズル（pazuru.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-pazuru]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="pazuru.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 朝ごはんの世界旅行（asagohan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-asagohan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="asagohan.js?v=20261119d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script src="osatsu.js?v=20261119d"></script>
+  <script>/* 体験のプログラムは、近づいてから読みこむ（はじめに届く重さを軽くする） */(function(){var v="20261119d",L=[["[data-double]","double.js"],["[data-market]","market.js"],["[data-fx]","fx.js"],["[data-shop]","shop.js"],["[data-oku]","oku.js"],["[data-budget]","budget.js"],["[data-infl]","infl.js"],["[data-bungyo]","bungyo.js"],["[data-receipt]","receipt.js"],["[data-kuji]","kuji.js"],["[data-kabu]","kabu.js"],["[data-ginko]","ginko.js"],["[data-nesage]","nesage.js"],["[data-flow]","flow.js"],["[data-village]","village.js"],["[data-tsuuka]","tsuuka.js"],["[data-updown]","updown.js"],["[data-okozukai]","okozukai.js"]];L.forEach(function(p){var el=document.querySelector(p[0]);if(!el)return;var go=function(){var s=document.createElement("script");s.src=p[1]+"?v="+v;document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"900px 0px"});io.observe(el);});})();</script>
+  <script src="pagetoc.js?v=20261119d"></script>
+  <script src="site.js?v=20261119d"></script>
 </body>
 </html>
