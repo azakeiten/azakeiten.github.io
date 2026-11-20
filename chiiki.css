@@ -57,3 +57,33 @@
 @media (max-width: 900px) { .mg[data-chiiki] { grid-template-columns: minmax(0, 1fr); } .mg[data-chiiki] .mg-learn { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .mg[data-chiiki] .mg-stats { grid-template-columns: 1fr 1fr; } .mg[data-chiiki] .mg-town { padding: 10px; } }
 @media (prefers-reduced-motion: reduce) { .mg[data-chiiki] *, .mg-coin { animation: none !important; transition: none !important; } }
+/* ゲーム：お金をつかまえろ */
+.mg[data-chiiki] .mg-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.mg[data-chiiki] .mg-mode button { display: grid; gap: 2px; padding: 9px 12px; border-radius: 14px; border: 2px solid var(--color-border, rgba(47, 107, 58, .25)); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.mg[data-chiiki] .mg-mode b { font-size: 14px; } .mg[data-chiiki] .mg-mode small { font-size: 11px; opacity: .7; }
+.mg[data-chiiki] .mg-mode button[aria-checked="true"] { border-color: #2f6b3a; background: #2f6b3a; color: #fff; }
+.mg[data-chiiki] .mg-gbox, .mg[data-chiiki] .mg-lbox { display: grid; gap: 10px; }
+.mg[data-chiiki] .mg-gbox[hidden], .mg[data-chiiki] .mg-lbox[hidden], .mg[data-chiiki] .mg-gres[hidden] { display: none; }
+.mg[data-chiiki] .mg-g-h { margin: 0; font-family: "Shippori Mincho", serif; font-size: 18px; font-weight: 800; }
+.mg[data-chiiki] .mg-g-p { margin: 0; font-size: 13px; line-height: 1.75; } .mg[data-chiiki] .mg-g-p .is-o { color: #d8822a; }
+.mg[data-chiiki] .mg-g-stat { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.mg[data-chiiki] .mg-g-stat p { margin: 0; padding: 7px 8px; border-radius: 12px; background: var(--color-surface, #fffaf0); box-shadow: inset 0 0 0 1px var(--color-border, rgba(47, 107, 58, .2)); text-align: center; }
+.mg[data-chiiki] .mg-g-stat small { display: block; font-size: 10.5px; opacity: .7; } .mg[data-chiiki] .mg-g-stat b { font-size: 16px; font-variant-numeric: tabular-nums; }
+.mg[data-chiiki] .mg-g-btns { display: grid; gap: 6px; }
+.mg[data-chiiki] .mg-go:disabled { opacity: .45; cursor: default; }
+.mg[data-chiiki] .mg-boost { padding: 10px; border-radius: 999px; border: 2px solid #3b84b0; background: rgba(59, 132, 176, .12); color: inherit; font: inherit; font-size: 13.5px; font-weight: 800; cursor: pointer; }
+.mg[data-chiiki] .mg-boost:disabled { opacity: .4; cursor: default; }
+.mg[data-chiiki] .mg-gres { padding: 14px 16px; border-radius: 18px; background: #fffaf0; color: #2a2015; box-shadow: inset 0 0 0 2px rgba(47, 107, 58, .35); }
+.mg-gc { cursor: default; } .mg-gc .mg-hit { fill: transparent; pointer-events: all; }
+.mg-gc .mg-face { fill: #f2c94c; stroke: #a8761d; stroke-width: 2; } .mg-yen { fill: #6b4a22; font-size: 9px; font-weight: 800; text-anchor: middle; pointer-events: none; }
+.mg-gc.is-leak { cursor: pointer; } .mg-gc.is-leak .mg-face { fill: #f08a2c; stroke: #a3461a; animation: mg-wobble .35s ease-in-out infinite alternate; }
+.mg-gc.is-leak .mg-hit { fill: rgba(240, 138, 44, .18); stroke: rgba(240, 138, 44, .6); stroke-dasharray: 3 3; }
+@keyframes mg-wobble { to { transform: scale(1.18); } }
+.mg-gc.is-caught .mg-face { fill: #9de3a6; stroke: #2f8a4a; }
+.mg-gc.is-cur .mg-face { fill: #7cc3d8; stroke: #2a5f80; }
+.mg-pop { font-size: 13px; font-weight: 800; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 3px; animation: mg-pop .9s ease-out forwards; pointer-events: none; }
+.mg-pop.is-good { fill: #2f8a4a; } .mg-pop.is-bad { fill: #c4442c; }
+@keyframes mg-pop { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-22px); } }
+.mg-gate.is-hit rect { animation: mg-gate .45s ease-out; } @keyframes mg-gate { 30% { fill: #c4442c; } }
+.mg[data-chiiki].is-boost .mg-town { box-shadow: 0 0 0 4px #7cc3d8, 0 20px 44px -24px rgba(20, 40, 20, .8); }
+@media (max-width: 560px) { .mg[data-chiiki] .mg-g-stat { grid-template-columns: 1fr 1fr; } }

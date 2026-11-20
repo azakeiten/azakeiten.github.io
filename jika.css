@@ -1,83 +1,86 @@
-/* jika.css — あそび場：チケットの値段は時価（jika.js が読みこむ） */
-.jk[data-jika] { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 16px; align-items: start; }
-.jk[data-jika] .jk-park { display: grid; gap: 12px; padding: 16px; border-radius: 26px; background: linear-gradient(180deg, #bfe3f2 0%, #e8f5ec 55%, #f6efd9 100%); color: #1f2a33; box-shadow: 0 20px 44px -24px rgba(30, 70, 90, .6), inset 0 0 0 1px rgba(30, 70, 90, .12); position: relative; overflow: hidden; }
-.jk[data-jika] .jk-park::before { content: ''; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 236, 160, .9), rgba(255, 236, 160, 0) 70%); pointer-events: none; }
-.jk[data-jika] .jk-gate { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 18px; background: #fffaf0; box-shadow: 0 6px 16px rgba(30, 70, 90, .15); }
-.jk[data-jika] .jk-seal { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: conic-gradient(#e0412b 0 25%, #f2b632 0 50%, #3b84b0 0 75%, #4f9a5a 0); color: #fff; font-family: "Shippori Mincho", serif; font-size: 24px; font-weight: 800; text-shadow: 0 1px 3px rgba(0, 0, 0, .4); }
-.jk[data-jika] .jk-name { margin: 0; font-family: "Shippori Mincho", serif; font-size: 19px; font-weight: 800; }
-.jk[data-jika] .jk-cap { margin: 0; font-size: 12px; opacity: .8; }
-.jk[data-jika] .jk-total { margin: 0 0 0 auto; text-align: right; }
-.jk[data-jika] .jk-total small { display: block; font-size: 11px; font-weight: 700; opacity: .7; }
-.jk[data-jika] .jk-total b { font-family: "Shippori Mincho", serif; font-size: 22px; color: #b5432f; font-variant-numeric: tabular-nums; }
-.jk[data-jika] .jk-week { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
-.jk[data-jika] .jk-day { display: grid; gap: 4px; align-content: start; padding: 8px 6px; border-radius: 14px; background: rgba(255, 255, 255, .75); box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .12); opacity: .7; transition: opacity .3s, transform .3s, box-shadow .3s; }
-.jk[data-jika] .jk-day.is-end { background: rgba(255, 246, 225, .9); }
-.jk[data-jika] .jk-day.is-on { opacity: 1; transform: translateY(-2px); }
-.jk[data-jika] .jk-day.is-full { box-shadow: inset 0 0 0 2px #e0412b; }
-.jk[data-jika] .jk-day.is-low { box-shadow: inset 0 0 0 2px #8a9aa6; }
-.jk[data-jika] .jk-dh { display: flex; justify-content: space-between; align-items: center; margin: 0; }
-.jk[data-jika] .jk-dh b { font-family: "Shippori Mincho", serif; font-size: 17px; }
-.jk[data-jika] .jk-day.is-end .jk-dh b { color: #b5432f; }
-.jk[data-jika] .jk-sky { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 800; color: #fff; }
+/* jika.css — あそび場：チケットの値段は時価（ライブ営業。jika.js が読みこむ） */
+.jk[data-jika] { display: grid; gap: 12px; }
+.jk[data-jika] .jk-hud { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 16px; border-radius: 22px; background: #1f2a33; color: #eef6fa; }
+.jk[data-jika] .jk-dayb { display: flex; align-items: center; gap: 12px; }
+.jk[data-jika] .jk-sky { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 15px; }
 .jk[data-jika] .jk-sky.is-sun { background: #f0a12a; } .jk[data-jika] .jk-sky.is-rain { background: #3b84b0; } .jk[data-jika] .jk-sky.is-cloud { background: #8a9aa6; }
-.jk[data-jika] .jk-tag { margin: 0; padding: 2px 0; border-radius: 6px; background: #1f2a33; color: #ffe08a; font-size: 11.5px; font-weight: 800; text-align: center; font-variant-numeric: tabular-nums; }
-.jk[data-jika] .jk-dots { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; padding: 4px; border-radius: 8px; background: rgba(30, 70, 90, .06); }
-.jk[data-jika] .jk-dots i { aspect-ratio: 1; border-radius: 50%; background: rgba(30, 70, 90, .12); transition: background .2s, transform .2s; }
-.jk[data-jika] .jk-dots i.is-in { background: #4f9a5a; animation: jk-pop .3s cubic-bezier(.3, 1.8, .5, 1); }
-.jk[data-jika] .jk-dots i.is-empty { background: rgba(30, 70, 90, .1); box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .25); }
-@keyframes jk-pop { from { transform: scale(0); } }
-.jk[data-jika] .jk-line { display: flex; flex-wrap: wrap; gap: 2px; min-height: 8px; }
-.jk[data-jika] .jk-line i { width: 6px; height: 6px; border-radius: 50%; background: #e0412b; animation: jk-pop .3s ease-out backwards; }
-.jk[data-jika] .jk-line b { font-size: 10px; color: #e0412b; line-height: 6px; }
-.jk[data-jika] .jk-num { margin: 0; text-align: center; } .jk[data-jika] .jk-num b { font-size: 15px; font-variant-numeric: tabular-nums; } .jk[data-jika] .jk-num small { font-size: 10px; margin-left: 1px; }
-.jk[data-jika] .jk-sales { margin: 0; min-height: 1.4em; text-align: center; font-size: 11px; font-weight: 800; color: #b5432f; }
+.jk[data-jika] .jk-dname { margin: 0; font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; }
+.jk[data-jika] .jk-fc { margin: 0; font-size: 12.5px; color: #ffd76a; letter-spacing: .05em; }
+.jk[data-jika] .jk-pricebox { display: flex; align-items: center; gap: 10px; }
+.jk[data-jika] .jk-pm { width: 56px; height: 56px; border-radius: 50%; border: 0; background: #b5432f; color: #fff; font: inherit; font-size: 28px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 0 #7a2418; transition: transform .08s, box-shadow .08s; touch-action: manipulation; }
+.jk[data-jika] .jk-pm:active { transform: translateY(5px); box-shadow: 0 1px 0 #7a2418; }
+.jk[data-jika] .jk-pm[data-a="down"] { background: #2f6fb0; box-shadow: 0 6px 0 #1d4a78; } .jk[data-jika] .jk-pm[data-a="down"]:active { box-shadow: 0 1px 0 #1d4a78; }
+.jk[data-jika] .jk-tag { position: relative; min-width: 150px; padding: 10px 16px 8px; border-radius: 10px; background: #fffef8; color: #2a2015; text-align: center; transform: rotate(-2deg); box-shadow: 0 8px 18px rgba(0, 0, 0, .35); }
+.jk[data-jika] .jk-tag::before { content: ''; position: absolute; top: 6px; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #1f2a33; }
+.jk[data-jika] .jk-tag small { display: block; margin-top: 6px; font-size: 11px; color: #6b5a44; }
+.jk[data-jika] .jk-tag b { font-family: "Shippori Mincho", serif; font-size: 28px; font-weight: 800; color: #b5432f; font-variant-numeric: tabular-nums; }
+.jk[data-jika] .jk-tag.is-bump { animation: jk-bump .25s ease-out; }
+@keyframes jk-bump { 50% { transform: rotate(-2deg) scale(1.08); } }
+.jk[data-jika] .jk-money { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; justify-self: end; }
+.jk[data-jika] .jk-money p { margin: 0; padding: 6px 10px; border-radius: 10px; background: rgba(255, 255, 255, .08); text-align: right; }
+.jk[data-jika] .jk-money small { display: block; font-size: 11px; opacity: .75; } .jk[data-jika] .jk-money b { font-size: 16px; color: #ffd76a; font-variant-numeric: tabular-nums; }
+.jk[data-jika] .jk-stage { position: relative; display: grid; gap: 8px; }
+.jk[data-jika] .jk-timebar { height: 6px; border-radius: 3px; background: rgba(42, 32, 21, .15); overflow: hidden; } .jk[data-jika] .jk-timebar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f2b632, #e0412b); }
+.jk[data-jika] .jk-field { position: relative; height: clamp(220px, 32vw, 320px); border-radius: 22px; overflow: hidden; background: linear-gradient(180deg, #bfe3f2 0 30%, #a8cf8e 30%); box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .15); }
+.jk[data-jika] .jk-path { position: absolute; left: 0; right: 0; top: 34%; bottom: 6%; background: repeating-linear-gradient(90deg, #e6d6b0 0 40px, #dcc99d 40px 80px); clip-path: polygon(0 0, 52% 0, 52% 100%, 0 100%); opacity: .9; }
+.jk[data-jika] .jk-gate { position: absolute; left: 46%; top: 22%; bottom: 4%; width: 9%; min-width: 54px; display: grid; justify-items: center; align-content: start; gap: 4px; padding-top: 6px; border-radius: 10px 10px 0 0; background: #b5432f; box-shadow: inset 0 -30px 0 rgba(0, 0, 0, .15); z-index: 2; }
+.jk[data-jika] .jk-gate-t { writing-mode: vertical-rl; color: #ffd76a; font-family: "Shippori Mincho", serif; font-size: 13px; font-weight: 800; letter-spacing: .1em; }
+.jk[data-jika] .jk-gate-p { padding: 2px 4px; border-radius: 4px; background: #fffef8; color: #b5432f; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.jk[data-jika] .jk-park { position: absolute; left: 58%; right: 2%; top: 4%; bottom: 4%; display: grid; justify-items: center; align-content: end; gap: 6px; }
+.jk[data-jika] .jk-wheel { width: min(70%, 190px); height: auto; }
+.jk[data-jika] .jk-wheel-r { transform-box: fill-box; transform-origin: 50% 50%; animation: jk-spin 14s linear infinite; }
+@keyframes jk-spin { to { transform: rotate(360deg); } }
+.jk[data-jika] .jk-gauge { position: relative; width: 100%; height: 22px; border-radius: 11px; background: rgba(255, 255, 255, .7); overflow: hidden; box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .25); }
+.jk[data-jika] .jk-gauge i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #4f9a5a, #2f8a4a); transition: width .2s; }
+.jk[data-jika] .jk-gauge.is-full i { background: linear-gradient(90deg, #e0412b, #b5432f); animation: jk-blink .6s steps(2) infinite; }
+@keyframes jk-blink { 50% { opacity: .7; } }
+.jk[data-jika] .jk-gauge span { position: absolute; inset: 0; display: grid; place-items: center; font-size: 11.5px; font-weight: 800; color: #1f2a33; }
+.jk[data-jika] .jk-v { position: absolute; z-index: 3; width: 14px; height: 20px; margin: -10px 0 0 -7px; border-radius: 7px 7px 4px 4px; background: radial-gradient(circle at 50% 28%, #f3d6b5 0 26%, transparent 28%), #5b7fa6; transition: background .2s, opacity .3s; }
+.jk[data-jika] .jk-v.is-in { background: radial-gradient(circle at 50% 28%, #f3d6b5 0 26%, transparent 28%), #4f9a5a; }
+.jk[data-jika] .jk-v.is-high { background: radial-gradient(circle at 50% 28%, #f3d6b5 0 26%, transparent 28%), #9aa3b0; opacity: .8; }
+.jk[data-jika] .jk-v.is-full { background: radial-gradient(circle at 50% 28%, #f3d6b5 0 26%, transparent 28%), #e0412b; }
+.jk[data-jika] .jk-v[data-say]::after { content: attr(data-say); position: absolute; bottom: 22px; left: 50%; translate: -50% 0; padding: 1px 6px; border-radius: 8px; background: #fff; color: #2a2015; font-size: 10px; font-weight: 800; white-space: nowrap; box-shadow: 0 2px 6px rgba(0, 0, 0, .2); animation: jk-say 1.2s ease-out forwards; }
+@keyframes jk-say { 0% { opacity: 0; transform: translateY(4px); } 20%, 70% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.jk[data-jika] .jk-card { position: absolute; inset: 14px 0 34px; z-index: 5; display: grid; place-items: center; pointer-events: none; opacity: 0; transition: opacity .3s; }
+.jk[data-jika] .jk-card.is-on { opacity: 1; pointer-events: auto; }
+.jk[data-jika] .jk-card > p, .jk[data-jika] .jk-card > div { max-width: 92%; }
+.jk[data-jika] .jk-card:not(:empty) { background: rgba(31, 42, 51, .55); border-radius: 22px; }
+.jk[data-jika] .jk-card > * { padding: 16px 24px; border-radius: 18px; background: #fffef8; color: #2a2015; text-align: center; box-shadow: 0 16px 34px rgba(0, 0, 0, .35); }
+.jk[data-jika] .jk-card:not(.is-final):not(:has(.jk-intro)) { flex-direction: column; }
+.jk[data-jika] .jk-card { grid-auto-flow: row; align-content: center; gap: 0; }
+.jk[data-jika] .jk-card > p { margin: 0; padding: 4px 24px; border-radius: 0; box-shadow: none; }
+.jk[data-jika] .jk-card > p:first-child { padding-top: 16px; border-radius: 18px 18px 0 0; } .jk[data-jika] .jk-card > p:last-child { padding-bottom: 16px; border-radius: 0 0 18px 18px; }
+.jk[data-jika] .jk-c-k { font-size: 12px; font-weight: 800; color: #b5432f; letter-spacing: .1em; }
+.jk[data-jika] .jk-c-t { font-family: "Shippori Mincho", serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800; }
+.jk[data-jika] .jk-c-t small { margin-left: 8px; font-size: 14px; color: #6b5a44; }
+.jk[data-jika] .jk-c-s { font-size: 13.5px; line-height: 1.7; } .jk[data-jika] .jk-c-n { font-size: 12.5px; color: #2f6fb0; font-weight: 800; }
+.jk[data-jika] .jk-intro, .jk[data-jika] .jk-end { display: grid; justify-items: center; gap: 10px; }
+.jk[data-jika] .jk-intro p, .jk[data-jika] .jk-end p { margin: 0; }
+.jk[data-jika] .jk-start, .jk[data-jika] .jk-again { padding: 12px 34px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 18px rgba(181, 67, 47, .4); animation: jk-pulse 1.8s ease-out infinite; }
+@keyframes jk-pulse { 0% { box-shadow: 0 0 0 0 rgba(181, 67, 47, .5); } 100% { box-shadow: 0 0 0 14px rgba(181, 67, 47, 0); } }
+.jk[data-jika] .jk-keys { font-size: 11.5px; opacity: .7; }
+.jk[data-jika] .jk-snd { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; font-weight: 700; }
+.jk[data-jika] .jk-e-top { display: flex; gap: 12px; align-items: center; text-align: left; }
+.jk[data-jika] .jk-e-seal { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; border: 4px solid #b5432f; color: #b5432f; font-family: "Shippori Mincho", serif; font-size: 28px; font-weight: 800; transform: rotate(-10deg); animation: jk-stamp .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes jk-stamp { from { transform: rotate(-30deg) scale(2.2); opacity: 0; } }
+.jk[data-jika] .jk-e-t { font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; } .jk[data-jika] .jk-e-t small { margin-left: 8px; font-size: 15px; color: #b5432f; }
+.jk[data-jika] .jk-e-s, .jk[data-jika] .jk-e-cnt { font-size: 12.5px; opacity: .85; }
+.jk[data-jika] .jk-e-bars { display: grid; grid-template-columns: repeat(7, 34px); gap: 6px; align-items: end; height: 90px; }
+.jk[data-jika] .jk-e-bars div { position: relative; height: 100%; display: flex; align-items: end; justify-content: center; }
+.jk[data-jika] .jk-e-b { position: absolute; bottom: 14px; width: 22px; border-radius: 4px 4px 0 0; background: #4f9a5a; animation: jk-grow .6s ease-out backwards; }
+.jk[data-jika] .jk-e-b.is-best { width: 30px; background: rgba(42, 32, 21, .12); box-shadow: inset 0 0 0 1px rgba(42, 32, 21, .25); }
+@keyframes jk-grow { from { height: 0; } }
+.jk[data-jika] .jk-e-bars small { position: absolute; bottom: 0; font-size: 11px; font-weight: 800; }
+.jk[data-jika] .jk-e-tip { max-width: 30em; font-size: 13px; line-height: 1.7; }
 .jk[data-jika] .jk-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; font-size: 11.5px; }
-.jk[data-jika] .jk-legend i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; vertical-align: -1px; }
-.jk[data-jika] .jk-legend .is-in { background: #4f9a5a; } .jk[data-jika] .jk-legend .is-out { background: #e0412b; } .jk[data-jika] .jk-legend .is-empty { box-shadow: inset 0 0 0 1px rgba(30, 70, 90, .4); }
-.jk[data-jika] .jk-msg { margin: 0; padding: 10px 14px; border-radius: 12px; background: #1f2a33; color: #eef6fa; font-size: 13.5px; font-weight: 700; line-height: 1.7; min-height: 3.4em; }
-.jk[data-jika] .jk-side { display: grid; gap: 10px; }
-.jk[data-jika] .jk-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.jk[data-jika] .jk-mode button { display: grid; gap: 2px; padding: 10px 12px; border-radius: 14px; border: 2px solid var(--color-border, rgba(30, 70, 90, .2)); background: var(--color-surface, #fffaf0); color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.jk[data-jika] .jk-mode b { font-size: 14px; } .jk[data-jika] .jk-mode small { font-size: 11px; opacity: .7; }
-.jk[data-jika] .jk-mode button[aria-checked="true"] { border-color: #b5432f; background: #fff1dc; color: #2a2015; }
-.jk[data-jika] .jk-sl { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 10px; font-size: 13px; font-weight: 700; }
-.jk[data-jika] .jk-sl[hidden], .jk[data-jika] .jk-dyn[hidden] { display: none; }
-.jk[data-jika] .jk-sl output { font-family: "Shippori Mincho", serif; font-size: 24px; color: #b5432f; }
-.jk[data-jika] .jk-sl input { grid-column: 1 / -1; width: 100%; accent-color: #b5432f; }
-.jk[data-jika] .jk-dyn { display: grid; gap: 2px; padding: 8px 10px; border-radius: 14px; background: rgba(59, 132, 176, .08); }
-.jk[data-jika] .jk-row { display: grid; grid-template-columns: 22px minmax(0, 1fr) 70px; align-items: center; gap: 8px; font-size: 13px; }
-.jk[data-jika] .jk-row b { font-family: "Shippori Mincho", serif; }
-.jk[data-jika] .jk-row:nth-child(n+6) b { color: #b5432f; }
-.jk[data-jika] .jk-row input { width: 100%; accent-color: #3b84b0; }
-.jk[data-jika] .jk-row output { font-size: 12.5px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
-.jk[data-jika] .jk-go { padding: 13px; border-radius: 999px; border: 0; background: #b5432f; color: #fff; font: inherit; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 6px 16px rgba(181, 67, 47, .35); }
-.jk[data-jika].is-busy .jk-side input, .jk[data-jika].is-busy .jk-side button { opacity: .5; pointer-events: none; }
-.jk[data-jika] .jk-res { display: grid; gap: 10px; padding: 14px 16px; border-radius: 18px; background: #fffaf0; color: #2a2015; box-shadow: inset 0 0 0 2px rgba(181, 67, 47, .3); animation: jk-in .5s cubic-bezier(.3, 1.4, .5, 1); }
-.jk[data-jika] .jk-res[hidden] { display: none; }
-@keyframes jk-in { from { opacity: 0; transform: translateY(10px); } }
-.jk[data-jika] .jk-r-top { display: flex; gap: 12px; align-items: center; }
-.jk[data-jika] .jk-r-seal { flex: none; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 12px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; font-size: 26px; font-weight: 800; transform: rotate(-6deg); animation: jk-stamp .5s cubic-bezier(.3, 1.6, .5, 1); }
-@keyframes jk-stamp { from { transform: rotate(-20deg) scale(2); opacity: 0; } }
-.jk[data-jika] .jk-r-h { margin: 0; font-family: "Shippori Mincho", serif; font-size: 20px; font-weight: 800; }
-.jk[data-jika] .jk-r-h small { margin-left: 10px; font-size: 15px; color: #b5432f; }
-.jk[data-jika] .jk-r-s { margin: 0; font-size: 12.5px; opacity: .8; }
-.jk[data-jika] .jk-r-cmp { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.jk[data-jika] .jk-r-cmp li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 8px; padding: 6px 10px; border-radius: 10px; background: rgba(42, 32, 21, .05); font-size: 12.5px; }
-.jk[data-jika] .jk-r-cmp li.is-me { box-shadow: inset 0 0 0 2px #e3b341; }
-.jk[data-jika] .jk-r-cmp small { grid-column: 1 / -1; font-size: 11px; opacity: .7; }
-.jk[data-jika] .jk-r-cmp b { font-size: 12.5px; } .jk[data-jika] .jk-r-cmp b i { font-style: normal; font-size: 10.5px; margin-left: 3px; opacity: .7; }
-.jk[data-jika] .jk-r-cmp span { font-weight: 800; color: #b5432f; }
-.jk[data-jika] .jk-r-voice { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.jk[data-jika] .jk-r-voice li { display: flex; gap: 8px; align-items: center; font-size: 12.5px; }
-.jk[data-jika] .jk-r-voice span { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #2a2015; color: #f3e3bd; font-size: 11px; font-weight: 800; }
-.jk[data-jika] .jk-r-tip { margin: 0; padding: 8px 10px; border-radius: 10px; background: rgba(59, 132, 176, .1); font-size: 12.5px; line-height: 1.7; }
-.jk[data-jika] .jk-learn { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.jk[data-jika] .jk-legend i { display: inline-block; width: 9px; height: 12px; margin-right: 5px; border-radius: 4px; vertical-align: -1px; background: #5b7fa6; }
+.jk[data-jika] .jk-legend .is-in { background: #4f9a5a; } .jk[data-jika] .jk-legend .is-high { background: #9aa3b0; } .jk[data-jika] .jk-legend .is-full { background: #e0412b; }
+.jk[data-jika] .jk-learn { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .jk[data-jika] .jk-learn p { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(59, 132, 176, .09); font-size: 14px; line-height: 1.75; }
 .jk[data-jika] .jk-learn b { display: block; margin-bottom: 2px; color: #b5432f; }
 .jk[data-jika] a { color: #b5432f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
-.jk[data-jika] .jk-note { grid-column: 1 / -1; margin: 0; font-size: 12px; opacity: .75; }
+.jk[data-jika] .jk-note { margin: 0; font-size: 12px; opacity: .75; }
 :root[data-theme="dark"] .jk[data-jika] .jk-learn p { background: rgba(255, 255, 255, .07); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .jk[data-jika] .jk-learn p { background: rgba(255, 255, 255, .07); } }
-@media (max-width: 900px) { .jk[data-jika] { grid-template-columns: minmax(0, 1fr); } .jk[data-jika] .jk-learn { grid-template-columns: 1fr; } }
-@media (max-width: 560px) { .jk[data-jika] .jk-week { grid-template-columns: repeat(4, minmax(0, 1fr)); } .jk[data-jika] .jk-park { padding: 12px; } .jk[data-jika] .jk-total b { font-size: 18px; } }
-@media (prefers-reduced-motion: reduce) { .jk[data-jika] * { animation: none !important; transition: none !important; } }
+@media (max-width: 760px) { .jk[data-jika] .jk-hud { grid-template-columns: 1fr; justify-items: center; text-align: center; } .jk[data-jika] .jk-money { justify-self: stretch; } .jk[data-jika] .jk-learn { grid-template-columns: 1fr; } .jk[data-jika] .jk-gate-t { font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { .jk[data-jika] *, .jk[data-jika] .jk-wheel-r { animation: none !important; transition: none !important; } }
