@@ -54,3 +54,60 @@
 @media (max-width: 900px) { .zd[data-zeidan] { grid-template-columns: minmax(0, 1fr); } .zd[data-zeidan] .zd-learn { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .zd-rate { font-size: 16px; } .zd-range { font-size: 9px; } .zd[data-zeidan] .zd-stage { padding: 10px; } }
 @media (prefers-reduced-motion: reduce) { .zd[data-zeidan] *, .zd-keep, .zd-tax, .zd-flag { transition: none !important; } }
+/* 勝負：手取りはいくら増える？ */
+.zd[data-zeidan] .zd-game { grid-column: 1 / -1; scroll-margin-top: calc(var(--nav-h, 64px) + 70px); }
+.zd[data-zeidan] .zd-game button { font: inherit; cursor: pointer; touch-action: manipulation; }
+.zd[data-zeidan] .zg-intro, .zd[data-zeidan] .zg-end { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 22px; background: linear-gradient(120deg, #fffaf0, #f3ead2); color: #2a2015; border: 2px solid #e3d3a8; }
+.zd[data-zeidan] .zg-seal, .zd[data-zeidan] .zg-stamp { display: grid; place-items: center; width: 62px; height: 62px; border-radius: 14px; background: linear-gradient(135deg, #2f6b4f, #16211a); color: #ffe08a; font-family: "Shippori Mincho", serif; font-size: 32px; font-weight: 800; transform: rotate(-5deg); box-shadow: 0 5px 0 #0d1510; }
+.zd[data-zeidan] .zg-k { margin: 0; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; color: #2f6b4f; }
+.zd[data-zeidan] .zg-t { margin: 2px 0 4px; font-family: "Shippori Mincho", serif; font-size: 23px; font-weight: 800; line-height: 1.35; }
+.zd[data-zeidan] .zg-d { margin: 0; font-size: 13.5px; line-height: 1.75; color: #5d4e3a; }
+.zd[data-zeidan] .zg-go { display: grid; justify-items: center; gap: 6px; }
+.zd[data-zeidan] .zg-go p { margin: 0; font-size: 12.5px; font-weight: 700; color: #5d4e3a; } .zd[data-zeidan] .zg-go b { font-size: 18px; color: #b5432f; }
+.zd[data-zeidan] .zg-start, .zd[data-zeidan] .zg-next { padding: 13px 28px; border: 0; border-radius: 14px; background: #2f6b4f; color: #fff; font-weight: 800; font-size: 16px; letter-spacing: .1em; box-shadow: 0 5px 0 #16211a; white-space: nowrap; }
+.zd[data-zeidan] .zg-start:active, .zd[data-zeidan] .zg-next:active { transform: translateY(4px); box-shadow: 0 1px 0 #16211a; }
+.zd[data-zeidan] .zg-play { display: grid; gap: 10px; }
+.zd[data-zeidan] .zg-hud { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 10px 16px; border-radius: 18px; background: #16211a; color: #eef3ea; }
+.zd[data-zeidan] .zg-hud p { margin: 0; font-weight: 800; font-size: 22px; font-variant-numeric: tabular-nums; } .zd[data-zeidan] .zg-hud small { font-size: 12px; opacity: .75; }
+.zd[data-zeidan] .zg-bar { height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .14); overflow: hidden; }
+.zd[data-zeidan] .zg-bar i { display: block; height: 100%; background: linear-gradient(90deg, #ffe08a, #e0412b); transform-origin: left; }
+.zd[data-zeidan] .zg-sc b { font-family: "Shippori Mincho", serif; color: #ffe08a; }
+.zd[data-zeidan] .zg-sc em { margin-left: 6px; font-style: normal; font-size: 13px; color: #8be0a4; }
+.zd[data-zeidan] .zg-card { position: relative; display: grid; gap: 10px; padding: 18px 20px; border-radius: 22px; background: #fffaf0; color: #2a2015; border: 2px solid #e3d3a8; animation: zg-in .35s ease both; }
+@keyframes zg-in { from { transform: translateY(10px); opacity: 0; } }
+.zd[data-zeidan] .zg-who { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: #5d4e3a; }
+.zd[data-zeidan] .zg-who span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #16211a; color: #ffe08a; font-family: "Shippori Mincho", serif; font-size: 16px; }
+.zd[data-zeidan] .zg-q { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.8; }
+.zd[data-zeidan] .zg-q b { color: #16211a; font-size: 18px; } .zd[data-zeidan] .zg-q em { display: inline-block; padding: 0 10px; border-radius: 999px; background: #ffe08a; font-style: normal; font-weight: 800; }
+.zd[data-zeidan] .zg-hint { margin: 0; font-size: 12.5px; color: #6b5a40; }
+.zd[data-zeidan] .zg-ch { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.zd[data-zeidan] .zg-ch button { padding: 14px 12px; border-radius: 14px; border: 2px solid #d9c49c; background: #fff; color: #2a2015; font-weight: 800; font-size: 16px; font-variant-numeric: tabular-nums; transition: transform .12s, border-color .2s; }
+.zd[data-zeidan] .zg-ch button:hover:not(:disabled) { border-color: #2f6b4f; transform: translateY(-2px); }
+.zd[data-zeidan] .zg-ch button:disabled { cursor: default; opacity: .55; }
+.zd[data-zeidan] .zg-ch button.is-ok { opacity: 1; background: #dff1e3; border-color: #2f6b4f; color: #1d4825; }
+.zd[data-zeidan] .zg-ch button.is-ng { opacity: 1; background: #fbe1dc; border-color: #c0392b; color: #8a2a18; text-decoration: line-through; }
+.zd[data-zeidan] .zg-exp { margin: 0; font-size: 14px; line-height: 1.85; }
+.zd[data-zeidan] .zg-exp:empty { display: none; }
+.zd[data-zeidan] .zg-exp b { display: block; font-size: 15.5px; }
+.zd[data-zeidan] .zg-exp.is-ok b { color: #2f6b4f; } .zd[data-zeidan] .zg-exp.is-ng b { color: #c0392b; }
+.zd[data-zeidan] .zg-next { justify-self: end; animation: zg-in .3s ease both; }
+.zd[data-zeidan] .zg-pop { position: absolute; right: 24px; top: 14px; padding: 4px 14px; border-radius: 999px; background: linear-gradient(135deg, #ffe08a, #b8861a); color: #2a2015; font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; pointer-events: none; animation: zg-pop 1.2s ease-out forwards; }
+@keyframes zg-pop { 0% { transform: scale(.6); opacity: 0; } 20% { transform: scale(1.1); opacity: 1; } 100% { transform: translateY(-40px); opacity: 0; } }
+.zd[data-zeidan] .zd-stage.is-show { box-shadow: 0 0 0 3px #ffe08a, 0 20px 44px -20px rgba(10, 25, 15, .8); transition: box-shadow .3s; }
+.zd[data-zeidan] .zg-end { grid-template-columns: auto minmax(0, 1fr); }
+.zd[data-zeidan] .zg-stamp { background: none; border: 4px double #c0392b; color: #c0392b; box-shadow: none; animation: zg-stamp .4s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes zg-stamp { from { transform: rotate(-5deg) scale(2.2); opacity: 0; } }
+.zd[data-zeidan] .zg-res { margin: 0; font-weight: 800; } .zd[data-zeidan] .zg-res b { font-family: "Shippori Mincho", serif; font-size: 38px; }
+.zd[data-zeidan] .zg-res em { margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: #c0392b; color: #fff; font-style: normal; font-size: 11.5px; vertical-align: .4em; }
+.zd[data-zeidan] .zg-tips { grid-column: 1 / -1; margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.zd[data-zeidan] .zg-tips li { padding: 10px 14px; border-left: 4px solid #2f6b4f; border-radius: 0 12px 12px 0; background: rgba(47, 107, 79, .08); font-size: 13.5px; line-height: 1.8; }
+.zd[data-zeidan] .zg-end .zg-start { grid-column: 1 / -1; justify-self: center; }
+@media (max-width: 640px) {
+  .zd[data-zeidan] .zg-intro { grid-template-columns: auto minmax(0, 1fr); padding: 16px; }
+  .zd[data-zeidan] .zg-go { grid-column: 1 / -1; }
+  .zd[data-zeidan] .zg-ch { grid-template-columns: 1fr; }
+  .zd[data-zeidan] .zg-card { padding: 14px; }
+  .zd[data-zeidan] .zg-q { font-size: 15px; }
+  .zd[data-zeidan] .zg-ch button { padding: 12px; font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .zd[data-zeidan] .zd-game * { animation: none !important; transition: none !important; } }
