@@ -105,6 +105,36 @@
     taikai: ['授業 1 コマ', '班で', 'やさしい', 'クラスで経済クイズ'],
     make: ['約 10 分', '1 人', 'じっくり', '問題をつくる側の目']
   };
+  const CATN = { game: 'クイズとゲーム', money: 'お金のしくみ', life: 'くらしと社会', make: 'つくる' };
+  /* カードのいちばん上に出す「つかみの一言」（遊びの中身に合わせて） */
+  const HOOK = {
+    quiz: '何枚賭ける？ 会場の最高記録 120 枚をこえろ',
+    crossword: '14 のカギを解いて、最後の二重マスへ',
+    cardgame: 'ニュースを読んで、5 枚のカードで勝負',
+    sugoroku: 'サイコロ 12 回。1,000 円をいくらにできる？',
+    shinka: '貝、金属、紙、そしてスマホへ。お金の変身',
+    koukan: 'お金がない島で、ほしい物を手に入れろ',
+    ehon: '1 枚の千円札が、町をひとめぐり',
+    coins: '世界 12 の国のコインを、図鑑に集めよう',
+    himitsu: 'かたむけて、すかして、にせものを見破れ',
+    otsuri: '60 秒で、何人におつりをわたせる？',
+    imaato: 'いまの 1,000 円か、1 か月後の 1,100 円か',
+    bakery: 'パン屋の 1 年をまかされた。黒字で終われるか',
+    kyuyo: '給料が上がったのに、手取りが減る？',
+    cashless: 'お弁当屋さんの店長に。カードは入れる？',
+    nefuda: '「半額！」「送料無料！」のしかけを見破れ',
+    jika: 'お客さんの列は目の前。値段をその場で動かせ',
+    kanzei: '関税を上げると、だれが得してだれが損する？',
+    subsc: '読み放題に入る？ やめる？ 1 年をやりくり',
+    atobarai: '10 万円のゲーム機、払い方で合計はいくら？',
+    nenkin: '胴上げ、騎馬戦、そして肩車。支える人の数は',
+    lemon: '中古スマホ、はずれを引かない値段はいくら？',
+    zeidan: '税の階段、1 段上がると全部高くなる？',
+    kawa: '工場と漁師さん、両方が笑える環境税は？',
+    koen: 'みんなで公園。お金を出す？ 出さない？',
+    taikai: '教室で班対抗。プロジェクターに映して',
+    make: '遊ぶ側から、つくる側へ。問題を出そう'
+  };
   const ids = items.map(li => href(li).slice(1));
   const secOf = id => { const el = document.getElementById(id); return el ? (el.tagName === 'SECTION' ? el : el.closest('section')) : null; };
   const secs = ids.map(secOf);
@@ -113,7 +143,19 @@
   board.classList.add('am-rich');
   items.forEach((li, i) => {
     const a = li.querySelector('a'), inf = INFO[ids[i]] || ['', '1 人', '', ''], lead = leadOf(secs[i]) || (ids[i] === 'quiz' ? 'チップ 5 枚から 5 ラウンド。毎回、賭ける枚数とむずかしさ（かんたん・普通・激ムズ）を決めて 2 問に答え、正解の数で倍率がかかります。おたすけは「50:50」と「問題チェンジ」。新聞の記事を読んでから賭けるニュースモードも。' : '');
-    a.insertAdjacentHTML('beforeend', `<p class="am-d">${esc(lead)}</p><p class="am-meta">${inf[0] ? `<span>${inf[0]}</span>` : ''}<span>${inf[1]}</span>${inf[2] ? `<span class="is-lv">${inf[2]}</span>` : ''}</p>${inf[3] ? `<p class="am-learn"><b>学べること</b>${esc(inf[3])}</p>` : ''}<span class="am-go">はじめる<i aria-hidden="true">→</i></span>`);
+    /* v319：ゲームの箱のようなカード（上に色の帯と大きな一字、つかみの一言、短い説明、時間・人数・むずかしさ、大きな「はじめる」） */
+    const seal = a.querySelector('.am-s'), title = a.querySelector('b'), sub = a.querySelector('small'), lv = { 'やさしい': 1, 'ふつう': 2, 'じっくり': 3 }[inf[2]] || 0;
+    a.querySelector('.am-perf')?.remove();
+    const box = document.createElement('span'); box.className = 'am-box';
+    box.innerHTML = `<span class="am-wm" aria-hidden="true">${seal.textContent}</span><span class="am-cat">${CATN[li.dataset.cat] || ''}</span>${inf[0] ? `<span class="am-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${inf[0]}</span>` : ''}`;
+    box.prepend(seal);
+    const body = document.createElement('span'); body.className = 'am-body';
+    body.append(title);
+    body.insertAdjacentHTML('beforeend', HOOK[ids[i]] ? `<span class="am-hook">${esc(HOOK[ids[i]])}</span>` : '');
+    if (sub) body.append(sub);
+    body.insertAdjacentHTML('beforeend', `<span class="am-d">${esc(lead)}</span><span class="am-meta"><span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/></svg>${inf[1]}</span>${lv ? `<span class="am-lv" aria-label="むずかしさ ${inf[2]}"><i class="is-on"></i><i${lv > 1 ? ' class="is-on"' : ''}></i><i${lv > 2 ? ' class="is-on"' : ''}></i>${inf[2]}</span>` : ''}</span>${inf[3] ? `<span class="am-learn"><em>学べること</em>${esc(inf[3])}</span>` : ''}`);
+    a.prepend(box); box.after(body);
+    a.insertAdjacentHTML('beforeend', '<span class="am-go"><i aria-hidden="true"></i>はじめる</span>');
     a.setAttribute('aria-label', `${a.querySelector('b').textContent}をはじめる`);
   });
   const hero = document.querySelector('.page-hero'), wrap = board.closest('.am-wrap');
