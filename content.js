@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-21', seal: '進', tone: 'dark', href: 'quiz.html#shinka', eyebrow: 'あそび場', title: 'お金の進化が、困りごと解決ゲームに', text: '5 つの時代の困りごとを解決すると、お金が次の形へ変身。最後は 6 つのお金を古い順にならべる年表ならべ。' },
     { date: '2026-11-21', seal: '換', tone: 'green', href: 'quiz.html#koukan', eyebrow: 'あそび場', title: '交換の島が、6 日間のゲームに', text: '魚は 2 日でいたみ、動けるのは 1 日 4 回。物々交換と貝のお金で、本・布・薪をそろえる日数をくらべる。' },
     { date: '2026-11-21', seal: '札', tone: 'gold', href: 'quiz.html#cardgame', eyebrow: 'あそび場', title: 'カード勝負に、確率・取材・倍率', text: 'ニュースの予報に確率。チップ 1 枚で取材して読みなおし、カードの期待値を考えて ×1〜×3 で賭ける。相手には性格も。' },
     { date: '2026-11-21', seal: '双', tone: 'dark', href: 'quiz.html#sugoroku', eyebrow: 'あそび場', title: '経済すごろくが、作戦ゲームに', text: '財布・貯金・投資の 3 つの置き場所。景気予報を読んでお金を動かし、2 つのサイコロのどちらで進むかをえらぶ。もうけ話には要注意。' },

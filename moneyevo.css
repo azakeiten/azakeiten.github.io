@@ -1,0 +1,109 @@
+/* moneyevo.css — あそび場：お金の進化（moneyevo.js が読みこむ） */
+.me[data-moneyevo] { display: grid; gap: 14px; max-width: 920px; margin: 0 auto; color: #f3eee4; text-align: left; scroll-margin-top: calc(var(--nav-h, 64px) + 70px); }
+.me[data-moneyevo] button { font: inherit; cursor: pointer; touch-action: manipulation; }
+.me[data-moneyevo] p, .me[data-moneyevo] li, .me[data-moneyevo] small { color: inherit; }
+/* 進化の道 */
+.me[data-moneyevo] .me-road { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; position: relative; }
+.me[data-moneyevo] .me-road::before { content: ""; position: absolute; left: 8%; right: 8%; top: 17px; height: 3px; background: rgba(243, 238, 228, .18); }
+.me[data-moneyevo] .me-road li { position: relative; display: grid; justify-items: center; gap: 4px; text-align: center; }
+.me[data-moneyevo] .me-road span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #2c3b32; border: 2px solid rgba(243, 238, 228, .25); font-family: "Shippori Mincho", serif; font-weight: 800; color: rgba(243, 238, 228, .5); }
+.me[data-moneyevo] .me-road small { font-size: 10.5px; font-weight: 700; line-height: 1.3; opacity: .55; }
+.me[data-moneyevo] .me-road .is-done span { background: #b08a4a; border-color: #b08a4a; color: #1c2b23; }
+.me[data-moneyevo] .me-road .is-done small { opacity: .85; }
+.me[data-moneyevo] .me-road .is-now span { background: #b5432f; border-color: #ffd76a; color: #fff; box-shadow: 0 0 0 4px rgba(255, 215, 106, .2); animation: me-beat 1.6s ease-in-out infinite; }
+.me[data-moneyevo] .me-road .is-now small { opacity: 1; color: #ffd76a; }
+@keyframes me-beat { 50% { transform: scale(1.1); } }
+/* 絵 */
+.me[data-moneyevo] .me-art { display: grid; place-items: center; height: 130px; border-radius: 18px; background: radial-gradient(circle at 50% 40%, #fffaf0, #efe2c4); color: #3a2e1a; }
+.me[data-moneyevo] .me-art svg { width: 76%; height: auto; max-height: 116px; }
+.me[data-moneyevo] .me-art.is-big { height: 180px; }
+.me[data-moneyevo] .me-art.is-big svg { max-height: 160px; animation: me-pop .7s cubic-bezier(.2, 1.4, .4, 1) both; }
+@keyframes me-pop { from { transform: scale(.5) rotate(-10deg); opacity: 0; } }
+.me[data-moneyevo] .me-era { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; color: #e3c68e; }
+.me[data-moneyevo] .me-era span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 6px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; }
+.me[data-moneyevo] h3 { margin: 0; font-family: "Shippori Mincho", serif; font-weight: 800; font-size: 24px; color: #fff; }
+.me[data-moneyevo] .me-x { margin: 0; font-size: 14.5px; line-height: 1.9; color: rgba(243, 238, 228, .88); }
+.me[data-moneyevo] .me-gl { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0; }
+.me[data-moneyevo] .me-gl a { padding: 5px 13px; border-radius: 999px; border: 1px solid rgba(233, 164, 147, .6); color: #f2b8a8; font-size: 12.5px; font-weight: 700; text-decoration: none; }
+.me[data-moneyevo] .me-gl a:hover { background: #b5432f; color: #fff; }
+.me[data-moneyevo] .me-gl a.me-try { background: #f3e3bd; border-color: #f3e3bd; color: #1c2b23; }
+/* はじめ */
+.me[data-moneyevo] .me-intro { display: grid; gap: 16px; }
+.me[data-moneyevo] .me-ih { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 20px; align-items: center; padding: 20px; border-radius: 24px; background: #243429; border: 1px solid rgba(243, 238, 228, .12); }
+.me[data-moneyevo] .me-k { margin: 0; font-size: 12.5px; font-weight: 800; letter-spacing: .12em; color: #e9a493; }
+.me[data-moneyevo] .me-t { margin: 4px 0 10px; font-family: "Shippori Mincho", serif; font-size: 24px; font-weight: 800; line-height: 1.4; color: #fff; }
+.me[data-moneyevo] .me-rules { margin: 0 0 12px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.me[data-moneyevo] .me-rules li { padding: 9px 12px; border-radius: 12px; background: rgba(243, 238, 228, .07); font-size: 13.5px; line-height: 1.7; }
+.me[data-moneyevo] .me-rules b { color: #ffd76a; }
+.me[data-moneyevo] .me-best { margin: 0 0 10px; font-size: 13px; font-weight: 700; } .me[data-moneyevo] .me-best b { font-size: 20px; color: #ffd76a; }
+.me[data-moneyevo] .me-go { padding: 13px 30px; border: 0; border-radius: 14px; background: #b5432f; color: #fff; font-weight: 800; font-size: 15.5px; letter-spacing: .08em; box-shadow: 0 5px 0 #7a2418; }
+.me[data-moneyevo] .me-go:active { transform: translateY(4px); box-shadow: 0 1px 0 #7a2418; }
+/* 困りごと */
+.me[data-moneyevo] .me-stage { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 14px; align-items: stretch; }
+.me[data-moneyevo] .me-now { display: grid; align-content: start; gap: 8px; padding: 16px; border-radius: 22px; background: #243429; border: 1px solid rgba(243, 238, 228, .12); transition: transform .5s, filter .5s, opacity .5s; }
+.me[data-moneyevo] .me-now.is-morph { transform: scale(1.06); filter: brightness(1.8) saturate(0); opacity: 0; }
+.me[data-moneyevo] .me-q { display: grid; align-content: start; gap: 8px; padding: 18px; border-radius: 22px; background: #fffaf0; color: #2a2015; }
+.me[data-moneyevo] .me-who { margin: 0; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; color: #b5432f; }
+.me[data-moneyevo] .me-pb { margin: 0; font-family: "Shippori Mincho", serif; font-size: 19px; font-weight: 800; line-height: 1.6; }
+.me[data-moneyevo] .me-ask { margin: 0; font-size: 13px; font-weight: 800; color: #6b5a40; }
+.me[data-moneyevo] .me-ch { display: grid; gap: 8px; }
+.me[data-moneyevo] .me-ch button { padding: 12px 14px; border-radius: 14px; border: 2px solid #e3d3a8; background: #fff; color: #2a2015; font-weight: 800; font-size: 14.5px; line-height: 1.5; text-align: left; transition: transform .15s, border-color .2s; }
+.me[data-moneyevo] .me-ch button:hover:not(:disabled) { border-color: #b5432f; transform: translateX(4px); }
+.me[data-moneyevo] .me-ch button:disabled { cursor: default; }
+.me[data-moneyevo] .me-ch button.is-ng { background: #f4e6e2; border-color: #d9b0a5; color: #9a6a5e; text-decoration: line-through; animation: me-shake .4s; }
+.me[data-moneyevo] .me-ch button.is-ok { background: #dff1e3; border-color: #2f6b4f; color: #1d4825; animation: me-ok .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes me-shake { 25%, 75% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
+@keyframes me-ok { 40% { transform: scale(1.04); } }
+.me[data-moneyevo] .me-fb { margin: 0; min-height: 1.6em; font-size: 13.5px; font-weight: 800; line-height: 1.6; }
+.me[data-moneyevo] .me-fb.is-ok { color: #2f6b4f; } .me[data-moneyevo] .me-fb.is-ng { color: #b5432f; }
+.me[data-moneyevo] .me-score { margin: 0; text-align: right; font-size: 12.5px; font-weight: 800; } .me[data-moneyevo] .me-score b { font-family: "Shippori Mincho", serif; font-size: 22px; color: #ffd76a; }
+/* 変身 */
+.me[data-moneyevo] .me-evo { position: relative; display: grid; justify-items: center; gap: 10px; padding: 22px; border-radius: 24px; background: #243429; border: 1px solid rgba(255, 215, 106, .35); text-align: center; overflow: hidden; }
+.me[data-moneyevo] .me-evo .me-art { width: min(100%, 380px); }
+.me[data-moneyevo] .me-evo .me-x { max-width: 600px; text-align: left; }
+.me[data-moneyevo] .me-flash { position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, #fff, rgba(255, 215, 106, .6) 30%, transparent 60%); pointer-events: none; animation: me-flash 1s ease-out forwards; }
+@keyframes me-flash { from { opacity: 1; } to { opacity: 0; } }
+/* 年表ならべ */
+.me[data-moneyevo] .me-ord { display: grid; gap: 12px; }
+.me[data-moneyevo] .me-oh { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 18px; background: #243429; }
+.me[data-moneyevo] .me-oh .me-t { margin: 0; font-size: 18px; }
+.me[data-moneyevo] .me-bar { height: 8px; border-radius: 4px; background: rgba(255, 255, 255, .14); overflow: hidden; } .me[data-moneyevo] .me-bar i { display: block; height: 100%; background: linear-gradient(90deg, #ffd76a, #b5432f); transform-origin: left; }
+.me[data-moneyevo] .me-line { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.me[data-moneyevo] .me-line li { display: grid; justify-items: center; align-content: center; gap: 2px; min-height: 84px; padding: 6px 4px; border-radius: 14px; border: 2px dashed rgba(243, 238, 228, .25); text-align: center; }
+.me[data-moneyevo] .me-line li.is-on { border: 2px solid #b08a4a; background: rgba(176, 138, 74, .18); animation: me-ok .4s ease; }
+.me[data-moneyevo] .me-line span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 6px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; font-size: 14px; }
+.me[data-moneyevo] .me-line b { font-size: 12px; line-height: 1.3; } .me[data-moneyevo] .me-line small { font-size: 10.5px; color: #e3c68e; }
+.me[data-moneyevo] .me-pool { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.me[data-moneyevo] .me-pool button { display: grid; gap: 6px; padding: 8px; border-radius: 16px; border: 0; background: #fffaf0; color: #2a2015; box-shadow: 0 5px 0 rgba(0, 0, 0, .35); transition: transform .2s, opacity .3s; }
+.me[data-moneyevo] .me-pool button:hover:not(:disabled) { transform: translateY(-3px); }
+.me[data-moneyevo] .me-pool .me-art { height: 76px; } .me[data-moneyevo] .me-pool .me-art svg { max-height: 66px; }
+.me[data-moneyevo] .me-pool b { font-size: 13.5px; }
+.me[data-moneyevo] .me-pool button.is-in { opacity: .15; transform: scale(.9); cursor: default; }
+.me[data-moneyevo] .me-pool button.is-ng { animation: me-shake .4s; box-shadow: 0 0 0 3px #b5432f, 0 5px 0 rgba(0, 0, 0, .35); }
+.me[data-moneyevo] .me-ord .me-fb.is-ok { color: #8be0a4; } .me[data-moneyevo] .me-ord .me-fb.is-ng { color: #ffab98; }
+/* おわり */
+.me[data-moneyevo] .me-fin { display: grid; justify-items: center; gap: 10px; padding: 22px; border-radius: 24px; background: #243429; text-align: center; }
+.me[data-moneyevo] .me-stamp { display: grid; place-items: center; width: 72px; height: 72px; border: 4px double #ffd76a; border-radius: 12px; color: #ffd76a; font-family: "Shippori Mincho", serif; font-size: 40px; font-weight: 800; transform: rotate(-6deg); animation: me-stamp .4s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes me-stamp { from { transform: rotate(-6deg) scale(2.2); opacity: 0; } }
+.me[data-moneyevo] .me-res { margin: 0; font-weight: 800; } .me[data-moneyevo] .me-res b { font-family: "Shippori Mincho", serif; font-size: 40px; color: #fff; }
+.me[data-moneyevo] .me-res em { margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: #b5432f; font-style: normal; font-size: 11.5px; vertical-align: .4em; }
+.me[data-moneyevo] .me-sum { margin: 0; font-size: 13px; opacity: .85; }
+.me[data-moneyevo] .me-tl { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; width: 100%; }
+.me[data-moneyevo] .me-tl > div { display: grid; gap: 4px; animation: me-pop .5s ease both; }
+.me[data-moneyevo] .me-tl > div:nth-child(2) { animation-delay: .08s; } .me[data-moneyevo] .me-tl > div:nth-child(3) { animation-delay: .16s; } .me[data-moneyevo] .me-tl > div:nth-child(4) { animation-delay: .24s; } .me[data-moneyevo] .me-tl > div:nth-child(5) { animation-delay: .32s; } .me[data-moneyevo] .me-tl > div:nth-child(6) { animation-delay: .4s; }
+.me[data-moneyevo] .me-tl .me-art { height: 64px; border-radius: 12px; } .me[data-moneyevo] .me-tl .me-art svg { max-height: 54px; }
+.me[data-moneyevo] .me-tl p { margin: 0; display: grid; font-size: 11px; line-height: 1.35; } .me[data-moneyevo] .me-tl span { color: #e3c68e; font-weight: 700; } .me[data-moneyevo] .me-tl b { font-size: 11.5px; }
+.me[data-moneyevo] .me-fin .me-x { max-width: 600px; }
+@media (max-width: 680px) {
+  .me[data-moneyevo] .me-road small { display: none; } .me[data-moneyevo] .me-road span { width: 30px; height: 30px; } .me[data-moneyevo] .me-road::before { top: 14px; }
+  .me[data-moneyevo] .me-ih, .me[data-moneyevo] .me-stage { grid-template-columns: 1fr; }
+  .me[data-moneyevo] .me-ih { padding: 14px; } .me[data-moneyevo] .me-art.is-big { height: 140px; }
+  .me[data-moneyevo] .me-now { grid-template-columns: 96px minmax(0, 1fr); align-items: center; padding: 10px; }
+  .me[data-moneyevo] .me-now .me-art { grid-row: 1 / 3; height: 80px; } .me[data-moneyevo] .me-now h3 { font-size: 19px; }
+  .me[data-moneyevo] .me-q { padding: 14px; } .me[data-moneyevo] .me-pb { font-size: 16.5px; }
+  .me[data-moneyevo] .me-oh { grid-template-columns: auto minmax(0, 1fr) auto; } .me[data-moneyevo] .me-oh .me-k { display: none; }
+  .me[data-moneyevo] .me-line { grid-template-columns: repeat(3, minmax(0, 1fr)); } .me[data-moneyevo] .me-line li { min-height: 64px; }
+  .me[data-moneyevo] .me-pool { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .me[data-moneyevo] .me-tl { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .me[data-moneyevo] * { animation: none !important; transition: none !important; } }
