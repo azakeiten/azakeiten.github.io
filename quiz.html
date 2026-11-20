@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-quiz.min.css?v=20261121c" />
+  <link rel="stylesheet" href="p-quiz.min.css?v=20261121d" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -57,7 +57,7 @@
         <li data-cat="game"><a href="#cardgame"><span class="am-s">札</span><b>経済カード勝負</b><small data-k="azakei_card_win" data-u="勝">確率と取材の 5 回勝負</small></a></li>
         <li data-cat="game"><a href="#sugoroku"><span class="am-s">双</span><b>経済すごろく</b><small data-k="azakei_sugo_best" data-u="円">財布・貯金・投資で 12 回</small></a></li>
         <li data-cat="money"><a href="#shinka"><span class="am-s">進</span><b>お金の進化</b><small>物々交換から電子マネーまで</small></a></li>
-        <li data-cat="money"><a href="#koukan"><span class="am-s">換</span><b>交換の島</b><small data-k="azakei_koukan">お金がない島で取引</small></a></li>
+        <li data-cat="money"><a href="#koukan"><span class="am-s">換</span><b>交換の島</b><small data-k="azakei_koukan">魚がいたむ 6 日間</small></a></li>
         <li data-cat="money"><a href="#ehon"><span class="am-s">絵</span><b>絵本：千円札の旅</b><small data-k="azakei_ehon">1 枚が町をめぐる</small></a></li>
         <li data-cat="money"><a href="#coins"><span class="am-s">貨</span><b>世界のお金図鑑</b><small data-k="azakei_coins" data-u="/ 12 枚" data-len>12 の国のお金</small></a></li>
         <li data-cat="money" data-new><a href="#himitsu"><span class="am-s">秘</span><b>新しいお札のひみつ</b><small data-k="azakei_osatsu_himitsu">にせもの防止の 6 つ</small></a></li>
@@ -156,7 +156,7 @@
       <div class="section-head reveal">
         <p class="section-label"><span class="sl-seal" aria-hidden="true">換</span></p>
         <h2 class="section-title">交換の島</h2>
-        <p class="lead">魚を持って、本がほしい。まずは物々交換で、次に同じ島で「貝のお金」を使って。お金があると、なぜ楽になるのかを、自分の手で確かめます。</p>
+        <p class="lead">あなたは魚をとる人。毎朝 3 匹とれるけれど、魚は 2 日でいたみます。1 日に動けるのは 4 回。6 日のうちに本・布・薪の 3 つを手に入れよう。まずは物々交換の島で、次に同じ島に「貝のお金」があったら。お金の 3 つの働きを、自分の手で確かめます。</p>
       </div>
       <div class="bt reveal" data-barter></div>
     </div>
@@ -196,7 +196,7 @@
       <div class="bz reveal" data-osatsuhimitsu></div>
     </div>
   </section>
-  <script>/* 新しいお札のひみつ（osatsuhimitsu.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-osatsuhimitsu]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="osatsuhimitsu.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 新しいお札のひみつ（osatsuhimitsu.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-osatsuhimitsu]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="osatsuhimitsu.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- おつりの達人（otsuri.js・近づいてから読みこむ） -->
   <section class="services tight" id="otsuri">
@@ -221,7 +221,7 @@
       <div class="im reveal" data-imaato></div>
     </div>
   </section>
-  <script>/* いま？ それとも あとで？（imaato.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-imaato]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="imaato.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* いま？ それとも あとで？（imaato.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-imaato]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="imaato.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 麻経ベーカリー 12 か月（bakery.js・bakery.css・近づいてから読みこむ） -->
   <section class="services tight" id="bakery">
@@ -234,7 +234,7 @@
       <div class="bk reveal" data-bakery></div>
     </div>
   </section>
-  <script>/* 麻経ベーカリー 12 か月（bakery.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-bakery]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="bakery.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* 麻経ベーカリー 12 か月（bakery.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-bakery]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="bakery.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- はじめての給料明細（kyuyo.js・kyuyo.css・近づいてから読みこむ） -->
   <section class="services tight" id="kyuyo">
@@ -247,7 +247,7 @@
       <div class="ky reveal" data-kyuyo></div>
     </div>
   </section>
-  <script>/* はじめての給料明細（kyuyo.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kyuyo]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kyuyo.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* はじめての給料明細（kyuyo.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kyuyo]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kyuyo.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- 店長のレジ（cashless.js・cashless.css・近づいてから読みこむ） -->
   <section class="services tight" id="cashless">
@@ -260,7 +260,7 @@
       <div class="cl reveal" data-cashless></div>
     </div>
   </section>
-  <script>/* 店長のレジ（cashless.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-cashless]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="cashless.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* 店長のレジ（cashless.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-cashless]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="cashless.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- 値札のマジック（nefuda.js・nefuda.css・近づいてから読みこむ） -->
   <section class="services tight" id="nefuda">
@@ -273,7 +273,7 @@
       <div class="nd reveal" data-nefuda></div>
     </div>
   </section>
-  <script>/* 値札のマジック（nefuda.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-nefuda]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="nefuda.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* 値札のマジック（nefuda.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-nefuda]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="nefuda.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- チケットの値段は時価（jika.js・jika.css・近づいてから読みこむ） -->
   <section class="services tight" id="jika">
@@ -286,7 +286,7 @@
       <div class="jk reveal" data-jika></div>
     </div>
   </section>
-  <script>/* チケットの値段は時価（jika.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-jika]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="jika.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* チケットの値段は時価（jika.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-jika]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="jika.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- 関税のシーソー（kanzei.js・kanzei.css・近づいてから読みこむ） -->
   <section class="services tight" id="kanzei">
@@ -299,7 +299,7 @@
       <div class="kz reveal" data-kanzei></div>
     </div>
   </section>
-  <script>/* 関税のシーソー（kanzei.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kanzei]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kanzei.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
+  <script>/* 関税のシーソー（kanzei.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kanzei]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kanzei.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"600px 0px"});io.observe(el);})();</script>
 
   <!-- サブスクと買い切り（subsc.js・subsc.css・近づいてから読みこむ） -->
   <section class="services tight" id="subsc">
@@ -312,7 +312,7 @@
       <div class="sb reveal" data-subsc></div>
     </div>
   </section>
-  <script>/* サブスクと買い切り（subsc.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-subsc]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="subsc.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* サブスクと買い切り（subsc.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-subsc]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="subsc.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 10 万円のゲーム機、どう払う？（atobarai.js・atobarai.css・近づいてから読みこむ） -->
   <section class="about tight" id="atobarai">
@@ -325,7 +325,7 @@
       <div class="ah reveal" data-atobarai></div>
     </div>
   </section>
-  <script>/* 後払いの体験（atobarai.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-atobarai]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="atobarai.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 後払いの体験（atobarai.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-atobarai]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="atobarai.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 胴上げから肩車へ（nenkin.js・nenkin.css・近づいてから読みこむ） -->
   <section class="services tight" id="nenkin">
@@ -338,7 +338,7 @@
       <div class="nk reveal" data-nenkin></div>
     </div>
   </section>
-  <script>/* 胴上げから肩車へ（nenkin.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-nenkin]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="nenkin.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 胴上げから肩車へ（nenkin.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-nenkin]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="nenkin.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- フリマのなぞ（lemon.js・lemon.css・近づいてから読みこむ） -->
   <section class="about tight" id="lemon">
@@ -351,7 +351,7 @@
       <div class="fm reveal" data-lemon></div>
     </div>
   </section>
-  <script>/* フリマのなぞ（lemon.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-lemon]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="lemon.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* フリマのなぞ（lemon.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-lemon]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="lemon.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 税の階段（zeidan.js・zeidan.css・近づいてから読みこむ） -->
   <section class="services tight" id="zeidan">
@@ -364,7 +364,7 @@
       <div class="zd reveal" data-zeidan></div>
     </div>
   </section>
-  <script>/* 税の階段（zeidan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-zeidan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="zeidan.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 税の階段（zeidan.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-zeidan]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="zeidan.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 川上の工場（kawa.js・kawa.css・近づいてから読みこむ） -->
   <section class="about tight" id="kawa">
@@ -377,7 +377,7 @@
       <div class="kw reveal" data-kawa></div>
     </div>
   </section>
-  <script>/* 川上の工場（kawa.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kawa]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kawa.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* 川上の工場（kawa.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-kawa]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="kawa.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- みんなの公園（koen.js・koen.css・近づいてから読みこむ） -->
   <section class="services tight" id="koen">
@@ -390,7 +390,7 @@
       <div class="pk reveal" data-koen></div>
     </div>
   </section>
-  <script>/* みんなの公園（koen.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-koen]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="koen.js?v=20261121c";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
+  <script>/* みんなの公園（koen.js）は、近づいてから読みこむ */(function(){var el=document.querySelector("[data-koen]");if(!el)return;var go=function(){var s=document.createElement("script");s.src="koen.js?v=20261121d";document.body.appendChild(s);};if(!("IntersectionObserver" in window))return go();var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:"400px"});io.observe(el);})();</script>
 
   <!-- 問題を、つくってみよう -->
   <!-- みんなでクイズ大会（taikai.js・近づいてから読みこむ） -->
@@ -418,23 +418,23 @@
 
   <footer id="site-footer"></footer>
 
-  <script src="curtain.js?v=20261121c"></script>
-  <script src="content.js?v=20261121c"></script>
-  <script src="layout.js?v=20261121c"></script>
-  <script src="brand.js?v=20261121c"></script>
-  <script src="nav.js?v=20261121c"></script>
-  <script src="reveal.js?v=20261121c"></script>
-  <script src="ranking.js?v=20261121c"></script>
-  <script src="quiz-data.js?v=20261121c"></script>
-  <script src="shareimg.js?v=20261121c"></script>
-  <script src="quiz.js?v=20261121c"></script>
-  <script src="osatsu.js?v=20261121c"></script>
-  <script src="asobimap.js?v=20261121c"></script>
-  <script src="site.js?v=20261121c"></script>
+  <script src="curtain.js?v=20261121d"></script>
+  <script src="content.js?v=20261121d"></script>
+  <script src="layout.js?v=20261121d"></script>
+  <script src="brand.js?v=20261121d"></script>
+  <script src="nav.js?v=20261121d"></script>
+  <script src="reveal.js?v=20261121d"></script>
+  <script src="ranking.js?v=20261121d"></script>
+  <script src="quiz-data.js?v=20261121d"></script>
+  <script src="shareimg.js?v=20261121d"></script>
+  <script src="quiz.js?v=20261121d"></script>
+  <script src="osatsu.js?v=20261121d"></script>
+  <script src="asobimap.js?v=20261121d"></script>
+  <script src="site.js?v=20261121d"></script>
   <script>
     /* 下のほうの「世界のお金図鑑」「問題をつくる」は、近づいてから読みこむ（クイズのページを軽く） */
     (function () {
-      var V = '20261121c';
+      var V = '20261121d';
       [['[data-card]', 'cardgame.js'], ['[data-cw]', 'crossword.js'], ['[data-sugo]', 'sugoroku.js'], ['[data-moneyevo]', 'moneyevo.js'], ['[data-barter]', 'barter.js'], ['[data-ehon]', 'ehon.js'], ['[data-coins]', 'coins.js'], ['[data-otsuri]', 'otsuri.js'], ['[data-taikai]', 'taikai.js'], ['[data-qmake]', 'qmake.js']].forEach(function (p) {
         var el = document.querySelector(p[0]), done = false; if (!el) return;
         var load = function () { if (done) return; done = true; var s = document.createElement('script'); s.src = p[1] + '?v=' + V; document.body.appendChild(s); };
