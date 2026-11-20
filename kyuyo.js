@@ -50,6 +50,7 @@
         <p class="ky-ratio">手取りは額面の <b data-k="ratio">—</b>（2 年目のたとえ）</p>
       </div>
     </div>
+    <div class="ky-keiri"><p class="ky-k-h"><span aria-hidden="true">経</span>経理の仕事：明細を完成させよう<small>あなたは会社の経理係。3 人分の給料明細の「引かれるお金」を計算して、正しい金額をえらぼう。まちがえると 5 秒たされます。</small></p><div class="ky-k-box" data-k="keiri"><button type="button" class="ky-k-go" data-k-a="start">明細づくりをはじめる</button></div></div>
     <div class="ky-learn">
       <p><b>額面と手取り</b>会社が決めた給料（額面）から、保険料や税金が引かれて、残りが口座に入ります。これが手取りです。手取りは、額面のおよそ 8 割ぐらいになることが多いといわれます（<a href="glossary.html#take-home">手取り</a>）。</p>
       <p><b>2 年目の「住民税」</b>住民税は、前の年の収入をもとに、次の年の 6 月ごろから引かれはじめます。そのため、働きはじめた年はほとんど引かれず、2 年目に給料が上がっても手取りが減ることがあります。</p>
@@ -97,6 +98,62 @@
     const y = e.target.closest('[data-y]'); if (y && !busy) tab(+y.dataset.y);
   });
   box.addEventListener('input', e => { const s = e.target.closest('[data-s="g"]'); if (s) { gross = +s.value; tryit(); } });
+  /* ---- v318：経理の仕事「明細を完成させよう」（3 人分の控除を、自分で計算して当てる） ---- */
+  const STAFF = [['新人', '麻布 花子', 200000, 0, '1 年目。住民税は、まだ引かれない'], ['3 年目', '六本木 一郎', 280000, 270000, '前の年の給料は 27 万円'], ['課長', '広尾 誠', 420000, 400000, '前の年の給料は 40 万円']];
+  const kq = box.querySelector('[data-k="keiri"]');
+  let kg = null;
+  const kOpts = (s, i) => {
+    const g = s.gross, v = s.rows[i][1], ins = s.rows[0][1] + s.rows[1][1] + s.rows[2][1];
+    const wrong = [
+      [Math.round(g * .09 / 10) * 10, Math.round(g * .005 / 10) * 10, v * 10],
+      [Math.round(g * .05 / 10) * 10, Math.round(g * .009 / 10) * 10, v * 10],
+      [Math.round(g * .06 / 10) * 10, v * 10, Math.round(g * .0006 / 10) * 10],
+      [Math.max(0, Math.round((g - 88000) * .05 / 10) * 10), Math.round(g * .05 / 10) * 10, Math.max(0, Math.round((g - ins) * .05 / 10) * 10)]
+    ][i];
+    const set = [v]; wrong.forEach(w => { if (w > 0 && !set.includes(w) && set.length < 3) set.push(w); });
+    let k = 2; while (set.length < 3) { const w = v + k * 1000; if (!set.includes(w)) set.push(w); k++; }
+    return set.sort(() => Math.random() - .5);
+  };
+  const HINT = ['額面 × 約 5%', '額面 × 約 9%', '額面 × 約 0.6%', '（額面 − 3 つの保険料の合計 − 88,000 円）× 5%'];
+  const kDraw = () => {
+    const p = STAFF[kg.n], s = kg.s, step = kg.step;
+    const line = (i, n) => { const v = s.rows[i][1]; return `<div class="ky-k-row${i === step ? ' is-now' : ''}${i < step ? ' is-ok' : ''}"><dt>${n}</dt><dd>${i < step || i === 4 ? (v ? '− ' + yen(v) : '0 円') : i === step ? '？' : '—'}</dd>${i === step ? `<small>${HINT[i]}</small>` : ''}</div>`; };
+    const net = step === 5, opts = net ? kg.netOpts : step < 4 ? kOpts(s, step) : [];
+    kq.innerHTML = `<div class="ky-k-top"><p><small>${kg.n + 1} / 3 人目・${p[0]}</small><b>${p[1]} さん</b><span>${p[4]}</span></p><p class="ky-k-clock"><small>時間</small><b data-k="kclock">${kg.t.toFixed(1)} 秒</b><small>まちがい ${kg.miss}</small></p></div>
+      <dl class="ky-k-slip"><div class="ky-k-row is-pay"><dt>基本給（額面）</dt><dd>${yen(s.gross)}</dd></div>${s.rows.map((r, i) => line(i, r[0] + (i === 4 ? '（市役所の通知の額）' : ''))).join('')}<div class="ky-k-row is-net${net ? ' is-now' : ''}"><dt>差引支給額（手取り）</dt><dd>？</dd>${net ? '<small>額面 − 控除の合計</small>' : ''}</div></dl>
+      <p class="ky-k-q">${net ? '手取りはいくら？' : `${s.rows[step][0]}はいくら？`}</p>
+      <div class="ky-k-opts">${opts.map(v => `<button type="button" data-kv="${v}">${yen(v)}</button>`).join('')}</div>`;
+  };
+  const kNext = () => {
+    const p = STAFF[kg.n]; kg.s = slip(p[2], p[3]); kg.step = 0;
+    const s = kg.s, ins = s.rows[0][1] + s.rows[1][1] + s.rows[2][1];
+    const set = [s.net]; [s.gross - ins, s.net - s.rows[4][1], s.net + s.rows[3][1], s.net - 10000].forEach(w => { if (w > 0 && !set.includes(w) && set.length < 4) set.push(w); });
+    kg.netOpts = set.sort(() => Math.random() - .5); kDraw();
+  };
+  const kStart = () => {
+    if (kg) clearInterval(kg.iv); kg = { n: 0, t: 0, miss: 0, t0: performance.now() };
+    kg.iv = setInterval(() => { kg.t = (performance.now() - kg.t0) / 1000 + kg.miss * 5; const c = kq.querySelector('[data-k="kclock"]'); if (c) c.textContent = kg.t.toFixed(1) + ' 秒'; }, 100);
+    kNext();
+  };
+  const kEnd = () => {
+    clearInterval(kg.iv); const t = (performance.now() - kg.t0) / 1000 + kg.miss * 5;
+    const rank = kg.miss === 0 && t < 90 ? ['ベテラン経理', 'まちがいなし、しかも速い。会社のみんなの給料を任せられます。'] : kg.miss <= 2 ? ['一人前の経理', 'ほぼ正確。ひっかけに気づけました。'] : ['経理の見習い', 'まちがえやすいのは「保険料を引いてから税金を計算する」ところ。もう一度ためそう。'];
+    let best = 0; try { best = +localStorage.getItem('azakei_kyuyo_keiri') || 0; if (!best || t < best) localStorage.setItem('azakei_kyuyo_keiri', t.toFixed(1)); } catch (e) {}
+    kq.innerHTML = `<div class="ky-k-end"><p class="ky-k-rk">${rank[0]}</p><p>3 人分の明細を完成。時間 <b>${t.toFixed(1)} 秒</b>（まちがい ${kg.miss} 回 × 5 秒をふくむ）${best && t >= best ? `・自己ベスト ${best} 秒` : '・自己ベスト更新'}</p><p>${rank[1]}</p><p class="ky-k-tip">ポイント：所得税は、額面からそのままではなく、健康保険・厚生年金・雇用保険を引いた残りにかかります。住民税は前の年の収入で決まるので、1 年目の人は 0 円でした。</p><button type="button" class="ky-k-go" data-k-a="start">もう一度</button></div>`;
+    try { if (!localStorage.getItem('azakei_kyuyo')) localStorage.setItem('azakei_kyuyo', '1'); } catch (e) {}
+  };
+  kq.addEventListener('click', e => {
+    if (e.target.closest('[data-k-a="start"]')) { kStart(); return; }
+    const b = e.target.closest('[data-kv]'); if (!b || !kg || b.disabled) return;
+    const v = +b.dataset.kv, s = kg.s, right = kg.step === 5 ? s.net : s.rows[kg.step][1];
+    if (v !== right) { kg.miss++; b.disabled = true; b.classList.add('is-ng'); return; }
+    b.classList.add('is-ok');
+    setTimeout(() => {
+      kg.step++; if (kg.step === 4) kg.step = 5;
+      if (kg.step > 5) { kg.n++; if (kg.n >= STAFF.length) return kEnd(); return kNext(); }
+      kDraw();
+    }, reduce ? 0 : 260);
+  });
   tryit();
   print(Y1, '1 年目', '2026 年 5 月分');
 })();

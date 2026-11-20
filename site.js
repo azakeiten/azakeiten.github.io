@@ -291,7 +291,13 @@ try {
     if (!CURTAIN_NAV) return;
     if (!a || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
     const url = new URL(a.href, location.href);
-    if (url.origin !== location.origin || url.pathname === location.pathname) return;
+    if (url.origin !== location.origin) return;
+    // v318：いま開いているページへのリンク（目次の「経済用語ミニ辞典」を辞典の中で押した、など）は、
+    // 重いページをまるごと読みこみなおさず、目次を閉じてページの上へもどるだけにする
+    if (url.pathname === location.pathname) {
+      if (!url.hash && url.search === location.search) { e.preventDefault(); setTimeout(() => scrollTo({ top: 0, behavior: 'smooth' }), 60); }
+      return;
+    }
     e.preventDefault();
     curtain.classList.remove('is-out');
     void curtain.offsetWidth;
@@ -1376,7 +1382,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261120c';
+  const V = '20261120d';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1402,7 +1408,7 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-tour]'); if (!b) return;
   e.preventDefault();
   if (window.AZAKEI_TOUR) { window.AZAKEI_TOUR.start(); return; }
-  const s = document.createElement('script'); s.src = 'tour.js?v=20261120c'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
+  const s = document.createElement('script'); s.src = 'tour.js?v=20261120d'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
 });
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */
