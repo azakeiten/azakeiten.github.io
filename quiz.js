@@ -23,7 +23,7 @@
 
   const BEST_KEY = 'azakei_quiz_best', NEWS_BEST_KEY = 'azakei_quiz_best_news', TIME_BEST_KEY = 'azakei_quiz_best_time';
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // 案内の声（voice.js：効果音ラボの声）。「案内の声」をオンにしたときだけ。「第一問」「正解です」など
+  // 案内の声（voice.js：VOICEVOX:冥鳴ひまりの声）。「案内の声」をオンにしたときだけ。「第一問」「正解です」など
   const QV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
   let vOn = false; try { vOn = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
   const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + QV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });

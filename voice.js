@@ -1,7 +1,8 @@
 /* ================================================================
    voice.js — 案内の声（使うページが、必要になったときだけ読みこむ）
-   ・声の素材：効果音ラボ「アプリ・音声案内（落ち着いた女性）」（声：音枝優日）。voice/ に置いたものを使う
-     （効果音ラボの利用規約：商用・非商用とも無料、クレジットは任意、素材そのものの再配布と直リンクは禁止）
+   ・声の素材：VOICEVOX でつくった mp3（VOICEVOX:冥鳴ひまり＝案内・ナレーション、VOICEVOX:白上虎太郎（わーい）＝お札マン）
+     voice/＊.mp3＝案内のことば（名前で呼ぶ）、voice/vv/＊.mp3＝1 文ごとの声（m-＝お札マン、n-＝ナレーション。名前は文の FNV-1a）
+     つくり方は tools/voicevox/README.txt。クレジットは policy.html#voice-credit
    ・AZAKEI_VOICE.on() / set(true|false)：声を出すかどうか（localStorage azakei_voice。サイト全体で共通）
    ・AZAKEI_VOICE.say(['nisen', 'sanbyaku', ...])：いくつかの声を、前後の無音を切ってすきまなくつなげて流す（Promise）
    ・AZAKEI_VOICE.dur(['countdown1'])：つないだときの長さ（秒）
@@ -11,7 +12,7 @@
    ================================================================ */
 (function () {
   if (window.AZAKEI_VOICE) return;
-  const VER = '1';
+  const VER = '2';
   let ac = null, on = false, gen = 0, live = [], wake = null;
   try { on = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
   const ctx = () => ac || (ac = new (window.AudioContext || window.webkitAudioContext)());
@@ -119,14 +120,44 @@
   ];
   const fix = t => READ.reduce((s, [a, b]) => s.replace(a, b), String(t));
   const split = t => String(t).replace(/\s+/g, ' ').split(/(?<=[。！？])/).map(s => s.trim()).filter(Boolean);
-  const ttsStop = () => { ttsGen++; if (window.speechSynthesis) speechSynthesis.cancel(); };
+  // ── 前もってつくった声（VOICEVOX）。voice/vv/ に、役ごと・1 文ごとの mp3 がある（list.json に、ある文の印）
+  //    役：m＝お札マン／n＝ナレーション。ない文は、これまでどおりブラウザの読み上げで読む
+  //    文の印は、文（字幕と同じ字）の FNV-1a。声をつくるときも、この hash で名前をつける
+  const VVV = '1';
+  let vvList = null, vvLive = [];
+  const vvHash = s => { let x = 0x811c9dc5; for (const ch of String(s)) { x ^= ch.codePointAt(0); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(36); };
+  const vvIndex = () => vvList || (vvList = fetch('voice/vv/list.json?v=' + VVV).then(r => r.ok ? r.json() : {}).catch(() => ({})));
+  const vvCache = {};
+  const vvBuf = name => vvCache[name] || (vvCache[name] = fetch('voice/vv/' + name + '.mp3?v=' + VVV).then(r => { if (!r.ok) throw 0; return r.arrayBuffer(); }).then(b => new Promise((ok, ng) => ctx().decodeAudioData(b, ok, ng))).catch(() => { delete vvCache[name]; return null; }));
+  const vvStop = () => { vvLive.forEach(x => { try { x.onended = null; x.stop(); } catch (e) {} }); vvLive = []; };
+  // 1 文を流す。流せたら true、つくった声がなければ false（そのときはブラウザの読み上げへ）
+  const vvPlay = async (role, sentence, rate, my) => {
+    const idx = await vvIndex(), name = role + '-' + vvHash(sentence);
+    if (!idx[name]) return false;
+    let c; try { c = ctx(); if (c.state === 'suspended') await Promise.race([c.resume(), new Promise(r => setTimeout(r, 400))]); } catch (e) { return false; }
+    const buf = await vvBuf(name);
+    if (!buf || my !== ttsGen) return !!buf;
+    return new Promise(res => {
+      const src = c.createBufferSource(); src.buffer = buf; src.playbackRate.value = Math.max(.8, Math.min(1.25, rate || 1)); src.connect(c.destination);
+      const end = () => { clearTimeout(w); vvLive = vvLive.filter(x => x !== src); res(true); };
+      const w = setTimeout(end, (buf.duration / src.playbackRate.value) * 1000 + 600);
+      src.onended = end; vvLive.push(src); src.start(c.currentTime + .03);
+    });
+  };
+  const vvHas = async (role, text) => { const idx = await vvIndex(); return split(text).every(p => idx[role + '-' + vvHash(p)]); };
+  const ttsStop = () => { ttsGen++; vvStop(); if (window.speechSynthesis) speechSynthesis.cancel(); };
   // o.onPart(文, 何番目, 全部で何文)。終わりの知らせが来ないブラウザのため、長さから見た時間がたったら先へ
   const tts = (text, o = {}) => new Promise(res => {
-    if (!window.speechSynthesis) { const parts = split(text); let k = 0; const step = () => { if (k >= parts.length) return res(); if (o.onPart) o.onPart(parts[k], k, parts.length); setTimeout(step, 900 + parts[k++].length * 130); }; return step(); }
+    if (!window.speechSynthesis && !o.role) { const parts = split(text); let k = 0; const step = () => { if (k >= parts.length) return res(); if (o.onPart) o.onPart(parts[k], k, parts.length); setTimeout(step, 900 + parts[k++].length * 130); }; return step(); }
     ttsStop(); const my = ttsGen, parts = split(text); let k = 0;
     const next = () => {
       if (my !== ttsGen || k >= parts.length) return res();
       const s = parts[k]; if (o.onPart) o.onPart(s, k, parts.length); k++;
+      if (o.role) { const mine = my; vvPlay(o.role, s, o.vvRate, mine).then(ok => { if (mine !== ttsGen) return res(); if (ok) return setTimeout(next, o.gap == null ? 160 : o.gap); speakTTS(s); }); return; }
+      speakTTS(s);
+    };
+    const speakTTS = s => {
+      if (!window.speechSynthesis) { setTimeout(next, 900 + s.length * 130); return; }
       const u = new SpeechSynthesisUtterance(fix(s)); u.lang = 'ja-JP';
       const v = o.voice || pick(); if (v) u.voice = v;
       u.rate = o.rate || 1; u.pitch = o.pitch || 1; u.volume = 1;
@@ -184,10 +215,10 @@
   const setStyle = st => { manStyle = STYLE[st] ? st : 'hero'; try { localStorage.setItem('azakei_man_style', manStyle); } catch (e) {} };
   const getStyle = () => manStyle;
   const setMan = name => { manName = name; try { localStorage.setItem('azakei_man_voice', name); } catch (e) {} };
-  const man = (text, o = {}) => { const t = manTone(); return tts(text, { ...o, voice: t.voice, pitch: t.pitch, rate: (o.rate || 1) * t.rate }); };
+  const man = (text, o = {}) => { const t = manTone(); return tts(text, { role: 'm', vvRate: o.rate || 1, ...o, voice: t.voice, pitch: t.pitch, rate: (o.rate || 1) * t.rate }); };
   // 声のえらぶ欄に出す名前（男の声には「男性」）
   const label = v => v.name.replace(/^Microsoft\s*/, '').replace(/\s*Online\s*\(Natural\)/, '（自然な声）').replace(/\s*-\s*Japanese.*$|\s*\(Japan\)$/g, '').slice(0, 16) + (isMale(v) ? '・男性' : '');
   // この機械に、人の声に近い声があるか（なければ「Edge だと自然な声」と案内する）
   const hasNatural = () => jaVoices().some(isNatural);
-  window.AZAKEI_VOICE = { on: () => on, set, say, dur, chime, stop, load, tts, ttsStop, jaVoices, pick, setTTS, fix, bgm, man, manPick, manTone, setMan, setStyle, getStyle, isMale, isNatural, hasNatural, label };
+  window.AZAKEI_VOICE = { vvHas, vvHash, on: () => on, set, say, dur, chime, stop, load, tts, ttsStop, jaVoices, pick, setTTS, fix, bgm, man, manPick, manTone, setMan, setStyle, getStyle, isMale, isNatural, hasNatural, label };
 })();

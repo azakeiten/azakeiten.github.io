@@ -9,7 +9,7 @@
   const OV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
   const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + OV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
   const voiceOn = () => { try { return localStorage.getItem('azakei_voice') === '1'; } catch (e) { return false; } };
-  const speak = t => { if (!window.speechSynthesis) return; VO().then(v => { if (v) v.man(t); }); };
+  const speak = t => { VO().then(v => { if (v) v.man(t); }); };
   const SVG = `<svg class="os-svg" viewBox="0 0 120 112" aria-hidden="true">
     <g class="os-legs" stroke="#6b4a22" stroke-width="3.5" stroke-linecap="round"><path d="M50 76 L46 96"/><path d="M70 76 L74 96"/></g>
     <ellipse cx="44" cy="98" rx="7" ry="3.5" fill="#6b4a22"/><ellipse cx="76" cy="98" rx="7" ry="3.5" fill="#6b4a22"/>
@@ -60,7 +60,6 @@
   // 声：オンならすぐ話す。オフなら、文字が出おわったあとに「声で聞く」
   const voiced = (bubble, text) => {
     const tok = bubble._vt = (bubble._vt || 0) + 1;
-    if (!window.speechSynthesis) return;
     if (voiceOn()) { speak(text); return; }
     // 文字が出おわったら（typeIn の done）、「声で聞く」を足す
     return () => { if (bubble._vt !== tok) return; const b = document.createElement('button'); b.type = 'button'; b.className = 'os-say'; b.textContent = '声で聞く'; b.dataset.say = text; bubble.appendChild(b); };

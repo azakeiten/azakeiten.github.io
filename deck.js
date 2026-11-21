@@ -5,7 +5,7 @@
    ・段（親しむ → 知る → つくる）が変わるところで、大きな印が出る
    ・「発表」（N キー）：自動送りを止め、話す台本・経過時間・次のスライドを出す（部員が人前で話すとき用）
    ・「ナレーション」（R キー）：台本を、いちばん自然な日本語の声で 1 文ずつ読み、大きな字幕を出す。読み終わると次へ。声はえらべる。静かな BGM つき
-   ・「開演」（O キー）：チャイム → 開演の案内（効果音ラボの声）→ 3・2・1・0 → ナレーションで発表
+   ・「開演」（O キー）：チャイム → 開演の案内（VOICEVOX:冥鳴ひまりの声）→ 3・2・1・0 → ナレーションで発表
    ・「発表」（P キー）：お札マン（仮）が横に出てきて、ふきだしで 1 文ずつ発表する。「声を出す」で読み上げも。言い終わると次へ
    ・「台本」（N キー）：自分で話すときの台本・経過時間
    ・「一覧」（G キー）：全部のスライドを並べて、好きな場面へ
@@ -318,7 +318,7 @@
     } catch (e) {}
   };
 
-  // ── 案内の声（voice.js：効果音ラボの声）。「案内の声」を押したとき・「開演」のときだけ流れる。流れている文は字幕にも出す
+  // ── 案内の声（voice.js：VOICEVOX:冥鳴ひまりの声）。「案内の声」を押したとき・「開演」のときだけ流れる。流れている文は字幕にも出す
   let ann = false, annP = null, annTok = 0, flipAsked = false, opTok = 0, opBusy = false;
   try { ann = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
   const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + DV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
@@ -394,6 +394,7 @@
     Promise.all([VO(), annP || Promise.resolve()]).then(([v]) => {
       if (tok !== tTok || !v) return;
       v.tts(S[i].n, {
+        role: "n", vvRate: 1 / SPD[spd][1],
         rate: 1.02 / SPD[spd][1],
         onPart: (s, k, n) => { if (tok !== tTok) return; subShow(s); bar.style.transition = 'transform .5s'; bar.style.transform = `scaleX(${(k + 1) / n})`; }
       }).then(() => {
@@ -519,15 +520,10 @@
       tt = setTimeout(() => { if (tok === tTok) done(); }, voice ? 350 * SPD[spd][1] : (650 + txt.length * 22) * SPD[spd][1]);
     };
     if (voice) {
-      // 読み上げの「終わった」の知らせが来ないことがあるブラウザのため、長さから見て遅すぎたら先へ進む（止まらないように）
-      const u = new SpeechSynthesisUtterance(window.AZAKEI_VOICE ? AZAKEI_VOICE.fix(txt) : txt);
-      // お札マンは男の人の声（voice.js の manTone）。少し低く、落ち着いて
-      const mt = window.AZAKEI_VOICE ? AZAKEI_VOICE.manTone() : { voice: null, pitch: .7, rate: 1 };
-      if (mt.voice) u.voice = mt.voice;
-      u.lang = 'ja-JP'; u.pitch = mt.pitch; u.rate = 1.02 * mt.rate / SPD[spd][1];
-      u.onend = u.onerror = () => { spoke = true; fin(); };
-      setTimeout(() => { if (tok === tTok) speechSynthesis.speak(u); }, 80);
-      setTimeout(() => { if (tok === tTok && !spoke) { spoke = true; fin(); } }, 3000 + txt.length * 280 * SPD[spd][1]);
+      // お札マンの声（voice.js の man：前もってつくった VOICEVOX の声。なければブラウザの読み上げ）。終わりの知らせが来なくても、長さから見て遅すぎたら先へ
+      const go2 = () => { if (tok === tTok && !spoke) { spoke = true; fin(); } };
+      setTimeout(() => { if (tok !== tTok) return; if (window.AZAKEI_VOICE) AZAKEI_VOICE.man(txt, { rate: 1 / SPD[spd][1] }).then(go2); else go2(); }, 80);
+      setTimeout(go2, 4000 + txt.length * 300 * SPD[spd][1]);
     }
     const type = () => {
       if (tok !== tTok) return;
