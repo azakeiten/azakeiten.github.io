@@ -1,0 +1,54 @@
+/* ehon.css — 絵本「お札マンと千円札の旅」の、えらぶページ・スタンプ帳・おしまい・クイズ（ehon.js が読みこむ。本の形は site.css の .eh） */
+.eh[data-ehon] .eh-stamp { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding: 8px 12px; border-radius: 14px; background: #fffaf0; border: 1px dashed #c9b88f; overflow-x: auto; }
+.eh[data-ehon] .eh-sk { flex: none; font-size: 11.5px; font-weight: 800; color: #6b5a40; }
+.eh[data-ehon] .eh-stamp ol { margin: 0; padding: 0; list-style: none; display: flex; gap: 6px; }
+.eh[data-ehon] .eh-stamp li { flex: none; display: grid; justify-items: center; gap: 0; width: 46px; }
+.eh[data-ehon] .eh-stamp li b { display: grid; place-items: center; width: 34px; height: 34px; border: 2px solid #b5432f; border-radius: 50%; color: #b5432f; font-family: "Shippori Mincho", serif; font-size: 16px; transform: rotate(var(--r, 0deg)); background: rgba(181, 67, 47, .06); }
+.eh[data-ehon] .eh-stamp li small { font-size: 9px; line-height: 1.2; color: #6b5a40; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46px; }
+.eh[data-ehon] .eh-stamp li.is-new b { animation: eh-stamp .45s cubic-bezier(.3, 1.6, .5, 1) both; }
+.eh[data-ehon] .eh-stamp li.is-empty { width: auto; font-size: 12px; color: #a89a80; }
+@keyframes eh-stamp { from { transform: rotate(var(--r, 0deg)) scale(2.2); opacity: 0; } }
+/* 読んでいる文が光る */
+.eh[data-ehon] .eh-x span { transition: background .3s, color .3s; border-radius: 4px; }
+.eh[data-ehon] .eh-x span.is-now { background: rgba(255, 215, 106, .55); box-shadow: 0 0 0 3px rgba(255, 215, 106, .55); }
+/* えらぶページ */
+.eh[data-ehon] .eh-pick { display: grid; gap: 8px; margin-top: 10px; }
+.eh[data-ehon] .eh-pick button { position: relative; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; border: 2px solid #d9c49c; background: #fff; color: #2a2015; font: inherit; font-weight: 800; font-size: 14.5px; line-height: 1.5; text-align: left; cursor: pointer; box-shadow: 0 4px 0 rgba(107, 74, 34, .2); transition: transform .15s, border-color .2s; animation: eh-in .4s ease both; }
+.eh[data-ehon] .eh-pick button:nth-child(2) { animation-delay: .1s; } .eh[data-ehon] .eh-pick button:nth-child(3) { animation-delay: .2s; }
+.eh[data-ehon] .eh-pick button:hover { transform: translateY(-2px); border-color: #b5432f; }
+.eh[data-ehon] .eh-pick span { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #b5432f; color: #fff; font-family: "Shippori Mincho", serif; font-size: 18px; }
+.eh[data-ehon] .eh-pick em { margin-left: auto; padding: 2px 8px; border-radius: 999px; background: #e4ede8; color: #2f6b4f; font-style: normal; font-size: 11px; }
+@keyframes eh-in { from { opacity: 0; transform: translateY(8px); } }
+/* 絵の動き */
+.eh[data-ehon] .eh-truck { animation: eh-truck 3s ease-in-out infinite; }
+@keyframes eh-truck { 50% { transform: translate(380px, 222px); } }
+.eh[data-ehon] .eh-fire { animation: eh-fire 1.2s ease-in-out infinite; }
+@keyframes eh-fire { 50% { fill: #ff8a3a; } }
+/* おしまい */
+.eh[data-ehon] .eh-end { display: grid; gap: 8px; margin-top: 10px; }
+.eh[data-ehon] .eh-sum { margin: 0; padding: 10px 12px; border-radius: 12px; background: #fff1c9; font-size: 14px; line-height: 1.7; }
+.eh[data-ehon] .eh-sum b { color: #b5432f; }
+.eh[data-ehon] .eh-why { margin: 0; font-size: 13.5px; line-height: 1.8; }
+.eh[data-ehon] .eh-rt { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: #6b5a40; }
+.eh[data-ehon] .eh-rt span { padding: 2px 10px; border-radius: 999px; border: 1px dashed #c9b88f; color: #a89a80; }
+.eh[data-ehon] .eh-rt span.is-on { border: 1px solid #2f6b4f; background: #e4ede8; color: #2f6b4f; }
+.eh[data-ehon] .eh-endb { display: flex; flex-wrap: wrap; gap: 8px; }
+.eh[data-ehon] .eh-endb button { padding: 10px 16px; border-radius: 12px; border: 0; background: #b5432f; color: #fff; font: inherit; font-weight: 800; font-size: 14px; cursor: pointer; box-shadow: 0 4px 0 #7a2418; }
+.eh[data-ehon] .eh-endb .eh-again { background: #2f5a8a; box-shadow: 0 4px 0 #1b3158; }
+.eh[data-ehon] .eh-qz:empty { display: none; }
+.eh[data-ehon] .eh-qz { padding: 12px; border-radius: 14px; background: #fffaf0; border: 2px solid #ecdcbc; animation: eh-in .3s ease both; }
+.eh[data-ehon] .eh-qq { margin: 0 0 8px; font-weight: 800; font-size: 14.5px; line-height: 1.6; }
+.eh[data-ehon] .eh-qq span { margin-right: 8px; padding: 1px 8px; border-radius: 6px; background: #2a2015; color: #fffaf0; font-size: 12px; }
+.eh[data-ehon] .eh-qo { display: grid; gap: 6px; }
+.eh[data-ehon] .eh-qo button { padding: 10px 12px; border-radius: 12px; border: 2px solid #d9c49c; background: #fff; color: #2a2015; font: inherit; font-weight: 700; font-size: 13.5px; text-align: left; cursor: pointer; }
+.eh[data-ehon] .eh-qo button:disabled { cursor: default; opacity: .6; }
+.eh[data-ehon] .eh-qo button.is-ok { opacity: 1; background: #dff1e3; border-color: #2f6b4f; color: #1d4825; }
+.eh[data-ehon] .eh-qo button.is-ng { opacity: 1; background: #fbe1dc; border-color: #c0392b; color: #8a2a18; }
+.eh[data-ehon] .eh-qres { display: flex; align-items: center; gap: 12px; }
+.eh[data-ehon] .eh-qres p { margin: 0; font-size: 14px; }
+.eh[data-ehon] .eh-seal { display: grid; place-items: center; width: 54px; height: 54px; border: 4px double #c0392b; border-radius: 10px; color: #c0392b; font-family: "Shippori Mincho", serif; font-size: 28px; font-weight: 800; transform: rotate(-8deg); animation: eh-seal .4s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes eh-seal { from { transform: rotate(-8deg) scale(2.2); opacity: 0; } }
+.eh[data-ehon] .eh-dots li.is-pick { background: #b5432f; }
+.eh[data-ehon] .eh-dots li.is-q { opacity: .3; }
+.eh[data-ehon] .eh-opts .eh-voice[aria-pressed="true"] { background: #b5432f; color: #fff; border-color: #b5432f; }
+@media (prefers-reduced-motion: reduce) { .eh[data-ehon] .eh-truck, .eh[data-ehon] .eh-fire, .eh[data-ehon] .eh-stamp li.is-new b, .eh[data-ehon] .eh-pick button { animation: none !important; } }
