@@ -8,7 +8,8 @@
   if (!box || !list || !list.length) return;
   let prev = 0; try { prev = +JSON.parse(localStorage.getItem('azakei-last-visit') || '0') || 0; } catch (e) {}
   const at = d => Date.parse(d + 'T00:00:00+09:00');
-  const fresh = list.filter(p => Date.now() - at(p.date) < 14 * 864e5);
+  // トップはシンプルに：2 週間以内の新しいものから、6 件だけ（ほかは更新履歴と麻経だよりで）
+  const fresh = list.filter(p => Date.now() - at(p.date) < 14 * 864e5).slice(0, 6);
   if (!fresh.length) { box.closest('section').hidden = true; return; }
   const md = d => { const [, m, dd] = d.split('-'); return `${+m}/${+dd}`; };
   box.innerHTML = fresh.map(p => `<li><a class="npl-card is-${p.tone}" href="${p.href}">

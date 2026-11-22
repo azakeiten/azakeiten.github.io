@@ -26,7 +26,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300..700&family=Shippori+Mincho:wght@500;800&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="p-azakei.min.css?v=20261122a" />
+  <link rel="stylesheet" href="p-azakei.min.css?v=20261122b" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YQ2P951D"></script>
   <script>
@@ -355,19 +355,72 @@
     </div>
   </section>
 
+  <!-- 4 つの場面で見る麻経（スクロールすると、写真と数字が入れかわる。sty.js） -->
+  <section class="sty" id="scenes" data-sty aria-labelledby="sty-h">
+    <div class="container">
+      <div class="sty-head reveal">
+        <h2 class="sty-title" id="sty-h"><span class="keep-phrase">4 つの場面で、</span><span class="keep-phrase">麻経を。</span></h2>
+        <p class="sty-lead">教室の入口から、黒板、手づくりの飾り、そして Web へ。下へ進むと、写真が入れかわります。</p>
+      </div>
+      <div class="sty-grid">
+        <div class="sty-media">
+          <div class="sty-frame">
+            <figure class="sty-ph is-on" data-i="0"><img src="photos/s/star-door.jpg" width="800" height="600" alt="教室の入口。「入門」の札と、経の字の六芒星" loading="lazy" decoding="async"></figure>
+            <figure class="sty-ph" data-i="1"><img src="photos/s/board-millionaire.jpg" width="680" height="600" alt="黒板の「本日の億万長者」。1 位 120 枚" loading="lazy" decoding="async"></figure>
+            <figure class="sty-ph" data-i="2"><img src="photos/s/hallway-wave.jpg" width="800" height="600" alt="廊下の飾りつけ「麻経」の大波" loading="lazy" decoding="async"></figure>
+            <figure class="sty-ph" data-i="3"><img src="photos/s/room-diagnosis.jpg" width="800" height="600" alt="展示会場。エコノミスト診断のポスターと「紙展」のパネル" loading="lazy" decoding="async"></figure>
+            <p class="sty-cap" aria-hidden="true"><span class="sty-cap-no">一</span><span class="sty-cap-t">教室の入口</span></p>
+          </div>
+          <ol class="sty-rail" aria-hidden="true"><li class="is-on"></li><li></li><li></li><li></li></ol>
+        </div>
+        <ol class="sty-steps">
+          <li class="sty-step is-on" data-i="0" data-cap="教室の入口">
+            <p class="sty-no" aria-hidden="true">一</p>
+            <h3>「入門」をくぐると、<br>経済の町。</h3>
+            <p class="sty-big"><b data-count>2,364</b><small>人</small><span>2026 年の文化祭、3 日間の来場者</span></p>
+            <p>入口には「入門」の札と、経の字の六芒星。中は、チップを賭けて 6 つのコーナーで遊ぶ体験型展示「麻布経済展」です。</p>
+            <a class="sty-go" href="festival.html">文化祭のページへ</a>
+          </li>
+          <li class="sty-step" data-i="1" data-cap="黒板の「本日の億万長者」">
+            <p class="sty-no" aria-hidden="true">二</p>
+            <h3>黒板に、<br>「本日の億万長者」。</h3>
+            <p class="sty-big"><b data-count>120</b><small>枚</small><span>会場の最高記録（黒板には 24 倍と）</span></p>
+            <p>増やしたチップの枚数で、その日の上位が黒板に書かれました。Web の億万長者クイズでも、同じように挑戦できます。</p>
+            <a class="sty-go" href="quiz.html">クイズで挑戦する</a>
+          </li>
+          <li class="sty-step" data-i="2" data-cap="廊下の飾りつけ">
+            <p class="sty-no" aria-hidden="true">三</p>
+            <h3>飾りも、パネルも、<br>手づくり。</h3>
+            <p class="sty-big"><b data-count>6</b><small>コーナー</small><span>クイズ・カードゲーム・クロスワードほか</span></p>
+            <p>廊下の「麻経」の大波から、ルールのポスター、診断のパネルまで。部員が準備して、教室ひとつを会場にしました。</p>
+            <a class="sty-go" href="activities.html">活動のようすを見る</a>
+          </li>
+          <li class="sty-step" data-i="3" data-cap="展示は Web でも">
+            <p class="sty-no" aria-hidden="true">四</p>
+            <h3>展示は、<br>Web でも続く。</h3>
+            <p class="sty-big"><b data-count>300</b><small>語</small><span>用語辞典の言葉。経済ラボの実験は 29</span></p>
+            <p>エコノミスト診断・クイズに、Web 用に作ったクロスワードとカード勝負。登録なし、無料で、スマホからすぐ遊べます。</p>
+            <a class="sty-go" href="quiz.html">遊んでみる</a>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <footer id="site-footer"></footer>
 
-  <script src="curtain.js?v=20261122a"></script>
-  <script src="content.js?v=20261122a"></script>
-  <script src="layout.js?v=20261122a"></script>
-  <script src="brand.js?v=20261122a"></script>
-  <script src="live.js?v=20261122a"></script>
-  <script src="render.js?v=20261122a"></script>
-  <script src="nav.js?v=20261122a"></script>
-  <script src="reveal.js?v=20261122a"></script>
-  <script src="osatsu.js?v=20261122a"></script>
-  <script src="kisekae.js?v=20261122a"></script>
-  <script src="pagetoc.js?v=20261122a"></script>
-  <script src="site.js?v=20261122a"></script>
+  <script src="curtain.js?v=20261122b"></script>
+  <script src="content.js?v=20261122b"></script>
+  <script src="layout.js?v=20261122b"></script>
+  <script src="brand.js?v=20261122b"></script>
+  <script src="live.js?v=20261122b"></script>
+  <script src="render.js?v=20261122b"></script>
+  <script src="nav.js?v=20261122b"></script>
+  <script src="reveal.js?v=20261122b"></script>
+  <script src="osatsu.js?v=20261122b"></script>
+  <script src="kisekae.js?v=20261122b"></script>
+  <script src="pagetoc.js?v=20261122b"></script>
+  <script src="site.js?v=20261122b"></script>
+  <script src="sty.js?v=20261122b"></script>
 </body>
 </html>
