@@ -1,0 +1,77 @@
+/* 経済ラボ「お金が 2 倍になるまで」— 早算き勝負「複利の時計」（double.js が読みこむ） */
+.dg2 { margin: 0 0 22px; padding: clamp(18px, 3vw, 30px); border-radius: 28px; color: #f3eee4; background: radial-gradient(circle at 88% 10%, rgba(227, 179, 65, .22), transparent 42%), linear-gradient(150deg, #1d2b4a, #142036 60%, #0f1828); box-shadow: 0 26px 50px -30px rgba(10, 20, 40, .8); }
+.dg2 button { font: inherit; cursor: pointer; }
+.dg2-kicker { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #e3b341; }
+.dg2-h { margin: 2px 0 8px; font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: .06em; }
+.dg2-p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.85; color: #d6dcea; max-width: 40em; }
+.dg2-intro { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 32px); align-items: center; }
+.dg2-clock { position: relative; width: clamp(110px, 16vw, 160px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fffaf0 0 58%, #e3b341 59% 63%, #fffaf0 64%); box-shadow: 0 0 0 6px rgba(227, 179, 65, .25), 0 18px 30px -12px rgba(0, 0, 0, .6); display: grid; place-items: center; }
+.dg2-clock b { position: relative; z-index: 1; font-family: 'Shippori Mincho', serif; font-size: clamp(34px, 5vw, 48px); font-weight: 800; color: #1d2b4a; }
+.dg2-clock i { position: absolute; left: 50%; top: 50%; width: 3px; height: 40%; margin-left: -1.5px; background: #b5432f; opacity: .55; border-radius: 2px; transform-origin: 50% 0; transform: rotate(180deg); animation: dg2-hand 6s linear infinite; }
+@keyframes dg2-hand { to { transform: rotate(540deg); } }
+.dg2-kinds { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.dg2-kinds li { padding: 4px 12px; border-radius: 999px; background: rgba(255, 255, 255, .1); font-size: 12.5px; font-weight: 800; }
+.dg2-best { margin: 0 0 12px; font-size: 13px; color: #c9d3ee; }
+.dg2-best b { font-size: 18px; color: #ffd76a; }
+.dg2-go { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border: 0; border-radius: 14px; background: #e3b341; color: #1c2033; font-weight: 800; font-size: 16px; box-shadow: 0 5px 0 #a47a1c; transition: transform .15s, box-shadow .15s; }
+.dg2-go:hover { transform: translateY(-2px); }
+.dg2-go:active { transform: translateY(4px); box-shadow: 0 1px 0 #a47a1c; }
+.dg2-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; font-size: 13px; font-weight: 800; }
+.dg2-n { font-family: 'Shippori Mincho', serif; font-size: 18px; }
+.dg2-tag { padding: 3px 11px; border-radius: 999px; background: #e3b341; color: #1c2033; }
+.dg2-st { padding: 3px 11px; border-radius: 999px; background: #b5432f; color: #fff; animation: dg2-pop .4s cubic-bezier(.3, 1.6, .5, 1); }
+.dg2-sc { margin-left: auto; } .dg2-sc b { font-size: 20px; color: #ffd76a; }
+.dg2-time { height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .12); overflow: hidden; }
+.dg2-time i { display: block; height: 100%; background: linear-gradient(90deg, #e3b341, #ffd76a); transform-origin: left; transition: transform .1s linear; }
+.dg2-time i.is-low { background: #e0573f; }
+.dg2-q { margin: 18px 0 16px; font-family: 'Shippori Mincho', serif; font-size: clamp(19px, 2.6vw, 24px); font-weight: 800; line-height: 1.6; }
+.dg2-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.dg2-opts button { min-height: 58px; padding: 12px 14px; border-radius: 16px; border: 2px solid rgba(255, 255, 255, .18); background: rgba(255, 255, 255, .06); color: inherit; font-size: 18px; font-weight: 800; transition: transform .15s, background .15s, border-color .15s; }
+.dg2-opts button:hover:not(:disabled) { transform: translateY(-2px); border-color: #e3b341; background: rgba(227, 179, 65, .14); }
+.dg2-opts button:disabled { cursor: default; opacity: .55; }
+.dg2-opts button.is-ok { opacity: 1; border-color: #5ec27a; background: #2f7a52; color: #fff; animation: dg2-pop .45s cubic-bezier(.3, 1.6, .5, 1); }
+.dg2-opts button.is-ng { opacity: 1; border-color: #e0573f; background: rgba(224, 87, 63, .25); animation: dg2-shake .4s; }
+@keyframes dg2-pop { 0% { transform: scale(.9); } 60% { transform: scale(1.05); } }
+@keyframes dg2-shake { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
+.dg2-ex:empty { display: none; }
+.dg2-ex { margin-top: 16px; padding: 16px 18px; border-radius: 18px; background: #fffaf0; color: #2a2015; animation: dg2-up .35s ease-out; }
+@keyframes dg2-up { from { opacity: 0; transform: translateY(8px); } }
+.dg2-res { margin: 0 0 8px; font-size: 17px; font-weight: 800; }
+.dg2-res.is-ok { color: #2f7a52; } .dg2-res.is-ng { color: #b5432f; }
+.dg2-res b { font-size: 22px; } .dg2-res small { margin-left: 8px; padding: 2px 9px; border-radius: 99px; background: #b5432f; color: #fff; font-size: 12px; }
+.dg2-why { margin: 8px 0 14px; font-size: 14px; line-height: 1.85; }
+/* 年の線：2 倍・4 倍の点が左から順に灯る */
+.dg2-line { position: relative; height: 62px; margin: 18px 22px 6px 14px; }
+.dg2-line > i { position: absolute; left: 0; right: 0; top: 18px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, #e3b341, #b5432f); transform-origin: left; animation: dg2-grow .9s ease-out both; }
+@keyframes dg2-grow { from { transform: scaleX(0); } }
+.dg2-pt { position: absolute; top: 0; display: grid; justify-items: center; transform: translateX(-50%); animation: dg2-pt .4s calc(var(--k) * .3s + .2s) cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes dg2-pt { from { opacity: 0; transform: translateX(-50%) scale(.4); } }
+.dg2-pt b { display: grid; place-items: center; min-width: 40px; height: 40px; padding: 0 6px; border-radius: 99px; background: #1d2b4a; color: #ffd76a; font-size: 14px; box-shadow: 0 0 0 3px #fffaf0; }
+.dg2-pt.is-0 b { background: #8a8170; color: #fff; }
+.dg2-pt small { margin-top: 2px; font-size: 11.5px; font-weight: 800; color: #5d4e3a; white-space: nowrap; }
+.dg2-end { display: grid; gap: 10px; }
+.dg2-big { margin: 0; font-family: 'Shippori Mincho', serif; font-size: 20px; }
+.dg2-big b { display: inline-block; font-size: clamp(48px, 8vw, 72px); color: #ffd76a; line-height: 1; }
+.dg2-big small { display: block; font-family: inherit; font-size: 14px; color: #c9d3ee; }
+.dg2-title { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 20px; font-weight: 800; }
+.dg2-title span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; }
+.dg2-title em { font-style: normal; padding: 3px 10px; border-radius: 99px; background: #ffd76a; color: #1c2033; font-size: 12.5px; }
+.dg2-title small { font-size: 13px; color: #c9d3ee; }
+.dg2-log { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 6px; }
+.dg2-log li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; padding: 8px 12px; border-radius: 12px; background: rgba(255, 255, 255, .07); font-size: 13px; line-height: 1.6; }
+.dg2-log span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #2f7a52; font-weight: 800; }
+.dg2-log li.is-ng span { background: #b5432f; }
+.dg2-log p { margin: 0; } .dg2-log b { display: block; color: #ffd76a; }
+.dg2-memo { margin: 4px 0 6px; padding: 12px 14px; border-radius: 14px; background: rgba(227, 179, 65, .14); font-size: 13.5px; line-height: 1.8; }
+.dg2-end .dg2-go { justify-self: start; }
+.dg2-sub { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-size: 14px; font-weight: 800; }
+.dg2-sub span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: #2f7a52; color: #fff; font-family: 'Shippori Mincho', serif; }
+@media (max-width: 560px) {
+  .dg2 { border-radius: 22px; }
+  .dg2-intro { grid-template-columns: 64px minmax(0, 1fr); align-items: start; gap: 14px; }
+  .dg2-clock { width: 64px; box-shadow: 0 0 0 4px rgba(227, 179, 65, .25); } .dg2-clock b { font-size: 24px; }
+  .dg2-opts button { min-height: 52px; font-size: 16px; }
+  .dg2-line { margin-left: 18px; margin-right: 24px; }
+  .dg2-pt b { min-width: 34px; height: 34px; font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .dg2 *, .dg2 *::before { animation: none !important; transition: none !important; } }
