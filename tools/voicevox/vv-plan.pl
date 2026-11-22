@@ -22,7 +22,7 @@ for my $it (@$src) {
   for my $s (split_s($text)) {
     my $name = "$role-" . h36($s);
     next if $seen{$name}++;
-    push @plan, [$name, $s, fix($s)];
+    push @plan, [$name, $s, fix($s) =~ s{(?<=[^\x00-\x7F])\s+|\s+(?=[^\x00-\x7F])}{}gr];  # 日本語の前後の空白は消す（間があいて読まれないように）
   }
 }
 print JSON::PP->new->utf8(0)->canonical->pretty->encode(\@plan);
