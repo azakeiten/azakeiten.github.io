@@ -9,12 +9,19 @@
   const board = document.querySelector('[data-asobimap]');
   if (!board) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const KEY = 'azakei_play_tried';
+  /* 経済ラボ（sim.html）は labinfo.js の中身（window.AZAKEI_ASB）で、同じ形を使う */
+  const CFG = window.AZAKEI_ASB || {};
+  const T = Object.assign({ seal: '券', title: 'あそび場のきっぷ', sub: n => `${n} の遊び。気になるものから、どうぞ。`, doneWord: '遊んだ', unit: '遊び', listBtn: '遊びの一覧', endH: 'つぎは、どれで遊ぶ？', more: '遊び方をくわしく' }, CFG);
+  const KEY = CFG.key || 'azakei_play_tried';
+  const catsOf = li => (li.dataset.cat || '').split(' ');
+  const cat1 = li => catsOf(li)[0];
+  /* 色：経済ラボは、なかまの 1 つめの色（labinfo.js）。あそび場は CSS の data-cat の色 */
+  const tint = li => CFG.col && CFG.col[cat1(li)] ? ` style="background:${CFG.col[cat1(li)][0]}"` : '';
   const get = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
   let tried = []; try { tried = JSON.parse(get(KEY) || '[]'); } catch (e) {}
   const items = [...board.children];
   const href = li => li.querySelector('a').getAttribute('href');
-  const stamp = li => { const a = li.querySelector('a'); if (!a.querySelector('.am-done')) a.insertAdjacentHTML('beforeend', '<span class="am-done" aria-label="遊んだ">済</span>'); li.classList.add('is-done'); };
+  const stamp = li => { const a = li.querySelector('a'); if (!a.querySelector('.am-done')) a.insertAdjacentHTML('beforeend', `<span class="am-done" aria-label="${T.doneWord}">済</span>`); li.classList.add('is-done'); };
   items.forEach(li => {
     const a = li.querySelector('a');
     a.insertAdjacentHTML('afterbegin', '<i class="am-perf" aria-hidden="true"></i>');
@@ -39,15 +46,15 @@
     sec.addEventListener('click', mark, true); sec.addEventListener('input', mark, true);
   });
 
-  const CATS = [['all', 'すべて'], ['game', 'クイズとゲーム'], ['money', 'お金のしくみ'], ['life', 'くらしと社会'], ['make', 'つくる']];
-  const cnt = k => k === 'all' ? items.length : items.filter(li => li.dataset.cat === k).length;
+  const CATS = CFG.cats || [['all', 'すべて'], ['game', 'クイズとゲーム'], ['money', 'お金のしくみ'], ['life', 'くらしと社会'], ['make', 'つくる']];
+  const cnt = k => k === 'all' ? items.length : items.filter(li => catsOf(li).includes(k)).length;
   const R = 24, LEN = 2 * Math.PI * R;
   const head = document.createElement('div');
   head.className = 'am-head';
-  head.innerHTML = `<div class="am-top"><p class="am-title"><span class="am-ticket" aria-hidden="true">券</span><b>あそび場のきっぷ</b><small>${items.length} の遊び。気になるものから、どうぞ。</small></p>
-    <div class="am-prog"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="${R}" class="am-ring-bg"/><circle cx="30" cy="30" r="${R}" class="am-ring" style="stroke-dasharray:${LEN.toFixed(1)};stroke-dashoffset:${LEN.toFixed(1)}"/></svg><p><b data-am="n">0</b><small>/ ${items.length} 遊んだ</small></p></div>
+  head.innerHTML = `<div class="am-top"><p class="am-title"><span class="am-ticket" aria-hidden="true">${T.seal}</span><b>${T.title}</b><small>${T.sub(items.length)}</small></p>
+    <div class="am-prog"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="${R}" class="am-ring-bg"/><circle cx="30" cy="30" r="${R}" class="am-ring" style="stroke-dasharray:${LEN.toFixed(1)};stroke-dashoffset:${LEN.toFixed(1)}"/></svg><p><b data-am="n">0</b><small>/ ${items.length} ${T.doneWord}</small></p></div>
     <a class="am-next" href="#" data-am="next"><small>次はこれ</small><span class="am-s" data-am="ns"></span><b data-am="nn"></b><i aria-hidden="true">→</i></a></div>
-    <div class="am-chips" role="group" aria-label="遊びのなかま">${CATS.map(([k, t], i) => `<button type="button" data-c="${k}" aria-pressed="${i === 0}">${t}<small>${cnt(k)}</small></button>`).join('')}</div>`;
+    <div class="am-chips" role="group" aria-label="${T.unit}のなかま">${CATS.map(([k, t], i) => `<button type="button" data-c="${k}" aria-pressed="${i === 0}">${t}<small>${cnt(k)}</small></button>`).join('')}</div>`;
   board.before(head);
   const H = k => head.querySelector(`[data-am="${k}"]`);
   function refresh() {
@@ -57,14 +64,14 @@
     head.classList.toggle('is-all', done === items.length);
     const nx = items.find(li => li.hasAttribute('data-new') && !li.classList.contains('is-done')) || items.find(li => !li.classList.contains('is-done'));
     const a = H('next'); a.hidden = !nx;
-    if (nx) { a.href = href(nx); H('ns').textContent = nx.querySelector('.am-s').textContent; H('nn').textContent = nx.querySelector('b').textContent; a.dataset.cat = nx.dataset.cat; }
+    if (nx) { a.href = href(nx); H('ns').textContent = nx.querySelector('.am-s').textContent; H('nn').textContent = nx.querySelector('b').textContent; a.dataset.cat = nx.dataset.cat; const ns = H('ns'); if (CFG.col) ns.style.background = CFG.col[cat1(nx)][0]; }
   }
   refresh();
   head.addEventListener('click', e => {
     const c = e.target.closest('[data-c]'); if (!c) return;
     head.querySelectorAll('[data-c]').forEach(b => b.setAttribute('aria-pressed', b === c));
     items.forEach((li, i) => {
-      const on = c.dataset.c === 'all' || li.dataset.cat === c.dataset.c;
+      const on = c.dataset.c === 'all' || catsOf(li).includes(c.dataset.c);
       li.hidden = !on;
       if (on && !reduce) { li.classList.remove('is-in'); void li.offsetWidth; li.style.setProperty('--d', (i % 8) * 35 + 'ms'); li.classList.add('is-in'); }
     });
@@ -77,7 +84,7 @@
      ・上の帯で「一覧へもどる」「前の遊び」「次の遊び」。ブラウザの「戻る」でも一覧へ
      ・quiz.html#jika のように、ほかのページからも直接その遊びへ
      ================================================================ */
-  const INFO = {
+  const INFO = CFG.info || {
     quiz: ['約 5 分', '1 人', 'ふつう', 'ニュースの読み方・リスクとリターン'],
     crossword: ['約 10 分', '1 人', 'じっくり', '経済のことば（約 50 語から、毎回 10〜12 語）'],
     cardgame: ['約 6 分', '1 人', 'じっくり', '確率と期待値・リスクと倍率・お金の置き場所'],
@@ -105,9 +112,9 @@
     taikai: ['授業 1 コマ', '班で', 'やさしい', 'クラスで経済クイズ'],
     make: ['約 10 分', '1 人〜', 'じっくり', 'よい問題のつくり方・説明する力']
   };
-  const CATN = { game: 'クイズとゲーム', money: 'お金のしくみ', life: 'くらしと社会', make: 'つくる' };
+  const CATN = CFG.catn || { game: 'クイズとゲーム', money: 'お金のしくみ', life: 'くらしと社会', make: 'つくる' };
   /* カードのいちばん上に出す「つかみの一言」（遊びの中身に合わせて） */
-  const HOOK = {
+  const HOOK = CFG.hook || {
     quiz: '何枚賭ける？ 会場の最高記録 120 枚をこえろ',
     crossword: '遊ぶたびに盤が変わる。今日の問題に挑戦',
     cardgame: '好景気 70%。取材する？ 株を ×3 で賭ける？',
@@ -142,12 +149,12 @@
   const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   board.classList.add('am-rich');
   items.forEach((li, i) => {
-    const a = li.querySelector('a'), inf = INFO[ids[i]] || ['', '1 人', '', ''], lead = leadOf(secs[i]) || (ids[i] === 'quiz' ? 'チップ 5 枚から 5 ラウンド。毎回、賭ける枚数とむずかしさ（かんたん・普通・激ムズ）を決めて 2 問に答え、正解の数で倍率がかかります。おたすけは「50:50」と「問題チェンジ」。新聞の記事を読んでから賭けるニュースモードも。' : '');
+    const a = li.querySelector('a'), inf = INFO[ids[i]] || ['', '1 人', '', ''], lead = leadOf(secs[i]) || (CFG.desc || {})[ids[i]] || (ids[i] === 'quiz' ? 'チップ 5 枚から 5 ラウンド。毎回、賭ける枚数とむずかしさ（かんたん・普通・激ムズ）を決めて 2 問に答え、正解の数で倍率がかかります。おたすけは「50:50」と「問題チェンジ」。新聞の記事を読んでから賭けるニュースモードも。' : '');
     /* v319：ゲームの箱のようなカード（上に色の帯と大きな一字、つかみの一言、短い説明、時間・人数・むずかしさ、大きな「はじめる」） */
     const seal = a.querySelector('.am-s'), title = a.querySelector('b'), sub = a.querySelector('small'), lv = { 'やさしい': 1, 'ふつう': 2, 'じっくり': 3 }[inf[2]] || 0;
     a.querySelector('.am-perf')?.remove();
     const box = document.createElement('span'); box.className = 'am-box';
-    box.innerHTML = `<span class="am-wm" aria-hidden="true">${seal.textContent}</span><span class="am-cat">${CATN[li.dataset.cat] || ''}</span>${inf[0] ? `<span class="am-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${inf[0]}</span>` : ''}`;
+    box.innerHTML = `<span class="am-wm" aria-hidden="true">${seal.textContent}</span><span class="am-cat">${CATN[cat1(li)] || ''}${CFG.col && cat1(li) !== 'game' && catsOf(li).includes('game') ? '・ゲーム' : ''}</span>${inf[0] ? `<span class="am-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${inf[0]}</span>` : ''}`;
     box.prepend(seal);
     const body = document.createElement('span'); body.className = 'am-body';
     body.append(title);
@@ -157,11 +164,12 @@
     a.prepend(box); box.after(body);
     a.insertAdjacentHTML('beforeend', '<span class="am-go"><i aria-hidden="true"></i>はじめる</span>');
     a.setAttribute('aria-label', `${a.querySelector('b').textContent}をはじめる`);
+    if (CFG.col && CFG.col[cat1(li)]) { li.style.setProperty('--c', CFG.col[cat1(li)][0]); li.style.setProperty('--c2', CFG.col[cat1(li)][1]); }
   });
   const hero = document.querySelector('.page-hero'), wrap = board.closest('.am-wrap');
   secs.forEach(s => s && s.classList.add('asb-game'));
   document.body.classList.add('asb-on');
-  const bar = document.createElement('div'); bar.className = 'asb-bar'; bar.setAttribute('role', 'navigation'); bar.setAttribute('aria-label', '遊びの切りかえ');
+  const bar = document.createElement('div'); bar.className = 'asb-bar'; bar.setAttribute('role', 'navigation'); bar.setAttribute('aria-label', `${T.unit}の切りかえ`);
   const end = document.createElement('div'); end.className = 'asb-end';
   let cur = -1, fromList = false;
   const cardOf = i => items[i];
@@ -173,21 +181,21 @@
     document.body.classList.add('asb-play');
     const prev = (i + items.length - 1) % items.length, next = (i + 1) % items.length;
     const nm = j => items[j].querySelector('b').textContent, sl = j => items[j].querySelector('.am-s').textContent;
-    bar.innerHTML = `<button type="button" class="asb-back" data-asb="list"><i aria-hidden="true">←</i>遊びの一覧</button>
-      <p class="asb-now"><span class="am-s" data-cat="${li.dataset.cat}">${sl(i)}</span><span><small>${i + 1} / ${items.length}${inf[0] ? '・' + inf[0] : ''}</small><b>${nm(i)}</b></span></p>
+    bar.innerHTML = `<button type="button" class="asb-back" data-asb="list"><i aria-hidden="true">←</i>${T.listBtn}</button>
+      <p class="asb-now"><span class="am-s" data-cat="${li.dataset.cat}"${tint(li)}>${sl(i)}</span><span><small>${i + 1} / ${items.length}${inf[0] ? '・' + inf[0] : ''}</small><b>${nm(i)}</b></span></p>
       <span class="asb-pn"><a href="#${ids[prev]}" title="${nm(prev)}"><i aria-hidden="true">‹</i>前</a><a href="#${ids[next]}" title="${nm(next)}">次<i aria-hidden="true">›</i></a></span>`;
     const pick = [1, 2, 3].map(k => (i + k) % items.length);
-    end.innerHTML = `<p class="asb-end-h">つぎは、どれで遊ぶ？</p><ul>${pick.map(j => `<li data-cat="${items[j].dataset.cat}"><a href="#${ids[j]}"><span class="am-s">${sl(j)}</span><b>${nm(j)}</b><small>${(INFO[ids[j]] || [''])[0]}</small></a></li>`).join('')}</ul><button type="button" class="asb-back" data-asb="list"><i aria-hidden="true">←</i>遊びの一覧へもどる</button>`;
+    end.innerHTML = `<p class="asb-end-h">${T.endH}</p><ul>${pick.map(j => `<li data-cat="${items[j].dataset.cat}"><a href="#${ids[j]}"><span class="am-s"${tint(items[j])}>${sl(j)}</span><b>${nm(j)}</b><small>${(INFO[ids[j]] || [''])[0]}</small></a></li>`).join('')}</ul><button type="button" class="asb-back" data-asb="list"><i aria-hidden="true">←</i>${T.listBtn}へもどる</button>`;
     s.before(bar); s.after(end);
     // 遊んでいるあいだは、見出しを出さず（上の帯に名前がある）、説明は 2 行にたたむ。「遊び方をくわしく」で開く
     const head = s.querySelector('.section-head'), lead = head && head.querySelector('.lead');
-    if (lead && !head.querySelector('.asb-more')) { head.classList.add('asb-fold'); lead.insertAdjacentHTML('afterend', '<button type="button" class="asb-more" aria-expanded="false">遊び方をくわしく</button>'); }
+    if (lead && !head.querySelector('.asb-more')) { head.classList.add('asb-fold'); lead.insertAdjacentHTML('afterend', `<button type="button" class="asb-more" aria-expanded="false">${T.more}</button>`); }
     if (!reduce) { s.classList.remove('asb-in'); void s.offsetWidth; s.classList.add('asb-in'); }
     // 遊びの区画の上が、上の帯のすぐ下に来るように（帯は上に貼りつくので、帯の位置ではなく区画の位置で合わせる）
     requestAnimationFrame(() => { const nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64; scrollTo({ top: Math.max(0, s.getBoundingClientRect().top + scrollY - nav - bar.offsetHeight), behavior: 'auto' }); });
     if (how !== 'load') { try { s.querySelector('button, a[href], input, [tabindex]')?.focus({ preventScroll: true }); } catch (e) {} }
   };
-  document.addEventListener('click', e => { const m = e.target.closest('.asb-more'); if (!m) return; const h = m.closest('.section-head'), open = !h.classList.contains('is-open'); h.classList.toggle('is-open', open); m.setAttribute('aria-expanded', open); m.textContent = open ? '説明をたたむ' : '遊び方をくわしく'; });
+  document.addEventListener('click', e => { const m = e.target.closest('.asb-more'); if (!m) return; const h = m.closest('.section-head'), open = !h.classList.contains('is-open'); h.classList.toggle('is-open', open); m.setAttribute('aria-expanded', open); m.textContent = open ? '説明をたたむ' : T.more; });
   const list = () => {
     if (cur < 0) return;
     const was = cur; cur = -1;

@@ -9462,3 +9462,12 @@ section.asb-game { scroll-margin-top: calc(var(--nav-h, 64px) + 64px); }
   .hero .hero-today { margin-top: 12px; }
   .hero .hero-days { margin-top: 12px; }
 }
+
+/* ---- v339：経済ラボも「実験のきっぷ」（カード一覧 → はじめるで 1 つずつ開く。asobimap.js ＋ labinfo.js） ---- */
+html.asb-pre body > section.asb-keep { display: block; }
+html.asb-pre body.asb-play > section.asb-keep, html.asb-pre-play body > section.asb-keep { display: none; }
+.am[data-asobimap="lab"] ~ .rs-link, .am-wrap .rs-link { margin-top: 22px; }
+[data-asobimap="lab"] .am-new { background: #ffd76a; }
+.am-wrap:has([data-asobimap="lab"]) .am-top { background: linear-gradient(135deg, #1c2b23, #1f3a33 55%, #20324a); }
+.am-wrap:has([data-asobimap="lab"]) .am-ticket { background: #f3eee4; color: #1c2b23; }
+.am-wrap:has([data-asobimap="lab"]) .am-chips button[aria-pressed="true"] { background: #1c2b23; border-color: #1c2b23; }
