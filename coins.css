@@ -85,3 +85,10 @@
   .cn[data-coins] .ct-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { .cn[data-coins] * { animation: none !important; transition: none !important; } }
+/* スマホ：地図とパスポートを横に並べて低く、遊ぶ場所を早く */
+@media (max-width: 720px) {
+  .cn[data-coins] .ct-top { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 8px; }
+  .cn[data-coins] .ct-pass { padding: 8px; } .cn[data-coins] .ct-ph { font-size: 13px; margin-bottom: 4px; }
+  .cn[data-coins] .ct-stamps { grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 4px; }
+}
+.cn[data-coins] .ct-grid small { font-size: 11px; }

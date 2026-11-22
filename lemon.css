@@ -88,3 +88,4 @@
 .fm[data-lemon] .fm-st.is-info.is-good .fm-ph-s { fill: #6fb3d8; } .fm[data-lemon] .fm-st.is-info.is-good .fm-shine { opacity: .45; }
 .fm[data-lemon] .fm-st.is-info.is-bad .fm-crack { opacity: 1; } .fm[data-lemon] .fm-st.is-info.is-bad .fm-ph-s { fill: #4a3a3a; }
 .fm[data-lemon] .fm-pickhint { background: #eef7ec; color: #2f6b3a; }
+.fm[data-lemon] .fm-got span { font-size: 11.5px; } .fm[data-lemon] .fm-reset { min-height: 36px; }

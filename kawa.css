@@ -59,3 +59,4 @@
 @media (max-width: 900px) { .kw[data-kawa] { grid-template-columns: minmax(0, 1fr); } .kw[data-kawa] .kw-learn { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .kw[data-kawa] .kw-hud b { font-size: 18px; } .kw[data-kawa] .kw-hud p { padding: 4px 8px; } }
 @media (prefers-reduced-motion: reduce) { .kw[data-kawa] *, .kw-smoke circle, .kw-f { animation: none !important; transition: none !important; } }
+.kw[data-kawa] .kw-hud small { font-size: 11px; }

@@ -185,3 +185,6 @@
 @media (prefers-reduced-motion: reduce) { .ot[data-otsuri] *, .ot[data-otsuri] *::before { animation: none !important; transition: none !important; } }
 :root[data-theme="dark"] .ot[data-otsuri] .ot-msg.is-ok { color: #8be0a4; } :root[data-theme="dark"] .ot[data-otsuri] .ot-msg.is-ng { color: #ff9a85; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ot[data-otsuri] .ot-msg.is-ok { color: #8be0a4; } :root:not([data-theme="light"]) .ot[data-otsuri] .ot-msg.is-ng { color: #ff9a85; } }
+/* すぐ遊べるように：「開店する」を見出しのすぐ下に */
+.ot[data-otsuri] .ot-intro { display: flex; flex-direction: column; }
+.ot[data-otsuri] .ot-ih { order: -2; } .ot[data-otsuri] .ot-ifoot { order: -1; margin: 0 0 14px; }

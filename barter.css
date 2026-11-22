@@ -98,3 +98,6 @@
 @media (prefers-reduced-motion: reduce) { .bt[data-barter] *, .bt[data-barter]::before { animation: none !important; transition: none !important; } }
 .bt[data-barter] .bt-links a { padding: 6px 14px; border-radius: 999px; border: 2px solid #2a6b62; color: #2a6b62; text-decoration: none; }
 .bt[data-barter] .bt-links a:hover { background: #2a6b62; color: #fff; }
+/* 「島へ行く」を、決まりの前に */
+.bt[data-barter] .bt-intro { display: flex; flex-direction: column; align-items: center; }
+.bt[data-barter] .bt-intro .bt-go { order: 1; margin-bottom: 4px; } .bt[data-barter] .bt-intro .bt-rules { order: 2; }

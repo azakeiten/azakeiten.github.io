@@ -111,3 +111,4 @@
   .zd[data-zeidan] .zg-ch button { padding: 12px; font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) { .zd[data-zeidan] .zd-game * { animation: none !important; transition: none !important; } }
+.zd[data-zeidan] .zd-pre button { min-height: 36px; }

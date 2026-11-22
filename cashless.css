@@ -60,3 +60,5 @@
 @media (max-width: 900px) { .cl[data-cashless] { grid-template-columns: minmax(0, 1fr); } .cl[data-cashless] .cl-learn { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .cl[data-cashless] .cl-grid { grid-template-columns: repeat(10, 1fr); } .cl[data-cashless] .cl-stick { margin-left: 0; } }
 @media (prefers-reduced-motion: reduce) { .cl[data-cashless] * { animation: none !important; transition: none !important; } }
+/* スマホでも、100 人のお客さんの点を小さく 1 画面に */
+@media (max-width: 520px) { .cl[data-cashless] .cl-grid { grid-template-columns: repeat(20, 1fr); gap: 2px; padding: 6px; } }

@@ -107,3 +107,5 @@
   .me[data-moneyevo] .me-tl { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) { .me[data-moneyevo] * { animation: none !important; transition: none !important; } }
+/* スマホ：はじめの画面の大きな絵は省いて、「はじめる」を早く */
+@media (max-width: 680px) { .me[data-moneyevo] .me-intro .me-art.is-big { display: none; } }

@@ -104,3 +104,5 @@
 .ky[data-kyuyo] .ky-k-rk { font-family: "Shippori Mincho", serif; font-size: 28px !important; font-weight: 800; color: #ffd76a; }
 .ky[data-kyuyo] .ky-k-tip { padding: 8px 12px; border-left: 4px solid #ffd76a; background: rgba(255, 255, 255, .06); border-radius: 0 10px 10px 0; }
 @media (prefers-reduced-motion: reduce) { .ky[data-kyuyo] .ky-k-opts button.is-ng { animation: none; } }
+/* スマホ：問題を明細の上に出して、すぐ答えられるように（答えると下の明細が動く） */
+@media (max-width: 520px) { .ky[data-kyuyo] { display: flex; flex-direction: column; } .ky[data-kyuyo] .ky-side { order: -1; } .ky[data-kyuyo] .ky-row small { font-size: 11px; } }

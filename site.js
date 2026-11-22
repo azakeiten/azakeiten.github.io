@@ -1127,8 +1127,11 @@ try {
   const fix = () => {
     const el = document.getElementById(id);
     if (!el || touched || !el.getClientRects().length) return;
+    // あそび場で遊んでいるときは、上の帯の分もあける
+    const bar = el.classList.contains('asb-game') && document.querySelector('.asb-bar');
+    const off = bar ? (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64) + bar.offsetHeight : 80;
     const top = el.getBoundingClientRect().top;
-    if (Math.abs(top - 80) > 40) scrollTo({ top: scrollY + top - 80, behavior: 'instant' });
+    if (Math.abs(top - off) > 40) scrollTo({ top: scrollY + top - off, behavior: 'instant' });
     // 着いた場所のフェードインは待たせずに、すぐ見せる
     document.querySelectorAll('.reveal:not(.visible)').forEach(r => { const b = r.getBoundingClientRect(); if (b.top < innerHeight && b.bottom > 0) { r.style.transition = 'none'; r.classList.add('visible'); requestAnimationFrame(() => { r.style.transition = ''; }); } });
   };
@@ -1382,7 +1385,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261122b';
+  const V = '20261122g';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1408,7 +1411,7 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-tour]'); if (!b) return;
   e.preventDefault();
   if (window.AZAKEI_TOUR) { window.AZAKEI_TOUR.start(); return; }
-  const s = document.createElement('script'); s.src = 'tour.js?v=20261122b'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
+  const s = document.createElement('script'); s.src = 'tour.js?v=20261122g'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
 });
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */

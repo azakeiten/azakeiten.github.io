@@ -120,3 +120,4 @@
 .sg[data-sugo] .sg-tips li { padding: 8px 12px; border-left: 3px solid #ffd76a; border-radius: 0 10px 10px 0; background: rgba(255, 255, 255, .07); font-size: 12.5px; line-height: 1.7; }
 .sg[data-sugo].is-over .sg-fc { display: none; }
 @media (max-width: 560px) { .sg[data-sugo] .sg-die { width: 24px; height: 24px; padding: 3px; gap: 1px; } .sg[data-sugo] .sg-choice button small { font-size: 10px; } }
+.sg[data-sugo] .sg-mv button { min-height: 36px; }

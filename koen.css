@@ -78,3 +78,4 @@
 @media (max-width: 900px) { .pk[data-koen] { grid-template-columns: minmax(0, 1fr); } .pk[data-koen] .pk-learn { grid-template-columns: 1fr; } }
 @media (max-width: 520px) { .pk[data-koen] .pk-ppl { gap: 3px; padding: 6px; } .pk[data-koen] .pk-ppl b { font-size: 9.5px; } .pk[data-koen] .pk-result { flex-direction: column; } .pk[data-koen] .pk-r-nums { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .pk[data-koen] *, .pk-part, .pk-coin { animation: none !important; transition: none !important; } }
+.pk[data-koen] .pk-ppl b { font-size: 11px; }

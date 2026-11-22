@@ -179,10 +179,15 @@
     const pick = [1, 2, 3].map(k => (i + k) % items.length);
     end.innerHTML = `<p class="asb-end-h">つぎは、どれで遊ぶ？</p><ul>${pick.map(j => `<li data-cat="${items[j].dataset.cat}"><a href="#${ids[j]}"><span class="am-s">${sl(j)}</span><b>${nm(j)}</b><small>${(INFO[ids[j]] || [''])[0]}</small></a></li>`).join('')}</ul><button type="button" class="asb-back" data-asb="list"><i aria-hidden="true">←</i>遊びの一覧へもどる</button>`;
     s.before(bar); s.after(end);
+    // 遊んでいるあいだは、見出しを出さず（上の帯に名前がある）、説明は 2 行にたたむ。「遊び方をくわしく」で開く
+    const head = s.querySelector('.section-head'), lead = head && head.querySelector('.lead');
+    if (lead && !head.querySelector('.asb-more')) { head.classList.add('asb-fold'); lead.insertAdjacentHTML('afterend', '<button type="button" class="asb-more" aria-expanded="false">遊び方をくわしく</button>'); }
     if (!reduce) { s.classList.remove('asb-in'); void s.offsetWidth; s.classList.add('asb-in'); }
-    requestAnimationFrame(() => bar.scrollIntoView({ behavior: 'auto', block: 'start' }));
+    // 遊びの区画の上が、上の帯のすぐ下に来るように（帯は上に貼りつくので、帯の位置ではなく区画の位置で合わせる）
+    requestAnimationFrame(() => { const nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64; scrollTo({ top: Math.max(0, s.getBoundingClientRect().top + scrollY - nav - bar.offsetHeight), behavior: 'auto' }); });
     if (how !== 'load') { try { s.querySelector('button, a[href], input, [tabindex]')?.focus({ preventScroll: true }); } catch (e) {} }
   };
+  document.addEventListener('click', e => { const m = e.target.closest('.asb-more'); if (!m) return; const h = m.closest('.section-head'), open = !h.classList.contains('is-open'); h.classList.toggle('is-open', open); m.setAttribute('aria-expanded', open); m.textContent = open ? '説明をたたむ' : '遊び方をくわしく'; });
   const list = () => {
     if (cur < 0) return;
     const was = cur; cur = -1;
