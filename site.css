@@ -9448,3 +9448,17 @@ section.asb-game { scroll-margin-top: calc(var(--nav-h, 64px) + 64px); }
 .asb-play .asb-bar { margin-top: var(--nav-h, 64px); }
 .asb-game.is-playing .section-head.asb-fold .section-label { display: none !important; }
 .asb-play section.asb-game.is-playing .section-head.asb-fold { padding-top: 12px; }
+
+/* ---- v338：スマホの最初の画面（上が切れない・3 つの入口は横 1 列） ---- */
+@media (max-width: 560px) {
+  /* 中身が 1 画面より高いときは、上を切らずに伸ばす（上のメニューの下から始める） */
+  .hero { height: auto; min-height: 100svh; }
+  .is-apple .hero-content { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  /* 3 つの入口：アイコンと名前だけを横に 3 つ */
+  .hero .hero-doors { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; gap: 8px; margin-top: 4px; }
+  .hero .hero-door { grid-template-columns: 1fr; grid-template-rows: auto auto; justify-items: center; gap: 6px; padding: 12px 6px 10px; text-align: center; border-radius: 16px; }
+  .hero .hero-door span { grid-row: auto; width: 40px; height: 40px; font-size: 21px; }
+  .hero .hero-door b { font-size: 14px; } .hero .hero-door small { display: none; }
+  .hero .hero-today { margin-top: 12px; }
+  .hero .hero-days { margin-top: 12px; }
+}
