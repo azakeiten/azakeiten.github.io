@@ -109,3 +109,15 @@
 @media (prefers-reduced-motion: reduce) { .me[data-moneyevo] * { animation: none !important; transition: none !important; } }
 /* スマホ：はじめの画面の大きな絵は省いて、「はじめる」を早く */
 @media (max-width: 680px) { .me[data-moneyevo] .me-intro .me-art.is-big { display: none; } }
+/* おまけ：これからのお金（暗号資産と中央銀行デジタル通貨） */
+.me[data-moneyevo] .me-fut { width: 100%; max-width: 640px; display: grid; gap: 8px; margin: 6px 0; padding: 16px; border-radius: 18px; background: linear-gradient(160deg, #18213a, #111829); box-shadow: inset 0 0 0 1px rgba(242, 184, 75, .35); text-align: left; }
+.me[data-moneyevo] .me-fut .me-k { color: #f2b84b; }
+.me[data-moneyevo] .me-fq { margin: 0; font-size: 14.5px; line-height: 1.75; } .me[data-moneyevo] .me-fq b { color: #f2b84b; }
+.me[data-moneyevo] .me-fch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.me[data-moneyevo] .me-fch button { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; border: 2px solid rgba(255, 255, 255, .2); background: rgba(255, 255, 255, .05); color: #e8eef7; font-size: 14px; text-align: left; transition: transform .15s, border-color .15s; }
+.me[data-moneyevo] .me-fch button:hover:not(:disabled) { transform: translateY(-2px); border-color: #f2b84b; }
+.me[data-moneyevo] .me-fch span { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #f2b84b; color: #18213a; font-family: "Shippori Mincho", serif; font-weight: 800; }
+.me[data-moneyevo] .me-fch button.is-ok { border-color: #2f9a6a; background: rgba(47, 154, 106, .3); } .me[data-moneyevo] .me-fch button.is-off { opacity: .5; }
+.me[data-moneyevo] .me-fa p { margin: 0 0 8px; font-size: 13.5px; line-height: 1.8; } .me[data-moneyevo] .me-fa b { display: block; color: #7fe0ae; }
+.me[data-moneyevo] .me-fa .me-try { display: inline-flex; padding: 8px 14px; border-radius: 999px; background: #f2b84b; color: #18213a; font-weight: 800; font-size: 13.5px; text-decoration: none; }
+@media (max-width: 560px) { .me[data-moneyevo] .me-fch { grid-template-columns: 1fr; } }

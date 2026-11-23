@@ -11,7 +11,7 @@
 (function () {
   const box = document.querySelector('[data-crypto]');
   if (!box) return;
-  if (!document.querySelector('link[href^="crypto.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'crypto.css?v=20261123b'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="crypto.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'crypto.css?v=20261124a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_crypto';
   /* 指紋（ハッシュ）：文字列 → 16 進 8 けた */

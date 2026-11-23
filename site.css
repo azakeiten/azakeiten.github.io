@@ -9471,3 +9471,7 @@ html.asb-pre body.asb-play > section.asb-keep, html.asb-pre-play body > section.
 .am-wrap:has([data-asobimap="lab"]) .am-top { background: linear-gradient(135deg, #1c2b23, #1f3a33 55%, #20324a); }
 .am-wrap:has([data-asobimap="lab"]) .am-ticket { background: #f3eee4; color: #1c2b23; }
 .am-wrap:has([data-asobimap="lab"]) .am-chips button[aria-pressed="true"] { background: #1c2b23; border-color: #1c2b23; }
+
+/* ---- v345：用語辞典から経済ラボの実験へ（暗号資産・ブロックチェーン） ---- */
+.gl-item dd .gl-try { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 4px 12px; border-radius: 999px; background: #18213a; color: #f2b84b; font-size: 12.5px; font-weight: 800; text-decoration: none; }
+.gl-item dd .gl-try::before { content: "試"; display: grid; place-items: center; width: 18px; height: 18px; border-radius: 5px; background: #f2b84b; color: #18213a; font-family: "Shippori Mincho", serif; font-size: 11px; }

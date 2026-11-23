@@ -111,12 +111,21 @@
       <p class="me-sum">困りごと：一回で解決 ${G.first} / 5・年表：${timeout ? `時間切れ（${G.next} / 6）` : `${sec.toFixed(1)} 秒・まちがい ${G.wrong} 回`}</p>
       <div class="me-tl">${S.map((s, i) => `<div><div class="me-art" aria-hidden="true">${ART[s[0]]}</div><p><span>${s[1]}</span><b>${s[2]}</b></p></div>`).join('')}</div>
       <p class="me-x">お金は、そのときの人の「困りごと」を解決するために形を変えてきました。どの形でも大事なのは、みんなが「これで払える」と信じていることです。</p>
+      <div class="me-fut"><p class="me-k">おまけ：これからのお金は？</p><p class="me-fq">「電子のお金」の先に、新しいデジタルのお金が 2 つあります。<b>国（中央銀行）が発行する</b>のは、どっち？</p>
+      <div class="me-fch"><button type="button" data-fut="0"><span aria-hidden="true">暗</span>ビットコインなどの<b>暗号資産</b></button><button type="button" data-fut="1"><span aria-hidden="true">央</span><b>中央銀行デジタル通貨</b></button></div><div class="me-fa" aria-live="polite"></div></div>
       <button type="button" class="me-go" data-go="start">もう一度</button></div>`;
   };
 
   box.addEventListener('click', e => {
     const g = e.target.closest('[data-go]');
     if (g) { const v = g.dataset.go; if (v === 'start') start(); else if (v === 'next') scene(); else if (v === 'order') order(); const r = box.getBoundingClientRect(); if (r.top < 0) box.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' }); return; }
+    const fu = e.target.closest('[data-fut]');
+    if (fu && !fu.disabled) {
+      const ok = fu.dataset.fut === '1';
+      box.querySelectorAll('[data-fut]').forEach(b => { b.disabled = true; b.classList.add(b.dataset.fut === '1' ? 'is-ok' : 'is-off'); });
+      box.querySelector('.me-fa').innerHTML = `<p><b>${ok ? '正解！' : '答えは「中央銀行デジタル通貨」'}</b>中央銀行デジタル通貨は、円などの国のお金そのものをデジタルにしたもの。日本銀行も実験を進めています。ビットコインは 2009 年に動きはじめた暗号資産で、国や中央銀行は発行していません。世界中のコンピューターが同じ台帳を持ちあって記録し、値段は大きく上下します。</p><a class="me-try" href="sim.html#crypto">経済ラボで、ビットコインの台帳を書きかえてみる</a>`;
+      return;
+    }
     if (!G) return;
     const c = e.target.closest('.me-ch [data-k]'); if (c) { choose(+c.dataset.k); return; }
     const o = e.target.closest('.me-pool [data-o]'); if (o) tapOrder(+o.dataset.o);
