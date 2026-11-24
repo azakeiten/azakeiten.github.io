@@ -74,3 +74,119 @@
   };
   ask();
 })();
+
+/* ================================================================
+   v349：「為替ニュース速報 40 秒」— レートが動いた！ この人にとって、うれしい？ こまる？
+   ・ニュースは「1 ドル＝140 円 → 160 円」のように数字だけ。円安か円高かは、自分で読む
+   ・出てくる人（12 人）に、うれしい／こまるを答える。続けて正解すると倍率アップ。まちがえると 3 秒へる
+   ・終わったら、まちがえた人と理由、「円安で得する人・困る人」の表
+   ・レートと人は、しくみを見るための「たとえ」。自己ベストは azakei_fx_best
+   ================================================================ */
+(function () {
+  const box = document.querySelector('[data-fx]');
+  if (!box) return;
+  if (!document.querySelector('link[href^="fxgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'fxgame.css?v=20261124e'; document.head.appendChild(l); }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const KEY = 'azakei_fx_best', TIME = 40;
+  const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
+  /* [一字, だれ, 円安のとき（+1 うれしい / -1 こまる）, 円安のときの理由, 円高のときの理由] */
+  const W = [
+    ['旅', 'アメリカへ家族旅行に行く人', -1, 'ドルが高くなるので、ホテルや食事の代金を円にすると高くなる。', 'ドルが安くなるので、旅行の代金を円にすると安くなる。'],
+    ['観', '日本に来る外国人の観光客', 1, '自分の国のお金を円に換えると、たくさんの円になる。日本での買い物が割安に。', '自分の国のお金を円に換えると少ない円にしかならず、日本での買い物が割高に。'],
+    ['車', '車をアメリカに輸出する会社', 1, '同じ 1 台をドルで売っても、円に直すと多くのお金が入る。', '同じ 1 台をドルで売っても、円に直すと入るお金がへる。'],
+    ['麦', '輸入した小麦でパンを作るパン屋さん', -1, '小麦はドルで買うので、円で払う仕入れ代が上がる。', '小麦はドルで買うので、円で払う仕入れ代が下がる。'],
+    ['遊', '海外のゲームをダウンロードで買う人', -1, 'ドルで値段が決まっているので、円で払う金額が上がる。', 'ドルで決まった値段を円で払うと、金額が下がる。'],
+    ['宿', '外国からのお客さんが多い温泉旅館', 1, '外国人観光客がふえやすく、予約がふえる。', '外国人観光客にとって日本が割高になり、お客さんがへりやすい。'],
+    ['油', 'トラックで荷物を運ぶ運送会社', -1, 'ガソリンのもとになる原油は輸入。燃料代が上がる。', '原油の輸入代が下がり、燃料代が下がる。'],
+    ['株', 'アメリカの会社の株を持っている人', 1, 'ドルの値打ちが上がるので、円に直すと金額がふえる。', 'ドルの値打ちが下がるので、円に直すと金額がへる。'],
+    ['葡', '外国のワインを輸入して売るお店', -1, 'ドルで仕入れるので、仕入れ代が上がる。', 'ドルで仕入れるので、仕入れ代が下がる。'],
+    ['画', '日本のアニメを海外に売る会社', 1, '海外で受け取ったドルを円に換えると、多くのお金になる。', '海外で受け取ったドルを円に換えると、少ないお金になる。'],
+    ['学', '日本から仕送りを受けてアメリカに留学している学生', -1, '同じ円の仕送りをドルに換えると、少ないドルにしかならない。', '同じ円の仕送りをドルに換えると、多いドルになる。'],
+    ['部', '海外から部品を買って組み立てる会社', -1, '部品をドルで買うので、作るのにかかるお金が上がる。', '部品をドルで買うので、作るのにかかるお金が下がる。']
+  ];
+  const g = document.createElement('div');
+  g.className = 'fxg';
+  box.before(g);
+  box.insertAdjacentHTML('beforebegin', '<p class="fxg-sub"><span aria-hidden="true">験</span>じっくりためす：レートを動かして、値段の変わり方を見る</p>');
+  let st = null, tick = 0;
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const intro = () => {
+    const b = getB();
+    g.innerHTML = `<div class="fxg-intro">
+      <div class="fxg-tv" aria-hidden="true"><small>速報</small><b>$1 = <i>¥150</i></b></div>
+      <div><p class="fxg-kicker">スピード勝負</p><h3 class="fxg-h">為替ニュース速報 40 秒</h3>
+      <p class="fxg-p">「1 ドル＝140 円 → 160 円」。ニュースはレートの数字だけ。これは円安？ 円高？ そのあと出てくる人にとって、<b>うれしい</b>か<b>こまる</b>かを、40 秒で何人答えられるか。続けて正解すると点が上がり、まちがえると 3 秒へります。</p>
+      <p class="fxg-best">${b ? `自己ベスト <b>${b}</b> 点` : 'はじめての挑戦'}</p>
+      <button type="button" class="fxg-go" data-fxg="start">速報をはじめる</button></div></div>`;
+  };
+  const news = () => {
+    const a = 120 + Math.floor(Math.random() * 9) * 5;   // 120〜160
+    let b; do { b = 120 + Math.floor(Math.random() * 9) * 5; } while (Math.abs(b - a) < 10);
+    return { a, b, weak: b > a };   // 1 ドルに払う円がふえる＝円の値打ちが下がる＝円安
+  };
+  const start = () => {
+    st = { q: shuffle(W.map((_, i) => i)), at: 0, n: news(), score: 0, streak: 0, ok: 0, miss: [], end: performance.now() + TIME * 1000, lock: false };
+    g.innerHTML = `<div class="fxg-play">
+      <div class="fxg-top"><span class="fxg-t"><b data-fxg="t">${TIME}</b> 秒</span><span class="fxg-st" data-fxg="st"></span><span class="fxg-sc">得点 <b data-fxg="sc">0</b></span></div>
+      <div class="fxg-time" aria-hidden="true"><i data-fxg="bar"></i></div>
+      <div class="fxg-news" data-fxg="news"></div>
+      <div class="fxg-who" data-fxg="who"></div>
+      <div class="fxg-keys"><button type="button" data-ans="1"><b>うれしい</b><small>得をする</small></button><button type="button" data-ans="-1"><b>こまる</b><small>損をする</small></button></div>
+      <p class="fxg-fb" data-fxg="fb" aria-live="polite"></p></div>`;
+    show();
+    clearInterval(tick);
+    tick = setInterval(() => {
+      const left = Math.max(0, (st.end - performance.now()) / 1000);
+      g.querySelector('[data-fxg="t"]').textContent = Math.ceil(left);
+      const bar = g.querySelector('[data-fxg="bar"]'); bar.style.transform = `scaleX(${(left / TIME).toFixed(3)})`; bar.classList.toggle('is-low', left < 10);
+      if (left <= 0) finish();
+    }, 100);
+  };
+  const show = () => {
+    if (st.at >= st.q.length) st.q = st.q.concat(shuffle(W.map((_, i) => i)));
+    if (st.at % 3 === 0) st.n = news();   // 3 人ごとに、新しいニュース
+    const n = st.n, w = W[st.q[st.at]];
+    const nw = g.querySelector('[data-fxg="news"]');
+    nw.innerHTML = `<small>為替速報</small><p>1 ドル ＝ <s>${n.a} 円</s> <i aria-hidden="true">→</i> <b>${n.b} 円</b></p>`;
+    if (st.at % 3 === 0) { nw.classList.remove('is-in'); void nw.offsetWidth; nw.classList.add('is-in'); }
+    const el = g.querySelector('[data-fxg="who"]');
+    el.innerHTML = `<span class="fxg-seal" aria-hidden="true">${w[0]}</span><b>${w[1]}</b>`;
+    el.classList.remove('is-in', 'is-ok', 'is-ng'); void el.offsetWidth; el.classList.add('is-in');
+  };
+  const mult = () => 1 + Math.min(st.streak, 8) * 0.25;
+  const answer = v => {
+    if (!st || st.lock) return;
+    const w = W[st.q[st.at]], n = st.n, right = w[2] * (n.weak ? 1 : -1), ok = v === right;
+    const kind = n.weak ? '円安' : '円高';
+    const why = n.weak ? w[3] : w[4];
+    const fb = g.querySelector('[data-fxg="fb"]'), el = g.querySelector('[data-fxg="who"]');
+    if (ok) { st.streak++; st.ok++; const p = Math.round(10 * mult()); st.score += p; fb.className = 'fxg-fb is-ok'; fb.textContent = `正解 ＋${p}（${kind}）`; el.classList.add('is-ok'); }
+    else { st.streak = 0; st.end -= 3000; st.miss.push([st.q[st.at], n.weak]); fb.className = 'fxg-fb is-ng'; fb.textContent = `これは${kind}。${right > 0 ? 'うれしい' : 'こまる'}。${why}`; el.classList.add('is-ng'); }
+    g.querySelector('[data-fxg="sc"]').textContent = st.score;
+    g.querySelector('[data-fxg="st"]').textContent = st.streak >= 3 ? `${st.streak} 連続` : '';
+    st.lock = true;
+    setTimeout(() => { if (!st) return; st.lock = false; st.at++; show(); }, ok ? (reduce ? 0 : 250) : 1600);
+  };
+  const TITLE = [[380, '為替の名解説者'], [240, 'ニュースが読める人'], [110, '為替の見習い'], [0, 'これから覚えよう']];
+  const finish = () => {
+    clearInterval(tick);
+    const s = st; st = null;
+    const prev = getB(), best = s.score > prev;
+    if (best) { try { localStorage.setItem(KEY, String(s.score)); localStorage.setItem('azakei_fx_master', '1'); } catch (e) {} }
+    const seen = new Set(), miss = s.miss.filter(m => { const k = m[0] + ':' + m[1]; if (seen.has(k)) return false; seen.add(k); return true; });
+    g.innerHTML = `<div class="fxg-end">
+      <p class="fxg-kicker">放送終了</p>
+      <p class="fxg-big"><b>${s.score}</b> 点<small>正解 ${s.ok} 人・まちがい ${s.miss.length} 人</small></p>
+      <p class="fxg-title"><span aria-hidden="true">称</span>${TITLE.find(x => s.score >= x[0])[1]}${best ? '<em>自己ベスト更新</em>' : prev ? `<small>自己ベスト ${prev} 点</small>` : ''}</p>
+      ${miss.length ? `<p class="fxg-l">まちがえた人</p><ul class="fxg-miss">${miss.map(([i, weak]) => { const w = W[i], r = w[2] * (weak ? 1 : -1); return `<li><span class="fxg-tag ${r > 0 ? 'is-up' : 'is-dn'}">${weak ? '円安' : '円高'}で${r > 0 ? 'うれしい' : 'こまる'}</span><p><b>${w[1]}</b>${weak ? w[3] : w[4]}</p></li>`; }).join('')}</ul>` : '<p class="fxg-perfect">まちがいなし！ 為替のニュースが、しっかり読めています。</p>'}
+      <div class="fxg-rule"><p class="fxg-l">円安のとき</p>
+        <div class="fxg-two"><div><b>うれしい人</b><p>${W.filter(w => w[2] > 0).map(w => w[1]).join('、')}</p></div><div><b>こまる人</b><p>${W.filter(w => w[2] < 0).map(w => w[1]).join('、')}</p></div></div>
+        <p>1 ドルに払う円がふえる（140 円 → 160 円）のは、円の値打ちが下がったということ。だから「円安」。円高のときは、うれしい人とこまる人が入れかわります。同じニュースでも、立場によって、よい知らせにも悪い知らせにもなります。</p></div>
+      <button type="button" class="fxg-go" data-fxg="start">もう一度速報を読む</button></div>`;
+  };
+  g.addEventListener('click', e => {
+    const k = e.target.closest('[data-ans]'); if (k) { answer(+k.dataset.ans); return; }
+    if (e.target.closest('[data-fxg="start"]')) start();
+  });
+  intro();
+})();

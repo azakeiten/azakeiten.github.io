@@ -1,0 +1,65 @@
+/* 経済ラボ「円高・円安の両替所」— 為替ニュース速報 40 秒（fx.js が読みこむ） */
+.fxg { margin: 0 0 22px; padding: clamp(18px, 3vw, 30px); border-radius: 28px; color: #eef3f8; background: radial-gradient(circle at 90% 0%, rgba(224, 87, 63, .22), transparent 40%), linear-gradient(160deg, #142a3d, #0f1f2e 60%, #0a1520); box-shadow: 0 26px 50px -30px rgba(5, 15, 25, .9); }
+.fxg button { font: inherit; cursor: pointer; color: inherit; touch-action: manipulation; }
+.fxg-kicker { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #ff8f78; }
+.fxg-h { margin: 2px 0 8px; font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: .06em; }
+.fxg-p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.85; color: #cfdae6; max-width: 42em; } .fxg-p b { color: #ffd76a; }
+.fxg-intro { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 32px); align-items: center; }
+.fxg-tv { display: grid; place-content: center; gap: 4px; width: clamp(120px, 16vw, 160px); aspect-ratio: 4 / 3; border-radius: 16px; background: #0a1520; box-shadow: inset 0 0 0 4px #33485c, 0 14px 24px -12px rgba(0, 0, 0, .7); text-align: center; }
+.fxg-tv small { justify-self: center; padding: 1px 10px; border-radius: 4px; background: #e0573f; font-size: 11px; font-weight: 800; animation: fxg-blink 1.2s steps(2) infinite; }
+.fxg-tv b { font-size: clamp(16px, 2.2vw, 20px); } .fxg-tv i { font-style: normal; color: #ffd76a; display: inline-block; animation: fxg-tick 3s ease-in-out infinite; }
+@keyframes fxg-blink { 50% { opacity: .4; } }
+@keyframes fxg-tick { 0%, 100% { transform: none; } 50% { transform: translateY(-3px); color: #ff8f78; } }
+.fxg-best { margin: 0 0 12px; font-size: 13px; color: #b5c4d3; } .fxg-best b { font-size: 18px; color: #ffd76a; }
+.fxg-go { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border: 0; border-radius: 14px; background: #e0573f; color: #fff !important; font-weight: 800; font-size: 16px; box-shadow: 0 5px 0 #8f2a1a; transition: transform .15s, box-shadow .15s; }
+.fxg-go:hover { transform: translateY(-2px); } .fxg-go:active { transform: translateY(4px); box-shadow: 0 1px 0 #8f2a1a; }
+.fxg-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 800; font-size: 13px; }
+.fxg-t b { font-family: 'Shippori Mincho', serif; font-size: 26px; } .fxg-sc { margin-left: auto; } .fxg-sc b { font-size: 22px; color: #ffd76a; }
+.fxg-st:not(:empty) { padding: 3px 10px; border-radius: 99px; background: #e0573f; }
+.fxg-time { height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .12); overflow: hidden; }
+.fxg-time i { display: block; height: 100%; background: #ffd76a; transform-origin: left; transition: transform .1s linear; } .fxg-time i.is-low { background: #e0573f; }
+.fxg-news { margin: 14px 0 10px; padding: 12px 16px; border-radius: 14px; background: #0a1520; box-shadow: inset 0 0 0 2px #33485c; }
+.fxg-news.is-in { animation: fxg-flash .6s ease-out; }
+@keyframes fxg-flash { 0% { box-shadow: inset 0 0 0 2px #ffd76a, 0 0 24px rgba(255, 215, 106, .5); } }
+.fxg-news small { display: inline-block; padding: 1px 8px; border-radius: 4px; background: #e0573f; font-size: 11px; font-weight: 800; }
+.fxg-news p { margin: 6px 0 0; font-family: 'Shippori Mincho', serif; font-size: clamp(20px, 3.2vw, 28px); font-weight: 800; }
+.fxg-news s { color: #8fa2b5; text-decoration-thickness: 2px; } .fxg-news i { font-style: normal; color: #ff8f78; } .fxg-news b { color: #ffd76a; }
+.fxg-who { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; background: #fffaf0; color: #2a2015; }
+.fxg-who.is-in { animation: fxg-in .35s cubic-bezier(.2, .9, .3, 1.2); }
+@keyframes fxg-in { from { transform: translateY(14px) scale(.96); opacity: 0; } }
+.fxg-who.is-ok { box-shadow: 0 0 0 4px #3fae74; } .fxg-who.is-ng { box-shadow: 0 0 0 4px #e0573f; animation: fxg-shake .4s; }
+@keyframes fxg-shake { 25%, 75% { transform: translateX(-6px); } 50% { transform: translateX(6px); } }
+.fxg-seal { flex: none; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 14px; background: #142a3d; color: #ffd76a; font-family: 'Shippori Mincho', serif; font-size: 24px; font-weight: 800; }
+.fxg-who b { font-family: 'Shippori Mincho', serif; font-size: clamp(17px, 2.5vw, 21px); line-height: 1.5; }
+.fxg-keys { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.fxg-keys button { display: grid; justify-items: center; gap: 2px; padding: 14px 8px; border: 0; border-radius: 18px; box-shadow: 0 6px 0 rgba(0, 0, 0, .35); transition: transform .08s, box-shadow .08s; }
+.fxg-keys button:active { transform: translateY(5px); box-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
+.fxg-keys [data-ans="1"] { background: #2f7a52; } .fxg-keys [data-ans="-1"] { background: #b5432f; }
+.fxg-keys b { font-family: 'Shippori Mincho', serif; font-size: clamp(22px, 4vw, 28px); } .fxg-keys small { font-size: 12px; font-weight: 800; opacity: .85; }
+.fxg-fb { min-height: 3.4em; margin: 10px 0 0; font-size: 14px; font-weight: 800; line-height: 1.7; } .fxg-fb.is-ok { color: #8fe0b0; } .fxg-fb.is-ng { color: #ff9a86; }
+.fxg-end { display: grid; gap: 10px; }
+.fxg-big { margin: 0; font-family: 'Shippori Mincho', serif; font-size: 20px; } .fxg-big b { font-size: clamp(48px, 8vw, 68px); color: #ffd76a; line-height: 1; } .fxg-big small { display: block; font-size: 14px; color: #b5c4d3; }
+.fxg-title { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 20px; font-weight: 800; }
+.fxg-title span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: #e0573f; font-family: 'Shippori Mincho', serif; }
+.fxg-title em { font-style: normal; padding: 3px 10px; border-radius: 99px; background: #ffd76a; color: #142a3d; font-size: 12.5px; } .fxg-title small { font-size: 13px; color: #b5c4d3; }
+.fxg-l { margin: 4px 0 6px; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; color: #ff8f78; }
+.fxg-miss { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.fxg-miss li { display: grid; grid-template-columns: 7.5em 1fr; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 12px; background: rgba(255, 255, 255, .06); font-size: 13.5px; line-height: 1.7; }
+.fxg-miss p { margin: 0; } .fxg-miss b { display: block; }
+.fxg-tag { padding: 4px 8px; border-radius: 8px; font-size: 12px; font-weight: 800; text-align: center; } .fxg-tag.is-up { background: #2f7a52; } .fxg-tag.is-dn { background: #b5432f; }
+.fxg-perfect { margin: 0; padding: 12px 14px; border-radius: 12px; background: rgba(63, 174, 116, .2); color: #8fe0b0; font-weight: 800; }
+.fxg-rule { padding: 14px 16px; border-radius: 16px; background: #fffaf0; color: #2a2015; font-size: 14px; line-height: 1.8; }
+.fxg-rule .fxg-l { color: #b5432f; } .fxg-rule > p:last-child { margin: 8px 0 0; }
+.fxg-two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .fxg-two div { padding: 10px 12px; border-radius: 12px; background: #f3ead6; } .fxg-two p { margin: 4px 0 0; font-size: 13px; }
+.fxg-two div:first-child b { color: #2f7a52; } .fxg-two div:last-child b { color: #b5432f; }
+.fxg-end .fxg-go { justify-self: start; }
+.fxg-sub { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-size: 14px; font-weight: 800; }
+.fxg-sub span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: #2f7a52; color: #fff; font-family: 'Shippori Mincho', serif; }
+@media (max-width: 560px) {
+  .fxg { border-radius: 22px; padding: 16px 12px; }
+  .fxg-intro { grid-template-columns: 76px minmax(0, 1fr); align-items: start; gap: 12px; }
+  .fxg-tv { width: 76px; border-radius: 10px; } .fxg-tv b { font-size: 11px; } .fxg-tv small { font-size: 9px; }
+  .fxg-miss li { grid-template-columns: 1fr; gap: 4px; } .fxg-tag { justify-self: start; }
+  .fxg-two { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .fxg *, .fxg *::before { animation: none !important; transition: none !important; } }
