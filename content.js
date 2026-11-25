@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-25', seal: '値', tone: 'paper', href: 'sim.html#market', eyebrow: '経済ラボ', title: '需要と供給ニュースデスク', text: '台風でキャベツは？ テレビで紹介されたパンは？ ニュースを読んで、需要と供給のどちらの線が動くかを当てよう。' },
     { date: '2026-11-24', seal: '店', tone: 'shu', href: 'sim.html#shop', eyebrow: '経済ラボ', title: '模擬店の当日 3 時間', text: 'メニュー・作る数・値段を決めて、文化祭の当日へ。「損益分岐点まで あと ◯ 個」をゼロにできるか。' },
     { date: '2026-11-24', seal: '為', tone: 'dark', href: 'sim.html#fx', eyebrow: '経済ラボ', title: '為替ニュース速報 40 秒', text: '1 ドル 135 円 → 145 円。輸出する会社は？ 留学生は？ うれしいか、こまるかを 40 秒で答えるスピード勝負。' },
     { date: '2026-11-24', seal: '株', tone: 'gold', href: 'sim.html#kabu', eyebrow: '経済ラボ', title: 'クレープ会社の社長 5 年', text: '株を売って集める？ 銀行から借りる？ 配当は？ 持ち分が半分を切ると、株主総会で社長交代も。' },
