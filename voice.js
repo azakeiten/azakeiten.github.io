@@ -1,6 +1,6 @@
 /* ================================================================
    voice.js — 案内の声（使うページが、必要になったときだけ読みこむ）
-   ・声の素材：VOICEVOX でつくった mp3（VOICEVOX:冥鳴ひまり＝案内・ナレーション、VOICEVOX:白上虎太郎（わーい）＝お札マン）
+   ・声の素材：AivisSpeech でつくった mp3（AivisSpeech: みちのくあいり＝案内・ナレーション、AivisSpeech: らせつん（喜び）＝お札マン。2026.11.24 までは VOICEVOX）
      voice/＊.mp3＝案内のことば（名前で呼ぶ）、voice/vv/＊.mp3＝1 文ごとの声（m-＝お札マン、n-＝ナレーション。名前は文の FNV-1a）
      つくり方は tools/voicevox/README.txt。クレジットは policy.html#voice-credit
    ・AZAKEI_VOICE.on() / set(true|false)：声を出すかどうか（localStorage azakei_voice。サイト全体で共通）
@@ -12,7 +12,7 @@
    ================================================================ */
 (function () {
   if (window.AZAKEI_VOICE) return;
-  const VER = '3';
+  const VER = '4';
   let ac = null, on = false, gen = 0, live = [], wake = null;
   try { on = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
   const ctx = () => ac || (ac = new (window.AudioContext || window.webkitAudioContext)());
@@ -123,7 +123,7 @@
   // ── 前もってつくった声（VOICEVOX）。voice/vv/ に、役ごと・1 文ごとの mp3 がある（list.json に、ある文の印）
   //    役：m＝お札マン／n＝ナレーション。ない文は、これまでどおりブラウザの読み上げで読む
   //    文の印は、文（字幕と同じ字）の FNV-1a。声をつくるときも、この hash で名前をつける
-  const VVV = '4';
+  const VVV = '5';
   let vvList = null, vvLive = [];
   const vvHash = s => { let x = 0x811c9dc5; for (const ch of String(s)) { x ^= ch.codePointAt(0); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(36); };
   const vvIndex = () => vvList || (vvList = fetch('voice/vv/list.json?v=' + VVV).then(r => r.ok ? r.json() : {}).catch(() => ({})));

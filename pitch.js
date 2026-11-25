@@ -10,7 +10,7 @@
   if (!box || box.dataset.ready) return;
   box.dataset.ready = '1';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // 計時の声（voice.js：VOICEVOX:冥鳴ひまりの声）。「始め」「残り 10 秒」「タイムアップです」
+  // 計時の声（voice.js：AivisSpeech: みちのくあいりの声）。「始め」「残り 10 秒」「タイムアップです」
   const PV = (document.currentScript && document.currentScript.src.split('v=')[1]) || '1';
   let annOn = false; try { annOn = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
   const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + PV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });

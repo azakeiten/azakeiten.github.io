@@ -5,7 +5,7 @@
    ・段（親しむ → 知る → つくる）が変わるところで、大きな印が出る
    ・「発表」（N キー）：自動送りを止め、話す台本・経過時間・次のスライドを出す（部員が人前で話すとき用）
    ・「ナレーション」（R キー）：台本を、いちばん自然な日本語の声で 1 文ずつ読み、大きな字幕を出す。読み終わると次へ。声はえらべる。静かな BGM つき
-   ・「開演」（O キー）：チャイム → 開演の案内（VOICEVOX:冥鳴ひまりの声）→ 3・2・1・0 → ナレーションで発表
+   ・「開演」（O キー）：チャイム → 開演の案内（AivisSpeech: みちのくあいりの声）→ 3・2・1・0 → ナレーションで発表
    ・「発表」（P キー）：お札マン（仮）が横に出てきて、ふきだしで 1 文ずつ発表する。「声を出す」で読み上げも。言い終わると次へ
    ・「台本」（N キー）：自分で話すときの台本・経過時間
    ・「一覧」（G キー）：全部のスライドを並べて、好きな場面へ
@@ -318,7 +318,7 @@
     } catch (e) {}
   };
 
-  // ── 案内の声（voice.js：VOICEVOX:冥鳴ひまりの声）。「案内の声」を押したとき・「開演」のときだけ流れる。流れている文は字幕にも出す
+  // ── 案内の声（voice.js：AivisSpeech: みちのくあいりの声）。「案内の声」を押したとき・「開演」のときだけ流れる。流れている文は字幕にも出す
   let ann = false, annP = null, annTok = 0, flipAsked = false, opTok = 0, opBusy = false;
   try { ann = localStorage.getItem('azakei_voice') === '1'; } catch (e) {}
   const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + DV; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
