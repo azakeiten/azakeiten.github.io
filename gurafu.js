@@ -179,7 +179,7 @@
 (function () {
   const box = document.querySelector('[data-gurafu]');
   if (!box || document.querySelector('.gq')) return;
-  if (!document.querySelector('link[href^="gugame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'gugame.css?v=20261126j'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="gugame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'gugame.css?v=20261126k'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_gurafu_best', TIME = 40;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

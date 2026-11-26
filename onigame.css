@@ -1,0 +1,81 @@
+/* 経済ラボ「おにぎり 1 個の値段の中身」— おにぎり屋の値上げ会議（uchiwake.js が読みこむ） */
+.og { margin: 0 0 22px; padding: clamp(18px, 3vw, 30px); border-radius: 28px; color: #2a2015; background: linear-gradient(180deg, #fbf5e6, #efe3c6); box-shadow: inset 0 0 0 1px rgba(107, 74, 34, .25), 0 24px 46px -30px rgba(60, 40, 10, .6); scroll-margin-top: 120px; }
+.og button { font: inherit; cursor: pointer; color: inherit; touch-action: manipulation; }
+.og a { color: #b5432f; }
+.og-sub { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 13px; font-weight: 700; color: #5a4a35; }
+.og-sub span { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 13px; }
+.og-kicker { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #b5432f; }
+.og-h { margin: 2px 0 8px; font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: .06em; }
+.og-p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.85; max-width: 42em; } .og-p b { color: #b5432f; }
+.og-intro { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 32px); align-items: center; }
+.og-tri svg { display: block; width: clamp(100px, 14vw, 140px); filter: drop-shadow(0 12px 14px rgba(60, 40, 10, .3)); animation: og-bob 3.2s ease-in-out infinite; }
+.og-tri text { font-size: 30px; font-weight: 800; fill: #b5432f; animation: og-up 1.6s ease-in-out infinite; }
+@keyframes og-bob { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg) translateY(-4px); } }
+@keyframes og-up { 0%, 100% { opacity: .3; transform: translateY(6px); } 50% { opacity: 1; transform: none; } }
+.og-best { margin: 0 0 12px; font-size: 13px; } .og-best b { font-size: 18px; color: #b5432f; }
+.og-go { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border: 0; border-radius: 14px; background: #2a2015; color: #fff !important; font-weight: 800; font-size: 16px; box-shadow: 0 5px 0 #000; transition: transform .15s, box-shadow .15s; }
+.og-go:hover { transform: translateY(-2px); } .og-go:active { transform: translateY(4px); box-shadow: 0 1px 0 #000; }
+.og-cal { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; list-style: none; margin: 0 0 14px; padding: 0; }
+.og-cal li { padding: 6px 0 5px; border-radius: 10px; background: rgba(42, 32, 21, .07); text-align: center; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; line-height: 1; color: #9a8a70; }
+.og-cal small { display: block; margin-top: 3px; font-family: 'DM Sans', sans-serif; font-size: 10px; }
+.og-cal .is-done { background: #2a2015; color: #f3ead6; } .og-cal .is-now { background: #b5432f; color: #fff; box-shadow: 0 6px 12px -6px rgba(181, 67, 47, .8); }
+.og-news { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 6px; background: #fffdf8; box-shadow: 0 1px 0 #ddd5c4, 0 12px 22px -16px rgba(0, 0, 0, .5); animation: og-in .45s cubic-bezier(.2, .9, .3, 1.15); }
+@keyframes og-in { from { opacity: 0; transform: translateY(-12px) rotate(-1deg); } to { opacity: 1; transform: none; } }
+.og-seal { flex: none; display: inline-grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; }
+.og-nh { margin: 0; font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 800; line-height: 1.45; }
+.og-nd { margin: 2px 0 0; font-size: 13px; line-height: 1.7; color: #5a4a35; } .og-nd b { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 99px; background: #fde4dc; color: #b5432f; font-size: 12.5px; }
+.og-rival { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; font-size: 13.5px; font-weight: 700; animation: og-in .45s .2s both; }
+.og-rival span { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #2f6fb0; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 12px; } .og-rival b { color: #2f6fb0; }
+.og-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 14px 0 10px; }
+.og-num { padding: 8px 10px; border-radius: 12px; background: #fffdf8; box-shadow: inset 0 0 0 1px rgba(107, 74, 34, .18); }
+.og-num span { display: block; font-size: 11px; font-weight: 800; color: #7a6a50; }
+.og-num b { font-family: 'Shippori Mincho', serif; font-size: 24px; font-weight: 800; } .og-num small { font-size: 12px; margin-left: 2px; }
+.og-num.is-red { background: #fde4dc; } .og-num.is-red b { color: #b5432f; }
+.og-cost { display: flex; height: 22px; border-radius: 6px; overflow: hidden; background: #fffdf8; box-shadow: inset 0 0 0 1px rgba(107, 74, 34, .2); }
+.og-cost i, .og-cost b { display: block; min-width: 0; transition: flex .6s ease; } .og-cost i + i { box-shadow: inset 1px 0 0 rgba(255, 255, 255, .5); }
+.og-cost b { background: repeating-linear-gradient(45deg, #2f8a4a 0 6px, #3fa35c 6px 12px); }
+.og-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; list-style: none; margin: 6px 0 12px; padding: 0; font-size: 11.5px; color: #5a4a35; }
+.og-legend i { display: inline-block; width: 9px; height: 9px; margin-right: 4px; border-radius: 2px; vertical-align: -1px; } .og-legend i.is-m { background: #2f8a4a; }
+.og-meters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin: 0 0 12px; }
+.og-meters p { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; margin: 0; font-size: 12px; font-weight: 800; }
+.og-meters i { display: block; height: 8px; border-radius: 4px; background: rgba(42, 32, 21, .1); overflow: hidden; } .og-meters i b { display: block; height: 100%; background: #e3b341; transition: width .6s; }
+.og-meters em { font-style: normal; font-size: 12px; min-width: 3em; text-align: right; }
+.og-q { margin: 0 0 8px; font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 800; }
+.og-acts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.og-acts button { display: grid; justify-items: start; gap: 2px; padding: 10px 12px; border: 0; border-radius: 14px; text-align: left; background: #fffdf8; box-shadow: inset 0 0 0 1.5px rgba(42, 32, 21, .25), 0 4px 0 rgba(42, 32, 21, .25); transition: transform .12s, box-shadow .12s, opacity .2s; }
+.og-acts button:hover:not(:disabled) { transform: translateY(-2px); }
+.og-acts button:active:not(:disabled) { transform: translateY(3px); box-shadow: inset 0 0 0 1.5px rgba(42, 32, 21, .25); }
+.og-acts span { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; background: #2a2015; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 14px; }
+.og-acts [data-act="up"] span { background: #b5432f; } .og-acts [data-act="shrink"] span { background: #8a6fb0; } .og-acts [data-act="kaizen"] span { background: #2f8a4a; }
+.og-acts b { font-size: 15.5px; } .og-acts small { font-size: 11px; line-height: 1.45; color: #6b5a40; }
+.og-acts button:disabled { cursor: default; opacity: .45; } .og-acts button.is-on { opacity: 1; background: #fff3cf; box-shadow: inset 0 0 0 2.5px #e3b341; }
+.og-res:empty { display: none; }
+.og-res { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: #2a2015; color: #f3ead6; animation: og-in .35s ease; }
+.og-res > p { margin: 0 0 6px; font-size: 13.5px; line-height: 1.7; } .og-warn { color: #ffb19f; }
+.og-out { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 4px 0 10px; }
+.og-out p { margin: 0; font-size: 13px; } .og-out span { display: block; font-size: 11px; color: #c9b896; font-weight: 700; }
+.og-out b { font-family: 'Shippori Mincho', serif; font-size: 28px; color: #f2c75c; } .og-out b.is-red { color: #ff8e78; }
+.og-res .og-go { background: #e3b341; color: #1a1408 !important; box-shadow: 0 5px 0 #8a6516; }
+.og-tot { margin: 10px 0 0; font-size: 13px; font-weight: 700; text-align: right; } .og-tot b { font-family: 'Shippori Mincho', serif; font-size: 20px; }
+.og-big { margin: 4px 0; font-family: 'Shippori Mincho', serif; font-size: 18px; }
+.og-big b { font-size: clamp(44px, 8vw, 64px); color: #b5432f; margin-right: 4px; } .og-big small { display: block; font-size: 13px; color: #6b5a40; }
+.og-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 6px 0 14px; font-weight: 800; font-size: 18px; }
+.og-title span { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #2a2015; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 14px; }
+.og-title em { font-style: normal; padding: 2px 10px; border-radius: 99px; background: #b5432f; color: #fff; font-size: 12px; } .og-title small { font-size: 12px; color: #6b5a40; font-weight: 700; }
+.og-chart { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; align-items: end; height: 150px; margin: 0 0 14px; padding: 10px 10px 0; border-radius: 14px; background: #fffdf8; box-shadow: inset 0 0 0 1px rgba(107, 74, 34, .18); }
+.og-col { display: grid; grid-template-rows: 1fr auto auto; height: 100%; text-align: center; }
+.og-col i { align-self: end; display: block; height: var(--h); min-height: 3px; border-radius: 5px 5px 0 0; background: #2f8a4a; animation: og-grow .7s ease-out both; transform-origin: bottom; } .og-col i.is-neg { background: #b5432f; }
+.og-col:nth-child(2) i { animation-delay: .08s; } .og-col:nth-child(3) i { animation-delay: .16s; } .og-col:nth-child(4) i { animation-delay: .24s; } .og-col:nth-child(5) i { animation-delay: .32s; } .og-col:nth-child(6) i { animation-delay: .4s; }
+@keyframes og-grow { from { transform: scaleY(0); } }
+.og-col b { font-size: 11.5px; } .og-col small { font-size: 10.5px; line-height: 1.3; color: #6b5a40; padding-bottom: 6px; }
+.og-tips { margin: 0 0 12px; padding-left: 1.2em; font-size: 13.5px; line-height: 1.8; }
+.og-learn { margin: 0 0 16px; padding: 12px 14px; border-left: 4px solid #b5432f; background: rgba(255, 255, 255, .6); font-size: 13.5px; line-height: 1.8; }
+.og-learn p { margin: 0; } .og-learn b { display: block; font-family: 'Shippori Mincho', serif; font-size: 15px; }
+@media (max-width: 640px) {
+  .og-intro { grid-template-columns: minmax(0, 1fr); }
+  .og-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .og-acts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .og-meters { grid-template-columns: minmax(0, 1fr); }
+  .og-cal li { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .og-tri svg, .og-tri text, .og-news, .og-rival, .og-res, .og-col i { animation: none; } }
