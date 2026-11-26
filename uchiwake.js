@@ -102,7 +102,7 @@
 (function () {
   const box = document.querySelector('[data-uchiwake]');
   if (!box || document.querySelector('.og')) return;
-  if (!document.querySelector('link[href^="onigame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'onigame.css?v=20261126k'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="onigame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'onigame.css?v=20261126l'; document.head.appendChild(l); }
   const KEY = 'azakei_oni_best';
   const getB = () => { try { const v = localStorage.getItem(KEY); return v === null ? null : +v; } catch (e) { return null; } };
   const g = document.createElement('div');
