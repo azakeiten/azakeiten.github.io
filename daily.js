@@ -23,7 +23,9 @@
   const W0 = Math.floor((Date.UTC(2026, 9, 19) / 864e5 - 4) / 7);
   // 2026.10.23 にも問題を増やしたので（added: 2）、10/26（月）の週から使う
   const W1 = Math.floor((Date.UTC(2026, 9, 26) / 864e5 - 4) / 7);
-  const pickFor = w => { const pool = w < W0 ? all.filter(x => !x.added) : w < W1 ? all.filter(x => x.added !== 2) : all; let s = 17; while (gcd(s, pool.length) !== 1) s++; return pool[((w * s) % pool.length + pool.length) % pool.length]; };
+  // 2026.11.26 にも問題を増やしたので（added: 3）、11/30（月）の週から使う
+  const W2 = Math.floor((Date.UTC(2026, 10, 30) / 864e5 - 4) / 7);
+  const pickFor = w => { const pool = w < W0 ? all.filter(x => !x.added) : w < W1 ? all.filter(x => !x.added || x.added === 1) : w < W2 ? all.filter(x => x.added !== 3) : all; let s = 17; while (gcd(s, pool.length) !== 1) s++; return pool[((w * s) % pool.length + pool.length) % pool.length]; };
   const q = pickFor(weekNo);
   // 選択肢の並びも週で決める
   let seed = Math.abs(weekNo) + 1;
