@@ -22,7 +22,7 @@ window.AZAKEI = {
     { date: '2026-11-23', seal: '予', tone: 'paper', href: 'sim.html#budget', eyebrow: '経済ラボ', title: '100 円の予算会議', text: '5 円玉 20 枚で国の予算の使いみちを予想して、本物とくらべます。そのあと予算会議へ。足りない 2 円は、へらす・借りる・税のどこから出す？' },
     { date: '2026-11-22', seal: '億', tone: 'dark', href: 'sim.html#oku', eyebrow: '経済ラボ', title: '大きなお金のものさし', text: '1 兆円の重さは？ 国の予算を積むと？ 10 倍ごとの目もりのものさしで、ケタを当てるテスト。' },
     { date: '2026-11-22', seal: '籤', tone: 'gold', href: 'sim.html#kuji', eyebrow: '経済ラボ', title: '文化祭のくじ屋の店主に', text: '値段と当たりの本数を決めて、100 枚の箱を 3 回売ります。当たりを減らしすぎると、評判が落ちてお客さんが来なくなる。' },
-    { date: '2026-11-22', seal: '倍', tone: 'paper', href: 'sim.html#double', eyebrow: '経済ラボ', title: '複利の時計：72 の法則の早算き', text: '1 問 12 秒。「72 ÷ 年利」で、お金や物価や借金が 2 倍になる年を当てる 8 問勝負。' },
+    { date: '2026-11-22', seal: '倍', tone: 'paper', href: 'sim.html#double', eyebrow: '経済ラボ', title: '複利の時計：72 の法則の早解き', text: '1 問 12 秒。「72 ÷ 年利」で、お金や物価や借金が 2 倍になる年を当てる 8 問勝負。' },
     { date: '2026-11-22', seal: '試', tone: 'dark', href: 'sim.html', eyebrow: '経済ラボ', title: '経済ラボが「実験きっぷ」に', text: '29 の実験を説明つきのカードで一覧に。「はじめる」で 1 つずつ開いて、すぐ試せます。' },
     { date: '2026-11-22', seal: '字', tone: 'dark', href: 'quiz.html#crossword', eyebrow: 'あそび場', title: 'クロスワードが、毎日ちがう盤に', text: '約 50 語の経済のことばから、遊ぶたびに新しい盤を組み立てます。「今日の問題」は、同じ日ならだれでも同じ盤。' },
     { date: '2026-11-21', seal: '作', tone: 'paper', href: 'quiz.html#make', eyebrow: 'あそび場', title: 'クイズ工房：つくって友だちに出す', text: '最大 5 問のクイズ集をつくると、お札マンが問題のよさを星でチェック。リンクにして友だちに出せます。' },

@@ -44,7 +44,7 @@
 })();
 
 /* ================================================================
-   v340：72 の法則の早算き勝負「複利の時計」
+   v340：72 の法則の早解き勝負「複利の時計」
    ・8 問。1 問 12 秒。「2 倍まで何年？」「何 % なら？」「何倍になる？」「物価・借金なら？」
    ・答えると、その問題の「2 倍・4 倍…」を年の線の上で見せる（ふえ方が目で見える）
    ・早く正解するほど点が高く、続けて正解すると倍率が上がる。自己ベストは azakei_dbl_best
@@ -53,7 +53,7 @@
 (function () {
   const box = document.querySelector('[data-double]');
   if (!box) return;
-  if (!document.querySelector('link[href^="dblgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'dblgame.css?v=20261126g'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="dblgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'dblgame.css?v=20261126h'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_dbl_best', LIM = 12;
   const get = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -100,7 +100,7 @@
     const b = get();
     g.innerHTML = `<div class="dg2-intro">
       <div class="dg2-clock" aria-hidden="true"><i></i><b>72</b></div>
-      <div class="dg2-in"><p class="dg2-kicker">早算き勝負</p><h3 class="dg2-h">複利の時計</h3>
+      <div class="dg2-in"><p class="dg2-kicker">早解き勝負</p><h3 class="dg2-h">複利の時計</h3>
       <p class="dg2-p">「72 ÷ 年利 ＝ 2 倍になるまでの年数」。この式 1 つで、8 問に答えます。1 問 12 秒。早いほど点が高く、続けて正解すると倍率が上がります。</p>
       <ul class="dg2-kinds"><li>2 倍まで何年？</li><li>何 % なら？</li><li>何倍になる？</li><li>物価や借金なら？</li></ul>
       <p class="dg2-best">${b ? `自己ベスト <b>${b.toLocaleString()}</b> 点` : 'はじめての挑戦'}</p>
