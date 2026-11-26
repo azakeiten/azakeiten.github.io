@@ -1,6 +1,6 @@
 /* ================================================================
    seiza.js — 用語辞典：ことばの星座（近づいてから読みこむ）
-   ・辞典の 300 語を、夜空の星にする。ある言葉の説明の中に、別の言葉が出てきたら、2 つの星を線で結ぶ
+   ・辞典の 312 語を、夜空の星にする。ある言葉の説明の中に、別の言葉が出てきたら、2 つの星を線で結ぶ
      （線は、このページの説明文から自動でつくる。新しい事実はつくらない）
    ・星の色は 11 の分類ごと。はじめは分類ごとに集まり、だんだん「つながり」で位置が決まっていく
    ・星を押すと、つながる星が星座のように光り、説明が出る。つながりの星へ、次々にとんでいける
@@ -42,7 +42,7 @@
 
   box.innerHTML = `
     <div class="sz-sky">
-      <svg class="sz-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="ことばの星座。300 の言葉が星になり、説明の中で出てくる言葉どうしが線で結ばれている">
+      <svg class="sz-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="ことばの星座。312 の言葉が星になり、説明の中で出てくる言葉どうしが線で結ばれている">
         <defs><radialGradient id="sz-glow"><stop offset="0" stop-color="#fff6d0" stop-opacity=".9"/><stop offset="1" stop-color="#fff6d0" stop-opacity="0"/></radialGradient></defs>
         <g class="sz-dust">${Array.from({ length: 120 }, (_, i) => `<circle cx="${(i * 389) % W}" cy="${(i * 211) % H}" r="${i % 7 ? .7 : 1.3}" style="animation-delay:-${(i * .29 % 4).toFixed(2)}s"/>`).join('')}</g>
         <g class="sz-view"><g class="sz-edges"></g><g class="sz-nodes"></g><g class="sz-labels"></g></g>
