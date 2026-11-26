@@ -186,6 +186,7 @@
     tips.push('実際には、このほかに住民税（多くは約 10%）や社会保険料も引かれます。ここでは所得税だけを計算しています。');
     game.innerHTML = `<div class="zg-end"><span class="zg-stamp" aria-hidden="true">${rk[0]}</span><div><p class="zg-k">${rk[1]}</p><p class="zg-res"><b>${R2.score.toLocaleString()}</b> 点${nb ? '<em>自己ベスト</em>' : ''}</p><p class="zg-d">8 問中 ${R2.ok} 問正解</p></div>
       <ul class="zg-tips">${tips.map(t => `<li>${t}</li>`).join('')}</ul><button type="button" class="zg-start">もう一度</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(game.querySelector('.zg-end'), 'zeidan', R2.ok === 8 ? 'top' : R2.ok < 4 ? 'low' : 'mid');
   };
   game.addEventListener('click', e => {
     if (e.target.closest('.zg-start')) { gstart(); return; }

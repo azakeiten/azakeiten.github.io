@@ -108,6 +108,7 @@
       <ul class="nk-tips">${tips.slice(-3).map(t => `<li>${t}</li>`).join('')}</ul><button type="button" class="nk-go" data-go="start">もう一度、1965 年から</button></div>`);
     box.querySelector('.nk-ask')?.remove(); box.querySelector('.nk-pol')?.remove();
     const r = box.getBoundingClientRect(); if (r.top < 0) box.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+    window.AZAKEI_TALK && window.AZAKEI_TALK(box.querySelector('.nk-fin'), 'nenkin', Math.min(hw, he) < 30 || sc < 100 ? 'low' : sc >= 180 ? 'top' : 'mid');
   };
   const LEARN = `
     <div class="nk-learn">

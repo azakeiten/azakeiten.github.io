@@ -219,6 +219,7 @@
         <div class="ot-diff${R.loss ? ' is-ng' : ''}"><dt>レジのお金と売上の差</dt><dd>${R.loss ? '−' + yen(R.loss) : '0'} 円</dd></div></dl></div>
       <ul class="ot-tips">${tips.slice(0, 3).map(t => `<li>${t}</li>`).join('')}</ul>
       <button type="button" class="ot-start">もう一度開店する</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(box.querySelector('.ot-end'), 'otsuri', R.rep <= 0 || R.score < 1000 ? 'low' : R.score >= 2600 ? 'top' : 'mid');
   };
 
   box.addEventListener('click', e => {

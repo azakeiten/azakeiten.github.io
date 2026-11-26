@@ -1,13 +1,53 @@
 /* ================================================================
-   labtalk.js — 経済ラボ：ゲームの結果に、お札マンがひとこと（声つき）
+   labtalk.js — 経済ラボ・あそび場：ゲームの結果に、お札マンがひとこと（声つき）
    ・各ゲームの結果画面から window.AZAKEI_TALK(結果の箱, ゲーム名, 段階, 段階の数) を呼ぶ
-     段階 0 がいちばんよい結果。いちばん上は「top」、いちばん下は「low」、あいだは「mid」のせりふ
+     段階は 0 がいちばんよい結果（数字）、または 'top'・'mid'・'low' の文字。いちばん上は「top」、いちばん下は「low」、あいだは「mid」のせりふ
    ・「声で聞く」を押すと、voice.js（AivisSpeech でつくったお札マンの声）で読む。自動では鳴らさない
    ・せりふを変えたら、声もつくりなおす（tools/voicevox/README.txt。vv-extract.pl がここの LINES を集める）
    ================================================================ */
 (function () {
   if (window.AZAKEI_TALK) return;
   const LINES = {
+    otsuri: {
+      top: '列をさばききった！ 大きいお金から順に考えるのが、少ない枚数のコツだね。',
+      mid: 'いい調子！ 小銭が切れる前に、金庫から補充するのも店長の仕事だよ。',
+      low: 'おつりは、大きいお金から順に。380 円なら、100 円玉 3 枚と 50 円玉と 10 円玉 3 枚だよ。'
+    },
+    zeidan: {
+      top: '税の階段、完ぺきだね！ 高い税率は、段をこえた部分だけにかかるんだ。',
+      mid: 'あと少し！ 昇給が段をまたぐときは、さかいで 2 つに分けて計算してね。',
+      low: '段が上がっても、全部に高い税率がかかるわけじゃないよ。ここがひっかけなんだ。'
+    },
+    sugoroku: {
+      top: '財布と貯金と投資、上手に使い分けたね。お金にも働いてもらえたよ！',
+      mid: 'いい作戦！ 景気予報を読んで、置き場所を動かすともっと増えるよ。',
+      low: '「絶対もうかる」は詐欺の決まり文句。急な出費のために、財布に少し残しておこうね。'
+    },
+    cardgame: {
+      top: '勝ったね！ 確率と増え方をかけた期待値で、カードを選べていたよ。',
+      mid: '引き分け！ 迷ったら、期待値がいちばん高いカードを選んでみて。',
+      low: '倍率を上げるのは、期待値が高くて、外れても減りが小さいときだけにしよう！'
+    },
+    koukan: {
+      top: 'あっという間にそろったね！ お金があると、交換がすごく楽になるんだ。',
+      mid: 'そろったね！ お金は、交換と、ものさしと、ためておく役目があるよ。',
+      low: '魚は 2 日でいたむけど、貝のお金はいたまない。お金の大事な役目なんだ。'
+    },
+    shinka: {
+      top: 'お金の歴史博士だね！ 困りごとを解決するたびに、お金は形を変えてきたんだ。',
+      mid: 'いい調子！ 貝、金属、紙、そして電子のお金。順番を思い出してみて。',
+      low: 'どの形のお金でも、大事なのは、みんながこれで払えると信じていることだよ。'
+    },
+    coins: {
+      top: '世界のお金博士だね！ ケタの大きいお金も、両替の計算もばっちり。',
+      mid: 'いい旅だったね！ ウォンやドンは、ゼロの数に気をつけるのがコツだよ。',
+      low: 'まずは、1 ドルが何円かを覚えよう。そこから、だいたいの値段が見えてくるよ。'
+    },
+    nenkin: {
+      top: '名村長だね！ 働く世代も、お年寄りも、どちらも守れたよ。',
+      mid: 'なんとか乗りきったね！ 子育て支援は、早く始めるほど効いてくるんだ。',
+      low: '支える人と支えられる人のバランスが大事。いろいろな手を組み合わせてみよう！'
+    },
     dbl: {
       top: '72 を割るだけで、未来が見えるね。きみはもう、複利の時計職人だよ！',
       mid: 'いい調子！ 年利が 2 倍になると、2 倍になる年数は半分。これを覚えておくと速いよ。',
@@ -73,13 +113,13 @@
   const VO = () => window.AZAKEI_VOICE ? Promise.resolve(window.AZAKEI_VOICE) : new Promise(r => { const s = document.createElement('script'); s.src = 'voice.js?v=' + ver; s.onload = () => r(window.AZAKEI_VOICE || null); s.onerror = () => r(null); document.head.appendChild(s); });
   window.AZAKEI_TALK = (box, key, idx, n) => {
     const set = LINES[key]; if (!box || !set) return;
-    const tier = idx <= 0 ? 'top' : idx >= n - 1 ? 'low' : 'mid', text = set[tier];
+    const tier = typeof idx === 'string' ? idx : idx <= 0 ? 'top' : idx >= n - 1 ? 'low' : 'mid', text = set[tier];
     const el = document.createElement('div');
     el.className = 'lt';
     el.innerHTML = `<span class="lt-face" aria-hidden="true">札</span><div class="lt-b"><p class="lt-who">お札マンのひとこと</p><p class="lt-t">${text}</p><button type="button" class="lt-say">声で聞く</button></div>`;
-    const parent = box.firstElementChild && box.children.length === 1 ? box.firstElementChild : box;
-    const last = [...parent.children].reverse().find(c => c.tagName === 'BUTTON');
-    if (last) last.before(el); else parent.appendChild(el);
+    // 結果の中の、いちばん最後のボタン（「もう一度」など）の前に置く。ボタンがなければ、いちばん下に
+    const btns = box.querySelectorAll('button'), last = btns[btns.length - 1];
+    if (last) last.before(el); else box.appendChild(el);
     el.querySelector('.lt-say').addEventListener('click', async e => {
       const b = e.currentTarget; b.classList.add('is-on'); b.textContent = '再生中…';
       const v = await VO();

@@ -123,7 +123,7 @@
   // ── 前もってつくった声（VOICEVOX）。voice/vv/ に、役ごと・1 文ごとの mp3 がある（list.json に、ある文の印）
   //    役：m＝お札マン／n＝ナレーション。ない文は、これまでどおりブラウザの読み上げで読む
   //    文の印は、文（字幕と同じ字）の FNV-1a。声をつくるときも、この hash で名前をつける
-  const VVV = '6';
+  const VVV = '7';
   let vvList = null, vvLive = [];
   const vvHash = s => { let x = 0x811c9dc5; for (const ch of String(s)) { x ^= ch.codePointAt(0); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(36); };
   const vvIndex = () => vvList || (vvList = fetch('voice/vv/list.json?v=' + VVV).then(r => r.ok ? r.json() : {}).catch(() => ({})));

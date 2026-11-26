@@ -152,6 +152,7 @@
       <p class="ct-sum">お金の名前 ${T.cur} / ${STOPS}・値段の見積もり ${T.est} / ${STOPS}</p>
       <p class="ct-x">${got.length >= C.length ? '図鑑がうまった！ 世界のお金博士。' : `図鑑はあと ${C.length - got.length} 枚。次の旅は、まだのコインの国から回ります。`}</p>
       <button type="button" class="ct-go" data-go="start">もう一度、旅に出る</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(play.querySelector('.ct-end'), 'coins', sc >= 1050 ? 'top' : sc < 550 ? 'low' : 'mid');
   };
 
   box.addEventListener('click', e => {

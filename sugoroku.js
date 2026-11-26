@@ -166,6 +166,7 @@
     log(`ゴール！ 合計 ${yen(sc)}`, "is-goal");
     $("rollt").textContent = "もう 1 回あそぶ";
     box.classList.add('is-over'); paint();
+    window.AZAKEI_TALK && window.AZAKEI_TALK($('res').querySelector('.sg-end'), 'sugoroku', sc >= 4200 ? 'top' : sc < 2600 ? 'low' : 'mid');
   };
   box.addEventListener('click', e => {
     const m = e.target.closest('[data-mv]'); if (!m || m.disabled || st.busy || st.over) return;

@@ -114,6 +114,7 @@
       <div class="me-fut"><p class="me-k">おまけ：これからのお金は？</p><p class="me-fq">「電子のお金」の先に、新しいデジタルのお金が 2 つあります。<b>国（中央銀行）が発行する</b>のは、どっち？</p>
       <div class="me-fch"><button type="button" data-fut="0"><span aria-hidden="true">暗</span>ビットコインなどの<b>暗号資産</b></button><button type="button" data-fut="1"><span aria-hidden="true">央</span><b>中央銀行デジタル通貨</b></button></div><div class="me-fa" aria-live="polite"></div></div>
       <button type="button" class="me-go" data-go="start">もう一度</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(box.querySelector('.me-fin'), 'shinka', G.score >= 800 ? 'top' : G.score < 400 ? 'low' : 'mid');
   };
 
   box.addEventListener('click', e => {

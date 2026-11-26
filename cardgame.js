@@ -142,6 +142,7 @@
       <ul class="cg-tips">${tips.map(t => `<li>${t}</li>`).join('')}</ul>
       <button type="button" class="cg-again">もう一度勝負する</button></div>
       <div class="cg-log">${S.hist.map(h => h.html).join('')}</div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(box.querySelector('.cg-fin'), 'cardgame', win ? 'top' : tie ? 'mid' : 'low');
   }
 
   box.addEventListener('click', e => {

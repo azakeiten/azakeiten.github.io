@@ -132,6 +132,7 @@
         <p><b>ためておく</b>魚は 2 日でいたむけれど、貝のお金はいたまない。とった日に売って、必要な日に使える。</p></div>
       <p class="bt-links"><a href="glossary.html#money-roles">お金の 3 つの役割</a><a href="#shinka">お金の進化を見る</a></p>
       <button type="button" class="bt-go" data-go="new">ちがう島で、はじめから</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(box.querySelector('.bt-end'), 'koukan', m.ok ? (m.day <= 4 ? 'top' : 'mid') : 'low');
   };
   const intro = () => {
     box.innerHTML = `<div class="bt-end bt-intro"><span class="bt-stamp" aria-hidden="true">島</span>
