@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126h'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126i'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -48,7 +48,7 @@
     ['lab','okozukai','遣','おこづかいチャレンジ','azakei_ozk_master','',0],
     ['lab','market','値','値段の決まり方','azakei_market_best','点',0],
     ['lab','seri','競','せりの会場','azakei_seri','',0],
-    ['lab','asagohan','旅','朝ごはんの世界旅行','azakei_asagohan','',0],
+    ['lab','asagohan','旅','朝ごはんの世界旅行','azakei_asagohan_best','点',0],
     ['lab','fx','為','円高・円安の両替所','azakei_fx_best','点',0],
     ['lab','shop','店','文化祭でお店をひらこう','azakei_shop_best','円',0],
     ['lab','oku','億','1 億円って、どれくらい？','azakei_oku_best','点',0],

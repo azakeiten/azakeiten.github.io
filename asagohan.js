@@ -120,5 +120,124 @@
     const p = e.target.closest('[data-p]');
     if (p) { on.clear(); (PRESET[p.dataset.p] || []).forEach(i => on.add(i)); draw(); }
   });
+  /* ================================================================
+     v363：「朝ごはん港の荷受け」— 材料はどの国から？ 地図の国を押して当てるゲーム
+     ・朝ごはんが 1 品ずつ出る。材料のおもな輸入先（国産なら日本）を、地図の光る 4 か国から選ぶ
+     ・1 品 12 秒。早いほど高い点。当たると、その国から日本へ船が走る
+     ・終わったら、材料の旅の合計きょりと、まちがえた品の答え合わせ
+     ・自己ベストは azakei_asagohan_best
+     ================================================================ */
+  (function () {
+    if (!document.querySelector('link[href^="asgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'asgame.css?v=20261126i'; document.head.appendChild(l); }
+    const KEY = 'azakei_asagohan_best', N = 8, SEC = 12;
+    const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
+    const g = document.createElement('div');
+    g.className = 'ag';
+    box.before(g);
+    box.insertAdjacentHTML('beforebegin', '<p class="ag-sub"><span aria-hidden="true">験</span>じっくりためす：お盆にのせて、材料の旅を地図で見る</p>');
+    const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const KS = Object.keys(C);
+    const TITLE = [[700, '世界の港の名人'], [500, 'たよれる荷受け係'], [250, '港の見習い'], [0, 'これから世界を知ろう']];
+    let st = null, tick = 0;
+    const map = () => `<svg class="ag-map" viewBox="0 0 ${W} ${H}" role="img" aria-label="世界の点の地図。光っている国が、答えの候補">
+        <path d="${dots}" class="as-dots"/>
+        <g class="ag-routes"></g>
+        ${KS.map(k => { const [x, y] = P(k); return `<g class="ag-c${k === 'jp' ? ' is-jp' : ''}" data-c="${k}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})"><circle r="26" class="ag-hit"/><circle r="11" class="ag-ring"/><circle r="3.6" class="ag-dot"/><text y="${y > H - 40 ? -16 : 22}">${C[k][0]}</text></g>`; }).join('')}
+      </svg>`;
+    const intro = () => {
+      const b = getB();
+      g.innerHTML = `<div class="ag-intro">
+        <div class="ag-crate" aria-hidden="true"><i>麦</i><i>珈</i><i>果</i></div>
+        <div><p class="ag-kicker">地図でこたえる</p><h3 class="ag-h">朝ごはん港の荷受け</h3>
+        <p class="ag-p">港に朝ごはんの材料がとどきます。どの国から来た？ 地図で光る 4 つの国から、<b>おもな輸入先</b>を押してください（国産なら<b>日本</b>）。1 品 12 秒、全部で ${N} 品。早く当てるほど高い点で、当たると船が日本へ走ります。</p>
+        <p class="ag-best">${b ? `自己ベスト <b>${b}</b> 点` : 'はじめての荷受け'}</p>
+        <button type="button" class="ag-go" data-ag="start">港をあける</button></div></div>`;
+    };
+    const start = () => {
+      st = { q: shuffle(F.map((_, i) => i)).slice(0, N), at: 0, score: 0, ok: 0, miss: [], km: 0, lock: false };
+      g.innerHTML = `<div class="ag-play">
+        <div class="ag-top"><span class="ag-n"><b data-ag="n">1</b> / ${N} 品</span><span class="ag-sc">得点 <b data-ag="sc">0</b></span></div>
+        <div class="ag-time" aria-hidden="true"><i data-ag="bar"></i></div>
+        <div class="ag-card" data-ag="card" aria-live="polite"></div>
+        <div class="ag-mapw">${map()}</div>
+        <div class="ag-keys" data-ag="keys"></div>
+        <p class="ag-fb" data-ag="fb" aria-live="polite"></p></div>`;
+      show();
+    };
+    const show = () => {
+      const i = st.q[st.at], [s, n, m, from] = F[i];
+      const right = from.length ? from : ['jp'];
+      const ans = right[Math.random() * right.length | 0];
+      const both = /国産|北海道/.test(F[i][4]);   // 国産もある品では、日本をはずれの選択肢にしない
+      const wrong = shuffle(KS.filter(k => !right.includes(k) && !(both && k === 'jp'))).slice(0, 3);
+      st.ch = shuffle([ans, ...wrong]); st.right = right; st.t0 = performance.now();
+      g.querySelector('[data-ag="n"]').textContent = st.at + 1;
+      const card = g.querySelector('[data-ag="card"]');
+      card.innerHTML = `<span class="ag-seal" aria-hidden="true">${s}</span><p><b>${n}</b><small>${n === m ? 'どの国から来た？' : m + 'は、どの国から？'}</small></p>`;
+      card.classList.remove('is-in'); void card.offsetWidth; card.classList.add('is-in');
+      g.querySelector('.ag-routes').innerHTML = '';
+      g.querySelectorAll('.ag-c').forEach(c => { c.classList.toggle('is-ch', st.ch.includes(c.dataset.c)); c.classList.remove('is-ok', 'is-ng'); });
+      g.querySelector('[data-ag="keys"]').innerHTML = st.ch.map(k => `<button type="button" data-k="${k}">${C[k][0]}</button>`).join('');
+      g.querySelector('[data-ag="fb"]').textContent = '';
+      st.lock = false;
+      clearInterval(tick);
+      tick = setInterval(() => {
+        if (!st || st.lock) return;
+        const left = Math.max(0, SEC - (performance.now() - st.t0) / 1000);
+        const bar = g.querySelector('[data-ag="bar"]');
+        bar.style.transform = `scaleX(${(left / SEC).toFixed(3)})`; bar.classList.toggle('is-low', left < 4);
+        if (left <= 0) answer(null);
+      }, 100);
+    };
+    const answer = k => {
+      if (!st || st.lock) return;
+      st.lock = true; clearInterval(tick);
+      const i = st.q[st.at], f = F[i], ok = k && st.right.includes(k);
+      const left = Math.max(0, SEC - (performance.now() - st.t0) / 1000);
+      const fb = g.querySelector('[data-ag="fb"]');
+      const names = st.right.map(x => C[x][0]).join('・');
+      if (ok) { const pts = 50 + Math.round(left * 5); st.score += pts; st.ok++; fb.className = 'ag-fb is-ok'; fb.innerHTML = `<b>正解 ＋${pts}</b>${f[4]}`; }
+      else { st.miss.push(i); fb.className = 'ag-fb is-ng'; fb.innerHTML = `<b>${k ? 'ざんねん' : '時間切れ'}</b>${f[3].length ? names + 'から。' : '国産です。'}${f[4]}`; }
+      g.querySelector('[data-ag="sc"]').textContent = st.score;
+      g.querySelectorAll('.ag-c').forEach(c => { const x = c.dataset.c; c.classList.toggle('is-ok', st.right.includes(x)); c.classList.toggle('is-ng', x === k && !ok); });
+      g.querySelectorAll('[data-ag="keys"] button').forEach(b => { b.disabled = true; b.classList.toggle('is-ok', st.right.includes(b.dataset.k)); b.classList.toggle('is-ng', b.dataset.k === k && !ok); });
+      // 船を走らせる（えさの輸入先は、うすい線で）
+      let html = '';
+      [...f[3].map(x => [x, 0]), ...(f[5] || []).map(x => [x, 1])].forEach(([x, feed], n) => {
+        const d = route(x, 1 + n * .3), dist = km(x, 'jp');
+        if (!feed) st.km += dist;
+        html += `<g class="as-r${feed ? ' is-feed' : ''}"><path d="${d}" class="as-line" pathLength="1"/><g class="as-ship"><rect x="-5" y="-3" width="10" height="6" rx="2"/><animateMotion dur="${(1.6 + dist / 6000).toFixed(2)}s" repeatCount="indefinite" rotate="auto" path="${d}"/></g></g>`;
+      });
+      g.querySelector('.ag-routes').innerHTML = html;
+      const next = document.createElement('button');
+      next.type = 'button'; next.className = 'ag-next'; next.dataset.ag = 'next';
+      next.textContent = st.at + 1 < N ? '次の荷物へ' : '結果を見る';
+      fb.append(next);
+      next.focus({ preventScroll: true });
+    };
+    const finish = () => {
+      const s = st; st = null;
+      const prev = getB(), best = s.score > prev;
+      try { if (best) localStorage.setItem(KEY, String(s.score)); if (!localStorage.getItem('azakei_asagohan')) localStorage.setItem('azakei_asagohan', '[]'); } catch (e) {}
+      const ti = TITLE.findIndex(x => s.score >= x[0]);
+      const miss = s.miss;
+      g.innerHTML = `<div class="ag-end">
+        <p class="ag-kicker">本日の荷受け</p>
+        <p class="ag-big"><b>${s.score}</b> 点<small>${N} 品中 ${s.ok} 品正解</small></p>
+        <p class="ag-title"><span aria-hidden="true">称</span>${TITLE[ti][1]}${best ? '<em>自己ベスト更新</em>' : prev ? `<small>自己ベスト ${prev} 点</small>` : ''}</p>
+        <div class="ag-km"><span>きょうの材料が旅したきょり（目安）</span><b>${fmt(s.km).toLocaleString()}</b><small>km</small><p>地球 1 周は約 4 万 km。船で何週間もかけて運ばれてくるものもあります。</p></div>
+        ${miss.length ? `<p class="ag-l">答え合わせ</p><ul class="ag-miss">${miss.map(i => { const [sl, n, m, from, note] = F[i]; return `<li><span class="ag-seal" aria-hidden="true">${sl}</span><p><b>${n}</b><small>${m}：${from.length ? from.map(k => C[k][0]).join('・') + 'から' : '国産'}</small>${note}</p></li>`; }).join('')}</ul>` : '<p class="ag-perfect">全問正解！ 世界の港の地図が、頭に入っています。</p>'}
+        <p class="ag-note">輸入先は、おもな例です。年や商品によって変わります。</p>
+        <button type="button" class="ag-go" data-ag="start">もう一度、港に立つ</button></div>`;
+      window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'asagohan', ti, TITLE.length);
+    };
+    g.addEventListener('click', e => {
+      if (e.target.closest('[data-ag="start"]')) { start(); return; }
+      if (e.target.closest('[data-ag="next"]')) { st.at++; st.at < N ? show() : finish(); return; }
+      const b = e.target.closest('[data-k]'); if (b) { answer(b.dataset.k); return; }
+      const c = e.target.closest('.ag-c.is-ch'); if (c) answer(c.dataset.c);
+    });
+    intro();
+  })();
   draw();
 })();
