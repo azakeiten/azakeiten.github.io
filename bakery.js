@@ -187,6 +187,7 @@
       ${svg}
       <div class="bk-e-btns"><button type="button" data-a="again">もう一度（同じむずかしさ）</button><button type="button" data-a="menu">むずかしさを変える</button></div>`;
     e.hidden = false;
+    if (window.AZAKEI_TALK) { window.AZAKEI_TALK(e, 'bakery', st.over === 'short' ? 'low' : gain >= 1800000 ? 'top' : 'mid'); const lt = e.querySelector('.lt'), bt = e.querySelector('.bk-e-btns'); if (lt && bt) bt.before(lt); }
     try { const k = 'azakei_bakery_' + lv, b = +localStorage.getItem(k) || -1e9; if (gain > b && st.over === 'done') localStorage.setItem(k, String(gain)); localStorage.setItem('azakei_bakery', String(Math.max(ok, +localStorage.getItem('azakei_bakery') || 0))); } catch (er) {}
   };
   const start = () => { reset(); K('start').hidden = true; K('game').hidden = false; K('end').hidden = true; K('pl').hidden = true; K('news').innerHTML = '<span class="bk-nw-h">ようこそ</span><b>開店準備ができました</b>値段と焼く数を決めて、4 月の営業をはじめよう。'; crowd(0, 0); shelf(dec.bake); paintHead(); paintDec(); };

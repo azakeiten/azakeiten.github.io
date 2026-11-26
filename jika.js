@@ -107,6 +107,7 @@
       <button type="button" class="jk-again" data-a="again">もう一度、1 週間</button></div>`;
     K('card').classList.add('is-on', 'is-final');
     try { const b = +localStorage.getItem('azakei_jika') || 0; if (pct > b) localStorage.setItem('azakei_jika', String(pct)); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(K('card').querySelector('.jk-end'), 'jika', pct >= 85 ? 'top' : pct >= 70 ? 'mid' : 'low');
   };
   const begin = () => { d = 0; total = 0; cnt = { in: 0, high: 0, full: 0 }; log = []; K('card').classList.remove('is-final'); hud(); startDay(); };
   // はじめの画面

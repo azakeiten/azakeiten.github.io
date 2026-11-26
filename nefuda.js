@@ -96,6 +96,7 @@
     K('q').textContent = `おつかれさま！ 右の図鑑で、${R.length} つのしかけをふり返ろう。${mode === 'basic' && rt >= .7 ? ' つぎは「上級編」にも挑戦してみよう。' : ''}`;
     K('shelf').innerHTML = ''; K('opts').innerHTML = ''; K('rev').hidden = true;
     try { const key = mode === 'adv' ? 'azakei_nefuda_adv' : 'azakei_nefuda', b = +localStorage.getItem(key) || 0; localStorage.setItem(key, String(Math.max(ok, b))); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(res, 'nefuda', rt >= 1 ? 'top' : rt >= .4 ? 'mid' : 'low');
   };
   box.addEventListener('click', e => {
     const o = e.target.closest('[data-o]'); if (o) { answer(+o.dataset.o); return; }

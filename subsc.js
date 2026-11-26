@@ -202,6 +202,7 @@
       <button type="button" class="sb-go" data-a="again">もう 1 年やってみる</button>`;
     res.hidden = false; box.classList.add('is-end'); beep(660, .3); setTimeout(() => beep(990, .4), 180);
     try { const b = +localStorage.getItem('azakei_subsc') || 0; if (sc > b) localStorage.setItem('azakei_subsc', String(sc)); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(res, 'subsc', rank[0] === 'やりくり名人' ? 'top' : rank[0] === 'やりくり上手' ? 'mid' : 'low');
     res.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
   };
   const start = () => {
