@@ -83,7 +83,7 @@
 (function () {
   const box = document.querySelector('[data-kuji]');
   if (!box) return;
-  if (!document.querySelector('link[href^="kjgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kjgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="kjgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kjgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_kuji_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -217,6 +217,7 @@
       <div class="kg-learn"><p><b>くじは、売る側が必ず「平均では」もうかるように作られています。</b>1 枚あたりの期待値（賞金の合計 ÷ 枚数）は、値段より低くなります。その差が、お店のもうけです。</p>
       <p>でも、もどる割合を下げすぎると、お客さんは来なくなります。宝くじは、法律で、賞金の合計が売上の半分をこえないように決められています。買う人にとっては、平均すると払ったお金の半分以下しかもどらない、ということです。</p></div>
       <button type="button" class="kg-go" data-kg="start">もう一度出店する</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'kuji', TITLE.findIndex(x => S.total >= x[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const s = e.target.closest('[data-set]');

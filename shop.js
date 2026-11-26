@@ -102,7 +102,7 @@
 (function () {
   const box = document.querySelector('[data-shop]');
   if (!box) return;
-  if (!document.querySelector('link[href^="shgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'shgame.css?v=20261125d'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="shgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'shgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_shop_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -209,6 +209,7 @@
       <table class="sg-tab"><thead><tr><th>時間</th><th>値段</th><th>来た人</th><th>売れた</th></tr></thead><tbody>${S.hist.map(h => `<tr><th>${h.h}</th><td>${yen(h.price)}</td><td>${h.want} 人</td><td>${h.n} 個</td></tr>`).join('')}</tbody></table>
       <div class="sg-learn"><p><b>損益分岐点 ＝ 費用の合計 ÷ 1 個の値段。</b>値段を上げると分岐点は下がるけれど、来る人もへります。値段を下げると人は来るけれど、分岐点は上がります。作る数は、多すぎると売れ残り、少なすぎると売り切れ。どちらも、もうけをへらします。</p></div>
       <button type="button" class="sg-go" data-sg="start">もう一度出店する</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'shop', TITLE.findIndex(t => profit >= t[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const s = e.target.closest('[data-set]'); if (s) { S[s.dataset.set] = +s.dataset.v; prep(); return; }

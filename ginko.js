@@ -110,7 +110,7 @@
 (function () {
   const box = document.querySelector('[data-ginko]');
   if (!box) return;
-  if (!document.querySelector('link[href^="bkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bkgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="bkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bkgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_bank_best', YEARS = 6, DEP_RATE = 0.005;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -256,6 +256,7 @@
       <div class="bk-learn"><p><b>銀行のもうけは、貸すときの利子と、預金につける利子の差。</b>でも、利子が高いのは、たいてい返せない心配が大きい相手です。「必ずもうかる」と言う相手ほど、気をつけます。</p>
       <p>銀行は、あずかったお金を全部金庫に置いておくわけではありません。だから、みんなが一度に引き出しに来ると困ります。そんなときに銀行にお金を貸すのが日本銀行で、「銀行の銀行」とよばれます。また、銀行がつぶれても、預金は 1 人 1,000 万円とその利子までは守られるしくみ（預金保険）があります。</p></div>
       <button type="button" class="bk-go" data-bk="start">もう一度銀行をひらく</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'ginko', TITLE.findIndex(x => p >= x[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const l = e.target.closest('[data-lend]'); if (l && !l.disabled) { lend(l.dataset.lend === '1'); return; }

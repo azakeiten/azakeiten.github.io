@@ -49,7 +49,7 @@
 (function () {
   const box = document.querySelector('[data-market]');
   if (!box) return;
-  if (!document.querySelector('link[href^="mkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'mkgame.css?v=20261125d'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="mkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'mkgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_market_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -165,6 +165,7 @@
         <tr><th>供給がへる</th><td class="is-up">上がる</td><td class="is-dn">へる</td></tr></tbody></table>
         <p>ニュースを見たら、「ほしい人の話？ それとも作る側・売る側の話？」と考えるのがコツ。同じ「値段が上がった」でも、ほしい人がふえたのか、作れる量がへったのかで、売れる数は反対に動きます。</p></div>
       <button type="button" class="mkg-go" data-mkg="start">もう一度デスクにつく</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'market', TITLE.findIndex(t => st.score >= t[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const a = e.target.closest('[data-ans]'); if (a && !a.disabled) { answer(a.dataset.ans); return; }

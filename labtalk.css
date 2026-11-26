@@ -1,0 +1,12 @@
+/* 経済ラボ：ゲームの結果に、お札マンのひとこと（labtalk.js が読みこむ） */
+.lt { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; margin: 6px 0 12px; padding: 14px 16px; border-radius: 18px; background: #fffaf0; color: #2a2015; box-shadow: 0 10px 24px -14px rgba(0, 0, 0, .5), inset 0 0 0 2px #e3b341; animation: lt-in .5s cubic-bezier(.3, 1.4, .5, 1) .4s both; }
+@keyframes lt-in { from { opacity: 0; transform: translateY(12px) scale(.96); } }
+.lt-face { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: #2f6b3a; color: #fffaf0; font-family: "Shippori Mincho", serif; font-size: 22px; font-weight: 800; box-shadow: inset 0 0 0 3px #e3b341; animation: lt-hop 2.6s ease-in-out 1s infinite; }
+@keyframes lt-hop { 0%, 80%, 100% { transform: none; } 88% { transform: translateY(-5px) rotate(-4deg); } }
+.lt-b { position: relative; }
+.lt-who { margin: 0; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; color: #2f6b3a; }
+.lt-t { margin: 2px 0 8px; font-size: 14.5px; font-weight: 800; line-height: 1.7; }
+.lt-say { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 10px; border-radius: 999px; border: 0; background: #2f6b3a; color: #fff !important; font: inherit; font-size: 12.5px; font-weight: 800; cursor: pointer; }
+.lt-say::before { content: ""; width: 0; height: 0; border-left: 8px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+.lt-say.is-on { background: #b5432f; }
+@media (prefers-reduced-motion: reduce) { .lt, .lt-face { animation: none; } }

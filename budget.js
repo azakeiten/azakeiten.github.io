@@ -55,7 +55,7 @@
 (function () {
   const box = document.querySelector('[data-budget]');
   if (!box) return;
-  if (!document.querySelector('link[href^="bdgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bdgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="bdgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bdgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_budget_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -173,6 +173,7 @@
       <div class="bd-learn"><p><b>正解は、ひとつではありません。</b>だれが、いつ負担するのか。予算を決めることは、それを決めることでもあります。</p>
       <p>本物の国では、使うお金のうち、税金でまかなえているのは 6〜7 割ほど。残りの多くは、借金（国債）でまかなっています（最近の当初予算のだいたい）。だから、使いみちの 2 番目が「借金の返済と利子」なのです。</p></div>
       <button type="button" class="bd-go" data-bd="start">もう一度会議をひらく</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'budget', score >= 80 ? 0 : score >= 50 ? 1 : 2, 3);
   };
   g.addEventListener('click', e => {
     const d = e.target.closest('[data-d]');

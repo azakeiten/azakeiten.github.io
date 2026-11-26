@@ -53,7 +53,7 @@
 (function () {
   const box = document.querySelector('[data-double]');
   if (!box) return;
-  if (!document.querySelector('link[href^="dblgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'dblgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="dblgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'dblgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_dbl_best', LIM = 12;
   const get = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -164,6 +164,7 @@
       <p class="dg2-memo">おぼえておきたいこと：72 ÷ 年利 ＝ 2 倍になるまでの年数。ふえるお金にも、上がる物価にも、ふくらむ借金にも、同じ式が使えます（毎年同じ割合で増えるとしたときの、およその数です）。</p>
       <button type="button" class="dg2-go" data-dg="start">もう一度（問題が変わります）</button></div>`;
     if (!reduce && g.querySelector('.dg2-big b').animate) g.querySelector('.dg2-big b').animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(1.08)', opacity: 1 }, { transform: 'scale(1)' }], { duration: 600, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'dbl', TITLE.findIndex(x => score >= x[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const o = e.target.closest('[data-o]'); if (o && !o.disabled) { answer(+o.dataset.o); return; }

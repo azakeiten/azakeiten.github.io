@@ -18,6 +18,9 @@ for my $s ($cl =~ /(?:\{\s*t:\s*'([^']+)'|(?<![:\w])'([^'@][^']*)')/g) { next un
 # 絵本（ehon.js の x:）をお札マンが読む
 my $eh = rd('ehon.js');
 push @out, map { ['m', $_] } $eh =~ /\bx:\s*'([^']+)'/g;
+# 経済ラボのゲームの結果で、お札マンがひとこと（labtalk.js の LINES）
+my $lt = rd('labtalk.js');
+push @out, map { ['m', $_] } $lt =~ /(?:top|mid|low): '([^']+)'/g;
 # ナレーション（S[i].n）
 my ($sl) = $dk =~ /const S = \[(.*?)\n  \];/s or die 's';
 push @out, map { ['n', $_] } $sl =~ /\bn:\s*'([^']+)'/g;

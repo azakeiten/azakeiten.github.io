@@ -73,7 +73,7 @@
 (function () {
   const box = document.querySelector('[data-oku]');
   if (!box) return;
-  if (!document.querySelector('link[href^="okgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'okgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="okgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'okgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_oku_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -166,6 +166,7 @@
       <ol class="og-log">${log.map(x => `<li><p>${x.q}</p><span>こたえ <b>${x.a}</b>・あなた ${x.gs}</span><em class="${x.off < 0.5 ? 'is-ok' : ''}">${x.pts} 点</em></li>`).join('')}</ol>
       <p class="og-memo">ケタが 1 つ上がると 10 倍、4 つ上がると 1 万倍。「億」と「兆」は 1 万倍ちがいます。ニュースの「◯兆円」は、一万円札を宇宙まで積めるほどの大きさです（一万円札 1 枚の厚さ約 0.1 mm・重さ約 1 g で計算した、およその数です）。</p>
       <button type="button" class="og-go" data-og="start">もう一度（問題が少し変わります）</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'oku', TITLE.findIndex(x => total >= x[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const a = e.target.closest('[data-og]'); if (!a || a.tagName === 'INPUT') return;

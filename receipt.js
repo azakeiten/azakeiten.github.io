@@ -80,7 +80,7 @@
 (function () {
   const box = document.querySelector('[data-receipt]');
   if (!box) return;
-  if (!document.querySelector('link[href^="rcgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'rcgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="rcgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'rcgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_receipt_best', TIME = 45;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -172,6 +172,7 @@
       ${miss.length ? `<p class="rg-l">まちがえた品物</p><ul class="rg-miss">${miss.map(i => `<li><span class="rg-tag is-${P[i][2]}">${P[i][2]}%</span><p><b>${P[i][0]}</b><small>${P[i][1]}</small>${P[i][4]}</p></li>`).join('')}</ul>` : '<p class="rg-perfect">まちがいなし！ 完ぺきなレジ係です。</p>'}
       <div class="rg-rule"><p class="rg-l">覚え方</p><ul><li><b>8%</b>　食べもの・飲みもの（持ち帰り・宅配）、定期購読の新聞</li><li><b>10%</b>　お酒、外食（お店の席で食べる・ケータリング）、医薬品、食べもの以外</li></ul><p>軽減税率は、毎日の食べものの負担を軽くするために、2019 年 10 月に消費税が 10% になったときに始まりました。</p></div>
       <button type="button" class="rg-go" data-rg="start">もう一度レジに立つ</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'receipt', TITLE.findIndex(x => s.score >= x[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const k = e.target.closest('[data-tax]'); if (k) { answer(+k.dataset.tax); return; }

@@ -54,7 +54,7 @@
 (function () {
   const box = document.querySelector('[data-infl]');
   if (!box) return;
-  if (!document.querySelector('link[href^="ijgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'ijgame.css?v=20261125d'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="ijgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'ijgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_infl_best', TIME = 40, ONI = 150;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -141,6 +141,7 @@
         <p><b>実質 ≒ お金の上がり方 − 物価の上がり方</b></p>
         <ul><li>給料が上がっても、物価がもっと上がれば、買えるものはへる（実質賃金が下がる）</li><li>預金の利子より物価の上がり方が大きいと、あずけているあいだに買う力がへる（実質金利がマイナス）</li><li>金額が決まっているもの（おこづかいなど）は、物価が上がるだけで買えるものがへる。物価が下がる（デフレ）と、ふえる</li></ul></div>
       <button type="button" class="ij-go" data-ij="start">もう一度タイムマシンに乗る</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'infl', TITLE.findIndex(t => s.score >= t[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const k = e.target.closest('[data-ans]'); if (k) { answer(+k.dataset.ans); return; }

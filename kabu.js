@@ -78,7 +78,7 @@
 (function () {
   const box = document.querySelector('[data-kabu]');
   if (!box) return;
-  if (!document.querySelector('link[href^="kbgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kbgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="kbgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kbgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_kabu_best', YEARS = 5;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -204,6 +204,7 @@
       <div class="kg2-learn"><p><b>株で集めたお金は返さなくてよいけれど、会社を持つ人がふえて、あなたの割合はへります。</b>借金なら割合はそのままですが、利子がかかり、うまくいかなくても返さなければなりません。</p>
       <p>株主総会では、ふつう 1 株 1 票で決めます。半分より多くの株を持っていれば、自分の賛成だけで決められることがふえます。配当をたくさん配ると株主はよろこびますが、会社に残るお金はへります。どれにも、よい面と心配な面があります。</p></div>
       <button type="button" class="kg2-go" data-kg2="start">もう一度会社をはじめる</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'kabu', S.out ? TITLE.length - 1 : TITLE.findIndex(x => total >= x[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const f = e.target.closest('[data-fund]'); if (f && !f.disabled) { fund(f.dataset.fund); return; }

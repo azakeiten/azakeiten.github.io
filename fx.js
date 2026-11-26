@@ -85,7 +85,7 @@
 (function () {
   const box = document.querySelector('[data-fx]');
   if (!box) return;
-  if (!document.querySelector('link[href^="fxgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'fxgame.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="fxgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'fxgame.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_fx_best', TIME = 40;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
@@ -183,6 +183,7 @@
         <div class="fxg-two"><div><b>うれしい人</b><p>${W.filter(w => w[2] > 0).map(w => w[1]).join('、')}</p></div><div><b>こまる人</b><p>${W.filter(w => w[2] < 0).map(w => w[1]).join('、')}</p></div></div>
         <p>1 ドルに払う円がふえる（140 円 → 160 円）のは、円の値打ちが下がったということ。だから「円安」。円高のときは、うれしい人とこまる人が入れかわります。同じニュースでも、立場によって、よい知らせにも悪い知らせにもなります。</p></div>
       <button type="button" class="fxg-go" data-fxg="start">もう一度速報を読む</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'fx', TITLE.findIndex(x => s.score >= x[0]), TITLE.length);
   };
   g.addEventListener('click', e => {
     const k = e.target.closest('[data-ans]'); if (k) { answer(+k.dataset.ans); return; }

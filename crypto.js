@@ -11,7 +11,7 @@
 (function () {
   const box = document.querySelector('[data-crypto]');
   if (!box) return;
-  if (!document.querySelector('link[href^="crypto.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'crypto.css?v=20261124e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="crypto.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'crypto.css?v=20261126a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_crypto';
   /* 指紋（ハッシュ）：文字列 → 16 進 8 けた */
@@ -128,6 +128,7 @@
           <li>国の中央銀行がデジタルのお金をつくる「中央銀行デジタル通貨」の研究も進んでいます。こちらは国のお金そのもので、暗号資産とはちがいます。</li></ul></div>
         <p class="cx-more"><a href="glossary.html#crypto">用語辞典「暗号資産」</a><a href="glossary.html#blockchain">「ブロックチェーン」</a><a href="glossary.html#cbdc">「中央銀行デジタル通貨」</a></p>
         <button type="button" class="cx-reset" data-sort="again">もう一度仕分ける</button></div>`;
+      window.AZAKEI_TALK && window.AZAKEI_TALK(pane(2).querySelector('.cx-end'), 'crypto', good >= 8 ? 0 : good >= 5 ? 1 : 2, 3);
       save(); return;
     }
     const c = CARDS[order[at]];
