@@ -83,7 +83,7 @@
 (function () {
   const box = document.querySelector('[data-kuji]');
   if (!box) return;
-  if (!document.querySelector('link[href^="kjgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kjgame.css?v=20261126m'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="kjgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kjgame.css?v=20261127a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_kuji_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

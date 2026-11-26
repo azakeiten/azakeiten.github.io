@@ -183,7 +183,10 @@
       <div class="sr-next"><button type="button" class="sr-go" data-a="next">${lot < 2 ? '次の品物へ' : 'もう一度、3 品'}</button><button type="button" data-a="again">同じ品物でもう一度</button></div>`;
     reveal.hidden = false;
     score();
-    if (lot === 2) { try { localStorage.setItem('azakei_seri', String((+localStorage.getItem('azakei_seri') || 0) + 1)); } catch (e) {} }
+    if (lot === 2) {
+      try { localStorage.setItem('azakei_seri', String((+localStorage.getItem('azakei_seri') || 0) + 1)); const b = localStorage.getItem('azakei_seri_best'); if (total >= 0 && (b === null || total > +b)) localStorage.setItem('azakei_seri_best', String(Math.round(total))); } catch (e) {}
+      if (window.AZAKEI_TALK) { window.AZAKEI_TALK(reveal, 'seri', total > 0 ? 'top' : rec.some(r => r[1]) ? 'mid' : 'low'); const lt = reveal.querySelector('.lt'), nx = reveal.querySelector('.sr-next'); if (lt && nx) nx.before(lt); }
+    }
   };
   const score = () => {
     K('score').innerHTML = rec.map(([n, w, g, m]) => `<li><span>${n}<small>${m === 'up' ? 'せり上げ' : '封筒'}</small></span><b class="${g < 0 ? 'is-minus' : ''}">${w ? (g >= 0 ? '+' : '−') + yen(Math.abs(g)) : '買わず'}</b></li>`).join('') + (rec.length ? `<li class="sr-total"><span>あなたの得の合計</span><b class="${total < 0 ? 'is-minus' : ''}">${total < 0 ? '−' : ''}${yen(Math.abs(total))}</b></li>` : '');

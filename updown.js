@@ -47,8 +47,9 @@
   };
   const finish = () => {
     const wins = hist.filter(Boolean).length;
-    if (wins >= 5) { try { localStorage.setItem('azakei_chart_reader', '1'); } catch (e) {} }
+    try { if (wins >= 5) localStorage.setItem('azakei_chart_reader', '1'); if (chips > (+localStorage.getItem('azakei_ud_best') || 0)) localStorage.setItem('azakei_ud_best', String(chips)); } catch (e) {}
     info.innerHTML = `<b>結果：チップ ${chips} 枚</b>${hist.length} 回中 ${wins} 回当たり。<br><span class="ud-reveal">種明かし：このチャートは、毎回サイコロのように<strong>でたらめに</strong>作っていました（ランダムウォーク）。本物の株価も、短い先の動きはとても予想しにくいもの。だからこそ、1 つに賭けずに「分散」したり、長い目で見たりすることが大切です。</span>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(info, 'updown', wins >= 5 ? 'top' : wins >= 3 ? 'mid' : 'low');
     btnUp.disabled = btnDown.disabled = true; btnNext.hidden = false; btnNext.textContent = 'もう一度あそぶ';
     btnNext.onclick = () => { btnNext.textContent = '次の回戦へ'; btnNext.onclick = null; start(); };
   };

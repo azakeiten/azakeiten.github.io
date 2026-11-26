@@ -89,6 +89,7 @@
     box.querySelectorAll(".pz-coin").forEach(c => c.classList.add("is-on"));
     box.querySelector('.pz-msg').innerHTML = `ぜんぶ正解。<b>${moves}</b> 手でした。お金が、矢印の上をめぐりはじめました。<br>${E.map(e => `<span>${e[3]}：${e[4]}</span>`).join('')}`;
     try { localStorage.setItem('azakei_pazuru', String(moves)); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(box.querySelector('.pz-msg'), 'pazuru', moves <= 6 ? 'top' : moves <= 10 ? 'mid' : 'low');
   };
   // 押して選ぶ → 空らんを押して置く
   box.addEventListener('click', e => {
