@@ -183,6 +183,7 @@
     box.querySelector('[data-a="go"]').textContent = 'もう一度（新しい 3 年）';
     K('turn').textContent = TURNS;
     try { localStorage.setItem('azakei_kinri', String(Math.max(sc, +localStorage.getItem('azakei_kinri') || 0))); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(result.querySelector(':scope > div') || result, 'kinri', sc >= 80 ? 'top' : sc >= 40 ? 'mid' : 'low');
   };
 
   box.addEventListener('click', e => {

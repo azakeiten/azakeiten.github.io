@@ -72,7 +72,7 @@
   const finish = () => {
     $('btns').hidden = true; box.classList.add('is-over');
     $('who').textContent = `作戦：${ai[0]}`;
-    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    try { localStorage.setItem(KEY, '1'); if (sy + st > (+localStorage.getItem('azakei_nesage_best') || 0)) localStorage.setItem('azakei_nesage_best', String(sy + st)); } catch (e) {}
     const both = you.filter((m, i) => m === 'K' && them[i] === 'K').length;
     const msg = both === ROUNDS ? 'みごと！ 2 軒そろって、いちばんもうかる形をつくれました。'
       : sy > st ? 'となりより多くもうけました。でも、2 軒の合計はどうだったかな？'
@@ -84,6 +84,7 @@
       <p class="ns-end-who"><span aria-hidden="true">策</span><span>となりの作戦は<b>「${ai[0]}」</b>でした。<small>${ai[1]}</small></span></p>
       <p class="ns-end-m">${msg}<br>1 回だけなら、値下げしたほうが得に見えます。でも<b>何回もくり返す</b>と、相手も仕返しをしてきて、2 軒とも 1 ずつの「値下げ競争」になりがち。おたがいに値段を守ると、2 軒の合計がいちばん大きくなります（10 回で 60）。このように、相手の出方を考えて選ぶことを調べる学問が<b>ゲーム理論</b>です。2 軒とも守れた回は <b>${both} 回</b>でした。</p>
       <button type="button" class="btn-primary" data-a="again">別のお店と、もう 1 回</button>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK($('end'), 'nesage', sy + st >= 50 ? 'top' : sy + st >= 30 ? 'mid' : 'low');
   };
   box.addEventListener('click', e => {
     const b = e.target.closest('[data-m]'); if (b) return play(b.dataset.m);

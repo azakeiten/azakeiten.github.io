@@ -146,7 +146,8 @@
     result.innerHTML = `<span class="ik-r-seal" aria-hidden="true">${st.dead ? '涸' : '池'}</span><div><p class="ik-r-h">${head}</p><p>${body}</p><ul class="ik-r-nums"><li><small>あなた</small><b>${you} 匹</b></li><li><small>4 人の合計</small><b>${total} 匹</b></li><li><small>3 匹ずつなら（合計）</small><b>${fair} 匹</b></li><li><small>池に残った魚</small><b>${Math.round(st.fish)} 匹</b></li></ul></div>`;
     result.hidden = false;
     box.querySelector('[data-a="go"]').textContent = 'もう一度（1 年目から）';
-    try { localStorage.setItem('azakei_ike', String((+localStorage.getItem('azakei_ike') || 0) + 1)); } catch (e) {}
+    try { localStorage.setItem('azakei_ike', String((+localStorage.getItem('azakei_ike') || 0) + 1)); if (!st.dead && total > (+localStorage.getItem('azakei_ike_best') || 0)) localStorage.setItem('azakei_ike_best', String(total)); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(result.querySelector(':scope > div') || result, 'ike', st.dead ? 'low' : total >= fair ? 'top' : 'mid');
   };
 
   box.addEventListener('click', e => {

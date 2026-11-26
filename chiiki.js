@@ -176,7 +176,7 @@
     K('msg').textContent = `お金は町で ${mul.toFixed(1)} 倍の売上を生みました。つかまえたコインは ${gCatch} 枚。`;
     const g = K('gres');
     g.innerHTML = `<p class="mg-r-h"><span aria-hidden="true">${t[0]}</span>${t[1]}<small>${mul.toFixed(1)} 倍${isBest ? '・最高記録！' : `（最高 ${gBest.toFixed(1)} 倍）`}</small></p><p class="mg-r-tip">何もしないと、町に残る割合はおよそ半分。めぐるのは 2 回ほどで、売上は 1 万円の 2 倍ほどです。つかまえるほど、町の中でお金がめぐり、売上が何倍にもなります（乗数効果）。</p><button type="button" class="mg-go" data-a="gstart">もう一度</button>`;
-    g.hidden = false; box.querySelector('[data-a="boost"]').disabled = true; box.querySelector('.mg-g-btns [data-a="gstart"]').disabled = false;
+    g.hidden = false; window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'chiiki', mul >= 6 ? 'top' : mul >= 3.5 ? 'mid' : 'low'); box.querySelector('[data-a="boost"]').disabled = true; box.querySelector('.mg-g-btns [data-a="gstart"]').disabled = false;
   };
   const setMode = m => {
     if (gRun) gEnd();

@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126l'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126m'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -59,15 +59,15 @@
     ['lab','kuji','籤','くじ引きの期待値','azakei_kuji_best','円',0],
     ['lab','kabu','株','株式会社をつくろう','azakei_kabu_best','万円',0],
     ['lab','ginko','銀','銀行のふしぎ','azakei_bank_best','万円',0],
-    ['lab','kinri','舵','景気の舵とり','azakei_kinri','',0],
+    ['lab','kinri','舵','景気の舵とり','azakei_kinri','点',0],
     ['lab','uchiwake','訳','おにぎり 1 個の値段の中身','azakei_oni_best','万円',0],
     ['lab','robot','機','ロボットがやってきた工場','azakei_robot','',0],
-    ['lab','chiiki','巡','めぐる町のお金','azakei_chiiki','',0],
+    ['lab','chiiki','巡','めぐる町のお金','azakei_chiiki_game','倍',0],
     ['lab','gurafu','図','グラフのうそを見破れ','azakei_gurafu_best','点',0],
     ['lab','hoken','備','みんなで備える箱','azakei_hoken','',0],
-    ['lab','ike','池','みんなの池','azakei_ike','',0],
+    ['lab','ike','池','みんなの池','azakei_ike_best','匹',0],
     ['lab','crypto','暗','暗号資産とブロックチェーン','azakei_crypto','',0],
-    ['lab','nesage','策','となりのお店と値下げ競争','azakei_nesage','',0]
+    ['lab','nesage','策','となりのお店と値下げ競争','azakei_nesage_best','/ 60',0]
   ];
   const raw = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
   const arr = k => { try { const v = JSON.parse(raw(k) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } };
