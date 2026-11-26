@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-26', seal: '分', tone: 'gold', href: 'sim.html#bungyo', eyebrow: '経済ラボ', title: '文化祭の分担パズル', text: '1 人 6 時間。だれに、どの仕事を、何時間？ 何でも速い人に全部まかせるのが正解とは限らない、4 ステージのパズル。' },
     { date: '2026-11-25', seal: '昇', tone: 'dark', href: 'sim.html#infl', eyebrow: '経済ラボ', title: '実質ジャッジ 40 秒', text: '給料 +3%・物価 +5%。買えるものは、ふえた？ へった？ タイムマシンで 1 年ずつ進みながら、40 秒で判定するスピード勝負。' },
     { date: '2026-11-25', seal: '値', tone: 'paper', href: 'sim.html#market', eyebrow: '経済ラボ', title: '需要と供給ニュースデスク', text: '台風でキャベツは？ テレビで紹介されたパンは？ ニュースを読んで、需要と供給のどちらの線が動くかを当てよう。' },
     { date: '2026-11-24', seal: '店', tone: 'shu', href: 'sim.html#shop', eyebrow: '経済ラボ', title: '模擬店の当日 3 時間', text: 'メニュー・作る数・値段を決めて、文化祭の当日へ。「損益分岐点まで あと ◯ 個」をゼロにできるか。' },

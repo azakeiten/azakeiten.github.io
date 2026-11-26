@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126b'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126c'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -54,7 +54,7 @@
     ['lab','oku','億','1 億円って、どれくらい？','azakei_oku_best','点',0],
     ['lab','budget','予','国の予算を 100 円にすると','azakei_budget_best','点',0],
     ['lab','infl','昇','インフレのタイムマシン','azakei_infl_best','点',0],
-    ['lab','bungyo','分','分業のふしぎ','azakei_bungyo','',0],
+    ['lab','bungyo','分','分業のふしぎ','azakei_bungyo_total','/ 12 ★',0],
     ['lab','receipt','税','レシートの中の税金','azakei_receipt_best','点',0],
     ['lab','kuji','籤','くじ引きの期待値','azakei_kuji_best','円',0],
     ['lab','kabu','株','株式会社をつくろう','azakei_kabu_best','万円',0],

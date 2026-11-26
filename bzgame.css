@@ -1,0 +1,56 @@
+/* 経済ラボ「分業のふしぎ」— 文化祭の分担パズル（bungyo.js が読みこむ） */
+.bz { --p: #c0587a; --s: #3567a0; --c: #c9922e; margin: 0 0 22px; padding: clamp(18px, 3vw, 30px); border-radius: 28px; color: #2a2015; background: linear-gradient(180deg, #fdf6ec, #f2e6d0); box-shadow: inset 0 0 0 1px rgba(107, 74, 34, .25), 0 24px 46px -30px rgba(60, 40, 10, .6); }
+.bz button { font: inherit; cursor: pointer; color: inherit; }
+.bz-kicker { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #b5432f; }
+.bz-h { margin: 2px 0 8px; font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: .06em; }
+.bz-p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.85; max-width: 42em; }
+.bz-hd { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.bz-total { margin: 0; padding: 10px 16px; border-radius: 16px; background: #2a2015; color: #ffd76a; text-align: center; line-height: 1; } .bz-total b { font-family: 'Shippori Mincho', serif; font-size: 32px; } .bz-total small { display: block; margin-top: 4px; font-size: 12px; color: #f3e3bd; }
+.bz-stages { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 10px; }
+.bz-stages button { position: relative; width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: center; padding: 14px; border-radius: 18px; border: 0; background: #fffaf0; text-align: left; box-shadow: 0 8px 18px -12px rgba(60, 40, 10, .5); transition: transform .15s; }
+.bz-stages button:hover:not(:disabled) { transform: translateY(-3px); } .bz-stages button:disabled { opacity: .5; cursor: default; }
+.bz-no { grid-row: span 3; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: #b5432f; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 22px; font-weight: 800; }
+.bz-stages b { font-size: 15px; } .bz-stages small { font-size: 12px; color: #6b5a44; } .bz-stages em { font-style: normal; font-size: 11px; color: #8a5a1c; }
+.bz-st { color: #e3a52a; font-size: 18px; letter-spacing: .1em; } .bz-st i { font-style: normal; color: rgba(107, 74, 34, .2); }
+.bz-st.is-big { font-size: 48px; } .bz-st.is-big { animation: bz-pop .6s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes bz-pop { from { transform: scale(.4); opacity: 0; } }
+.bz-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 12px; }
+.bz-back { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(107, 74, 34, .3); background: transparent; font-size: 12.5px; font-weight: 800; }
+.bz-n { padding: 3px 10px; border-radius: 99px; background: #b5432f; color: #fff; font-size: 12px; font-weight: 800; } .bz-top b { font-family: 'Shippori Mincho', serif; font-size: 20px; }
+.bz-goal { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin-bottom: 12px; }
+.bz-goal > div { position: relative; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px; background: #fffaf0; overflow: hidden; box-shadow: inset 0 0 0 2px rgba(107, 74, 34, .15); }
+.bz-goal > div.is-ok { box-shadow: inset 0 0 0 2px #2f7a52; } .bz-goal > div.is-max { box-shadow: inset 0 0 0 2px var(--c); background: #fff4dc; }
+.bz-goal span { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #2a2015; color: #ffd76a; font-family: 'Shippori Mincho', serif; flex: none; }
+.bz-goal p { margin: 0; display: grid; line-height: 1.25; } .bz-goal small { font-size: 11.5px; color: #6b5a44; } .bz-goal b { font-family: 'Shippori Mincho', serif; font-size: 24px; } .bz-goal em { font-style: normal; font-size: 11px; font-weight: 800; color: #8a5a1c; }
+.bz-goal i { position: absolute; left: 0; bottom: 0; height: 4px; background: #2f7a52; transition: width .3s; }
+.bz-people { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 10px; }
+.bz-person { padding: 12px 14px; border-radius: 18px; background: #fffaf0; box-shadow: 0 8px 18px -14px rgba(60, 40, 10, .5); }
+.bz-who { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin: 0 0 6px; } .bz-who b { font-family: 'Shippori Mincho', serif; font-size: 18px; } .bz-who small { font-size: 12px; color: #6b5a44; }
+.bz-left { margin-left: auto; padding: 2px 9px; border-radius: 99px; background: #e3f0e6; color: #2f7a52; font-size: 12px; font-weight: 800; } .bz-left.is-full { background: #f3e6d0; color: #8a5a1c; }
+.bz-clock { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; margin-bottom: 8px; }
+.bz-clock i { height: 10px; border-radius: 3px; background: rgba(107, 74, 34, .12); transition: background .2s; }
+.bz-clock i.is-p { background: var(--p); } .bz-clock i.is-s { background: var(--s); } .bz-clock i.is-c { background: var(--c); }
+.bz-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto 3.6em auto; align-items: center; gap: 8px; padding: 5px 0; border-top: 1px dashed rgba(107, 74, 34, .2); }
+.bz-j { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 14px; } .bz-j.is-p { background: var(--p); } .bz-j.is-s { background: var(--s); } .bz-j.is-c { background: var(--c); }
+.bz-rate { display: grid; font-size: 13px; font-weight: 800; } .bz-rate small { font-size: 11px; font-weight: 500; color: #6b5a44; }
+.bz-row button { width: 36px; height: 36px; border-radius: 10px; border: 2px solid rgba(107, 74, 34, .25); background: #fff; font-size: 18px; font-weight: 800; line-height: 1; }
+.bz-row button:disabled { opacity: .3; cursor: default; }
+.bz-row > b { text-align: center; font-family: 'Shippori Mincho', serif; font-size: 20px; } .bz-row > b small { display: block; font-family: inherit; font-size: 10px; color: #6b5a44; }
+.bz-hint { margin: 8px 0 0; padding: 8px 10px; border-radius: 10px; background: #fff4dc; font-size: 12.5px; line-height: 1.7; } .bz-hint b { color: #b5432f; font-size: 15px; }
+.bz-msg { margin: 12px 0; font-size: 14px; font-weight: 800; }
+.bz-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.bz-go { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border: 0; border-radius: 14px; background: #b5432f; color: #fff !important; font-weight: 800; font-size: 15px; box-shadow: 0 5px 0 #7a2418; }
+.bz-go:disabled { opacity: .45; cursor: default; }
+.bz-sec { padding: 12px 18px; border-radius: 14px; border: 2px solid rgba(107, 74, 34, .3); background: transparent; font-weight: 800; font-size: 14px; }
+.bz-res { display: grid; gap: 10px; }
+.bz-big { margin: 0; }
+.bz-cmp { margin: 0; font-size: 15px; } .bz-cmp b { font-family: 'Shippori Mincho', serif; font-size: 22px; color: #b5432f; }
+.bz-opt { padding: 12px 14px; border-radius: 16px; background: #fffaf0; font-size: 13.5px; line-height: 1.9; } .bz-opt p { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; } .bz-opt p > b { min-width: 4em; } .bz-opt .bz-j { width: 22px; height: 22px; font-size: 12px; }
+.bz-l { font-size: 12px !important; font-weight: 800; color: #8a5a1c; letter-spacing: .08em; }
+.bz-learn { padding: 14px 16px; border-radius: 16px; background: #fffaf0; box-shadow: inset 4px 0 0 #b5432f; font-size: 14px; line-height: 1.85; } .bz-learn p { margin: 0; }
+.bz-sub { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-size: 14px; font-weight: 800; }
+.bz-sub span { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: #2f7a52; color: #fff; font-family: 'Shippori Mincho', serif; }
+@media (max-width: 560px) { .bz { border-radius: 22px; padding: 16px 12px; } .bz-row { gap: 6px; } .bz-row button { width: 34px; height: 34px; } .bz-goal b { font-size: 20px; } }
+@media (prefers-reduced-motion: reduce) { .bz * { animation: none !important; transition: none !important; } }
+.bz-goal { position: sticky; top: calc(var(--nav-h, 64px) + 58px); z-index: 5; padding: 6px; margin: 0 -6px 12px; border-radius: 18px; background: rgba(253, 246, 236, .94); backdrop-filter: blur(6px); }
+@media (max-width: 560px) { .bz-goal { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; } .bz-goal > div { flex-direction: column; align-items: flex-start; gap: 2px; padding: 6px 8px; } .bz-goal span { display: none; } .bz-goal em { font-size: 10px; } }
