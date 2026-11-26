@@ -1292,7 +1292,10 @@ try {
   const KEY = 'azakei_mission';
   const jget = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
   const len = k => { const v = jget(k, []); return Array.isArray(v) ? v.length : (+v || 0); };
-  const labN = () => ['azakei_sim_run', 'azakei_chart_reader', 'azakei_ozk_master', 'azakei_fx_master', 'azakei_oku', 'azakei_budget', 'azakei_bungyo', 'azakei_ginko', 'azakei_nesage'].filter(k => { try { return !!localStorage.getItem(k); } catch (e) { return false; } }).length + (len('azakei_shop') >= 3 ? 1 : 0);
+  const labN = () => { const a = jget('azakei_lab_tried', []); return Array.isArray(a) ? a.length : 0; };
+  // ためした遊び（あそび場 26 ＋ 経済ラボ 30）
+  const triedN = () => new Set([].concat(jget('azakei_play_tried', []) || [], jget('azakei_lab_tried', []) || []).map(String)).size;
+  const num = k => +jget(k, 0) || 0;
   // [id, お題, どこで, 今の数を読む関数]
   const M = [
     ['gacha', 'ことばガチャで、新しい言葉に 1 つ出会う', 'glossary.html#gacha', () => len('azakei_gacha')],
@@ -1300,8 +1303,16 @@ try {
     ['mame', 'お札マンを押して、豆知識を 1 つ聞く', 'glossary.html', () => len('azakei_mame')],
     ['coin', '世界のお金図鑑に、コインを 1 枚ふやす', 'quiz.html#coins', () => len('azakei_coins')],
     ['np', '年表ゲームで、自己ベストを 1 つ更新する', 'glossary.html#nenpyo', () => len('azakei_np_best')],
-    ['lab', '経済ラボで、「済」を 1 つふやす', 'sim.html', labN],
-    ['shop', '文化祭のお店で、ミッションを 1 つクリア', 'sim.html#shop', () => len('azakei_shop')]
+    ['lab', '経済ラボで、まだの実験を 1 つためす', 'sim.html', labN],
+    ['shop', '模擬店の当日 3 時間で、自己ベストを更新する', 'sim.html#shop', () => num('azakei_shop_best')],
+    ['try', 'まだ遊んでいない遊びを、1 つためす', 'quiz.html', triedN],
+    ['quiz', '億万長者クイズで、自己ベストを更新する', 'quiz.html#quiz', () => num('azakei_quiz_best')],
+    ['otsuri', 'おつりの達人で、自己ベストを更新する', 'quiz.html#otsuri', () => num('azakei_otsuri_best')],
+    ['dbl', '複利の時計で、自己ベストを更新する', 'sim.html#double', () => num('azakei_dbl_best')],
+    ['receipt', '税率レジ 45 秒で、自己ベストを更新する', 'sim.html#receipt', () => num('azakei_receipt_best')],
+    ['fxg', '為替ニュース速報で、自己ベストを更新する', 'sim.html#fx', () => num('azakei_fx_best')],
+    ['infl', '実質ジャッジで、自己ベストを更新する', 'sim.html#infl', () => num('azakei_infl_best')],
+    ['bungyo', '文化祭の分担パズルで、★ を 1 つふやす', 'sim.html#bungyo', () => num('azakei_bungyo_total')],
   ];
   const jst = new Date(Date.now() + 9 * 3600e3);
   const day = Math.floor(Date.UTC(jst.getUTCFullYear(), jst.getUTCMonth(), jst.getUTCDate()) / 864e5);
@@ -1309,7 +1320,7 @@ try {
   if (s.day !== day) {
     // 新しい日：お題を決めて、いまの数を「スタート」として覚える（ぜんぶ終わっているお題は飛ばす）
     let i = (day * 7 + 3) % M.length, tries = 0;
-    while (tries++ < M.length && ((M[i][0] === 'lab' && labN() >= 10) || (M[i][0] === 'shop' && len('azakei_shop') >= 3) || (M[i][0] === 'coin' && len('azakei_coins') >= 12) || (M[i][0] === 'gacha' && len('azakei_gacha') >= document.querySelectorAll('.gl-item').length && document.querySelectorAll('.gl-item').length > 0))) i = (i + 1) % M.length;
+    while (tries++ < M.length && ((M[i][0] === 'lab' && labN() >= 30) || (M[i][0] === 'try' && triedN() >= 56) || (M[i][0] === 'bungyo' && num('azakei_bungyo_total') >= 12) || (M[i][0] === 'coin' && len('azakei_coins') >= 12) || (M[i][0] === 'gacha' && len('azakei_gacha') >= document.querySelectorAll('.gl-item').length && document.querySelectorAll('.gl-item').length > 0))) i = (i + 1) % M.length;
     const streak = s.done && s.day === day - 1 ? (s.streak || 0) : 0;
     const hist = (s.hist || (s.done ? [s.day] : [])).filter(d => d > day - 14);
     s = { day, id: M[i][0], base: M[i][3](), done: false, streak, hist };
@@ -1391,7 +1402,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261126e';
+  const V = '20261126f';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1417,7 +1428,7 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-tour]'); if (!b) return;
   e.preventDefault();
   if (window.AZAKEI_TOUR) { window.AZAKEI_TOUR.start(); return; }
-  const s = document.createElement('script'); s.src = 'tour.js?v=20261126e'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
+  const s = document.createElement('script'); s.src = 'tour.js?v=20261126f'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
 });
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */
