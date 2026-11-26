@@ -6,7 +6,7 @@
    ・せりふを変えたら、声もつくりなおす（tools/voicevox/README.txt。vv-extract.pl がここの LINES を集める）
    ================================================================ */
 (function () {
-  if (window.AZAKEI_TALK) return;
+  if (window.AZAKEI_TALK && !window.AZAKEI_TALK.stub) return;
   const LINES = {
     bungyo: {
       top: 'いちばんよい分担だね！ 速さじゃなくて、あきらめる数でくらべるのがコツなんだ。',

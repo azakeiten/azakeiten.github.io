@@ -1028,6 +1028,12 @@ try {
     if (weekly.week === undefined) items.push(`<a href="#weekly">今週の 1 問に、挑戦してみませんか</a>`);
     else if (weekly.week !== weekNo) items.push(`<a href="#weekly">今週の 1 問が、新しくなっています</a>`);
     else if (weekly.lastOk === weekNo && weekly.streak > 1) items.push(`<a href="#weekly">今週の 1 問、<b>${weekly.streak}</b> 週連続正解中！</a>`);
+    // 前に来たときから、新しく遊べるものがふえていたら（content.js の newPlay の日付で数える）
+    const np = (window.AZAKEI && AZAKEI.newPlay || []).filter(n => Date.parse(n.date + 'T00:00:00+09:00') > prev).length;
+    if (np) items.push(`<a href="#newplay">前に来たときから、新しく遊べるものが <b>${np}</b> こふえています</a>`);
+    // トロフィー棚：ためした遊びの数（あそび場 26 ＋ 経済ラボ 30）
+    const tried = new Set([].concat(get('azakei_play_tried', []) || [], get('azakei_lab_tried', []) || []).map(String)).size;
+    if (tried) items.push(`<a href="mypage.html#trophy">トロフィー棚：ためした遊び <b>${Math.min(56, tried)}</b> / 56</a>`);
     if (window.AZAKEI_BADGES) items.push(`<a href="mypage.html">わたしの記録：バッジ <b>${AZAKEI_BADGES.filter(b => b[2]).length}</b> / ${AZAKEI_BADGES.length}</a>`);
     welcome.innerHTML = `<div class="container">${window.AZAKEI_OSATSU ? AZAKEI_OSATSU(`おかえりなさい！ 前回は ${fmt(prev)} に来てくれたね。また会えてうれしいよ。`, 'happy') : `<p class="wb-hello"><span class="wb-seal" aria-hidden="true">経</span>おかえりなさい。<small>前回は ${fmt(prev)} に来てくれました。</small></p>`}${items.length ? `<ul class="wb-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</div>`;
     welcome.hidden = false;
@@ -1385,7 +1391,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261126d';
+  const V = '20261126e';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1411,7 +1417,7 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-tour]'); if (!b) return;
   e.preventDefault();
   if (window.AZAKEI_TOUR) { window.AZAKEI_TOUR.start(); return; }
-  const s = document.createElement('script'); s.src = 'tour.js?v=20261126d'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
+  const s = document.createElement('script'); s.src = 'tour.js?v=20261126e'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
 });
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */
