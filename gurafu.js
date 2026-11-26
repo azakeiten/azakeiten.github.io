@@ -167,3 +167,183 @@
   };
   show();
 })();
+
+/* ================================================================
+   v364：「見出しチェック 40 秒」— グラフと見出しを見て、正しい？ 言いすぎ？
+   ・毎回、数字から新しいグラフをつくる（棒・折れ線・帯）。数字はすべてたとえ
+   ・見出しがグラフの数字と合っていれば「正しい」、合っていなければ「言いすぎ」
+   ・縦軸を切りとったグラフも出る。見た目ではなく、目もりの数字で判断する
+   ・正解で次へ。続けて正解すると倍率アップ。まちがえると 3 秒へる
+   ・自己ベストは azakei_gurafu_best
+   ================================================================ */
+(function () {
+  const box = document.querySelector('[data-gurafu]');
+  if (!box || document.querySelector('.gq')) return;
+  if (!document.querySelector('link[href^="gugame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'gugame.css?v=20261126j'; document.head.appendChild(l); }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const KEY = 'azakei_gurafu_best', TIME = 40;
+  const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
+  const g = document.createElement('div');
+  g.className = 'gq';
+  box.before(g);
+  box.insertAdjacentHTML('beforebegin', '<p class="gq-sub"><span aria-hidden="true">験</span>じっくりためす：5 つのしかけを、ひとつずつあばく</p>');
+  const R = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const pick = a => a[Math.random() * a.length | 0];
+  const coin = () => Math.random() < .5;
+  const W = 300, H = 170, L = 40, Rr = 290, T = 14, B = 146;
+  const COMP = ['A 社', 'B 社'], THING = [['売上', '億円'], ['来場者', '万人'], ['会員', '万人'], ['生産量', '万トン']];
+  /* 棒グラフ：vals、縦軸 mn〜mx（mn が 0 でないと「切りとり」） */
+  const bars = (labels, vals, mn, mx, step, unit) => {
+    const y = v => B - (v - mn) / (mx - mn) * (B - T), n = vals.length, bw = Math.min(52, (Rr - L) / n * .55);
+    let s = '';
+    for (let v = mn; v <= mx + 1e-9; v += step) s += `<line class="gq-gr" x1="${L}" x2="${Rr}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}"/><text class="gq-tk" x="${L - 5}" y="${(y(v) + 4).toFixed(1)}">${v}</text>`;
+    vals.forEach((v, i) => { const cx = L + (Rr - L) * (i + .5) / n; s += `<rect class="gq-bar${i === n - 1 ? ' is-last' : ''}" x="${(cx - bw / 2).toFixed(1)}" y="${y(v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(B - y(v)).toFixed(1)}" rx="3"/><text class="gq-lb" x="${cx.toFixed(1)}" y="${B + 15}">${labels[i]}</text>`; });
+    if (mn > 0) s += `<path class="gq-cut" d="M${L - 7} ${B - 8} l14 -4 M${L - 7} ${B - 3} l14 -4"/>`;
+    return `<text class="gq-unit" x="${L - 5}" y="${T - 4}">${unit}</text>${s}<line class="gq-ax" x1="${L}" y1="${T - 4}" x2="${L}" y2="${B}"/><line class="gq-ax" x1="${L}" y1="${B}" x2="${Rr}" y2="${B}"/>`;
+  };
+  const line = (labels, vals, mn, mx, step, unit) => {
+    const y = v => B - (v - mn) / (mx - mn) * (B - T), n = vals.length, x = i => L + 14 + (Rr - L - 28) * i / (n - 1);
+    let s = '';
+    for (let v = mn; v <= mx + 1e-9; v += step) s += `<line class="gq-gr" x1="${L}" x2="${Rr}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}"/><text class="gq-tk" x="${L - 5}" y="${(y(v) + 4).toFixed(1)}">${v}</text>`;
+    s += `<polyline class="gq-ln" points="${vals.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ')}"/>`;
+    vals.forEach((v, i) => { s += `<circle class="gq-pt" cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="3.5"/><text class="gq-lb" x="${x(i).toFixed(1)}" y="${B + 15}">${labels[i]}</text>`; });
+    return `<text class="gq-unit" x="${L - 5}" y="${T - 4}">${unit}</text>${s}<line class="gq-ax" x1="${L}" y1="${T - 4}" x2="${L}" y2="${B}"/><line class="gq-ax" x1="${L}" y1="${B}" x2="${Rr}" y2="${B}"/>`;
+  };
+  const band = (parts) => {   // 100% の帯：[名前, ％]
+    let x = L, s = '';
+    const cls = ['is-a', 'is-b', 'is-c'];
+    parts.forEach(([n, p], i) => { const w = (Rr - L) * p / 100; s += `<rect class="gq-band ${cls[i]}" x="${x.toFixed(1)}" y="52" width="${w.toFixed(1)}" height="44"/><text class="gq-bt" x="${(x + w / 2).toFixed(1)}" y="79">${p}%</text><text class="gq-lb" x="${(x + w / 2).toFixed(1)}" y="${i % 2 ? 116 : 44}">${n}</text>`; x += w; });
+    return s;
+  };
+  const yrs = n => { const y0 = R(2018, 2020); return Array.from({ length: n }, (_, i) => `${y0 + i}`); };
+  const nice = (lo, hi) => { const span = hi - lo, st = span > 60 ? 20 : span > 30 ? 10 : span > 12 ? 5 : 2; return [Math.floor(lo / st) * st, Math.ceil(hi / st) * st, st]; };
+  /* 問題のつくり方：[グラフの SVG, 見出し, 正しい？, なぜ] */
+  const GEN = [
+    // 2 社をくらべる棒（縦軸を切りとることが多い）
+    () => {
+      const [th, u] = pick(THING), a = R(40, 90), d = R(2, 6), b = a + d, cut = Math.random() < .7;
+      const [lo, hi, st] = cut ? nice(a - 6, b + 1) : nice(0, b + 4);
+      const svg = bars(COMP, [a, b], cut ? lo : 0, hi, st, u);
+      const r = b / a, truth = coin();
+      const head = truth ? `B 社の${th}、A 社とほぼ同じ` : `B 社の${th}、A 社の ${pick([2, 3])} 倍に！`;
+      return [svg, head, truth, `${a} と ${b} ${u}。B 社は A 社の約 ${r.toFixed(2)} 倍で、ほとんど同じです。${cut ? '縦軸が 0 からではないので、差が大きく見えます。' : ''}`];
+    },
+    // 何年も続けて増えた？
+    () => {
+      const [th, u] = pick(THING.slice(1)), n = 5, v = [R(20, 40)];
+      const up = coin();
+      for (let i = 1; i < n; i++) v.push(v[i - 1] + R(1, 6));
+      if (!up) { const k = R(1, n - 2); v[k] = v[k - 1] - R(1, 4); }
+      const [lo, hi, st] = nice(Math.min(...v) - 4, Math.max(...v) + 2);
+      const lb = yrs(n);
+      const head = `${th}、${n - 1} 年連続で増加`;
+      const down = v.findIndex((x, i) => i && x < v[i - 1]);
+      return [line(lb, v, lo, hi, st, u), head, up, up ? `毎年、前の年より増えています（${v.join('→')}）。` : `${lb[down]} 年は ${v[down - 1]} から ${v[down]} に減っています。「連続」ではありません。`];
+    },
+    // 過去最高？
+    () => {
+      const n = 6, v = Array.from({ length: n }, () => R(30, 70)), best = coin();
+      const mx = Math.max(...v.slice(0, n - 1));
+      v[n - 1] = best ? mx + R(1, 5) : mx - R(2, 8);
+      const [lo, hi, st] = nice(0, Math.max(...v) + 5);
+      const lb = yrs(n);
+      const head = `${lb[n - 1]} 年の来場者、過去最高に`;
+      return [bars(lb, v, 0, hi, st, '万人'), head, best, best ? `${lb[n - 1]} 年の ${v[n - 1]} 万人は、6 年でいちばん多い数です。` : `いちばん多いのは ${mx} 万人の年。${lb[n - 1]} 年（${v[n - 1]} 万人）は最高ではありません。`];
+    },
+    // 何％増えた？
+    () => {
+      const a = R(5, 16) * 10, pct = pick([10, 20, 50]), b = a * (100 + pct) / 100, truth = coin();
+      const claim = truth ? pct : pct * 2;
+      const [, hi, st] = nice(0, b + 10);
+      return [bars(['去年', 'ことし'], [a, b], 0, hi, st, '個'), `売れた数、去年より ${claim}% 増えた`, truth, `${a} 個から ${b} 個。ふえたのは ${b - a} 個で、${b - a} ÷ ${a} ＝ ${pct}% です。`];
+    },
+    // 半分以上？（帯グラフ）
+    () => {
+      const p = R(38, 62), q = R(10, Math.min(30, 100 - p - 8)), r = 100 - p - q, kind = R(0, 2);
+      let head, truth, why;
+      if (kind === 0) { head = '賛成が半分をこえた'; truth = p > 50; why = `賛成は ${p}%。半分（50%）を${p > 50 ? 'こえています' : 'こえていません'}。`; }
+      else if (kind === 1) { head = '賛成は、反対の 2 倍以上'; truth = p >= q * 2; why = `賛成 ${p}% と反対 ${q}%。${p} は ${q} の約 ${(p / q).toFixed(1)} 倍です。`; }
+      else { head = '「わからない」は 3 人に 1 人以上'; truth = r >= 100 / 3; why = `「わからない」は ${r}%。3 人に 1 人は約 33% です。`; }
+      if (p === 50 && kind === 0) truth = false;
+      return [band([['賛成', p], ['反対', q], ['わからない', r]]), head, truth, why];
+    },
+    // 折れ線の縦軸切りとり：大きくはね上がって見える
+    () => {
+      const n = 6, base = R(100, 140), v = [base];
+      for (let i = 1; i < n; i++) v.push(v[i - 1] + R(0, 2));
+      v[n - 1] = v[n - 2] + R(2, 4);
+      const cut = Math.random() < .75, [lo, hi, st] = cut ? nice(Math.min(...v) - 1, Math.max(...v) + 1) : [0, Math.ceil((Math.max(...v) + 20) / 50) * 50, 50];
+      const pct = ((v[n - 1] - v[0]) / v[0] * 100), truth = coin();
+      const head = truth ? `値段、5 年で少しだけ上がる（約 ${Math.round(pct)}%）` : '値段が急上昇、5 年で約 2 倍に';
+      return [line(yrs(n), v, lo, hi, st, '円'), head, truth, `${v[0]} 円から ${v[n - 1]} 円。上がったのは約 ${pct.toFixed(0)}% です。${cut ? '縦軸を切りとると、少しの上がり方が急に見えます。' : ''}`];
+    }
+  ];
+  const make = (last) => { let k; do { k = R(0, GEN.length - 1); } while (k === last && GEN.length > 1); return [k, GEN[k]()]; };
+  let st = null, tick = 0;
+  const intro = () => {
+    const b = getB();
+    g.innerHTML = `<div class="gq-intro">
+      <div class="gq-paper" aria-hidden="true"><b>速報</b><i></i><i></i><svg viewBox="0 0 60 34"><path d="M4 30 L18 22 L30 25 L44 10 L56 6"/></svg></div>
+      <div><p class="gq-kicker">スピード勝負</p><h3 class="gq-h">見出しチェック 40 秒</h3>
+      <p class="gq-p">新聞のデスクになって、記者が書いた見出しをチェックします。グラフの数字と合っていれば<b>「正しい」</b>、合っていなければ<b>「言いすぎ」</b>。縦軸を切りとったグラフも出るので、見た目ではなく<b>目もりの数字</b>で判断しよう。続けて当てると点が上がり、まちがえると 3 秒へります。グラフの数字は、すべてたとえです。</p>
+      <p class="gq-best">${b ? `自己ベスト <b>${b}</b> 点` : 'はじめてのデスク'}</p>
+      <button type="button" class="gq-go" data-gq="start">チェックを始める</button></div></div>`;
+  };
+  const start = () => {
+    st = { score: 0, streak: 0, ok: 0, miss: [], end: performance.now() + TIME * 1000, lock: false, k: -1 };
+    g.innerHTML = `<div class="gq-play">
+      <div class="gq-top"><span class="gq-t"><b data-gq="t">${TIME}</b> 秒</span><span class="gq-st" data-gq="st"></span><span class="gq-sc">得点 <b data-gq="sc">0</b></span></div>
+      <div class="gq-time" aria-hidden="true"><i data-gq="bar"></i></div>
+      <div class="gq-desk" data-gq="desk"></div>
+      <div class="gq-keys"><button type="button" data-v="1"><b>正しい</b><small>数字と合っている</small></button><button type="button" data-v="0"><b>言いすぎ</b><small>数字と合わない</small></button></div>
+      <p class="gq-fb" data-gq="fb" aria-live="polite"></p></div>`;
+    show();
+    clearInterval(tick);
+    tick = setInterval(() => {
+      if (!st) return;
+      const left = Math.max(0, (st.end - performance.now()) / 1000);
+      g.querySelector('[data-gq="t"]').textContent = Math.ceil(left);
+      const bar = g.querySelector('[data-gq="bar"]'); bar.style.transform = `scaleX(${(left / TIME).toFixed(3)})`; bar.classList.toggle('is-low', left < 10);
+      if (left <= 0) finish();
+    }, 100);
+  };
+  const show = () => {
+    const [k, q] = make(st.k); st.k = k; st.q = q;
+    const d = g.querySelector('[data-gq="desk"]');
+    d.innerHTML = `<p class="gq-head"><span aria-hidden="true">見出し</span>${q[1]}</p><svg class="gq-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="見出しのもとになったグラフ">${q[0]}</svg>`;
+    d.classList.remove('is-in', 'is-ok', 'is-ng'); void d.offsetWidth; d.classList.add('is-in');
+  };
+  const mult = () => 1 + Math.min(st.streak, 8) * 0.25;
+  const answer = v => {
+    if (!st || st.lock) return;
+    const q = st.q, ok = v === q[2], d = g.querySelector('[data-gq="desk"]'), fb = g.querySelector('[data-gq="fb"]');
+    if (ok) { st.streak++; st.ok++; const pts = Math.round(10 * mult()); st.score += pts; fb.className = 'gq-fb is-ok'; fb.innerHTML = `<b>正解 ＋${pts}</b>${q[3]}`; d.classList.add('is-ok'); }
+    else { st.streak = 0; st.end -= 3000; st.miss.push(q); fb.className = 'gq-fb is-ng'; fb.innerHTML = `<b>${q[2] ? '正しい見出しでした' : '言いすぎの見出しでした'}</b>${q[3]}`; d.classList.add('is-ng'); }
+    d.insertAdjacentHTML('beforeend', `<span class="gq-stamp ${q[2] ? 'is-t' : 'is-f'}" aria-hidden="true">${q[2] ? '正' : '誤'}</span>`);
+    g.querySelector('[data-gq="sc"]').textContent = st.score;
+    g.querySelector('[data-gq="st"]').textContent = st.streak >= 3 ? `${st.streak} 連続 ×${mult().toFixed(2).replace(/0$/, '')}` : '';
+    st.lock = true;
+    setTimeout(() => { if (!st) return; st.lock = false; show(); }, ok ? (reduce ? 300 : 1100) : 2600);
+  };
+  const TITLE = [[220, '敏腕デスク'], [130, 'たよれるデスク'], [60, 'デスクの見習い'], [0, 'これから見る目を育てよう']];
+  const finish = () => {
+    clearInterval(tick);
+    const s = st; st = null;
+    const prev = getB(), best = s.score > prev;
+    try { if (best) localStorage.setItem(KEY, String(s.score)); localStorage.setItem('azakei_gurafu', '1'); } catch (e) {}
+    const ti = TITLE.findIndex(x => s.score >= x[0]);
+    g.innerHTML = `<div class="gq-end">
+      <p class="gq-kicker">本日の紙面</p>
+      <p class="gq-big"><b>${s.score}</b> 点<small>正解 ${s.ok}・まちがい ${s.miss.length}</small></p>
+      <p class="gq-title"><span aria-hidden="true">称</span>${TITLE[ti][1]}${best ? '<em>自己ベスト更新</em>' : prev ? `<small>自己ベスト ${prev} 点</small>` : ''}</p>
+      ${s.miss.length ? `<p class="gq-l">見のがした見出し</p><ul class="gq-miss">${s.miss.slice(0, 4).map(q => `<li><span class="gq-tag ${q[2] ? 'is-t' : 'is-f'}">${q[2] ? '正しい' : '言いすぎ'}</span><p><b>${q[1]}</b>${q[3]}</p></li>`).join('')}</ul>` : '<p class="gq-perfect">見のがしゼロ！ 数字を見る目は確かです。</p>'}
+      <div class="gq-rule"><p class="gq-l">見出しを見たら</p><ul><li>縦軸は 0 から始まっている？</li><li>「〇倍」「〇%」は、自分でわり算してみる</li><li>「連続」「過去最高」は、全部の年を見てたしかめる</li></ul></div>
+      <button type="button" class="gq-go" data-gq="start">もう一度チェックする</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g, 'gurafu', ti, TITLE.length);
+  };
+  g.addEventListener('click', e => {
+    const k = e.target.closest('[data-v]'); if (k) { answer(k.dataset.v === '1'); return; }
+    if (e.target.closest('[data-gq="start"]')) start();
+  });
+  intro();
+})();

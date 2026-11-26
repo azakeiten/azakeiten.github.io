@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-26', seal: '図', tone: 'paper', href: 'sim.html#gurafu', eyebrow: '経済ラボ', title: '見出しチェック 40 秒', text: '「A 社の 3 倍に！」その見出し、グラフの数字と合ってる？ 新聞のデスクになってチェック。' },
     { date: '2026-11-26', seal: '旅', tone: 'dark', href: 'sim.html#asagohan', eyebrow: '経済ラボ', title: '朝ごはん港の荷受け', text: 'トーストの小麦は、どの国から？ 地図の国を押して、材料の輸入先を当てよう。' },
     { date: '2026-11-26', seal: '辞', tone: 'green', href: 'glossary.html', eyebrow: '用語辞典', title: '辞典が 312 語に', text: '期待値、担保、実質賃金、マイニング、ハッシュ……。ゲームに出てくる 12 の言葉を足しました。' },
     { date: '2026-11-26', seal: '分', tone: 'gold', href: 'sim.html#bungyo', eyebrow: '経済ラボ', title: '文化祭の分担パズル', text: '1 人 6 時間。だれに、どの仕事を、何時間？ 何でも速い人に全部まかせるのが正解とは限らない、4 ステージのパズル。' },

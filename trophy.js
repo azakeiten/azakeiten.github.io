@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126i'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261126j'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -63,7 +63,7 @@
     ['lab','uchiwake','訳','おにぎり 1 個の値段の中身','azakei_uchiwake','',0],
     ['lab','robot','機','ロボットがやってきた工場','azakei_robot','',0],
     ['lab','chiiki','巡','めぐる町のお金','azakei_chiiki','',0],
-    ['lab','gurafu','図','グラフのうそを見破れ','','',0],
+    ['lab','gurafu','図','グラフのうそを見破れ','azakei_gurafu_best','点',0],
     ['lab','hoken','備','みんなで備える箱','azakei_hoken','',0],
     ['lab','ike','池','みんなの池','azakei_ike','',0],
     ['lab','crypto','暗','暗号資産とブロックチェーン','azakei_crypto','',0],
