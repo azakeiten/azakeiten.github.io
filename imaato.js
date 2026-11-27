@@ -78,6 +78,7 @@
       <button type="button" class="im-again" data-a="again">もう一度えらぶ</button>`;
     result.hidden = false;
     try { localStorage.setItem('azakei_imaato', type); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(result, 'imaato', n >= 6 ? 'top' : n >= 3 ? 'mid' : 'low');
   };
   box.addEventListener('click', e => {
     const c = e.target.closest('[data-c]'); if (c) { choose(c.dataset.c === 'later'); return; }

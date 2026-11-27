@@ -94,6 +94,7 @@
     res.hidden = false;
     busy = false; box.classList.remove('is-busy');
     try { localStorage.setItem('azakei_cashless', '1'); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(res, 'cashless', best.v <= keep + 1 ? 'top' : lost ? 'low' : 'mid');
   };
   box.addEventListener('change', e => { const p = e.target.closest('[data-p]'); if (p && !busy) { acc[p.dataset.p] = p.checked; sticker(); clear(); } });
   box.addEventListener('click', e => { if (e.target.closest('[data-a="go"]')) run(); });

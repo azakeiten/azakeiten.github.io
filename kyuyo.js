@@ -141,6 +141,7 @@
     let best = 0; try { best = +localStorage.getItem('azakei_kyuyo_keiri') || 0; if (!best || t < best) localStorage.setItem('azakei_kyuyo_keiri', t.toFixed(1)); } catch (e) {}
     kq.innerHTML = `<div class="ky-k-end"><p class="ky-k-rk">${rank[0]}</p><p>3 人分の明細を完成。時間 <b>${t.toFixed(1)} 秒</b>（まちがい ${kg.miss} 回 × 5 秒をふくむ）${best && t >= best ? `・自己ベスト ${best} 秒` : '・自己ベスト更新'}</p><p>${rank[1]}</p><p class="ky-k-tip">ポイント：所得税は、額面からそのままではなく、健康保険・厚生年金・雇用保険を引いた残りにかかります。住民税は前の年の収入で決まるので、1 年目の人は 0 円でした。</p><button type="button" class="ky-k-go" data-k-a="start">もう一度</button></div>`;
     try { if (!localStorage.getItem('azakei_kyuyo')) localStorage.setItem('azakei_kyuyo', '1'); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(kq.querySelector('.ky-k-end') || kq, 'kyuyo', kg.miss === 0 && t < 90 ? 'top' : kg.miss <= 2 ? 'mid' : 'low');
   };
   kq.addEventListener('click', e => {
     if (e.target.closest('[data-k-a="start"]')) { kStart(); return; }

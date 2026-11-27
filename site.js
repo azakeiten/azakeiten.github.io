@@ -1402,7 +1402,7 @@ try {
 /* 「1 分でわかる麻経」スライド：[data-deck] を押したとき・#deck で来たときだけ deck.js を読みこむ */
 (function() {
   let loading = null;
-  const V = '20261127b';
+  const V = '20261127c';
   const css = () => new Promise(ok => { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'deck.css?v=' + V; l.onload = l.onerror = ok; document.head.appendChild(l); });
   const js = () => new Promise((ok, ng) => { const s = document.createElement('script'); s.src = 'deck.js?v=' + V; s.onload = ok; s.onerror = ng; document.body.appendChild(s); });
   const load = () => loading || (loading = Promise.all([css(), js()]).catch(e => { loading = null; throw e; }));
@@ -1428,7 +1428,7 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-tour]'); if (!b) return;
   e.preventDefault();
   if (window.AZAKEI_TOUR) { window.AZAKEI_TOUR.start(); return; }
-  const s = document.createElement('script'); s.src = 'tour.js?v=20261127b'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
+  const s = document.createElement('script'); s.src = 'tour.js?v=20261127c'; s.onload = () => window.AZAKEI_TOUR && window.AZAKEI_TOUR.start(); document.body.appendChild(s);
 });
 
 /* [data-until="YYYY-MM-DD"]：その日まで「あと ○ 日」を出す（過ぎたら出さない） */

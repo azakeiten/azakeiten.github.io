@@ -3,6 +3,7 @@
    ・各ゲームの結果画面から window.AZAKEI_TALK(結果の箱, ゲーム名, 段階, 段階の数) を呼ぶ
      段階は 0 がいちばんよい結果（数字）、または 'top'・'mid'・'low' の文字。いちばん上は「top」、いちばん下は「low」、あいだは「mid」のせりふ
    ・「声で聞く」を押すと、voice.js（AivisSpeech でつくったお札マンの声）で読む。自動では鳴らさない
+   ・出たひとことは azakei_talk_seen（{ゲーム: ['top','mid','low']}）に記録。talkbook.js（マイページ）が一覧にする
    ・せりふを変えたら、声もつくりなおす（tools/voicevox/README.txt。vv-extract.pl がここの LINES を集める）
    ================================================================ */
 (function () {
@@ -148,6 +149,21 @@
       mid: 'いい目をしてるね！ 1個あたりいくらかを計算すると、しかけが見えてくるよ。',
       low: 'お店の値札には、買いたくなるしかけがいっぱい。もう一度ゆっくり見てみよう！'
     },
+    imaato: {
+      top: '待つ力があるね！ お金は、時間をかけるとふえることがあるんだ。',
+      mid: 'いまとあとで、場面によって使い分けているね。どちらも大事な考え方だよ。',
+      low: 'いまを大切にするのも、りっぱな考え方。ふえ方がとても大きいときは、待つのもありだよ。'
+    },
+    cashless: {
+      top: 'いちばんお金が残る払い方の組み合わせを見つけたね。店長の才能があるよ！',
+      mid: 'キャッシュレスは手数料がかかるけど、現金を数える手間が減るんだ。',
+      low: '使える払い方が少ないと、お客さんが帰ってしまう。いろいろな組み合わせを試してみよう！'
+    },
+    kyuyo: {
+      top: 'まちがいなしで速い！ みんなの給料を任せられる経理さんだね。',
+      mid: 'ほぼ正確だったね。給料から税金と保険料を引いたのが、手取りなんだ。',
+      low: '給料から引かれるのは、税金と社会保険料。ひとつずつ確かめてみよう！'
+    },
     receipt: {
       top: '税率の打ち分け、プロのレジ係みたい！ イートインも見のがさなかったね。',
       mid: 'いい調子！ 迷ったら、お酒と外食と薬は 10 パーセント、と思い出してね。',
@@ -189,6 +205,8 @@
   window.AZAKEI_TALK = (box, key, idx, n) => {
     const set = LINES[key]; if (!box || !set) return;
     const tier = typeof idx === 'string' ? idx : idx <= 0 ? 'top' : idx >= n - 1 ? 'low' : 'mid', text = set[tier];
+    // 聞いたひとことを記録（マイページの「お札マンのことば帳」で見られる）
+    try { const o = JSON.parse(localStorage.getItem('azakei_talk_seen') || '{}'); o[key] = o[key] || []; if (!o[key].includes(tier)) { o[key].push(tier); localStorage.setItem('azakei_talk_seen', JSON.stringify(o)); } } catch (e) {}
     const el = document.createElement('div');
     el.className = 'lt';
     el.innerHTML = `<span class="lt-face" aria-hidden="true">札</span><div class="lt-b"><p class="lt-who">お札マンのひとこと</p><p class="lt-t">${text}</p><button type="button" class="lt-say">声で聞く</button></div>`;
@@ -203,5 +221,7 @@
       b.classList.remove('is-on'); b.textContent = 'もう一度聞く';
     });
   };
+  window.AZAKEI_TALK.lines = LINES;
+  window.AZAKEI_TALK.say = text => VO().then(v => (v && v.man ? v.man(text) : Promise.reject(new Error('no voice'))));
   if (!document.querySelector('link[href^="labtalk.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'labtalk.css?v=' + ver; document.head.appendChild(l); }
 })();
