@@ -46,3 +46,4 @@ button.tb-c:hover { transform: translateY(-2px); }
   .tb-c { padding: 8px 30px 22px 10px; }
   .tb-c.is-lock { padding: 6px 30px 6px 10px; } .tb-c.is-lock .tb-txt { display: none; }
 }
+.tb-cards.is-one { grid-template-columns: minmax(0, 1fr); }

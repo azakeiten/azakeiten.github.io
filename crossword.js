@@ -266,6 +266,7 @@
       S.chips += 5; S.fin = true; if (seed === today) { try { const d = JSON.parse(localStorage.getItem(DAYS) || '[]'); if (!d.includes(today)) { d.push(today); localStorage.setItem(DAYS, JSON.stringify(d.slice(-60))); } } catch (er) {} }
       if (S.chips > best) { best = S.chips; try { localStorage.setItem(BEST, best); } catch (er) {} }
       save(); paint();
+      window.AZAKEI_TALK && window.AZAKEI_TALK($('.cw-done'), 'cw', !S.miss && !S.rev.length ? 'top' : S.miss <= 3 ? 'mid' : 'low');
     } else m.textContent = `おしい。${[...ABC].join('・')} のマスの文字を、もう一度見てみよう`;
   });
   paint();

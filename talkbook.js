@@ -17,6 +17,7 @@
     ['jika', 'チケットの値段は時価', 'quiz.html#jika', '価'], ['subsc', 'サブスクと買い切り', 'quiz.html#subsc', '月'], ['nefuda', '値札のマジック', 'quiz.html#nefuda', '値'],
     ['imaato', 'いま？ それとも あとで？', 'quiz.html#imaato', '待'], ['cashless', '店長のレジ', 'quiz.html#cashless', '銭'], ['kyuyo', 'はじめての給料明細', 'quiz.html#kyuyo', '給'],
     ['kanzei', '関税のシーソー', 'quiz.html#kanzei', '関'], ['kawa', '川上の工場', 'quiz.html#kawa', '川'], ['koen', 'みんなの公園', 'quiz.html#koen', '園'],
+    ['lemon', 'フリマのなぞ', 'quiz.html#lemon', '檸'], ['cw', '経済クロスワード', 'quiz.html#crossword', '字'],
     ['dbl', 'お金が 2 倍になるまで', 'sim.html#double', '倍'], ['updown', 'チャート予想', 'sim.html#updown', '線'], ['market', '値段の決まり方', 'sim.html#market', '需'],
     ['seri', 'せりの会場', 'sim.html#seri', '競'], ['pazuru', 'めぐりパズル', 'sim.html#pazuru', '嵌'], ['asagohan', '朝ごはんの世界旅行', 'sim.html#asagohan', '旅'],
     ['fx', '円高・円安の両替所', 'sim.html#fx', '為'], ['shop', '文化祭でお店をひらこう', 'sim.html#shop', '店'], ['oku', '1 億円って、どれくらい？', 'sim.html#oku', '億'],
@@ -25,28 +26,31 @@
     ['ginko', '銀行のふしぎ', 'sim.html#ginko', '銀'], ['kinri', '景気の舵とり', 'sim.html#kinri', '舵'], ['oni', 'おにぎり屋の値上げ会議', 'sim.html#uchiwake', '訳'],
     ['chiiki', 'めぐる町のお金', 'sim.html#chiiki', '巡'], ['gurafu', 'グラフのうそを見破れ', 'sim.html#gurafu', '図'], ['ike', 'みんなの池', 'sim.html#ike', '池'],
     ['crypto', '暗号資産とブロックチェーン', 'sim.html#crypto', '暗'], ['nesage', 'となりのお店と値下げ競争', 'sim.html#nesage', '策'],
-    ['hoken', 'みんなで備える箱', 'sim.html#hoken', '備'], ['robot', 'ロボットがやってきた工場', 'sim.html#robot', '機']
+    ['tsuuka', 'お祭りの券の工房', 'sim.html#tsuuka', '券'], ['hoken', 'みんなで備える箱', 'sim.html#hoken', '備'], ['robot', 'ロボットがやってきた工場', 'sim.html#robot', '機']
   ];
-  const TIER = [['top', 'ほめる', '極'], ['mid', 'あと少し', '中'], ['low', 'ここから', '初']];
+  const TIER0 = [['top', 'ほめる', '極'], ['mid', 'あと少し', '中'], ['low', 'ここから', '初']];
+  // 決まった場面で 1 回だけ話す遊びは、カード 1 まい
+  const ONE = { kawa: 1, kanzei: 1, tsuuka: 1, lemon: 1 };
+  const TIER_OF = k => ONE[k] ? [['top', 'クリア', '極']] : TIER0;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
   let seen = {};
   try { seen = JSON.parse(localStorage.getItem('azakei_talk_seen') || '{}') || {}; } catch (e) {}
   const render = lines => {
     const list = G.filter(g => lines[g[0]]);
-    const total = list.length * 3, got = list.reduce((a, g) => a + TIER.filter(t => (seen[g[0]] || []).includes(t[0])).length, 0);
+    const total = list.reduce((a, g) => a + TIER_OF(g[0]).length, 0), got = list.reduce((a, g) => a + TIER_OF(g[0]).filter(t => (seen[g[0]] || []).includes(t[0])).length, 0);
     const games = list.filter(g => (seen[g[0]] || []).length).length;
     const nextG = list.find(g => !(seen[g[0]] || []).length);
     box.innerHTML = `<div class="tb-head">
         <span class="tb-face" aria-hidden="true">札</span>
         <div><h2 class="tb-h">お札マンのことば帳</h2>
-        <p class="tb-s">ゲームが終わると、お札マンが結果に合わせてひとこと。よい結果・あと少し・ここから、の 3 まいずつ、全部で ${total} まい。集めたカードを押すと、声で聞けます。</p></div>
+        <p class="tb-s">ゲームが終わると、お札マンが結果に合わせてひとこと。よい結果・あと少し・ここから、の 3 まいずつ（決まった場面で話す遊びは 1 まい）、全部で ${total} まい。集めたカードを押すと、声で聞けます。</p></div>
         <div class="tb-ring" style="--p:${total ? (got / total * 100).toFixed(1) : 0}"><b>${got}</b><small>/ ${total}</small></div>
       </div>
       <p class="tb-meta">${games} / ${list.length} の遊びで、ひとことを聞きました。${nextG ? `<a href="${nextG[2]}">まだの「${esc(nextG[1])}」で遊んでみる →</a>` : 'すべての遊びで聞きました！'}</p>
       <ol class="tb-list">${list.filter(g => (seen[g[0]] || []).length).map(([k, name, href, seal]) => {
-        const s = seen[k] || [], n = TIER.filter(t => s.includes(t[0])).length;
-        return `<li class="tb-g${n === 3 ? ' is-full' : n ? ' is-some' : ''}"><a class="tb-gn" href="${href}"><span class="tb-seal" aria-hidden="true">${seal}</span><b>${esc(name)}</b><small>${n} / 3</small></a>
-          <div class="tb-cards">${TIER.map(([t, lb, ts]) => s.includes(t)
+        const TIER = TIER_OF(k), s = seen[k] || [], n = TIER.filter(t => s.includes(t[0])).length;
+        return `<li class="tb-g${n === TIER.length ? ' is-full' : n ? ' is-some' : ''}"><a class="tb-gn" href="${href}"><span class="tb-seal" aria-hidden="true">${seal}</span><b>${esc(name)}</b><small>${n} / ${TIER.length}</small></a>
+          <div class="tb-cards${TIER.length === 1 ? ' is-one' : ''}">${TIER.map(([t, lb, ts]) => s.includes(t)
             ? `<button type="button" class="tb-c is-${t}" data-k="${k}" data-t="${t}"><span class="tb-ct" aria-hidden="true">${ts}</span><small>${lb}</small><span class="tb-txt">${esc(lines[k][t])}</span><i class="tb-play">声で聞く</i></button>`
             : `<div class="tb-c is-lock"><span class="tb-ct" aria-hidden="true">？</span><small>${lb}</small><span class="tb-txt">まだ聞いていないひとこと</span></div>`).join('')}</div></li>`;
       }).join('')}</ol>

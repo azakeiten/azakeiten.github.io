@@ -110,6 +110,7 @@
       <ul class="fm-l-row"><li><small>24,000 円以上出すと</small><b>良品もはずれも来る。平均 20,000 円の価値なのに高く払うので、損をしやすい</b></li><li><small>24,000 円より下げると</small><b>良品のお店は閉まって、はずれだけ。価値は 10,000 円</b></li></ul>
       <p>どの値段でも、良品はうまく売り買いできません。中身を伝えるくふう（保証書・レビュー）が大切な理由です。上の「保証書・レビューあり」を押してみよう。</p></div>`;
     lesson.hidden = false;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(lesson.querySelector(':scope > div') || lesson, 'lemon', 'top');
     try { localStorage.setItem('azakei_lemon', '1'); } catch (e) {}
   };
 

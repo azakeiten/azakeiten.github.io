@@ -78,7 +78,7 @@
 (function () {
   const box = document.querySelector('[data-kabu]');
   if (!box) return;
-  if (!document.querySelector('link[href^="kbgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kbgame.css?v=20261127d'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="kbgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'kbgame.css?v=20261127e'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_kabu_best', YEARS = 5;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

@@ -82,6 +82,7 @@
     const good = st.guard && p >= 1 && p <= 4 && soldP >= 80 && buy >= 90;
     box.querySelector('.ts-good').hidden = !good;
     if (good) { try { localStorage.setItem('azakei_tsuuka', '1'); } catch (e) {} }
+    if (good && window.AZAKEI_TALK && !box.dataset.talked) { box.dataset.talked = '1'; window.AZAKEI_TALK(box.querySelector('.ts-good'), 'tsuuka', 'top'); }
   };
   box.addEventListener('input', e => { const k = e.target.dataset.k; if (k) { st[k] = +e.target.value; render(); } });
   box.addEventListener('click', e => {
