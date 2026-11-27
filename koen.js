@@ -112,6 +112,7 @@
     result.hidden = false;
     box.querySelector('[data-a="go"]').textContent = 'もう一度（1 回目から）';
     try { localStorage.setItem('azakei_koen', String(nParts)); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(result.querySelector(':scope > div') || result, 'koen', nParts >= 6 ? 'top' : nParts >= 4 ? 'mid' : 'low');
   };
 
   box.addEventListener('click', e => {

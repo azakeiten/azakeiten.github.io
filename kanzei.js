@@ -117,6 +117,7 @@
     MIS.forEach((m, k) => { if (m[2](r) && !got.includes(k)) { got.push(k); try { localStorage.setItem('azakei_kanzei_m', JSON.stringify(got)); } catch (e) {} box.dataset.flash = k; } });
     K('mis').innerHTML = MIS.map((m, k) => `<li class="${got.includes(k) ? 'is-ok' : ''}${m[2](r) ? ' is-now' : ''}${box.dataset.flash == k ? ' is-flash' : ''}"><span aria-hidden="true">${got.includes(k) ? '達' : m[0]}</span>${m[1]}</li>`).join('');
     K('mcount').textContent = `${got.length} / ${MIS.length}`; delete box.dataset.flash;
+    if (got.length === MIS.length && window.AZAKEI_TALK && !box.querySelector('.kz-mis .lt')) window.AZAKEI_TALK(K('mis').parentElement, 'kanzei', 'top');
     K('msg').textContent = !t ? (retal ? '関税なしなら、仕返しもありません。トマトは安く、島の自転車も売れています。' : '関税なし（自由貿易）。トマトは 1 個 100 円。多くを輸入にたよっています。')
       : r.m <= 0 ? `関税 ${t}%：輸入が止まりました。値段は島の中だけで決まり、${Math.round(r.p)} 円に。政府の関税収入もなくなります。`
       : `関税 ${t}%：農家の仕事は +${(r.farm - S(PW) * 2).toLocaleString()} 人、政府に ${okane(r.rev)}。でも、トマトを買う人は ${okane(r.dcs)} 多く払います。${retal ? `仕返しで、自転車工場の仕事は −${(X0 * 2 - r.fact).toLocaleString()} 人。` : ''}`;

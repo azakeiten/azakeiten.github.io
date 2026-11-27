@@ -255,6 +255,7 @@
     result.hidden = false;
     say(`10 年がたちました。${head}。`);
     try { localStorage.setItem('azakei_hoken', String((+localStorage.getItem('azakei_hoken') || 0) + 1)); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(result.querySelector(':scope > div') || result, 'hoken', st.short ? 'low' : st.bal > inT * .4 ? 'mid' : 'top');
   };
 
   // ---- 操作 ----

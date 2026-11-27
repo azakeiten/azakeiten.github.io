@@ -90,7 +90,7 @@
     K('why').textContent = t === 0 ? '税がないと、工場は自分のもうけだけを見て、たくさんつくります。漁師さんの損は気にしません。'
       : q === 0 ? '税が高すぎて、工場はつくるのをやめてしまいました。川はきれいですが、工場がつくるものの価値もなくなりました。'
       : `1 つあたり ${t} 万円の税。工場は、もうけが税より少ないものはつくらなくなるので、${q % 1 ? q.toFixed(1) : q} 個に減らしました。`;
-    if (t === DMG && !found) { found = true; const f = K('found'); f.hidden = false; f.textContent = 'いちばんよい所を見つけました！ 税が「1 つあたりの被害（40 万円）」と同じとき、社会全体の得がいちばん大きくなります。これがピグー税の考え方です。'; try { localStorage.setItem('azakei_kawa', '1'); } catch (e) {} }
+    if (t === DMG && !found) { found = true; const f = K('found'); f.hidden = false; f.textContent = 'いちばんよい所を見つけました！ 税が「1 つあたりの被害（40 万円）」と同じとき、社会全体の得がいちばん大きくなります。これがピグー税の考え方です。'; try { localStorage.setItem('azakei_kawa', '1'); window.AZAKEI_TALK && window.AZAKEI_TALK(f, 'kawa', 'top'); } catch (e) {} }
     drawChart(t);
   };
   range.addEventListener('input', update);

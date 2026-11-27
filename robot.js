@@ -84,6 +84,7 @@
     res.hidden = false;
     busy = false; box.classList.remove('is-busy');
     try { localStorage.setItem('azakei_robot', '1'); } catch (e) {}
+    window.AZAKEI_TALK && window.AZAKEI_TALK(res, 'robot', !goal ? 'low' : r.out ? 'mid' : 'top');
   };
   box.addEventListener('input', e => { const s = e.target.closest('[data-s="goal"]'); if (s && !busy) { goal = +s.value; K('goal').textContent = goal + '%'; reset(); } });
   box.addEventListener('click', e => {

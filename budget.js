@@ -55,7 +55,7 @@
 (function () {
   const box = document.querySelector('[data-budget]');
   if (!box) return;
-  if (!document.querySelector('link[href^="bdgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bdgame.css?v=20261127c'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="bdgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bdgame.css?v=20261127d'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_budget_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

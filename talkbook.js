@@ -16,6 +16,7 @@
     ['coins', '世界のお金図鑑', 'quiz.html#coins', '貨'], ['nenkin', '胴上げから肩車へ', 'quiz.html#nenkin', '支'], ['bakery', '麻経ベーカリー 12 か月', 'quiz.html#bakery', '麦'],
     ['jika', 'チケットの値段は時価', 'quiz.html#jika', '価'], ['subsc', 'サブスクと買い切り', 'quiz.html#subsc', '月'], ['nefuda', '値札のマジック', 'quiz.html#nefuda', '値'],
     ['imaato', 'いま？ それとも あとで？', 'quiz.html#imaato', '待'], ['cashless', '店長のレジ', 'quiz.html#cashless', '銭'], ['kyuyo', 'はじめての給料明細', 'quiz.html#kyuyo', '給'],
+    ['kanzei', '関税のシーソー', 'quiz.html#kanzei', '関'], ['kawa', '川上の工場', 'quiz.html#kawa', '川'], ['koen', 'みんなの公園', 'quiz.html#koen', '園'],
     ['dbl', 'お金が 2 倍になるまで', 'sim.html#double', '倍'], ['updown', 'チャート予想', 'sim.html#updown', '線'], ['market', '値段の決まり方', 'sim.html#market', '需'],
     ['seri', 'せりの会場', 'sim.html#seri', '競'], ['pazuru', 'めぐりパズル', 'sim.html#pazuru', '嵌'], ['asagohan', '朝ごはんの世界旅行', 'sim.html#asagohan', '旅'],
     ['fx', '円高・円安の両替所', 'sim.html#fx', '為'], ['shop', '文化祭でお店をひらこう', 'sim.html#shop', '店'], ['oku', '1 億円って、どれくらい？', 'sim.html#oku', '億'],
@@ -23,7 +24,8 @@
     ['receipt', 'レシートの中の税金', 'sim.html#receipt', '税'], ['kuji', 'くじ引きの期待値', 'sim.html#kuji', '籤'], ['kabu', '株式会社をつくろう', 'sim.html#kabu', '株'],
     ['ginko', '銀行のふしぎ', 'sim.html#ginko', '銀'], ['kinri', '景気の舵とり', 'sim.html#kinri', '舵'], ['oni', 'おにぎり屋の値上げ会議', 'sim.html#uchiwake', '訳'],
     ['chiiki', 'めぐる町のお金', 'sim.html#chiiki', '巡'], ['gurafu', 'グラフのうそを見破れ', 'sim.html#gurafu', '図'], ['ike', 'みんなの池', 'sim.html#ike', '池'],
-    ['crypto', '暗号資産とブロックチェーン', 'sim.html#crypto', '暗'], ['nesage', 'となりのお店と値下げ競争', 'sim.html#nesage', '策']
+    ['crypto', '暗号資産とブロックチェーン', 'sim.html#crypto', '暗'], ['nesage', 'となりのお店と値下げ競争', 'sim.html#nesage', '策'],
+    ['hoken', 'みんなで備える箱', 'sim.html#hoken', '備'], ['robot', 'ロボットがやってきた工場', 'sim.html#robot', '機']
   ];
   const TIER = [['top', 'ほめる', '極'], ['mid', 'あと少し', '中'], ['low', 'ここから', '初']];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
