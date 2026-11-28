@@ -21,7 +21,7 @@
     ['double', 'お金が 2 倍になるまで'], ['updown', 'チャート予想', 'azakei_chart_reader'], ['okozukai', 'おこづかいチャレンジ', 'azakei_ozk_master'], ['market', '値段の決まり方'], ['seri', 'せりの会場', 'azakei_seri'],
     ['asagohan', '朝ごはんの世界旅行', 'azakei_asagohan'], ['fx', '円高・円安の両替所', 'azakei_fx_master'], ['shop', '文化祭でお店をひらこう', 'azakei_shop'], ['oku', '1 億円って、どれくらい？', 'azakei_oku'], ['budget', '国の予算を 100 円にすると', 'azakei_budget'],
     ['infl', 'インフレのタイムマシン'], ['bungyo', '分業のふしぎ', 'azakei_bungyo'], ['receipt', 'レシートの中の税金'], ['kuji', 'くじ引きの期待値'], ['kabu', '株式会社をつくろう'],
-    ['ginko', '銀行のふしぎ', 'azakei_ginko'], ['kinri', '景気の舵とり', 'azakei_kinri'], ['uchiwake', 'おにぎり 1 個の値段の中身', 'azakei_uchiwake'], ['robot', 'ロボットがやってきた工場', 'azakei_robot'], ['chiiki', 'めぐる町のお金', 'azakei_chiiki'], ['gurafu', 'グラフのうそを見破れ', 'azakei_gurafu'], ['hoken', 'みんなで備える箱', 'azakei_hoken'], ['ike', 'みんなの池', 'azakei_ike'], ['nesage', 'となりのお店と値下げ競争', 'azakei_nesage']]
+    ['ginko', '銀行のふしぎ', 'azakei_ginko'], ['kinri', '景気の舵とり', 'azakei_kinri'], ['uchiwake', 'おにぎり 1 個の値段の中身', 'azakei_uchiwake'], ['robot', 'ロボットがやってきた工場', 'azakei_robot'], ['chiiki', 'めぐる町のお金', 'azakei_chiiki'], ['gurafu', 'グラフのうそを見破れ', 'azakei_gurafu'], ['hoken', 'みんなで備える箱', 'azakei_hoken'], ['ike', 'みんなの池', 'azakei_ike'], ['nesage', 'となりのお店と値下げ競争', 'azakei_nesage'], ['danryoku', '値上げしたら、売上は？', 'azakei_danryoku']]
     .map(([id, n, k]) => [n, 'sim.html#' + id, tried.includes('#' + id) || (k && has(k))]);
   const K = list => list.map(([k, n, h]) => [n, h, has(k)]);
   // [印, 名前, 形, 中心 x, 遊びの一覧]

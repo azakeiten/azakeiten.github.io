@@ -25,7 +25,7 @@
     ['receipt', 'レシートの中の税金', 'sim.html#receipt', '税'], ['kuji', 'くじ引きの期待値', 'sim.html#kuji', '籤'], ['kabu', '株式会社をつくろう', 'sim.html#kabu', '株'],
     ['ginko', '銀行のふしぎ', 'sim.html#ginko', '銀'], ['kinri', '景気の舵とり', 'sim.html#kinri', '舵'], ['oni', 'おにぎり屋の値上げ会議', 'sim.html#uchiwake', '訳'],
     ['chiiki', 'めぐる町のお金', 'sim.html#chiiki', '巡'], ['gurafu', 'グラフのうそを見破れ', 'sim.html#gurafu', '図'], ['ike', 'みんなの池', 'sim.html#ike', '池'],
-    ['crypto', '暗号資産とブロックチェーン', 'sim.html#crypto', '暗'], ['nesage', 'となりのお店と値下げ競争', 'sim.html#nesage', '策'],
+    ['crypto', '暗号資産とブロックチェーン', 'sim.html#crypto', '暗'], ['nesage', 'となりのお店と値下げ競争', 'sim.html#nesage', '策'], ['danryoku', '値上げしたら、売上は？', 'sim.html#danryoku', '弾'],
     ['tsuuka', 'お祭りの券の工房', 'sim.html#tsuuka', '券'], ['hoken', 'みんなで備える箱', 'sim.html#hoken', '備'], ['robot', 'ロボットがやってきた工場', 'sim.html#robot', '機']
   ];
   const TIER0 = [['top', 'ほめる', '極'], ['mid', 'あと少し', '中'], ['low', 'ここから', '初']];
