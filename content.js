@@ -5,11 +5,12 @@
 window.AZAKEI = {
 
   /* ---- サイトの最終更新日（フッターに出す。更新したら書きかえる） ---- */
-  siteUpdated: '2026-11-27',
+  siteUpdated: '2026-11-28',
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
-    { date: '2026-11-27', seal: '札', tone: 'green', href: 'mypage.html#talkbook', eyebrow: 'わたしの記録', title: 'お札マンのことば帳', text: 'ゲームの結果でもらえるお札マンのひとことは、全部で 130 まい。何まい集められる？' },
+    { date: '2026-11-28', seal: '単', tone: 'green', href: 'quiz.html#nefuda', eyebrow: 'あそび場', title: '単価くらべ 40 秒', text: '大きい袋と小さい袋、1 g あたり安いのはどっち？ 「2 割引」「20% 増量」もまざる棚で、40 秒のスピード勝負。' },
+    { date: '2026-11-27', seal: '札', tone: 'green', href: 'mypage.html#talkbook', eyebrow: 'わたしの記録', title: 'お札マンのことば帳', text: 'ゲームの結果でもらえるお札マンのひとことは、全部で 136 まい。何まい集められる？' },
     { date: '2026-11-26', seal: '訳', tone: 'shu', href: 'sim.html#uchiwake', eyebrow: '経済ラボ', title: 'おにぎり屋の値上げ会議', text: 'お米も電気代も値上がり。値上げ？ 小さくする？ 工夫する？ 社長として 6 か月を乗りきろう。' },
     { date: '2026-11-26', seal: '図', tone: 'paper', href: 'sim.html#gurafu', eyebrow: '経済ラボ', title: '見出しチェック 40 秒', text: '「A 社の 3 倍に！」その見出し、グラフの数字と合ってる？ 新聞のデスクになってチェック。' },
     { date: '2026-11-26', seal: '旅', tone: 'dark', href: 'sim.html#asagohan', eyebrow: '経済ラボ', title: '朝ごはん港の荷受け', text: 'トーストの小麦は、どの国から？ 地図の国を押して、材料の輸入先を当てよう。' },

@@ -110,7 +110,7 @@
 (function () {
   const box = document.querySelector('[data-ginko]');
   if (!box) return;
-  if (!document.querySelector('link[href^="bkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bkgame.css?v=20261127e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="bkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'bkgame.css?v=20261128a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_bank_best', YEARS = 6, DEP_RATE = 0.005;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

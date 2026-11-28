@@ -115,3 +115,135 @@
   };
   show();
 })();
+/* ================================================================
+   v373：「単価くらべ 40 秒」— スーパーの棚で、1 g・1 mL・1 個あたり安いのはどっち？
+   ・毎回、たとえの商品と値段を数字から新しくつくる（大きい袋が高いこともある）
+   ・L と mL のちがい、「2 割引」「20% 増量」もまざる。計算してからえらぶ
+   ・正解で次へ。続けて正解すると倍率アップ。まちがえると 3 秒へる
+   ・自己ベストは azakei_tanka_best。見た目は tanka.css（このファイルが読みこむ）
+   ================================================================ */
+(function () {
+  const box = document.querySelector('[data-nefuda]');
+  if (!box || document.querySelector('.tk2')) return;
+  if (!document.querySelector('link[href^="tanka.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'tanka.css?v=20261128a'; document.head.appendChild(l); }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const KEY = 'azakei_tanka_best', TIME = 40;
+  const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
+  const g = document.createElement('div');
+  g.className = 'tk2';
+  box.before(g);
+  box.insertAdjacentHTML('beforebegin', '<p class="tk2-sub"><span aria-hidden="true">験</span>じっくりためす：7 つのしかけを、ひとつずつ見破る</p>');
+  const R = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const pick = a => a[Math.random() * a.length | 0];
+  // [名前, 印, 単位, くらべる量, サイズ候補, 単価(円/単位)の範囲, 形]
+  const ITEM = [
+    ['緑茶', '茶', 'mL', 100, [500, 650, 1000, 2000], [.12, .3], 'bt'],
+    ['ポテトチップス', '芋', 'g', 100, [60, 85, 170], [1.4, 2.2], 'bx'],
+    ['たまご', '卵', '個', 1, [6, 10], [22, 34], 'bx'],
+    ['お米', '米', 'kg', 1, [2, 5, 10], [380, 560], 'bg'],
+    ['ノート', '帳', '冊', 1, [1, 3, 5], [110, 180], 'bx'],
+    ['ヨーグルト', '乳', 'g', 100, [100, 400], [.3, .6], 'bx'],
+    ['トイレットペーパー', '紙', 'ロール', 1, [4, 12], [45, 80], 'bg'],
+    ['オレンジジュース', '果', 'mL', 100, [200, 1000, 1500], [.18, .4], 'bt']
+  ];
+  const nice = p => Math.max(58, Math.round(p / 10) * 10 - 2); // 〜8 円で終わる値段
+  const qtyText = (q, u) => u === 'mL' && q >= 1000 ? `${(q / 1000).toLocaleString()} L` : `${q.toLocaleString()} ${u}`;
+  const unitText = it => it[3] === 1 ? `1 ${it[2]}` : `${it[3]} ${it[2]}`;
+  const perText = (v, it) => `${unitText(it)}あたり 約 ${v >= 100 ? Math.round(v).toLocaleString() : v.toFixed(1)} 円`;
+  const make = () => {
+    for (let tries = 0; tries < 60; tries++) {
+      const it = pick(ITEM), sz = it[4];
+      const i1 = R(0, sz.length - 2), i2 = R(i1 + 1, sz.length - 1), s = sz[i1], l = sz[i2];
+      const base = it[5][0] + Math.random() * (it[5][1] - it[5][0]);
+      const trap = Math.random() < .3; // 大きいほうが、かえって高い
+      const A = { q: s, price: nice(base * s) }, B = { q: l, price: nice(base * l * (trap ? 1 + R(6, 18) / 100 : 1 - R(8, 24) / 100)) };
+      // ときどき「割引」「20% 増量」をまぜる
+      const tw = Math.random();
+      if (tw < .2) { const t = Math.random() < .5 ? A : B; t.off = pick([10, 20, 30]); t.price = nice(t.price / (1 - t.off / 100)); }
+      else if (tw < .38) { const t = Math.random() < .5 ? A : B; t.plus = 1; t.base = t.q; t.q = Math.round(t.q * 1.2); }
+      [A, B].forEach(o => { o.pay = o.off ? Math.round(o.price * (1 - o.off / 100)) : o.price; o.u = o.pay / o.q * it[3]; });
+      const d = Math.abs(A.u - B.u) / Math.min(A.u, B.u);
+      if (d < .04 || d > .6) continue;
+      const pair = Math.random() < .5 ? [A, B] : [B, A];
+      return { it, pair, ans: pair[0].u < pair[1].u ? 0 : 1, bigHigh: B.u > A.u };
+    }
+    return make();
+  };
+  const card = (o, it, k) => `<button type="button" class="tk2-p" data-v="${k}">
+      <span class="tk2-pk is-${it[6]}" style="--s:${(.72 + Math.min(1, o.q / it[4][it[4].length - 1]) * .28).toFixed(2)}" aria-hidden="true"><i>${it[1]}</i>${o.plus ? '<em>20% 増量</em>' : ''}</span>
+      <b class="tk2-q">${qtyText(o.q, it[2])}</b>${o.plus ? `<small class="tk2-was">いつもは ${qtyText(o.base, it[2])}</small>` : ''}
+      <span class="tk2-tag">${o.off ? `<s>${o.price.toLocaleString()} 円</s><b>レジで ${o.off / 10} 割引</b>` : `<b>${o.price.toLocaleString()}<small> 円</small></b>`}</span>
+    </button>`;
+  let st = null, tick = 0;
+  const intro = () => {
+    const b = getB();
+    g.innerHTML = `<div class="tk2-intro">
+      <div class="tk2-shelf" aria-hidden="true"><span class="tk2-pk is-bt" style="--s:.8"><i>茶</i></span><span class="tk2-pk is-bx" style="--s:1"><i>芋</i></span><span class="tk2-pk is-bg" style="--s:.9"><i>米</i></span></div>
+      <div><p class="tk2-kicker">スピード勝負</p><h3 class="tk2-h">単価くらべ 40 秒</h3>
+      <p class="tk2-p0">スーパーの棚に、同じ商品の大きさちがいが 2 つ。<b>1 g・1 mL・1 個あたり安いほう</b>を押そう。大きい袋のほうが高いこともあります。「L」と「mL」、「割引」「20% 増量」もまざるので、計算してからえらぼう。続けて当てると点が上がり、まちがえると 3 秒へります。値段はすべてたとえです。</p>
+      <p class="tk2-best">${b ? `自己ベスト <b>${b}</b> 点` : 'はじめての買い物'}</p>
+      <button type="button" class="tk2-go" data-tk="start">買い物を始める</button></div></div>`;
+  };
+  const start = () => {
+    st = { score: 0, streak: 0, ok: 0, miss: [], end: performance.now() + TIME * 1000, lock: false };
+    g.innerHTML = `<div class="tk2-play">
+      <div class="tk2-top"><span class="tk2-t"><b data-tk="t">${TIME}</b> 秒</span><span class="tk2-st" data-tk="st"></span><span class="tk2-sc">得点 <b data-tk="sc">0</b></span></div>
+      <div class="tk2-time" aria-hidden="true"><i data-tk="bar"></i></div>
+      <p class="tk2-ask" data-tk="ask"></p>
+      <div class="tk2-row" data-tk="row"></div>
+      <p class="tk2-fb" data-tk="fb" aria-live="polite"></p></div>`;
+    show();
+    clearInterval(tick);
+    tick = setInterval(() => {
+      if (!st) return;
+      const left = Math.max(0, (st.end - performance.now()) / 1000);
+      g.querySelector('[data-tk="t"]').textContent = Math.ceil(left);
+      const bar = g.querySelector('[data-tk="bar"]'); bar.style.transform = `scaleX(${(left / TIME).toFixed(3)})`; bar.classList.toggle('is-low', left < 10);
+      if (left <= 0) finish();
+    }, 100);
+  };
+  const show = () => {
+    const q = make(); st.q = q;
+    g.querySelector('[data-tk="ask"]').innerHTML = `<b>${q.it[0]}</b>　${unitText(q.it)}あたり安いのは？`;
+    const row = g.querySelector('[data-tk="row"]');
+    row.innerHTML = card(q.pair[0], q.it, 0) + '<span class="tk2-vs" aria-hidden="true">か</span>' + card(q.pair[1], q.it, 1);
+    row.classList.remove('is-in'); void row.offsetWidth; row.classList.add('is-in');
+  };
+  const why = q => {
+    const [a, b] = q.pair, it = q.it, f = o => `${o.off ? `${o.price} 円の ${o.off / 10} 割引で ${o.pay} 円、` : ''}${qtyText(o.q, it[2])}で ${o.pay} 円 → ${perText(o.u, it)}`;
+    return `<span>左：${f(a)}</span><span>右：${f(b)}</span>${q.bigHigh ? '<em>この棚では、大きいほうが高い。</em>' : ''}`;
+  };
+  const mult = () => 1 + Math.min(st.streak, 8) * 0.25;
+  const answer = v => {
+    if (!st || st.lock) return;
+    const q = st.q, ok = v === q.ans, fb = g.querySelector('[data-tk="fb"]'), btn = g.querySelectorAll('.tk2-p');
+    btn[q.ans].classList.add('is-win'); if (!ok) btn[v].classList.add('is-lose');
+    if (ok) { st.streak++; st.ok++; const pts = Math.round(10 * mult()); st.score += pts; fb.className = 'tk2-fb is-ok'; fb.innerHTML = `<b>正解 ＋${pts}</b>${why(q)}`; }
+    else { st.streak = 0; st.end -= 3000; st.miss.push(q); fb.className = 'tk2-fb is-ng'; fb.innerHTML = `<b>${q.ans ? '右' : '左'}のほうが安い</b>${why(q)}`; }
+    g.querySelector('[data-tk="sc"]').textContent = st.score;
+    g.querySelector('[data-tk="st"]').textContent = st.streak >= 3 ? `${st.streak} 連続 ×${mult().toFixed(2).replace(/0$/, '')}` : '';
+    st.lock = true;
+    setTimeout(() => { if (!st) return; st.lock = false; fb.className = 'tk2-fb'; fb.innerHTML = ''; show(); }, ok ? (reduce ? 500 : 1600) : 3200);
+  };
+  const TITLE = [[200, '単価の名人'], [120, 'かしこい買い物上手'], [50, '買い物係の見習い'], [0, 'これから見る目を育てよう']];
+  const finish = () => {
+    clearInterval(tick);
+    const s = st; st = null;
+    const prev = getB(), best = s.score > prev;
+    try { if (best) localStorage.setItem(KEY, String(s.score)); } catch (e) {}
+    const ti = TITLE.findIndex(x => s.score >= x[0]);
+    g.innerHTML = `<div class="tk2-end">
+      <p class="tk2-kicker">本日のレシート</p>
+      <p class="tk2-big"><b>${s.score}</b> 点<small>正解 ${s.ok}・まちがい ${s.miss.length}</small></p>
+      <p class="tk2-title"><span aria-hidden="true">称</span>${TITLE[ti][1]}${best ? '<em>自己ベスト更新</em>' : prev ? `<small>自己ベスト ${prev} 点</small>` : ''}</p>
+      ${s.miss.length ? `<p class="tk2-l">まちがえた棚</p><ul class="tk2-miss">${s.miss.slice(0, 3).map(q => `<li><b>${q.it[0]}</b><p>${why(q)}</p></li>`).join('')}</ul>` : '<p class="tk2-perfect">まちがいゼロ！ 単価を見る目は確かです。</p>'}
+      <div class="tk2-rule"><p class="tk2-l">お店でくらべるときは</p><ul><li>単位をそろえる（1 L ＝ 1,000 mL、1 kg ＝ 1,000 g）</li><li>大きい袋が安いとは限らない。値札の「単価」の小さな字も見よう</li><li>割引や増量は、計算してからくらべる</li><li>安くても、使い切れない量なら、むだになることもある</li></ul></div>
+      <button type="button" class="tk2-go" data-tk="start">もう一度買い物する</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g.querySelector('.tk2-end'), 'tanka', ti, TITLE.length);
+  };
+  g.addEventListener('click', e => {
+    const k = e.target.closest('[data-v]'); if (k) { answer(+k.dataset.v); return; }
+    if (e.target.closest('[data-tk="start"]')) start();
+  });
+  intro();
+})();

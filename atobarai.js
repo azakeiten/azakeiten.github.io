@@ -108,6 +108,7 @@
     K('msg').textContent = m === 'save' ? `${n} か月ためて、ゲーム機を買いました。手数料は 0 円。そのかわり、待つ時間がかかりました。` : `${n} か月で払い終わりました。払った合計は ${yen(pr + it)}（手数料 ${yen(it)}）。`;
     busy = false; box.classList.remove('is-running');
     compare();
+    { const fee = sum(plan(m, A), 1); window.AZAKEI_TALK && window.AZAKEI_TALK(cmp, 'atobarai', fee === 0 ? 'top' : fee < 10000 ? 'mid' : 'low'); }
     try { localStorage.setItem('azakei_atobarai', String((+localStorage.getItem('azakei_atobarai') || 0) + 1)); } catch (e) {}
   };
   const compare = () => {

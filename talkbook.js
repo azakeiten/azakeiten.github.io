@@ -14,7 +14,7 @@
     ['otsuri', 'おつりの達人', 'quiz.html#otsuri', '釣'], ['zeidan', '税の階段', 'quiz.html#zeidan', '段'], ['sugoroku', '経済すごろく', 'quiz.html#sugoroku', '双'],
     ['cardgame', '経済カード勝負', 'quiz.html#cardgame', '札'], ['koukan', '交換の島', 'quiz.html#koukan', '換'], ['shinka', 'お金の進化', 'quiz.html#shinka', '進'],
     ['coins', '世界のお金図鑑', 'quiz.html#coins', '貨'], ['nenkin', '胴上げから肩車へ', 'quiz.html#nenkin', '支'], ['bakery', '麻経ベーカリー 12 か月', 'quiz.html#bakery', '麦'],
-    ['jika', 'チケットの値段は時価', 'quiz.html#jika', '価'], ['subsc', 'サブスクと買い切り', 'quiz.html#subsc', '月'], ['nefuda', '値札のマジック', 'quiz.html#nefuda', '値'],
+    ['jika', 'チケットの値段は時価', 'quiz.html#jika', '価'], ['subsc', 'サブスクと買い切り', 'quiz.html#subsc', '月'], ['nefuda', '値札のマジック', 'quiz.html#nefuda', '値'], ['tanka', '単価くらべ 40 秒', 'quiz.html#nefuda', '単'], ['atobarai', 'ゲーム機、どう払う？', 'quiz.html#atobarai', '払'],
     ['imaato', 'いま？ それとも あとで？', 'quiz.html#imaato', '待'], ['cashless', '店長のレジ', 'quiz.html#cashless', '銭'], ['kyuyo', 'はじめての給料明細', 'quiz.html#kyuyo', '給'],
     ['kanzei', '関税のシーソー', 'quiz.html#kanzei', '関'], ['kawa', '川上の工場', 'quiz.html#kawa', '川'], ['koen', 'みんなの公園', 'quiz.html#koen', '園'],
     ['lemon', 'フリマのなぞ', 'quiz.html#lemon', '檸'], ['cw', '経済クロスワード', 'quiz.html#crossword', '字'],

@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261127e'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261128a'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -27,6 +27,7 @@
     ['play','kyuyo','給','はじめての給料明細','azakei_kyuyo','',0],
     ['play','cashless','レ','店長のレジ','azakei_cashless','',0],
     ['play','nefuda','札','値札のマジック','azakei_nefuda','/ 7',0],
+    ['play','tanka','単','単価くらべ 40 秒','azakei_tanka_best','点',0],
     ['play','jika','価','チケットの値段は時価','azakei_jika','点',0],
     ['play','kanzei','関','関税のシーソー','azakei_kanzei','',0],
     ['play','subsc','月','サブスクと買い切り','azakei_subsc','点',0],

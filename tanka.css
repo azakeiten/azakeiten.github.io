@@ -1,0 +1,60 @@
+/* あそび場「値札のマジック」— 単価くらべ 40 秒（nefuda.js が読みこむ） */
+.tk2 { margin: 0 0 22px; padding: clamp(18px, 3vw, 30px); border-radius: 28px; color: #1f2a24; background: #eef4ec linear-gradient(180deg, transparent 0 calc(100% - 26px), #d9e4d4 calc(100% - 26px)); box-shadow: inset 0 0 0 1px rgba(31, 42, 36, .16), 0 24px 46px -30px rgba(20, 30, 20, .5); }
+.tk2 button { font: inherit; cursor: pointer; color: inherit; touch-action: manipulation; }
+.tk2-sub { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 13px; font-weight: 700; color: #355a3f; }
+.tk2-sub span { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: #2f7a4a; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 13px; }
+.tk2-kicker { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #2f7a4a; }
+.tk2-h { margin: 2px 0 8px; font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: .06em; }
+.tk2-p0 { margin: 0 0 12px; font-size: 14.5px; line-height: 1.85; max-width: 42em; } .tk2-p0 b { color: #2f7a4a; }
+.tk2-intro { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 32px); align-items: center; }
+.tk2-shelf { display: flex; align-items: flex-end; gap: 8px; padding: 0 10px 8px; border-bottom: 8px solid #8a6b47; border-radius: 0 0 4px 4px; }
+.tk2-shelf .tk2-pk { animation: tk2-bob 3.6s ease-in-out infinite; } .tk2-shelf .tk2-pk:nth-child(2) { animation-delay: -1.2s; } .tk2-shelf .tk2-pk:nth-child(3) { animation-delay: -2.4s; }
+@keyframes tk2-bob { 0%, 100% { transform: scale(var(--s)); } 50% { transform: scale(var(--s)) translateY(-4px); } }
+.tk2-pk { position: relative; display: grid; place-items: center; width: 54px; height: 70px; transform: scale(var(--s)); transform-origin: bottom; border-radius: 8px; background: linear-gradient(160deg, #f7d27a, #e6a93a); box-shadow: inset -6px 0 0 rgba(0, 0, 0, .08), 0 6px 10px -6px rgba(0, 0, 0, .4); }
+.tk2-pk i { font-style: normal; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 22px; color: #5a3a10; background: #fffaf0; border-radius: 50%; width: 34px; height: 34px; display: grid; place-items: center; }
+.tk2-pk.is-bt { width: 40px; height: 82px; border-radius: 14px 14px 8px 8px; background: linear-gradient(160deg, #a8d8b0, #4f9a62); }
+.tk2-pk.is-bt::before { content: ''; position: absolute; top: -9px; width: 16px; height: 10px; border-radius: 3px; background: #2f5d3a; }
+.tk2-pk.is-bt i { width: 28px; height: 28px; font-size: 17px; color: #234a2d; }
+.tk2-pk.is-bg { width: 64px; height: 62px; border-radius: 18px 18px 10px 10px; background: linear-gradient(160deg, #f4efe2, #d6c9a8); } .tk2-pk.is-bg i { color: #6b5a2a; }
+.tk2-pk em { position: absolute; top: -10px; right: -16px; padding: 3px 6px; border-radius: 999px; background: #d2402f; color: #fff; font-style: normal; font-size: 10px; font-weight: 800; white-space: nowrap; transform: rotate(10deg); }
+.tk2-best { margin: 0 0 12px; font-size: 13px; } .tk2-best b { font-size: 18px; color: #2f7a4a; }
+.tk2-go { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border: 0; border-radius: 14px; background: #1f3a2a; color: #fff !important; font-weight: 800; font-size: 16px; box-shadow: 0 5px 0 #0c1a12; transition: transform .15s, box-shadow .15s; }
+.tk2-go:hover { transform: translateY(-2px); } .tk2-go:active { transform: translateY(4px); box-shadow: 0 1px 0 #0c1a12; }
+.tk2-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 800; font-size: 13px; }
+.tk2-t b, .tk2-sc b { font-family: 'Shippori Mincho', serif; font-size: 20px; } .tk2-sc { margin-left: auto; } .tk2-st { color: #2f7a4a; }
+.tk2-time { height: 6px; border-radius: 3px; background: rgba(31, 42, 36, .1); overflow: hidden; margin-bottom: 12px; }
+.tk2-time i { display: block; height: 100%; background: #1f3a2a; transform-origin: left; transition: transform .1s linear; } .tk2-time i.is-low { background: #d2402f; }
+.tk2-ask { margin: 0 0 10px; font-size: 16px; font-weight: 700; } .tk2-ask b { font-family: 'Shippori Mincho', serif; font-size: 20px; }
+.tk2-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 10px; align-items: stretch; }
+.tk2-row.is-in .tk2-p { animation: tk2-in .4s cubic-bezier(.2, .9, .3, 1.15) both; } .tk2-row.is-in .tk2-p:last-child { animation-delay: .06s; }
+@keyframes tk2-in { from { opacity: 0; transform: translateY(14px); } }
+.tk2-vs { align-self: center; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 18px; color: #5a6b5f; }
+.tk2-p { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 22px 10px 14px; border: 0; border-radius: 16px; background: #fffef9; box-shadow: 0 2px 0 #d5dccf, 0 12px 20px -14px rgba(0, 0, 0, .45); transition: transform .15s, box-shadow .15s; }
+.tk2-p:hover { transform: translateY(-3px); } .tk2-p:focus-visible { outline: 3px solid #2f7a4a; outline-offset: 2px; }
+.tk2-p .tk2-pk { margin-bottom: 4px; }
+.tk2-q { font-size: 22px; font-weight: 800; font-family: 'DM Sans', sans-serif; }
+.tk2-was { font-size: 11.5px; color: #6b746e; margin-top: -4px; }
+.tk2-tag { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; border-radius: 6px; background: #ffe25a; box-shadow: 0 2px 0 #c9a91c; line-height: 1.2; }
+.tk2-tag > b { font-size: 24px; font-family: 'DM Sans', sans-serif; } .tk2-tag > b small { font-size: 13px; }
+.tk2-tag s { font-size: 14px; color: #6b5a2a; } .tk2-tag s + b { font-size: 14px; color: #c2331f; }
+.tk2-p.is-win { box-shadow: 0 0 0 3px #2f7a4a, 0 12px 20px -14px rgba(0, 0, 0, .45); }
+.tk2-p.is-win::after { content: '安'; position: absolute; top: 8px; right: 10px; display: grid; place-items: center; width: 40px; height: 40px; border: 3px solid #2f7a4a; border-radius: 50%; color: #2f7a4a; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 20px; transform: rotate(-12deg); animation: tk2-stamp .28s cubic-bezier(.3, 1.6, .5, 1); }
+.tk2-p.is-lose { opacity: .6; animation: tk2-shake .35s; }
+@keyframes tk2-stamp { from { transform: scale(1.8) rotate(-12deg); opacity: 0; } }
+@keyframes tk2-shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.tk2-fb { min-height: 3.4em; margin: 12px 0 0; font-size: 13.5px; line-height: 1.7; }
+.tk2-fb b { display: block; font-size: 15px; } .tk2-fb.is-ok b { color: #2f7a4a; } .tk2-fb.is-ng b { color: #c2331f; }
+.tk2-fb span, .tk2-miss span { display: block; } .tk2-fb em, .tk2-miss em { display: block; font-style: normal; font-weight: 700; color: #8a5a12; }
+.tk2-big { margin: 4px 0; font-size: 18px; font-weight: 700; } .tk2-big b { font-family: 'Shippori Mincho', serif; font-size: 54px; color: #2f7a4a; } .tk2-big small { display: block; font-size: 13px; color: #5a6b5f; }
+.tk2-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 14px; font-size: 18px; font-weight: 800; }
+.tk2-title span { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #2f7a4a; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 14px; }
+.tk2-title em { padding: 2px 10px; border-radius: 999px; background: #d2402f; color: #fff; font-style: normal; font-size: 12px; } .tk2-title small { font-size: 12px; color: #5a6b5f; }
+.tk2-l { margin: 12px 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #2f7a4a; }
+.tk2-miss { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; } .tk2-miss li { padding: 10px 12px; border-radius: 10px; background: #fffef9; font-size: 13px; line-height: 1.7; } .tk2-miss p { margin: 2px 0 0; }
+.tk2-perfect { font-weight: 700; color: #2f7a4a; }
+.tk2-rule ul { margin: 0 0 16px; padding-left: 1.3em; font-size: 13.5px; line-height: 1.8; }
+@media (max-width: 560px) {
+  .tk2-intro { grid-template-columns: 1fr; } .tk2-shelf { justify-self: start; }
+  .tk2-row { gap: 6px; } .tk2-p { padding: 18px 6px 12px; } .tk2-q { font-size: 18px; } .tk2-tag > b { font-size: 20px; } .tk2-vs { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .tk2 *, .tk2 *::before, .tk2 *::after { animation: none !important; transition: none !important; } }
