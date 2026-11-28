@@ -128,7 +128,7 @@
      ・自己ベストは azakei_asagohan_best
      ================================================================ */
   (function () {
-    if (!document.querySelector('link[href^="asgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'asgame.css?v=20261128c'; document.head.appendChild(l); }
+    if (!document.querySelector('link[href^="asgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'asgame.css?v=20261128d'; document.head.appendChild(l); }
     const KEY = 'azakei_asagohan_best', N = 8, SEC = 12;
     const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
     const g = document.createElement('div');

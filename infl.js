@@ -54,7 +54,7 @@
 (function () {
   const box = document.querySelector('[data-infl]');
   if (!box) return;
-  if (!document.querySelector('link[href^="ijgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'ijgame.css?v=20261128c'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="ijgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'ijgame.css?v=20261128d'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_infl_best', TIME = 40, ONI = 150;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

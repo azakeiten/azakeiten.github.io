@@ -17,7 +17,7 @@
     ['jika', 'チケットの値段は時価', 'quiz.html#jika', '価'], ['subsc', 'サブスクと買い切り', 'quiz.html#subsc', '月'], ['nefuda', '値札のマジック', 'quiz.html#nefuda', '値'], ['tanka', '単価くらべ 40 秒', 'quiz.html#nefuda', '単'], ['atobarai', 'ゲーム機、どう払う？', 'quiz.html#atobarai', '払'],
     ['imaato', 'いま？ それとも あとで？', 'quiz.html#imaato', '待'], ['cashless', '店長のレジ', 'quiz.html#cashless', '銭'], ['kyuyo', 'はじめての給料明細', 'quiz.html#kyuyo', '給'],
     ['kanzei', '関税のシーソー', 'quiz.html#kanzei', '関'], ['kawa', '川上の工場', 'quiz.html#kawa', '川'], ['koen', 'みんなの公園', 'quiz.html#koen', '園'],
-    ['lemon', 'フリマのなぞ', 'quiz.html#lemon', '檸'], ['cw', '経済クロスワード', 'quiz.html#crossword', '字'], ['kikai', 'えらばなかった道のねだん', 'quiz.html#kikai', '択'], ['himitsu', '新しいお札のひみつ', 'quiz.html#himitsu', '秘'],
+    ['lemon', 'フリマのなぞ', 'quiz.html#lemon', '檸'], ['cw', '経済クロスワード', 'quiz.html#crossword', '字'], ['kikai', 'えらばなかった道のねだん', 'quiz.html#kikai', '択'], ['sagi', 'そのメッセージ、あやしい？', 'quiz.html#sagi', '守'], ['himitsu', '新しいお札のひみつ', 'quiz.html#himitsu', '秘'],
     ['meguri', 'お金のめぐり', 'sim.html#meguri', '巡'], ['dbl', 'お金が 2 倍になるまで', 'sim.html#double', '倍'], ['updown', 'チャート予想', 'sim.html#updown', '線'], ['market', '値段の決まり方', 'sim.html#market', '需'],
     ['seri', 'せりの会場', 'sim.html#seri', '競'], ['pazuru', 'めぐりパズル', 'sim.html#pazuru', '嵌'], ['asagohan', '朝ごはんの世界旅行', 'sim.html#asagohan', '旅'],
     ['fx', '円高・円安の両替所', 'sim.html#fx', '為'], ['shop', '文化祭でお店をひらこう', 'sim.html#shop', '店'], ['oku', '1 億円って、どれくらい？', 'sim.html#oku', '億'],
