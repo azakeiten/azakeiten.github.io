@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261129a'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261129b'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -72,7 +72,8 @@
     ['lab','ike','池','みんなの池','azakei_ike_best','匹',0],
     ['lab','crypto','暗','暗号資産とブロックチェーン','azakei_crypto','',0],
     ['lab','nesage','策','となりのお店と値下げ競争','azakei_nesage_best','/ 60',0],
-    ['lab','danryoku','弾','値上げしたら、売上は？','azakei_danryoku','/ 8',0]
+    ['lab','danryoku','弾','値上げしたら、売上は？','azakei_danryoku','/ 8',0],
+    ['lab','kibo','規','どの工場でつくる？','azakei_kibo','/ 5',0]
   ];
   const raw = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
   const arr = k => { try { const v = JSON.parse(raw(k) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } };

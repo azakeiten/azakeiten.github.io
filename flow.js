@@ -102,7 +102,7 @@
 (function () {
   const box = document.querySelector('[data-flow]');
   if (!box || document.querySelector('.mq')) return;
-  if (!document.querySelector('link[href^="mgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'mgame.css?v=20261129a'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="mgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'mgame.css?v=20261129b'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_meguri_best', TIME = 40;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

@@ -49,7 +49,7 @@
 (function () {
   const box = document.querySelector('[data-market]');
   if (!box) return;
-  if (!document.querySelector('link[href^="mkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'mkgame.css?v=20261129a'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="mkgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'mkgame.css?v=20261129b'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_market_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
