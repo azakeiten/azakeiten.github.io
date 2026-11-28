@@ -73,7 +73,7 @@
     const h = H.find(x => x[0] === k);
     K('n').textContent = found.size;
     K('msg').textContent = found.size === 6 ? '6 つのひみつを、ぜんぶ見つけました！ これだけのくふうで、お札の信用が守られています。' : `「${h[2]}」を見つけた！ ${h[3]}`;
-    if (found.size === 6) { box.classList.add('is-all'); try { localStorage.setItem('azakei_osatsu_himitsu', '6'); } catch (e) {} }
+    if (found.size === 6) { box.classList.add('is-all'); try { localStorage.setItem('azakei_osatsu_himitsu', '6'); } catch (e) {} if (window.AZAKEI_TALK && !box.dataset.talked) { box.dataset.talked = '1'; const w = document.createElement('div'); K('msg').after(w); window.AZAKEI_TALK(w, 'himitsu', 'top'); } }
     else try { localStorage.setItem('azakei_osatsu_himitsu', String(found.size)); } catch (e) {}
   };
   const tilt = v => {
