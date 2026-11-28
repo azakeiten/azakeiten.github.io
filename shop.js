@@ -102,7 +102,7 @@
 (function () {
   const box = document.querySelector('[data-shop]');
   if (!box) return;
-  if (!document.querySelector('link[href^="shgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'shgame.css?v=20261128d'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="shgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'shgame.css?v=20261128e'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_shop_best';
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

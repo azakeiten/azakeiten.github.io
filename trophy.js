@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261128d'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261128e'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -36,6 +36,7 @@
     ['play','lemon','檸','フリマのなぞ','azakei_lemon','',0],
     ['play','kikai','択','えらばなかった道のねだん','azakei_kikai','/ 6',0],
     ['play','sagi','守','そのメッセージ、あやしい？','azakei_sagi','/ 8',0],
+    ['play','sara','皿','何皿で、ごちそうさま？','azakei_sara','円',0],
     ['play','zeidan','段','税の階段','azakei_zeidan_best','点',0],
     ['play','kawa','川','川上の工場','azakei_kawa','',0],
     ['play','koen','園','みんなの公園','azakei_koen','',0],
