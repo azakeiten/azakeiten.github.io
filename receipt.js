@@ -80,7 +80,7 @@
 (function () {
   const box = document.querySelector('[data-receipt]');
   if (!box) return;
-  if (!document.querySelector('link[href^="rcgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'rcgame.css?v=20261129b'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="rcgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'rcgame.css?v=20261129c'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'azakei_receipt_best', TIME = 45;
   const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };

@@ -9,6 +9,7 @@ window.AZAKEI = {
 
   /* ---- トップ「新しく、遊べるもの」（新しい順。date はその遊びを公開した日） ---- */
   newPlay: [
+    { date: '2026-11-29', seal: '誘', tone: 'dark', href: 'quiz.html#incen', eyebrow: 'あそび場', title: 'ルールで、みんなは動く？', text: '放置自転車を届けたら 100 円。いいルールに見えて、思わぬことが起きるかも。4 つのこまりごとに挑戦。' },
     { date: '2026-11-29', seal: '規', tone: 'gold', href: 'sim.html#kibo', eyebrow: '経済ラボ', title: 'どの工場でつくる？', text: '100 個と 5 万個、いちばん安くつくれる工場は同じ？ 固定費と変動費で、規模の経済を体験しよう。' },
     { date: '2026-11-29', seal: '弾', tone: 'green', href: 'sim.html#danryoku', eyebrow: '経済ラボ', title: '値上げしたら、売上は？', text: 'お米と自販機のお茶、20% 値上げすると売上はどうなる？ お客さんの動きで、価格弾力性を体験しよう。' },
     { date: '2026-11-28', seal: '皿', tone: 'paper', href: 'quiz.html#sara', eyebrow: 'あそび場', title: '何皿で、ごちそうさま？', text: '回転ずしの 1 皿目は最高。でも 5 皿目は？ いちばん得する止めどきを、3 つのお店でさがそう。' },
@@ -16,7 +17,7 @@ window.AZAKEI = {
     { date: '2026-11-28', seal: '巡', tone: 'gold', href: 'sim.html#meguri', eyebrow: '経済ラボ', title: 'お金の配達 40 秒', text: 'おにぎりの代金は？ 所得税は？ 家計・企業・銀行・政府のどこからどこへ、お金を配達しよう。' },
     { date: '2026-11-28', seal: '択', tone: 'dark', href: 'quiz.html#kikai', eyebrow: 'あそび場', title: 'えらばなかった道のねだん', text: '映画の 3 時間、バイトをしていたら？ 6 つの分かれ道で、目に見えない「本当のコスト」を当てよう。' },
     { date: '2026-11-28', seal: '単', tone: 'green', href: 'quiz.html#nefuda', eyebrow: 'あそび場', title: '単価くらべ 40 秒', text: '大きい袋と小さい袋、1 g あたり安いのはどっち？ 「2 割引」「20% 増量」もまざる棚で、40 秒のスピード勝負。' },
-    { date: '2026-11-27', seal: '札', tone: 'green', href: 'mypage.html#talkbook', eyebrow: 'わたしの記録', title: 'お札マンのことば帳', text: 'ゲームの結果でもらえるお札マンのひとことは、全部で 155 まい。何まい集められる？' },
+    { date: '2026-11-27', seal: '札', tone: 'green', href: 'mypage.html#talkbook', eyebrow: 'わたしの記録', title: 'お札マンのことば帳', text: 'ゲームの結果でもらえるお札マンのひとことは、全部で 158 まい。何まい集められる？' },
     { date: '2026-11-26', seal: '訳', tone: 'shu', href: 'sim.html#uchiwake', eyebrow: '経済ラボ', title: 'おにぎり屋の値上げ会議', text: 'お米も電気代も値上がり。値上げ？ 小さくする？ 工夫する？ 社長として 6 か月を乗りきろう。' },
     { date: '2026-11-26', seal: '図', tone: 'paper', href: 'sim.html#gurafu', eyebrow: '経済ラボ', title: '見出しチェック 40 秒', text: '「A 社の 3 倍に！」その見出し、グラフの数字と合ってる？ 新聞のデスクになってチェック。' },
     { date: '2026-11-26', seal: '旅', tone: 'dark', href: 'sim.html#asagohan', eyebrow: '経済ラボ', title: '朝ごはん港の荷受け', text: 'トーストの小麦は、どの国から？ 地図の国を押して、材料の輸入先を当てよう。' },
