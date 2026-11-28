@@ -1,0 +1,62 @@
+/* 経済ラボ「お金のめぐり」— お金の配達 40 秒（flow.js が読みこむ） */
+.mq { margin: 22px 0 0; padding: clamp(18px, 3vw, 30px); border-radius: 28px; color: #1e2430; background: radial-gradient(120% 90% at 50% 0, #fdf7e6, #f3ead2); box-shadow: inset 0 0 0 1px rgba(30, 36, 48, .14), 0 24px 46px -30px rgba(40, 30, 10, .5); }
+.mq button { font: inherit; cursor: pointer; color: inherit; touch-action: manipulation; }
+.mq-sub { display: flex; align-items: center; gap: 8px; margin: 22px 0 0; font-size: 13px; font-weight: 700; color: #7a5a1c; }
+.mq-sub span { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; background: #c08a1e; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 13px; }
+.mq-kicker { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #a5701a; }
+.mq-h { margin: 2px 0 8px; font-family: 'Shippori Mincho', serif; font-size: clamp(26px, 4vw, 36px); font-weight: 800; letter-spacing: .06em; }
+.mq-p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.85; max-width: 42em; } .mq-p b { color: #a5701a; }
+.mq-intro { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 32px); align-items: center; }
+.mq-bag { position: relative; display: grid; place-items: center; width: clamp(90px, 12vw, 120px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffe8a3, #e2a93a 60%, #b07a1a); box-shadow: inset 0 -8px 0 rgba(0, 0, 0, .12), 0 14px 24px -12px rgba(90, 60, 0, .6); animation: mq-spin 5s ease-in-out infinite; }
+.mq-bag i { font-style: normal; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: clamp(34px, 5vw, 46px); color: #6b4a0e; }
+@keyframes mq-spin { 0%, 100% { transform: rotateY(0) translateY(0); } 50% { transform: rotateY(180deg) translateY(-6px); } }
+.mq-best { margin: 0 0 12px; font-size: 13px; } .mq-best b { font-size: 18px; color: #a5701a; }
+.mq-go { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border: 0; border-radius: 14px; background: #2a2316; color: #fff !important; font-weight: 800; font-size: 16px; box-shadow: 0 5px 0 #0e0b05; transition: transform .15s, box-shadow .15s; }
+.mq-go:hover { transform: translateY(-2px); } .mq-go:active { transform: translateY(4px); box-shadow: 0 1px 0 #0e0b05; }
+.mq-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 800; font-size: 13px; }
+.mq-t b, .mq-sc b { font-family: 'Shippori Mincho', serif; font-size: 20px; } .mq-sc { margin-left: auto; } .mq-st { color: #a5701a; }
+.mq-time { height: 6px; border-radius: 3px; background: rgba(30, 36, 48, .1); overflow: hidden; margin-bottom: 12px; }
+.mq-time i { display: block; height: 100%; background: #2a2316; transform-origin: left; transition: transform .1s linear; } .mq-time i.is-low { background: #c2331f; }
+.mq-ev { margin: 0; padding: 14px 16px; border-radius: 14px; background: #fff; font-family: 'Shippori Mincho', serif; font-size: clamp(18px, 2.6vw, 22px); font-weight: 800; line-height: 1.5; box-shadow: 0 2px 0 #e4d7b6; }
+.mq-ev.is-in { animation: mq-in .35s cubic-bezier(.2, .9, .3, 1.15); }
+@keyframes mq-in { from { opacity: 0; transform: translateY(10px); } }
+.mq-step { margin: 10px 0; font-size: 14px; font-weight: 700; } .mq-step b { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 6px; border-radius: 50%; background: #2a2316; color: #fff; font-size: 12px; } .mq-step em { font-style: normal; color: #a5701a; }
+.mq-map { position: relative; display: grid; grid-template-columns: 1fr auto 1fr; grid-template-areas: 'h . f' '. b .' '. g .'; gap: 10px 14px; align-items: center; justify-items: center; padding: 6px 0; }
+.mq-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.mq-svg line { stroke: transparent; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 10 8; }
+.mq-svg line.is-ok { stroke: #2f7a4a; animation: mq-dash .6s linear infinite; } .mq-svg line.is-ng { stroke: #c2331f; animation: mq-dash .6s linear infinite; }
+@keyframes mq-dash { to { stroke-dashoffset: -18; } }
+.mq-n { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1px; width: min(100%, 150px); padding: 10px 8px; border: 0; border-radius: 18px; background: #fff; box-shadow: 0 3px 0 #e0d2ae, 0 12px 18px -12px rgba(0, 0, 0, .35); transition: transform .15s, box-shadow .2s, background .2s; }
+.mq-n:hover { transform: translateY(-2px); }
+.mq-n span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 19px; }
+.mq-n b { font-size: 16px; } .mq-n small { font-size: 11px; color: #6a6f79; }
+.mq-n.is-H { grid-area: h; } .mq-n.is-H span { background: #d0603f; }
+.mq-n.is-F { grid-area: f; } .mq-n.is-F span { background: #2f6fb0; }
+.mq-n.is-B { grid-area: b; } .mq-n.is-B span { background: #2f7a4a; }
+.mq-n.is-G { grid-area: g; } .mq-n.is-G span { background: #6a4fb0; }
+.mq-c { grid-area: c; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 2px dashed rgba(42, 35, 22, .3); font-size: 11px; font-weight: 800; color: #8a7a55; }
+.mq-n.is-from { box-shadow: 0 0 0 3px #e2a93a, 0 12px 18px -12px rgba(0, 0, 0, .35); background: #fff6dc; }
+.mq-n.is-to { box-shadow: 0 0 0 3px #2a2316, 0 12px 18px -12px rgba(0, 0, 0, .35); }
+.mq-n.is-from::after, .mq-n.is-to::after { position: absolute; top: -9px; right: -6px; padding: 1px 7px; border-radius: 999px; font-size: 10px; font-weight: 800; color: #fff; }
+.mq-n.is-from::after { content: 'から'; background: #c08a1e; } .mq-n.is-to::after { content: 'へ'; background: #2a2316; }
+.mq-coin { position: absolute; left: -18px; top: -18px; z-index: 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffe8a3, #e2a93a 65%, #b07a1a); color: #6b4a0e; font-family: 'Shippori Mincho', serif; font-weight: 800; font-size: 16px; opacity: 0; pointer-events: none; box-shadow: 0 4px 8px -2px rgba(90, 60, 0, .5); }
+.mq-fb { min-height: 3em; margin: 10px 0 0; font-size: 13.5px; line-height: 1.7; }
+.mq-fb b { display: block; font-size: 15px; } .mq-fb.is-ok b { color: #2f7a4a; } .mq-fb.is-ng b { color: #c2331f; }
+.mq-big { margin: 4px 0; font-size: 18px; font-weight: 700; } .mq-big b { font-family: 'Shippori Mincho', serif; font-size: 54px; color: #a5701a; } .mq-big small { display: block; font-size: 13px; color: #6a6f79; }
+.mq-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 14px; font-size: 18px; font-weight: 800; }
+.mq-title span { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #a5701a; color: #fff; font-family: 'Shippori Mincho', serif; font-size: 14px; }
+.mq-title em { padding: 2px 10px; border-radius: 999px; background: #c2331f; color: #fff; font-style: normal; font-size: 12px; } .mq-title small { font-size: 12px; color: #6a6f79; }
+.mq-l { margin: 12px 0 6px; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #a5701a; }
+.mq-miss { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; } .mq-miss li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding: 9px 12px; border-radius: 10px; background: #fff; font-size: 13.5px; } .mq-miss span { font-weight: 800; color: #2f7a4a; }
+.mq-perfect { font-weight: 700; color: #2f7a4a; }
+.mq-rule ul { margin: 0 0 16px; padding-left: 1.3em; font-size: 13.5px; line-height: 1.8; }
+@media (max-width: 560px) {
+  .mq-intro { grid-template-columns: 1fr; } .mq-bag { width: 80px; }
+  .mq-map { gap: 8px; } .mq-n { padding: 8px 4px; } .mq-n span { width: 34px; height: 34px; font-size: 16px; } .mq-n small { display: none; } .mq-c { width: 40px; height: 40px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .mq *, .mq *::before, .mq *::after { animation: none !important; transition: none !important; } }
+/* 図をコンパクトに */
+.mq-map { max-width: 540px; margin: 0 auto; gap: 4px 10px; }
+.mq-n { padding: 7px 8px; width: min(100%, 140px); }
+.mq-n span { width: 32px; height: 32px; font-size: 16px; }
+.mq-n b { font-size: 15px; }

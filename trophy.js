@@ -8,7 +8,7 @@
 (function () {
   const box = document.querySelector('[data-trophy]');
   if (!box) return;
-  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261128b'; document.head.appendChild(l); }
+  if (!document.querySelector('link[href^="trophy.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'trophy.css?v=20261128c'; document.head.appendChild(l); }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* [棚, id, 一字, 名前, 記録のキー, 単位, 配列の長さで数える] */
   const T = [
@@ -40,7 +40,7 @@
     ['play','koen','園','みんなの公園','azakei_koen','',0],
     ['play','taikai','会','みんなでクイズ大会','','',0],
     ['play','make','作','クイズ工房','azakei-qmake','',0],
-    ['lab','meguri','巡','お金のめぐり','','',0],
+    ['lab','meguri','巡','お金のめぐり','azakei_meguri_best','点',0],
     ['lab','pazuru','嵌','めぐりパズル','azakei_pazuru','',0],
     ['lab','koubou','創','仕組みをつくる工房','azakei_village','',0],
     ['lab','tsuuka','券','お祭りの券の工房','azakei_tsuuka','',0],

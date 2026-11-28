@@ -93,3 +93,128 @@
   });
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) svg.pauseAnimations && svg.pauseAnimations();
 })();
+/* ================================================================
+   v375：「お金の配達 40 秒」— できごとを読んで、お金が「どこから」「どこへ」流れるかを 2 回押す
+   ・家計・企業・銀行・政府の 4 つ。押すと、コインが矢印の上を飛んでいく
+   ・正解で次へ。続けて正解すると倍率アップ。まちがえると 3 秒へる
+   ・自己ベストは azakei_meguri_best。見た目は mgame.css（このファイルが読みこむ）
+   ================================================================ */
+(function () {
+  const box = document.querySelector('[data-flow]');
+  if (!box || document.querySelector('.mq')) return;
+  if (!document.querySelector('link[href^="mgame.css"]')) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'mgame.css?v=20261128c'; document.head.appendChild(l); }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const KEY = 'azakei_meguri_best', TIME = 40;
+  const getB = () => { try { return +localStorage.getItem(KEY) || 0; } catch (e) { return 0; } };
+  const N = { H: ['家計', '家', 'わたしたちの家'], F: ['企業', '企', '会社・お店'], B: ['銀行', '銀', 'お金をあずかって貸す'], G: ['政府', '政', '国や市町村'] };
+  // [できごと, から, へ, ひとこと]
+  const EV = [
+    ['コンビニで、おにぎりを買った', 'H', 'F', '買い物の代金は、家計から企業へ（消費）。'],
+    ['会社が、社員に給料を払った', 'F', 'H', '働いた分の給料は、企業から家計へ。'],
+    ['お年玉を、銀行の口座にあずけた', 'H', 'B', '預金は、家計から銀行へ。'],
+    ['銀行が、新しい工場を建てる会社にお金を貸した', 'B', 'F', 'あずかったお金を、銀行が企業に貸し出す（融資）。'],
+    ['給料から、所得税が引かれた', 'H', 'G', '所得税は、家計から政府へ。'],
+    ['会社が、もうけにかかる税金（法人税）をおさめた', 'F', 'G', '法人税は、企業から政府へ。'],
+    ['おじいちゃんに、年金が振りこまれた', 'G', 'H', '年金は、政府（国）から家計へ（社会保障）。'],
+    ['市が、道路工事の代金を建設会社に払った', 'G', 'F', '公共事業の代金は、政府から企業へ。'],
+    ['会社が、借りたお金の利息を銀行に払った', 'F', 'B', '借りた分の利息は、企業から銀行へ。'],
+    ['銀行が、預金に利息をつけた', 'B', 'H', '預金の利息は、銀行から家計へ。'],
+    ['家を買うために、銀行から住宅ローンを借りた', 'B', 'H', 'ローンで借りたお金は、銀行から家計へ。'],
+    ['住宅ローンを、今月も銀行に返した', 'H', 'B', '借りたお金の返済は、家計から銀行へ。'],
+    ['子育ての家に、国から手当が振りこまれた', 'G', 'H', '児童手当などは、政府から家計へ。'],
+    ['会社が、使う予定のないお金を銀行にあずけた', 'F', 'B', '企業も、銀行にお金をあずけます。'],
+    ['国が、省エネの機械を入れた工場に補助金を出した', 'G', 'F', '補助金は、政府から企業へ。'],
+    ['美容院で、髪を切ってもらった', 'H', 'F', 'サービスの代金も、家計から企業へ。'],
+    ['アルバイト代が、口座に振りこまれた', 'F', 'H', 'バイト代も給料。企業から家計へ。']
+  ];
+  const g = document.createElement('div');
+  g.className = 'mq';
+  box.after(g);
+  g.insertAdjacentHTML('beforebegin', '<p class="mq-sub"><span aria-hidden="true">験</span>スピード勝負：めぐりの図を見たら、お金を配達してみよう</p>');
+  let st = null, tick = 0;
+  const node = k => `<button type="button" class="mq-n is-${k}" data-n="${k}"><span aria-hidden="true">${N[k][1]}</span><b>${N[k][0]}</b><small>${N[k][2]}</small></button>`;
+  const intro = () => {
+    const b = getB();
+    g.innerHTML = `<div class="mq-intro"><div class="mq-bag" aria-hidden="true"><i>円</i></div><div>
+      <p class="mq-kicker">スピード勝負</p><h3 class="mq-h">お金の配達 40 秒</h3>
+      <p class="mq-p">「コンビニで、おにぎりを買った」。このお金は、どこから、どこへ？ できごとを読んで、<b>お金が出ていくところ</b>、次に<b>お金が届くところ</b>の順に押そう。家計・企業・銀行・政府の 4 つです。続けて当てると点が上がり、まちがえると 3 秒へります。</p>
+      <p class="mq-best">${b ? `自己ベスト <b>${b}</b> 点` : 'はじめての配達'}</p>
+      <button type="button" class="mq-go" data-mq="start">配達を始める</button></div></div>`;
+  };
+  const start = () => {
+    st = { score: 0, streak: 0, ok: 0, miss: [], end: performance.now() + TIME * 1000, lock: false, from: null, last: -1 };
+    g.innerHTML = `<div class="mq-play">
+      <div class="mq-top"><span class="mq-t"><b data-mq="t">${TIME}</b> 秒</span><span class="mq-st" data-mq="st"></span><span class="mq-sc">得点 <b data-mq="sc">0</b></span></div>
+      <div class="mq-time" aria-hidden="true"><i data-mq="bar"></i></div>
+      <p class="mq-ev" data-mq="ev"></p>
+      <p class="mq-step" data-mq="step"></p>
+      <div class="mq-map" data-mq="map">
+        <svg class="mq-svg" aria-hidden="true"><line data-mq="line"/></svg>
+        ${node('H')}${node('F')}${node('B')}${node('G')}
+        <span class="mq-coin" data-mq="coin" aria-hidden="true">円</span>
+      </div>
+      <p class="mq-fb" data-mq="fb" aria-live="polite"></p></div>`;
+    show();
+    clearInterval(tick);
+    tick = setInterval(() => {
+      if (!st) return;
+      const left = Math.max(0, (st.end - performance.now()) / 1000);
+      g.querySelector('[data-mq="t"]').textContent = Math.ceil(left);
+      const bar = g.querySelector('[data-mq="bar"]'); bar.style.transform = `scaleX(${(left / TIME).toFixed(3)})`; bar.classList.toggle('is-low', left < 10);
+      if (left <= 0) finish();
+    }, 100);
+  };
+  const show = () => {
+    let k; do { k = Math.random() * EV.length | 0; } while (k === st.last); st.last = k; st.q = EV[k]; st.from = null;
+    const ev = g.querySelector('[data-mq="ev"]'); ev.textContent = st.q[0]; ev.classList.remove('is-in'); void ev.offsetWidth; ev.classList.add('is-in');
+    g.querySelector('[data-mq="step"]').innerHTML = '<b>1</b> お金が<em>出ていく</em>ところは？';
+    g.querySelectorAll('.mq-n').forEach(n => n.classList.remove('is-from', 'is-to', 'is-ok', 'is-ng'));
+    g.querySelector('[data-mq="line"]').setAttribute('class', '');
+  };
+  const center = el => { const m = g.querySelector('[data-mq="map"]').getBoundingClientRect(), r = el.getBoundingClientRect(); return [r.left - m.left + r.width / 2, r.top - m.top + r.height / 2]; };
+  const fly = (a, b, ok) => {
+    const [x1, y1] = center(a), [x2, y2] = center(b), ln = g.querySelector('[data-mq="line"]'), c = g.querySelector('[data-mq="coin"]');
+    ln.setAttribute('x1', x1); ln.setAttribute('y1', y1); ln.setAttribute('x2', x2); ln.setAttribute('y2', y2); ln.setAttribute('class', ok ? 'is-ok' : 'is-ng');
+    if (reduce) return;
+    c.style.transition = 'none'; c.style.transform = `translate(${x1}px, ${y1}px) scale(.6)`; c.style.opacity = 1; void c.offsetWidth;
+    c.style.transition = 'transform .55s cubic-bezier(.4, 0, .2, 1), opacity .3s .5s'; c.style.transform = `translate(${x2}px, ${y2}px) scale(1)`; c.style.opacity = 0;
+  };
+  const mult = () => 1 + Math.min(st.streak, 8) * 0.25;
+  const tap = k => {
+    if (!st || st.lock) return;
+    const n = g.querySelector(`[data-n="${k}"]`);
+    if (!st.from) { st.from = k; n.classList.add('is-from'); g.querySelector('[data-mq="step"]').innerHTML = `<b>2</b> ${N[k][0]}から、お金が<em>届く</em>ところは？`; return; }
+    if (k === st.from) { st.from = null; n.classList.remove('is-from'); g.querySelector('[data-mq="step"]').innerHTML = '<b>1</b> お金が<em>出ていく</em>ところは？'; return; }
+    const q = st.q, ok = st.from === q[1] && k === q[2], fb = g.querySelector('[data-mq="fb"]');
+    n.classList.add('is-to');
+    g.querySelector('[data-mq="step"]').innerHTML = `<b>${ok ? '○' : '×'}</b> ${N[q[1]][0]} → ${N[q[2]][0]}`;
+    const A = g.querySelector(`[data-n="${q[1]}"]`), B = g.querySelector(`[data-n="${q[2]}"]`);
+    if (ok) { st.streak++; st.ok++; const pts = Math.round(10 * mult()); st.score += pts; fb.className = 'mq-fb is-ok'; fb.innerHTML = `<b>配達成功 ＋${pts}</b>${q[3]}`; fly(A, B, true); }
+    else { st.streak = 0; st.end -= 3000; st.miss.push(q); fb.className = 'mq-fb is-ng'; fb.innerHTML = `<b>正しくは ${N[q[1]][0]} → ${N[q[2]][0]}</b>${q[3]}`; g.querySelectorAll('.mq-n').forEach(x => x.classList.remove('is-from', 'is-to')); A.classList.add('is-from'); B.classList.add('is-to'); fly(A, B, false); }
+    g.querySelector('[data-mq="sc"]').textContent = st.score;
+    g.querySelector('[data-mq="st"]').textContent = st.streak >= 3 ? `${st.streak} 連続 ×${mult().toFixed(2).replace(/0$/, '')}` : '';
+    st.lock = true;
+    setTimeout(() => { if (!st) return; st.lock = false; fb.className = 'mq-fb'; fb.innerHTML = ''; show(); }, ok ? (reduce ? 400 : 1200) : 2600);
+  };
+  const TITLE = [[180, '名配達人', '極'], [100, 'たよれる配達人', '良'], [40, '配達の見習い', '見'], [0, 'これから道を覚えよう', '初']];
+  const finish = () => {
+    clearInterval(tick);
+    const s = st; st = null;
+    const prev = getB(), best = s.score > prev;
+    try { if (best) localStorage.setItem(KEY, String(s.score)); } catch (e) {}
+    const ti = TITLE.findIndex(x => s.score >= x[0]);
+    g.innerHTML = `<div class="mq-end">
+      <p class="mq-kicker">本日の配達</p>
+      <p class="mq-big"><b>${s.score}</b> 点<small>成功 ${s.ok}・まちがい ${s.miss.length}</small></p>
+      <p class="mq-title"><span aria-hidden="true">${TITLE[ti][2]}</span>${TITLE[ti][1]}${best ? '<em>自己ベスト更新</em>' : prev ? `<small>自己ベスト ${prev} 点</small>` : ''}</p>
+      ${s.miss.length ? `<p class="mq-l">まちがえた配達</p><ul class="mq-miss">${s.miss.slice(0, 3).map(q => `<li><b>${q[0]}</b><span>${N[q[1]][0]} → ${N[q[2]][0]}</span></li>`).join('')}</ul>` : '<p class="mq-perfect">まちがいゼロ！ お金の道は、もうばっちりです。</p>'}
+      <div class="mq-rule"><p class="mq-l">めぐりの 4 つの道</p><ul><li>家計 ⇄ 企業：買い物の代金と、給料</li><li>家計・企業 → 政府：税金。政府 → 家計・企業：年金・手当・工事の代金・補助金</li><li>家計・企業 ⇄ 銀行：預金と貸し出し、そして利息</li></ul></div>
+      <button type="button" class="mq-go" data-mq="start">もう一度配達する</button></div>`;
+    window.AZAKEI_TALK && window.AZAKEI_TALK(g.querySelector('.mq-end'), 'meguri', ti, TITLE.length);
+  };
+  g.addEventListener('click', e => {
+    const n = e.target.closest('[data-n]'); if (n) { tap(n.dataset.n); return; }
+    if (e.target.closest('[data-mq="start"]')) start();
+  });
+  intro();
+})();
